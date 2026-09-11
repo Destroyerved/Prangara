@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-EU-CBAM-2026",
+  "agency": "European Commission, Directorate-General for Taxation and Customs Union",
+  "dataset": "Carbon Border Adjustment Mechanism (CBAM) Definitive Regime Rules & Default Values",
+  "version": "Regulation (EU) 2023/956 & Implementing Regulations",
+  "official_url": "https://taxation-customs.ec.europa.eu/system/files/2023-12/CBAM%20Guidance%20for%20importers_en.pdf",
+  "portal_url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-definitive-regime_en",
+  "access_method": "official_guidelines",
+  "authority_class": "GOVERNMENT_OFFICIAL",
+  "retrieved_at": "2026-09-11T20:43:00.329Z",
+  "notes": "Rules for covered sectors (Steel, Aluminium, Cement, Fertilizer, Hydrogen, Electricity). Indicative exposure = (Scope 1 + 2) * EU export share * certificate price."
+}

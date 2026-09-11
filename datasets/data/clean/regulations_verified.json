@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "schema_version": "2.0",
+    "generated_at": "2026-09-11T20:43:51.128Z"
+  },
+  "regulations": [
+    {
+      "regulation_id": "REG-CPCB-HAZ-2016",
+      "title": "Hazardous and Other Wastes (Management and Transboundary Movement) Rules, 2016",
+      "authority": "CPCB / MoEFCC",
+      "source_id": "SRC-CPCB-RULES",
+      "applicable_sectors": [
+        "foundry_casting",
+        "chemicals",
+        "auto_components"
+      ],
+      "key_requirements": "Mandatory manifest system, authorized TSDF disposal or co-processing for used core sand and hazardous residues.",
+      "status": "VERIFIED_OFFICIAL"
+    },
+    {
+      "regulation_id": "REG-SEBI-BRSR-2025",
+      "title": "BRSR Core Value Chain Disclosures Framework (March 2025)",
+      "authority": "SEBI",
+      "source_id": "SRC-SEBI-BRSR-2025",
+      "applicable_sectors": [
+        "all"
+      ],
+      "key_requirements": "Voluntary ESG self-assessment for MSME suppliers to top 250 listed Indian entities.",
+      "status": "VERIFIED_OFFICIAL"
+    },
+    {
+      "regulation_id": "REG-EU-CBAM-2026",
+      "title": "EU Carbon Border Adjustment Mechanism (Definitive Regime)",
+      "authority": "European Commission",
+      "source_id": "SRC-EU-CBAM-2026",
+      "applicable_sectors": [
+        "foundry_casting",
+        "auto_components",
+        "fabrication"
+      ],
+      "key_requirements": "Scope 1 and Scope 2 embedded emission reporting on iron, steel, and aluminium exports to the EU.",
+      "status": "VERIFIED_OFFICIAL"
+    },
+    {
+      "regulation_id": "REG-MOEFCC-ASH-2021",
+      "title": "Fly Ash Utilisation Notification (S.O. 5481(E))",
+      "authority": "MoEFCC",
+      "source_id": "SRC-MOEFCC-ASH",
+      "applicable_sectors": [
+        "ceramics",
+        "fabrication",
+        "all_building"
+      ],
+      "key_requirements": "100% ash utilisation in construction products within 300 km radius of thermal plants.",
+      "status": "VERIFIED_OFFICIAL"
+    }
+  ]
+}

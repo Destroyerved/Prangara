@@ -102,6 +102,16 @@ prototype/
     ├── interventions.json             30 circular interventions
     └── sectors.json                   10 Indian sectors + benchmarks + demo plants
 
+datasets/                              authoritative verified data architecture
+├── 01_statutory_emission_baselines/   CEA v21/22 grid, DESNZ 2026 fuels
+├── 02_circular_interventions_library/ 30 MACC interventions, capex, payback
+├── 03_industrial_sector_benchmarks/   10 SME sector SEC ranges & benchmarks
+├── 04_derived_engineering_models/     Coal G1-G17 NCV, IPCC FOD landfill models
+├── 05_database_and_typed_layer/       PostgreSQL DDL, seed SQL, typed JSON/CSV
+├── 06_auditing_and_proofs/            SHA-256 registers, audit verification
+├── 07_primary_raw_sources/            Immutable sovereign PDFs & XLSX
+└── 08_automated_test_suites/          100% SHA-256 verification & invariant tests
+
 build/
 ├── Chakra-Report.pdf                  the full project report
 └── Chakra-Plant-Report.pdf            a sample per-assessment report

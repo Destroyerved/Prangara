@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "description": "IPCC 2019 Refinement Vol 5 First-Order-Decay (FOD) Landfill Model & Net Anaerobic Digestion Balance",
+    "source_id": "SRC-IPCC-2019",
+    "gwp_version": "IPCC AR6 GWP100 = 28"
+  },
+  "landfill_fod_model": {
+    "formula": "DOC * DOCf * F * (16/12) * MCF * (1 - OX) * GWP_CH4",
+    "parameters": {
+      "DOC": {
+        "value": 0.18,
+        "description": "Degradable Organic Carbon in wet industrial food/organic waste"
+      },
+      "DOCf": {
+        "value": 0.5,
+        "description": "Fraction of DOC that actually degrades anaerobically"
+      },
+      "F": {
+        "value": 0.5,
+        "description": "Fraction of methane in generated landfill gas"
+      },
+      "MCF": {
+        "value": 0.8,
+        "description": "Methane Correction Factor for unmanaged deep dumpsites (>5m)"
+      },
+      "OX": {
+        "value": 0,
+        "description": "Oxidation factor for unmanaged Indian dumpsites"
+      },
+      "molecular_conversion": 1.333,
+      "GWP_CH4": 28
+    },
+    "output_kg_ch4_per_t": 20.64,
+    "output_tco2e_per_t": 0.578
+  },
+  "anaerobic_digestion_model": {
+    "formula": "Net = Avoided Landfill Methane + Displaced Fossil Fuel - Fugitive & Parasitic Emissions",
+    "credits": {
+      "avoided_landfill_methane_tco2e_per_t": -0.462,
+      "fossil_fuel_displacement_tco2e_per_t": -0.134
+    },
+    "debits": {
+      "parasitic_electricity_tco2e_per_t": 0.045,
+      "fugitive_methane_leakage_tco2e_per_t": 0.033
+    },
+    "net_factor_tco2e_per_t": -0.518,
+    "conservative_screening_factor": -0.118,
+    "status": "DERIVED_TRANSPARENT"
+  }
+}

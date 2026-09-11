@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-SFC-INDIA-2026",
+  "agency": "Smart Freight Centre (SFC)",
+  "dataset": "India Default GHG Emission Values for Logistics Operations V1.0 & GLEC Framework v3.1",
+  "version": "Version 1.0 (June 2026)",
+  "official_url": "https://smartfreightcentre.org/wp-content/uploads/2026/06/SFC-India-Default-Logistics-Factors-V1.pdf",
+  "portal_url": "https://smartfreightcentre.org/news/13311661",
+  "access_method": "technical_guidelines",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-11T20:42:52.727Z",
+  "notes": "India Heavy Commercial Vehicle (HCV diesel rigid/articulated): 0.095 kgCO2e/t-km (Well-to-Wheel). Indian Railways electric freight: 0.022 kgCO2e/t-km."
+}

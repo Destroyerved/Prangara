@@ -1,0 +1,1547 @@
+[
+  {
+    "id": "INT-COMP-AIR",
+    "name": "Compressed Air Ultrasonic Leak Detection & Tagged Repair",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.02,
+      "base": 0.04,
+      "high": 0.065,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "fixed_survey_kit",
+      "capex_value": 120000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 3
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Ultrasonic survey plus repair of identified leaks across distribution manifolds and couplings."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-VFD",
+    "name": "Variable Frequency Drives on Draft Fans and Pumping Loops",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.05,
+      "base": 0.08,
+      "high": 0.12,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "per_kw",
+      "capex_value": 350000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 1,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "BEE DPR documented savings on fluctuating motor loads."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-IE4-MOTOR",
+    "name": "IE4 Super Premium Efficiency Motor Retrofits",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.03,
+      "base": 0.05,
+      "high": 0.07,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-IEC-60034",
+      "source_record": "IEC 60034-30-1:2025 Motor Efficiency Standards",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "per_unit",
+      "capex_value": 480000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 12
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 1,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "IEC 60034-30-1 standard efficiency gains over standard IE1/IE2 motors."
+    ],
+    "source_ids": [
+      "SRC-IEC-60034",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-LED-LIGHTING",
+    "name": "Industrial High-Bay LED Retrofit & Occupancy Sensors",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.015,
+      "base": 0.025,
+      "high": 0.04,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "plant_area",
+      "capex_value": 150000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Straightforward lighting load reduction."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-IDLE-SHUTDOWN",
+    "name": "Automated Non-Operational Load Interlocking & Sub-metering",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.02,
+      "base": 0.045,
+      "high": 0.06,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "controls",
+      "capex_value": 95000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Eliminates idle load; caveats note savings decay without continuous monitoring."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-SOLAR-ROOFTOP",
+    "name": "Captive Rooftop Solar PV Installation",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.15,
+      "base": 0.25,
+      "high": 0.35,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "per_kwp",
+      "capex_value": 21700000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 25
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 3,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Replaces grid import with zero-marginal cost self-generation."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-OPEN-ACCESS",
+    "name": "Group Captive / Green Open Access PPA",
+    "category": "energy",
+    "target_stream": "electricity",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.3,
+      "base": 0.5,
+      "high": 0.7,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "equity_collateral",
+      "capex_value": 2500000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "tariff_delta",
+      "lifetime_years": 15
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 4,
+    "disruption_days": 0,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Tariff delta savings model; cross-subsidy surcharges can compress margin."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-BOILER-ECONOMIZER",
+    "name": "Flue Gas Waste Heat Recovery Economizer for Steam Boiler",
+    "category": "energy",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.04,
+      "base": 0.06,
+      "high": 0.08,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "per_boiler",
+      "capex_value": 650000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 2,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Recovers boiler sensible flue heat to preheat boiler feed water."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-STEAM-TRAP",
+    "name": "Steam Trap Maintenance, Acoustic Testing & Insulation",
+    "category": "energy",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.03,
+      "base": 0.05,
+      "high": 0.08,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "network",
+      "capex_value": 180000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 4
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Repairs live steam blowing traps and uninsulated lines."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-WHR-KILN",
+    "name": "Hot Air Recirculation & Kiln Waste Heat Recovery",
+    "category": "energy",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.06,
+      "base": 0.1,
+      "high": 0.14,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "ductwork",
+      "capex_value": 1250000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 8
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "pharma_formulation",
+        "plastic_moulding"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 4,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Exhaust ducting from cooling zone to combustion air preheating."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-BIOMASS-SWITCH",
+    "name": "Fuel Switch from Coal to Agricultural Residue Briquettes",
+    "category": "energy",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.7,
+      "base": 0.85,
+      "high": 0.95,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "burner_mod",
+      "capex_value": 850000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "fuel_switch",
+      "lifetime_years": 8
+    },
+    "constraints": {
+      "max_substitution_pct": 1,
+      "blocked_sectors": [
+        "ceramics"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 3,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Replaces coal with biomass. Blocked for ceramics because fly ash ruins glazed tile finish."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-REC-ALUM",
+    "name": "Secondary / Recycled Aluminium Alloy Ingot Substitution",
+    "category": "material",
+    "target_stream": "mat_aluminium",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.9,
+      "base": 0.95,
+      "high": 0.96,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-IAI-2022",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "blending_system",
+      "capex_value": 300000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": 0.7,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 1,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "IAI verified ~95% embodied emissions reduction; capped at 70% due to alloy trace element specifications."
+    ],
+    "source_ids": [
+      "SRC-IAI-2022",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-REC-STEEL",
+    "name": "Secondary EAF / Scrap-Derived Steel Billet Substitution",
+    "category": "material",
+    "target_stream": "mat_steel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.7,
+      "base": 0.75,
+      "high": 0.78,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-WORLDSTEEL-2026",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "procurement",
+      "capex_value": 200000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": 0.8,
+      "blocked_sectors": [],
+      "sector_caps": {
+        "auto_components": 0.45
+      }
+    },
+    "difficulty": 2,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Scrap-based steel substitution. Capped at 45% in automotive components due to OEM fatigue certification."
+    ],
+    "source_ids": [
+      "SRC-WORLDSTEEL-2026",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-REC-COTTON",
+    "name": "Recycled Cotton Comber Noil / Mechanically Recycled Fibre",
+    "category": "material",
+    "target_stream": "mat_cotton_yarn",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.6,
+      "base": 0.67,
+      "high": 0.72,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-TEXTILE-2026",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "blending",
+      "capex_value": 150000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": 0.25,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 1,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Capped strictly at 25% because staple length degrades with mechanical shredding."
+    ],
+    "source_ids": [
+      "SRC-TEXTILE-2026",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-RPET",
+    "name": "Post-Consumer Recycled PET (rPET) Resin Substitution",
+    "category": "material",
+    "target_stream": "mat_pet",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.5,
+      "base": 0.57,
+      "high": 0.62,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-PLASTICSEUROPE-2024",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "crystallizer",
+      "capex_value": 450000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 7
+    },
+    "constraints": {
+      "max_substitution_pct": 0.5,
+      "blocked_sectors": [
+        "pharma_formulation"
+      ],
+      "sector_caps": {
+        "food_processing": 0.35
+      }
+    },
+    "difficulty": 3,
+    "disruption_days": 2,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Blocked for pharma formulations due to US/EU pharmacopeia primary packaging GMP rules. Capped at 35% in food contact."
+    ],
+    "source_ids": [
+      "SRC-PLASTICSEUROPE-2024",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-BLENDED-CEMENT",
+    "name": "Portland Pozzolana Cement (PPC) / Slag Cement (PSC) Switch",
+    "category": "material",
+    "target_stream": "mat_cement",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.3,
+      "base": 0.35,
+      "high": 0.4,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-GCCA-2023",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "silo_switch",
+      "capex_value": 120000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": 0.7,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Complies with IS 1489 / IS 455 standards. Direct substitution for non-rapid-hardening structural work."
+    ],
+    "source_ids": [
+      "SRC-GCCA-2023",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-REC-BOARD",
+    "name": "High Recycled-Content Corrugated Shipping Packaging",
+    "category": "material",
+    "target_stream": "mat_paper",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.3,
+      "base": 0.36,
+      "high": 0.42,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-CEPI-2020",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "specification",
+      "capex_value": 50000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 3
+    },
+    "constraints": {
+      "max_substitution_pct": 0.9,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Near-frictionless switch for secondary transit cartons."
+    ],
+    "source_ids": [
+      "SRC-CEPI-2020",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-CULLET-GLASS",
+    "name": "Beneficiated Post-Consumer Glass Cullet Melting Addition",
+    "category": "material",
+    "target_stream": "mat_glass",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.3,
+      "base": 0.36,
+      "high": 0.42,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-FEVE-2020",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "crusher",
+      "capex_value": 600000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": 0.6,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 1,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "FEVE LCI verified. Lowers furnace melting temperature."
+    ],
+    "source_ids": [
+      "SRC-FEVE-2020",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-FLY-ASH-BRICK",
+    "name": "Fly Ash & Pond Ash Masonry Block Substitution",
+    "category": "material",
+    "target_stream": "mat_cement",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.4,
+      "base": 0.5,
+      "high": 0.6,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-MOEFCC-ASH",
+      "source_record": "Verified Industry Life Cycle Assessment & Technical Blend Specifications",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "procurement",
+      "capex_value": 100000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": 0.6,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Mandated under MoEFCC Ash Utilisation Notification."
+    ],
+    "source_ids": [
+      "SRC-MOEFCC-ASH",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-COLD-DYEING",
+    "name": "Cold-Pad-Batch Dyeing for Cellulosic Woven Fabrics",
+    "category": "process",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "food_processing",
+      "pharma_formulation",
+      "plastic_moulding"
+    ],
+    "abatement": {
+      "low": 0.2,
+      "base": 0.3,
+      "high": 0.4,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "dyeing_padder",
+      "capex_value": 1800000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "foundry_casting",
+        "ceramics",
+        "auto_components",
+        "paper_packaging",
+        "fabrication",
+        "chemicals"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 3,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Eliminates high-temperature dye bath heating for cotton fabric lots."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-OXY-FUEL",
+    "name": "Oxy-Fuel Combustion Conversion on Melting Furnaces",
+    "category": "process",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "foundry_casting",
+      "ceramics",
+      "auto_components",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.15,
+      "base": 0.25,
+      "high": 0.35,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "skid",
+      "capex_value": 3200000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "textile_dyeing",
+        "food_processing",
+        "pharma_formulation",
+        "plastic_moulding"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 4,
+    "disruption_days": 5,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Replaces combustion air with pure oxygen, drastically lowering exhaust flue losses."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-COMBUSTION-TUNING",
+    "name": "Automated Flue Gas O2 Trim & Air-to-Fuel Ratio Control",
+    "category": "process",
+    "target_stream": "thermal_fuel",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.03,
+      "base": 0.05,
+      "high": 0.07,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "sensor_kit",
+      "capex_value": 380000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 7
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 1,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Zirconia oxygen sensor dynamically corrects excess combustion air."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-FOUNDRY-SAND-RECLAIM",
+    "name": "Thermal-Mechanical Sand Reclamation Loop",
+    "category": "process",
+    "target_stream": "waste",
+    "applicable_sectors": [
+      "foundry_casting",
+      "ceramics",
+      "auto_components",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.6,
+      "base": 0.75,
+      "high": 0.85,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "reclaimer",
+      "capex_value": 4200000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 12
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "textile_dyeing",
+        "food_processing",
+        "pharma_formulation",
+        "plastic_moulding",
+        "paper_packaging"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 4,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Reclaims 75% of silica sand and cuts hazardous core-sand disposal fees."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-INHOUSE-REGRIND",
+    "name": "Closed-Loop Runner Regrind & Internal Polymer Recycling",
+    "category": "process",
+    "target_stream": "waste",
+    "applicable_sectors": [
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "granulator",
+      "capex_value": 280000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 8
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "foundry_casting",
+        "ceramics",
+        "textile_dyeing"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Granulates and blends runners immediately back into moulding hoppers."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-ANAEROBIC-DIGESTION",
+    "name": "On-site Bio-Methanation of Organic Wet Effluent & Sludge",
+    "category": "waste",
+    "target_stream": "waste",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.7,
+      "base": 0.85,
+      "high": 0.95,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "cbr_reactor",
+      "capex_value": 2600000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 15
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "foundry_casting",
+        "fabrication"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 4,
+    "disruption_days": 4,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Diverts high-COD effluent from aerobic lagoons to anaerobic digester."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-SOLVENT-RECOVERY",
+    "name": "Wiped-Film Evaporator & Solvent Fractional Distillation",
+    "category": "waste",
+    "target_stream": "waste",
+    "applicable_sectors": [
+      "foundry_casting",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.6,
+      "base": 0.75,
+      "high": 0.85,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "distillation_skid",
+      "capex_value": 1950000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "textile_dyeing",
+        "ceramics",
+        "fabrication",
+        "paper_packaging"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 2,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Recovers 75% of isopropyl alcohol and ethyl acetate on-site."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-SLAG-VALORISATION",
+    "name": "Blast Furnace / Cupola Slag Offtake for Cement Co-Processing",
+    "category": "waste",
+    "target_stream": "waste",
+    "applicable_sectors": [
+      "foundry_casting",
+      "ceramics",
+      "auto_components",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.5,
+      "base": 0.7,
+      "high": 0.85,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "handling",
+      "capex_value": 150000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "textile_dyeing",
+        "food_processing",
+        "pharma_formulation",
+        "plastic_moulding"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Industrial symbiosis turning solid metallurgical waste into revenue stream."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-COMPOSTING",
+    "name": "On-Site Rotary Drum Composting for Organic Solid Waste",
+    "category": "waste",
+    "target_stream": "waste",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "ceramics",
+      "food_processing",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.4,
+      "base": 0.6,
+      "high": 0.75,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-BEE-MAPPING",
+      "source_record": "BEE MSME 55 Industrial Cluster Study & ADEETIE Catalogue",
+      "verification_status": "VERIFIED_OFFICIAL_SCREENING"
+    },
+    "economics": {
+      "capex_basis": "drum",
+      "capex_value": 320000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 8
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [
+        "foundry_casting",
+        "auto_components",
+        "fabrication"
+      ],
+      "sector_caps": {}
+    },
+    "difficulty": 2,
+    "disruption_days": 0,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Avoids methane generation from uncontrolled dump sites."
+    ],
+    "source_ids": [
+      "SRC-BEE-MAPPING",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-MODAL-SHIFT-RAIL",
+    "name": "Inbound Bulk Freight Modal Shift from Road to Rail",
+    "category": "logistics",
+    "target_stream": "freight_inbound",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.65,
+      "base": 0.76,
+      "high": 0.82,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-SFC-INDIA-2026",
+      "source_record": "Smart Freight Centre India Logistics Defaults V1.0",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "siding_handling",
+      "capex_value": 800000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "price_delta",
+      "lifetime_years": 10
+    },
+    "constraints": {
+      "max_substitution_pct": 0.8,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 3,
+    "disruption_days": 0,
+    "confidence": "MEDIUM",
+    "evidence_notes": [
+      "Rail emits ~0.022 kgCO2e/t-km vs road at ~0.095. Lowers Scope 3 bulk transport."
+    ],
+    "source_ids": [
+      "SRC-SFC-INDIA-2026",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  },
+  {
+    "id": "INT-ROUTE-OPTIMISATION",
+    "name": "Finished Goods Distribution Dispatch & Cube Optimization",
+    "category": "logistics",
+    "target_stream": "freight_outbound",
+    "applicable_sectors": [
+      "textile_dyeing",
+      "foundry_casting",
+      "ceramics",
+      "food_processing",
+      "auto_components",
+      "pharma_formulation",
+      "plastic_moulding",
+      "paper_packaging",
+      "fabrication",
+      "chemicals"
+    ],
+    "abatement": {
+      "low": 0.08,
+      "base": 0.12,
+      "high": 0.16,
+      "unit": "fraction_of_target_stream",
+      "source_id": "SRC-SFC-INDIA-2026",
+      "source_record": "Smart Freight Centre India Logistics Defaults V1.0",
+      "verification_status": "VERIFIED_INDUSTRY_LCI"
+    },
+    "economics": {
+      "capex_basis": "tms_software",
+      "capex_value": 240000,
+      "capex_source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+      "planning_grade": true,
+      "savings_model": "avoided_purchase",
+      "lifetime_years": 5
+    },
+    "constraints": {
+      "max_substitution_pct": null,
+      "blocked_sectors": [],
+      "sector_caps": {}
+    },
+    "difficulty": 1,
+    "disruption_days": 0,
+    "confidence": "HIGH",
+    "evidence_notes": [
+      "Load consolidations cut empty running and trip frequencies."
+    ],
+    "source_ids": [
+      "SRC-SFC-INDIA-2026",
+      "SRC-BEE-SIDHIEE-ADEETIE"
+    ],
+    "actual_quote_required": true
+  }
+]

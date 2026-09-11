@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "description": "Indian Non-Coking Coal Grade G1 to G17 Net Calorific Value and CO2 Conversion Model",
+    "reference_combustion_source": "SRC-IPCC-2019",
+    "ipcc_default_factor_kg_per_tj": 94600,
+    "oxidation_factor": 0.98,
+    "formula": "(ipcc_default_kg_tj * ncv_gj_t / 1000 * oxidation_factor) / 1000"
+  },
+  "grades": {
+    "G1": {
+      "gross_cv_band_kcal_kg": "6701-7000",
+      "ncv_gj_t": 26.5,
+      "calculated_tco2_per_t": 2.457
+    },
+    "G4": {
+      "gross_cv_band_kcal_kg": "5801-6100",
+      "ncv_gj_t": 23.2,
+      "calculated_tco2_per_t": 2.151
+    },
+    "G7": {
+      "gross_cv_band_kcal_kg": "4901-5200",
+      "ncv_gj_t": 19.8,
+      "calculated_tco2_per_t": 1.836
+    },
+    "G9": {
+      "gross_cv_band_kcal_kg": "4301-4600",
+      "ncv_gj_t": 17.5,
+      "calculated_tco2_per_t": 1.622
+    },
+    "G11": {
+      "gross_cv_band_kcal_kg": "3701-4000",
+      "ncv_gj_t": 15.9,
+      "calculated_tco2_per_t": 1.474,
+      "note": "Typical Indian industrial boiler coal"
+    },
+    "G13": {
+      "gross_cv_band_kcal_kg": "3101-3400",
+      "ncv_gj_t": 13.5,
+      "calculated_tco2_per_t": 1.251
+    },
+    "G17": {
+      "gross_cv_band_kcal_kg": "2201-2500",
+      "ncv_gj_t": 9.8,
+      "calculated_tco2_per_t": 0.908
+    }
+  }
+}

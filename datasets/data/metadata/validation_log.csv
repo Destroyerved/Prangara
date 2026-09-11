@@ -1,0 +1,10 @@
+validation_id,dataset,rule_checked,records_tested,records_passed,records_flagged,action_taken,status
+VAL-001,mnre_biourja,installed_capacity_tpd > 0,15,15,0,None,PASSED
+VAL-002,mnre_biourja,latitude between 20.0 and 24.7 AND longitude between 68.0 and 74.5,15,15,0,None,PASSED
+VAL-003,sbm_urban,waste_processed_tpd <= waste_generated_tpd,20,20,0,None,PASSED
+VAL-004,sbm_urban,processing_percent between 0 and 100,20,20,0,None,PASSED
+VAL-005,cpcb_benchmark,annual_treated_tpd <= generated_tpd,4,4,0,None,PASSED
+VAL-006,gujarat_des,production_tonnes > 0 AND yield_kg_per_ha > 0,25,25,0,None,PASSED
+VAL-007,dahd_livestock,bovine_total == total_cattle + buffalo_total,15,15,0,None,PASSED
+VAL-008,sansaadhan_mrf,sum_fractions == 100,8,8,0,None,PASSED
+VAL-009,cross_source_check,Sum of Gujarat ULB SBM generation (10939 TPD) within 8% of CPCB 2023-24 reported total (11890 TPD),1,1,0,Cross-source consistency validated,PASSED
