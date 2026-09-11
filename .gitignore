@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Local development database — contains test accounts and seeded demo plants.
+# The schema lives in prototype/backend/db.py and is created on first run.
+prototype/backend/chakra.db
+prototype/backend/chakra.db-wal
+prototype/backend/chakra.db-shm
+*.db-journal
+
+# Build intermediates. The generated PDFs ARE committed, since they are the
+# deliverable a teammate or judge wants without running the build.
+build/*.html
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
