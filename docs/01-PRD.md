@@ -202,6 +202,8 @@ Reference data: `emission_factors.json` (31 factors across 5 groups, plus 15 sta
 
 ## 8. Out of scope for v1, sequenced for v2
 
+> **Status update.** Items 1 (partially), 5 and 7 have since been built, along with accounts, persistence and implementation tracking. See [`12-FULLSTACK-ARCHITECTURE.md`](12-FULLSTACK-ARCHITECTURE.md) and [`15-FEATURE-CATALOGUE.md`](15-FEATURE-CATALOGUE.md) for what actually exists.
+
 1. Multi-site rollup and year-on-year tracking
 2. Utility bill OCR / DISCOM portal ingestion to remove manual entry
 3. Smart meter and SCADA integration for measured rather than declared baselines

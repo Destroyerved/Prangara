@@ -165,7 +165,7 @@ A readiness checklist, not a filing. States explicitly that **assurance is out o
 | # | Limitation | Severity | Mitigation / route out |
 |---|---|---|---|
 | L1 | Emission factors are literature values, not primary measurements | **High** | Bands + sources shown; flagged for re-verification before commercial use |
-| L2 | Sector benchmarks are indicative percentiles, not a surveyed corpus | **High** | Stated in UI; replaced by measured corpus as usage grows |
+| L2 | Sector benchmarks start as indicative percentiles, not a surveyed corpus | **High → shrinking** | **Partly addressed.** A live corpus now blends measured percentiles in at n/(n+8), with the plant excluded from judging itself and provenance shown in the UI. Literature still dominates any sector below ~8 plants. See [`13-DATA-FLYWHEEL.md`](13-DATA-FLYWHEEL.md) |
 | L3 | Capex figures are screening-grade planning estimates | Medium | Stated on every card; intended to trigger a quotation, not replace one |
 | L4 | Abatement fractions are literature ranges, strongly site-sensitive | Medium | Low/base/high carried; confidence rating per intervention |
 | L5 | Inputs are declared, not measured or validated | **High** | v2: bill ingestion and plausibility cross-checks |

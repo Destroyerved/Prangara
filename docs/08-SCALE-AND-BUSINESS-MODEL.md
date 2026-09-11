@@ -4,7 +4,7 @@
 
 ## 1. Technical scalability
 
-The engine is pure CPU arithmetic with no I/O, no model inference and no database. A full assessment — 10 streams against 30 interventions with uncertainty propagation and de-rating — completes in well under 300 ms.
+The engine is pure CPU arithmetic with no I/O and no model inference (persistence sits outside it, in the platform layer). A full assessment — 10 streams against 30 interventions with uncertainty propagation and de-rating — completes in well under 300 ms.
 
 | Dimension | Current | Ceiling | Blocker |
 |---|---|---|---|
@@ -118,10 +118,10 @@ Gross margin is software-like; the investment is a research library that compoun
 | Phase | Focus | Key additions |
 |---|---|---|
 | **Now (48h)** | Prove the engine | 10 sectors, 30 interventions, 31 factors, MACC, refusal layer, CBAM/BRSR panels |
-| **v1.1** | Remove entry friction | Bill OCR, DISCOM portal ingest, save/resume, PDF export |
+| ~~**v1.1**~~ | Remove entry friction | ✅ save/resume, ✅ PDF export · ⬜ bill OCR, DISCOM ingest |
 | **v1.2** | Make it transferable | BRSR-format export, CBAM working sheet, lender pack |
-| **v2.0** | Close the loop | Vendor marketplace (recommendation → 3 quotes), implementation tracking |
-| **v2.1** | Earn the benchmarks | Replace literature percentiles with the measured corpus |
+| ~~**v2.0**~~ | Close the loop | ✅ implementation tracking · ⬜ vendor marketplace |
+| ~~**v2.1**~~ | Earn the benchmarks | ✅ shipped — shrinkage blending at n/(n+8), see doc 13 |
 | **v3.0** | Measure, don't declare | Smart meter / SCADA integration; **ML on implementation outcomes** to learn real realisation rates by intervention, sector and plant size |
 
 **Note on ML.** It appears in v3, not v1, and only where it has something real to learn: the gap between estimated and achieved abatement. Using it earlier would mean training on synthetic data to approximate physics we already compute exactly. That sequencing is a deliberate engineering judgement, not an omission — see [`05-INNOVATION-AND-FEASIBILITY.md`](05-INNOVATION-AND-FEASIBILITY.md) §2.2.

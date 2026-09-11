@@ -13,11 +13,27 @@ It leads with rupees and closes with tonnes, because an SME owner is not buying 
 ## Run it
 
 ```bash
+pip install -r requirements.txt
 cd prototype/backend
-python -m uvicorn app:app --reload --port 8077
+python -m uvicorn app:app --reload --port 8080
 ```
 
-Open **http://127.0.0.1:8077/**. Requires `fastapi` and `uvicorn`; the engine itself is standard library only. **No internet connection is needed at any point** — no CDN, no external API.
+Open **http://127.0.0.1:8080/**. **No internet connection is needed at any point** — no CDN, no external API. The database is created on first run at `prototype/backend/chakra.db`.
+
+```bash
+python -m pytest tests/test_stack.py -q     # 20 tests
+```
+
+## Two surfaces
+
+| | Anonymous sandbox | Signed-in product |
+|---|---|---|
+| Stores | **Nothing** | Plants, assessments, actions |
+| Benchmarks | Literature priors | **Blended with the live corpus** |
+| Tracking | — | Implementation tracker with actuals |
+| Account | Not required | Required |
+
+Same engine, same charts. An SME who has just been asked for carbon data gets the full assessment on a plant from their own cluster before handing over anything.
 
 ## Result on the hero demo — Tirupur knitwear dyeing unit
 
@@ -38,47 +54,65 @@ Across all ten sectors, roughly **40% of an SME's footprint sits behind a positi
 3. **It refuses** — the engine evaluates and then *rejects* inadmissible interventions. It will not tell a GMP pharma plant to use recycled blister foil, nor a Morbi tile kiln to burn briquettes, and it caps recycled cotton at 25% because staple length falls with every recycling pass.
 4. **Interaction de-rating** — seven interventions target the electricity meter; each applies to what the previous one left behind, not to the original bill.
 5. **Uncertainty carried to the headline** — every factor has a band, and the band survives every multiplication.
+6. **A data flywheel that actually runs** — sector benchmarks shrink from literature toward measured percentiles at `n/(n+8)`. A plant is never benchmarked against its own data, and only its latest assessment counts.
+7. **Realisation measured, not assumed** — the impact model has to assume a 25% realisation rate. The action tracker records estimated vs achieved and replaces that assumption with a number.
 
 ## Layout
 
 ```
-docs/                        the written work
+docs/                                  the written work — 19 documents
 ├── 00-EXECUTIVE-SUMMARY.md
-├── 01-PRD.md                        product requirements
-├── 02-RESEARCH-DOSSIER.md           market, regulation, factors, benchmarks
+├── 01-PRD.md                          product requirements
+├── 02-RESEARCH-DOSSIER.md             market, regulation, factors, benchmarks
 ├── 03-USERS-AND-PERSONAS.md
-├── 04-COMPETITIVE-LANDSCAPE.md      including where we would lose
-├── 05-INNOVATION-AND-FEASIBILITY.md including the risk register
+├── 04-COMPETITIVE-LANDSCAPE.md        including where we would lose
+├── 05-INNOVATION-AND-FEASIBILITY.md   including the risk register
 ├── 06-IMPACT-MODEL.md
-├── 07-ARCHITECTURE-AND-MODULES.md
+├── 07-ARCHITECTURE-AND-MODULES.md     the engine
 ├── 08-SCALE-AND-BUSINESS-MODEL.md
 ├── 09-EXECUTION-PLAN-48H.md
-├── 10-PITCH-AND-QA.md               demo script + hostile-question prep
-└── 11-METHODOLOGY-AND-LIMITATIONS.md
+├── 10-PITCH-AND-QA.md                 demo script + hostile-question prep
+├── 11-METHODOLOGY-AND-LIMITATIONS.md
+├── 12-FULLSTACK-ARCHITECTURE.md       the platform layer
+├── 13-DATA-FLYWHEEL.md                how benchmarks become measured
+├── 14-API-REFERENCE.md                all 20 routes
+├── 15-FEATURE-CATALOGUE.md            everything built, and what isn't
+├── 16-TEAM-TASKS-4-PEOPLE.md          full task split for a team of four
+└── 17-SECURITY-AND-TESTING.md         tenancy model + what the tests prove
 
 prototype/
 ├── backend/
-│   ├── app.py                       FastAPI, 7 endpoints, stateless
+│   ├── app.py                         FastAPI, 20 routes, two surfaces
+│   ├── db.py                          sqlite3 schema, 6 tables
+│   ├── auth.py                        bcrypt + revocable server sessions
+│   ├── repo.py                        org-scoped data access
+│   ├── benchmarks.py                  live corpus blending + realisation stats
+│   ├── report.py                      per-assessment PDF, server-rendered MACC
+│   ├── tests/test_stack.py            20 full-stack tests
 │   └── engine/
-│       ├── constants.py             NCVs, tariffs, CRF, thresholds
-│       ├── factors.py               units + uncertainty bands
-│       ├── footprint.py             Scope 1/2/3 inventory by stream
-│       ├── leaks.py                 three detection rules
-│       ├── macc.py                  matching, economics, de-rating, refusal
-│       └── assess.py                orchestration, Sankey, compliance
-├── frontend/                        zero dependencies, hand-built SVG
+│       ├── constants.py               NCVs, tariffs, CRF, thresholds
+│       ├── factors.py                 units + uncertainty bands
+│       ├── footprint.py               Scope 1/2/3 inventory by stream
+│       ├── leaks.py                   three detection rules
+│       ├── macc.py                    matching, economics, de-rating, refusal
+│       └── assess.py                  orchestration, Sankey, compliance
+├── frontend/                          zero dependencies, hand-built SVG
 └── data/
-    ├── emission_factors.json        31 factors + 15 state grids, sourced, banded
-    ├── interventions.json           30 circular interventions
-    └── sectors.json                 10 Indian sectors + benchmarks + demo plants
+    ├── emission_factors.json          31 factors + 15 state grids, sourced, banded
+    ├── interventions.json             30 circular interventions
+    └── sectors.json                   10 Indian sectors + benchmarks + demo plants
+
+build/
+├── Chakra-Report.pdf                  the full project report
+└── Chakra-Plant-Report.pdf            a sample per-assessment report
 ```
 
 Reference data is JSON so a domain expert can extend it without touching Python.
 
 ## Status
 
-Working end to end. All 10 sectors assess cleanly with **zero invariant violations** (stream sums, abatement ceilings, de-rating monotonicity, substitution caps).
+Working end to end. **20/20 tests pass**; all 10 sectors assess with **zero invariant violations** (stream sums, abatement ceilings, de-rating monotonicity, substitution caps).
 
 ## What it is not
 
-A **screening tool**, not a BEE-accredited energy audit and not an assurance engine. Its economics are planning-grade estimates meant to rank options and justify getting a vendor quotation — not to replace one. Every limitation is listed in [`docs/11-METHODOLOGY-AND-LIMITATIONS.md`](docs/11-METHODOLOGY-AND-LIMITATIONS.md) and surfaced in the product's own UI.
+A **screening tool**, not a BEE-accredited energy audit and not an assurance engine. Its economics are planning-grade estimates meant to rank options and justify getting a vendor quotation — not to replace one. Every limitation is listed in [`docs/11-METHODOLOGY-AND-LIMITATIONS.md`](docs/11-METHODOLOGY-AND-LIMITATIONS.md) and [`docs/15-FEATURE-CATALOGUE.md`](docs/15-FEATURE-CATALOGUE.md), and surfaced in the product's own UI.

@@ -12,7 +12,7 @@
 └───────────────────────────┬──────────────────────────────────┘
                             │  JSON over HTTP
 ┌───────────────────────────▼──────────────────────────────────┐
-│  API  — FastAPI, stateless                                   │
+│  API  — FastAPI (v1: stateless; see doc 12 for the platform) │
 │  /api/sectors  /api/sector/{k}  /api/reference               │
 │  /api/assess   /api/demo/{k}    /api/health                  │
 └───────────────────────────┬──────────────────────────────────┘
@@ -31,7 +31,9 @@
 └──────────────────────────────────────────────────────────────┘
 ```
 
-**Why stateless.** There is no database. The plant's data arrives in the request, is assessed, and is returned — it is never persisted. *"Where is the data stored?"* → *"Nowhere. Your process data never leaves the request."* That is a better answer for this user than an unused Postgres container, and it removes an entire class of privacy objection from a user who is genuinely sensitive about disclosing energy and material consumption.
+**Why the v1 engine is stateless.** The engine layer described in this document holds no state: a profile arrives in the request, is assessed, and is returned. That remains true today — `factors`, `footprint`, `leaks`, `macc` and `assess` are pure functions with no database awareness, which is why the anonymous sandbox and the signed-in product cannot drift apart.
+
+> **Superseded in part.** A persistence layer *was* subsequently added — accounts, stored assessments, implementation tracking and the live benchmark corpus. The engine did not change; it gained an optional benchmark override. See [`12-FULLSTACK-ARCHITECTURE.md`](12-FULLSTACK-ARCHITECTURE.md). The anonymous sandbox still stores nothing, so the privacy answer above still holds for it.
 
 ---
 
@@ -166,7 +168,7 @@ Both charts are hand-built SVG:
 
 ```bash
 cd prototype/backend
-python -m uvicorn app:app --reload --port 8077
+python -m uvicorn app:app --reload --port 8080
 ```
 
-Then open `http://127.0.0.1:8077/`. Requires `fastapi` and `uvicorn`; the engine itself is standard library only.
+Then open `http://127.0.0.1:8080/`. Requires `fastapi`, `uvicorn` and `bcrypt` (see `requirements.txt`); the engine itself is standard library only.
