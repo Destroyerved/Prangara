@@ -1,0 +1,9 @@
+{
+  "name": "@prangara/contracts",
+  "version": "1.0.0",
+  "description": "Shared DTO contracts and type definitions for PRANGARA industrial carbon intelligence network",
+  "main": "index.ts",
+  "types": "index.ts",
+  "author": "PRANGARA Team",
+  "license": "MIT"
+}

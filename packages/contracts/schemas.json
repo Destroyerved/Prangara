@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PRANGARA_Shared_Schemas",
+  "description": "JSON Schemas for PRANGARA industrial intake and assessment payloads",
+  "definitions": {
+    "PlantProfile": {
+      "type": "object",
+      "required": ["company_name", "plant_name", "sector_key", "state", "annual_production_tonnes"],
+      "properties": {
+        "company_name": { "type": "string" },
+        "plant_name": { "type": "string" },
+        "sector_key": { "type": "string" },
+        "state": { "type": "string" },
+        "annual_production_tonnes": { "type": "number", "minimum": 0 },
+        "production_unit": { "type": "string", "default": "tonnes" },
+        "annual_turnover_inr_cr": { "type": "number", "minimum": 0 },
+        "electricity_kwh": { "type": "number", "minimum": 0 },
+        "fossil_fuels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["fuel_key", "annual_quantity", "unit"],
+            "properties": {
+              "fuel_key": { "type": "string" },
+              "annual_quantity": { "type": "number", "minimum": 0 },
+              "unit": { "type": "string" }
+            }
+          }
+        },
+        "raw_materials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["material_key", "annual_tonnes"],
+            "properties": {
+              "material_key": { "type": "string" },
+              "annual_tonnes": { "type": "number", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "OptimizationConstraints": {
+      "type": "object",
+      "properties": {
+        "max_capex_inr": { "type": "number", "minimum": 0 },
+        "max_payback_months": { "type": "number", "minimum": 0 },
+        "target_abatement_pct": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    }
+  }
+}

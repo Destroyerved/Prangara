@@ -26,3 +26,8 @@ build/*.html
 Thumbs.db
 desktop.ini
 *.swp
+*.bak
+
+# Internal Task / Sprint Notes
+task.md
+
