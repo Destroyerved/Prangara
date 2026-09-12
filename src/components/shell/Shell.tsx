@@ -58,23 +58,29 @@ function SidebarNavItem({
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const link = (
+    <NavLink
+      className="nav-item"
+      to={path}
+      aria-label={label}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Icon size={collapsed ? 24 : 22} />
+      <span className="nav-text">
+        <TextRoll isHovered={isHovered}>{label}</TextRoll>
+      </span>
+      {count ? <span className="count">{count}</span> : null}
+    </NavLink>
+  );
+
+  if (!collapsed) {
+    return link;
+  }
+
   return (
-    <Tooltip.Root open={collapsed ? undefined : false}>
-      <Tooltip.Trigger asChild>
-        <NavLink
-          className="nav-item"
-          to={path}
-          aria-label={label}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <Icon size={collapsed ? 24 : 22} />
-          <span className="nav-text">
-            <TextRoll isHovered={isHovered}>{label}</TextRoll>
-          </span>
-          {count ? <span className="count">{count}</span> : null}
-        </NavLink>
-      </Tooltip.Trigger>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>{link}</Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content className="tooltip" side="right">
           {label}
