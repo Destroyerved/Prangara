@@ -2,6 +2,20 @@
 * {
   box-sizing: border-box;
 }
+/* Modern UI: Hide clunky native browser window scrollbars while preserving full smooth scrolling */
+html,
+body {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 body {
   margin: 0;
   background: var(--bg);

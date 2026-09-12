@@ -444,25 +444,46 @@ export default function Shell() {
             </Popover.Root>
             <div className="top-actions">
               <button
-                className="chip positive"
+                className="chip positive group transition-all duration-300 hover:shadow-[0_0_14px_rgba(16,185,129,0.28)] hover:border-[#10b981]/60"
                 onClick={() => setRagOpen(true)}
                 style={{
                   cursor: "pointer",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.4rem",
+                  gap: "0.45rem",
                   fontSize: "0.825rem",
-                  padding: "0.35rem 0.75rem",
+                  padding: "0.38rem 0.8rem",
                   background: "rgba(16, 185, 129, 0.12)",
                   border: "1px solid rgba(16, 185, 129, 0.35)",
                   color: "#10b981",
                   fontWeight: 600,
-                  borderRadius: "999px"
+                  borderRadius: "999px",
                 }}
                 aria-label="Ask PRANGARA"
               >
-                <Sparkles size={14} />
-                Ask PRANGARA ✨
+                <Sparkles
+                  size={14}
+                  className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-12"
+                />
+                <span className="relative grid place-items-center select-none pointer-events-none leading-none">
+                  {/* Normal state: Standard bold sans-serif */}
+                  <span className="col-start-1 row-start-1 font-semibold whitespace-nowrap transition-opacity duration-300 ease-out group-hover:opacity-0">
+                    Ask PRANGARA
+                  </span>
+
+                  {/* Hover state: Editorial italic serif text — exactly in place with 0px box size change */}
+                  <span
+                    aria-hidden="true"
+                    className="col-start-1 row-start-1 italic font-semibold whitespace-nowrap transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100"
+                    style={{
+                      fontFamily: "var(--font-editorial)",
+                      letterSpacing: "0.03em",
+                      fontSize: "0.95em",
+                    }}
+                  >
+                    Ask PRANGARA
+                  </span>
+                </span>
               </button>
               <button
                 className="command-trigger"
