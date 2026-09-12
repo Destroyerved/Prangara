@@ -243,19 +243,25 @@ def build_report_html(assessment: Assessment, factory: Factory,
         f"<div class='f'>{e(l.get('finding'))}</div></div>"
         for l in lk.get("leaks", [])) or "<p>No leak points detected above threshold.</p>"
 
-    rows = "".join(
-        f"<tr><td><b>{e(r.get('name'))}</b>"
-        f"{' <span class=\"pill p-high\">capped</span>' if r.get('substitution_capped') else ''}"
-        f"<div style='font-size:7.4pt;color:#5d6b64'>{e(r.get('target_stream_label'))} · "
-        f"{e(r.get('confidence'))} confidence · difficulty {r.get('difficulty', 1)}/5 · "
-        f"{r.get('disruption_days', 0)}d downtime</div></td>"
-        f"<td style='font-size:7.6pt'>{e(r.get('category'))}</td>"
-        f"<td class='r'>{r.get('portfolio_abatement_tco2e', 0):,.0f}</td>"
-        f"<td class='r {'pos' if r.get('cash_positive') else ''}'>{r.get('lcoa_inr_per_tco2e', 0):,.0f}</td>"
-        f"<td class='r'>{inr(r.get('capex_inr'))}</td>"
-        f"<td class='r {'pos' if (r.get('net_annual_benefit_inr') or 0) >= 0 else 'neg'}'>{inr(r.get('net_annual_benefit_inr'))}</td>"
-        f"<td class='r'>{pay(r.get('payback_months'))}</td></tr>"
-        for r in rec.get("recommendations", []))
+    def _rec_row(r: dict) -> str:
+        capped = " <span class='pill p-high'>capped</span>" if r.get("substitution_capped") else ""
+        pos_class = "pos" if r.get("cash_positive") else ""
+        benefit = r.get("net_annual_benefit_inr") or 0
+        ben_class = "pos" if benefit >= 0 else "neg"
+        return (
+            f"<tr><td><b>{e(r.get('name'))}</b>{capped}"
+            f"<div style='font-size:7.4pt;color:#5d6b64'>{e(r.get('target_stream_label'))} · "
+            f"{e(r.get('confidence'))} confidence · difficulty {r.get('difficulty', 1)}/5 · "
+            f"{r.get('disruption_days', 0)}d downtime</div></td>"
+            f"<td style='font-size:7.6pt'>{e(r.get('category'))}</td>"
+            f"<td class='r'>{r.get('portfolio_abatement_tco2e', 0):,.0f}</td>"
+            f"<td class='r {pos_class}'>{r.get('lcoa_inr_per_tco2e', 0):,.0f}</td>"
+            f"<td class='r'>{inr(r.get('capex_inr'))}</td>"
+            f"<td class='r {ben_class}'>{inr(r.get('net_annual_benefit_inr'))}</td>"
+            f"<td class='r'>{pay(r.get('payback_months'))}</td></tr>"
+        )
+
+    rows = "".join(_rec_row(r) for r in rec.get("recommendations", []))
 
     refused = "".join(
         f"<div class='blocked'><b>✕ {e(b.get('name'))}</b><div>{e(b.get('reason'))}</div></div>"
