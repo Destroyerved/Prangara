@@ -204,7 +204,7 @@ export default function Logistics() {
             return (
               <div
                 key={r.mode}
-                onClick={() => setSelectedMode(r.mode as any)}
+                onClick={() => setSelectedMode(r.mode as "fastest" | "cheapest" | "lowest_carbon" | "balanced")}
                 className={`platform-extracted ${isSelected ? "active-row" : ""}`}
                 style={{
                   padding: "1.25rem",

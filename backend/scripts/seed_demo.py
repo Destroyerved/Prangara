@@ -436,8 +436,8 @@ def main() -> None:
                         help="create tables directly instead of running migrations")
     args = parser.parse_args()
 
-    if args.create_tables:
-        Base.metadata.create_all(engine)
+    # Ensure all tables exist before querying
+    Base.metadata.create_all(engine)
 
     with SessionLocal() as db:
         if args.reset:

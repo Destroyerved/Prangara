@@ -670,7 +670,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
                     Equipment Category
                     <select
                       value={newAssetCategory}
-                      onChange={(e) => setNewAssetCategory(e.target.value as any)}
+                      onChange={(e) => setNewAssetCategory(e.target.value as "motor" | "boiler" | "compressor" | "chiller")}
                       style={{ width: "100%", padding: "0.5rem", borderRadius: "6px", border: "1px solid var(--border-subtle)", background: "var(--surface-dropdown, #111)", color: "inherit" }}
                     >
                       <option value="motor">Electric Motor</option>

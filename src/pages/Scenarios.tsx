@@ -106,7 +106,7 @@ export default function Scenarios() {
       simplePaybackYears,
       solarGenerationKwh
     };
-  }, [baseOutput, baseElectricityKwh, baseScope1, baseScope2, baseScope3, baseTotal, plant?.tariff, scaleDeltaPct, solarOffsetPct, fuelSwitch, recycledMaterialPct, eeMotorsVfd]);
+  }, [baseOutput, baseElectricityKwh, baseScope1, baseScope3, baseTotal, plant?.tariff, scaleDeltaPct, solarOffsetPct, fuelSwitch, recycledMaterialPct, eeMotorsVfd]);
 
   return (
     <div className="page-reveal">
@@ -225,7 +225,7 @@ export default function Scenarios() {
             </label>
             <select
               value={fuelSwitch}
-              onChange={(e) => setFuelSwitch(e.target.value as any)}
+              onChange={(e) => setFuelSwitch(e.target.value as "none" | "biomass" | "gas")}
               style={{
                 width: "100%",
                 padding: "0.6rem 0.8rem",
