@@ -8,15 +8,13 @@ __pycache__/
 venv/
 env/
 
-# Local development database — contains test accounts and seeded demo plants.
-# The schema lives in prototype/backend/db.py and is created on first run.
+# Local development database
 prototype/backend/chakra.db
 prototype/backend/chakra.db-wal
 prototype/backend/chakra.db-shm
 *.db-journal
 
-# Build intermediates. The generated PDFs ARE committed, since they are the
-# deliverable a teammate or judge wants without running the build.
+# Build intermediates
 build/*.html
 
 # Editors / OS
@@ -35,5 +33,11 @@ HackOut26_Problem_Statements.pdf
 *Problem_Statements*
 README_ARCHIVE.md
 
-
-
+# Node / Web Frontend
+node_modules/
+dist/
+.vite/
+.env
+.env.local
+.sites-runtime/
+work/

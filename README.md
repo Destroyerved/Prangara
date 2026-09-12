@@ -328,11 +328,54 @@ PRANGARA/
 │   ├── 07_primary_raw_sources/        # Immutable PDFs and XLSX files
 │   ├── 08_automated_test_suites/      # Integrity audit test scripts
 │   └── 10_rag_knowledge_base/         # Regulatory chunks for grounded RAG
+├── src/                               # React & TypeScript web application (Vite, Tailwind, D3, Motion)
+│   ├── components/                    # UI, Shell, Drawers, Intake, RAG Assistant, Charts
+│   ├── pages/                         # Overview, Plant Data, Footprint, Leaks, Scenarios, Logistics, Circular Network...
+│   ├── api/                           # Typed contracts, platform API client & adapters
+│   └── styles/                        # Visual system, glassmorphism tokens & animations
+├── prds/                              # PRANGARA v2.0 Working Specifications & Role Playbooks
 ├── docs/                              # Full technical specifications & architectural PRDs
 ├── .gitattributes                     # Binary hash preservation rules
 ├── .gitignore                         # Local notes and sensitive files exclusions
 └── README.md                          # Platform master documentation
 ```
+
+---
+
+## 💻 Web Frontend Application
+
+A React and TypeScript dashboard for industrial carbon intelligence, circular interventions, and investment decisions.
+
+### Run locally
+
+Use Node.js 20+ or 22+ and npm. All commands run from this folder:
+
+```powershell
+npm install
+npm run dev
+```
+
+Open `http://127.0.0.1:5173/overview`. The application serves fully local interactive demonstration profiles and features AI Intake, What-If Simulation, Green Logistics, and Industrial Symbiosis.
+
+### Connect your backend
+
+Copy `.env.example` to `.env.local` and set:
+
+```dotenv
+VITE_DATA_MODE=api
+VITE_API_BASE_URL=/api
+API_PROXY_TARGET=http://127.0.0.1:8080
+```
+
+### Build and verify
+
+```powershell
+npm test
+npm run build
+npm run preview
+```
+
+The build is compiled into `dist/`. Preview runs at `http://127.0.0.1:4173`.
 
 ---
 
