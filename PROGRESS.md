@@ -31,10 +31,11 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Sovereign RAG Assistant (B3) | Done — BM25 proxy retrieval over statutory chunks, zero hallucination |
 | Logistics routing & pooling (B4) | Done — 4 presets, CVRPTW pooling, circular backhauls, shipment CRUD |
 | Report export service (B5) | Done — Vector SVG MACC, Scope 1/2/3 breakdown, HTML/PDF working paper |
+| Local Ollama LLM runtime | Integrated (`llama3:latest`/`gemma4:latest`) for conversational intake & grounded RAG |
 | Mobile offline queue idempotency (M2) | Done — client_ref on Evidence, ActivityRecord, and Shipment |
 | Factor provenance (BE-2 datasets) | Done — 25/31 factors traced to source |
 
-**Backend tests:** 194 passing (0 failing). **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
+**Backend tests:** 198 passing (0 failing). **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
 
 ---
 

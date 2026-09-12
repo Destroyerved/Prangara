@@ -165,6 +165,18 @@ class SovereignRAGService:
             f'"{primary_chunk.get("text_content")}"'
         )
 
+        # Enhance with local Ollama synthesis when available
+        try:
+            from app.services.ollama_service import get_ollama_service
+
+            ollama = get_ollama_service()
+            if ollama.is_available():
+                synth = ollama.synthesize_rag_answer(question, [c for _, c in top_matches])
+                if synth and len(synth) > 20 and "cannot support that answer" not in synth.lower():
+                    answer = synth
+        except Exception:
+            pass
+
         return {
             "answer": answer,
             "confidence": confidence,

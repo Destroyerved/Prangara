@@ -278,36 +278,26 @@ _PERIOD_MULTIPLIER = {"year": 1.0, "month": 12.0, "day": 365.0}
 
 
 def extract_with_llm(message: str, known: dict[str, Any] | None = None,
-                     timeout: float = 25.0) -> dict[str, Any] | None:
+                     timeout: float = 20.0) -> dict[str, Any] | None:
     """Call the configured Ollama model. Returns None if it is unusable.
 
     Returning None rather than raising is deliberate: a failed model call must
     degrade to the deterministic parser, not break onboarding.
     """
-    if not (settings.ollama_base_url and settings.ollama_model):
-        return None
-    try:
-        import httpx
-    except ImportError:
+    from app.services.ollama_service import get_ollama_service
+
+    svc = get_ollama_service()
+    if not svc.is_available():
         return None
 
     try:
-        response = httpx.post(
-            f"{settings.ollama_base_url.rstrip('/')}/api/chat",
-            json={
-                "model": settings.ollama_model,
-                "stream": False,
-                "format": "json",
-                "options": {"temperature": 0.0},
-                "messages": [
-                    {"role": "system", "content": _SYSTEM},
-                    {"role": "user", "content": message},
-                ],
-            },
-            timeout=timeout,
-        )
-        response.raise_for_status()
-        content = response.json().get("message", {}).get("content", "")
+        messages = [
+            {"role": "system", "content": _SYSTEM},
+            {"role": "user", "content": message},
+        ]
+        content = svc.chat(messages, json_format=True, temperature=0.0, timeout=timeout)
+        if not content:
+            return None
         parsed = json.loads(content)
     except Exception:
         return None

@@ -13165,6 +13165,30 @@
         ]
       }
     },
+    "/api/llm/status": {
+      "get": {
+        "description": "Inspect local Ollama runtime availability, installed models, and active model.",
+        "operationId": "get_llm_status_api_llm_status_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Llm Status Api Llm Status Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Llm Status",
+        "tags": [
+          "assistant"
+        ]
+      }
+    },
     "/api/logistics/backhaul": {
       "post": {
         "description": "Matches returning empty trucks with compatible return loads.",

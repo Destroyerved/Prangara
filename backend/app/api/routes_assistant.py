@@ -35,3 +35,12 @@ def list_sources() -> list[SourceDetail]:
     """List all registered sovereign statutory sources."""
     rag = get_rag_service()
     return [SourceDetail.model_validate(s) for s in rag.list_sources()]
+
+
+@router.get("/llm/status")
+def get_llm_status() -> dict[str, Any]:
+    """Inspect local Ollama runtime availability, installed models, and active model."""
+    from app.services.ollama_service import get_ollama_service
+
+    return get_ollama_service().get_status()
+

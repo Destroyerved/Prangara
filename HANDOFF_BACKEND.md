@@ -13,10 +13,11 @@ Full backend implementation across Phase 0 through Phase 4:
 - B3: Grounded Sovereign RAG Assistant with Anti-Hallucination Rejection (`app/services/rag_service.py`)
 - B4: Logistics Green Route Planner (4 presets), CVRPTW Multi-Tenant Truck Pooling, Backhaul Matching (`app/services/logistics_service.py`, `app/models/logistics.py`, `app/api/routes_logistics.py`)
 - B5: Auditable Working Paper Report Export in HTML and PDF with Vector SVG MACC (`app/services/report.py`)
+- Local Ollama LLM Runtime: Integrated offline inference (`llama3:latest`) for conversational intake & grounded RAG synthesis (`app/services/ollama_service.py`, `GET /api/llm/status`)
 - M2: Offline Mobile Queue Idempotency via `client_ref` on Evidence, Activity Records, and Shipments
 - B7/B8: Dataset Authenticity & Cryptographic Verification Audit Script (`datasets/08_automated_test_suites/verify_dataset_authenticity.js`)
 
-83 endpoints, 31 tables, 194 tests green (0 failures).
+84 endpoints, 31 tables, 198 tests green (0 failures).
 
 ## Files changed
 
