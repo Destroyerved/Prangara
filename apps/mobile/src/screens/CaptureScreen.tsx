@@ -26,12 +26,14 @@ import {
   Note,
   Screen,
 } from '../components/ui';
+import { onDeviceStatus } from '../ml';
 import { colour, space, type as typeScale } from '../theme/tokens';
 import type { RootStackParams } from '../navigation/types';
 
 export default function CaptureScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const onDevice = onDeviceStatus();
 
   const query = useQuery({ queryKey: ['factories'], queryFn: factoriesApi.list });
 
@@ -48,6 +50,10 @@ export default function CaptureScreen() {
       <Heading sub="Record something while you are standing in front of it.">
         Capture
       </Heading>
+
+      {/* Say up front whether reading works without a signal: it changes what
+          somebody standing in a plant room decides to do next. */}
+      <Note>{onDevice.summary}</Note>
 
       {query.isLoading ? <Loading label="Loading factories" /> : null}
       {query.isError ? (

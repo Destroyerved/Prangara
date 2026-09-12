@@ -20,6 +20,10 @@ import { Image, Text, View } from 'react-native';
 import { describeError } from '../api/client';
 import { factories as factoriesApi, intake } from '../api/endpoints';
 import { Button, Card, Chip, Field, Heading, Note, Screen } from '../components/ui';
+import { Badge } from '../components/layout';
+import ExtractedFields from '../components/ExtractedFields';
+import { onDeviceStatus, scanNameplateOnDevice } from '../ml';
+import type { NameplateReading, ScanOutcome } from '../ml';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 import type { RootStackParams } from '../navigation/types';
 
@@ -68,18 +72,71 @@ export default function EquipmentScanScreen() {
 
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ basis: string; confidence: string } | null>(null);
+  const [reading, setReading] = useState<ScanOutcome<NameplateReading> | null>(null);
+  const [readingNow, setReadingNow] = useState(false);
+  const capability = onDeviceStatus();
 
-  async function capture() {
+  /**
+   * Read the plate on this phone. A nameplate is usually photographed in a
+   * plant room with no signal, so this cannot depend on an upload.
+   */
+  async function readOnDevice(uri: string) {
+    setReadingNow(true);
+    try {
+      const outcome = await scanNameplateOnDevice(uri);
+      setReading(outcome);
+      setExtractorNote(outcome.extractorDetail);
+      const plate = outcome.reading;
+      if (plate) {
+        if (plate.ratedPowerKw !== null) setRatedKw(String(plate.ratedPowerKw));
+        if (plate.efficiencyPct !== null) setEfficiency(String(plate.efficiencyPct));
+        if (plate.manufacturer) setManufacturer(plate.manufacturer);
+        if (plate.model) setName((current) => current || plate.model || '');
+        if (plate.assetType) {
+          const match = ASSET_TYPES.find((item) => item.key === plate.assetType?.value);
+          if (match) setAssetType(match);
+        }
+      }
+    } catch (ex) {
+      setError(describeError(ex));
+    } finally {
+      setReadingNow(false);
+    }
+  }
+
+  /**
+   * Camera or gallery. A plant engineer often already has the plate on their
+   * phone from a maintenance round, and making them photograph it again just
+   * to record it is the kind of friction that stops a tool being used.
+   */
+  async function capture(from: 'camera' | 'library' = 'camera') {
     setError(null);
-    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    const permission =
+      from === 'camera'
+        ? await ImagePicker.requestCameraPermissionsAsync()
+        : await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) {
-      setError('Camera access is off. Turn it on in Settings to photograph a nameplate.');
+      setError(
+        from === 'camera'
+          ? 'Camera access is off. Turn it on in Settings to photograph a nameplate.'
+          : 'Photo access is off. Turn it on in Settings to pick a nameplate photo.',
+      );
       return;
     }
-    const shot = await ImagePicker.launchCameraAsync({ quality: 0.7, allowsEditing: true });
+    const shot =
+      from === 'camera'
+        ? await ImagePicker.launchCameraAsync({ quality: 0.7, allowsEditing: true })
+        : await ImagePicker.launchImageLibraryAsync({
+            quality: 0.7,
+            allowsEditing: true,
+            mediaTypes: ['images'],
+          });
     if (!shot.canceled && shot.assets[0]) {
-      setImage(shot.assets[0]);
+      const asset = shot.assets[0];
+      setImage(asset);
       setResult(null);
+      setReading(null);
+      if (capability.ocr) await readOnDevice(asset.uri);
     }
   }
 
@@ -96,12 +153,16 @@ export default function EquipmentScanScreen() {
       return intake.scanEquipment(form);
     },
     onSuccess: (response) => {
-      setExtractorNote(response.extractor_detail);
       setQuestions(response.required_questions);
-      response.fields.forEach((field) => {
-        if (field.field === 'rated_power_kw') setRatedKw(String(field.value));
-        if (field.field === 'manufacturer') setManufacturer(String(field.value));
-      });
+      if (response.fields.length) {
+        setExtractorNote(response.extractor_detail);
+        response.fields.forEach((field) => {
+          if (field.field === 'rated_power_kw') setRatedKw(String(field.value));
+          if (field.field === 'manufacturer') setManufacturer(String(field.value));
+        });
+      } else if (!reading?.reading?.fields.length) {
+        setExtractorNote(response.extractor_detail);
+      }
     },
     onError: (ex) => setError(describeError(ex)),
   });
@@ -151,12 +212,30 @@ export default function EquipmentScanScreen() {
         ) : null}
         <Button
           title={image ? 'Retake nameplate photo' : 'Photograph the nameplate'}
-          onPress={capture}
+          onPress={() => capture('camera')}
         />
+        <Button
+          title="Choose an existing photo"
+          variant="secondary"
+          onPress={() => capture('library')}
+          style={{ marginTop: space.sm }}
+        />
+        {image && capability.ocr ? (
+          <Button
+            title={reading ? 'Read the plate again' : 'Read the plate on this phone'}
+            variant="secondary"
+            onPress={() => {
+              setError(null);
+              readOnDevice(image.uri);
+            }}
+            loading={readingNow}
+            style={{ marginTop: space.sm }}
+          />
+        ) : null}
         {image ? (
           <Button
-            title="Read the nameplate"
-            variant="secondary"
+            title="File the photo and ask the server"
+            variant="ghost"
             onPress={() => {
               setError(null);
               scan.mutate();
@@ -165,10 +244,44 @@ export default function EquipmentScanScreen() {
             style={{ marginTop: space.sm }}
           />
         ) : null}
+        <Text style={{ ...typeScale.caption, color: colour.textFaint, marginTop: space.sm }}>
+          {capability.summary}
+        </Text>
       </Card>
 
-      {extractorNote ? <Note tone="warning">{extractorNote}</Note> : null}
+      {extractorNote ? <Note>{extractorNote}</Note> : null}
       {error ? <Note tone="warning">{error}</Note> : null}
+
+      {reading?.scene && reading.scene.kind === 'unclear' ? (
+        <Note tone="warning">{reading.scene.summary}</Note>
+      ) : null}
+
+      {reading?.reading ? (
+        <Card>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: space.md }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ ...typeScale.heading, color: colour.text }}>
+                Read on this phone
+              </Text>
+              <Text style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 2 }}>
+                {reading.reading.assetType
+                  ? `Plate reads as: ${reading.reading.assetType.label.toLowerCase()}, from "${reading.reading.assetType.evidence}".`
+                  : 'The plate did not say what kind of machine this is. Pick it below.'}
+              </Text>
+            </View>
+            <Badge tone="positive">ON DEVICE</Badge>
+          </View>
+          <ExtractedFields
+            fields={reading.reading.fields}
+            emptyBody="Nothing on the plate matched a known rating format. Plates are small and often oily - get close, avoid the flash reflecting, and try again, or enter the rating by hand."
+          />
+          {reading.scene && reading.scene.kind !== 'unclear' ? (
+            <Text style={{ ...typeScale.caption, color: colour.textFaint }}>
+              {reading.scene.summary}
+            </Text>
+          ) : null}
+        </Card>
+      ) : null}
 
       <Card>
         <Text style={{ ...typeScale.bodyStrong, color: colour.text, marginBottom: space.sm }}>

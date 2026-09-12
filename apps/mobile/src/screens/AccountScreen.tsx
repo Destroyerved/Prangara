@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { Modal, Text, TextInput, View } from 'react-native';
 
 import { describeError, getBaseUrl, setCustomBaseUrl } from '../api/client';
+import { onDeviceStatus } from '../ml';
 import { system } from '../api/endpoints';
 import { useAuth } from '../auth/AuthContext';
 import {
@@ -31,6 +32,7 @@ export default function AccountScreen() {
   const [busy, setBusy] = useState(false);
   const [serverModalOpen, setServerModalOpen] = useState(false);
   const [tempUrl, setTempUrl] = useState(getBaseUrl());
+  const onDevice = onDeviceStatus();
 
   const health = useQuery({
     queryKey: ['health'],
@@ -55,6 +57,22 @@ export default function AccountScreen() {
             strong={membership.organization.id === me.active_organization_id}
           />
         ))}
+      </Card>
+
+      {/* What the phone can do without a server, stated plainly: the first
+          question on a factory floor with no signal. */}
+      <Card>
+        <Eyebrow>ON THIS PHONE</Eyebrow>
+        <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs }}>
+          On-device intelligence
+        </Text>
+        <Row
+          left="Text recognition (OCR)"
+          right={onDevice.ocr ? 'Available' : 'Unavailable'}
+          strong
+        />
+        <Row left="Image labelling" right={onDevice.vision ? 'Available' : 'Unavailable'} />
+        <Note>{onDevice.summary}</Note>
       </Card>
 
       <Card>

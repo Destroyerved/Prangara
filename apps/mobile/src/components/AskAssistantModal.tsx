@@ -191,8 +191,8 @@ export function AskAssistantModal({
                 <View
                   style={{
                     alignSelf: 'flex-end',
-                    backgroundColor: 'rgba(56, 189, 248, 0.12)',
-                    borderColor: 'rgba(56, 189, 248, 0.3)',
+                    backgroundColor: colour.selectedBg,
+                    borderColor: colour.borderHighlight,
                     borderWidth: 1,
                     borderRadius: radius.md,
                     paddingHorizontal: space.md,
@@ -252,7 +252,7 @@ export function AskAssistantModal({
                             {c.badge || c.grade ? (
                               <View
                                 style={{
-                                  backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                                  backgroundColor: colour.positiveBg,
                                   paddingHorizontal: 6,
                                   paddingVertical: 2,
                                   borderRadius: radius.pill,

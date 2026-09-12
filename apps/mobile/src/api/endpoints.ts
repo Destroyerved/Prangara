@@ -21,6 +21,23 @@ import type {
   Notification,
   Sector,
   TokenResponse,
+  AskResponse,
+  AuditEntry,
+  ComplianceCase,
+  ComplianceReadiness,
+  MaterialListing,
+  PoolingMatch,
+  Provider,
+  ProviderMatch,
+  QuoteComparison,
+  Quote,
+  RFQ,
+  ReferencePayload,
+  RoutePlan,
+  Scenario,
+  ScenarioComparison,
+  ScenarioModification,
+  Shipment,
 } from './types';
 
 export const auth = {
@@ -147,4 +164,113 @@ export const notifications = {
     api.get<Notification[]>('/api/notifications', { unread_only: unreadOnly }),
   markRead: (id: string) => api.post<Notification>(`/api/notifications/${id}/read`),
   markAllRead: () => api.post<{ marked: number }>('/api/notifications/read-all'),
+};
+
+export const scenarios = {
+  list: (factoryId: string) => api.get<Scenario[]>(`/api/factories/${factoryId}/scenarios`),
+  create: (
+    factoryId: string,
+    body: {
+      name: string;
+      description?: string;
+      baseline_assessment_id?: string | null;
+      modifications: ScenarioModification[];
+    },
+  ) => api.post<Scenario>(`/api/factories/${factoryId}/scenarios`, body),
+  run: (scenarioId: string) =>
+    api.post<ScenarioComparison>(`/api/scenarios/${scenarioId}/run`),
+};
+
+export const compliance = {
+  readiness: (factoryId: string) =>
+    api.get<ComplianceReadiness>(`/api/factories/${factoryId}/compliance`),
+  evaluate: (factoryId: string, assessmentId?: string | null) =>
+    api.post<{ created: number; updated: number; rule_packs: string[] }>(
+      '/api/compliance/evaluate',
+      { factory_id: factoryId, assessment_id: assessmentId ?? null },
+    ),
+  cases: (factoryId?: string) =>
+    api.get<ComplianceCase[]>(
+      '/api/compliance/cases',
+      factoryId ? { factory_id: factoryId } : undefined,
+    ),
+  case: (caseId: string) => api.get<ComplianceCase>(`/api/compliance/cases/${caseId}`),
+  addCorrectiveAction: (caseId: string, body: { title: string; description?: string }) =>
+    api.post<ComplianceCase>(`/api/compliance/cases/${caseId}/corrective-actions`, body),
+  close: (caseId: string, reason: string, evidence_ids: string[] = []) =>
+    api.post<ComplianceCase>(`/api/compliance/cases/${caseId}/close`, { reason, evidence_ids }),
+};
+
+export const marketplace = {
+  providers: (params?: Record<string, string | number | boolean>) =>
+    api.get<Provider[]>('/api/providers', params),
+  match: (factoryId: string, interventionId: string) =>
+    api.get<ProviderMatch[]>('/api/providers/match', {
+      factory_id: factoryId,
+      intervention_id: interventionId,
+    }),
+  rfqs: (factoryId?: string) =>
+    api.get<RFQ[]>('/api/rfqs', factoryId ? { factory_id: factoryId } : undefined),
+  createRfq: (body: {
+    factory_id: string;
+    intervention_id: string;
+    title: string;
+    scope_of_work?: string;
+    action_id?: string | null;
+    provider_ids?: string[];
+  }) => api.post<RFQ>('/api/rfqs', body),
+  compare: (rfqId: string) => api.get<QuoteComparison>(`/api/rfqs/${rfqId}/compare`),
+  acceptQuote: (quoteId: string) => api.post<Quote>(`/api/quotes/${quoteId}/accept`),
+  materials: (params?: Record<string, string | number | boolean>) =>
+    api.get<MaterialListing[]>('/api/materials', params),
+};
+
+export const logistics = {
+  plan: (body: {
+    origin_gps: number[];
+    destination_gps: number[];
+    payload_tonnes: number;
+    cargo_type?: string;
+  }) => api.post<RoutePlan>('/api/logistics/routes', body),
+  shipments: (factoryId?: string) =>
+    api.get<Shipment[]>('/api/shipments', factoryId ? { factory_id: factoryId } : undefined),
+  createShipment: (body: {
+    factory_id?: string | null;
+    origin_name: string;
+    origin_lat: number;
+    origin_lon: number;
+    destination_name: string;
+    dest_lat: number;
+    dest_lon: number;
+    payload_tonnes: number;
+    cargo_type?: string;
+    selected_route_preset?: string | null;
+  }) => api.post<Shipment>('/api/shipments', body),
+  pool: (shipment_ids?: string[]) =>
+    api.post<PoolingMatch>('/api/logistics/pool', shipment_ids ? { shipment_ids } : {}),
+};
+
+export const assistant = {
+  ask: (question: string, factoryId?: string | null, topic?: string) =>
+    api.post<AskResponse>('/api/assistant/ask', {
+      question,
+      factory_id: factoryId ?? null,
+      topic: topic ?? null,
+    }),
+  sources: () => api.get<Record<string, unknown>[]>('/api/sources'),
+};
+
+export const governance = {
+  audit: (factoryId: string) => api.get<AuditEntry[]>(`/api/factories/${factoryId}/audit`),
+};
+
+export const reference = {
+  all: () => api.get<ReferencePayload>('/api/reference', undefined, false),
+  interventions: () =>
+    api.get<{ interventions: Record<string, unknown>[]; meta?: Record<string, unknown> }>(
+      '/api/reference/interventions',
+      undefined,
+      false,
+    ),
+  provenance: () => api.get<Record<string, unknown>>('/api/reference/provenance', undefined, false),
 };

@@ -153,7 +153,7 @@ def list_shipments(
             resolve_factory(db, principal, factory_id)
         stmt = stmt.where(Shipment.factory_id == factory_id)
     elif principal:
-        allowed_factories = accessible_factory_ids(principal)
+        allowed_factories = accessible_factory_ids(db, principal)
         if allowed_factories:
             stmt = stmt.where(
                 (Shipment.factory_id.in_(allowed_factories))
@@ -207,7 +207,7 @@ def match_pooling(
         # Default: pool all pending shipments in database
         stmt = select(Shipment).where(Shipment.status == "PENDING")
         if principal:
-            allowed = accessible_factory_ids(principal)
+            allowed = accessible_factory_ids(db, principal)
             if allowed:
                 stmt = stmt.where(
                     (Shipment.factory_id.in_(allowed)) | (Shipment.organization_id == principal.active_org_id)

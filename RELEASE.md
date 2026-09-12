@@ -1,57 +1,175 @@
-# Release v0.1.0 - PRANGARA Decarbonization OS & Mobile Companion
+# Release v0.2.0 — PRANGARA Decarbonization OS & Mobile Companion
 
-PRANGARA is an industrial decarbonization operating system that translates complex facility activity data (electricity, fossil fuels, freight, materials) into statutory audit-grade carbon accounts, cash-positive marginal abatement cost curves (MACC), and verified regulatory reporting.
+PRANGARA is an industrial decarbonization operating system. It turns facility
+activity data — electricity, fossil fuels, freight, materials, waste — into
+audit-grade carbon accounts with uncertainty bands, a costed marginal abatement
+cost curve, and regulatory readiness working papers for EU CBAM, India CCTS and
+SEBI BRSR Core.
+
+Screening and decision support. Not a BEE-accredited audit, a legal assurance
+service, a regulator or a carbon-credit verifier.
 
 ---
 
-## 📦 Release Assets & Download
+## 📦 Release assets
 
 | Asset | Path | Description |
 |:---|:---|:---|
-| **Android Standalone APK (Debug / Dev)** | `prangara-companion.apk` | Fat multi-ABI APK for immediate installation on any Android device |
-| **Android Production APK (Release)** | `apps/mobile/android/app/build/outputs/apk/release/app-release.apk` | Optimized production release APK with Hermes bytecode |
+| **Android APK (release)** | `prangara-companion-release.apk` | Standalone ARM build (`armeabi-v7a`, `arm64-v8a`), Hermes bytecode, installable on any Android 7+ phone |
 
----
+Build it yourself:
 
-## 🌟 What's New in v0.1.0
-
-### 1. 📱 Mobile Floor Companion (`apps/mobile`)
-- **Executive Hero & Scope Breakdown**:
-  - Live **"YOUR CASH-POSITIVE OPPORTUNITY"** indicator displaying potential annual net recurring savings (e.g. ₹6.4L/yr).
-  - Tri-color proportional Scope split visualization:
-    - **Scope 1 (Direct)**: Coral `#FFB689`
-    - **Scope 2 (Electricity)**: Lavender `#BEC2FF`
-    - **Scope 3 (Value Chain)**: Electric Cyan `#38BDF8`
-- **Ask PRANGARA ✨ (Sovereign RAG Copilot)**:
-  - Instant statutory reasoning for plant engineers on the factory floor.
-  - Verification grades and statutory citations for **BEE PAT Scheme**, **SEBI BRSR Core**, **EU CBAM**, and **CEA Grid Factors**.
-- **1-Tap Demo Switcher**:
-  - Pre-seeded with *Factory Owner* (`owner@demo.prangara.example`) and *Platform Admin* (`admin@demo.prangara.example`).
-  - Dynamic API URL switcher defaulting to local/LAN endpoint (`http://10.227.95.161:8000`).
-- **Hardware Integration**:
-  - Camera permissions and storage handlers for bill scanning, electricity meter readings, and machine nameplate capture.
-
-### 2. 🖥️ Web Decarbonization Dashboard (`apps/web`)
-- Full modern dark space theme (`#080B11`) with electric cyan highlights and glassmorphic cards.
-- Marginal Abatement Cost Curve (MACC) visualization.
-- Instant PDF audit report export for physical compliance filings.
-- 21/21 Vitest test suites passing.
-
-### 3. ⚙️ Thermodynamic & Statutory Backend (`backend`)
-- FastAPI engine with deterministic carbon accounting traceable to CEA v20, BEE, and IPCC emission factors.
-- Full migration history with SQLite/PostgreSQL support.
-- 201/201 pytest test suites passing.
-
----
-
-## 📲 Installation Instructions
-
-### Via Android Debug Bridge (ADB):
 ```powershell
-adb install -r prangara-companion.apk
+powershell -ExecutionPolicy Bypass -File apps/mobile/scripts/build-apk.ps1
 ```
 
-### Direct Install:
-1. Transfer `prangara-companion.apk` to your device via USB or file sharing.
-2. Enable "Install from unknown sources" if prompted.
-3. Open the app, sign in with demo credentials, and start scanning!
+The APK is signed with the Expo-generated debug keystore. That is fine for
+sideloading and wrong for Play distribution — a store build needs a release
+keystore held outside this repository.
+
+---
+
+## 🌟 What's new in v0.2.0
+
+### The Android app now has web-dashboard parity
+
+The companion previously covered capture only. It now carries every module the
+browser app has, as a pushed screen from a module hub that mirrors the web
+sidebar group for group:
+
+- **Overview** — cash-positive hero, carbon hero with its band, metric strip,
+  and the four numbered sections (diagnose, act, invest, prepare)
+- **Plant Data** — activity inventory with data states, evidence on file, audit trail
+- **Footprint** — scope split, uncertainty band, source-to-scope flow, stream inventory
+- **Leak Points** — every finding with the rule that fired, peer quartiles, recoverable tonnes
+- **What-If Simulator** — named engine-input modifications, rerun server-side
+- **Circular Actions** — priced interventions, substitution caps, the refusals, and a writable tracker
+- **Abatement Portfolio** — the MACC, plus the interaction de-rating explained
+- **Marketplace & RFQs** — provider matching, quote requests, quote comparison, accept
+- **Green Logistics** — multi-modal route planner, truck pooling, backhaul
+- **Circular Network** — symbiosis listings, shared capacity, live supplier listings
+- **Compliance** — CBAM, CCTS and BRSR readiness with rule-pack cases
+- **Methodology** — standard, version stamp, limitations, the full factor registry
+
+### One design system across both surfaces
+
+`apps/mobile/src/theme/tokens.ts` is now a direct port of the web app's
+`src/styles/tokens.css`: ground `#070708`, lavender accent `#bec2ff`, cyan
+secondary `#50d8e9`, scope palette `#ffb689 / #bec2ff / #50d8e9`, the `rgba`
+glass surfaces, and the Manrope/Inter type ramp with the web's tight display
+tracking. The bottom tab bar is the web's detached floating navbar — a glass
+pill lifted off the bottom edge, with line icons drawn in SVG.
+
+The charts are ports of the web geometry to `react-native-svg`: the MACC (width
+is de-rated tonnes, height is ₹/tCO₂e, cash-positive below the zero line), the
+scope band, the uncertainty band, the peer quartile strip, stream bars, and a
+three-column stream → scope → total flow.
+
+### A guided walkthrough
+
+PRD section 32's demo story as 17 navigable steps — sign-in to verified
+abatement — each one opening the module it belongs to and saying what to look
+at. Progress is kept on the device, because a walkthrough on a factory floor
+gets interrupted.
+
+### The phone reads bills and nameplates by itself
+
+Text recognition and image labelling run **on the device**, with the models
+bundled into the APK rather than downloaded — so a bill or a machine nameplate
+can be read standing in a plant room with no signal, and the photograph never
+leaves the phone.
+
+Measured on a OnePlus CPH2467 running Android 15:
+
+| Photograph | Read on the phone |
+|:---|:---|
+| Electricity bill | 48,500 kWh and 750 kVA, billing period recognised as one month |
+| Motor nameplate | 11 fields in 0.3 s — 7.5 kW, 10 HP, 1,440 rpm, 415 V, 89.4% efficiency, IE3, Crompton Greaves, 2019 |
+
+Rows are rebuilt from the recogniser's own geometry before any rule runs, which
+is what lets a two-column nameplate be read at all. Every value carries a
+confidence and the exact printed line it came from, and nothing is saved until
+a person confirms it. The rules refuse more than they accept: a leading zero
+marks an identifier rather than a quantity, an amount needs a currency token
+beside it, and a tariff is read only where the bill prints a rate — never
+back-calculated from a total that includes fixed charges and duty.
+
+The image labeller catches the most common failure on a factory floor, a
+mis-framed photograph, before fields read from it are shown. It is a hint,
+never a gate.
+
+### It works with no backend in reach
+
+The sign-in screen offers **Open the demonstration**: ten sectors of real engine
+output bundled into the APK, with every analytical module working offline. It is
+labelled as demonstration data everywhere it appears, and capture and
+procurement stay read-only because those write to a real plant's record. See
+`docs/DEMO-FIXTURES.md`.
+
+### Fixes
+
+- **`GET /api/shipments` and truck pooling returned 500 for any signed-in
+  user.** `routes_logistics.py` called `accessible_factory_ids(principal)` where
+  the helper takes `(db, principal)`. Every existing logistics test used the
+  anonymous client, so the authenticated path was never exercised. Covered now
+  by `test_signed_in_user_can_list_shipments_and_pool`.
+- **The release APK could not reach any `http://` backend.** `app.json` carried
+  `android.usesCleartextTraffic`, which is not an Expo config key, so it was
+  silently ignored and Android's default of blocking cleartext applied. Every
+  sign-in failed with "could not reach PRANGARA" while the same URL answered
+  from the device shell. Now set through `expo-build-properties`.
+- **A saved API endpoint did not survive an app restart**, so anyone pointing an
+  installed APK at their own server had to retype the address on every launch.
+- **Modules read a data-quality panel that an unpersisted engine run does not
+  have.** They now print "Not supplied", which is also what the web app does.
+
+---
+
+## ✅ Verification
+
+```text
+backend    python -m pytest -q      202 passed
+mobile     npx tsc --noEmit         clean
+mobile     npm test                 172 passed
+```
+
+On-device reading was verified on real hardware, not only in tests: a OnePlus
+CPH2467 running Android 15, with the release APK installed over ADB.
+
+---
+
+## 📲 Installation
+
+Via ADB:
+
+```bash
+adb install -r prangara-companion-release.apk
+```
+
+Or copy the APK to the phone, allow installation from unknown sources, and open
+it. Then either sign in against a running backend, or tap **Open the
+demonstration**.
+
+### Pointing the app at a backend
+
+The Account screen shows the resolved endpoint and lets you change it; the
+choice is remembered. Over USB, the simplest route is a reverse tunnel:
+
+```bash
+adb reverse tcp:8000 tcp:8000
+```
+
+then set the endpoint to `http://127.0.0.1:8000`. On Wi-Fi, use the laptop's LAN
+address — `localhost` on a phone is the phone.
+
+### Demo accounts
+
+Password `prangara-demo-2026`:
+
+| Role | Email |
+|:---|:---|
+| Plant owner | `owner@demo.prangara.example` |
+| Compliance officer | `compliance@demo.prangara.example` |
+| Platform admin | `admin@demo.prangara.example` |
+
+Start the stack with `start.bat` (backend on `:8000`, web dashboard on `:5173`).

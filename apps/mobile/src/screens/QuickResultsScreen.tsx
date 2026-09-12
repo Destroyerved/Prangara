@@ -116,7 +116,7 @@ export default function QuickResultsScreen() {
             style={{
               borderColor: colour.ok,
               borderWidth: 1,
-              backgroundColor: 'rgba(16, 185, 129, 0.04)',
+              backgroundColor: colour.positiveBg,
             }}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: space.xs }}>
@@ -181,7 +181,7 @@ export default function QuickResultsScreen() {
                 marginTop: space.md,
                 padding: space.sm,
                 borderRadius: radius.sm,
-                backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                backgroundColor: colour.selectedBg,
                 flexDirection: 'row',
                 alignItems: 'center',
               }}
@@ -195,8 +195,8 @@ export default function QuickResultsScreen() {
           {/* 2. ASK PRANGARA SOVEREIGN COPILOT PROMPT */}
           <Card
             style={{
-              backgroundColor: 'rgba(56, 189, 248, 0.05)',
-              borderColor: 'rgba(56, 189, 248, 0.25)',
+              backgroundColor: colour.selectedBg,
+              borderColor: colour.borderHighlight,
               borderWidth: 1,
             }}
           >
@@ -496,14 +496,16 @@ export default function QuickResultsScreen() {
           <Card>
             <Eyebrow>AUDIT READINESS</Eyebrow>
             <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.sm }}>
-              Data Quality: {result.data_quality.score}/100 ({result.data_quality.band})
+              {result.data_quality
+                ? `Data Quality: ${result.data_quality.score}/100 (${result.data_quality.band})`
+                : 'Data quality: not supplied'}
             </Text>
-            {result.data_quality.gaps.length ? (
+            {result.data_quality?.gaps.length ? (
               <Text style={{ ...typeScale.caption, color: colour.textMuted, lineHeight: 19 }}>
                 Identified data gaps: {result.data_quality.gaps.join(', ')}.
               </Text>
             ) : null}
-            {result.data_quality.notes.map((note) => (
+            {(result.data_quality?.notes ?? []).map((note) => (
               <Note key={note} tone="warning">
                 {note}
               </Note>

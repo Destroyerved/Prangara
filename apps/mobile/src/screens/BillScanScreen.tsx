@@ -1,12 +1,17 @@
 /**
  * Bill and invoice capture. PRD FR-05.
  *
- *     capture -> upload -> extract -> confirm -> activity record + evidence link
+ *     capture -> read on the phone -> confirm -> activity record + evidence link
  *
- * When the backend reports that no OCR runtime is configured, the screen says so
- * plainly and drops into manual entry with the photograph already stored as
- * evidence. That is the honest failure mode: the owner still gets their bill
- * filed against the reading, and nobody is shown numbers that were never read.
+ * The reading happens on the device: ML Kit text recognition, bundled in the
+ * APK, so a bill can be read standing on the shop floor with no signal and
+ * without the photograph leaving the phone. The figures it finds are shown with
+ * their confidence and the exact printed line each came from, and nothing is
+ * written until the reader confirms it.
+ *
+ * The photograph is still uploaded when there is a network, because a confirmed
+ * reading needs its evidence filed against it - but the upload is no longer
+ * what makes the reading possible.
  */
 
 import { useNavigation, useRoute, type RouteProp } from '@react-navigation/native';
@@ -20,7 +25,11 @@ import { NetworkError, describeError } from '../api/client';
 import { intake } from '../api/endpoints';
 import * as queue from '../storage/queue';
 import { Button, Card, Chip, Field, Heading, Note, Screen } from '../components/ui';
+import { Badge } from '../components/layout';
+import ExtractedFields from '../components/ExtractedFields';
 import PendingBanner from '../components/PendingBanner';
+import { onDeviceStatus, scanDocumentOnDevice } from '../ml';
+import type { DocumentKind, DocumentReading, ScanOutcome } from '../ml';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 import type { RootStackParams } from '../navigation/types';
 import type { ActivityRecordIn, StreamKind } from '../api/types';
@@ -104,6 +113,36 @@ export default function BillScanScreen() {
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [queued, setQueued] = useState(false);
+  const [reading, setReading] = useState<ScanOutcome<DocumentReading> | null>(null);
+  const [readingNow, setReadingNow] = useState(false);
+  const capability = onDeviceStatus();
+
+  /**
+   * Read the photograph on this phone. Runs the moment a photo exists, because
+   * the alternative - waiting for an upload - is exactly what does not work on
+   * a factory floor.
+   */
+  async function readOnDevice(uri: string, kind: DocumentKind) {
+    setReadingNow(true);
+    try {
+      const outcome = await scanDocumentOnDevice(uri, kind);
+      setReading(outcome);
+      setExtractorNote(outcome.extractorDetail);
+      const suggested = outcome.reading?.suggested;
+      if (suggested && typeof suggested.quantity === 'number') {
+        setQuantity(String(suggested.quantity));
+      }
+      const guessed = outcome.reading?.period;
+      if (guessed) {
+        const match = PERIODS.find((item) => item.multiplier === guessed.multiplier);
+        if (match) setPeriod(match);
+      }
+    } catch (ex) {
+      setError(describeError(ex));
+    } finally {
+      setReadingNow(false);
+    }
+  }
 
   async function pick(from: 'camera' | 'library') {
     setError(null);
@@ -131,10 +170,14 @@ export default function BillScanScreen() {
             mediaTypes: ['images'],
           });
     if (!result.canceled && result.assets[0]) {
-      setImage(result.assets[0]);
+      const asset = result.assets[0];
+      setImage(asset);
       setEvidenceId(null);
       setExtractorNote(null);
+      setReading(null);
+      setQuantity('');
       setSaved(false);
+      if (capability.ocr) await readOnDevice(asset.uri, docType.key as DocumentKind);
     }
   }
 
@@ -155,9 +198,15 @@ export default function BillScanScreen() {
     },
     onSuccess: (result) => {
       setEvidenceId(result.evidence_id);
-      setExtractorNote(result.extractor_detail);
+      // The server only overrides the phone's reading when it actually found
+      // something; an unconfigured OCR runtime must not blank a good reading.
       const suggested = result.suggested_activity_records[0];
-      if (suggested) setQuantity(String(suggested.quantity));
+      if (suggested) {
+        setQuantity(String(suggested.quantity));
+        setExtractorNote(result.extractor_detail);
+      } else if (!reading?.reading?.fields.length) {
+        setExtractorNote(result.extractor_detail);
+      }
     },
     onError: (ex) => setError(describeError(ex)),
   });
@@ -269,9 +318,21 @@ export default function BillScanScreen() {
           onPress={() => pick('library')}
           style={{ marginTop: space.sm }}
         />
+        {image && capability.ocr ? (
+          <Button
+            title={reading ? 'Read this photo again' : 'Read this photo'}
+            variant="secondary"
+            onPress={() => {
+              setError(null);
+              readOnDevice(image.uri, docType.key as DocumentKind);
+            }}
+            loading={readingNow}
+            style={{ marginTop: space.sm }}
+          />
+        ) : null}
         {image && !evidenceId ? (
           <Button
-            title="Upload and read"
+            title="File this photo as evidence"
             onPress={() => {
               setError(null);
               upload.mutate();
@@ -280,20 +341,67 @@ export default function BillScanScreen() {
             style={{ marginTop: space.sm }}
           />
         ) : null}
+        <Text style={{ ...typeScale.caption, color: colour.subtle, marginTop: space.sm }}>
+          {capability.summary}
+        </Text>
       </Card>
 
       {error ? <Note tone="warning">{error}</Note> : null}
-      {extractorNote ? <Note tone="warning">{extractorNote}</Note> : null}
+      {extractorNote ? <Note>{extractorNote}</Note> : null}
 
-      {evidenceId ? (
+      {reading?.scene && reading.scene.kind === 'unclear' ? (
+        <Note tone="warning">{reading.scene.summary}</Note>
+      ) : null}
+
+      {reading?.reading ? (
+        <Card>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginBottom: space.md,
+            }}
+          >
+            <View style={{ flex: 1 }}>
+              <Text style={{ ...typeScale.heading, color: colour.text }}>
+                Read on this phone
+              </Text>
+              <Text style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 2 }}>
+                Text recognition ran on the device. The photo did not leave it.
+              </Text>
+            </View>
+            <Badge tone="positive">ON DEVICE</Badge>
+          </View>
+          <ExtractedFields
+            fields={reading.reading.fields}
+            emptyBody="Nothing on this photo matched a known bill layout. Enter the reading by hand below - the photograph is still filed as evidence."
+          />
+          {reading.reading.period ? (
+            <Note>
+              This looks like {reading.reading.period.label.toLowerCase()} of data, read from
+              &ldquo;{reading.reading.period.evidence}&rdquo;. Check the period below before
+              saving.
+            </Note>
+          ) : null}
+          {reading.scene && reading.scene.kind !== 'unclear' ? (
+            <Text style={{ ...typeScale.caption, color: colour.textFaint }}>
+              {reading.scene.summary}
+            </Text>
+          ) : null}
+        </Card>
+      ) : null}
+
+      {image ? (
         <Card>
           <Text style={{ ...typeScale.heading, color: colour.text }}>
-            Enter what the bill says
+            Confirm what the bill says
           </Text>
           <Text
             style={{ ...typeScale.caption, color: colour.textMuted, marginTop: space.xs, marginBottom: space.md }}
           >
-            The photo is stored and will be linked to this reading as evidence.
+            {evidenceId
+              ? 'The photo is stored and will be linked to this reading as evidence.'
+              : 'The photo is on this phone. File it as evidence above when you have a signal.'}
           </Text>
 
           <Field

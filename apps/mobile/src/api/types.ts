@@ -184,6 +184,8 @@ export interface AssessmentResult {
       activity_qty: number;
       activity_unit: string;
       source: string;
+      factor_keys?: string[];
+      detail?: Record<string, unknown> | null;
     }[];
   };
   leaks: {
@@ -221,12 +223,22 @@ export interface AssessmentResult {
     total_abatement_available_tco2e: number;
     total_abatement_pct: number;
     recommendations: Recommendation[];
+    macc_curve: MaccBar[];
     blocked: { id: string; name: string; reason: string }[];
     portfolio: Record<string, PortfolioStats>;
     assumptions: Record<string, unknown>;
   };
-  compliance: Record<string, unknown>;
-  data_quality: {
+  compliance: CompliancePanel;
+  sankey?: SankeyPayload;
+  methodology?: MethodologyPanel;
+  profile?: EngineProfile;
+  is_demo?: boolean;
+  /**
+   * Only a persisted assessment carries this: the score needs the stored
+   * profile and activity records, which an unpersisted engine run does not
+   * have. Absent means "not supplied", never "zero".
+   */
+  data_quality?: {
     score: number;
     band: string;
     gaps: string[];
@@ -235,6 +247,82 @@ export interface AssessmentResult {
   };
   versions: Record<string, string>;
   claim_boundary?: string;
+}
+
+export interface EngineProfile {
+  name: string;
+  sector: string;
+  sector_label: string;
+  state?: string | null;
+  annual_output_t?: number | null;
+  annual_revenue_cr?: number | null;
+  employees?: number | null;
+}
+
+export interface SankeyPayload {
+  nodes: { name: string; kind: string }[];
+  links: { source: number; target: number; value: number; scope: number }[];
+}
+
+export interface MethodologyPanel {
+  standard?: string;
+  gwp?: string;
+  factor_note?: string;
+  verification_status?: string;
+  benchmark_note?: string;
+  leak_rule?: string;
+}
+
+/** `compliance` from the engine. Shape owned by `backend/engine/assess.py`. */
+export interface CompliancePanel {
+  cbam: {
+    applicable: boolean;
+    status?: string;
+    applicability?: string;
+    eu_export_share_pct?: number | null;
+    embedded_emissions_exported_tco2e?: number | null;
+    eu_benchmark_tco2e_per_t?: number | null;
+    excess_intensity_tco2e_per_t?: number | null;
+    net_surrender_tco2e?: number | null;
+    indicative_annual_cost_inr?: number | null;
+    reference_price_inr_per_tco2e?: number | null;
+    basis?: string;
+    caveat?: string;
+  };
+  ccts?: {
+    applicable: boolean;
+    status: string;
+    designated_consumer_status: string;
+    plant_thermal_gj?: number | null;
+    designated_consumer_threshold_gj?: number | null;
+    is_designated_consumer: boolean;
+    voluntary_ccc_potential_tco2e?: number | null;
+    mechanism: string;
+    notes: string[];
+  } | null;
+  brsr: {
+    relevant: boolean;
+    why?: string;
+    readiness: {
+      item: string;
+      status: string;
+      value_tco2e?: number | null;
+      note?: string | null;
+    }[];
+    total_disclosed_tco2e?: number | null;
+  };
+  sector_flags?: string[];
+}
+
+export interface MaccBar {
+  id: string;
+  name: string;
+  category: string;
+  x_start: number;
+  width: number;
+  standalone: number;
+  height: number;
+  cash_positive: boolean;
 }
 
 export interface Recommendation {
@@ -272,9 +360,12 @@ export interface PortfolioStats {
   abatement_pct: number;
   capex_inr: number;
   net_annual_benefit_inr: number;
+  blended_payback_yrs: number | null;
   blended_payback_months: number | null;
   npv_inr: number;
 }
+
+export type PortfolioMode = 'all' | 'cash_positive_only' | 'quick_wins';
 
 export interface Assessment {
   id: string;
@@ -358,4 +449,297 @@ export interface ApiErrorBody {
   code: string;
   message: string;
   details: Record<string, unknown>;
+}
+
+// ---------------------------------------------------------------------------
+// Scenarios (PRD FR-34)
+// ---------------------------------------------------------------------------
+
+export type ScenarioKind =
+  | 'electricity_efficiency_pct'
+  | 'solar_share_pct'
+  | 'recycled_material_pct'
+  | 'fuel_switch'
+  | 'logistics_mode_shift_pct'
+  | 'waste_recovery_pct'
+  | 'output_change_pct';
+
+export interface ScenarioModification {
+  kind: ScenarioKind;
+  value: number;
+  target_key?: string | null;
+  replacement_key?: string | null;
+}
+
+export interface Scenario {
+  id: string;
+  factory_id: string;
+  name: string;
+  description?: string | null;
+  baseline_assessment_id?: string | null;
+  latest_assessment_id?: string | null;
+  modifications: { items?: ScenarioModification[] };
+  created_at: string;
+}
+
+export interface ScenarioComparison {
+  scenario: Scenario;
+  baseline?: Assessment | null;
+  result: Assessment;
+  delta_tco2e?: number | null;
+  delta_pct?: number | null;
+  unsupported: string[];
+}
+
+// ---------------------------------------------------------------------------
+// Compliance
+// ---------------------------------------------------------------------------
+
+export interface ReadinessItem {
+  key: string;
+  label: string;
+  status: string;
+  detail?: string | null;
+  basis: string;
+  open_case_count: number;
+}
+
+export interface ComplianceReadiness {
+  factory_id: string;
+  assessment_id?: string | null;
+  evaluated_at?: string | null;
+  overall: string;
+  items: ReadinessItem[];
+  open_cases: number;
+  overdue_cases: number;
+  human_review_required: number;
+  engine_panel: Record<string, unknown>;
+  rule_packs_evaluated: string[];
+  caveat: string;
+}
+
+export interface CorrectiveAction {
+  id: string;
+  case_id: string;
+  title: string;
+  description?: string | null;
+  due_date?: string | null;
+  status: string;
+  completed_at?: string | null;
+  is_overdue: boolean;
+}
+
+export interface ComplianceCase {
+  id: string;
+  factory_id: string;
+  rule_id: string;
+  rule_pack: string;
+  rule_pack_version: string;
+  severity: string;
+  status: string;
+  flow_state: string;
+  requires_human_review: boolean;
+  title: string;
+  reason?: string | null;
+  required_evidence: string[];
+  due_date?: string | null;
+  closed_at?: string | null;
+  created_at: string;
+  is_overdue: boolean;
+  evidence_count: number;
+  corrective_actions: CorrectiveAction[];
+}
+
+// ---------------------------------------------------------------------------
+// Marketplace
+// ---------------------------------------------------------------------------
+
+export interface Provider {
+  id: string;
+  name: string;
+  provider_type: string;
+  description?: string | null;
+  contact_email?: string | null;
+  contact_phone?: string | null;
+  state?: string | null;
+  district?: string | null;
+  service_states: string[];
+  certifications: string[];
+  typical_lead_time_days?: number | null;
+  verification_status: string;
+  rating?: number | null;
+  rating_count: number;
+  accepting_work: boolean;
+  is_demo_seed: boolean;
+}
+
+export interface ProviderMatch {
+  provider: Provider;
+  score: number;
+  reasons: string[];
+  distance_km?: number | null;
+  indicative_price_inr?: number | null;
+  matched_service_id?: string | null;
+}
+
+export interface RFQ {
+  id: string;
+  factory_id: string;
+  intervention_id: string;
+  title: string;
+  scope_of_work?: string | null;
+  status: string;
+  needed_by?: string | null;
+  accepted_quote_id?: string | null;
+  shared_context: Record<string, unknown>;
+  invited_provider_ids: string[];
+  quote_count: number;
+  created_at: string;
+}
+
+export interface Quote {
+  id: string;
+  rfq_id: string;
+  provider_id: string;
+  provider_name?: string | null;
+  status: string;
+  price_inr: number;
+  installation_included: boolean;
+  installation_inr?: number | null;
+  annual_opex_delta_inr?: number | null;
+  warranty_months?: number | null;
+  delivery_days?: number | null;
+  validity_days?: number | null;
+  notes?: string | null;
+  revised_payback_yrs?: number | null;
+  revised_lcoa_inr_per_tco2e?: number | null;
+  comparison: Record<string, unknown>;
+  created_at: string;
+}
+
+export interface QuoteComparison {
+  rfq: RFQ;
+  quotes: Quote[];
+  engine_estimate: Record<string, unknown>;
+  note: string;
+}
+
+export interface MaterialListing {
+  id: string;
+  provider_id: string;
+  provider_name?: string | null;
+  name: string;
+  material_key?: string | null;
+  grade?: string | null;
+  recycled_content_pct?: number | null;
+  embodied_tco2e_per_t?: number | null;
+  embodied_source?: string | null;
+  price_inr_per_t?: number | null;
+  moq_t?: number | null;
+  stock_t?: number | null;
+  certifications: string[];
+  state?: string | null;
+  is_active: boolean;
+  is_demo_seed: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Logistics
+// ---------------------------------------------------------------------------
+
+export interface RouteAlternative {
+  preset: string;
+  distance_km: number;
+  transit_hours: number;
+  cost_inr: number;
+  emissions_kgco2e: number;
+  vehicle: string;
+  description: string;
+  carbon_reduction_pct?: number | null;
+}
+
+export interface RoutePlan {
+  origin_gps: number[];
+  destination_gps: number[];
+  payload_tonnes: number;
+  routes: Record<string, RouteAlternative>;
+}
+
+export interface Shipment {
+  id: string;
+  factory_id?: string | null;
+  origin_name: string;
+  destination_name: string;
+  payload_tonnes: number;
+  cargo_type: string;
+  status: string;
+  pooled_run_id?: string | null;
+  selected_route_preset?: string | null;
+  distance_km?: number | null;
+  transit_hours?: number | null;
+  cost_inr?: number | null;
+  emissions_kgco2e?: number | null;
+  client_ref?: string | null;
+  created_at: string;
+}
+
+export interface PoolingMatch {
+  status: string;
+  algorithm: string;
+  total_shipments_evaluated: number;
+  trucks_dispatched_before: number;
+  trucks_dispatched_after: number;
+  truck_count_reduction_pct: number;
+  pooled_runs: Record<string, unknown>[];
+  standalone_summary: Record<string, unknown>;
+}
+
+// ---------------------------------------------------------------------------
+// Assistant, audit and reference
+// ---------------------------------------------------------------------------
+
+export interface Citation {
+  source_id: string;
+  title?: string | null;
+  publisher?: string | null;
+  page?: string | null;
+  section?: string | null;
+  url?: string | null;
+  jurisdiction?: string | null;
+  effective_date?: string | null;
+  sha256_hash?: string | null;
+  badge?: string | null;
+}
+
+export interface AskResponse {
+  answer: string;
+  confidence: string;
+  citations: Citation[];
+  limitations: string[];
+}
+
+export interface AuditEntry {
+  id: string;
+  action: string;
+  object_type?: string | null;
+  object_id?: string | null;
+  actor_label?: string | null;
+  created_at: string;
+  new_value?: Record<string, unknown> | null;
+}
+
+export interface ReferenceFactor {
+  key: string;
+  label: string;
+  scope: number;
+  value: number;
+  low?: number | null;
+  high?: number | null;
+  unit: string;
+  source: string;
+}
+
+export interface ReferencePayload {
+  groups: Record<string, ReferenceFactor[]>;
+  meta?: Record<string, unknown>;
 }

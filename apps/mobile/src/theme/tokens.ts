@@ -1,62 +1,101 @@
 /**
  * Mobile design tokens.
  *
- * Aligned with the Web App's Deep Onyx, Dark Navy Glassmorphism and
- * Vivid Electric Cyan & Emerald color system.
+ * These are a direct port of the web app's `src/styles/tokens.css`, value for
+ * value, so a screen looks like the same product whichever device it is on.
+ * Where the web relies on `backdrop-filter` for its glass, React Native
+ * composites the same rgba surface over the same near-black ground, which
+ * lands in the same place visually without a blur pass.
+ *
+ * Nothing here is invented. If a colour is needed that the web does not have,
+ * the web token is added first.
  */
 
 export const colour = {
-  // Surfaces - Matching Web App Deep Onyx & Navy Glass
-  bg: '#080B11',
-  surface: '#0F1626',
-  surfaceRaised: '#172239',
-  surfaceCard: '#0F1626',
-  surfaceGlass: 'rgba(15, 22, 38, 0.85)',
-  border: 'rgba(255, 255, 255, 0.09)',
-  borderStrong: 'rgba(255, 255, 255, 0.16)',
-  borderHighlight: 'rgba(16, 185, 129, 0.25)',
+  // Ground and glass
+  bg: '#070708',
+  bgSecondary: 'rgba(10, 10, 13, 0.75)',
+  sidebar: 'rgba(13, 14, 16, 0.75)',
+  surface: 'rgba(18, 19, 23, 0.68)',
+  surfaceHover: 'rgba(28, 30, 36, 0.78)',
+  surfaceInset: 'rgba(10, 11, 14, 0.55)',
+  surfaceHigh: 'rgba(25, 27, 32, 0.78)',
+  panel: 'rgba(16, 17, 21, 0.82)',
+  glass: 'rgba(18, 19, 23, 0.72)',
 
-  // Text - High Legibility Slate White & Muted Accents
-  text: '#F8FAFC',
-  textMuted: '#94A3B8',
-  textFaint: '#64748B',
+  // Type
+  text: '#e5e2e3',
+  bright: '#f0f1f2',
+  muted: '#9a9da3',
+  subtle: '#92949c',
 
-  // Brand - Web App Electric Cyan & Vivid Emerald
-  primary: '#38BDF8',
-  primaryPressed: '#0284C7',
-  onPrimary: '#081018',
-  accent: '#38BDF8',
-  accentGlow: 'rgba(56, 189, 248, 0.2)',
-  positive: '#10B981',
+  // Lines
+  border: '#232426',
+  borderSecondary: '#1b1c1e',
+  outline: '#454655',
+  cardBorder: 'rgba(255, 255, 255, 0.08)',
+  floatingBorder: 'rgba(255, 255, 255, 0.14)',
 
-  // Accent Tones
-  emerald: '#10B981',
-  emeraldGlow: 'rgba(16, 185, 129, 0.12)',
-  cyanGlow: 'rgba(56, 189, 248, 0.12)',
-  violet: '#C084FC',
-  violetGlow: 'rgba(192, 132, 252, 0.12)',
+  // Accent: lavender primary, cyan secondary
+  accent: '#bec2ff',
+  accentStrong: '#d6d8ff',
+  accentSaturated: '#5e6bff',
+  accentContainer: '#7a85ff',
+  accentInk: '#000469',
+  secondary: '#50d8e9',
+  secondaryBright: '#92f1ff',
 
-  // GHG Scope Colors (Exact Match to Web MACC & Footprint)
-  scope1: '#FFB689', // Peach / Direct Combustion
-  scope2: '#BEC2FF', // Lavender / Electricity Grid
-  scope3: '#38BDF8', // Cyan / Value Chain
+  // GHG scopes
+  scope1: '#ffb689',
+  scope2: '#bec2ff',
+  scope3: '#50d8e9',
 
-  // Severity Chips
-  critical: '#FF7676',
-  high: '#FFA94D',
-  moderate: '#FFD43B',
-  watch: '#38BDF8',
-  ok: '#10B981',
-  info: '#38BDF8',
+  // Status
+  critical: '#ffb4ab',
+  high: '#ffb689',
+  moderate: '#ffb689',
+  healthy: '#e5fd17',
+  watch: '#9a9da3',
 
-  // Data-state badges
-  verified: '#10B981',
-  documentConfirmed: '#38BDF8',
-  declared: '#FFD43B',
-  estimated: '#FFA94D',
-  missing: '#FF7676',
+  // Tinted grounds
+  dangerBg: 'rgba(255, 180, 171, 0.09)',
+  positiveBg: 'rgba(80, 216, 233, 0.08)',
+  warningBg: 'rgba(255, 182, 137, 0.09)',
+  selectedBg: 'rgba(190, 194, 255, 0.09)',
+  navActive: 'rgba(255, 255, 255, 0.06)',
+
+  // Charts
+  chartGrid: 'rgba(255, 255, 255, 0.035)',
+  zeroLine: 'rgba(255, 255, 255, 0.25)',
+
+  // Names the older screens used. Kept so nothing has to be rewritten twice.
+  primary: '#bec2ff',
+  primaryPressed: '#7a85ff',
+  onPrimary: '#000469',
+  textMuted: '#9a9da3',
+  textFaint: '#92949c',
+  surfaceCard: 'rgba(18, 19, 23, 0.68)',
+  surfaceRaised: 'rgba(25, 27, 32, 0.78)',
+  surfaceGlass: 'rgba(18, 19, 23, 0.72)',
+  borderStrong: 'rgba(255, 255, 255, 0.14)',
+  borderHighlight: 'rgba(190, 194, 255, 0.28)',
+  positive: '#50d8e9',
+  ok: '#50d8e9',
+  info: '#50d8e9',
+  accentGlow: 'rgba(190, 194, 255, 0.14)',
+  emerald: '#50d8e9',
+  emeraldGlow: 'rgba(80, 216, 233, 0.1)',
+  cyanGlow: 'rgba(80, 216, 233, 0.1)',
+  violet: '#bec2ff',
+  violetGlow: 'rgba(190, 194, 255, 0.12)',
+  verified: '#50d8e9',
+  documentConfirmed: '#bec2ff',
+  declared: '#ffb689',
+  estimated: '#ffb689',
+  missing: '#ffb4ab',
 } as const;
 
+/** `--space-*` from the web, under the names the mobile screens already use. */
 export const space = {
   xs: 4,
   sm: 8,
@@ -64,31 +103,73 @@ export const space = {
   lg: 16,
   xl: 24,
   xxl: 32,
+  /** Gutter that keeps a card the same distance off the edge as web `main`. */
+  page: 16,
 } as const;
 
 export const radius = {
   sm: 8,
-  md: 12,
-  lg: 16,
+  control: 10,
+  md: 14,
+  lg: 14,
+  hero: 20,
   pill: 999,
 } as const;
 
-export const type = {
-  display: { fontSize: 32, fontWeight: '700' as const, letterSpacing: -0.5 },
-  title: { fontSize: 22, fontWeight: '700' as const },
-  heading: { fontSize: 17, fontWeight: '600' as const },
-  body: { fontSize: 15, fontWeight: '400' as const },
-  bodyStrong: { fontSize: 15, fontWeight: '600' as const },
-  caption: { fontSize: 13, fontWeight: '400' as const },
-  micro: { fontSize: 11, fontWeight: '600' as const, letterSpacing: 0.4 },
+/**
+ * The web's type ramp: Manrope for anything that carries a number or a title,
+ * Inter for prose, both with the tight negative tracking the display sizes use.
+ */
+export const font = {
+  heading: 'Manrope_600SemiBold',
+  headingMedium: 'Manrope_500Medium',
+  headingBold: 'Manrope_700Bold',
+  headingExtra: 'Manrope_800ExtraBold',
+  body: 'Inter_400Regular',
+  bodyMedium: 'Inter_500Medium',
+  bodySemi: 'Inter_600SemiBold',
 } as const;
+
+export const type = {
+  /** Web h1 at phone width. */
+  hero: { fontFamily: font.headingBold, fontSize: 34, letterSpacing: -1.4, lineHeight: 38 },
+  display: { fontFamily: font.headingBold, fontSize: 30, letterSpacing: -1.1, lineHeight: 34 },
+  title: { fontFamily: font.heading, fontSize: 22, letterSpacing: -0.7, lineHeight: 27 },
+  heading: { fontFamily: font.heading, fontSize: 16, letterSpacing: -0.2, lineHeight: 21 },
+  body: { fontFamily: font.body, fontSize: 14, lineHeight: 22 },
+  bodyStrong: { fontFamily: font.bodySemi, fontSize: 14, lineHeight: 21 },
+  caption: { fontFamily: font.body, fontSize: 12.5, lineHeight: 19 },
+  captionStrong: { fontFamily: font.bodySemi, fontSize: 12.5, lineHeight: 19 },
+  micro: { fontFamily: font.bodySemi, fontSize: 10.5, letterSpacing: 0.9 },
+  /** Numbers in tables and metric tiles. */
+  numeric: { fontFamily: font.headingMedium, fontSize: 17, letterSpacing: -0.4 },
+} as const;
+
+export const shadow = {
+  card: {
+    shadowColor: '#000',
+    shadowOpacity: 0.35,
+    shadowRadius: 24,
+    shadowOffset: { width: 0, height: 16 },
+    elevation: 6,
+  },
+  floating: {
+    shadowColor: '#000',
+    shadowOpacity: 0.42,
+    shadowRadius: 18,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 12,
+  },
+} as const;
+
+export const duration = { fast: 180, nav: 220, chart: 500 } as const;
 
 /** Minimum touch target. Factory floors, gloves, sunlight. */
 export const HIT_SLOP = { top: 8, bottom: 8, left: 8, right: 8 } as const;
 export const MIN_TOUCH = 48;
 
 export const severityColour = (severity?: string): string => {
-  switch (severity) {
+  switch ((severity ?? '').toLowerCase()) {
     case 'critical':
       return colour.critical;
     case 'high':
@@ -97,25 +178,31 @@ export const severityColour = (severity?: string): string => {
       return colour.moderate;
     case 'watch':
       return colour.watch;
+    case 'ok':
+    case 'healthy':
+      return colour.secondary;
     default:
-      return colour.textMuted;
+      return colour.muted;
   }
 };
 
 export const dataStateColour = (state?: string): string => {
-  switch (state) {
+  switch ((state ?? '').toUpperCase()) {
     case 'VERIFIED':
-      return colour.verified;
+      return colour.secondary;
     case 'DOCUMENT-CONFIRMED':
-      return colour.documentConfirmed;
+      return colour.accent;
     case 'DECLARED':
-      return colour.declared;
+      return colour.high;
     case 'ESTIMATED':
-      return colour.estimated;
+      return colour.high;
     case 'MISSING':
     case 'STALE':
-      return colour.missing;
+      return colour.critical;
     default:
-      return colour.textMuted;
+      return colour.muted;
   }
 };
+
+export const scopeColour = (scope: number | string): string =>
+  String(scope) === '1' ? colour.scope1 : String(scope) === '2' ? colour.scope2 : colour.scope3;

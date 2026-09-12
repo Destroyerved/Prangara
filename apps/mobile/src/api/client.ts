@@ -16,12 +16,14 @@
  *    request that hangs forever looks identical to a frozen app.
  */
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 
 import { clearTokens, loadTokens, saveTokens } from '../storage/tokens';
 import type { ApiErrorBody, TokenResponse } from './types';
 
 const DEFAULT_TIMEOUT_MS = 20000;
+const CUSTOM_URL_KEY = 'prangara.apiBaseUrl';
 
 /**
  * Resolution order: EXPO_PUBLIC_API_URL, then the host the dev server is served
@@ -30,8 +32,32 @@ const DEFAULT_TIMEOUT_MS = 20000;
  */
 let customBaseUrl: string | null = null;
 
+/**
+ * Point the app at a different backend. Persisted, because someone who typed
+ * their own server address into an installed APK should not have to type it
+ * again every time the app is opened.
+ */
 export function setCustomBaseUrl(url: string | null) {
   customBaseUrl = url ? url.trim().replace(/\/$/, '') : null;
+  if (customBaseUrl) {
+    AsyncStorage.setItem(CUSTOM_URL_KEY, customBaseUrl).catch(() => undefined);
+  } else {
+    AsyncStorage.removeItem(CUSTOM_URL_KEY).catch(() => undefined);
+  }
+}
+
+/**
+ * Restore a stored endpoint. Must finish before the first request goes out, so
+ * the app awaits it on cold start rather than firing it and hoping.
+ */
+export async function restoreCustomBaseUrl(): Promise<string | null> {
+  try {
+    const stored = await AsyncStorage.getItem(CUSTOM_URL_KEY);
+    if (stored) customBaseUrl = stored.replace(/\/$/, '');
+  } catch {
+    /* a missing preference is not an error */
+  }
+  return customBaseUrl;
 }
 
 export function getBaseUrl(): string {
@@ -49,8 +75,6 @@ export function getBaseUrl(): string {
   // Default to machine LAN IP for standalone APK on Android devices
   return 'http://10.227.95.161:8000';
 }
-
-export const API_BASE_URL = getBaseUrl();
 
 export class ApiError extends Error {
   readonly status: number;

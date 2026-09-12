@@ -1,26 +1,56 @@
 /**
  * Number formatting for an Indian industrial audience.
  *
- * Rupees are written in lakh and crore because that is how the reader thinks
- * about them; "Rs 4,80,00,000" is not a number anyone reads at a glance.
- * Rounding is deliberately coarse - these are screening figures with an
- * uncertainty band, and printing them to the rupee would claim a precision the
- * engine does not have.
+ * These are the web app's `src/lib/format.ts` rules, so the same figure reads
+ * identically on both surfaces: rupees in lakh and crore because that is how
+ * the reader thinks about them, and coarse rounding because these are
+ * screening figures carrying an uncertainty band. Printing them to the rupee
+ * would claim a precision the engine does not have.
  */
 
-export function formatInr(value: number | null | undefined): string {
-  if (value === null || value === undefined || Number.isNaN(value)) return '-';
+/** `null` is a real state: the engine did not supply the figure. Say so. */
+export const number = (value: number | null | undefined, digits = 0): string =>
+  value === null || value === undefined || Number.isNaN(value)
+    ? 'Unavailable'
+    : new Intl.NumberFormat('en-IN', { maximumFractionDigits: digits }).format(value);
+
+export function money(value: number | null | undefined): string {
+  if (value === null || value === undefined || Number.isNaN(value)) return 'Unavailable';
   const abs = Math.abs(value);
-  const sign = value < 0 ? '-' : '';
-  if (abs >= 1_00_00_000) return `${sign}Rs ${(abs / 1_00_00_000).toFixed(2)} cr`;
-  if (abs >= 1_00_000) return `${sign}Rs ${(abs / 1_00_000).toFixed(1)} lakh`;
-  if (abs >= 1_000) return `${sign}Rs ${Math.round(abs / 1_000)}k`;
-  return `${sign}Rs ${Math.round(abs)}`;
+  const sign = value < 0 ? '−' : '';
+  if (abs >= 1e7) return `${sign}₹${number(abs / 1e7, 2)} Cr`;
+  if (abs >= 1e5) return `${sign}₹${number(abs / 1e5, 1)} L`;
+  return `${sign}₹${number(abs)}`;
 }
+
+export const payback = (years: number | null | undefined): string =>
+  years === null || years === undefined
+    ? 'Unavailable'
+    : years <= 2
+      ? `${number(years * 12)} mo`
+      : `${number(years, 1)} yr`;
+
+export const label = (value: string): string =>
+  value.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
+export const portfolioLabels = {
+  all: 'All interventions',
+  cash_positive_only: 'Cash positive',
+  quick_wins: 'Quick wins',
+} as const;
+
+export const percent = (value: number | null | undefined, digits = 1): string =>
+  value === null || value === undefined || Number.isNaN(value)
+    ? 'Unavailable'
+    : `${number(value, digits)}%`;
+
+// --- names the earlier screens use, kept so nothing has to be rewritten ----
+
+export const formatInr = money;
 
 export function formatTonnes(value: number | null | undefined): string {
   if (value === null || value === undefined || Number.isNaN(value)) return '-';
-  if (Math.abs(value) >= 1000) return `${Math.round(value).toLocaleString('en-IN')}`;
+  if (Math.abs(value) >= 1000) return number(Math.round(value));
   if (Math.abs(value) >= 10) return value.toFixed(0);
   return value.toFixed(1);
 }

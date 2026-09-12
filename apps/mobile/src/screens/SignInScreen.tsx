@@ -23,7 +23,7 @@ import { colour, radius, space, type as typeScale } from '../theme/tokens';
 type Mode = 'signin' | 'register';
 
 export default function SignInScreen() {
-  const { signIn, register } = useAuth();
+  const { signIn, register, continueAsGuest } = useAuth();
   const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -96,9 +96,9 @@ export default function SignInScreen() {
                 width: 38,
                 height: 38,
                 borderRadius: 10,
-                backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                backgroundColor: colour.selectedBg,
                 borderWidth: 1,
-                borderColor: 'rgba(56, 189, 248, 0.3)',
+                borderColor: colour.borderHighlight,
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -126,7 +126,7 @@ export default function SignInScreen() {
             justifyContent: 'space-between',
             backgroundColor: 'rgba(15, 22, 38, 0.9)',
             borderWidth: 1,
-            borderColor: 'rgba(56, 189, 248, 0.25)',
+            borderColor: colour.borderHighlight,
             borderRadius: radius.md,
             paddingVertical: 8,
             paddingHorizontal: space.md,
@@ -249,8 +249,8 @@ export default function SignInScreen() {
                     )
                   }
                   style={{
-                    backgroundColor: 'rgba(56, 189, 248, 0.08)',
-                    borderColor: 'rgba(56, 189, 248, 0.25)',
+                    backgroundColor: colour.selectedBg,
+                    borderColor: colour.borderHighlight,
                     borderWidth: 1,
                     borderRadius: radius.pill,
                     paddingHorizontal: 12,
@@ -271,8 +271,8 @@ export default function SignInScreen() {
                     )
                   }
                   style={{
-                    backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                    borderColor: 'rgba(16, 185, 129, 0.25)',
+                    backgroundColor: colour.positiveBg,
+                    borderColor: 'rgba(80, 216, 233, 0.28)',
                     borderWidth: 1,
                     borderRadius: radius.pill,
                     paddingHorizontal: 12,
@@ -286,6 +286,30 @@ export default function SignInScreen() {
               </View>
             </View>
           ) : null}
+        </Card>
+
+        {/* No server in reach, or nothing to sign in to yet. The bundled
+            engine demonstration is the same fallback the web app ships. */}
+        <Card>
+          <Eyebrow>NO ACCOUNT YET</Eyebrow>
+          <Text style={{ ...typeScale.heading, color: colour.text, marginTop: 4 }}>
+            Explore the demonstration
+          </Text>
+          <Text
+            style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 4, lineHeight: 19 }}
+          >
+            Ten sectors of bundled engine results, with every analytical module working offline.
+            Capture and procurement stay read-only until you sign in.
+          </Text>
+          <Button
+            title="Open the demonstration"
+            variant="secondary"
+            onPress={() => {
+              setError(null);
+              continueAsGuest().catch((ex) => setError(describeError(ex)));
+            }}
+            style={{ marginTop: space.md }}
+          />
         </Card>
 
         <Note>

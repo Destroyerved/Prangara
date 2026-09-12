@@ -16,14 +16,26 @@ import React, {
   useState,
 } from 'react';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { auth as authApi } from '../api/endpoints';
 import { onSignedOut, setActiveOrganization } from '../api/client';
 import { clearTokens, loadTokens, saveTokens } from '../storage/tokens';
 import type { Me } from '../api/types';
 
+const GUEST_KEY = 'prangara.guestMode';
+
 interface AuthState {
   ready: boolean;
   me: Me | null;
+  /**
+   * True when the user chose to explore without an account. The app then runs
+   * on the bundled demonstration assessment and writes nothing, which is what
+   * makes a freshly installed APK usable with no server in reach.
+   */
+  guest: boolean;
+  continueAsGuest: () => Promise<void>;
+  leaveGuest: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   register: (input: {
     email: string;
@@ -41,6 +53,7 @@ const AuthContext = createContext<AuthState | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [me, setMe] = useState<Me | null>(null);
+  const [guest, setGuest] = useState(false);
 
   const applyMe = useCallback((next: Me | null) => {
     setMe(next);
@@ -60,6 +73,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      try {
+        if ((await AsyncStorage.getItem(GUEST_KEY)) === 'true' && !cancelled) setGuest(true);
+      } catch {
+        /* a missing preference is not an error */
+      }
       const tokens = await loadTokens();
       if (tokens) {
         try {
@@ -79,6 +97,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // The client signs us out when a refresh token is rejected outright.
   useEffect(() => onSignedOut(() => applyMe(null)), [applyMe]);
 
+  const continueAsGuest = useCallback(async () => {
+    await AsyncStorage.setItem(GUEST_KEY, 'true').catch(() => undefined);
+    setGuest(true);
+  }, []);
+
+  const leaveGuest = useCallback(async () => {
+    await AsyncStorage.removeItem(GUEST_KEY).catch(() => undefined);
+    setGuest(false);
+  }, []);
+
   const signIn = useCallback(
     async (email: string, password: string) => {
       const tokens = await authApi.login(email.trim(), password, 'android');
@@ -87,6 +115,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         refreshToken: tokens.refresh_token,
       });
       applyMe(await authApi.me());
+      await AsyncStorage.removeItem(GUEST_KEY).catch(() => undefined);
+      setGuest(false);
     },
     [applyMe],
   );
@@ -123,6 +153,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     }
     await clearTokens();
+    await AsyncStorage.removeItem(GUEST_KEY).catch(() => undefined);
+    setGuest(false);
     applyMe(null);
   }, [applyMe]);
 
@@ -132,8 +164,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   const value = useMemo<AuthState>(
-    () => ({ ready, me, signIn, register, signOut, refreshMe, can }),
-    [ready, me, signIn, register, signOut, refreshMe, can],
+    () => ({
+      ready,
+      me,
+      guest,
+      continueAsGuest,
+      leaveGuest,
+      signIn,
+      register,
+      signOut,
+      refreshMe,
+      can,
+    }),
+    [ready, me, guest, continueAsGuest, leaveGuest, signIn, register, signOut, refreshMe, can],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

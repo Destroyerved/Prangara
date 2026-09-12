@@ -584,7 +584,7 @@ const styles = StyleSheet.create({
   rowRight: { ...typeScale.bodyStrong, color: colour.text },
 
   opportunityHero: {
-    backgroundColor: 'rgba(16, 185, 129, 0.08)',
+    backgroundColor: colour.positiveBg,
     borderWidth: 1,
     borderColor: colour.borderHighlight,
     borderRadius: radius.lg,

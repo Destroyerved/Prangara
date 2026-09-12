@@ -61,8 +61,8 @@ export default function FactoryListScreen() {
       {/* Sovereign AI Assistant Card */}
       <Card
         style={{
-          backgroundColor: 'rgba(56, 189, 248, 0.05)',
-          borderColor: 'rgba(56, 189, 248, 0.25)',
+          backgroundColor: colour.selectedBg,
+          borderColor: colour.borderHighlight,
           borderWidth: 1,
           marginBottom: space.md,
         }}
@@ -121,8 +121,8 @@ export default function FactoryListScreen() {
               {assessed ? (
                 <View
                   style={{
-                    backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                    borderColor: 'rgba(16, 185, 129, 0.3)',
+                    backgroundColor: colour.positiveBg,
+                    borderColor: 'rgba(80, 216, 233, 0.28)',
                     borderWidth: 1,
                     paddingHorizontal: space.sm,
                     paddingVertical: 3,

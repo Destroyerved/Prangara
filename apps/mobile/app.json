@@ -2,16 +2,16 @@
   "expo": {
     "name": "PRANGARA",
     "slug": "prangara",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "prangara",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#0B1220",
+    "backgroundColor": "#070708",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0B1220"
+      "backgroundColor": "#070708"
     },
     "ios": {
       "supportsTablet": true,
@@ -23,9 +23,8 @@
     },
     "android": {
       "package": "in.prangara.mobile",
-      "usesCleartextTraffic": true,
       "adaptiveIcon": {
-        "backgroundColor": "#0B1220",
+        "backgroundColor": "#070708",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -35,7 +34,8 @@
         "android.permission.CAMERA",
         "android.permission.INTERNET",
         "android.permission.ACCESS_NETWORK_STATE"
-      ]
+      ],
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -53,7 +53,17 @@
         {
           "photosPermission": "PRANGARA uses your photo library so you can upload a bill or certificate you have already photographed."
         }
-      ]
+      ],
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      "expo-mlkit-ocr"
     ],
     "extra": {
       "claimBoundary": "Screening and decision support. Not a BEE-accredited audit, legal assurance service, regulator or carbon-credit verifier."

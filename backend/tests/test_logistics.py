@@ -149,3 +149,35 @@ def test_vehicle_fleet_management(client: TestClient) -> None:
     list_res = client.get("/api/logistics/vehicles")
     assert list_res.status_code == 200
     assert any(v["vehicle_id_plate"] == "TN-38-ZZ-5555" for v in list_res.json())
+
+
+def test_signed_in_user_can_list_shipments_and_pool(client: TestClient, manufacturer: dict) -> None:
+    """Regression: the authenticated branch of the shipment filters.
+
+    Both filters call `accessible_factory_ids`, which takes the session as its
+    first argument. The earlier signature mismatch only fired when a principal
+    was present, so every anonymous test passed while a signed-in phone got a
+    500 on its Logistics screen.
+    """
+    headers = manufacturer["headers"]
+
+    created = client.post("/api/shipments", json={
+        "origin_name": "Surat GIDC Plant",
+        "origin_lat": 21.1702,
+        "origin_lon": 72.8311,
+        "destination_name": "Mundra Port",
+        "dest_lat": 22.8394,
+        "dest_lon": 69.7219,
+        "payload_tonnes": 11.0,
+        "cargo_type": "Synthetic Textiles",
+        "selected_route_preset": "LOWEST_CARBON",
+    }, headers=headers)
+    assert created.status_code == 201, created.text
+
+    listed = client.get("/api/shipments", headers=headers)
+    assert listed.status_code == 200, listed.text
+    assert isinstance(listed.json(), list)
+
+    pooled = client.post("/api/logistics/pool", json={}, headers=headers)
+    assert pooled.status_code == 200, pooled.text
+    assert "algorithm" in pooled.json()
