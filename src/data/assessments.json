@@ -1,0 +1,2871 @@
+{
+  "textile_dyeing": {
+    "id": "development-textile-v1",
+    "plant": {
+      "name": "Tirupur Knitwear Dyeing Unit",
+      "sector": "textile_dyeing",
+      "state": "Tamil Nadu",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report headline values with illustrative streams, action economics and chart data. This is a fixed development fixture, not a live assessment.",
+      "reference": "Project report · pp3, 30, 46; illustrative detail documented in FIXTURE-PROVENANCE.md"
+    },
+    "footprint": {
+      "total": {
+        "base": 24069,
+        "low": 19414,
+        "high": 29492
+      },
+      "uncertainty_pct": 20.9,
+      "scopes": [
+        {
+          "scope": "1",
+          "total": 6737,
+          "share_pct": 27.990361045328015
+        },
+        {
+          "scope": "2",
+          "total": 1950,
+          "share_pct": 8.101707590676805
+        },
+        {
+          "scope": "3",
+          "total": 15382,
+          "share_pct": 63.90793136399518
+        }
+      ],
+      "streams": [
+        {
+          "id": "thermal_fuel",
+          "name": "Process heat",
+          "scope": "1",
+          "category": "Fuel",
+          "quantity": 3900,
+          "unit": "t / yr",
+          "factor_key": "coal",
+          "emissions": {
+            "base": 6630,
+            "low": 5347.74,
+            "high": 8123.81
+          },
+          "share_pct": 27.545805808301136,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "diesel",
+          "name": "Diesel generators",
+          "scope": "1",
+          "category": "Fuel",
+          "quantity": 39925.37,
+          "unit": "litres / yr",
+          "factor_key": "diesel",
+          "emissions": {
+            "base": 107,
+            "low": 86.31,
+            "high": 131.11
+          },
+          "share_pct": 0.44455523702688104,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "electricity",
+          "name": "Purchased electricity",
+          "scope": "2",
+          "category": "Electricity",
+          "quantity": 3000000,
+          "unit": "kWh / yr",
+          "factor_key": "grid_tn",
+          "emissions": {
+            "base": 1950,
+            "low": 1572.87,
+            "high": 2389.36
+          },
+          "share_pct": 8.101707590676805,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "cotton_yarn",
+          "name": "Purchased cotton yarn",
+          "scope": "3",
+          "category": "Material",
+          "quantity": 2650.91,
+          "unit": "t / yr",
+          "factor_key": "cotton_yarn",
+          "emissions": {
+            "base": 14580,
+            "low": 11760.19,
+            "high": 17865.03
+          },
+          "share_pct": 60.57584444721426,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "road_freight",
+          "name": "Road freight",
+          "scope": "3",
+          "category": "Freight",
+          "quantity": 4000000,
+          "unit": "t·km / yr",
+          "factor_key": "road_freight",
+          "emissions": {
+            "base": 380,
+            "low": 306.51,
+            "high": 465.62
+          },
+          "share_pct": 1.5787942997216335,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "waste_landfill",
+          "name": "Organic waste to landfill",
+          "scope": "3",
+          "category": "Waste",
+          "quantity": 400,
+          "unit": "t / yr",
+          "factor_key": "waste_landfill",
+          "emissions": {
+            "base": 232,
+            "low": 187.13,
+            "high": 284.27
+          },
+          "share_pct": 0.9638954671984711,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "board",
+          "name": "Purchased paper & board",
+          "scope": "3",
+          "category": "Material",
+          "quantity": 120,
+          "unit": "t / yr",
+          "factor_key": "board",
+          "emissions": {
+            "base": 150,
+            "low": 120.99,
+            "high": 183.8
+          },
+          "share_pct": 0.623208276205908,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        },
+        {
+          "id": "rail_freight",
+          "name": "Rail freight",
+          "scope": "3",
+          "category": "Freight",
+          "quantity": 1818181.82,
+          "unit": "t·km / yr",
+          "factor_key": "rail_freight",
+          "emissions": {
+            "base": 40,
+            "low": 32.26,
+            "high": 49.01
+          },
+          "share_pct": 0.1661888736549088,
+          "working": "Illustrative inventory allocation. Displayed stream bands distribute the report headline range for interface testing; they are not factor-propagated engine results."
+        }
+      ],
+      "gate_to_gate": 3.62,
+      "cradle_to_gate": 10.03,
+      "biogenic_t": 0
+    },
+    "sankey": {
+      "nodes": [
+        {
+          "id": "thermal_fuel",
+          "name": "Process heat",
+          "scope": "1",
+          "stream_id": "thermal_fuel"
+        },
+        {
+          "id": "diesel",
+          "name": "Diesel generators",
+          "scope": "1",
+          "stream_id": "diesel"
+        },
+        {
+          "id": "electricity",
+          "name": "Purchased electricity",
+          "scope": "2",
+          "stream_id": "electricity"
+        },
+        {
+          "id": "cotton_yarn",
+          "name": "Purchased cotton yarn",
+          "scope": "3",
+          "stream_id": "cotton_yarn"
+        },
+        {
+          "id": "road_freight",
+          "name": "Road freight",
+          "scope": "3",
+          "stream_id": "road_freight"
+        },
+        {
+          "id": "waste_landfill",
+          "name": "Organic waste to landfill",
+          "scope": "3",
+          "stream_id": "waste_landfill"
+        },
+        {
+          "id": "board",
+          "name": "Purchased paper & board",
+          "scope": "3",
+          "stream_id": "board"
+        },
+        {
+          "id": "rail_freight",
+          "name": "Rail freight",
+          "scope": "3",
+          "stream_id": "rail_freight"
+        },
+        {
+          "id": "scope-1",
+          "name": "Scope 1",
+          "scope": "1",
+          "stream_id": null
+        },
+        {
+          "id": "scope-2",
+          "name": "Scope 2",
+          "scope": "2",
+          "stream_id": null
+        },
+        {
+          "id": "scope-3",
+          "name": "Scope 3",
+          "scope": "3",
+          "stream_id": null
+        },
+        {
+          "id": "total",
+          "name": "Annual footprint",
+          "scope": "total",
+          "stream_id": null
+        }
+      ],
+      "links": [
+        {
+          "source": "thermal_fuel",
+          "target": "scope-1",
+          "value": 6630,
+          "scope": "1"
+        },
+        {
+          "source": "diesel",
+          "target": "scope-1",
+          "value": 107,
+          "scope": "1"
+        },
+        {
+          "source": "electricity",
+          "target": "scope-2",
+          "value": 1950,
+          "scope": "2"
+        },
+        {
+          "source": "cotton_yarn",
+          "target": "scope-3",
+          "value": 14580,
+          "scope": "3"
+        },
+        {
+          "source": "road_freight",
+          "target": "scope-3",
+          "value": 380,
+          "scope": "3"
+        },
+        {
+          "source": "waste_landfill",
+          "target": "scope-3",
+          "value": 232,
+          "scope": "3"
+        },
+        {
+          "source": "board",
+          "target": "scope-3",
+          "value": 150,
+          "scope": "3"
+        },
+        {
+          "source": "rail_freight",
+          "target": "scope-3",
+          "value": 40,
+          "scope": "3"
+        },
+        {
+          "source": "scope-1",
+          "target": "total",
+          "value": 6737,
+          "scope": "1"
+        },
+        {
+          "source": "scope-2",
+          "target": "total",
+          "value": 1950,
+          "scope": "2"
+        },
+        {
+          "source": "scope-3",
+          "target": "total",
+          "value": 15382,
+          "scope": "3"
+        }
+      ]
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": [
+        {
+          "id": "cotton",
+          "stream_id": "cotton_yarn",
+          "name": "Purchased cotton yarn",
+          "rule": "structural_hotspot",
+          "severity": "critical",
+          "share_pct": 60.6,
+          "actual": null,
+          "unit": "",
+          "p25": null,
+          "p50": null,
+          "p75": null,
+          "percentile": null,
+          "recoverable_t": null,
+          "reason": "Purchased cotton accounts for 60.6% of the footprint. No compatible sector benchmark is available. Structural concentration is flagged independently of factory efficiency."
+        },
+        {
+          "id": "power",
+          "stream_id": "electricity",
+          "name": "Electricity",
+          "rule": "benchmark_breach",
+          "severity": "moderate",
+          "share_pct": 8.1,
+          "actual": 1250,
+          "unit": "kWh / t",
+          "p25": 620,
+          "p50": 850,
+          "p75": 1200,
+          "percentile": 78,
+          "recoverable_t": 624,
+          "reason": "Electricity intensity of 1,250 kWh/t exceeds the indicative sector p75 of 1,200 kWh/t. The comparison is on an equivalent production basis."
+        },
+        {
+          "id": "heat",
+          "stream_id": "thermal_fuel",
+          "name": "Process heat",
+          "rule": "benchmark_breach",
+          "severity": "moderate",
+          "share_pct": 27.5,
+          "actual": null,
+          "unit": "GJ / t",
+          "p25": null,
+          "p50": null,
+          "p75": null,
+          "percentile": 76,
+          "recoverable_t": 1992,
+          "reason": "Process heat is at p76 in the report. Detailed thermal benchmark values were not supplied. Recovery detail is illustrative."
+        }
+      ]
+    },
+    "recommendations": {
+      "items": [
+        {
+          "id": "air_repair",
+          "name": "Compressed air leak repair",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 120000,
+          "net_benefit": 870000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.138,
+          "npv": null,
+          "lcoa": -8100,
+          "standalone_t": 100,
+          "abatement_t": 75,
+          "abatement_range": {
+            "base": 100,
+            "low": 72.0,
+            "high": 125.0
+          },
+          "difficulty": 1,
+          "disruption_days": 0,
+          "confidence": "high",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "idle_load",
+          "name": "Idle-load elimination",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 150000,
+          "net_benefit": 1050000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.143,
+          "npv": null,
+          "lcoa": -7400,
+          "standalone_t": 125,
+          "abatement_t": 90,
+          "abatement_range": {
+            "base": 125,
+            "low": 90.0,
+            "high": 156.2
+          },
+          "difficulty": 1,
+          "disruption_days": 0,
+          "confidence": "high",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "steam_traps",
+          "name": "Steam trap maintenance",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 420000,
+          "net_benefit": 900000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.467,
+          "npv": null,
+          "lcoa": -3000,
+          "standalone_t": 260,
+          "abatement_t": 220,
+          "abatement_range": {
+            "base": 260,
+            "low": 187.2,
+            "high": 325.0
+          },
+          "difficulty": 1,
+          "disruption_days": 1,
+          "confidence": "high",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "insulation",
+          "name": "Steam line insulation",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 500000,
+          "net_benefit": 750000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.667,
+          "npv": null,
+          "lcoa": -2400,
+          "standalone_t": 230,
+          "abatement_t": 180,
+          "abatement_range": {
+            "base": 230,
+            "low": 165.6,
+            "high": 287.5
+          },
+          "difficulty": 2,
+          "disruption_days": 1,
+          "confidence": "high",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "vfd",
+          "name": "Variable-frequency drives",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 900000,
+          "net_benefit": 1300000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.692,
+          "npv": null,
+          "lcoa": -5300,
+          "standalone_t": 170,
+          "abatement_t": 130,
+          "abatement_range": {
+            "base": 170,
+            "low": 122.4,
+            "high": 212.5
+          },
+          "difficulty": 2,
+          "disruption_days": 2,
+          "confidence": "high",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "led",
+          "name": "LED lighting retrofit",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 320000,
+          "net_benefit": 500000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.64,
+          "npv": null,
+          "lcoa": -6000,
+          "standalone_t": 59,
+          "abatement_t": 45,
+          "abatement_range": {
+            "base": 59,
+            "low": 42.5,
+            "high": 73.8
+          },
+          "difficulty": 1,
+          "disruption_days": 0,
+          "confidence": "high",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "segregation",
+          "name": "Waste segregation & recovery",
+          "category": "waste",
+          "target": "waste_landfill",
+          "status": "cash_positive",
+          "quick_win": true,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 180000,
+          "net_benefit": 300000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.6,
+          "npv": null,
+          "lcoa": -1450,
+          "standalone_t": 165,
+          "abatement_t": 135,
+          "abatement_range": {
+            "base": 165,
+            "low": 118.8,
+            "high": 206.2
+          },
+          "difficulty": 1,
+          "disruption_days": 0,
+          "confidence": "high",
+          "savings_model": "none",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable waste landfill stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "recycled_cotton",
+          "name": "Recycled cotton blend",
+          "category": "material",
+          "target": "cotton_yarn",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": 25,
+          "restriction": "Mechanical recycling shortens cotton staple length. A 25% blend ceiling is illustrated from the report.",
+          "capex": 1400000,
+          "net_benefit": 20700000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.068,
+          "npv": null,
+          "lcoa": -8200,
+          "standalone_t": 2453,
+          "abatement_t": 1900,
+          "abatement_range": {
+            "base": 2453,
+            "low": 1766.2,
+            "high": 3066.2
+          },
+          "difficulty": 3,
+          "disruption_days": 3,
+          "confidence": "medium",
+          "savings_model": "price_delta",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable cotton yarn stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "closed_water",
+          "name": "Closed-loop dye water",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 12000000,
+          "net_benefit": 6200000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 1.935,
+          "npv": null,
+          "lcoa": -3700,
+          "standalone_t": 650,
+          "abatement_t": 460,
+          "abatement_range": {
+            "base": 650,
+            "low": 468.0,
+            "high": 812.5
+          },
+          "difficulty": 3,
+          "disruption_days": 5,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "heat_recovery",
+          "name": "Waste heat recovery",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 10000000,
+          "net_benefit": 5400000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 1.852,
+          "npv": null,
+          "lcoa": -2850,
+          "standalone_t": 980,
+          "abatement_t": 650,
+          "abatement_range": {
+            "base": 980,
+            "low": 705.6,
+            "high": 1225.0
+          },
+          "difficulty": 3,
+          "disruption_days": 4,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "solar",
+          "name": "Rooftop solar PV",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 15000000,
+          "net_benefit": 4700000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 3.191,
+          "npv": null,
+          "lcoa": -1250,
+          "standalone_t": 1000,
+          "abatement_t": 740,
+          "abatement_range": {
+            "base": 1000,
+            "low": 720.0,
+            "high": 1250.0
+          },
+          "difficulty": 3,
+          "disruption_days": 3,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 25,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "open_access",
+          "name": "Renewable open access",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 250000,
+          "net_benefit": 700000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.357,
+          "npv": null,
+          "lcoa": -580,
+          "standalone_t": 950,
+          "abatement_t": 620,
+          "abatement_range": {
+            "base": 950,
+            "low": 684.0,
+            "high": 1187.5
+          },
+          "difficulty": 3,
+          "disruption_days": 0,
+          "confidence": "medium",
+          "savings_model": "tariff_delta",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "motors",
+          "name": "High-efficiency motors",
+          "category": "energy",
+          "target": "electricity",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 1200000,
+          "net_benefit": 660000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 1.818,
+          "npv": null,
+          "lcoa": -800,
+          "standalone_t": 260,
+          "abatement_t": 150,
+          "abatement_range": {
+            "base": 260,
+            "low": 187.2,
+            "high": 325.0
+          },
+          "difficulty": 3,
+          "disruption_days": 2,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable electricity stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "economiser",
+          "name": "Boiler economiser",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 1400000,
+          "net_benefit": 1250000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 1.12,
+          "npv": null,
+          "lcoa": -1450,
+          "standalone_t": 490,
+          "abatement_t": 300,
+          "abatement_range": {
+            "base": 490,
+            "low": 352.8,
+            "high": 612.5
+          },
+          "difficulty": 3,
+          "disruption_days": 3,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "condensate",
+          "name": "Condensate return system",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 1500000,
+          "net_benefit": 940000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 1.596,
+          "npv": null,
+          "lcoa": -960,
+          "standalone_t": 450,
+          "abatement_t": 220,
+          "abatement_range": {
+            "base": 450,
+            "low": 324.0,
+            "high": 562.5
+          },
+          "difficulty": 3,
+          "disruption_days": 2,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "rail_shift",
+          "name": "Road-to-rail freight shift",
+          "category": "logistics",
+          "target": "road_freight",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 200000,
+          "net_benefit": 320000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 0.625,
+          "npv": null,
+          "lcoa": -1100,
+          "standalone_t": 130,
+          "abatement_t": 75,
+          "abatement_range": {
+            "base": 130,
+            "low": 93.6,
+            "high": 162.5
+          },
+          "difficulty": 3,
+          "disruption_days": 0,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable road freight stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "recycled_board",
+          "name": "Recycled transit packaging",
+          "category": "material",
+          "target": "board",
+          "status": "cash_positive",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 60000,
+          "net_benefit": 60000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 1.0,
+          "npv": null,
+          "lcoa": -650,
+          "standalone_t": 45,
+          "abatement_t": 23,
+          "abatement_range": {
+            "base": 45,
+            "low": 32.4,
+            "high": 56.2
+          },
+          "difficulty": 3,
+          "disruption_days": 0,
+          "confidence": "medium",
+          "savings_model": "price_delta",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable board stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "biomass",
+          "name": "Biomass fuel switch",
+          "category": "energy",
+          "target": "thermal_fuel",
+          "status": "net_cost",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 4500000,
+          "net_benefit": -2100000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": null,
+          "npv": null,
+          "lcoa": 1630,
+          "standalone_t": 4500,
+          "abatement_t": 3200,
+          "abatement_range": {
+            "base": 4500,
+            "low": 3240.0,
+            "high": 5625.0
+          },
+          "difficulty": 4,
+          "disruption_days": 5,
+          "confidence": "medium",
+          "savings_model": "fuel_switch",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "digestion",
+          "name": "Anaerobic digestion",
+          "category": "waste",
+          "target": "waste_landfill",
+          "status": "net_cost",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 4500000,
+          "net_benefit": 160000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 28.125,
+          "npv": null,
+          "lcoa": 2420,
+          "standalone_t": 180,
+          "abatement_t": 60,
+          "abatement_range": {
+            "base": 180,
+            "low": 129.6,
+            "high": 225.0
+          },
+          "difficulty": 4,
+          "disruption_days": 7,
+          "confidence": "medium",
+          "savings_model": "none",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable waste landfill stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "hybrid",
+          "name": "Solar–battery genset displacement",
+          "category": "energy",
+          "target": "diesel",
+          "status": "net_cost",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 6000000,
+          "net_benefit": 280000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": 21.429,
+          "npv": null,
+          "lcoa": 3800,
+          "standalone_t": 100,
+          "abatement_t": 87,
+          "abatement_range": {
+            "base": 100,
+            "low": 72.0,
+            "high": 125.0
+          },
+          "difficulty": 4,
+          "disruption_days": 2,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable diesel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        },
+        {
+          "id": "electrification",
+          "name": "Low-carbon process electrification",
+          "category": "process",
+          "target": "thermal_fuel",
+          "status": "net_cost",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": null,
+          "capex": 20000000,
+          "net_benefit": -400000,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": null,
+          "npv": null,
+          "lcoa": 6850,
+          "standalone_t": 2200,
+          "abatement_t": 850,
+          "abatement_range": {
+            "base": 2200,
+            "low": 1584.0,
+            "high": 2750.0
+          },
+          "difficulty": 5,
+          "disruption_days": 10,
+          "confidence": "medium",
+          "savings_model": "avoided_purchase",
+          "lifetime_years": 10,
+          "physical_statement": "Reduce the addressable thermal fuel stream. The quantities here are illustrative development data.",
+          "evidence": "Development fixture; the project report describes the intervention category. Site-specific evidence must come from the engine response.",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        }
+      ],
+      "blocked": [],
+      "portfolios": {
+        "all": {
+          "ids": [
+            "recycled_cotton",
+            "air_repair",
+            "idle_load",
+            "led",
+            "vfd",
+            "closed_water",
+            "steam_traps",
+            "heat_recovery",
+            "insulation",
+            "segregation",
+            "economiser",
+            "solar",
+            "rail_shift",
+            "condensate",
+            "motors",
+            "recycled_board",
+            "open_access",
+            "biomass",
+            "digestion",
+            "hybrid",
+            "electrification"
+          ],
+          "count": 21,
+          "abatement_t": 10210,
+          "share_pct": 42.41971000041547,
+          "capex": 80600000,
+          "net_benefit": 44540000,
+          "payback_years": 1.8096093399191737,
+          "npv": null,
+          "curve": [
+            {
+              "id": "recycled_cotton",
+              "abatement_t": 1900,
+              "lcoa": -8200
+            },
+            {
+              "id": "air_repair",
+              "abatement_t": 75,
+              "lcoa": -8100
+            },
+            {
+              "id": "idle_load",
+              "abatement_t": 90,
+              "lcoa": -7400
+            },
+            {
+              "id": "led",
+              "abatement_t": 45,
+              "lcoa": -6000
+            },
+            {
+              "id": "vfd",
+              "abatement_t": 130,
+              "lcoa": -5300
+            },
+            {
+              "id": "closed_water",
+              "abatement_t": 460,
+              "lcoa": -3700
+            },
+            {
+              "id": "steam_traps",
+              "abatement_t": 220,
+              "lcoa": -3000
+            },
+            {
+              "id": "heat_recovery",
+              "abatement_t": 650,
+              "lcoa": -2850
+            },
+            {
+              "id": "insulation",
+              "abatement_t": 180,
+              "lcoa": -2400
+            },
+            {
+              "id": "segregation",
+              "abatement_t": 135,
+              "lcoa": -1450
+            },
+            {
+              "id": "economiser",
+              "abatement_t": 300,
+              "lcoa": -1450
+            },
+            {
+              "id": "solar",
+              "abatement_t": 740,
+              "lcoa": -1250
+            },
+            {
+              "id": "rail_shift",
+              "abatement_t": 75,
+              "lcoa": -1100
+            },
+            {
+              "id": "condensate",
+              "abatement_t": 220,
+              "lcoa": -960
+            },
+            {
+              "id": "motors",
+              "abatement_t": 150,
+              "lcoa": -800
+            },
+            {
+              "id": "recycled_board",
+              "abatement_t": 23,
+              "lcoa": -650
+            },
+            {
+              "id": "open_access",
+              "abatement_t": 620,
+              "lcoa": -580
+            },
+            {
+              "id": "biomass",
+              "abatement_t": 3200,
+              "lcoa": 1630
+            },
+            {
+              "id": "digestion",
+              "abatement_t": 60,
+              "lcoa": 2420
+            },
+            {
+              "id": "hybrid",
+              "abatement_t": 87,
+              "lcoa": 3800
+            },
+            {
+              "id": "electrification",
+              "abatement_t": 850,
+              "lcoa": 6850
+            }
+          ]
+        },
+        "cash_positive_only": {
+          "ids": [
+            "recycled_cotton",
+            "air_repair",
+            "idle_load",
+            "led",
+            "vfd",
+            "closed_water",
+            "steam_traps",
+            "heat_recovery",
+            "insulation",
+            "segregation",
+            "economiser",
+            "solar",
+            "rail_shift",
+            "condensate",
+            "motors",
+            "recycled_board",
+            "open_access"
+          ],
+          "count": 17,
+          "abatement_t": 6013,
+          "share_pct": 24.982342432174164,
+          "capex": 45600000,
+          "net_benefit": 46600000,
+          "payback_years": 0.9785407725321889,
+          "npv": null,
+          "curve": [
+            {
+              "id": "recycled_cotton",
+              "abatement_t": 1900,
+              "lcoa": -8200
+            },
+            {
+              "id": "air_repair",
+              "abatement_t": 75,
+              "lcoa": -8100
+            },
+            {
+              "id": "idle_load",
+              "abatement_t": 90,
+              "lcoa": -7400
+            },
+            {
+              "id": "led",
+              "abatement_t": 45,
+              "lcoa": -6000
+            },
+            {
+              "id": "vfd",
+              "abatement_t": 130,
+              "lcoa": -5300
+            },
+            {
+              "id": "closed_water",
+              "abatement_t": 460,
+              "lcoa": -3700
+            },
+            {
+              "id": "steam_traps",
+              "abatement_t": 220,
+              "lcoa": -3000
+            },
+            {
+              "id": "heat_recovery",
+              "abatement_t": 650,
+              "lcoa": -2850
+            },
+            {
+              "id": "insulation",
+              "abatement_t": 180,
+              "lcoa": -2400
+            },
+            {
+              "id": "segregation",
+              "abatement_t": 135,
+              "lcoa": -1450
+            },
+            {
+              "id": "economiser",
+              "abatement_t": 300,
+              "lcoa": -1450
+            },
+            {
+              "id": "solar",
+              "abatement_t": 740,
+              "lcoa": -1250
+            },
+            {
+              "id": "rail_shift",
+              "abatement_t": 75,
+              "lcoa": -1100
+            },
+            {
+              "id": "condensate",
+              "abatement_t": 220,
+              "lcoa": -960
+            },
+            {
+              "id": "motors",
+              "abatement_t": 150,
+              "lcoa": -800
+            },
+            {
+              "id": "recycled_board",
+              "abatement_t": 23,
+              "lcoa": -650
+            },
+            {
+              "id": "open_access",
+              "abatement_t": 620,
+              "lcoa": -580
+            }
+          ]
+        },
+        "quick_wins": {
+          "ids": [
+            "air_repair",
+            "idle_load",
+            "led",
+            "vfd",
+            "steam_traps",
+            "insulation",
+            "segregation"
+          ],
+          "count": 7,
+          "abatement_t": 875,
+          "share_pct": 3.63538161120113,
+          "capex": 2590000,
+          "net_benefit": 5670000,
+          "payback_years": 0.4567901234567901,
+          "npv": null,
+          "curve": [
+            {
+              "id": "air_repair",
+              "abatement_t": 75,
+              "lcoa": -8100
+            },
+            {
+              "id": "idle_load",
+              "abatement_t": 90,
+              "lcoa": -7400
+            },
+            {
+              "id": "led",
+              "abatement_t": 45,
+              "lcoa": -6000
+            },
+            {
+              "id": "vfd",
+              "abatement_t": 130,
+              "lcoa": -5300
+            },
+            {
+              "id": "steam_traps",
+              "abatement_t": 220,
+              "lcoa": -3000
+            },
+            {
+              "id": "insulation",
+              "abatement_t": 180,
+              "lcoa": -2400
+            },
+            {
+              "id": "segregation",
+              "abatement_t": 135,
+              "lcoa": -1450
+            }
+          ]
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Textile goods: coverage not established",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": 20,
+        "included": [
+          "Scope 1 direct emissions",
+          "Scope 2 electricity — subject to goods coverage"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": [
+          "Reference price was not supplied. Indicative exposure is unavailable.",
+          "Verify goods CN codes and current rules before acting.",
+          "Export share is an illustrative input, not a verified commercial record."
+        ]
+      },
+      "brsr": [
+        {
+          "name": "GHG inventory",
+          "status": "Partial",
+          "detail": "The fixed demo illustrates an inventory; primary activity evidence is required."
+        },
+        {
+          "name": "Scope coverage",
+          "status": "Partial",
+          "detail": "Scope 1/2 and selected Scope 3 categories only."
+        },
+        {
+          "name": "Emission factor provenance",
+          "status": "Partial",
+          "detail": "Literature citations are available; current source editions need verification."
+        },
+        {
+          "name": "Calculation methodology",
+          "status": "Ready",
+          "detail": "Accounting boundary and calculation method are disclosed."
+        },
+        {
+          "name": "Value-chain information",
+          "status": "Missing",
+          "detail": "Supplier-specific primary data was not supplied."
+        },
+        {
+          "name": "Uncertainty",
+          "status": "Partial",
+          "detail": "Headline range is from the report; stream ranges are illustrative."
+        },
+        {
+          "name": "Working papers",
+          "status": "Partial",
+          "detail": "JSON export preserves the displayed snapshot and its provenance."
+        },
+        {
+          "name": "External assurance",
+          "status": "External action required",
+          "detail": "A licensed assurer must review the evidence. PRANGARA does not provide assurance."
+        }
+      ]
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Accounting and Reporting Standard",
+      "gwp": "IPCC AR6 · GWP100",
+      "boundary": "Single facility · operational control · one declared year",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": [
+        "Electricity is location-based. State variants are screening estimates.",
+        "The report names a default tariff of ₹8/kWh and cost of capital of 12%.",
+        "The engine must return both standalone and interaction-de-rated abatement."
+      ]
+    }
+  },
+  "foundry": {
+    "id": "report-foundry",
+    "plant": {
+      "name": "Coimbatore Precision Castings",
+      "sector": "foundry",
+      "state": "Tamil Nadu",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 18786,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 57.9,
+          "capex": null,
+          "net_benefit": 55100000,
+          "payback_years": 1.0833333333333333,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "ceramics": {
+    "id": "report-ceramics",
+    "plant": {
+      "name": "Morbi Ceramic Tile Works",
+      "sector": "ceramics",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 26075,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [
+        {
+          "id": "constraint-ceramics",
+          "name": "Biomass briquette fuel switch",
+          "category": "energy",
+          "target": "thermal_fuel",
+          "status": "blocked",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": "Briquette ash is unsuitable for glazed tile kiln firing.",
+          "capex": 0,
+          "net_benefit": 0,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": null,
+          "npv": null,
+          "lcoa": 0,
+          "standalone_t": 0,
+          "abatement_t": 0,
+          "abatement_range": {
+            "base": 0,
+            "low": 0,
+            "high": 0
+          },
+          "difficulty": 4,
+          "disruption_days": 5,
+          "confidence": "medium",
+          "savings_model": "fuel_switch",
+          "lifetime_years": 10,
+          "physical_statement": "Constraint example transcribed from the project report. No evaluated financial result was supplied.",
+          "evidence": "Project report · pp26, 53",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        }
+      ],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 28.4,
+          "capex": null,
+          "net_benefit": 90800000,
+          "payback_years": 1.0833333333333333,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "food_processing": {
+    "id": "report-food_processing",
+    "plant": {
+      "name": "Pune Food Processing Unit",
+      "sector": "food_processing",
+      "state": "Maharashtra",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 7623,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [
+        {
+          "id": "constraint-food_processing",
+          "name": "Recycled PET primary packaging",
+          "category": "material",
+          "target": "purchased_material",
+          "status": "constraint_only",
+          "quick_win": false,
+          "cap_pct": 35,
+          "restriction": "Food-contact grade approval limits substitution to 35%.",
+          "capex": 0,
+          "net_benefit": 0,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": null,
+          "npv": null,
+          "lcoa": 0,
+          "standalone_t": 0,
+          "abatement_t": 0,
+          "abatement_range": {
+            "base": 0,
+            "low": 0,
+            "high": 0
+          },
+          "difficulty": 3,
+          "disruption_days": 3,
+          "confidence": "medium",
+          "savings_model": "price_delta",
+          "lifetime_years": 10,
+          "physical_statement": "Constraint example transcribed from the project report. No evaluated financial result was supplied.",
+          "evidence": "Project report · pp26, 53",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        }
+      ],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 60.6,
+          "capex": null,
+          "net_benefit": 39200000,
+          "payback_years": 1.3333333333333333,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "auto_components": {
+    "id": "report-auto_components",
+    "plant": {
+      "name": "Chakan Auto Components",
+      "sector": "auto_components",
+      "state": "Maharashtra",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 11807,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [
+        {
+          "id": "constraint-auto_components",
+          "name": "Secondary steel substitution",
+          "category": "material",
+          "target": "purchased_material",
+          "status": "constraint_only",
+          "quick_win": false,
+          "cap_pct": 45,
+          "restriction": "Fatigue-rated OEM material certification limits substitution to 45%.",
+          "capex": 0,
+          "net_benefit": 0,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": null,
+          "npv": null,
+          "lcoa": 0,
+          "standalone_t": 0,
+          "abatement_t": 0,
+          "abatement_range": {
+            "base": 0,
+            "low": 0,
+            "high": 0
+          },
+          "difficulty": 3,
+          "disruption_days": 3,
+          "confidence": "medium",
+          "savings_model": "price_delta",
+          "lifetime_years": 10,
+          "physical_statement": "Constraint example transcribed from the project report. No evaluated financial result was supplied.",
+          "evidence": "Project report · pp26, 53",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        }
+      ],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 48.3,
+          "capex": null,
+          "net_benefit": 26600000,
+          "payback_years": 1.0833333333333333,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "pharma": {
+    "id": "report-pharma",
+    "plant": {
+      "name": "Ankleshwar Formulation Unit",
+      "sector": "pharma",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 7127,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [
+        {
+          "id": "constraint-pharma",
+          "name": "Recycled PET primary packaging",
+          "category": "material",
+          "target": "purchased_material",
+          "status": "blocked",
+          "quick_win": false,
+          "cap_pct": null,
+          "restriction": "Primary packaging in product contact requires GMP material qualification.",
+          "capex": 0,
+          "net_benefit": 0,
+          "gross_saving": null,
+          "opex_delta": null,
+          "payback_years": null,
+          "npv": null,
+          "lcoa": 0,
+          "standalone_t": 0,
+          "abatement_t": 0,
+          "abatement_range": {
+            "base": 0,
+            "low": 0,
+            "high": 0
+          },
+          "difficulty": 3,
+          "disruption_days": 3,
+          "confidence": "medium",
+          "savings_model": "price_delta",
+          "lifetime_years": 10,
+          "physical_statement": "Constraint example transcribed from the project report. No evaluated financial result was supplied.",
+          "evidence": "Project report · pp26, 53",
+          "caveats": [
+            "Planning-grade estimate. Obtain a site survey and vendor quotation.",
+            "Cross-stream overlap is not de-rated."
+          ]
+        }
+      ],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 50.3,
+          "capex": null,
+          "net_benefit": 35500000,
+          "payback_years": 1.8333333333333333,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "plastics": {
+    "id": "report-plastics",
+    "plant": {
+      "name": "Ahmedabad Polymer Works",
+      "sector": "plastics",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 8053,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 37.6,
+          "capex": null,
+          "net_benefit": 19000000,
+          "payback_years": 1.4166666666666667,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "paper": {
+    "id": "report-paper",
+    "plant": {
+      "name": "Vapi Paper & Packaging",
+      "sector": "paper",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 13960,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 36.9,
+          "capex": null,
+          "net_benefit": 43400000,
+          "payback_years": 0.8333333333333334,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "fabrication": {
+    "id": "report-fabrication",
+    "plant": {
+      "name": "Ludhiana Fabrication Works",
+      "sector": "fabrication",
+      "state": "Punjab",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 5169,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 51.1,
+          "capex": null,
+          "net_benefit": 14100000,
+          "payback_years": 1,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  },
+  "chemicals": {
+    "id": "report-chemicals",
+    "plant": {
+      "name": "Vapi Specialty Chemicals",
+      "sector": "chemicals",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "origin": {
+      "kind": "development_fixture",
+      "note": "Report snapshot. Detailed inventory and economics for this sector were not supplied. Unavailable detail is intentionally left empty.",
+      "reference": "Project report · p31"
+    },
+    "footprint": {
+      "total": {
+        "base": 7458,
+        "low": null,
+        "high": null
+      },
+      "uncertainty_pct": null,
+      "scopes": [],
+      "streams": [],
+      "gate_to_gate": null,
+      "cradle_to_gate": null,
+      "biogenic_t": null
+    },
+    "sankey": {
+      "nodes": [],
+      "links": []
+    },
+    "leaks": {
+      "peer_percentile": null,
+      "findings": []
+    },
+    "recommendations": {
+      "items": [],
+      "blocked": [],
+      "portfolios": {
+        "all": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        },
+        "cash_positive_only": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": 36.0,
+          "capex": null,
+          "net_benefit": 18900000,
+          "payback_years": 1.9166666666666667,
+          "npv": null,
+          "curve": []
+        },
+        "quick_wins": {
+          "ids": [],
+          "count": null,
+          "abatement_t": null,
+          "share_pct": null,
+          "capex": null,
+          "net_benefit": null,
+          "payback_years": null,
+          "npv": null,
+          "curve": []
+        }
+      }
+    },
+    "compliance": {
+      "cbam": {
+        "applicability": "Unconfirmed — goods classification required",
+        "exposure_t": null,
+        "indicative_cost": null,
+        "reference_price": null,
+        "export_share_pct": null,
+        "included": [
+          "Direct emissions",
+          "Indirect electricity emissions where applicable"
+        ],
+        "excluded": [
+          "Precursor emissions",
+          "Upstream supplier-specific emissions"
+        ],
+        "assumptions": ["No compliance calculation was supplied for this demo."]
+      },
+      "brsr": []
+    },
+    "methodology": {
+      "standard": "GHG Protocol Corporate Standard",
+      "gwp": "IPCC AR6 · 100-year",
+      "boundary": "Single facility · operational control",
+      "limitations": [
+        "Emission factors are literature values and need verification against current primary sources before commercial use.",
+        "Peer percentiles are indicative screening benchmarks, not a surveyed or accredited corpus.",
+        "CAPEX and savings are planning-grade estimates; a site survey and vendor quotation remain necessary.",
+        "Activity inputs are declared. No bills, meters or implementation outcomes are verified.",
+        "Within-stream interaction is de-rated. Cross-stream overlap may remain.",
+        "Scope 1 excludes mobile combustion, fugitive refrigerants and process emissions such as calcination.",
+        "Scope 2 is location-based only; purchased steam and market-based instruments are excluded.",
+        "Scope 3 is limited to modelled purchased materials, waste and freight. Other categories are unavailable, not zero.",
+        "CBAM uses an indicative reference price and excludes precursors. Confirm current goods coverage, applicable rules and certificate price.",
+        "This is a single-year, single-facility snapshot. No trend or seasonality is inferred.",
+        "This frontend demo is not an engine run. Headline textile values are transcribed from the report; granular chart and intervention data are illustrative."
+      ],
+      "assumptions": ["Report snapshot only. Detailed response is unavailable."]
+    }
+  }
+}
