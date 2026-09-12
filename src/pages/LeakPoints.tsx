@@ -6,16 +6,27 @@ import {
   SearchBox,
   Note,
   Empty,
+  Skeleton,
 } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { LeakCard } from "../components/leaks/LeakCard";
 import { BenchmarkStrip } from "../components/charts/BenchmarkStrip";
 import { number } from "../lib/format";
 export default function LeakPoints() {
   const w = useWorkspace(),
-    a = w.assessment!;
+    a = w.assessment;
   const [severity, setSeverity] = useState("all"),
     [rule, setRule] = useState("all"),
     [search, setSearch] = useState("");
+
+  if (!a) return <Skeleton />;
+
   const findings = a.leaks.findings.filter(
     (l) =>
       (severity === "all" || l.severity === severity) &&
@@ -64,16 +75,17 @@ export default function LeakPoints() {
             (v) => ({ value: v, label: v[0].toUpperCase() + v.slice(1) }),
           )}
         />
-        <select
-          aria-label="Detection rule"
-          value={rule}
-          onChange={(e) => setRule(e.target.value)}
-        >
-          <option value="all">All detection rules</option>
-          <option value="benchmark_breach">Benchmark breach</option>
-          <option value="material_concentration">Material concentration</option>
-          <option value="structural_hotspot">Structural hotspot</option>
-        </select>
+        <Select value={rule} onValueChange={setRule}>
+          <SelectTrigger className="w-[210px] h-[39px]" aria-label="Detection rule">
+            <SelectValue placeholder="All detection rules" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All detection rules</SelectItem>
+            <SelectItem value="benchmark_breach">Benchmark breach</SelectItem>
+            <SelectItem value="material_concentration">Material concentration</SelectItem>
+            <SelectItem value="structural_hotspot">Structural hotspot</SelectItem>
+          </SelectContent>
+        </Select>
         <SearchBox
           value={search}
           onChange={setSearch}

@@ -13,7 +13,7 @@ import {
 import { useWorkspace } from "../hooks/useWorkspace";
 import { plantSchema, type PlantProfile } from "../types/domain";
 import { FlowButton } from "../components/ui/flow-button";
-import { PageHeading, Note, DetailRows, Badge } from "../components/ui/common";
+import { PageHeading, Note, DetailRows, Badge, Skeleton } from "../components/ui/common";
 import { number, downloadJson } from "../lib/format";
 import { parsePlantDraft, MAX_DRAFT_BYTES } from "../lib/plantDraft";
 import { EvidenceStatus } from "../components/ui/EvidenceStatus";
@@ -644,5 +644,6 @@ function AssessmentForm() {
 }
 export default function PlantData() {
   const w = useWorkspace();
-  return <AssessmentForm key={w.assessment!.id} />;
+  if (!w.assessment) return <Skeleton />;
+  return <AssessmentForm key={w.assessment.id} />;
 }

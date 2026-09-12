@@ -4,6 +4,13 @@ import {
   Recycle,
 } from "lucide-react";
 import { PageHeading, Note, Badge, SearchBox } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { number, money } from "../lib/format";
 
 interface SymbiosisMatch {
@@ -203,24 +210,18 @@ export default function CircularNetwork() {
         />
 
         {activeTab === "symbiosis" && (
-          <select
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            style={{
-              padding: "0.5rem 0.8rem",
-              borderRadius: "8px",
-              border: "1px solid var(--border-subtle)",
-              background: "var(--surface-dropdown, #111)",
-              color: "inherit",
-              fontSize: "0.85rem"
-            }}
-          >
-            <option value="all">All Material Categories</option>
-            <option value="textile">Textile & Fibers</option>
-            <option value="ash_slag">Slag, Ash & Minerals</option>
-            <option value="solvent">Chemicals & Solvents</option>
-            <option value="biomass">Agro-Biomass Residues</option>
-          </select>
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="w-[220px] h-[39px]">
+              <SelectValue placeholder="All Material Categories" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Material Categories</SelectItem>
+              <SelectItem value="textile">Textile & Fibers</SelectItem>
+              <SelectItem value="ash_slag">Slag, Ash & Minerals</SelectItem>
+              <SelectItem value="solvent">Chemicals & Solvents</SelectItem>
+              <SelectItem value="biomass">Agro-Biomass Residues</SelectItem>
+            </SelectContent>
+          </Select>
         )}
       </div>
 

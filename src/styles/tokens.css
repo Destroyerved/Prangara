@@ -65,6 +65,21 @@
   --duration-nav: 220ms;
   --duration-chart: 500ms;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --background: var(--bg);
+  --foreground: var(--text);
+  --popover: var(--panel);
+  --popover-foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-ink);
+  --secondary-foreground: var(--muted);
+  --muted-foreground: var(--muted);
+  --accent-foreground: var(--bright);
+  --destructive: var(--critical);
+  --destructive-foreground: #ffffff;
+  --input: var(--border);
+  --ring: var(--accent);
 }
 :root[data-theme="light"] {
   color-scheme: light;
@@ -107,4 +122,19 @@
   --shadow: 0 18px 45px -12px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.03);
   --chart-grid: rgba(15, 23, 42, 0.06);
   --zero-line: rgba(15, 23, 42, 0.25);
+  --background: var(--bg);
+  --foreground: var(--text);
+  --popover: var(--panel);
+  --popover-foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-ink);
+  --secondary-foreground: var(--muted);
+  --muted-foreground: var(--muted);
+  --accent-foreground: var(--bright);
+  --destructive: var(--critical);
+  --destructive-foreground: #ffffff;
+  --input: var(--border);
+  --ring: var(--accent);
 }

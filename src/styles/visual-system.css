@@ -47,26 +47,26 @@ p {
   margin-top: 14px;
 }
 .page-heading {
-  margin-bottom: 32px;
+  margin-bottom: 22px;
   align-items: center;
 }
 main {
-  padding: 16px 40px 48px;
+  padding: 10px 40px 48px;
   max-width: 1680px;
 }
 
 /* Detached Floating Navbar */
 .topbar {
   position: sticky;
-  top: 18px;
-  margin: 18px 40px 20px 32px;
-  height: 72px;
-  padding: 0 28px;
+  top: 14px;
+  margin: 14px 40px 14px 32px;
+  height: 68px;
+  padding: 0 24px;
   border-radius: 9999px;
   border: 1px solid var(--floating-border);
-  background: var(--bg-secondary);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  background: rgba(11, 15, 23, 0.94);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
   box-shadow:
     0 16px 36px rgba(0, 0, 0, 0.42),
     0 4px 12px rgba(0, 0, 0, 0.2),
@@ -87,7 +87,7 @@ main {
 }
 
 .topbar.nav-visible {
-  top: 18px;
+  top: 14px;
   pointer-events: auto;
 }
 
@@ -255,9 +255,9 @@ main {
 
 .nav-item .nav-text {
   font-family: var(--font-heading), "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  font-size: 15.5px;
-  font-weight: 750;
-  letter-spacing: -0.015em;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.25;
   text-transform: none !important;
   display: inline-block;

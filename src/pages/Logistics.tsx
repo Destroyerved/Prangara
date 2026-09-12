@@ -4,6 +4,13 @@ import {
   Repeat,
 } from "lucide-react";
 import { PageHeading, Note, Badge } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { money } from "../lib/format";
 
 interface Corridor {
@@ -69,7 +76,7 @@ export default function Logistics() {
     km,
     costInr: Math.round(km * 72 + cargoWeightT * 420),
     emissionsTco2e: Math.round((km * cargoWeightT * 0.000085) * 100) / 100, // 85g CO2/t-km
-    tag: "Priority Delivery"
+    tag: "Express"
   };
 
   // 2. Cheapest Route (Toll-optimized highway)
@@ -81,7 +88,7 @@ export default function Logistics() {
     km: Math.round(km * 1.08),
     costInr: Math.round(km * 58 + cargoWeightT * 380),
     emissionsTco2e: Math.round((km * 1.08 * cargoWeightT * 0.000082) * 100) / 100,
-    tag: "Minimum Freight Rate"
+    tag: "Lowest Cost"
   };
 
   // 3. Lowest Carbon Route (Rail DFC Intermodal / LNG)
@@ -93,7 +100,7 @@ export default function Logistics() {
     km: Math.round(km * 1.02),
     costInr: Math.round(km * 52 + cargoWeightT * 340),
     emissionsTco2e: Math.round((km * cargoWeightT * 0.000028) * 100) / 100, // 28g CO2/t-km (-67%)
-    tag: "67% Carbon Reduction"
+    tag: "-67% CO₂e"
   };
 
   // 4. Balanced Route (Recommended hybrid optimal)
@@ -105,7 +112,7 @@ export default function Logistics() {
     km,
     costInr: Math.round(km * 64 + cargoWeightT * 390),
     emissionsTco2e: Math.round((km * cargoWeightT * 0.000054) * 100) / 100, // 54g CO2/t-km
-    tag: "Best Time-Cost-Emissions Ratio"
+    tag: "Optimal Ratio"
   };
 
   const routes = [balanced, lowestCarbon, fastest, cheapest];
@@ -123,34 +130,30 @@ export default function Logistics() {
       />
 
       {/* CORRIDOR SELECTOR & SHIPMENT PARAMS */}
-      <div className="glass-panel" style={{ padding: "1.5rem", borderRadius: "14px", marginBottom: "1.75rem" }}>
+      <div className="glass-panel" style={{ padding: "1.25rem 1.5rem", borderRadius: "14px", marginBottom: "1.25rem" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 1fr", gap: "1.25rem", alignItems: "end" }}>
           <div>
             <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.4rem" }}>
               Freight Corridor
             </label>
-            <select
+            <Select
               value={selectedCorridor.id}
-              onChange={(e) => {
-                const found = CORRIDORS.find((c) => c.id === e.target.value);
+              onValueChange={(val) => {
+                const found = CORRIDORS.find((c) => c.id === val);
                 if (found) setSelectedCorridor(found);
               }}
-              style={{
-                width: "100%",
-                padding: "0.65rem 0.85rem",
-                borderRadius: "8px",
-                border: "1px solid var(--border-subtle)",
-                background: "var(--surface-dropdown, #111)",
-                color: "inherit",
-                fontSize: "0.9rem"
-              }}
             >
-              {CORRIDORS.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name} ({c.distanceKm} km)
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full h-10">
+                <SelectValue placeholder="Select Freight Corridor" />
+              </SelectTrigger>
+              <SelectContent>
+                {CORRIDORS.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name} ({c.distanceKm} km)
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div>
@@ -198,7 +201,7 @@ export default function Logistics() {
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(235px, 1fr))", gap: "1.25rem" }}>
           {routes.map((r) => {
             const isSelected = selectedMode === r.mode;
             return (
@@ -208,44 +211,50 @@ export default function Logistics() {
                 className={`platform-extracted ${isSelected ? "active-row" : ""}`}
                 style={{
                   padding: "1.25rem",
-                  borderRadius: "12px",
+                  borderRadius: "14px",
                   cursor: "pointer",
                   border: isSelected ? "2px solid var(--brand-teal)" : "1px solid var(--border-subtle)",
                   position: "relative",
-                  transition: "all 0.2s ease"
+                  transition: "all 0.2s ease",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-                  <span className="eyebrow" style={{ color: isSelected ? "var(--brand-teal)" : "inherit" }}>
-                    {r.label}
-                  </span>
-                  <Badge tone={r.mode === "balanced" || r.mode === "lowest_carbon" ? "positive" : "neutral"}>
-                    {r.tag}
-                  </Badge>
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem", marginBottom: "0.6rem" }}>
+                    <span className="eyebrow" style={{ color: isSelected ? "var(--brand-teal)" : "inherit", fontSize: "0.75rem", lineHeight: 1.3, fontWeight: 700 }}>
+                      {r.label}
+                    </span>
+                    <Badge tone={r.mode === "balanced" || r.mode === "lowest_carbon" ? "positive" : "neutral"}>
+                      {r.tag}
+                    </Badge>
+                  </div>
+
+                  <div style={{ fontSize: "1.4rem", fontWeight: 800, margin: "0.4rem 0" }}>
+                    {money(r.costInr)}
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.38rem", fontSize: "0.85rem", marginTop: "0.85rem" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--text-muted)" }}>Transit Time:</span>
+                      <strong>{r.transitHours} hrs</strong>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--text-muted)" }}>Distance:</span>
+                      <strong>{r.km} km</strong>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--text-muted)" }}>Emissions:</span>
+                      <strong className={r.emissionsTco2e <= balanced.emissionsTco2e ? "positive" : ""}>
+                        {r.emissionsTco2e} tCO₂e
+                      </strong>
+                    </div>
+                  </div>
                 </div>
 
-                <div style={{ fontSize: "1.35rem", fontWeight: 700, margin: "0.4rem 0" }}>
-                  {money(r.costInr)}
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", fontSize: "0.85rem", marginTop: "0.75rem" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ color: "var(--text-muted)" }}>Transit Time:</span>
-                    <strong>{r.transitHours} hrs</strong>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ color: "var(--text-muted)" }}>Distance:</span>
-                    <strong>{r.km} km</strong>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ color: "var(--text-muted)" }}>Emissions:</span>
-                    <strong className={r.emissionsTco2e <= balanced.emissionsTco2e ? "positive" : ""}>
-                      {r.emissionsTco2e} tCO₂e
-                    </strong>
-                  </div>
-                </div>
-
-                <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "0.75rem", paddingTop: "0.5rem", borderTop: "1px solid var(--border-subtle)" }}>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "1rem", paddingTop: "0.6rem", borderTop: "1px solid var(--border-subtle)" }}>
                   {r.vehicle}
                 </div>
               </div>

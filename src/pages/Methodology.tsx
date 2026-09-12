@@ -11,14 +11,24 @@ import {
   SectionHeading,
   Note,
   DetailRows,
+  Skeleton,
 } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { DataTable } from "../components/tables/DataTable";
 import { EvidenceStatus } from "../components/ui/EvidenceStatus";
 import { number } from "../lib/format";
 export default function Methodology() {
   const w = useWorkspace(),
-    a = w.assessment!,
+    a = w.assessment,
     [params, setParams] = useSearchParams();
+
+  if (!a) return <Skeleton />;
   const view = params.get("view") || "methodology";
   const [search, setSearch] = useState(""),
     [group, setGroup] = useState("all"),
@@ -177,18 +187,19 @@ export default function Methodology() {
               onChange={setSearch}
               placeholder="Search factor IDs, sources or states…"
             />
-            <select
-              aria-label="Factor category"
-              value={group}
-              onChange={(e) => setGroup(e.target.value)}
-            >
-              <option value="all">All categories</option>
-              {["Electricity", "Fuel", "Material", "Waste", "Freight"].map(
-                (g) => (
-                  <option key={g}>{g}</option>
-                ),
-              )}
-            </select>
+            <Select value={group} onValueChange={setGroup}>
+              <SelectTrigger className="w-[180px] h-[39px]" aria-label="Factor category">
+                <SelectValue placeholder="All categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All categories</SelectItem>
+                {["Electricity", "Fuel", "Material", "Waste", "Freight"].map(
+                  (g) => (
+                    <SelectItem key={g} value={g}>{g}</SelectItem>
+                  ),
+                )}
+              </SelectContent>
+            </Select>
             <label className="checkbox-label">
               <input
                 type="checkbox"

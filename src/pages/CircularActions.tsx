@@ -10,16 +10,27 @@ import {
   Badge,
   Empty,
   Note,
+  Skeleton,
 } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ActionTable } from "../components/actions/ActionTable";
 import { money } from "../lib/format";
 export default function CircularActions() {
   const w = useWorkspace(),
-    a = w.assessment!,
+    a = w.assessment,
     [params, setParams] = useSearchParams();
   const view = params.get("view") || "all";
   const [search, setSearch] = useState(""),
     [category, setCategory] = useState("all");
+
+  if (!a) return <Skeleton />;
+
   const items = a.recommendations.items.filter(
     (x) =>
       (view === "all" ||
@@ -77,18 +88,19 @@ export default function CircularActions() {
           onChange={setSearch}
           placeholder="Search interventions or targets…"
         />
-        <select
-          aria-label="Intervention category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="all">All categories</option>
-          {["energy", "material", "process", "waste", "logistics"].map((v) => (
-            <option key={v} value={v}>
-              {v[0].toUpperCase() + v.slice(1)}
-            </option>
-          ))}
-        </select>
+        <Select value={category} onValueChange={setCategory}>
+          <SelectTrigger className="w-[180px] h-[39px]" aria-label="Intervention category">
+            <SelectValue placeholder="All categories" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All categories</SelectItem>
+            {["energy", "material", "process", "waste", "logistics"].map((v) => (
+              <SelectItem key={v} value={v}>
+                {v[0].toUpperCase() + v.slice(1)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <span className="filter-note">
           Select an intervention name to inspect
         </span>

@@ -14,10 +14,10 @@ export default function MaccChart({
   compact?: boolean;
 }) {
   const w = useWorkspace(),
-    a = w.assessment!;
+    a = w.assessment;
   const [selected, setSelected] = useState<string | null>(null);
   const { hover, setHover, move } = useChartHover();
-  const curve = a.recommendations.portfolios[mode].curve;
+  const curve = a?.recommendations.portfolios[mode]?.curve ?? [];
   const chart = useMemo(() => {
     const ordered = [...curve]
       .filter((v) => v.abatement_t > 0)
@@ -44,7 +44,7 @@ export default function MaccChart({
     const y = scaleLinear().domain([low, high]).range([350, 55]);
     return { bars, x, y, low, high, total: cumulative };
   }, [curve]);
-  if (!chart.bars.length)
+  if (!a || !chart.bars.length)
     return (
       <Empty
         title="MACC data unavailable"

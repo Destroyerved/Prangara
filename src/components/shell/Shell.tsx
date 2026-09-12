@@ -30,7 +30,6 @@ import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { WavesShaderBackground } from "../ui/WavesShaderBackground";
 import {
   MenuCloseIcon,
-  ToggleIcon,
 } from "@/components/ui/animated-state-icons";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { UnseenCursor } from "@/components/ui/UnseenCursor";
@@ -101,11 +100,11 @@ export default function Shell() {
   );
   const [width, setWidth] = useState(() =>
     Math.min(
-      300,
-      Math.max(214, Number(pref("prangara-sidebar", "238")) || 238),
+      320,
+      Math.max(252, Number(pref("prangara-sidebar", "260")) || 260),
     ),
   );
-  const [theme, setTheme] = useState(() => pref("prangara-theme", "dark"));
+  const [theme] = useState("dark");
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
   const [ragOpen, setRagOpen] = useState(false);
@@ -286,7 +285,7 @@ export default function Shell() {
           <nav aria-label="Main navigation">
             {navigation.map((group) => (
               <div className="nav-group" key={group.group}>
-                <div className="nav-label">{group.group}</div>
+                {group.group ? <div className="nav-label">{group.group}</div> : null}
                 {group.items.map(({ path, label, icon: Icon }) => (
                   <SidebarNavItem
                     key={path}
@@ -493,7 +492,8 @@ export default function Shell() {
                 <Command size={15} />
                 <kbd>K</kbd>
               </button>
-              <button
+              {/* Light theme toggle commented out - dark mode by default */}
+              {/* <button
                 className="icon-button theme-top"
                 aria-label="Toggle theme"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -503,7 +503,7 @@ export default function Shell() {
                   active={theme === "dark"}
                   color={theme === "dark" ? "#38bdf8" : "#94a3b8"}
                 />
-              </button>
+              </button> */}
               <LiquidButton
                 variant="blue"
                 size="sm"

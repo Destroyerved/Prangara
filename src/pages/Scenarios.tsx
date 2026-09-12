@@ -10,6 +10,13 @@ import {
 } from "lucide-react";
 import { useWorkspace } from "../hooks/useWorkspace";
 import { PageHeading, Note, Badge } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { number, money } from "../lib/format";
 
 export default function Scenarios() {
@@ -223,23 +230,19 @@ export default function Scenarios() {
                 Boiler Combustion Fuel Switch
               </span>
             </label>
-            <select
+            <Select
               value={fuelSwitch}
-              onChange={(e) => setFuelSwitch(e.target.value as "none" | "biomass" | "gas")}
-              style={{
-                width: "100%",
-                padding: "0.6rem 0.8rem",
-                borderRadius: "8px",
-                border: "1px solid var(--border-subtle)",
-                background: "var(--surface-dropdown, #111)",
-                color: "inherit",
-                fontSize: "0.875rem"
-              }}
+              onValueChange={(val) => setFuelSwitch(val as "none" | "biomass" | "gas")}
             >
-              <option value="none">Retain Current Fuel (Baseline Fossil)</option>
-              <option value="biomass">Switch to Biomass Briquettes / Pellets (-82% Scope 1)</option>
-              <option value="gas">Switch to Piped Natural Gas (-45% Scope 1)</option>
-            </select>
+              <SelectTrigger className="w-full h-10">
+                <SelectValue placeholder="Retain Current Fuel" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Retain Current Fuel (Baseline Fossil)</SelectItem>
+                <SelectItem value="biomass">Switch to Biomass Briquettes / Pellets (-82% Scope 1)</SelectItem>
+                <SelectItem value="gas">Switch to Piped Natural Gas (-45% Scope 1)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Lever 4: Recycled Material Slider */}

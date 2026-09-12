@@ -6,14 +6,16 @@ import {
   DetailRows,
   Note,
   Empty,
+  Skeleton,
 } from "../components/ui/common";
 import { EvidenceStatus } from "../components/ui/EvidenceStatus";
 import { money, number } from "../lib/format";
 import { ArrowUpRight, Check, Minus, ExternalLink } from "lucide-react";
 export default function Compliance() {
   const w = useWorkspace(),
-    a = w.assessment!,
-    c = a.compliance.cbam;
+    a = w.assessment;
+  if (!a) return <Skeleton />;
+  const c = a.compliance.cbam;
   return (
     <div className="page-reveal">
       <PageHeading
