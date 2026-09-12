@@ -118,7 +118,7 @@ export default function Scenarios() {
   return (
     <div className="page-reveal">
       <PageHeading
-        eyebrow="ANALYZE / WHAT-IF SIMULATOR (FR-34)"
+        eyebrow="ANALYZE / WHAT-IF SIMULATOR"
         title="Test operational shifts before capital allocation."
         description="Simulate solar PV offset, fuel switching, circular recycled materials, and output scaling side-by-side against your baseline."
         action={
@@ -306,7 +306,7 @@ export default function Scenarios() {
                 <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
                   Baseline: {number(baseScope1, 1)} tCO₂e
                 </div>
-                <div style={{ fontSize: "0.8rem", color: sim.simScope1 <= baseScope1 ? "#10b981" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "0.8rem", color: sim.simScope1 <= baseScope1 ? "#d1d5db" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
                   {sim.simScope1 <= baseScope1 ? "▼" : "▲"} {number(Math.abs(sim.simScope1 - baseScope1), 1)} tCO₂e
                 </div>
               </div>
@@ -320,7 +320,7 @@ export default function Scenarios() {
                 <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
                   Baseline: {number(baseScope2, 1)} tCO₂e
                 </div>
-                <div style={{ fontSize: "0.8rem", color: sim.simScope2 <= baseScope2 ? "#10b981" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "0.8rem", color: sim.simScope2 <= baseScope2 ? "#d1d5db" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
                   {sim.simScope2 <= baseScope2 ? "▼" : "▲"} {number(Math.abs(sim.simScope2 - baseScope2), 1)} tCO₂e
                 </div>
               </div>
@@ -334,7 +334,7 @@ export default function Scenarios() {
                 <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
                   Baseline: {number(baseScope3, 1)} tCO₂e
                 </div>
-                <div style={{ fontSize: "0.8rem", color: sim.simScope3 <= baseScope3 ? "#10b981" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "0.8rem", color: sim.simScope3 <= baseScope3 ? "#d1d5db" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
                   {sim.simScope3 <= baseScope3 ? "▼" : "▲"} {number(Math.abs(sim.simScope3 - baseScope3), 1)} tCO₂e
                 </div>
               </div>
@@ -352,7 +352,7 @@ export default function Scenarios() {
 
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", marginBottom: "0.35rem" }}>
                 <span>Scenario Footprint: <strong>{number(sim.simTotal, 1)} tCO₂e</strong></span>
-                <span style={{ color: sim.deltaTotal <= 0 ? "#10b981" : "#ef4444", fontWeight: 700 }}>
+                <span style={{ color: sim.deltaTotal <= 0 ? "#d1d5db" : "#ef4444", fontWeight: 700 }}>
                   {number((sim.simTotal / baseTotal) * 100, 1)}%
                 </span>
               </div>
@@ -361,7 +361,7 @@ export default function Scenarios() {
                   style={{
                     width: `${Math.min(100, (sim.simTotal / baseTotal) * 100)}%`,
                     height: "100%",
-                    background: sim.deltaTotal <= 0 ? "linear-gradient(90deg, #10b981, #06b6d4)" : "#ef4444",
+                    background: sim.deltaTotal <= 0 ? "#d1d5db" : "#ef4444",
                     transition: "width 0.3s ease"
                   }}
                 />

@@ -121,7 +121,7 @@ export default function Logistics() {
   return (
     <div className="page-reveal">
       <PageHeading
-        eyebrow="ACT / GREEN LOGISTICS & ROUTE PLANNER (FR-41, FR-42, FR-43)"
+        eyebrow="ACT / GREEN LOGISTICS & ROUTE PLANNER"
         title="Decarbonize your transport corridors."
         description="Compare multi-modal routes (Fastest, Cheapest, Lowest Carbon, Balanced), pool truck capacity with regional manufacturers, and eliminate empty backhaul miles."
         action={
@@ -193,7 +193,7 @@ export default function Logistics() {
       <div style={{ marginBottom: "2rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
           <div>
-            <span className="eyebrow">MULTI-MODAL ALTERNATIVES (FR-41)</span>
+            <span className="eyebrow">MULTI-MODAL ALTERNATIVES</span>
             <h3 style={{ margin: 0, fontSize: "1.15rem" }}>Compare 4 Route Execution Profiles</h3>
           </div>
           <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
@@ -291,7 +291,7 @@ export default function Logistics() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <Users size={18} className="positive" />
-              <h3 style={{ margin: 0, fontSize: "1.05rem" }}>Truck Pooling Consolidation (FR-42)</h3>
+              <h3 style={{ margin: 0, fontSize: "1.05rem" }}>Truck Pooling Consolidation</h3>
             </div>
             <Badge tone="positive">Match Found</Badge>
           </div>
@@ -333,12 +333,12 @@ export default function Logistics() {
           </button>
         </div>
 
-        {/* BACKHAUL MATCHING (FR-43) */}
+        {/* BACKHAUL MATCHING */}
         <div className="glass-panel" style={{ padding: "1.5rem", borderRadius: "14px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <Repeat size={18} className="positive" />
-              <h3 style={{ margin: 0, fontSize: "1.05rem" }}>Backhaul Return Match (FR-43)</h3>
+              <h3 style={{ margin: 0, fontSize: "1.05rem" }}>Backhaul Return Match</h3>
             </div>
             <Badge tone="positive">Deadhead Elimination</Badge>
           </div>

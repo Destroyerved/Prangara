@@ -47,8 +47,8 @@ export function FlowButton({
     'transition-all duration-300',
     sizeClasses,
     variant === 'blue'
-      ? 'flow-button-blue border-[#38bdf8]/70 bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#38bdf8] !text-white text-white shadow-[0_4px_18px_rgba(2,132,199,0.48)] hover:shadow-[0_6px_28px_rgba(56,189,248,0.68)] hover:border-[#38bdf8]'
-      : 'border-[#333333]/40 bg-transparent text-[#111111] hover:border-transparent hover:text-white',
+      ? 'flow-button-blue border-white/60 bg-gradient-to-r from-white via-slate-100 to-slate-200 !text-black text-black shadow-[0_4px_18px_rgba(255,255,255,0.25)] hover:shadow-[0_6px_28px_rgba(255,255,255,0.4)] hover:border-white'
+      : 'border-[#333333]/40 bg-transparent text-white hover:border-white/30 hover:text-white',
     disabled && 'opacity-60 cursor-not-allowed pointer-events-none',
     className
   );
@@ -56,11 +56,11 @@ export function FlowButton({
   const defaultBlueStyle: React.CSSProperties =
     variant === 'blue'
       ? {
-          background: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)',
-          backgroundColor: '#0284c7',
-          color: '#ffffff',
-          borderColor: 'rgba(56, 189, 248, 0.7)',
-          boxShadow: '0 4px 18px rgba(2, 132, 199, 0.45)',
+          background: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)',
+          backgroundColor: '#ffffff',
+          color: '#0a0a0c',
+          borderColor: 'rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 4px 18px rgba(255, 255, 255, 0.22)',
         }
       : {};
 
