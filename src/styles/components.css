@@ -952,3 +952,32 @@ kbd {
     display: none;
   }
 }
+
+/* Ask PRANGARA Assistant Glass Scrollbar */
+.rag-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.rag-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+.rag-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.rag-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+}
+.rag-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+:root[data-theme="light"] .rag-scroll-container {
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+:root[data-theme="light"] .rag-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+:root[data-theme="light"] .rag-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.38);
+}
