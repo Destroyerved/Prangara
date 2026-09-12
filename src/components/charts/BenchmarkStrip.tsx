@@ -48,7 +48,7 @@ export function BenchmarkStrip({
               height="5"
               fill={
                 [
-                  "var(--accent)",
+                  "var(--chart-positive, #10b981)",
                   "var(--scope-3)",
                   "var(--moderate)",
                   "var(--scope-1)",

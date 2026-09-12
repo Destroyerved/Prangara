@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   Sparkles,
   Upload,
-  ShieldCheck
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { Badge, Note } from "../ui/common";
@@ -317,7 +316,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <Sparkles size={20} className="positive" />
             <span className="eyebrow" style={{ color: "var(--brand-teal)", fontWeight: 700 }}>
-              AI INTAKE & MULTI-MODAL SCANNERS (FR-04, FR-05, FR-06)
+              AI INTAKE & MULTI-MODAL SCANNERS
             </span>
           </div>
           <h2 style={{ margin: "0.35rem 0 0.25rem 0", fontSize: "1.5rem", fontWeight: 700 }}>
@@ -342,7 +341,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
           style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem" }}
         >
           <MessageSquare size={16} />
-          Conversational Onboarding (FR-04)
+          Conversational Onboarding
         </button>
         <button
           className={`chip ${activeTab === "scanner" ? "positive" : ""}`}
@@ -350,7 +349,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
           style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem" }}
         >
           <FileText size={16} />
-          Bill & Invoice OCR Scanner (FR-05)
+          Bill & Invoice OCR Scanner
         </button>
         <button
           className={`chip ${activeTab === "equipment" ? "positive" : ""}`}
@@ -358,7 +357,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
           style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem" }}
         >
           <Cpu size={16} />
-          Equipment Nameplate Scanner (FR-06/07)
+          Equipment Nameplate Scanner
         </button>
       </div>
 
@@ -429,7 +428,6 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
             <div className="glass-panel" style={{ padding: "1.25rem", borderRadius: "12px", background: "rgba(255,255,255,0.03)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <ShieldCheck size={18} className="positive" />
                   <strong style={{ fontSize: "1rem" }}>Extracted Profile Fields for Review</strong>
                   <Badge tone="positive">High Confidence (96%)</Badge>
                 </div>
@@ -444,8 +442,8 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
               </div>
 
               {chatSuccessMsg && (
-                <div style={{ padding: "0.75rem", borderRadius: "8px", background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.3)", color: "#10b981", fontSize: "0.875rem", marginBottom: "1rem" }}>
-                  ✓ {chatSuccessMsg}
+                <div style={{ padding: "0.75rem", borderRadius: "8px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#d1d5db", fontSize: "0.875rem", marginBottom: "1rem" }}>
+                  {chatSuccessMsg}
                 </div>
               )}
 
@@ -584,7 +582,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
               </div>
 
               {billConfirmedMsg && (
-                <div style={{ padding: "0.6rem 0.75rem", borderRadius: "6px", background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.3)", color: "#10b981", fontSize: "0.825rem", marginBottom: "1rem" }}>
+                <div style={{ padding: "0.6rem 0.75rem", borderRadius: "6px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#d1d5db", fontSize: "0.825rem", marginBottom: "1rem" }}>
                   ✓ {billConfirmedMsg}
                 </div>
               )}
@@ -618,7 +616,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
                             style={{ fontSize: "0.8rem", display: "inline-flex", alignItems: "center", gap: "0.25rem" }}
                           >
                             {isVerified ? (
-                              <span style={{ color: "#10b981", fontWeight: 600 }}>✓ user_confirmed</span>
+                              <span style={{ color: "#d1d5db", fontWeight: 600 }}>✓ user_confirmed</span>
                             ) : (
                               <span style={{ color: "var(--text-muted)" }}>○ extracted_unverified</span>
                             )}
@@ -650,7 +648,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
             {/* Left: Quick Equipment Scanner Simulator */}
             <div>
               <span className="eyebrow" style={{ display: "block", marginBottom: "0.5rem" }}>
-                SCAN EQUIPMENT NAMEPLATE (FR-06)
+                SCAN EQUIPMENT NAMEPLATE
               </span>
               <form onSubmit={handleAddAsset} className="glass-panel" style={{ padding: "1rem", borderRadius: "10px", background: "rgba(255,255,255,0.03)" }}>
                 <label className="form-field" style={{ marginBottom: "0.75rem" }}>
@@ -716,7 +714,7 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
             {/* Right: Asset Registry Table */}
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-                <span className="eyebrow">FACTORY ASSET REGISTRY (FR-07)</span>
+                <span className="eyebrow">FACTORY ASSET REGISTRY</span>
                 <Badge tone="neutral">{assets.length} Active Industrial Assets</Badge>
               </div>
 
@@ -789,13 +787,13 @@ export function IntakeSuite({ onClose }: { onClose?: () => void }) {
               width: "42px",
               height: "42px",
               borderRadius: "50%",
-              background: "rgba(16,185,129,0.15)",
-              border: "2px solid #10b981",
+              background: "rgba(255,255,255,0.06)",
+              border: "2px solid #d1d5db",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontWeight: 700,
-              color: "#10b981",
+              color: "#d1d5db",
               fontSize: "0.95rem"
             }}
           >

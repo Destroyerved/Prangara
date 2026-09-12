@@ -1,0 +1,151 @@
+import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Search, ArrowUpRight, X, Factory, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useWorkspace } from "../../hooks/useWorkspace";
+import { navigation } from "./navigation";
+export function CommandPalette() {
+  const w = useWorkspace(),
+    navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const close = () => {
+    w.setCommandOpen(false);
+    setSearch("");
+  };
+  const matches = (s: string) => s.toLowerCase().includes(search.toLowerCase());
+  const actions =
+    w.assessment?.recommendations.items
+      .filter((a) => matches(a.name))
+      .slice(0, 5) || [];
+  const factors =
+    w.reference.data?.filter((f) => matches(f.name)).slice(0, 4) || [];
+  return (
+    <Dialog.Root
+      open={w.commandOpen}
+      onOpenChange={(v) => {
+        w.setCommandOpen(v);
+        if (!v) setSearch("");
+      }}
+    >
+      <Dialog.Portal>
+        <Dialog.Overlay className="dialog-overlay" />
+        <Dialog.Content className="command-dialog" data-lenis-prevent="true">
+          <Dialog.Title className="sr-only">Search PRANGARA</Dialog.Title>
+          <Dialog.Description className="sr-only">
+            Navigate modules, switch facilities, or inspect an intervention or
+            emission factor.
+          </Dialog.Description>
+          <div className="command-input">
+            <Search size={20} />
+            <input
+              aria-label="Search commands, actions and factors"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search commands, actions and factors…"
+            />
+            <Dialog.Close aria-label="Close search">
+              <X size={18} />
+            </Dialog.Close>
+          </div>
+          <div className="command-results">
+            <div className="eyebrow">NAVIGATE</div>
+            {navigation
+              .flatMap((g) => g.items)
+              .filter((n) => matches(n.label))
+              .map((n) => (
+                <button
+                  key={n.path}
+                  onClick={() => {
+                    navigate(n.path);
+                    close();
+                  }}
+                >
+                  <n.icon size={17} />
+                  <span>Go to {n.label}</span>
+                  <ArrowUpRight size={14} />
+                </button>
+              ))}
+            {matches("Run assessment") && (
+              <button
+                onClick={() => {
+                  navigate("/assessment");
+                  close();
+                }}
+              >
+                Run assessment
+                <ArrowUpRight size={14} />
+              </button>
+            )}
+            {matches("Glassmorphism Animation Demo") && (
+              <button
+                onClick={() => {
+                  navigate("/glass-demo");
+                  close();
+                }}
+              >
+                <Sparkles size={17} />
+                <span>Glassmorphism Animation Demo</span>
+                <ArrowUpRight size={14} />
+              </button>
+            )}
+            <div className="eyebrow">FACILITY PROFILES</div>
+            {w.sectors.data
+              ?.filter((s) => matches(s.name + " " + s.cluster))
+              .slice(0, search ? 10 : 3)
+              .map((s) => (
+                <button
+                  key={s.key}
+                  onClick={() => {
+                    w.selectPlant(s.key);
+                    navigate("/overview");
+                    close();
+                  }}
+                >
+                  <Factory size={17} />
+                  <span>{s.demo_profile.name}</span>
+                </button>
+              ))}
+            {search && (
+              <>
+                <div className="eyebrow">INTERVENTIONS</div>
+                {actions.map((a) => (
+                  <button
+                    key={a.id}
+                    onClick={() => {
+                      w.setDrawer({ kind: "action", data: a });
+                      close();
+                    }}
+                  >
+                    {a.name}
+                    <ArrowUpRight size={14} />
+                  </button>
+                ))}
+                <div className="eyebrow">EMISSION FACTORS</div>
+                {factors.map((f) => (
+                  <button
+                    key={f.key}
+                    onClick={() => {
+                      w.setDrawer({ kind: "factor", data: f });
+                      close();
+                    }}
+                  >
+                    {f.name}
+                    <ArrowUpRight size={14} />
+                  </button>
+                ))}
+                {!actions.length && !factors.length && (
+                  <p className="command-empty">
+                    No matching action or factor. Try another term.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+          <div className="command-footer">
+            <span>Esc to close</span>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+}

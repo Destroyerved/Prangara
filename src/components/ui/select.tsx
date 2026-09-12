@@ -1,11 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { isValidElement, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-import { Select as SelectPrimitive } from 'radix-ui';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import * as SelectPrimitive from '@radix-ui/react-select';
 
 // Create a Context for `indicatorPosition` and `indicator` control
 const SelectContext = React.createContext<{
@@ -155,33 +155,15 @@ function SelectLabel({ className, ...props }: React.ComponentProps<typeof Select
 }
 
 function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
-  const { indicatorPosition, indicatorVisibility, indicator } = React.useContext(SelectContext);
-
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 text-sm outline-hidden text-foreground hover:bg-accent focus:bg-accent data-disabled:pointer-events-none data-disabled:opacity-50',
-        indicatorPosition === 'left' ? 'ps-8 pe-2' : 'pe-8 ps-2',
+        'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 px-3 text-sm outline-hidden text-foreground hover:bg-accent focus:bg-accent data-disabled:pointer-events-none data-disabled:opacity-50',
         className,
       )}
       {...props}
     >
-      {indicatorVisibility &&
-        (indicator && isValidElement(indicator) ? (
-          indicator
-        ) : (
-          <span
-            className={cn(
-              'absolute flex h-3.5 w-3.5 items-center justify-center',
-              indicatorPosition === 'left' ? 'start-2' : 'end-2',
-            )}
-          >
-            <SelectPrimitive.ItemIndicator>
-              <Check className="h-4 w-4 text-primary" />
-            </SelectPrimitive.ItemIndicator>
-          </span>
-        ))}
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );

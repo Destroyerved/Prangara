@@ -6,7 +6,6 @@ import {
   Search,
   Copy,
   Check,
-  ShieldCheck,
   FileText,
   CornerDownLeft,
   Info,
@@ -384,10 +383,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background:
-                      "linear-gradient(135deg, rgba(80, 216, 233, 0.18) 0%, rgba(16, 185, 129, 0.18) 100%)",
-                    border: "1px solid rgba(80, 216, 233, 0.35)",
-                    color: "#50d8e9",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.18)",
+                    color: "var(--bright, #ffffff)",
                     flexShrink: 0,
                   }}
                 >
@@ -412,13 +410,13 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "0.35rem",
-                        padding: "0.15rem 0.5rem",
+                        padding: "0.18rem 0.55rem",
                         borderRadius: "999px",
                         fontSize: "0.68rem",
                         fontWeight: 600,
-                        background: "rgba(16, 185, 129, 0.12)",
-                        color: "#047857",
-                        border: "1px solid rgba(16, 185, 129, 0.28)",
+                        background: "rgba(255, 255, 255, 0.08)",
+                        color: "var(--bright, #ffffff)",
+                        border: "1px solid rgba(255, 255, 255, 0.18)",
                       }}
                     >
                       <span
@@ -426,7 +424,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                           width: "6px",
                           height: "6px",
                           borderRadius: "50%",
-                          background: "#10b981",
+                          background: "var(--bright, #ffffff)",
                         }}
                       />
                       Grounded
@@ -635,8 +633,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       style={{
                         padding: "0.4rem",
                         borderRadius: "9px",
-                        background: "rgba(16, 185, 129, 0.22)",
-                        color: "#10b981",
+                        background: "rgba(255, 255, 255, 0.12)",
+                        border: "1px solid rgba(255, 255, 255, 0.22)",
+                        color: "#ffffff",
                         marginTop: "1px",
                         flexShrink: 0,
                       }}
@@ -701,7 +700,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                      <FileText size={15} style={{ color: "#50d8e9" }} />
+                      <FileText size={15} style={{ color: "var(--bright, #ffffff)" }} />
                       <span
                         style={{
                           fontSize: "0.74rem",
@@ -727,7 +726,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         borderRadius: "6px",
                         border: "1px solid rgba(255, 255, 255, 0.12)",
                         background: "rgba(255, 255, 255, 0.05)",
-                        color: copiedFormula ? "#10b981" : "var(--bright, #f0f1f2)",
+                        color: copiedFormula ? "#ffffff" : "var(--bright, #f0f1f2)",
                         cursor: "pointer",
                         transition: "all 0.15s ease",
                       }}
@@ -742,8 +741,8 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       padding: "1rem 1.25rem",
                       fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, monospace)",
                       fontSize: "0.88rem",
-                      color: "#38bdf8",
-                      background: "#080c14",
+                      color: "#f4f4f5",
+                      background: "rgba(0, 0, 0, 0.45)",
                       overflowX: "auto",
                       whiteSpace: "pre-wrap",
                       wordBreak: "break-all",
@@ -766,7 +765,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     marginBottom: "0.85rem",
                   }}
                 >
-                  <BookOpen size={16} style={{ color: "#10b981" }} />
+                  <BookOpen size={16} style={{ color: "#ffffff" }} />
                   <span
                     className="rag-heading"
                     style={{
@@ -800,7 +799,6 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         }}
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-                          <ShieldCheck size={17} style={{ color: "#10b981", flexShrink: 0 }} />
                           <h4
                             className="rag-heading"
                             style={{ margin: 0, fontSize: "0.93rem", fontWeight: 600 }}
@@ -808,7 +806,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                             {src.title}
                           </h4>
                         </div>
-                        <Badge tone="positive">{src.grade}</Badge>
+                        <Badge tone="neutral">{src.grade}</Badge>
                       </div>
 
                       <div
@@ -862,7 +860,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     borderRadius: "999px",
                     border: "1px solid rgba(255, 255, 255, 0.12)",
                     background: "rgba(255, 255, 255, 0.05)",
-                    color: copiedAnswer ? "#10b981" : "var(--bright, #f0f1f2)",
+                    color: copiedAnswer ? "#ffffff" : "var(--bright, #f0f1f2)",
                     fontSize: "0.82rem",
                     fontWeight: 500,
                     cursor: "pointer",

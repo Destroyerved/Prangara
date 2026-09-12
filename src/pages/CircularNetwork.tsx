@@ -175,7 +175,7 @@ export default function CircularNetwork() {
   return (
     <div className="page-reveal">
       <PageHeading
-        eyebrow="ACT / CIRCULAR NETWORK (FR-44, FR-45)"
+        eyebrow="ACT / CIRCULAR NETWORK"
         title="Turn waste into feedstock and share idle capacity."
         description="Discover regional industrial symbiosis pairings, monetize underutilized factory machinery, and source circular secondary by-products."
         action={<Badge tone="positive">Industrial Symbiosis Ecosystem</Badge>}
@@ -189,7 +189,7 @@ export default function CircularNetwork() {
           style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.1rem" }}
         >
           <Recycle size={16} />
-          By-Product & Symbiosis Exchange (FR-45)
+          By-Product & Symbiosis Exchange
         </button>
         <button
           className={`chip ${activeTab === "capacity" ? "positive" : ""}`}
@@ -197,7 +197,7 @@ export default function CircularNetwork() {
           style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.1rem" }}
         >
           <Share2 size={16} />
-          Shared Industrial Equipment Capacity (FR-44)
+          Shared Industrial Equipment Capacity
         </button>
       </div>
 

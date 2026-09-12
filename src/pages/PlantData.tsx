@@ -327,7 +327,7 @@ function AssessmentForm() {
               Need rapid data entry? Use Conversational AI, Bill OCR, or Equipment Scanning.
             </div>
             <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-              Extract plant metrics automatically from plain English prompts or utility bills (FR-04, FR-05, FR-06).
+              Extract plant metrics automatically from plain English prompts or utility bills.
             </div>
           </div>
         </div>

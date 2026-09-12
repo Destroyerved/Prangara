@@ -67,7 +67,7 @@ const liquidbuttonVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent hover:scale-[1.02] duration-300 transition text-primary",
-        blue: "flow-button-blue border-[#38bdf8]/70 bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#38bdf8] !text-white text-white shadow-[0_4px_18px_rgba(2,132,199,0.48)] hover:shadow-[0_6px_28px_rgba(56,189,248,0.68)] hover:border-[#38bdf8] transition-all duration-300",
+        blue: "flow-button-blue border-white/80 bg-gradient-to-r from-white via-slate-100 to-slate-200 !text-black text-black font-semibold shadow-[0_4px_18px_rgba(255,255,255,0.22)] hover:shadow-[0_6px_28px_rgba(255,255,255,0.4)] hover:border-white transition-all duration-300",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         outline:
@@ -122,11 +122,11 @@ function LiquidButton({
   const defaultBlueStyle: React.CSSProperties =
     variant === "blue"
       ? {
-          background: "linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)",
-          backgroundColor: "#0284c7",
-          color: "#ffffff",
-          borderColor: "rgba(56, 189, 248, 0.75)",
-          boxShadow: "0 4px 18px rgba(2, 132, 199, 0.45)",
+          background: "linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)",
+          backgroundColor: "#ffffff",
+          color: "#0a0a0c",
+          borderColor: "rgba(255, 255, 255, 0.95)",
+          boxShadow: "0 4px 18px rgba(255, 255, 255, 0.22)",
         }
       : {}
 

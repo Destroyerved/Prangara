@@ -1,0 +1,392 @@
+[
+  {
+    "key": "textile_dyeing",
+    "name": "Textile dyeing",
+    "cluster": "Tirupur",
+    "state": "Tamil Nadu",
+    "demo_profile": {
+      "name": "Tirupur Knitwear Dyeing Unit",
+      "sector": "textile_dyeing",
+      "state": "Tamil Nadu",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [
+      {
+        "name": "Electricity intensity",
+        "unit": "kWh / t",
+        "p25": 620,
+        "p50": 850,
+        "p75": 1200
+      },
+      {
+        "name": "Process heat intensity",
+        "unit": "GJ / t",
+        "p25": null,
+        "p50": null,
+        "p75": null
+      },
+      {
+        "name": "Gate-to-gate intensity",
+        "unit": "tCO2e / t",
+        "p25": null,
+        "p50": null,
+        "p75": null
+      }
+    ],
+    "regulatory_flags": ["Zero liquid discharge — verify applicability"]
+  },
+  {
+    "key": "foundry",
+    "name": "Foundry / casting",
+    "cluster": "Coimbatore",
+    "state": "Tamil Nadu",
+    "demo_profile": {
+      "name": "Coimbatore Precision Castings",
+      "sector": "foundry",
+      "state": "Tamil Nadu",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "ceramics",
+    "name": "Ceramics",
+    "cluster": "Morbi",
+    "state": "Gujarat",
+    "demo_profile": {
+      "name": "Morbi Ceramic Tile Works",
+      "sector": "ceramics",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "food_processing",
+    "name": "Food processing",
+    "cluster": "Pune",
+    "state": "Maharashtra",
+    "demo_profile": {
+      "name": "Pune Food Processing Unit",
+      "sector": "food_processing",
+      "state": "Maharashtra",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "auto_components",
+    "name": "Auto components",
+    "cluster": "Chakan",
+    "state": "Maharashtra",
+    "demo_profile": {
+      "name": "Chakan Auto Components",
+      "sector": "auto_components",
+      "state": "Maharashtra",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "pharma",
+    "name": "Pharma formulation",
+    "cluster": "Ankleshwar",
+    "state": "Gujarat",
+    "demo_profile": {
+      "name": "Ankleshwar Formulation Unit",
+      "sector": "pharma",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "plastics",
+    "name": "Plastic moulding",
+    "cluster": "Ahmedabad",
+    "state": "Gujarat",
+    "demo_profile": {
+      "name": "Ahmedabad Polymer Works",
+      "sector": "plastics",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "paper",
+    "name": "Paper / packaging",
+    "cluster": "Vapi",
+    "state": "Gujarat",
+    "demo_profile": {
+      "name": "Vapi Paper & Packaging",
+      "sector": "paper",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "fabrication",
+    "name": "Fabrication",
+    "cluster": "Ludhiana",
+    "state": "Punjab",
+    "demo_profile": {
+      "name": "Ludhiana Fabrication Works",
+      "sector": "fabrication",
+      "state": "Punjab",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  },
+  {
+    "key": "chemicals",
+    "name": "Chemicals",
+    "cluster": "Vapi",
+    "state": "Gujarat",
+    "demo_profile": {
+      "name": "Vapi Specialty Chemicals",
+      "sector": "chemicals",
+      "state": "Gujarat",
+      "annual_output_t": 2400,
+      "annual_revenue_cr": 34,
+      "employees": 180,
+      "electricity_kwh": 3000000,
+      "fuels": {
+        "coal": 3900,
+        "diesel": 39925.37
+      },
+      "materials": {
+        "cotton_yarn": 2650.91,
+        "board": 120
+      },
+      "waste": {
+        "waste_landfill": 400
+      },
+      "freight": {
+        "road_freight": 4000000,
+        "rail_freight": 1818181.82
+      },
+      "tariff": 8,
+      "discount_rate": 0.12,
+      "eu_export_share_pct": 20
+    },
+    "benchmarks": [],
+    "regulatory_flags": [
+      "Goods and site-specific requirements need confirmation"
+    ]
+  }
+]

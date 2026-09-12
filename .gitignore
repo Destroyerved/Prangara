@@ -62,3 +62,7 @@ README_ARCHIVE.md
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Scratch temporary test files
+scratch/
+

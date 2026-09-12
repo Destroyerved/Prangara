@@ -177,7 +177,7 @@ function ActionDetail({ a }: { a: Action }) {
         </ul>
       </section>
       <section className="drawer-section" style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: "1.25rem", marginTop: "1rem" }}>
-        <div className="eyebrow" style={{ color: "var(--brand-teal)" }}>IMPLEMENTATION WORKSPACE (FR-36)</div>
+        <div className="eyebrow" style={{ color: "var(--brand-teal)" }}>IMPLEMENTATION WORKSPACE</div>
         <h3 style={{ margin: "0.25rem 0 0.5rem 0" }}>Find Providers & Request Quotes</h3>
         <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", marginBottom: "1rem" }}>
           Connect directly with verified equipment manufacturers, ESCOs, and installers matching this specific intervention.

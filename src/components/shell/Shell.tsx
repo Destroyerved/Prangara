@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import {
+  createContext,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -10,7 +12,15 @@ import { createPortal } from "react-dom";
 import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
 import * as Popover from "@radix-ui/react-popover";
 import * as Tooltip from "@radix-ui/react-tooltip";
-import { AnimatePresence, motion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type MotionValue,
+  type SpringOptions,
+} from "motion/react";
 import {
   Factory,
   ChevronDown,
@@ -27,14 +37,15 @@ import { RecordDrawer } from "../drawers/RecordDrawer";
 import { CommandPalette } from "./CommandPalette";
 import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
-import { WavesShaderBackground } from "../ui/WavesShaderBackground";
+import { ShaderBackground } from "../ui/waves-shader";
 import {
   MenuCloseIcon,
+  ToggleIcon,
 } from "@/components/ui/animated-state-icons";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { SpinningBorderButton } from "@/components/ui/spinning-border-button";
 import { UnseenCursor } from "@/components/ui/UnseenCursor";
 import { UnseenSmoothScroll } from "@/components/ui/UnseenSmoothScroll";
-import { TextRoll } from "@/components/ui/text-roll";
 const pref = (key: string, fallback: string) => {
   try {
     return localStorage.getItem(key) || fallback;
@@ -42,35 +53,118 @@ const pref = (key: string, fallback: string) => {
     return fallback;
   }
 };
+
+const SidebarDockContext = createContext<{
+  mouseY: MotionValue<number>;
+  distance: number;
+  spring: SpringOptions;
+  collapsed: boolean;
+} | null>(null);
+
+const MotionNavLink = motion.create(NavLink);
+
 function SidebarNavItem({
   path,
   label,
   icon: Icon,
   collapsed,
   count,
+  isJustLanded,
+  onExpand,
 }: {
   path: string;
   label: string;
-  icon: ComponentType<{ size?: number; className?: string }>;
+  icon: ComponentType<{ size?: number; className?: string; active?: boolean; isHovered?: boolean }>;
   collapsed: boolean;
   count?: number;
+  isJustLanded?: boolean;
+  onExpand?: () => void;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const location = useLocation();
+  const dockContext = useContext(SidebarDockContext);
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const isItemActive =
+    location.pathname === path ||
+    (path !== "/" &&
+      path !== "/overview" &&
+      location.pathname.startsWith(path + "/"));
+
+  const itemClassName = [
+    "nav-item",
+    isItemActive ? "active" : "",
+    (isJustLanded && isItemActive) ? "just-landed" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const fallbackMouseY = useMotionValue(Infinity);
+  const mouseY = dockContext ? dockContext.mouseY : fallbackMouseY;
+  const distance = dockContext?.distance ?? 110;
+  const springConfig = dockContext?.spring ?? { mass: 0.1, stiffness: 180, damping: 14 };
+
+  const mouseDistance = useTransform(mouseY, (val: number) => {
+    if (!ref.current || val === Infinity) return 1000;
+    const rect = ref.current.getBoundingClientRect();
+    return val - rect.y - rect.height / 2;
+  });
+
+  const iconScaleTransform = useTransform(
+    mouseDistance,
+    [-distance, 0, distance],
+    [1, collapsed ? 1.35 : 1.18, 1]
+  );
+  const iconScale = useSpring(iconScaleTransform, springConfig);
+
+  const rowTranslateXTransform = useTransform(
+    mouseDistance,
+    [-distance, 0, distance],
+    [0, collapsed ? 4 : 4, 0]
+  );
+  const rowTranslateX = useSpring(rowTranslateXTransform, springConfig);
+
+  const rowScaleTransform = useTransform(
+    mouseDistance,
+    [-distance, 0, distance],
+    [1, collapsed ? 1.15 : 1.015, 1]
+  );
+  const rowScale = useSpring(rowScaleTransform, springConfig);
 
   const link = (
-    <NavLink
-      className="nav-item"
+    <MotionNavLink
+      ref={ref}
+      className={itemClassName}
       to={path}
       aria-label={label}
+      aria-current={isItemActive ? "page" : undefined}
+      style={{
+        scale: rowScale,
+        x: rowTranslateX,
+        transformOrigin: collapsed ? "center left" : "left center",
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        if (collapsed && onExpand) {
+          onExpand();
+        }
+      }}
     >
-      <Icon size={collapsed ? 24 : 22} />
-      <span className="nav-text">
-        <TextRoll isHovered={isHovered}>{label}</TextRoll>
-      </span>
-      {count ? <span className="count">{count}</span> : null}
-    </NavLink>
+      <motion.span
+        style={{
+          scale: iconScale,
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transformOrigin: "center center",
+        }}
+      >
+        <Icon size={collapsed ? 19 : 22} active={isItemActive} isHovered={isHovered} />
+      </motion.span>
+      {!collapsed && <span className="nav-text">{label}</span>}
+      {!collapsed && count ? <span className="count">{count}</span> : null}
+    </MotionNavLink>
   );
 
   if (!collapsed) {
@@ -81,7 +175,7 @@ function SidebarNavItem({
     <Tooltip.Root>
       <Tooltip.Trigger asChild>{link}</Tooltip.Trigger>
       <Tooltip.Portal>
-        <Tooltip.Content className="tooltip" side="right">
+        <Tooltip.Content className="tooltip" side="right" sideOffset={12}>
           {label}
           <Tooltip.Arrow />
         </Tooltip.Content>
@@ -104,11 +198,12 @@ export default function Shell() {
       Math.max(252, Number(pref("prangara-sidebar", "260")) || 260),
     ),
   );
-  const [theme] = useState("dark");
+  const [theme, setTheme] = useState(() => pref("prangara-theme", "dark"));
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
   const [ragOpen, setRagOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
+  const sidebarMouseY = useMotionValue(Infinity);
 
   const popoverContentRef = useRef<HTMLDivElement>(null);
   const plantOptionsRef = useRef<HTMLDivElement>(null);
@@ -262,7 +357,10 @@ export default function Shell() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <WavesShaderBackground />
+      <div className="waves-shader-container" aria-hidden="true">
+        <ShaderBackground className="waves-shader-canvas" speed={1.8} />
+        <div className="waves-shader-scrim" />
+      </div>
       <div className="unseen-grain" aria-hidden="true" />
       <UnseenCursor />
       <UnseenSmoothScroll />
@@ -277,32 +375,48 @@ export default function Shell() {
         <aside className="sidebar">
           <Link to="/overview" className="brand" aria-label="PRANGARA overview">
             <PrangaraLogoMark size={28} />
-            <span className="brand-text">
-              <TextRoll>PRANGARA</TextRoll>
-            </span>
+            <span className="brand-text">PRANGARA</span>
           </Link>
           <div className="workspace-label">INDUSTRIAL INTELLIGENCE</div>
-          <nav aria-label="Main navigation">
-            {navigation.map((group) => (
-              <div className="nav-group" key={group.group}>
-                {group.group ? <div className="nav-label">{group.group}</div> : null}
-                {group.items.map(({ path, label, icon: Icon }) => (
-                  <SidebarNavItem
-                    key={path}
-                    path={path}
-                    label={label}
-                    icon={Icon}
-                    collapsed={collapsed}
-                    count={
-                      path === "/leaks" && !!w.assessment?.leaks.findings.length
-                        ? w.assessment.leaks.findings.length
-                        : undefined
-                    }
-                  />
-                ))}
-              </div>
-            ))}
-          </nav>
+          <SidebarDockContext.Provider
+            value={{
+              mouseY: sidebarMouseY,
+              distance: collapsed ? 80 : 95,
+              spring: { mass: 0.1, stiffness: 180, damping: 14 },
+              collapsed,
+            }}
+          >
+            <nav
+              aria-label="Main navigation"
+              onMouseMove={(e) => {
+                sidebarMouseY.set(e.clientY);
+              }}
+              onMouseLeave={() => {
+                sidebarMouseY.set(Infinity);
+              }}
+            >
+              {navigation.map((group) => (
+                <div className="nav-group" key={group.group}>
+                  {group.group ? <div className="nav-label">{group.group}</div> : null}
+                  {group.items.map(({ path, label, icon: Icon }) => (
+                    <SidebarNavItem
+                      key={path}
+                      path={path}
+                      label={label}
+                      icon={Icon}
+                      collapsed={collapsed}
+                      onExpand={() => setCollapsed(false)}
+                      count={
+                        path === "/leaks" && !!w.assessment?.leaks.findings.length
+                          ? w.assessment.leaks.findings.length
+                          : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              ))}
+            </nav>
+          </SidebarDockContext.Provider>
           <div className="sidebar-bottom">
             <div className="sidebar-foot">
               <span>PRANGARA</span>
@@ -442,48 +556,35 @@ export default function Shell() {
               </Popover.Portal>
             </Popover.Root>
             <div className="top-actions">
-              <button
-                className="chip positive group transition-all duration-300 hover:shadow-[0_0_14px_rgba(16,185,129,0.28)] hover:border-[#10b981]/60"
+              <SpinningBorderButton
                 onClick={() => setRagOpen(true)}
-                style={{
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.45rem",
-                  fontSize: "0.825rem",
-                  padding: "0.38rem 0.8rem",
-                  background: "rgba(16, 185, 129, 0.12)",
-                  border: "1px solid rgba(16, 185, 129, 0.35)",
-                  color: "#10b981",
-                  fontWeight: 600,
-                  borderRadius: "999px",
-                }}
                 aria-label="Ask PRANGARA"
+                showArrow={false}
+                icon={
+                  <Sparkles
+                    size={14}
+                    className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-12 text-white"
+                  />
+                }
+                contentClassName="px-3.5 py-1.5 text-[0.78rem] tracking-wider font-semibold text-neutral-200 group-hover:text-white"
               >
-                <Sparkles
-                  size={14}
-                  className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-12"
-                />
                 <span className="relative grid place-items-center select-none pointer-events-none leading-none">
-                  {/* Normal state: Standard bold sans-serif */}
                   <span className="col-start-1 row-start-1 font-semibold whitespace-nowrap transition-opacity duration-300 ease-out group-hover:opacity-0">
-                    Ask PRANGARA
+                    ASK PRANGARA
                   </span>
-
-                  {/* Hover state: Editorial italic serif text — exactly in place with 0px box size change */}
                   <span
                     aria-hidden="true"
-                    className="col-start-1 row-start-1 italic font-semibold whitespace-nowrap transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100"
+                    className="col-start-1 row-start-1 italic font-semibold whitespace-nowrap transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100 text-white"
                     style={{
                       fontFamily: "var(--font-editorial)",
                       letterSpacing: "0.03em",
                       fontSize: "0.95em",
                     }}
                   >
-                    Ask PRANGARA
+                    ASK PRANGARA
                   </span>
                 </span>
-              </button>
+              </SpinningBorderButton>
               <button
                 className="command-trigger"
                 onClick={() => w.setCommandOpen(true)}
@@ -492,18 +593,18 @@ export default function Shell() {
                 <Command size={15} />
                 <kbd>K</kbd>
               </button>
-              {/* Light theme toggle commented out - dark mode by default */}
-              {/* <button
+              <button
                 className="icon-button theme-top"
                 aria-label="Toggle theme"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
               >
                 <ToggleIcon
                   size={26}
                   active={theme === "dark"}
-                  color={theme === "dark" ? "#38bdf8" : "#94a3b8"}
+                  color={theme === "dark" ? "#ffffff" : "#09090b"}
                 />
-              </button> */}
+              </button>
               <LiquidButton
                 variant="blue"
                 size="sm"
@@ -515,12 +616,6 @@ export default function Shell() {
           <main id="main" tabIndex={-1}>
             {w.factoryId && <div className="platform-context">Saved factory assessment · {w.assessment?.plant.name}<Link to={"/workspace/"+w.factoryId}>Factory records ↗</Link></div>}
             <Outlet />
-            <footer className="page-footer">
-              <span>
-                Screening and decision support · Planning-grade economics
-              </span>
-              <Link to="/methodology">Methodology & limitations ↗</Link>
-            </footer>
           </main>
         </div>
       </div>

@@ -104,8 +104,8 @@ export default function MaccChart({
               y={chart.y(0)}
               width="970"
               height={350 - chart.y(0)}
-              fill="var(--accent)"
-              opacity=".025"
+              fill="var(--chart-positive, #10b981)"
+              opacity=".03"
             />
             {chart.bars.map((v, i) => {
               const value = Math.max(chart.low, Math.min(chart.high, v.lcoa)),
@@ -162,7 +162,11 @@ export default function MaccChart({
                     y={y}
                     height={height}
                     rx="1"
-                    fill={v.lcoa < 0 ? "var(--accent)" : "var(--scope-1)"}
+                    fill={
+                      v.lcoa < 0
+                        ? "var(--chart-positive, #10b981)"
+                        : "var(--chart-cost, #f43f5e)"
+                    }
                     initial={{ opacity: 0, scaleY: 0 }}
                     animate={{
                       opacity: active && active !== v.id ? 0.28 : 0.8,
