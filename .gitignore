@@ -21,21 +21,23 @@ prangara.db*
 
 # Runtime state: uploaded evidence, generated artefacts.
 var/
+build/*.html
 
 # Secrets. `.env.example` is committed; `.env` never is.
 .env
 .env.local
 
-# Node / Expo
+# Node / Web Frontend / Expo
 node_modules/
 .expo/
 dist/
+.vite/
+.sites-runtime/
+work/
 *.apk
 *.aab
-# Expo prebuild output. The managed workflow regenerates these.
 apps/mobile/android/
 apps/mobile/ios/
-# Expo export output, produced only to verify the bundle builds.
 apps/mobile/.expo-export/
 
 # Competition problem statements and scratch notes.
@@ -44,10 +46,9 @@ HackOut26_Problem_Statements.pdf
 *Problem_Statements*
 README_ARCHIVE.md
 *.bak
+*.swp
 
-# `task.md` used to be ignored as a sprint-notes file. It is now the committed
-# role/ownership specification at docs/task.md, so only a stray copy at the
-# repository root stays out.
+# `task.md` root stray copy
 /task.md
 
 # Editors / OS
@@ -56,4 +57,3 @@ README_ARCHIVE.md
 .DS_Store
 Thumbs.db
 desktop.ini
-*.swp

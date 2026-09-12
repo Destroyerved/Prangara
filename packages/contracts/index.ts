@@ -278,7 +278,7 @@ export interface RAGAnswer {
 export interface Event {
   id: string;
   event_type: 'ASSESSMENT_COMPLETED' | 'LEAK_DETECTED' | 'COMPLIANCE_BREACH' | 'RFQ_CREATED' | 'QUOTE_RECEIVED' | 'SHIPMENT_POOLED';
-  payload: Record<string, any>;
+  payload: Record<string, unknown>;
   timestamp: string;
 }
 

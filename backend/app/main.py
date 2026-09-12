@@ -48,6 +48,9 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
             "DATABASE_URL to PostgreSQL for PostGIS and pgvector features.",
             settings.database_url,
         )
+        from app.core.database import Base, engine
+        import app.models  # noqa: F401
+        Base.metadata.create_all(bind=engine)
     from app.services.compliance_evaluator import register_handlers as register_compliance_handlers
     register_compliance_handlers()
     yield
