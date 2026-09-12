@@ -61,46 +61,148 @@ const screenOptions = {
   contentStyle: { backgroundColor: colour.bg },
 } as const;
 
+import { PulseDot } from '../components/animations';
+
 /**
- * Tab icons are glyphs rather than an icon font.
- *
- * Expo's vector-icons package is another dependency and another thing to fail
- * on a device at a demo; a text glyph plus an always-visible label is legible,
- * accessible and cannot fail to load.
+ * Polished, dependency-free bespoke tab icons matching web platform visual language.
  */
-function TabGlyph({ glyph, focused }: { glyph: string; focused: boolean }) {
+function FactoryTabIcon({ focused }: { focused: boolean }) {
+  const iconColor = focused ? colour.primary : colour.textFaint;
   return (
-    <Text style={{ fontSize: 18, color: focused ? colour.primary : colour.textFaint }}>
-      {glyph}
-    </Text>
+    <View style={{ width: 22, height: 22, alignItems: 'center', justifyContent: 'center' }}>
+      <View
+        style={{
+          width: 18,
+          height: 14,
+          borderWidth: 1.8,
+          borderColor: iconColor,
+          borderRadius: 3,
+          backgroundColor: focused ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'flex-end',
+          paddingBottom: 2,
+        }}
+      >
+        <View style={{ width: 3, height: 6, backgroundColor: iconColor, borderRadius: 1 }} />
+        <View style={{ width: 3, height: 8, backgroundColor: iconColor, borderRadius: 1 }} />
+      </View>
+      {focused ? <View style={styles.activeDot} /> : null}
+    </View>
   );
 }
 
-function UnreadDot() {
+function ScanTabIcon({ focused }: { focused: boolean }) {
+  const iconColor = focused ? colour.primary : colour.textFaint;
+  return (
+    <View style={{ width: 22, height: 22, alignItems: 'center', justifyContent: 'center' }}>
+      <View
+        style={{
+          width: 18,
+          height: 18,
+          borderWidth: 1.8,
+          borderColor: iconColor,
+          borderRadius: 5,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: focused ? 'rgba(16, 185, 129, 0.18)' : 'transparent',
+        }}
+      >
+        <View
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: 3,
+            backgroundColor: iconColor,
+          }}
+        />
+      </View>
+      {focused ? <View style={styles.activeDot} /> : null}
+    </View>
+  );
+}
+
+function AlertsTabIcon({ focused }: { focused: boolean }) {
   const { data } = useQuery({
     queryKey: ['notifications', 'unread'],
     queryFn: () => notificationsApi.list(true),
     refetchInterval: 60_000,
   });
-  if (!data?.length) return <TabGlyph glyph="!" focused={false} />;
+  const iconColor = focused ? colour.primary : colour.textFaint;
+  const count = data?.length ?? 0;
+
   return (
-    <View
-      style={{
-        minWidth: 20,
-        height: 20,
-        borderRadius: 10,
-        paddingHorizontal: 5,
-        backgroundColor: colour.critical,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text style={{ ...typeScale.micro, color: colour.text }}>
-        {data.length > 9 ? '9+' : data.length}
-      </Text>
+    <View style={{ width: 22, height: 22, alignItems: 'center', justifyContent: 'center' }}>
+      <View
+        style={{
+          width: 16,
+          height: 16,
+          borderWidth: 1.8,
+          borderColor: iconColor,
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+          borderBottomLeftRadius: 2,
+          borderBottomRightRadius: 2,
+          backgroundColor: focused ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+        }}
+      />
+      {count > 0 ? (
+        <View style={styles.alertBadge}>
+          <Text style={{ fontSize: 9, fontWeight: '700', color: '#FFF' }}>
+            {count > 9 ? '9+' : count}
+          </Text>
+        </View>
+      ) : null}
+      {focused && count === 0 ? <View style={styles.activeDot} /> : null}
     </View>
   );
 }
+
+function AccountTabIcon({ focused }: { focused: boolean }) {
+  const iconColor = focused ? colour.primary : colour.textFaint;
+  return (
+    <View style={{ width: 22, height: 22, alignItems: 'center', justifyContent: 'center' }}>
+      <View
+        style={{
+          width: 16,
+          height: 16,
+          borderRadius: 8,
+          borderWidth: 1.8,
+          borderColor: iconColor,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: focused ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+        }}
+      >
+        <View style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: iconColor }} />
+      </View>
+      {focused ? <View style={styles.activeDot} /> : null}
+    </View>
+  );
+}
+
+const styles = {
+  activeDot: {
+    position: 'absolute' as const,
+    bottom: -6,
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: colour.primary,
+  },
+  alertBadge: {
+    position: 'absolute' as const,
+    top: -3,
+    right: -6,
+    minWidth: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: colour.critical,
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    paddingHorizontal: 3,
+  },
+};
 
 function TabNavigator() {
   return (
@@ -110,13 +212,14 @@ function TabNavigator() {
         tabBarStyle: {
           backgroundColor: colour.surface,
           borderTopColor: colour.border,
-          height: 62,
+          borderTopWidth: 1,
+          height: 64,
           paddingBottom: 8,
           paddingTop: 6,
         },
         tabBarActiveTintColor: colour.primary,
         tabBarInactiveTintColor: colour.textFaint,
-        tabBarLabelStyle: { ...typeScale.micro },
+        tabBarLabelStyle: { ...typeScale.micro, marginTop: 2 },
       }}
     >
       <Tabs.Screen
@@ -125,7 +228,7 @@ function TabNavigator() {
         options={{
           title: 'Factories',
           headerShown: false,
-          tabBarIcon: ({ focused }) => <TabGlyph glyph="■" focused={focused} />,
+          tabBarIcon: ({ focused }) => <FactoryTabIcon focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -134,7 +237,7 @@ function TabNavigator() {
         options={{
           title: 'Capture',
           headerShown: false,
-          tabBarIcon: ({ focused }) => <TabGlyph glyph="◉" focused={focused} />,
+          tabBarIcon: ({ focused }) => <ScanTabIcon focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -143,7 +246,7 @@ function TabNavigator() {
         options={{
           title: 'Alerts',
           headerShown: false,
-          tabBarIcon: () => <UnreadDot />,
+          tabBarIcon: ({ focused }) => <AlertsTabIcon focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -152,7 +255,7 @@ function TabNavigator() {
         options={{
           title: 'Account',
           headerShown: false,
-          tabBarIcon: ({ focused }) => <TabGlyph glyph="●" focused={focused} />,
+          tabBarIcon: ({ focused }) => <AccountTabIcon focused={focused} />,
         }}
       />
     </Tabs.Navigator>

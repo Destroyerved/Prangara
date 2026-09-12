@@ -34,6 +34,8 @@ import {
   type as typeScale,
 } from '../theme/tokens';
 
+import { SpringPressable } from './animations';
+
 export function Screen({
   children,
   scroll = true,
@@ -70,22 +72,93 @@ export function Card({
   children,
   style,
   onPress,
+  highlight = false,
 }: {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  highlight?: boolean;
 }) {
+  const content = (
+    <View style={[styles.card, highlight && styles.cardHighlight, style]}>
+      {children}
+    </View>
+  );
+
   if (onPress) {
     return (
-      <Pressable
-        onPress={onPress}
-        style={({ pressed }) => [styles.card, pressed && styles.cardPressed, style]}
-      >
-        {children}
-      </Pressable>
+      <SpringPressable onPress={onPress}>
+        {content}
+      </SpringPressable>
     );
   }
-  return <View style={[styles.card, style]}>{children}</View>;
+  return content;
+}
+
+/**
+ * Headline cash-positive opportunity banner matching the web overview hero.
+ */
+export function OpportunityHero({
+  headline,
+  label = 'YOUR CASH-POSITIVE OPPORTUNITY',
+  sub = 'Annual operational savings achievable from negative-cost upgrades.',
+}: {
+  headline: string;
+  label?: string;
+  sub?: string;
+}) {
+  return (
+    <View style={styles.opportunityHero}>
+      <View style={styles.opportunityEyebrow}>
+        <View style={styles.positiveDot} />
+        <Text style={styles.opportunityEyebrowText}>{label}</Text>
+      </View>
+      <Text style={styles.opportunityNumber}>{headline}</Text>
+      <Text style={styles.opportunitySub}>{sub}</Text>
+    </View>
+  );
+}
+
+/**
+ * Proportional colored horizontal bar for Scope 1, Scope 2, and Scope 3 split.
+ */
+export function ScopeBar({
+  scope1Pct,
+  scope2Pct,
+  scope3Pct,
+}: {
+  scope1Pct: number;
+  scope2Pct: number;
+  scope3Pct: number;
+}) {
+  const s1 = Math.max(0, scope1Pct || 0);
+  const s2 = Math.max(0, scope2Pct || 0);
+  const s3 = Math.max(0, scope3Pct || 0);
+  const total = s1 + s2 + s3 || 100;
+
+  return (
+    <View style={{ marginVertical: space.md }}>
+      <View style={styles.scopeBarContainer}>
+        {s1 > 0 ? <View style={[styles.scopeBarSegment, { flex: s1 / total, backgroundColor: colour.scope1 }]} /> : null}
+        {s2 > 0 ? <View style={[styles.scopeBarSegment, { flex: s2 / total, backgroundColor: colour.scope2 }]} /> : null}
+        {s3 > 0 ? <View style={[styles.scopeBarSegment, { flex: s3 / total, backgroundColor: colour.scope3 }]} /> : null}
+      </View>
+      <View style={styles.scopeLegend}>
+        <View style={styles.scopeLegendItem}>
+          <View style={[styles.legendDot, { backgroundColor: colour.scope1 }]} />
+          <Text style={styles.legendText}>S1: {Math.round(s1)}%</Text>
+        </View>
+        <View style={styles.scopeLegendItem}>
+          <View style={[styles.legendDot, { backgroundColor: colour.scope2 }]} />
+          <Text style={styles.legendText}>S2: {Math.round(s2)}%</Text>
+        </View>
+        <View style={styles.scopeLegendItem}>
+          <View style={[styles.legendDot, { backgroundColor: colour.scope3 }]} />
+          <Text style={styles.legendText}>S3: {Math.round(s3)}%</Text>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 export function Button({
@@ -105,19 +178,16 @@ export function Button({
 }) {
   const inactive = disabled || loading;
   return (
-    <Pressable
+    <SpringPressable
       onPress={onPress}
       disabled={inactive}
-      hitSlop={HIT_SLOP}
-      accessibilityRole="button"
-      accessibilityState={{ disabled: inactive, busy: loading }}
-      style={({ pressed }) => [
+      scaleTo={0.97}
+      style={[
         styles.button,
         variant === 'primary' && styles.buttonPrimary,
         variant === 'secondary' && styles.buttonSecondary,
         variant === 'ghost' && styles.buttonGhost,
         variant === 'danger' && styles.buttonDanger,
-        pressed && !inactive && styles.buttonPressed,
         inactive && styles.buttonDisabled,
         style,
       ]}
@@ -128,14 +198,14 @@ export function Button({
         <Text
           style={[
             styles.buttonLabel,
-            variant === 'primary' && { color: colour.onPrimary },
+            variant === 'primary' && { color: colour.onPrimary, fontWeight: '700' },
             variant === 'danger' && { color: colour.critical },
           ]}
         >
           {title}
         </Text>
       )}
-    </Pressable>
+    </SpringPressable>
   );
 }
 
@@ -352,12 +422,16 @@ const styles = StyleSheet.create({
   body: { ...typeScale.body, color: colour.textMuted, lineHeight: 21 },
 
   card: {
-    backgroundColor: colour.surface,
+    backgroundColor: colour.surfaceCard,
     borderRadius: radius.lg,
     borderWidth: 1,
     borderColor: colour.border,
     padding: space.lg,
     marginBottom: space.md,
+  },
+  cardHighlight: {
+    borderColor: colour.borderHighlight,
+    backgroundColor: colour.surfaceRaised,
   },
   cardPressed: { backgroundColor: colour.surfaceRaised },
 
@@ -454,4 +528,72 @@ const styles = StyleSheet.create({
   },
   rowLeft: { ...typeScale.body, color: colour.textMuted, flex: 1, paddingRight: space.md },
   rowRight: { ...typeScale.bodyStrong, color: colour.text },
+
+  opportunityHero: {
+    backgroundColor: 'rgba(16, 185, 129, 0.08)',
+    borderWidth: 1,
+    borderColor: colour.borderHighlight,
+    borderRadius: radius.lg,
+    padding: space.lg,
+    marginBottom: space.lg,
+  },
+  opportunityEyebrow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: space.xs,
+  },
+  positiveDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colour.positive,
+    marginRight: space.xs,
+  },
+  opportunityEyebrowText: {
+    ...typeScale.micro,
+    color: colour.positive,
+    letterSpacing: 0.8,
+    fontWeight: '700',
+  },
+  opportunityNumber: {
+    ...typeScale.display,
+    color: colour.text,
+    marginVertical: space.xs,
+  },
+  opportunitySub: {
+    ...typeScale.caption,
+    color: colour.textMuted,
+    lineHeight: 18,
+  },
+
+  scopeBarContainer: {
+    flexDirection: 'row',
+    height: 8,
+    borderRadius: radius.pill,
+    overflow: 'hidden',
+    backgroundColor: colour.border,
+    marginBottom: space.sm,
+  },
+  scopeBarSegment: {
+    height: '100%',
+  },
+  scopeLegend: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  scopeLegendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  legendDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 4,
+  },
+  legendText: {
+    ...typeScale.caption,
+    color: colour.textMuted,
+    fontSize: 12,
+  },
 });

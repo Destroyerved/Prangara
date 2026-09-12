@@ -8,38 +8,46 @@
  */
 
 export const colour = {
-  // Surfaces
-  bg: '#0B1220',
-  surface: '#121B2E',
-  surfaceRaised: '#1A2538',
-  border: '#26344C',
+  // Surfaces aligned with Web Glassmorphic palette
+  bg: '#080E1A',
+  surface: '#0E1726',
+  surfaceRaised: '#142036',
+  surfaceCard: '#0D1525',
+  border: '#1E2D45',
+  borderHighlight: 'rgba(16, 185, 129, 0.25)',
 
   // Text
-  text: '#F2F6FC',
-  textMuted: '#9AA9C2',
-  textFaint: '#6B7C99',
+  text: '#F8FAFC',
+  textMuted: '#94A3B8',
+  textFaint: '#64748B',
 
-  // Brand
-  primary: '#3DDC97',
-  primaryPressed: '#2FB87C',
-  onPrimary: '#06231A',
+  // Brand (Emerald & Sky Cyan)
+  primary: '#10B981',
+  primaryPressed: '#059669',
+  onPrimary: '#022C22',
+  accent: '#38BDF8',
+  accentGlow: 'rgba(56, 189, 248, 0.2)',
+  positive: '#34D399',
 
-  // Severity. Never the only carrier of meaning - PRD section 30 requires
-  // status not to be encoded by colour alone, so every severity chip also
-  // carries a word.
-  critical: '#FF6B6B',
-  high: '#FFA94D',
-  moderate: '#FFD43B',
-  watch: '#74C0FC',
-  ok: '#3DDC97',
-  info: '#74C0FC',
+  // GHG Scope Colors (matching web footprint & charts)
+  scope1: '#F59E0B',
+  scope2: '#38BDF8',
+  scope3: '#A855F7',
+
+  // Severity. Never the only carrier of meaning - PRD section 30
+  critical: '#EF4444',
+  high: '#F97316',
+  moderate: '#FBBF24',
+  watch: '#38BDF8',
+  ok: '#10B981',
+  info: '#38BDF8',
 
   // Data-state badges
-  verified: '#3DDC97',
-  documentConfirmed: '#74C0FC',
-  declared: '#FFD43B',
-  estimated: '#FFA94D',
-  missing: '#FF6B6B',
+  verified: '#10B981',
+  documentConfirmed: '#38BDF8',
+  declared: '#FBBF24',
+  estimated: '#F97316',
+  missing: '#EF4444',
 } as const;
 
 export const space = {
