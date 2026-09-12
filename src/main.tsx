@@ -8,15 +8,18 @@ import "./styles/global.css";
 import "./styles/components.css";
 import "./styles/charts.css";
 import "./styles/pages.css";
+import "./styles/landing-3d.css";
 import App from "./app/App";
 
-// On browser page refresh/reload, always land on /overview
+// Only redirect to /overview on reload if already inside private workspace routes
 try {
   const nav = performance.getEntriesByType("navigation")[0] as
     PerformanceNavigationTiming | undefined;
   const isReload =
     nav?.type === "reload" || window.performance.navigation?.type === 1;
-  if (isReload && window.location.pathname !== "/overview") {
+  const currentPath = window.location.pathname;
+  const isPublicRoute = currentPath === "/" || currentPath === "/signin" || currentPath === "/signup";
+  if (isReload && !isPublicRoute && currentPath !== "/overview") {
     window.history.replaceState(null, "", "/overview");
   }
 } catch {
@@ -31,5 +34,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>,
 );
 import "./styles/refinements.css";
-
 import "./styles/visual-system.css";
