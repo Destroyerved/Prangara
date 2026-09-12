@@ -138,7 +138,7 @@ export default function Logistics() {
             </label>
             <Select
               value={selectedCorridor.id}
-              onValueChange={(val) => {
+              onValueChange={(val: string) => {
                 const found = CORRIDORS.find((c) => c.id === val);
                 if (found) setSelectedCorridor(found);
               }}

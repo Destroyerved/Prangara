@@ -232,7 +232,7 @@ export default function Scenarios() {
             </label>
             <Select
               value={fuelSwitch}
-              onValueChange={(val) => setFuelSwitch(val as "none" | "biomass" | "gas")}
+              onValueChange={(val: string) => setFuelSwitch(val as "none" | "biomass" | "gas")}
             >
               <SelectTrigger className="w-full h-10">
                 <SelectValue placeholder="Retain Current Fuel" />
