@@ -17,7 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Image, Text, View } from 'react-native';
 
-import { ApiError, describeError } from '../api/client';
+import { ApiError, NetworkError, describeError } from '../api/client';
 import { evidence as evidenceApi } from '../api/endpoints';
 import {
   Button,
@@ -29,6 +29,8 @@ import {
   Note,
   Screen,
 } from '../components/ui';
+import PendingBanner from '../components/PendingBanner';
+import * as queue from '../storage/queue';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 import { relativeTime } from '../lib/format';
 import type { RootStackParams } from '../navigation/types';
@@ -59,6 +61,7 @@ export default function EvidenceCaptureScreen() {
   const [error, setError] = useState<string | null>(null);
   const [duplicateOf, setDuplicateOf] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [queued, setQueued] = useState(false);
 
   const filed = useQuery({
     queryKey: ['evidence', factoryId],
@@ -107,14 +110,40 @@ export default function EvidenceCaptureScreen() {
       form.append('evidence_type', evidenceType.key);
       if (title.trim()) form.append('title', title.trim());
 
-      const document = await evidenceApi.upload(form);
-      if (targetType && targetId) {
-        await evidenceApi.link(document.id, targetType, targetId);
+      try {
+        const document = await evidenceApi.upload(form);
+        if (targetType && targetId) {
+          await evidenceApi.link(document.id, targetType, targetId);
+        }
+        return { queued: false };
+      } catch (ex) {
+        if (ex instanceof NetworkError) {
+          // The photo stays where the camera left it; only its path is queued,
+          // so a large image is never copied into app storage twice.
+          await queue.enqueue({
+            kind: 'evidence_upload',
+            factoryId,
+            factoryName,
+            label: title.trim() || evidenceType.label,
+            file: {
+              uri: image.uri,
+              name: image.fileName ?? `${evidenceType.key}.jpg`,
+              type: image.mimeType ?? 'image/jpeg',
+            },
+            fields: {
+              factory_id: factoryId,
+              evidence_type: evidenceType.key,
+              ...(title.trim() ? { title: title.trim() } : {}),
+            },
+          });
+          return { queued: true };
+        }
+        throw ex;
       }
-      return document;
     },
-    onSuccess: () => {
+    onSuccess: (result) => {
       setSaved(true);
+      setQueued(result.queued);
       setImage(null);
       setTitle('');
       queryClient.invalidateQueries({ queryKey: ['evidence', factoryId] });
@@ -132,6 +161,8 @@ export default function EvidenceCaptureScreen() {
   return (
     <Screen>
       <Heading sub={factoryName}>File a document</Heading>
+
+      <PendingBanner />
 
       <Note>
         Evidence is what turns a declared number into a defensible one. A bill
@@ -209,11 +240,14 @@ export default function EvidenceCaptureScreen() {
       </Card>
 
       {saved ? (
-        <Card style={{ borderColor: colour.ok }}>
-          <Text style={{ ...typeScale.heading, color: colour.ok }}>Filed</Text>
+        <Card style={{ borderColor: queued ? colour.high : colour.ok }}>
+          <Text style={{ ...typeScale.heading, color: queued ? colour.high : colour.ok }}>
+            {queued ? 'Saved on this phone' : 'Filed'}
+          </Text>
           <Text style={{ ...typeScale.body, color: colour.textMuted, marginTop: space.xs }}>
-            Stored against {factoryName}
-            {targetType ? ` and linked to this ${targetType.replace(/_/g, ' ')}` : ''}.
+            {queued
+              ? 'The document is on this phone and will upload when you have a signal.'
+              : `Stored against ${factoryName}${targetType ? ` and linked to this ${targetType.replace(/_/g, ' ')}` : ''}.`}
           </Text>
           <Button
             title="Done"

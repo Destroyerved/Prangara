@@ -21,8 +21,9 @@ import { useMutation } from '@tanstack/react-query';
 import React, { useMemo, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Text, View } from 'react-native';
 
-import { describeError } from '../api/client';
+import { NetworkError, describeError } from '../api/client';
 import { intake } from '../api/endpoints';
+import * as queue from '../storage/queue';
 import {
   Button,
   Card,
@@ -32,6 +33,7 @@ import {
   Note,
   Screen,
 } from '../components/ui';
+import PendingBanner from '../components/PendingBanner';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 import type { RootStackParams } from '../navigation/types';
 import type { ActivityRecordIn, ExtractedField, StreamKind } from '../api/types';
@@ -105,6 +107,7 @@ export default function OnboardingChatScreen() {
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState<number | null>(null);
+  const [queued, setQueued] = useState(false);
 
   const extract = useMutation({
     mutationFn: () =>
@@ -164,10 +167,30 @@ export default function OnboardingChatScreen() {
   }, [fields]);
 
   const confirm = useMutation({
-    mutationFn: () =>
-      intake.confirm(factoryId, { ...payload, source_kind: 'conversation' }),
+    mutationFn: async () => {
+      const body = { ...payload, source_kind: 'conversation' as const };
+      try {
+        const result = await intake.confirm(factoryId, body);
+        return { queued: false, count: result.created_activity_record_ids.length };
+      } catch (ex) {
+        // Only a network failure is queued. If the server answered, the outcome
+        // is known and replaying it later would duplicate or repeat a refusal.
+        if (ex instanceof NetworkError) {
+          await queue.enqueue({
+            kind: 'confirm_intake',
+            factoryId,
+            factoryName,
+            label: `${payload.activity_records.length} value(s) from a description`,
+            body,
+          });
+          return { queued: true, count: payload.activity_records.length };
+        }
+        throw ex;
+      }
+    },
     onSuccess: (result) => {
-      setSaved(result.created_activity_record_ids.length);
+      setSaved(result.count);
+      setQueued(result.queued);
       setFields([]);
     },
     onError: (ex) => setError(describeError(ex)),
@@ -183,6 +206,8 @@ export default function OnboardingChatScreen() {
     >
       <Screen>
         <Heading sub={factoryName}>Describe your plant</Heading>
+
+        <PendingBanner />
 
         <Card>
           <Field
@@ -215,11 +240,14 @@ export default function OnboardingChatScreen() {
         {error ? <Note tone="warning">{error}</Note> : null}
 
         {saved !== null ? (
-          <Card style={{ borderColor: colour.ok }}>
-            <Text style={{ ...typeScale.heading, color: colour.ok }}>Saved</Text>
+          <Card style={{ borderColor: queued ? colour.high : colour.ok }}>
+            <Text style={{ ...typeScale.heading, color: queued ? colour.high : colour.ok }}>
+              {queued ? 'Saved on this phone' : 'Saved'}
+            </Text>
             <Text style={{ ...typeScale.body, color: colour.textMuted, marginTop: space.xs }}>
-              {saved} activity record{saved === 1 ? '' : 's'} added. Add more detail,
-              scan a bill, or run the assessment now.
+              {queued
+                ? `${saved} value(s) are waiting to send. They will go up on their own when you have a signal.`
+                : `${saved} activity record${saved === 1 ? '' : 's'} added. Add more detail, scan a bill, or run the assessment now.`}
             </Text>
             <Button
               title="Run assessment"

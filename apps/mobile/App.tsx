@@ -11,12 +11,13 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ApiError } from './src/api/client';
 import { AuthProvider } from './src/auth/AuthContext';
 import RootNavigator from './src/navigation/RootNavigator';
+import { drain, startAutoSync } from './src/storage/sync';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,14 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
+  useEffect(() => {
+    // Anything captured while offline goes up on the next connectivity
+    // transition, and once on cold start in case the app was killed while
+    // items were still waiting.
+    drain();
+    return startAutoSync();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>

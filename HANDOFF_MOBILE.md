@@ -8,7 +8,8 @@ Last updated: 2026-09-12
 Phase 0 mobile foundation plus the Phase 1 FE-2 screens: Expo app shell,
 navigation, design tokens, auth with token refresh, typed API client, factory
 setup, conversational onboarding, bill scan, equipment scan, quick results,
-evidence capture and the notification centre.
+evidence capture, the notification centre, and an offline capture queue that
+sends on reconnect.
 
 `tsc --noEmit` clean.
 
@@ -27,6 +28,9 @@ apps/mobile/src/lib/format.ts           lakh/crore, tonnes, payback, percentile
 apps/mobile/src/navigation/             four tabs plus pushed screens
 apps/mobile/src/screens/                10 screens
 apps/mobile/src/storage/tokens.ts       Android keystore
+apps/mobile/src/storage/queue.ts        offline capture queue
+apps/mobile/src/storage/sync.ts         drain on reconnect, single-flight
+apps/mobile/src/components/PendingBanner.tsx  visible pending count
 apps/mobile/src/theme/tokens.ts         design tokens
 apps/mobile/README.md
 ```
@@ -54,10 +58,11 @@ npm run bundle:android     # Android JS bundle
 
 ## Known issues
 
-1. **No offline queue.** A capture taken with no signal fails and can be
-   retried; it is not queued for later. This is the biggest remaining gap for
-   real factory-floor use, and the reason the client separates upload from
-   confirm is to make adding one straightforward.
+1. **The offline queue has no server-side idempotency yet.** Each queued item
+   carries a `clientRef` the backend does not consume. Until it does, replay
+   safety rests on only retrying *network* failures — a double write needs the
+   response to have been lost in flight rather than merely slow. Honouring
+   `clientRef` on the intake and evidence endpoints would close that gap.
 2. **OCR shows as unavailable.** Correct behaviour, not a bug — the backend
    reports that no OCR runtime is configured, and the bill and nameplate screens
    fall through to manual entry with the photo already stored as evidence. When
@@ -76,11 +81,11 @@ npm run bundle:android     # Android JS bundle
   the compliance evaluator (compliance alerts and corrective-action upload are
   Phase 2 FE-2 and cannot be built against nothing), and RAG (the mobile
   assistant screen).
-- **BE-1 (me):** member invite endpoints, compliance case CRUD.
+- **BE-1 (me):** honouring `clientRef` for idempotent replay.
 - **FE-1:** none. Separate app, shared contract only.
 
 ## Next safe task
 
-The offline capture queue. Persist pending uploads with their factory id and
-metadata, retry on reconnect, and show a pending badge — this touches only
-`src/api` and `src/storage` and collides with nothing.
+Provider and RFQ actions from mobile (task.md Phase 3 FE-2): list quotes on an
+action, accept one, update job status. The endpoints exist and are tested; this
+is screen work against a settled contract.

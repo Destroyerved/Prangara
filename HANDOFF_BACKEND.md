@@ -8,10 +8,11 @@ Last updated: 2026-09-12
 Phase 0 foundation plus the BE-1 halves of Phases 1 to 4: the deterministic
 engine port, the FastAPI platform, auth and RBAC, factories and activity data,
 the assessment service, scenarios, the evidence vault, the marketplace, action
-tracking and M&V, the event outbox, notifications, the audit log, and the seed
-command.
+tracking and M&V, the event outbox, notifications, the audit log, compliance
+case management, membership and delegated factory access, auth rate limiting,
+and the seed command.
 
-58 endpoints, 29 tables, 108 tests green.
+70 endpoints, 29 tables, 139 tests green.
 
 ## Files changed
 
@@ -23,14 +24,14 @@ backend/data/reference/*.json   ported; BE-2 owns the content from here
 backend/app/core/               config, database, security, errors
 backend/app/models/             29 tables across 6 modules
 backend/app/schemas/            Pydantic DTOs - the shared contract
-backend/app/api/                11 route modules
+backend/app/api/                13 route modules
 backend/app/services/           access, assessment, benchmarks, data quality,
                                 events, audit, storage, units, profile mapper,
                                 scenario, provider matching, intake, notify
 backend/app/workers/outbox.py   event worker
 backend/migrations/             Alembic, one revision at head
 backend/scripts/                seed_demo.py, export_openapi.py
-backend/tests/                  108 tests
+backend/tests/                  139 tests
 packages/contracts/openapi.json generated - the client contract
 .env.example                    every key the backend reads
 ```
@@ -82,7 +83,7 @@ python -m app.workers.outbox --once
 
 ## Tests run
 
-108 passing:
+139 passing:
 
 - `test_engine_invariants.py` — 85 tests. Every non-negotiable invariant from
   task.md section 15, parameterised across all 10 sectors.
@@ -91,6 +92,16 @@ python -m app.workers.outbox --once
 - `test_access_control.py` — tenant isolation, provider boundaries, evidence
   scoping, refresh rotation, delegated grants, blocked-intervention override.
 - `test_outbox.py` — events become notifications, and never cross a tenant.
+- `test_compliance.py` — a case cannot exist without its rule, evaluation is
+  queued not answered, and human-review cases cannot be closed on an empty
+  record.
+- `test_org_access.py` — a consultant cannot pass on a grant, a provider cannot
+  hold one, the last owner cannot be removed, expired grants stop working.
+- `test_ratelimit.py` — per-account guessing is stopped without locking out
+  other accounts.
+- `test_intake_extract.py` — period is read per clause; revenue comes back in
+  crore.
+- `test_seed_demo.py` — every seeded account can actually sign in.
 
 ## Known issues
 
@@ -99,14 +110,14 @@ python -m app.workers.outbox --once
    models are portable and the migration runs on both; this has not yet been
    *run* against a real PostgreSQL instance, so budget an hour for the first
    attempt.
-2. **No rate limiting on `/api/auth/login`.** PRD section 28 asks for it.
-3. **Member invite and factory-grant endpoints are not built.** The access rule
-   is enforced and tested; only the management API is missing, so a grant has to
-   be inserted directly for now (the test does exactly this).
-4. **Report export not ported.** `prototype/backend/report.py` builds the
+2. **Rate limiting is in-process.** Fixed windows held in memory, so behind
+   several workers each holds its own counters and the effective limit is per
+   worker. Stated in `app/core/ratelimit.py` rather than hidden. Redis would fix
+   it and is not worth the operational dependency at this scale.
+3. **Report export not ported.** `prototype/backend/report.py` builds the
    PDF/HTML working paper and still needs moving across.
-5. **Compliance case CRUD not built.** Tables exist and are migrated.
-6. `bcrypt` is used rather than Argon2. PRD FR-01 permits either.
+4. **Shipment CRUD and vehicle models not built** (Phase 4 BE-1).
+5. `bcrypt` is used rather than Argon2. PRD FR-01 permits either.
 
 ## Dependencies on another role
 
@@ -118,11 +129,13 @@ python -m app.workers.outbox --once
   `fields` + `suggested_activity_records`; the confirmation path and the
   evidence linking already work.
 - **Compliance evaluator.** Every assessment emits
-  `COMPLIANCE_EVALUATION_REQUESTED`. Register a handler with
-  `app.services.events.register(...)` and write `ComplianceCase` rows. Until a
-  handler exists the event is marked `PROCESSED` with
-  `last_error = "no domain handler registered"`, so the gap is visible rather
-  than silent.
+  `COMPLIANCE_EVALUATION_REQUESTED`, and so does
+  `POST /api/compliance/evaluate`. Register a handler with
+  `app.services.events.register(...)` and write `ComplianceCase` rows — the
+  table, the CRUD API, the readiness view, corrective actions and the audit
+  trail are all built and waiting. Until a handler exists the event is marked
+  `PROCESSED` with `last_error = "no domain handler registered"`, so the gap is
+  visible rather than silent.
 - **Reference data.** `backend/data/reference/*.json`. Changing a file changes
   its content hash, which is what makes past assessments distinguishable from
   future ones — that is intended, so bump `meta.schema_version` when the shape
@@ -135,7 +148,6 @@ python -m app.workers.outbox --once
 
 ## Next safe task
 
-Compliance case CRUD (`GET/POST /api/factories/{id}/compliance`,
-`/api/compliance/cases/*`). The tables, the event and the audit plumbing are
-already in place, so it is route work against an existing schema and does not
-collide with BE-2's evaluator.
+Port `prototype/backend/report.py` to produce the PDF/HTML working paper from a
+stored assessment. It reads a persisted result and writes a document; it touches
+no shared schema and collides with nothing.

@@ -15,7 +15,7 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Area | State |
 |---|---|
 | Deterministic carbon engine | Ported, version-stamped, 85 invariant tests green |
-| Platform API (FastAPI) | 58 endpoints, running |
+| Platform API (FastAPI) | 70 endpoints, running |
 | Database + migrations | 29 tables, Alembic head applied |
 | Auth / RBAC / tenant isolation | Done, 12 access-control tests green |
 | Assessment + scenarios | Done |
@@ -27,9 +27,13 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Bill / equipment OCR | Contract, storage and confirm path done; extraction runtime pending (BE-2) |
 | Demo seed | Done — 6 accounts, 3 factories, quotes, alerts, one command |
 | **Mobile APK (`apps/mobile`)** | **10 screens, typecheck clean, Android bundle builds** |
+| Compliance cases + readiness | Done (BE-1 half) |
+| Membership + delegated factory access | Done |
+| Auth rate limiting | Done |
+| Mobile offline capture queue | Done |
 | Compliance evaluator | Not mine (BE-2). Events are raised and visible. |
 
-**Backend tests:** 119 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
+**Backend tests:** 139 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
 
 ---
 
@@ -161,6 +165,36 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
   not the absolute value.
 - Compliance case and corrective-action tables exist, ready for BE-2.
 
+### Phase 5 — Governance, access and resilience
+
+**BE-1**
+
+- **Compliance cases** (FR-46, FR-49). Readiness view, case CRUD, corrective
+  actions, evidence attachment, close with a recorded reason.
+  `POST /api/compliance/evaluate` returns 202 and an event — BE-1 raises the
+  request, BE-2 answers it. A case cannot exist without the rule id and
+  rule-pack version it rests on. Closing returns every blocker at once, and a
+  case marked for human review cannot be closed on an empty record.
+- **Membership and delegated factory access** complete FR-01. Invite, remove,
+  grant, revoke. A consultant holding a grant cannot pass it on, a provider can
+  never hold one, and the last owner of an organization cannot be removed.
+  Grants are revoked rather than deleted: who had access and when is audit data.
+- **Auth rate limiting** (PRD section 28). Login is limited per account as well
+  as per address, because address rotation is cheap and a password is not.
+  Refusals carry `Retry-After`.
+
+**FE-2**
+
+- **Offline capture queue.** A capture that fails on the network is stored on
+  the device and sent when connectivity returns, with the pending count always
+  visible — queued work that is invisible is indistinguishable from lost work.
+
+  Two rules make it safe: only *network* failures are queued (if the server
+  answered, the outcome is known and replaying would duplicate a write or repeat
+  a refusal), and only user-authored facts are queued. Assessments are never
+  queued — replaying one hours later against changed data would produce a result
+  the user never saw and did not confirm.
+
 ### Tooling
 
 - `python -m scripts.seed_demo --reset` — 6 accounts, 3 factories with full
@@ -168,7 +202,7 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
   quotes, 2 material listings, and a drained outbox so the demo opens with real
   alerts. Idempotent; removes exactly what it created.
 - `python -m scripts.export_openapi` — writes `packages/contracts/openapi.json`
-  (58 paths, 66 schemas) for the web and mobile clients.
+  (70 paths, 81 schemas) for the web and mobile clients.
 
 ---
 
@@ -247,18 +281,12 @@ been merged into `main` and nothing on `main` has been overwritten.
 
 ### Backend (BE-1, mine)
 
-- [ ] Member invite and factory-grant API (the access *rule* is enforced and
-      tested; the management endpoints are not built)
-- [ ] Compliance case CRUD endpoints (tables exist; task.md Phase 2 BE-1)
 - [ ] Report export (PDF/HTML) — `prototype/backend/report.py` to port
 - [ ] Shipment CRUD and vehicle models (Phase 4 BE-1)
-- [ ] Rate limiting on auth endpoints (PRD section 28)
 - [ ] First run against a real PostgreSQL instance
 
 ### Mobile (FE-2, mine)
 
-- [ ] Offline queue for captures taken with no signal — the biggest remaining
-      gap for real factory-floor use
 - [ ] Signed APK (bundling verified; needs an Android SDK or an Expo account)
 - [ ] Provider/RFQ actions from mobile (Phase 3 FE-2, "if time permits")
 - [ ] Compliance alerts and corrective-action upload (Phase 2 FE-2, blocked)
@@ -314,7 +342,7 @@ URL was resolved and whether the API answered.
 ### Checks
 
 ```bash
-cd backend && python -m pytest tests -q          # 119 passing
+cd backend && python -m pytest tests -q          # 139 passing
 cd apps/mobile && npm run typecheck              # clean
 cd apps/mobile && npm run bundle:android         # Android bundle builds
 ```

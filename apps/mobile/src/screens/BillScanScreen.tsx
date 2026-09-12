@@ -16,9 +16,11 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Image, Text, View } from 'react-native';
 
-import { describeError } from '../api/client';
+import { NetworkError, describeError } from '../api/client';
 import { intake } from '../api/endpoints';
+import * as queue from '../storage/queue';
 import { Button, Card, Chip, Field, Heading, Note, Screen } from '../components/ui';
+import PendingBanner from '../components/PendingBanner';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 import type { RootStackParams } from '../navigation/types';
 import type { ActivityRecordIn, StreamKind } from '../api/types';
@@ -101,6 +103,7 @@ export default function BillScanScreen() {
   const [period, setPeriod] = useState(PERIODS[0]);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [queued, setQueued] = useState(false);
 
   async function pick(from: 'camera' | 'library') {
     setError(null);
@@ -162,7 +165,7 @@ export default function BillScanScreen() {
   const annualised = Number(quantity.replace(/,/g, '')) * period.multiplier;
 
   const confirm = useMutation({
-    mutationFn: () => {
+    mutationFn: async () => {
       const record: ActivityRecordIn = {
         stream_kind: docType.stream,
         factor_key: docType.factorKey,
@@ -174,19 +177,42 @@ export default function BillScanScreen() {
         data_state: 'DOCUMENT-CONFIRMED',
         source_kind: 'document_ocr',
       };
-      return intake.confirm(factoryId, {
+      const body = {
         activity_records: [record],
         evidence_id: evidenceId,
-        source_kind: 'document_ocr',
-      });
+        source_kind: 'document_ocr' as const,
+      };
+      try {
+        await intake.confirm(factoryId, body);
+        return { queued: false };
+      } catch (ex) {
+        // Only a network failure is queued. If the server answered, the outcome
+        // is known and replaying it later would duplicate or repeat a refusal.
+        if (ex instanceof NetworkError) {
+          await queue.enqueue({
+            kind: 'confirm_intake',
+            factoryId,
+            factoryName,
+            label: `${docType.label}: ${annualised.toLocaleString('en-IN')} ${docType.unit}`,
+            body,
+          });
+          return { queued: true };
+        }
+        throw ex;
+      }
     },
-    onSuccess: () => setSaved(true),
+    onSuccess: (result) => {
+      setSaved(true);
+      setQueued(result.queued);
+    },
     onError: (ex) => setError(describeError(ex)),
   });
 
   return (
     <Screen>
       <Heading sub={factoryName}>Scan a bill</Heading>
+
+      <PendingBanner />
 
       <Card>
         <Text style={{ ...typeScale.bodyStrong, color: colour.text, marginBottom: space.sm }}>
@@ -319,10 +345,14 @@ export default function BillScanScreen() {
       ) : null}
 
       {saved ? (
-        <Card style={{ borderColor: colour.ok }}>
-          <Text style={{ ...typeScale.heading, color: colour.ok }}>Reading saved</Text>
+        <Card style={{ borderColor: queued ? colour.high : colour.ok }}>
+          <Text style={{ ...typeScale.heading, color: queued ? colour.high : colour.ok }}>
+            {queued ? 'Saved on this phone' : 'Reading saved'}
+          </Text>
           <Text style={{ ...typeScale.body, color: colour.textMuted, marginTop: space.xs }}>
-            The bill is filed as evidence against it.
+            {queued
+              ? 'It will send on its own when you have a signal.'
+              : 'The bill is filed as evidence against it.'}
           </Text>
           <Button
             title="Scan another"
