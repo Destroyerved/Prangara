@@ -274,12 +274,28 @@ export default function Overview() {
             <div className="eyebrow">CBAM / INDICATIVE</div>
             <h3>
               {a.compliance.cbam.indicative_cost == null
-                ? "Exposure unavailable"
+                ? (a.compliance.cbam.status === "phase_2_watchlist" ? "Phase 2 Watchlist (Exempt)" : "Exempt in Phase 1")
                 : money(a.compliance.cbam.indicative_cost)}
             </h3>
-            <p>Confirm goods coverage and reference price before acting.</p>
+            <p>
+              {a.compliance.cbam.indicative_cost == null
+                ? "Sector is exempt from CBAM Phase 1 border tariffs."
+                : "Confirm product CN codes and net EU benchmark allowance."}
+            </p>
             <ArrowUpRight size={18} />
           </Link>
+          {a.compliance.ccts && (
+            <Link to="/compliance">
+              <div className="eyebrow">INDIA CCTS / BEE</div>
+              <h3>
+                {a.compliance.ccts.status === "obligated"
+                  ? "Obligated Designated Consumer"
+                  : `Voluntary Eligible · ${number(a.compliance.ccts.voluntary_ccc_potential_tco2e)} CCCs`}
+              </h3>
+              <p>Bureau of Energy Efficiency Carbon Credit Trading Scheme.</p>
+              <ArrowUpRight size={18} />
+            </Link>
+          )}
           <Link to="/compliance">
             <div className="eyebrow">BRSR / WORKING PAPERS</div>
             <h3>Readiness, with evidence gaps</h3>

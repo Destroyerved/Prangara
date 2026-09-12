@@ -172,7 +172,10 @@ export const assessmentSchema = z.object({
   compliance: z.object({
     cbam: z.object({
       applicability: z.string(),
+      status: z.string().optional(),
       exposure_t: maybe,
+      net_surrender_t: maybe.optional(),
+      eu_benchmark: maybe.optional(),
       indicative_cost: maybe,
       reference_price: maybe,
       export_share_pct: maybe,
@@ -180,6 +183,17 @@ export const assessmentSchema = z.object({
       excluded: z.array(z.string()),
       assumptions: z.array(z.string()),
     }),
+    ccts: z.object({
+      applicable: z.boolean(),
+      status: z.string(),
+      designated_consumer_status: z.string(),
+      plant_thermal_gj: maybe,
+      designated_consumer_threshold_gj: maybe,
+      is_designated_consumer: z.boolean().optional(),
+      voluntary_ccc_potential_tco2e: maybe,
+      mechanism: z.string(),
+      notes: z.array(z.string()),
+    }).optional(),
     brsr: z.array(
       z.object({
         name: z.string(),

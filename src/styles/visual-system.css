@@ -1277,11 +1277,6 @@ select:focus {
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--inner-highlight);
 }
-.search-box {
-  background: var(--surface-inset);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
 .action-table th,
 .data-table-container th {
   background: var(--surface-high);

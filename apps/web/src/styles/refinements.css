@@ -1,0 +1,356 @@
+/* Responsive refinements and final type hierarchy. */
+.plant-switch {
+  max-width: 55%;
+}
+.plant-switch > span:nth-child(2) {
+  min-width: 0;
+}
+.plant-switch strong,
+.plant-switch small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hero-support {
+  flex-wrap: wrap;
+  gap: 22px 30px;
+}
+.hero-support small {
+  line-height: 1.6;
+}
+.hero-support strong span,
+.metric-strip strong span,
+.reduction-callout span {
+  font-size: 12px;
+}
+.page-heading p,
+.section-heading p {
+  font-size: 14px;
+}
+.scope-legend small,
+.scope-legend strong,
+.uncertainty {
+  font-size: 12px;
+}
+.uncertainty {
+  flex-wrap: wrap;
+}
+.leak-footer {
+  font-size: 12px;
+  line-height: 1.7;
+  flex-wrap: wrap;
+}
+.leak-value small,
+.leak-card .chip {
+  font-size: 12px;
+}
+.leak-card h3 {
+  font-size: 16px;
+}
+.workspace-label {
+  font-size: 10px;
+}
+.nav-label {
+  font-size: 11px;
+}
+.nav-item {
+  font-size: 14px;
+}
+.chip {
+  font-size: 12px;
+}
+.button {
+  font-size: 13px;
+}
+.topbar .button {
+  font-size: 12px;
+}
+.text-button {
+  font-size: 12px;
+}
+.brand {
+  gap: 9px;
+}
+.brand-text {
+  font-size: 17px;
+  letter-spacing: 1.5px;
+}
+.executive-hero {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 45px;
+}
+.metric-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.metric-strip strong {
+  overflow-wrap: break-word;
+}
+.sidebar nav {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.sidebar-bottom {
+  padding-top: 10px;
+}
+.carbon-hero {
+  min-width: 0;
+}
+.hero-number {
+  white-space: nowrap;
+}
+.top-actions {
+  gap: 12px;
+}
+@media (min-width: 1600px) {
+  .executive-hero {
+    gap: 64px;
+  }
+  .hero-support {
+    gap: 40px;
+  }
+  .button {
+    font-size: 14px;
+  }
+  .hero-number {
+    font-size: 106px;
+  }
+  .scope-legend {
+    gap: 22px;
+  }
+  .nav-item {
+    padding: 12px;
+  }
+  .leak-card h3 {
+    font-size: 17px;
+  }
+}
+@media (max-width: 1150px) {
+  .hero-number {
+    font-size: 60px;
+    letter-spacing: -3px;
+  }
+  .hero-number > span {
+    font-size: 27px;
+  }
+  .hero-number small {
+    font-size: 14px;
+  }
+  .hero-support strong {
+    font-size: 16px;
+  }
+  .hero-support {
+    gap: 15px;
+  }
+  .executive-hero {
+    gap: 22px;
+  }
+  .scope-legend {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .metric-strip strong {
+    font-size: 23px;
+  }
+  .metric-strip > div + div {
+    padding-left: 17px;
+  }
+  .metric-strip {
+    gap: 17px;
+  }
+  .topbar {
+    gap: 12px;
+  }
+  .top-actions {
+    gap: 8px;
+  }
+  .theme-top {
+    display: none;
+  }
+  .carbon-number {
+    font-size: 42px;
+  }
+}
+@media (max-width: 800px) {
+  .app-shell {
+    --sidebar-width: 64px !important;
+  }
+  .sidebar {
+    width: 64px;
+  }
+  .brand {
+    padding-left: 0;
+  }
+  .sidebar .brand-mark {
+    width: 28px;
+    height: 28px;
+    border: none;
+  }
+  .nav-item[aria-current="page"]::before {
+    left: -10px;
+  }
+  .workspace {
+    margin-left: 64px;
+    width: calc(100% - 64px);
+  }
+  .topbar {
+    padding: 0 16px;
+  }
+  .plant-switch {
+    max-width: calc(100% - 80px);
+  }
+  .plant-switch > span:nth-child(2) {
+    width: 100%;
+  }
+  .plant-switch strong {
+    font-size: 12px;
+  }
+  .plant-switch small {
+    font-size: 11px;
+  }
+  .topbar .button {
+    font-size: 0;
+    padding: 10px;
+    gap: 0;
+  }
+  .topbar .theme-top {
+    display: grid !important;
+  }
+  .hero-number {
+    font-size: 70px;
+  }
+  .hero-number > span {
+    font-size: 25px;
+  }
+  .hero-number small {
+    font-size: 14px;
+  }
+  .executive-hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-support {
+    gap: 20px;
+  }
+  .hero-support strong {
+    font-size: 18px;
+  }
+  .metric-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 15px;
+  }
+  .metric-strip > div + div {
+    padding: 0;
+  }
+  .metric-strip strong {
+    font-size: 25px;
+  }
+  .section-heading .text-button {
+    font-size: 0;
+  }
+  .scope-legend {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  .workspace-label {
+    display: none;
+  }
+  .fixture-banner {
+    font-size: 12px;
+  }
+  .hero-number {
+    letter-spacing: -3.5px;
+  }
+  .brand-text {
+    display: none;
+  }
+}
+@media (max-width: 440px) {
+  main {
+    padding: 25px 16px;
+  }
+  .hero-number {
+    font-size: 59px;
+  }
+  .hero-number > span {
+    font-size: 23px;
+    margin-left: 7px;
+  }
+  .hero-number small {
+    font-size: 12px;
+  }
+  .page-heading h1 {
+    font-size: 25px;
+  }
+  .hero-support {
+    gap: 16px;
+  }
+  .hero-support strong span {
+    display: block;
+  }
+  .metric-strip strong span {
+    display: block;
+    margin: 6px 0 0;
+  }
+  .metric-strip strong {
+    font-size: 23px;
+  }
+  .scope-legend {
+    gap: 12px;
+  }
+  .scope-legend small,
+  .scope-legend strong {
+    font-size: 11px;
+  }
+  .topbar .theme-top {
+    display: none !important;
+  }
+  .plant-switch {
+    max-width: calc(100% - 45px);
+  }
+  .analytical-panel {
+    padding: 16px;
+  }
+  .segmented button {
+    padding: 8px 10px;
+  }
+  .action-summary small {
+    display: block;
+    margin-top: 7px;
+  }
+  .filter-bar .search-box {
+    flex-basis: 100%;
+  }
+  .command-dialog {
+    top: 9vh;
+  }
+  .command-input input {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+.cost-text {
+  color: var(--scope-1);
+}
+
+.hero-number > .animated-value {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+.workspace-label,
+.nav-label {
+  font-size: 12px;
+}
+.nav-item > span:first-of-type {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

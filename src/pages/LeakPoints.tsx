@@ -18,6 +18,8 @@ import {
 import { LeakCard } from "../components/leaks/LeakCard";
 import { BenchmarkStrip } from "../components/charts/BenchmarkStrip";
 import { number } from "../lib/format";
+
+
 export default function LeakPoints() {
   const w = useWorkspace(),
     a = w.assessment;
@@ -67,7 +69,7 @@ export default function LeakPoints() {
         from literature. Cohort identity, sample size, reporting period and
         data-quality scores are not supplied.
       </Note>
-      <div className="filter-bar">
+      <div className="filter-bar flex items-center gap-3 flex-wrap">
         <Segmented
           value={severity}
           onChange={setSeverity}

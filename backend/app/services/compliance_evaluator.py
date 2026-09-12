@@ -18,20 +18,24 @@ import os
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.models.assessment import Assessment
+from app.models.evidence import EvidenceDocument
 from app.models.factory import Factory, FactoryProfile
 from app.models.governance import ComplianceCase, Event
 from app.services import audit
 from app.services import events as bus
+from engine.constants import (
+    CBAM_ANNEX_1_COVERED_SECTORS,
+    CBAM_EU_BENCHMARKS_TCO2E_PER_T,
+    CBAM_REFERENCE_INR_PER_TCO2E,
+)
 
 log = logging.getLogger("prangara.compliance")
 
-_CBAM_COVERED_SECTORS = {
-    "iron_steel", "steel", "foundry_casting", "foundry", "aluminium", "cement", "chemicals",
-}
+_CBAM_COVERED_SECTORS = CBAM_ANNEX_1_COVERED_SECTORS
 
 # Root dataset directory lookup
 _DATASET_DIR = Path(__file__).resolve().parents[3] / "datasets" / "data" / "clean" / "compliance_rule_packs"
@@ -102,9 +106,12 @@ def evaluate_factory_compliance(db: Session, factory_id: str,
     is_cbam_sector = sector in _CBAM_COVERED_SECTORS
     if is_cbam_sector and eu_export_pct > 0:
         direct_emissions = scope1 + scope2
-        exposed_tonnes = direct_emissions * (eu_export_pct / 100.0)
-        benchmark_price_inr = 7650.0  # €85/tCO2e @ ₹90/EUR statutory benchmark
-        financial_exposure_inr = round(exposed_tonnes * benchmark_price_inr)
+        direct_intensity = (direct_emissions / annual_prod_t) if annual_prod_t > 0 else 0.0
+        eu_benchmark = CBAM_EU_BENCHMARKS_TCO2E_PER_T.get(sector, 0.0)
+        excess_intensity = max(0.0, direct_intensity - eu_benchmark)
+        exported_tonnes = annual_prod_t * (eu_export_pct / 100.0) if annual_prod_t > 0 else 0.0
+        surrender_tonnes = excess_intensity * exported_tonnes
+        financial_exposure_inr = round(surrender_tonnes * CBAM_REFERENCE_INR_PER_TCO2E)
 
         evaluated_cases.append({
             "rule_id": "CBAM_DEFINITIVE_EXPOSURE_001",
@@ -118,9 +125,9 @@ def evaluate_factory_compliance(db: Session, factory_id: str,
             "title": "EU CBAM Definitive Regime Border Exposure",
             "reason": (
                 f"Facility exports {eu_export_pct:.1f}% of production to the EU under CBAM covered "
-                f"sector '{sector}'. An estimated {exposed_tonnes:,.1f} tCO2e of Scope 1 & 2 embedded "
-                f"emissions are subject to mandatory surrender with ~₹{financial_exposure_inr:,.0f} "
-                "indicative annual certificate exposure."
+                f"sector '{sector}'. Direct intensity is {direct_intensity:.2f} tCO2e/t vs EU ETS benchmark of {eu_benchmark:.2f} tCO2e/t. "
+                f"An estimated {surrender_tonnes:,.1f} tCO2e net embedded emissions above benchmark are subject to mandatory surrender with ~₹{financial_exposure_inr:,.0f} "
+                f"indicative annual certificate exposure at €85 (₹{CBAM_REFERENCE_INR_PER_TCO2E:,.0f}/tCO2e)."
             ),
             "required_evidence": [
                 "eu_export_customs_declaration",
@@ -140,8 +147,8 @@ def evaluate_factory_compliance(db: Session, factory_id: str,
             "requires_human_review": False,
             "title": "EU CBAM Phase 2 Scope Extension Watch",
             "reason": (
-                f"Sector '{sector}' is under active review for EU CBAM expansion (polymers, textiles, "
-                f"specialty parts). Current EU export exposure is {eu_export_pct:.1f}%."
+                f"Sector '{sector}' is exempt from CBAM Phase 1 (2026) with ₹0 current statutory liability. "
+                f"Under active European Commission Article 30 review for post-2027 extension. Current EU export exposure is {eu_export_pct:.1f}%."
             ),
             "required_evidence": ["export_invoices", "scope12_activity_logs"],
         })
@@ -149,8 +156,16 @@ def evaluate_factory_compliance(db: Session, factory_id: str,
     # -----------------------------------------------------------------------
     # 2. India CCTS Rule Pack (BEE / Carbon Credit Trading Scheme)
     # -----------------------------------------------------------------------
-    # ~700 toe (~30,000 GJ) thermal threshold or large industrial output
-    thermal_gj = scope1 / 0.095 if scope1 > 0 else 0.0
+    # Exact thermal energy from footprint or intensities, comparing against statutory designated consumer threshold
+    streams = footprint.get("streams", [])
+    thermal_stream = next((s for s in streams if isinstance(s, dict) and s.get("key") == "thermal_fuel"), None) if isinstance(streams, list) else None
+    thermal_gj = float(thermal_stream.get("activity_qty") or 0.0) if thermal_stream else 0.0
+    if thermal_gj == 0.0 and annual_prod_t > 0:
+        thermal_intensity = getattr(assessment, "thermal_gj_per_t", None) or footprint.get("intensities", {}).get("thermal_gj_per_t", 0.0)
+        thermal_gj = float(thermal_intensity or 0.0) * annual_prod_t
+    if thermal_gj == 0.0 and scope1 > 0:
+        thermal_gj = scope1 / 0.095
+
     is_obligated_ccts = thermal_gj >= 30000.0 or annual_prod_t >= 25000.0
 
     if is_obligated_ccts:
@@ -165,8 +180,8 @@ def evaluate_factory_compliance(db: Session, factory_id: str,
             "requires_human_review": True,
             "title": "India CCTS Statutory GEI Trajectory Compliance",
             "reason": (
-                "Plant energy/production exceeds statutory designated consumer threshold. Mandatory "
-                "Greenhouse Gas Emission Intensity (GEI) reduction trajectory applies under BEE CCTS."
+                f"Plant thermal energy ({thermal_gj:,.0f} GJ) or output ({annual_prod_t:,.0f} t) exceeds statutory designated consumer threshold "
+                "(30,000 GJ thermal / 25,000 t). Mandatory Greenhouse Gas Emission Intensity (GEI) reduction trajectory applies under BEE CCTS."
             ),
             "required_evidence": [
                 "bee_designated_consumer_filing",
@@ -198,23 +213,48 @@ def evaluate_factory_compliance(db: Session, factory_id: str,
     # -----------------------------------------------------------------------
     # 3. SEBI BRSR Core (Value Chain Readiness)
     # -----------------------------------------------------------------------
+    evidence_count = db.scalar(
+        select(func.count())
+        .select_from(EvidenceDocument)
+        .where(EvidenceDocument.factory_id == factory.id,
+               EvidenceDocument.deleted_at.is_(None))
+    ) or 0
+
     if scope3 > 0 and dq_score >= 60:
-        evaluated_cases.append({
-            "rule_id": "BRSR_CORE_READY_001",
-            "rule_pack": "BRSR",
-            "rule_pack_version": "2025.1",
-            "source_ids": ["SRC-SEBI-BRSR-2024"],
-            "severity": "low",
-            "status": "READY",
-            "flow_state": "FLAGGED",
-            "requires_human_review": False,
-            "title": "SEBI BRSR Core Value Chain Assurance Ready",
-            "reason": (
-                f"Complete Scope 1, 2, and 3 accounting with data quality score of {dq_score:.0f}/100. "
-                "Meets reasonable assurance readiness for top 250 listed corporate supply chain partners."
-            ),
-            "required_evidence": ["ghg_inventory_report", "scope3_supplier_declaration"],
-        })
+        if evidence_count > 0:
+            evaluated_cases.append({
+                "rule_id": "BRSR_CORE_READY_001",
+                "rule_pack": "BRSR",
+                "rule_pack_version": "2025.1",
+                "source_ids": ["SRC-SEBI-BRSR-2024"],
+                "severity": "low",
+                "status": "READY",
+                "flow_state": "FLAGGED",
+                "requires_human_review": False,
+                "title": "SEBI BRSR Core Value Chain Working Papers & Evidence Attached",
+                "reason": (
+                    f"Complete Scope 1, 2, and 3 accounting with data quality score of {dq_score:.0f}/100 and "
+                    f"{evidence_count} primary evidence document(s) filed in Evidence Vault. Meets audit working-paper readiness for top 250 listed corporate supply chain partners."
+                ),
+                "required_evidence": ["ghg_inventory_report", "scope3_supplier_declaration"],
+            })
+        else:
+            evaluated_cases.append({
+                "rule_id": "BRSR_CORE_READY_001",
+                "rule_pack": "BRSR",
+                "rule_pack_version": "2025.1",
+                "source_ids": ["SRC-SEBI-BRSR-2024"],
+                "severity": "low",
+                "status": "PARTIAL",
+                "flow_state": "FLAGGED",
+                "requires_human_review": False,
+                "title": "SEBI BRSR Core Working Papers Ready (Evidence Audit Pending)",
+                "reason": (
+                    f"Complete Scope 1, 2, and 3 accounting (DQ score {dq_score:.0f}/100). Working papers are generated; "
+                    "statutory reasonable assurance under SEBI Circular 2023/122 requires primary evidence documents (utility bills, weighbridge slips, NABL test reports) to be attached to the Evidence Vault."
+                ),
+                "required_evidence": ["ghg_inventory_report", "scope3_supplier_declaration", "utility_bill"],
+            })
     else:
         gaps = []
         if scope3 == 0:

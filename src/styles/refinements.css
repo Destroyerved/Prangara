@@ -62,6 +62,68 @@
 .button {
   font-size: 13px;
 }
+.platform-toolbar .workspace-open,
+.platform-toolbar .sign-out {
+  flex: 1 1 0;
+  min-width: 180px;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 180ms ease;
+}
+.platform-toolbar .platform-action {
+  flex: 1 1 0;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.platform-toolbar .platform-action .button {
+  flex: 1;
+  min-width: 0;
+}
+.platform-toolbar .sign-out {
+  background: transparent;
+  border-color: color-mix(in srgb, var(--critical) 45%, transparent);
+  color: var(--critical);
+}
+.platform-toolbar .sign-out:hover {
+  background: color-mix(in srgb, var(--critical) 14%, transparent);
+  border-color: var(--critical);
+  box-shadow: 0 6px 18px -8px var(--critical);
+  transform: translateY(-1px);
+}
+.platform-toolbar .workspace-open {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    color-mix(in srgb, var(--accent) 6%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--accent);
+}
+.platform-toolbar .workspace-open:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 28%, transparent),
+    color-mix(in srgb, var(--accent) 10%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+  box-shadow: 0 6px 18px -8px var(--accent);
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .platform-toolbar .workspace-open,
+  .platform-toolbar .sign-out {
+    transform: none;
+  }
+}
 .topbar .button {
   font-size: 12px;
 }

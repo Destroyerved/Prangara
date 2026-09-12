@@ -1,15 +1,12 @@
 /**
  * Quick results. PRD FR-5.2 mobile scope and task.md FE-2 "Quick Results".
  *
- * The mobile companion deliberately does *not* reproduce the dashboard. It
- * answers four questions a factory owner can act on from the floor:
- *
- *   what am I emitting, where is the worst leak, what should I do first,
- *   and what is free money.
- *
- * Every figure shown carries its uncertainty band, and every recommendation
- * shows cost and carbon together, because PRD section 3.4 requires it and
- * because a payback without a capex is not a decision.
+ * Matches the web app's Executive Hero & Scope Breakdown aesthetics:
+ * - Cash-positive opportunity hero card (Annual net savings, capex, blended payback, quick wins)
+ * - Tri-color Scope 1/2/3 breakdown bar with precision tags
+ * - Sovereign RAG Assistant integration ("Ask PRANGARA ✨")
+ * - Peer quartile benchmark and actionable leak points
+ * - Ranked cost-of-abatement interventions and blocked caveats
  */
 
 import { useNavigation, useRoute, type RouteProp } from '@react-navigation/native';
@@ -26,6 +23,7 @@ import {
   Divider,
   EmptyState,
   ErrorState,
+  Eyebrow,
   Heading,
   Loading,
   Note,
@@ -34,6 +32,7 @@ import {
   SeverityBadge,
   Stat,
 } from '../components/ui';
+import { AskAssistantModal } from '../components/AskAssistantModal';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 import {
   describePercentile,
@@ -51,6 +50,7 @@ export default function QuickResultsScreen() {
   const queryClient = useQueryClient();
   const { factoryId, factoryName } = route.params;
   const [error, setError] = useState<string | null>(null);
+  const [assistantOpen, setAssistantOpen] = useState(false);
 
   const list = useQuery({
     queryKey: ['assessments', factoryId],
@@ -66,7 +66,7 @@ export default function QuickResultsScreen() {
   });
 
   const run = useMutation({
-    mutationFn: () => assessmentsApi.run(factoryId, 'From mobile'),
+    mutationFn: () => assessmentsApi.run(factoryId, 'From mobile companion'),
     onSuccess: (assessment: Assessment) => {
       queryClient.invalidateQueries({ queryKey: ['assessments', factoryId] });
       queryClient.invalidateQueries({ queryKey: ['factories'] });
@@ -76,20 +76,26 @@ export default function QuickResultsScreen() {
     onError: (ex) => setError(describeError(ex)),
   });
 
-  if (list.isLoading) return <Screen><Loading label="Loading" /></Screen>;
+  if (list.isLoading) {
+    return (
+      <Screen>
+        <Loading label="Loading assessment" />
+      </Screen>
+    );
+  }
 
   const result = detail.data?.result;
 
   return (
     <Screen>
-      <Heading sub={factoryName}>Results</Heading>
+      <Heading sub={factoryName}>Assessment Results</Heading>
 
       {error ? <Note tone="warning">{error}</Note> : null}
 
       {!latestId ? (
         <EmptyState
           title="Not assessed yet"
-          body="Once you have entered your electricity and fuel use, run the assessment. It takes a moment and nothing leaves your account."
+          body="Once you have entered your electricity and fuel use, run the assessment. It takes a few seconds and delivers instant screening & savings roadmap."
           actionLabel="Run assessment"
           onAction={() => {
             setError(null);
@@ -98,69 +104,298 @@ export default function QuickResultsScreen() {
         />
       ) : null}
 
-      {detail.isLoading ? <Loading label="Loading results" /> : null}
+      {detail.isLoading ? <Loading label="Evaluating thermodynamic engine..." /> : null}
       {detail.isError ? (
         <ErrorState message={describeError(detail.error)} onRetry={detail.refetch} />
       ) : null}
 
       {result ? (
         <>
+          {/* 1. EXECUTIVE HERO CARD: Cash-Positive Opportunity (Matches Web App) */}
+          <Card
+            style={{
+              borderColor: colour.ok,
+              borderWidth: 1,
+              backgroundColor: 'rgba(16, 185, 129, 0.04)',
+            }}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: space.xs }}>
+              <View
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: 4,
+                  backgroundColor: colour.ok,
+                  marginRight: 8,
+                }}
+              />
+              <Eyebrow style={{ color: colour.ok }}>YOUR CASH-POSITIVE OPPORTUNITY</Eyebrow>
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: space.xs }}>
+              <Text style={{ ...typeScale.display, color: colour.ok, fontWeight: '800' }}>
+                {formatInr(result.headline.cash_positive_annual_benefit_inr)}
+              </Text>
+              <Text style={{ ...typeScale.body, color: colour.textMuted }}> / year</Text>
+            </View>
+            <Text style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 2 }}>
+              Potential annual net recurring savings
+            </Text>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: space.md,
+                backgroundColor: colour.surfaceRaised,
+                padding: space.md,
+                borderRadius: radius.md,
+                borderWidth: 1,
+                borderColor: colour.border,
+              }}
+            >
+              <View>
+                <Text style={{ ...typeScale.micro, color: colour.textFaint }}>INVESTMENT</Text>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.text, marginTop: 2 }}>
+                  {formatInr(result.headline.cash_positive_capex_inr)}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ ...typeScale.micro, color: colour.textFaint }}>BLENDED PAYBACK</Text>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.ok, marginTop: 2 }}>
+                  {result.headline.cash_positive_payback_months
+                    ? `${result.headline.cash_positive_payback_months} mo`
+                    : '-'}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ ...typeScale.micro, color: colour.textFaint }}>QUICK WINS</Text>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.text, marginTop: 2 }}>
+                  {result.headline.quick_win_count} actions
+                </Text>
+              </View>
+            </View>
+
+            <View
+              style={{
+                marginTop: space.md,
+                padding: space.sm,
+                borderRadius: radius.sm,
+                backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <Text style={{ ...typeScale.caption, color: colour.primary, fontWeight: '600', flex: 1 }}>
+                💡 {result.headline.cash_positive_abatement_pct}% of your footprint can be eliminated at no net cost.
+              </Text>
+            </View>
+          </Card>
+
+          {/* 2. ASK PRANGARA SOVEREIGN COPILOT PROMPT */}
+          <Card
+            style={{
+              backgroundColor: 'rgba(56, 189, 248, 0.05)',
+              borderColor: 'rgba(56, 189, 248, 0.25)',
+              borderWidth: 1,
+            }}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <View style={{ flex: 1, marginRight: space.md }}>
+                <Eyebrow style={{ color: colour.primary }}>SOVEREIGN COPILOT</Eyebrow>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.text, marginTop: 2 }}>
+                  Ask PRANGARA ✨
+                </Text>
+                <Text style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 2, lineHeight: 18 }}>
+                  Statutory reasoning with verified citations (BEE PAT, SEBI BRSR, CEA, CBAM).
+                </Text>
+              </View>
+              <Button
+                title="Ask ✨"
+                onPress={() => setAssistantOpen(true)}
+              />
+            </View>
+          </Card>
+
+          {/* 3. ANNUAL CARBON FOOTPRINT & TRI-COLOR SCOPE BREAKDOWN */}
           <Card>
-            <Stat
-              label="Annual footprint"
-              value={formatTonnes(result.footprint.total_tco2e)}
-              unit="tCO2e"
-              note={`range ${formatTonnes(result.footprint.total_range.low)} to ${formatTonnes(
-                result.footprint.total_range.high,
-              )} · ±${result.footprint.uncertainty_pct}%`}
-            />
-            <Divider />
-            <Row left="Scope 1 — direct" right={`${formatTonnes(result.footprint.scope1_tco2e)} t (${result.footprint.scope_split_pct.scope1}%)`} />
-            <Row left="Scope 2 — electricity" right={`${formatTonnes(result.footprint.scope2_tco2e)} t (${result.footprint.scope_split_pct.scope2}%)`} />
-            <Row left="Scope 3 — value chain" right={`${formatTonnes(result.footprint.scope3_tco2e)} t (${result.footprint.scope_split_pct.scope3}%)`} />
+            <Eyebrow>ANNUAL CARBON FOOTPRINT</Eyebrow>
+            <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: space.xs }}>
+              <Text style={{ ...typeScale.display, color: colour.text, fontWeight: '800' }}>
+                {formatTonnes(result.footprint.total_tco2e)}
+              </Text>
+              <Text style={{ ...typeScale.body, color: colour.textMuted }}> tCO2e / yr</Text>
+            </View>
+            <Text style={{ ...typeScale.caption, color: colour.textFaint, marginTop: 2 }}>
+              Uncertainty range: {formatTonnes(result.footprint.total_range.low)} to {formatTonnes(result.footprint.total_range.high)} tCO2e (±{result.footprint.uncertainty_pct}%)
+            </Text>
+
+            {/* Tri-color segmented bar */}
+            <View
+              style={{
+                flexDirection: 'row',
+                height: 12,
+                borderRadius: 6,
+                overflow: 'hidden',
+                marginTop: space.md,
+                backgroundColor: colour.surfaceRaised,
+              }}
+            >
+              <View
+                style={{
+                  flex: Math.max(1, result.footprint.scope_split_pct.scope1),
+                  backgroundColor: colour.scope1,
+                }}
+              />
+              <View
+                style={{
+                  flex: Math.max(1, result.footprint.scope_split_pct.scope2),
+                  backgroundColor: colour.scope2,
+                }}
+              />
+              <View
+                style={{
+                  flex: Math.max(1, result.footprint.scope_split_pct.scope3),
+                  backgroundColor: colour.scope3,
+                }}
+              />
+            </View>
+
+            {/* Scope Breakdown Rows */}
+            <View style={{ marginTop: space.md }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingVertical: space.xs,
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: colour.scope1,
+                      marginRight: space.xs,
+                    }}
+                  />
+                  <Text style={{ ...typeScale.body, color: colour.text }}>Scope 1 (Direct)</Text>
+                </View>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.scope1 }}>
+                  {formatTonnes(result.footprint.scope1_tco2e)} t ({result.footprint.scope_split_pct.scope1}%)
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingVertical: space.xs,
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: colour.scope2,
+                      marginRight: space.xs,
+                    }}
+                  />
+                  <Text style={{ ...typeScale.body, color: colour.text }}>Scope 2 (Electricity)</Text>
+                </View>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.scope2 }}>
+                  {formatTonnes(result.footprint.scope2_tco2e)} t ({result.footprint.scope_split_pct.scope2}%)
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingVertical: space.xs,
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: colour.scope3,
+                      marginRight: space.xs,
+                    }}
+                  />
+                  <Text style={{ ...typeScale.body, color: colour.text }}>Scope 3 (Value chain)</Text>
+                </View>
+                <Text style={{ ...typeScale.bodyStrong, color: colour.scope3 }}>
+                  {formatTonnes(result.footprint.scope3_tco2e)} t ({result.footprint.scope_split_pct.scope3}%)
+                </Text>
+              </View>
+            </View>
+
             <Divider />
             <Text style={{ ...typeScale.caption, color: colour.textFaint }}>
-              {result.footprint.grid_source}
+              Grid factor: {result.footprint.grid_source}
             </Text>
           </Card>
 
+          {/* 4. EXECUTIVE STATEMENT */}
           <Card>
-            <Text style={{ ...typeScale.body, color: colour.text, lineHeight: 22 }}>
+            <Eyebrow>ENGINE DIAGNOSIS</Eyebrow>
+            <Text style={{ ...typeScale.body, color: colour.text, lineHeight: 22, marginTop: space.xs }}>
               {result.headline.statement}
             </Text>
           </Card>
 
+          {/* 5. PEER BENCHMARK */}
           {result.leaks.peer_position ? (
             <Card>
-              <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.sm }}>
+              <Eyebrow>INDUSTRY POSITION</Eyebrow>
+              <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.xs }}>
                 Against your peers
               </Text>
               <Text style={{ ...typeScale.body, color: colour.text }}>
                 {describePercentile(result.leaks.peer_position.percentile)}
               </Text>
-              <PercentileBar
-                percentile={result.leaks.peer_position.percentile}
-              />
+              <PercentileBar percentile={result.leaks.peer_position.percentile} />
               <Row
                 left={result.leaks.peer_position.metric_label}
                 right={formatNumber(result.leaks.peer_position.actual, 2)}
                 strong
               />
-              <Row left="Sector median" right={formatNumber(result.leaks.peer_position.p50, 2)} />
-              <Row left="Sector 75th percentile" right={formatNumber(result.leaks.peer_position.p75, 2)} />
+              <Row left="Sector median (p50)" right={formatNumber(result.leaks.peer_position.p50, 2)} />
+              <Row left="Sector top quartile (p75)" right={formatNumber(result.leaks.peer_position.p75, 2)} />
               <Note>
-                Benchmark basis: {result.leaks.benchmark_source}. {result.leaks.benchmark_caveat}
+                Basis: {result.leaks.benchmark_source}. {result.leaks.benchmark_caveat}
               </Note>
             </Card>
           ) : null}
 
+          {/* 6. WORST LEAK POINTS */}
           {result.leaks.leaks.length ? (
             <Card>
-              <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.sm }}>
-                Worst leak point
+              <Eyebrow>DIAGNOSE</Eyebrow>
+              <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.sm }}>
+                Identified leak points
               </Text>
-              {result.leaks.leaks.slice(0, 2).map((leak) => (
-                <View key={leak.stream_key} style={{ marginBottom: space.lg }}>
+              {result.leaks.leaks.slice(0, 3).map((leak) => (
+                <View
+                  key={leak.stream_key}
+                  style={{
+                    marginBottom: space.md,
+                    padding: space.md,
+                    backgroundColor: colour.surfaceRaised,
+                    borderRadius: radius.md,
+                    borderWidth: 1,
+                    borderColor: colour.border,
+                  }}
+                >
                   <View
                     style={{
                       flexDirection: 'row',
@@ -182,17 +417,16 @@ export default function QuickResultsScreen() {
             </Card>
           ) : null}
 
+          {/* 7. ACTIONS: DO THESE FIRST */}
           <Card>
-            <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.xs }}>
-              Do these first
+            <Eyebrow>DECARBONIZATION ROADMAP</Eyebrow>
+            <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.xs }}>
+              Recommended interventions
             </Text>
-            <Text
-              style={{ ...typeScale.caption, color: colour.textMuted, marginBottom: space.md }}
-            >
-              Cheapest cost of abatement first. Figures are planning-grade
-              estimates for ranking options, not quotations.
+            <Text style={{ ...typeScale.caption, color: colour.textMuted, marginBottom: space.md }}>
+              Ranked by cost of abatement. Physical and technical feasibility verified.
             </Text>
-            {result.recommendations.recommendations.slice(0, 3).map((rec) => (
+            {result.recommendations.recommendations.slice(0, 4).map((rec) => (
               <View
                 key={rec.id}
                 style={{
@@ -200,6 +434,8 @@ export default function QuickResultsScreen() {
                   borderRadius: radius.md,
                   padding: space.md,
                   marginBottom: space.md,
+                  borderWidth: 1,
+                  borderColor: colour.border,
                 }}
               >
                 <Text style={{ ...typeScale.bodyStrong, color: colour.text }}>{rec.name}</Text>
@@ -210,15 +446,12 @@ export default function QuickResultsScreen() {
                 </Text>
                 <View style={{ marginTop: space.sm }}>
                   <Row
-                    left="Cuts"
+                    left="Abatement"
                     right={`${formatTonnes(rec.portfolio_abatement_tco2e)} tCO2e/yr`}
                   />
-                  <Row left="Costs" right={formatInr(rec.capex_inr)} />
-                  <Row
-                    left="Saves"
-                    right={`${formatInr(rec.net_annual_benefit_inr)}/yr`}
-                  />
-                  <Row left="Pays back in" right={formatPayback(rec.payback_yrs)} strong />
+                  <Row left="Capex" right={formatInr(rec.capex_inr)} />
+                  <Row left="Recurring benefit" right={`${formatInr(rec.net_annual_benefit_inr)}/yr`} />
+                  <Row left="Payback" right={formatPayback(rec.payback_yrs)} strong />
                 </View>
                 {rec.substitution_capped && rec.restriction_note ? (
                   <Note tone="warning">{rec.restriction_note}</Note>
@@ -227,16 +460,22 @@ export default function QuickResultsScreen() {
             ))}
           </Card>
 
+          {/* 8. BLOCKED INTERVENTIONS */}
           {result.recommendations.blocked.length ? (
-            <Card style={{ borderColor: colour.critical }}>
-              <Text style={{ ...typeScale.heading, color: colour.critical }}>
+            <Card style={{ borderColor: colour.critical, borderWidth: 1 }}>
+              <Eyebrow style={{ color: colour.critical }}>ENGINEERING SAFEGUARDS</Eyebrow>
+              <Text style={{ ...typeScale.heading, color: colour.critical, marginTop: space.xs }}>
                 PRANGARA said no
               </Text>
               <Text
-                style={{ ...typeScale.caption, color: colour.textMuted, marginTop: space.xs, marginBottom: space.md }}
+                style={{
+                  ...typeScale.caption,
+                  color: colour.textMuted,
+                  marginTop: space.xs,
+                  marginBottom: space.md,
+                }}
               >
-                These are technically real options that are not admissible at this
-                plant. The reason matters more than the recommendation.
+                These options were analyzed but ruled inadmissible for your specific facility.
               </Text>
               {result.recommendations.blocked.map((blocked) => (
                 <View key={blocked.id} style={{ marginBottom: space.md }}>
@@ -253,38 +492,15 @@ export default function QuickResultsScreen() {
             </Card>
           ) : null}
 
+          {/* 9. DATA QUALITY & RE-RUN */}
           <Card>
-            <Stat
-              label="Free money available"
-              value={formatInr(result.headline.cash_positive_annual_benefit_inr)}
-              unit="a year"
-              tone="good"
-              note={`${result.headline.quick_win_count} quick win${
-                result.headline.quick_win_count === 1 ? '' : 's'
-              } · removes ${result.headline.cash_positive_abatement_pct}% of the footprint`}
-            />
-            <Row
-              left="Capital needed"
-              right={formatInr(result.headline.cash_positive_capex_inr)}
-            />
-            <Row
-              left="Blended payback"
-              right={
-                result.headline.cash_positive_payback_months
-                  ? `${result.headline.cash_positive_payback_months} months`
-                  : '-'
-              }
-              strong
-            />
-          </Card>
-
-          <Card>
-            <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.sm }}>
-              Data quality {result.data_quality.score}/100 ({result.data_quality.band})
+            <Eyebrow>AUDIT READINESS</Eyebrow>
+            <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.sm }}>
+              Data Quality: {result.data_quality.score}/100 ({result.data_quality.band})
             </Text>
             {result.data_quality.gaps.length ? (
               <Text style={{ ...typeScale.caption, color: colour.textMuted, lineHeight: 19 }}>
-                Still missing: {result.data_quality.gaps.join(', ')}.
+                Identified data gaps: {result.data_quality.gaps.join(', ')}.
               </Text>
             ) : null}
             {result.data_quality.notes.map((note) => (
@@ -293,7 +509,7 @@ export default function QuickResultsScreen() {
               </Note>
             ))}
             <Button
-              title="Add more data"
+              title="Add more plant data"
               variant="secondary"
               onPress={() =>
                 navigation.navigate('Onboarding', { factoryId, factoryName })
@@ -303,10 +519,7 @@ export default function QuickResultsScreen() {
           </Card>
 
           <Note>
-            Engine {result.versions.engine_version}, factors{' '}
-            {result.versions.factor_version} ({result.versions.factor_hash}). This
-            result is reproducible from those versions. Screening and decision
-            support only — not an accredited audit.
+            Engine v{result.versions.engine_version}, factors v{result.versions.factor_version} ({result.versions.factor_hash}). Screening and decision support only — not an accredited audit.
           </Note>
         </>
       ) : null}
@@ -320,19 +533,16 @@ export default function QuickResultsScreen() {
             run.mutate();
           }}
           loading={run.isPending}
+          style={{ marginTop: space.sm }}
         />
       ) : null}
+
+      {/* Sovereign RAG Assistant Companion Modal */}
+      <AskAssistantModal visible={assistantOpen} onClose={() => setAssistantOpen(false)} />
     </Screen>
   );
 }
 
-/**
- * Where the plant sits in its peer distribution.
- *
- * Lower intensity is better, so the marker moving left is good. The band is
- * quartile-shaded rather than a gradient, because a gradient implies a precision
- * the percentile does not have.
- */
 function PercentileBar({ percentile }: { percentile: number }) {
   const clamped = Math.min(99, Math.max(1, percentile));
   return (

@@ -63,8 +63,9 @@ export default function Account() {
             </select>
           </label>
           <div className="platform-toolbar">
-            <Link className="button" to="/workspace">Open workspace</Link>
+            <Link className="button workspace-open" to="/workspace">Open workspace</Link>
             <ActionButton
+              className="sign-out"
               onClick={async () => {
                 await client.cancelQueries();
                 try {

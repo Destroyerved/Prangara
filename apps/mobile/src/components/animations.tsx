@@ -228,7 +228,7 @@ export function PulseDot({
     <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
       <Animated.View
         style={[
-          StyleSheet.absoluteFillObject,
+          StyleSheet.absoluteFill,
           {
             borderRadius: radius.pill,
             backgroundColor: color,
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   laserGlow: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: colour.accent,
     opacity: 0.5,
   },
