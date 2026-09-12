@@ -28,6 +28,10 @@ desktop.ini
 *.swp
 *.bak
 
-# Internal Task / Sprint Notes
+# Internal Task / Sprint Notes & Problem Statements
 task.md
+build_report.py
+HackOut26_Problem_Statements.pdf
+*Problem_Statements*
+
 

@@ -34,17 +34,20 @@ Three facts a factory owner in Tirupur or Coimbatore faces at once:
 
 ## Quick start
 
-Rebuild the combined PDF report from `docs/` (renders through headless Chrome or Edge, which the script locates itself — no pandoc, no LaTeX):
+Verify the dataset layer, engine physics invariants, and advanced ML test suite:
 
 ```bash
-python build_report.py
-```
-
-Verify the dataset layer — 23 SHA-256 source hashes and 18 physics invariants, both in Node:
-
-```bash
+# Verify cryptographic source authenticity (23/23 passing)
 node datasets/08_automated_test_suites/verify_dataset_authenticity.js
+
+# Verify domain invariants (18/18 passing)
 node datasets/08_automated_test_suites/test_chakra_invariants.js
+
+# Run backend & ML engine automated test suite (15/15 passing)
+node backend/tests/test_ml_backend.js
+
+# Start the unified backend REST API server
+node backend/server.js
 ```
 
 ## The pipeline
