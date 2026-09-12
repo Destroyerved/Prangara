@@ -21,8 +21,17 @@ import { Button, Card, Eyebrow } from './ui';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
 
 interface Citation {
+  source_id?: string;
   source?: string;
   title?: string;
+  publisher?: string;
+  page?: string;
+  section?: string;
+  url?: string;
+  jurisdiction?: string;
+  effective_date?: string;
+  sha256_hash?: string;
+  badge?: string;
   ref?: string;
   refId?: string;
   grade?: string;
@@ -230,20 +239,47 @@ export function AskAssistantModal({
                             borderRadius: radius.sm,
                             padding: space.sm,
                             marginBottom: space.xs,
+                            borderWidth: 1,
+                            borderColor: colour.border,
                           }}
                         >
-                          <Text
-                            style={{ ...typeScale.caption, color: colour.text, fontWeight: '600' }}
-                          >
-                            {c.title || c.source}
-                          </Text>
+                          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Text
+                              style={{ ...typeScale.caption, color: colour.text, fontWeight: '700', flex: 1 }}
+                            >
+                              {c.title || c.source_id || c.source}
+                            </Text>
+                            {c.badge || c.grade ? (
+                              <View
+                                style={{
+                                  backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                                  paddingHorizontal: 6,
+                                  paddingVertical: 2,
+                                  borderRadius: radius.pill,
+                                  marginLeft: space.xs,
+                                }}
+                              >
+                                <Text style={{ ...typeScale.micro, color: colour.emerald, fontWeight: '700' }}>
+                                  {c.badge || c.grade}
+                                </Text>
+                              </View>
+                            ) : null}
+                          </View>
+                          {c.publisher || c.section || c.page ? (
+                            <Text style={{ ...typeScale.micro, color: colour.textMuted, marginTop: 2 }}>
+                              {[c.publisher, c.section ? `Sec ${c.section}` : null, c.page ? `p. ${c.page}` : null]
+                                .filter(Boolean)
+                                .join(' · ')}
+                            </Text>
+                          ) : null}
                           {c.excerpt || c.text ? (
                             <Text
                               style={{
                                 ...typeScale.micro,
                                 color: colour.textMuted,
                                 fontStyle: 'italic',
-                                marginTop: 2,
+                                marginTop: 4,
+                                lineHeight: 16,
                               }}
                             >
                               "{c.excerpt || c.text}"
