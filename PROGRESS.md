@@ -6,6 +6,8 @@
 
 Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`, `DATA_RAG_COMPLIANCE.md`, `AI_AGENT_PLAYBOOK.md`.
 
+Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HANDOFF_MOBILE.md).
+
 ---
 
 ## Status at a glance
@@ -22,17 +24,20 @@ Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`
 | Action tracking + M&V | Done |
 | Event outbox + notifications + audit | Done |
 | Conversational intake | Done (deterministic parser; LLM path wired, off by default) |
-| Bill / equipment OCR | Contract + storage done; extraction runtime pending (BE-2) |
-| Mobile APK (`apps/mobile`) | Not started — next |
+| Bill / equipment OCR | Contract, storage and confirm path done; extraction runtime pending (BE-2) |
+| Demo seed | Done — 6 accounts, 3 factories, quotes, alerts, one command |
+| **Mobile APK (`apps/mobile`)** | **10 screens, typecheck clean, Android bundle builds** |
 | Compliance evaluator | Not mine (BE-2). Events are raised and visible. |
 
-**Tests:** 108 passing.
+**Backend tests:** 119 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
 
 ---
 
 ## Done
 
-### Phase 0 — Repository foundation (BE-1)
+### Phase 0 — Repository foundation
+
+**BE-1**
 
 - `backend/engine/` — the PS10 deterministic engine ported unchanged.
   Two additions only, neither touching a calculation:
@@ -46,12 +51,21 @@ Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`
   their content from here.**
 - `backend/app/core/` — settings, SQLAlchemy engine/session, JWT + password
   hashing, typed API errors.
-- `backend/migrations/` — Alembic, configured to read `DATABASE_URL` from the
-  app settings so there is no second place to configure the database.
+- `backend/migrations/` — Alembic, reading `DATABASE_URL` from app settings so
+  there is no second place to configure the database.
 - `.env.example` at the repo root, every key the backend reads.
-- `backend/requirements.txt`.
 
-### Phase 1 — Manufacturer core (BE-1)
+**FE-2**
+
+- `apps/mobile/` — Expo SDK 57, React Native 0.86, TypeScript strict.
+- Design tokens sized for a factory floor, not for a desktop dashboard.
+- Typed API client: shared in-flight token refresh, typed errors, explicit
+  timeouts, tokens in the Android keystore.
+- Four-tab navigation plus pushed detail screens.
+
+### Phase 1 — Manufacturer core
+
+**BE-1**
 
 - **Auth / RBAC** (FR-01). Register, login, refresh with rotation, logout,
   logout-all, `/me`, organization switching. Access tokens are short-lived
@@ -61,43 +75,64 @@ Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`
   membership, explicit per-factory grant. Providers have no path to manufacturer
   data at all. Cross-tenant reads return 404, never 403.
 - **Factory service.** Factories, sites, reporting-period profiles, activity
-  records, assets. Creating a factory also creates its first draft profile, so
-  nothing has to be assembled by hand before an assessment can run.
+  records, assets. Creating a factory also creates its first draft profile.
 - **Assessment service.** `PlantProfile → engine.assess() → snapshot row`, with
   the engine version, factor hash, sector hash and intervention hash persisted
   on every result.
-- **Peer benchmarking** (FR-19). Ported the shrinkage-toward-literature blend
+- **Peer benchmarking** (FR-19). Shrinkage toward the literature prior, ported
   onto the platform schema. A factory is never benchmarked against itself, only
-  each factory's latest baseline counts, and cohorts under `BENCHMARK_MIN_COHORT`
-  report the literature value unchanged.
+  each factory's latest baseline counts, and cohorts under
+  `BENCHMARK_MIN_COHORT` report the literature value unchanged.
 - **Data quality** (FR-08) using the published weights from
-  `DATA_RAG_COMPLIANCE.md` section 31, plus the plausibility checks from
-  section 32.
+  `DATA_RAG_COMPLIANCE.md` section 31, plus the plausibility checks from §32.
 - **Scenarios** (FR-34). A closed set of declarative modifications applied to the
   engine *input*, rerun through the same engine. The baseline is never
   overwritten, and scenario runs are excluded from the benchmark corpus.
-  Anything the factor registry cannot express is reported in `unsupported`
-  rather than silently ignored.
+  Anything the factor registry cannot express is reported in `unsupported`.
 - **Evidence vault** (FR-47). Multipart upload, content-type allow-list,
   streamed size limit, generated storage keys, SHA-256 duplicate detection,
   polymorphic links, human verification step, soft delete.
 - **Unit safety.** `app/services/units.py` raises on any unit it cannot convert
   exactly. The task.md invariant "unknown units fail loudly" is a test.
 
-### Phase 2 — Intake (BE-1 half)
+**FE-2**
 
-- **Conversational onboarding** (FR-04). `POST /api/intake/conversation/extract`.
-  Uses a local Ollama model when `OLLAMA_BASE_URL`/`OLLAMA_MODEL` are set,
-  otherwise a deterministic number-and-unit parser that only reads quantities
-  literally present in the user's sentence. The response says which extractor
-  ran. Monthly and daily figures are annualised **in code**, never by the model,
-  and the annualisation is surfaced as a warning.
+- Sign in / register, session restore on cold start.
+- Factory list with last headline, factory hub, create factory (sector and state
+  are pickers — a typo would silently benchmark a foundry against a dairy).
+- **Quick results**: footprint with its band, scope split, peer percentile with a
+  quartile bar, worst leak points, top three actions with cost *and* carbon,
+  the blocked "PRANGARA said no" section, free-money summary, data quality, and
+  the version stamp.
+
+### Phase 2 — AI intake
+
+**BE-1**
+
+- **Conversational onboarding** (FR-04). Local Ollama when configured, a
+  deterministic number-and-unit parser otherwise. The response says which ran.
+  Period is resolved per clause and annualisation happens in code, never in the
+  model.
 - **Confirmation path.** `POST /api/intake/factories/{id}/confirm` is the only
   route by which an extracted value becomes factory data, and it stamps who
   confirmed it. Extraction endpoints never write.
 - **Bill and equipment capture** (FR-05, FR-06). Upload, store as evidence, link
   on confirm. Where no OCR runtime is configured the response says so and
   returns the evidence id so the client falls through to manual entry.
+
+**FE-2**
+
+- **Conversational onboarding screen.** Every proposed value shows its
+  confidence and the words it was read from, is editable, and can be switched
+  off. Nothing is written until confirm.
+- **Bill scan.** Document type picker, camera or gallery, upload, then an
+  explicit "what period does this cover" question — because getting that wrong
+  is a twelve-fold error, so it is asked rather than assumed.
+- **Equipment scan.** Built around PRD FR-06: a nameplate gives rated power, not
+  annual emissions, so run hours and load are the screen and the photo is
+  evidence. Leaving them blank is allowed and drops confidence, visibly.
+- **Evidence capture** with duplicate detection surfaced, not swallowed.
+- **Notification centre** with deep links into the right screen.
 
 ### Phase 3 — Marketplace (BE-1 half)
 
@@ -124,17 +159,39 @@ Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`
 - **Action tracking + M&V** (FR-51, FR-52). Expected values are frozen at the
   moment the factory committed; achievement is measured against the *saving*,
   not the absolute value.
-- Compliance case and corrective-action tables exist and are ready for BE-2's
-  evaluator.
+- Compliance case and corrective-action tables exist, ready for BE-2.
 
 ### Tooling
 
 - `python -m scripts.seed_demo --reset` — 6 accounts, 3 factories with full
   activity data, 3 assessments, 52 tracked actions, 3 providers, 3 competing
-  quotes, 2 material listings. Idempotent, and every seeded row is identifiable
-  and removable.
+  quotes, 2 material listings, and a drained outbox so the demo opens with real
+  alerts. Idempotent; removes exactly what it created.
 - `python -m scripts.export_openapi` — writes `packages/contracts/openapi.json`
-  (58 paths, 66 schemas) for the web and mobile clients to generate types from.
+  (58 paths, 66 schemas) for the web and mobile clients.
+
+---
+
+## Bugs found and fixed by running it, not just testing it
+
+Three defects only surfaced when the demo path was driven against a live server.
+All three are now covered by tests.
+
+1. **Conversational intake annualised a whole message by one period marker.**
+   "produce 4200 tonnes a year, use 340,000 units monthly" turned 4,200 t/yr of
+   output into 50,400. Output feeds every intensity, so the error would have
+   propagated into every benchmark comparison and leak finding. Period is now
+   resolved per clause.
+2. **"48 crore" became 480,000,000 in a field the engine reads in crore.** Seven
+   orders of magnitude on revenue intensity, and it silently moved the plant
+   into the largest capex size band.
+3. **Every seeded demo account was unable to sign in.** The seed used
+   `@…​.invalid`, which the email validator rejects, while reporting success.
+   `--reset` also broke with a foreign-key error once anyone had logged in.
+
+Neither (1) nor (2) could reach a stored assessment — intake never writes without
+confirmation — but both were presented to the user as the value to confirm,
+which is exactly where a twelve-fold error gets waved through.
 
 ---
 
@@ -142,15 +199,14 @@ Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`
 
 1. **SQLite is the default database, PostgreSQL is supported.**
    PRD section 24 names PostgreSQL. PRD section 30 requires the seeded demo to
-   always work and the core assessment to depend on no external service. A
-   laptop with no Postgres running must still get a working API, so
+   always work and the core assessment to depend on no external service, so
    `DATABASE_URL` defaults to a local file and every model uses portable types.
    PostGIS and pgvector features (BE-2's logistics and RAG) need PostgreSQL.
 
 2. **Data-quality scoring lives in `backend/app/`, not `backend/data/`.**
    task.md assigns the *scoring* to BE-2. The assessment endpoint needs a score
    today, so the published weights are implemented in the platform layer. BE-2
-   owns retuning and extending it; the weights are in one dict.
+   owns retuning it; the weights are one dict.
 
 3. **Sector cannot be changed after a factory is created.**
    Changing it would invalidate the benchmark basis of every stored assessment.
@@ -160,36 +216,30 @@ Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`
 
 ## Not done yet
 
-### Next up — FE-2, the APK (`apps/mobile/`)
-
-Expo + React Native + TypeScript, per task.md Phase 1 FE-2:
-
-- [ ] app shell, navigation, mobile design tokens
-- [ ] auth flow against `/api/auth/*` with token refresh
-- [ ] typed API client from `packages/contracts/openapi.json`
-- [ ] factory setup (create, sector/state, quick manual input)
-- [ ] conversational onboarding screen against `/api/intake/conversation/extract`
-- [ ] bill scan: capture, crop, upload, confirm fields
-- [ ] equipment scan: camera, metadata, operating-hours questions, add asset
-- [ ] quick results: footprint, top leak, top 3 actions, quick win
-- [ ] evidence capture with document type and links
-- [ ] notification centre
-- [ ] offline/poor-network behaviour
-- [ ] Android build
-
-### Backend gaps I still own
+### Backend (BE-1, mine)
 
 - [ ] Member invite and factory-grant API (the access *rule* is enforced and
       tested; the management endpoints are not built)
 - [ ] Compliance case CRUD endpoints (tables exist; task.md Phase 2 BE-1)
-- [ ] Report export (PDF/HTML) — the PS10 prototype has `report.py` to port
+- [ ] Report export (PDF/HTML) — `prototype/backend/report.py` to port
 - [ ] Shipment CRUD and vehicle models (Phase 4 BE-1)
 - [ ] Rate limiting on auth endpoints (PRD section 28)
+- [ ] First run against a real PostgreSQL instance
+
+### Mobile (FE-2, mine)
+
+- [ ] Offline queue for captures taken with no signal — the biggest remaining
+      gap for real factory-floor use
+- [ ] Signed APK (bundling verified; needs an Android SDK or an Expo account)
+- [ ] Provider/RFQ actions from mobile (Phase 3 FE-2, "if time permits")
+- [ ] Compliance alerts and corrective-action upload (Phase 2 FE-2, blocked)
+- [ ] RAG assistant screen (Phase 2 FE-2, blocked)
 
 ### Blocked on, or owned by, other roles
 
 - OCR runtime for FR-05 / FR-06 — **BE-2**. Contract, storage and confirmation
-  path are ready; the endpoints report honestly that extraction is unavailable.
+  path are ready; both mobile screens already render `fields` and
+  `suggested_activity_records` when they start arriving.
 - Compliance rule packs and the evaluator — **BE-2**.
   `COMPLIANCE_EVALUATION_REQUESTED` is already emitted on every assessment.
 - RAG ingestion, retrieval and citations — **BE-2**.
@@ -200,6 +250,8 @@ Expo + React Native + TypeScript, per task.md Phase 1 FE-2:
 
 ## Running it
 
+### Backend
+
 ```bash
 cd backend
 pip install -r requirements.txt
@@ -208,21 +260,34 @@ python -m scripts.seed_demo
 python -m uvicorn app.main:app --reload
 ```
 
-API docs at `http://localhost:8000/api/docs`. Demo accounts are printed by the
-seed command; the password is `prangara-demo-2026`.
+API docs at `http://localhost:8000/api/docs`. The seed prints the demo accounts;
+the password is `prangara-demo-2026`.
 
 Event worker, in a second terminal:
 
 ```bash
-cd backend
-python -m app.workers.outbox
+cd backend && python -m app.workers.outbox
 ```
 
-Tests:
+### Mobile
 
 ```bash
-cd backend
-python -m pytest tests -q
+cd apps/mobile
+npm install
+npm start
+```
+
+Press `a` for an emulator, or scan the QR code with Expo Go. On a physical
+phone, `localhost` is the phone — the client falls back to the Expo dev host on
+port 8000, and `EXPO_PUBLIC_API_URL` overrides it. The Account tab shows which
+URL was resolved and whether the API answered.
+
+### Checks
+
+```bash
+cd backend && python -m pytest tests -q          # 119 passing
+cd apps/mobile && npm run typecheck              # clean
+cd apps/mobile && npm run bundle:android         # Android bundle builds
 ```
 
 ---
@@ -233,4 +298,5 @@ Unchanged from `README_START_HERE.md`. PRANGARA is screening, decision support,
 implementation support and evidence/readiness support. It is not a BEE-accredited
 audit, a legal assurance service, a regulator, or a carbon-credit verifier, and
 it does not replace a site engineering study or a vendor quotation. The API
-returns this statement on every sandbox assessment.
+returns this statement on every sandbox assessment, and the mobile app shows it
+on the sign-in screen, the factory hub and the account screen.
