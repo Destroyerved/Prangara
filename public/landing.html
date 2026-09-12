@@ -7,6 +7,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20style%3D'background%3A%2523071015'%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20375%20362%22%20fill%3D%22%2523E9F2F6%22%20aria-hidden%3D%22true%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M1.6%20356.2C1.3%20354.2%201.0%20287.4%201.0%20207.8C1.0%2093.3%201.3%2062.9%202.2%2062.0C2.9%2061.4%2011.6%2056.4%2021.5%2050.8C85.7%2014.9%20107.2%203.0%20108.0%203.0C108.6%203.0%20109.0%2015.0%20109.0%2035.3L109.0%2067.7L91.2%2079.2C81.5%2085.5%2067.3%2094.7%2059.8%2099.5L46.0%20108.3L46.0%20157.5L46.0%20206.7L77.3%20227.7L108.5%20248.6L108.8%20304.3L109.0%20360.0L55.6%20360.0L2.3%20360.0L1.6%20356.2ZM136.0%20268.6L136.0%20251.2L145.8%20244.9C151.1%20241.5%20165.4%20232.2%20177.4%20224.2C189.5%20216.3%20202.2%20208.0%20205.7%20205.8L212.0%20201.8L212.0%20158.2L212.0%20114.5L174.0%2089.2L136.0%2063.9L136.0%2033.1L136.0%202.3L149.7%201.7C170.5%200.7%20246.0%200.9%20259.5%202.0C301.6%205.5%20337.8%2030.8%20357.4%2070.5C363.9%2083.5%20367.0%2092.6%20370.2%20107.5C372.2%20117.1%20372.5%20121.2%20372.5%20139.5C372.4%20157.8%20372.1%20161.7%20370.2%20170.0C361.5%20206.2%20344.9%20235.4%20321.8%20254.8C302.6%20270.9%20286.1%20279.6%20266.0%20284.1C258.2%20285.8%20252.8%20286.0%20196.8%20286.0L136.0%20286.0L136.0%20268.6ZM98.7%20208.4C85.1%20199.3%2073.5%20191.0%2073.1%20190.1C72.6%20189.2%2072.4%20174.5%2072.7%20157.4L73.3%20126.3L77.9%20123.4C80.4%20121.8%2091.7%20114.5%20102.9%20107.2C114.1%2099.9%20123.8%2093.6%20124.5%2093.4C125.2%2093.1%20131.6%2096.6%20138.7%20101.3C145.7%20105.9%20158.8%20114.5%20167.8%20120.3L184.0%20131.0L184.0%20159.0L184.0%20187.0L155.8%20205.7C140.2%20215.9%20126.6%20224.5%20125.5%20224.7C124.2%20225.0%20115.1%20219.4%2098.7%20208.4Z%22%2F%3E%3C%2Fsvg%3E">
 <title>PRANGARA</title>
 <meta name="description" content="PRANGARA — an industrial carbon intelligence network. Measure, detect, decide, connect, implement, verify.">
+<script src="/js/three.bundle.js"></script>
+<script src="/js/hero-3d.js"></script>
 <style>
 /* ============================================================
    PRANGARA — INDUSTRIAL INTELLIGENCE & DECARBONIZATION PLATFORM
@@ -860,6 +862,25 @@ input, select, textarea {
   padding: 130px 0 90px;
   position: relative;
   z-index: 10;
+  overflow: hidden;
+}
+
+/* 3D Post-Intro Hero Canvas */
+.hero-3d-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 1.35s var(--ease-primary);
+  will-change: opacity, transform;
+}
+.hero-active .hero-3d-canvas,
+.hero-3d-visible .hero-3d-canvas {
+  opacity: 1;
 }
 
 .hero-container {
@@ -867,7 +888,41 @@ input, select, textarea {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 1000px;
+  max-width: 1280px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+.hero-container > * {
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .hero-container {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 32px;
+  }
+  .hero-content-wrap {
+    max-width: 630px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero-headline {
+    text-align: left;
+  }
+  .hero-subtext {
+    text-align: left;
+  }
+  .hero-cta-group {
+    justify-content: flex-start;
+  }
+  .hero-credibility-strip {
+    justify-content: flex-start;
+  }
 }
 
 /* Staggered Hero Entrance Animations */
@@ -2956,50 +3011,55 @@ input, select, textarea {
 
   <!-- ============ 02. HERO SECTION ============ -->
   <section class="section-hero" id="hero">
+    <!-- Production 3D Post-Intro Hero Canvas (Carbon Core + Companion + Atmosphere) -->
+    <canvas id="hero-3d-canvas" class="hero-3d-canvas" aria-hidden="true"></canvas>
+
     <div class="container hero-container spatial-layer-hero">
-      <div class="hero-badge hero-fade-1">
-        <span class="badge-dot"></span>
-        <span class="badge-text">Deterministic Industrial Decarbonization Engine</span>
-      </div>
-
-      <h1 class="hero-headline hero-fade-2">
-        Turn industrial emissions into <span class="text-accent-opportunity">measurable opportunity.</span>
-      </h1>
-
-      <p class="hero-subtext hero-fade-3">
-        Track carbon. Find hidden energy leaks. Model interventions. Build cash-positive decarbonization plans. Stay ready for compliance.
-      </p>
-
-      <div class="hero-cta-group hero-fade-4">
-        <a class="btn btn--primary btn--lg btn--glow hero-cta-btn" href="#signup" data-auth-action="signup">
-          Start with your factory
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
-        </a>
-        <a class="btn btn--secondary btn--lg" href="#overview-preview">
-          Explore platform
-        </a>
-      </div>
-
-      <!-- Hero Micro Credibility Strip -->
-      <div class="hero-credibility-strip hero-fade-5" aria-label="Platform core principles">
-        <div class="cred-item">
-          <span class="cred-dot"></span>
-          <span class="cred-label">ZERO-LLM MATH</span>
+      <div class="hero-content-wrap">
+        <div class="hero-badge hero-fade-1">
+          <span class="badge-dot"></span>
+          <span class="badge-text">Deterministic Industrial Decarbonization Engine</span>
         </div>
-        <div class="cred-sep" aria-hidden="true"></div>
-        <div class="cred-item">
-          <span class="cred-dot"></span>
-          <span class="cred-label">DETERMINISTIC EMISSIONS</span>
+
+        <h1 class="hero-headline hero-fade-2">
+          Turn industrial emissions into <span class="text-accent-opportunity">measurable opportunity.</span>
+        </h1>
+
+        <p class="hero-subtext hero-fade-3">
+          Track carbon. Find hidden energy leaks. Model interventions. Build cash-positive decarbonization plans. Stay ready for compliance.
+        </p>
+
+        <div class="hero-cta-group hero-fade-4">
+          <a class="btn btn--primary btn--lg btn--glow hero-cta-btn" href="#signup" data-auth-action="signup">
+            Start with your factory
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+          <a class="btn btn--secondary btn--lg" href="#overview-preview">
+            Explore platform
+          </a>
         </div>
-        <div class="cred-sep" aria-hidden="true"></div>
-        <div class="cred-item">
-          <span class="cred-dot"></span>
-          <span class="cred-label">INDUSTRIAL BENCHMARKS</span>
-        </div>
-        <div class="cred-sep" aria-hidden="true"></div>
-        <div class="cred-item">
-          <span class="cred-dot"></span>
-          <span class="cred-label">COMPLIANCE READY</span>
+
+        <!-- Hero Micro Credibility Strip -->
+        <div class="hero-credibility-strip hero-fade-5" aria-label="Platform core principles">
+          <div class="cred-item">
+            <span class="cred-dot"></span>
+            <span class="cred-label">ZERO-LLM MATH</span>
+          </div>
+          <div class="cred-sep" aria-hidden="true"></div>
+          <div class="cred-item">
+            <span class="cred-dot"></span>
+            <span class="cred-label">DETERMINISTIC EMISSIONS</span>
+          </div>
+          <div class="cred-sep" aria-hidden="true"></div>
+          <div class="cred-item">
+            <span class="cred-dot"></span>
+            <span class="cred-label">INDUSTRIAL BENCHMARKS</span>
+          </div>
+          <div class="cred-sep" aria-hidden="true"></div>
+          <div class="cred-item">
+            <span class="cred-dot"></span>
+            <span class="cred-label">COMPLIANCE READY</span>
+          </div>
         </div>
       </div>
     </div>
@@ -4231,12 +4291,18 @@ var k="1.1.14";function w(r,t,e){return Math.max(r,Math.min(t,e))}function _(r,t
           if (heroEl) {
             heroEl.classList.add('hero-active');
           }
+          if (window.Hero3DEngine) {
+            window.Hero3DEngine.transitionToHero();
+          }
           break;
 
         case STATES.HERO_READY:
           introEl.classList.add('intro-complete', 'state-hero-ready');
           if (heroEl) {
             heroEl.classList.add('hero-active');
+          }
+          if (window.Hero3DEngine) {
+            window.Hero3DEngine.setHeroReady();
           }
           unlockScroll();
           sessionStorage.setItem(introKey, 'true');
@@ -4261,6 +4327,9 @@ var k="1.1.14";function w(r,t,e){return Math.max(r,Math.min(t,e))}function _(r,t
       if (heroEl) {
         heroEl.classList.add('hero-active');
       }
+      if (window.Hero3DEngine) {
+        window.Hero3DEngine.finishImmediately();
+      }
       unlockScroll();
       sessionStorage.setItem(introKey, 'true');
     }
@@ -4274,6 +4343,9 @@ var k="1.1.14";function w(r,t,e){return Math.max(r,Math.min(t,e))}function _(r,t
         introEl.classList.add('phase-signal', 'phase-symbol', 'state-symbol-active', 'phase-wordmark', 'phase-descriptor', 'phase-exit');
         if (heroEl) {
           heroEl.classList.add('hero-active');
+        }
+        if (window.Hero3DEngine) {
+          window.Hero3DEngine.transitionToHero();
         }
         setTimeout(function () {
           transitionTo(STATES.HERO_READY);
@@ -5284,6 +5356,7 @@ var k="1.1.14";function w(r,t,e){return Math.max(r,Math.min(t,e))}function _(r,t
      10. INITIALIZE ON DOM READY
      ============================================================ */
   document.addEventListener('DOMContentLoaded', function () {
+    if (window.Hero3DEngine) window.Hero3DEngine.init();
     IntroStateMachine.init();
     initAmbientField();
     initBenchmarks();
