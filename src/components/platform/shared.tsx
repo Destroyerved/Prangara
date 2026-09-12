@@ -49,9 +49,9 @@ export function useSave() {
   const client=useQueryClient();
   return async <T,>(path:string,body:unknown={},method='POST')=>{const result=await send<T>(path,body,method);await client.invalidateQueries({predicate:q=>q.queryKey[0]==='private'||q.queryKey[0]==='public'});return result;};
 }
-export function ActionButton({children,onClick,disabled=false}: {children:ReactNode;onClick:()=>Promise<unknown>;disabled?:boolean}) {
+export function ActionButton({children,onClick,disabled=false,className=''}: {children:ReactNode;onClick:()=>Promise<unknown>;disabled?:boolean;className?:string}) {
   const mutation=useMutation({mutationFn:onClick});
-  return <span className="platform-action"><button className="button" disabled={disabled||mutation.isPending} onClick={()=>mutation.mutate()}>{mutation.isPending?'Working…':children}</button><ErrorNotice error={mutation.error}/>{mutation.isSuccess&&<span role="status">Done</span>}</span>;
+  return <span className="platform-action"><button className={"button "+className} disabled={disabled||mutation.isPending} onClick={()=>mutation.mutate()}>{mutation.isPending?'Working…':children}</button><ErrorNotice error={mutation.error}/>{mutation.isSuccess&&<span role="status">Done</span>}</span>;
 }
 export function Rows<T extends {id:string}>({rows,columns,onOpen,caption}: {rows:T[];columns:(keyof T)[];onOpen?:(row:T)=>void;caption:string}) {
   const [search,setSearch]=useState('');

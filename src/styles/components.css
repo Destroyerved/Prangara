@@ -121,28 +121,141 @@
   color: var(--text);
 }
 .search-box {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 0 12px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  min-width: 200px;
-  background: var(--surface-inset);
-  height: 39px;
+  gap: 10px;
+  padding: 0 16px;
+  border-radius: 14px;
+  min-width: 240px;
+  height: 46px;
   color: var(--subtle);
+  overflow: hidden;
+  background: rgba(13, 15, 21, 0.5);
+  backdrop-filter: blur(26px) saturate(190%);
+  -webkit-backdrop-filter: blur(26px) saturate(190%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  transition:
+    background 250ms ease,
+    box-shadow 300ms ease;
+}
+.search-box::before,
+.search-box::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(22px);
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+.search-box::before {
+  width: 120px;
+  height: 120px;
+  top: -42px;
+  left: -32px;
+  background: radial-gradient(circle, rgba(190, 194, 255, 0.75), transparent 70%);
+  animation: aurora-a 9s ease-in-out infinite;
+}
+.search-box::after {
+  width: 150px;
+  height: 150px;
+  bottom: -58px;
+  right: -42px;
+  background: radial-gradient(circle, rgba(80, 216, 233, 0.6), transparent 70%);
+  animation: aurora-b 11s ease-in-out infinite;
+}
+@keyframes aurora-a {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(26px, 20px);
+  }
+}
+@keyframes aurora-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-24px, -16px);
+  }
+}
+.search-box > * {
+  position: relative;
+  z-index: 1;
 }
 .search-box input {
   background: none;
   border: 0;
   outline: none;
   width: 100%;
-  font-size: 12px;
-  color: var(--text);
   min-width: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 450;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--text);
+  caret-color: var(--accent);
 }
+.search-box input::placeholder {
+  color: var(--subtle);
+  font-weight: 400;
+  transition: color 250ms ease;
+}
+.search-box input:-webkit-autofill,
+.search-box input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: var(--text);
+  transition: background-color 9999s ease-in-out 0s;
+}
+.search-box svg {
+  flex: none;
+  color: var(--muted);
+  transition: color 250ms ease, filter 300ms ease;
+}
+.search-box:hover,
 .search-box:focus-within {
-  border-color: var(--accent);
+  background: rgba(18, 22, 30, 0.58);
+}
+.search-box:hover::before,
+.search-box:hover::after,
+.search-box:focus-within::before,
+.search-box:focus-within::after {
+  opacity: 0.8;
+}
+.search-box:focus-within svg {
+  color: var(--accent);
+  filter: drop-shadow(0 0 6px rgba(190, 194, 255, 0.6));
+}
+.search-box:focus-within input::placeholder {
+  color: var(--muted);
+}
+:root[data-theme="light"] .search-box {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(2, 132, 199, 0.16);
+  box-shadow: 0 8px 24px -10px rgba(15, 23, 42, 0.15);
+}
+:root[data-theme="light"] .search-box::before {
+  opacity: 0.38;
+}
+:root[data-theme="light"] .search-box::after {
+  opacity: 0.3;
+}
+:root[data-theme="light"] .search-box:hover,
+:root[data-theme="light"] .search-box:focus-within {
+  background: rgba(255, 255, 255, 0.68);
+}
+:root[data-theme="light"] .search-box:hover::before,
+:root[data-theme="light"] .search-box:focus-within::before {
+  opacity: 0.55;
+}
+:root[data-theme="light"] .search-box:hover::after,
+:root[data-theme="light"] .search-box:focus-within::after {
+  opacity: 0.45;
 }
 .filter-bar {
   display: flex;
@@ -1096,7 +1209,6 @@ kbd {
   border-color: #0284c7 !important;
   box-shadow: 0 0 14px rgba(2, 132, 199, 0.25), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
 }
-
 /* Close Button */
 .rag-close-btn {
   display: flex;
@@ -1361,5 +1473,64 @@ kbd {
   font-weight: 600;
 }
 
+/* ==========================================================================
+   PRANGARA GlassDropdown Component Styling
+   ========================================================================== */
+.glass-dropdown-wrapper {
+  position: relative;
+  z-index: 30;
+}
 
+.glass-dropdown-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
 
+:root[data-theme="light"] .glass-dropdown-trigger {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #0f172a !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+:root[data-theme="light"] .glass-dropdown-trigger:hover {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(2, 132, 199, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root[data-theme="light"] .glass-dropdown-popover {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+:root[data-theme="light"] .glass-dropdown-popover button {
+  color: #334155;
+}
+
+:root[data-theme="light"] .glass-dropdown-popover button:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .glass-dropdown-popover button[aria-selected="true"] {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.25) !important;
+  color: #0369a1 !important;
+}
+
+/* Glass Scrollbar */
+.custom-glass-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-glass-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-glass-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+:root[data-theme="light"] .custom-glass-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}

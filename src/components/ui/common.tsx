@@ -29,12 +29,14 @@ export function SectionHeading({
   description,
   to,
   label = "Explore",
+  action,
 }: {
   index?: string;
   title: string;
   description?: string;
   to?: string;
   label?: string;
+  action?: ReactNode;
 }) {
   return (
     <div className="section-heading">
@@ -43,6 +45,7 @@ export function SectionHeading({
         <h2>{title}</h2>
         {description && <p>{description}</p>}
       </div>
+      {action}
       {to && (
         <Link className="text-button" to={to}>
           {label}

@@ -266,15 +266,36 @@ def build_report_html(assessment: Assessment, factory: Factory,
         for r in rec.get("recommendations", []) if r.get("restriction_note"))
 
     cb = comp.get("cbam", {})
-    cbam_html = (
-        f"<div class='kpi'><div class='l'>Indicative annual exposure</div>"
-        f"<div class='v'>{inr(cb.get('indicative_annual_cost_inr'))}</div>"
-        f"<div class='n'>{cb.get('embedded_emissions_exported_tco2e', 0):,.0f} tCO₂e embedded at "
-        f"{cb.get('eu_export_share_pct', 0)}% EU export share</div></div>"
-        f"<div class='cav'><b>Basis.</b> {e(cb.get('basis'))}<br><br>{e(cb.get('caveat'))}</div>"
-        if cb.get("applicable") else
-        f"<p style='font-size:8.6pt;color:#5d6b64'>CBAM does not currently cover this sector's "
-        f"product lines. {e(cb.get('caveat', 'Not in active Annex I scope.'))}</p>")
+    if cb.get("applicable") and cb.get("indicative_annual_cost_inr") is not None:
+        net_surrender = cb.get("net_surrender_tco2e", 0)
+        eu_bm = cb.get("eu_benchmark_tco2e_per_t")
+        bm_str = f" · EU Benchmark: {eu_bm:.2f} tCO₂e/t" if eu_bm else ""
+        cbam_html = (
+            f"<div class='kpi'><div class='l'>Indicative net annual exposure</div>"
+            f"<div class='v'>{inr(cb.get('indicative_annual_cost_inr'))}</div>"
+            f"<div class='n'>{net_surrender:,.0f} tCO₂e net border surrender at "
+            f"{cb.get('eu_export_share_pct', 0)}% EU export share{bm_str}</div></div>"
+            f"<div class='cav'><b>Basis.</b> {e(cb.get('basis'))}<br><br>{e(cb.get('caveat'))}</div>")
+    else:
+        cbam_html = (
+            f"<div class='kpi'><div class='l'>Indicative annual exposure</div>"
+            f"<div class='v'>₹0 (Exempt in Phase 1)</div>"
+            f"<div class='n'>Phase 2 Watchlist · Outside Annex I Phase 1 coverage</div></div>"
+            f"<div class='cav'><b>Basis.</b> Regulation (EU) 2023/956 Annex I. Product lines exempt from Phase 1 border tariffs.<br><br>"
+            f"{e(cb.get('caveat', 'Sector monitored on Phase 2 watchlist for 2026+ scope review.'))}</div>")
+
+    ccts = comp.get("ccts", {})
+    if ccts:
+        dc_status = ccts.get("designated_consumer_status", "Voluntary")
+        thermal_gj = ccts.get("plant_thermal_gj") or 0.0
+        ccc_potential = ccts.get("voluntary_ccc_potential_tco2e") or 0.0
+        ccts_html = (
+            f"<div class='kpi'><div class='l'>India CCTS Mandate & Credits</div>"
+            f"<div class='v'>{'Obligated DC' if ccts.get('status') == 'obligated' else f'{ccc_potential:,.0f} CCCs'}</div>"
+            f"<div class='n'>{e(dc_status)} · Fuel Thermal: {thermal_gj:,.0f} GJ/yr (DC Threshold 30,000 GJ)</div></div>"
+            f"<div class='cav'><b>Statutory Framework.</b> {e(ccts.get('mechanism', 'BEE Carbon Credit Trading Scheme'))}</div>")
+    else:
+        ccts_html = "<p style='font-size:8.6pt;color:#5d6b64'>CCTS evaluation requires verified plant thermal fuel data.</p>"
 
     brsr = "".join(
         f"<tr><td>{e(r.get('item'))}</td><td style='font-size:7.6pt'>{e(r.get('status'))}</td>"
@@ -332,11 +353,14 @@ and return {inr(qw.get('net_annual_benefit_inr'))} a year.</p>
 
 {f'<h2>Considered and rejected ("PRANGARA Said No")</h2>{refused}' if refused else ''}
 
-<h2>Compliance exposure & readiness</h2>
+<h2>Compliance exposure & statutory readiness</h2>
 <div class="two">
-  <div><h3 style="font-size:10pt;margin-bottom:5px">EU CBAM Screening</h3>{cbam_html}</div>
-  <div><h3 style="font-size:10pt;margin-bottom:5px">SEBI BRSR Core Readiness</h3>
-    <table><tbody>{brsr}</tbody></table></div>
+  <div><h3 style="font-size:10pt;margin-bottom:5px">EU CBAM Screening (Reg 2023/956)</h3>{cbam_html}</div>
+  <div><h3 style="font-size:10pt;margin-bottom:5px">India CCTS Readiness (BEE 2024–2026)</h3>{ccts_html}</div>
+</div>
+<div style="margin-top:14px">
+  <h3 style="font-size:10pt;margin-bottom:5px">SEBI BRSR Core Readiness (Circular 2023/122)</h3>
+  <table><tbody>{brsr}</tbody></table>
 </div>
 
 <h2>Methodology and limitations</h2>
@@ -347,9 +371,10 @@ and return {inr(qw.get('net_annual_benefit_inr'))} a year.</p>
 <b>Interaction.</b> {e(rec.get('assumptions', {}).get('derating_note', 'Sequential multiplicative interaction de-rating applied.'))}<br><br>
 <b>Capex basis.</b> {e(rec.get('assumptions', {}).get('capex_note', 'Planning-grade engineering estimates.'))}</div>
 
-<div class="foot"><b>Claim Boundary:</b> PRANGARA is a screening, decision support, and implementation support platform.
-It is not a BEE-accredited energy audit, legal assurance service, regulator, or carbon-credit verifier, and does not replace a site
-engineering study or vendor quotation. Assumptions: electricity tariff ₹{rec.get('assumptions', {}).get('electricity_tariff_inr_per_kwh', 8.5)}/kWh,
+<div class="foot"><b>Claim Boundary & Legal Disclaimers:</b> PRANGARA is a deterministic screening, decision support, and implementation support platform.
+It is not a BEE-accredited energy audit, legal assurance service, statutory regulator, or verified carbon-credit registry, and does not replace a site engineering study or statutory verifier declaration.
+In accordance with Central Consumer Protection Authority (CCPA) Guidelines for Prevention and Regulation of Greenwashing (2024), emission figures and CCC estimates are planning-grade working papers and do not constitute certified carbon neutrality claims without accredited third-party verification.
+Under Regulation (EU) 2023/956, definitive CBAM border declarations from 2026 require EU-accredited verifier attestation. Assumptions: electricity tariff ₹{rec.get('assumptions', {}).get('electricity_tariff_inr_per_kwh', 8.5)}/kWh,
 discount rate {(rec.get('assumptions', {}).get('discount_rate', 0.12) * 100):.0f}%.
 Version Stamp: {stamp_line}</div>
 </body></html>"""

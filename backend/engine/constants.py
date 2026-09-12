@@ -34,7 +34,26 @@ DEFAULT_CARBON_PRICE       = 0.0   # India has no binding domestic carbon price 
 
 # CBAM reference price is used only for the export-exposure panel, never for the
 # domestic business case. Expressed in INR per tCO2e.
-CBAM_REFERENCE_INR_PER_TCO2E = 7000.0
+# €85/tCO2e @ ₹90/EUR statutory EU ETS 2026 reference benchmark.
+CBAM_REFERENCE_INR_PER_TCO2E = 7650.0
+
+# Statutory EU ETS product benchmarks (tCO2e / tonne product) under Commission Delegated
+# Regulation (EU) 2021/447 and CBAM Regulation (EU) 2023/956 Annex IV.
+# Only specific embedded emissions exceeding these benchmarks are subject to certificate surrender.
+CBAM_EU_BENCHMARKS_TCO2E_PER_T: dict[str, float] = {
+    "foundry_casting": 1.35,   # Iron / steel castings baseline
+    "fabrication": 1.35,       # Fabricated structural steel
+    "auto_components": 1.35,   # Machined ferrous component castings
+    "chemicals": 0.0,          # Dependent on specific CN code / process
+    "default": 0.0,
+}
+
+# Sectors covered under EU CBAM Regulation (EU) 2023/956 Annex I (Phase 1 definitive regime).
+# Other sectors (textiles, food, pharma, plastics, paper) are exempt from Phase 1 and on Phase 2 watchlist.
+CBAM_ANNEX_1_COVERED_SECTORS = {
+    "foundry_casting", "fabrication", "chemicals", "auto_components",
+    "iron_steel", "steel", "aluminium", "cement"
+}
 
 # ---------------------------------------------------------------------------
 # Engine thresholds
