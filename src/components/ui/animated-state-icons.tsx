@@ -56,10 +56,10 @@ export function MenuCloseIcon({ size = 40, color = "currentColor", className, du
   const open = useAutoToggle(duration);
   return (
     <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
-      <motion.line x1="10" y1="12" x2="30" y2="12" stroke={color} strokeWidth={2.5} strokeLinecap="round"
+      <motion.line x1="10" y1="20" x2="30" y2="20" stroke={color} strokeWidth={2.5} strokeLinecap="round"
         animate={open
-          ? { y1: 20, y2: 20, rotate: 45 }
-          : { y1: 12, y2: 12, rotate: 0 }}
+          ? { y: 0, rotate: 45 }
+          : { y: -8, rotate: 0 }}
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
         style={{ transformOrigin: "20px 20px" }}
       />
@@ -68,10 +68,10 @@ export function MenuCloseIcon({ size = 40, color = "currentColor", className, du
         transition={{ duration: 0.2 }}
         style={{ transformOrigin: "20px 20px" }}
       />
-      <motion.line x1="10" y1="28" x2="30" y2="28" stroke={color} strokeWidth={2.5} strokeLinecap="round"
+      <motion.line x1="10" y1="20" x2="30" y2="20" stroke={color} strokeWidth={2.5} strokeLinecap="round"
         animate={open
-          ? { y1: 20, y2: 20, rotate: -45 }
-          : { y1: 28, y2: 28, rotate: 0 }}
+          ? { y: 0, rotate: -45 }
+          : { y: 8, rotate: 0 }}
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
         style={{ transformOrigin: "20px 20px" }}
       />
@@ -260,8 +260,8 @@ export function ToggleIcon({ size = 40, color = "currentColor", className, durat
       />
       <rect x="5" y="13" width="30" height="14" rx="7" stroke={color} strokeWidth={2}
         opacity={on ? 1 : 0.4} />
-      <motion.circle cx={on ? 28 : 12} cy="20" r="5" fill={color}
-        animate={{ cx: on ? 28 : 12 }}
+      <motion.circle cx="12" cy="20" r="5" fill={color}
+        animate={{ x: on ? 16 : 0 }}
         transition={{ type: "spring", stiffness: 500, damping: 25 }}
       />
     </svg>
@@ -367,16 +367,19 @@ export function AbatementPortfolioIcon({ size = 40, color = "currentColor", clas
   const high = useAutoToggle(duration);
   return (
     <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
-      <motion.line x1="10" y1="30" x2="10" y2={high ? 18 : 24} stroke={color} strokeWidth={3} strokeLinecap="round"
-        animate={high ? { y2: 18 } : { y2: 24 }}
+      <motion.line x1="10" y1="30" x2="10" y2="18" stroke={color} strokeWidth={3} strokeLinecap="round"
+        style={{ transformOrigin: "10px 30px" }}
+        animate={{ scaleY: high ? 1 : 0.5 }}
         transition={{ duration: 0.35 }}
       />
-      <motion.line x1="18" y1="30" x2="18" y2={high ? 12 : 20} stroke={color} strokeWidth={3} strokeLinecap="round"
-        animate={high ? { y2: 12 } : { y2: 20 }}
+      <motion.line x1="18" y1="30" x2="18" y2="12" stroke={color} strokeWidth={3} strokeLinecap="round"
+        style={{ transformOrigin: "18px 30px" }}
+        animate={{ scaleY: high ? 1 : 0.55 }}
         transition={{ duration: 0.35, delay: 0.06 }}
       />
-      <motion.line x1="26" y1="30" x2="26" y2={high ? 8 : 16} stroke={color} strokeWidth={3} strokeLinecap="round"
-        animate={high ? { y2: 8 } : { y2: 16 }}
+      <motion.line x1="26" y1="30" x2="26" y2="8" stroke={color} strokeWidth={3} strokeLinecap="round"
+        style={{ transformOrigin: "26px 30px" }}
+        animate={{ scaleY: high ? 1 : 0.63 }}
         transition={{ duration: 0.35, delay: 0.12 }}
       />
       <motion.path d="M8 22l8-7 8 4 8-10" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
