@@ -75,6 +75,7 @@ class Leak:
     share_pct: float
     metric: str | None
     actual: float | None
+    p25: float | None
     p50: float | None
     p75: float | None
     percentile: int | None
@@ -94,6 +95,9 @@ class Leak:
             "metric_label": _METRIC_LABEL.get(self.metric or "", self.metric),
             "metric_unit": _METRIC_UNIT.get(self.metric or "", ""),
             "actual": round(self.actual, 2) if self.actual is not None else None,
+            # All three quartiles, not just the two the rules test against: a
+            # reader needs p25 to see how far the best of their peers are.
+            "p25": self.p25,
             "p50": self.p50,
             "p75": self.p75,
             "percentile": self.percentile,
@@ -209,7 +213,7 @@ def detect_leaks(fp: Footprint, sector_key: str,
             stream_key=stream.key, label=stream.label, rule="benchmark_breach",
             severity=_severity(score), severity_score=score,
             tco2e=stream.t, share_pct=round(share, 1),
-            metric=metric, actual=actual, p50=p50, p75=p75, percentile=pct,
+            metric=metric, actual=actual, p25=p25, p50=p50, p75=p75, percentile=pct,
             gap_to_median_tco2e=gap,
             finding=(
                 f"{_METRIC_LABEL.get(metric, metric)} is {actual:,.0f} against a sector "
@@ -242,7 +246,7 @@ def detect_leaks(fp: Footprint, sector_key: str,
             stream_key=stream.key, label=stream.label, rule="material_concentration",
             severity=_severity(score), severity_score=score,
             tco2e=stream.t, share_pct=round(share, 1),
-            metric=metric, actual=actual, p50=p50, p75=p75, percentile=pct,
+            metric=metric, actual=actual, p25=p25, p50=p50, p75=p75, percentile=pct,
             gap_to_median_tco2e=gap,
             finding=(
                 f"This stream is {share:.0f} percent of the total footprint and runs above the "
@@ -270,7 +274,7 @@ def detect_leaks(fp: Footprint, sector_key: str,
             stream_key=stream.key, label=stream.label, rule="structural_hotspot",
             severity=_severity(score), severity_score=score,
             tco2e=stream.t, share_pct=round(share, 1),
-            metric=None, actual=None, p50=None, p75=None, percentile=None,
+            metric=None, actual=None, p25=None, p50=None, p75=None, percentile=None,
             gap_to_median_tco2e=0.0,
             finding=(
                 f"{stream.label} alone is {share:.0f} percent of the total footprint "

@@ -134,3 +134,50 @@ def test_same_input_same_versions_same_output(sector_key: str) -> None:
 def test_sector_is_required() -> None:
     with pytest.raises(ValueError):
         assess({"electricity_kwh": 1000})
+
+
+# ---------------------------------------------------------------------------
+# Contract fields the web dashboard consumes.
+#
+# These are additive output fields, not calculations. They are pinned here
+# because a client was already built against them: removing one silently breaks
+# a page in another repository, which is the failure the shared contract exists
+# to prevent.
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("sector_key", SECTORS)
+def test_every_stream_cites_the_factors_that_priced_it(sector_key: str) -> None:
+    """PRD section 3.2 - a number must point at the factor behind it.
+
+    A list rather than a single key: process heat is a fuel mix and freight is a
+    modal mix, so naming one factor for a blended stream would be a false
+    citation.
+    """
+    from engine import default_db
+
+    db = default_db()
+    for stream in assess(demo_profile(sector_key))["footprint"]["streams"]:
+        keys = stream["factor_keys"]
+        assert keys, f"{stream['key']} cites no factor"
+        for key in keys:
+            assert db.has(key), f"{stream['key']} cites unknown factor {key}"
+
+
+@pytest.mark.parametrize("sector_key", SECTORS)
+def test_benchmarked_leaks_report_all_three_quartiles(sector_key: str) -> None:
+    for leak in assess(demo_profile(sector_key))["leaks"]["leaks"]:
+        if leak["rule"] == "structural_hotspot":
+            # No applicable benchmark, so percentiles are genuinely absent.
+            assert leak["p25"] is None and leak["p50"] is None
+            continue
+        assert leak["p25"] is not None, f"{leak['stream_key']} has no p25"
+        assert leak["p25"] <= leak["p50"] <= leak["p75"], "quartiles out of order"
+
+
+@pytest.mark.parametrize("sector_key", SECTORS)
+def test_a_capped_recommendation_states_its_ceiling(sector_key: str) -> None:
+    """"Capped" without the cap tells the user nothing they can act on."""
+    for rec in assess(demo_profile(sector_key))["recommendations"]["recommendations"]:
+        if rec["substitution_capped"]:
+            assert rec["substitution_cap_pct"] is not None, rec["id"]
+            assert 0 < rec["substitution_cap_pct"] <= 100

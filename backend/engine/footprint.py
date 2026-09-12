@@ -25,6 +25,10 @@ class Stream:
     activity_qty: float
     activity_unit: str
     source: str
+    # Which registry factors priced this stream. A list, not a single key,
+    # because process heat is a fuel mix and freight is a modal mix - naming one
+    # factor for a blended stream would be a false citation. PRD section 3.2.
+    factor_keys: list[str] = field(default_factory=list)
     detail: dict[str, Any] = field(default_factory=dict)
 
     @property
@@ -42,6 +46,7 @@ class Stream:
             "activity_qty": round(self.activity_qty, 2),
             "activity_unit": self.activity_unit,
             "source": self.source,
+            "factor_keys": list(self.factor_keys),
             "detail": self.detail,
         }
 
@@ -104,6 +109,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
         streams.append(Stream(
             key="electricity", label="Purchased electricity", scope=2, emissions=e,
             activity_qty=kwh, activity_unit="kWh/yr", source=grid_src,
+            factor_keys=["IN_GRID_NATIONAL"],
             detail={"grid_factor_tco2e_per_mwh": round(grid_band.base, 3)},
         ))
 
@@ -115,6 +121,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
     thermal_band = ZERO
     thermal_gj = 0.0
     thermal_mix: dict[str, Any] = {}
+    thermal_keys: list[str] = []
 
     for key, qty in fuels.items():
         qty = float(qty or 0.0)
@@ -133,6 +140,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
         if key in THERMAL_FUELS:
             thermal_band = thermal_band + e
             thermal_gj += gj
+            thermal_keys.append(key)
             thermal_mix[db.label(key)] = {
                 "qty": qty, "unit": db.denominator_unit(key),
                 "tco2e": round(e.base, 2), "gj": round(gj, 1),
@@ -144,7 +152,8 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
                 key="diesel" if key == "DIESEL" else f"fuel_{key}",
                 label=db.label(key), scope=1, emissions=e,
                 activity_qty=qty, activity_unit=db.denominator_unit(key),
-                source=db.source(key), detail={"gj": round(gj, 1)},
+                source=db.source(key), factor_keys=[key],
+                detail={"gj": round(gj, 1)},
             ))
 
     if thermal_band.base > 0:
@@ -152,7 +161,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
         streams.append(Stream(
             key="thermal_fuel", label="Process heat (boiler / furnace fuel)", scope=1,
             emissions=thermal_band, activity_qty=thermal_gj, activity_unit="GJ/yr",
-            source="IPCC / DEFRA combustion factors",
+            source="IPCC / DEFRA combustion factors", factor_keys=thermal_keys,
             detail={"mix": thermal_mix, "total_gj": round(thermal_gj, 1)},
         ))
 
@@ -166,6 +175,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
         streams.append(Stream(
             key=f"material_{key}", label=f"Purchased {db.label(key)}", scope=3, emissions=e,
             activity_qty=qty, activity_unit="tonne/yr", source=db.source(key),
+            factor_keys=[key],
             detail={"material_key": key, "unit_price_inr": db.price(key)},
         ))
 
@@ -179,6 +189,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
         streams.append(Stream(
             key=f"waste_{key}", label=db.label(key), scope=3, emissions=e,
             activity_qty=qty, activity_unit="tonne/yr", source=db.source(key),
+            factor_keys=[key],
             detail={"waste_key": key},
         ))
 
@@ -186,6 +197,7 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
     freight_band = ZERO
     freight_tkm = 0.0
     freight_mix: dict[str, Any] = {}
+    freight_keys: list[str] = []
     for key, tkm in (profile.get("freight") or {}).items():
         tkm = float(tkm or 0.0)
         if tkm <= 0 or not db.has(key):
@@ -193,13 +205,15 @@ def compute_footprint(profile: dict[str, Any], db: FactorDB | None = None) -> Fo
         e = db.emissions(key, tkm)
         freight_band = freight_band + e
         freight_tkm += tkm
+        freight_keys.append(key)
         freight_mix[db.label(key)] = {"tonne_km": tkm, "tco2e": round(e.base, 2)}
     if freight_band.base > 0:
         s3 = s3 + freight_band
         streams.append(Stream(
             key="freight", label="Inbound and outbound freight", scope=3,
             emissions=freight_band, activity_qty=freight_tkm, activity_unit="tonne-km/yr",
-            source="DEFRA modal freight factors", detail={"mix": freight_mix},
+            source="DEFRA modal freight factors", factor_keys=freight_keys,
+            detail={"mix": freight_mix},
         ))
 
     total = s1 + s2 + s3

@@ -18,7 +18,7 @@ is **blocked by**. Do not start a task whose blocker is open.
 | Surface | State | Lives in |
 |---|---|---|
 | Deterministic carbon engine | **Working.** 85 invariants green across 10 sectors | `backend/engine/` |
-| Platform API (Python/FastAPI) | **Working.** 71 endpoints, 148 tests | `backend/app/` |
+| Platform API (Python/FastAPI) | **Working.** 71 endpoints, 178 tests | `backend/app/` |
 | Android APK | **Working.** 10 screens, offline queue, bundle builds | `apps/mobile/` |
 | Web dashboard | **Built, but running on fixtures** | `Frontend` branch — not yet merged |
 | Reference datasets | **Working.** 25/31 factors traced to source | `datasets/` |
@@ -86,10 +86,27 @@ Keep `HANDOFF_WEB.md`, `FRONTEND-PRD-GAP.md`, `API-CONTRACT.md` and
 - All six existing endpoints work unchanged — verified 2026-09-12.
 - Delete the fixture fallback from the API path. Keep demo mode, but make it an
   explicit user choice, never a silent fallback (it already is — preserve that).
-- `src/api/adapter.ts` is where any field-shape difference gets absorbed. Check
-  `packages/contracts/openapi.json` before adding a mapping; the live payload is
-  the same engine output the fixtures were transcribed from, so most should pass
-  straight through.
+- `src/api/adapter.ts` is where the field-shape difference gets absorbed. Its
+  four functions are currently pass-through stubs with FE-1's own note: *"Map
+  your real response here after inspection."* That mapping is the actual work of
+  this task.
+
+  **Field-by-field audit, done 2026-09-12 against a live response:**
+
+  | Domain object | Maps cleanly | Rename in the adapter | Derive in the adapter |
+  |---|---|---|---|
+  | `action` | all 13 economic fields | `capex`←`capex_inr`, `net_benefit`←`net_annual_benefit_inr`, `payback_years`←`payback_yrs`, `abatement_t`←`portfolio_abatement_tco2e`, `standalone_t`←`abatement_tco2e`, `lcoa`←`lcoa_inr_per_tco2e`, `target`←`target_stream`, `restriction`←`restriction_note` | `status` from `cash_positive`/`substitution_capped`; `quick_win` from `payback_yrs<=2 && difficulty<=2` |
+  | `stream` | `scope`, `share_pct` | `id`←`key`, `name`←`label`, `quantity`←`activity_qty`, `unit`←`activity_unit`, `emissions`←`range` | `category` from the key prefix; `working` from `source` + `detail` |
+  | `leak` | `rule`, `severity`, `share_pct`, `actual`, `percentile`, `p25/p50/p75` | `stream_id`←`stream_key`, `name`←`label`, `reason`←`finding`, `recoverable_t`←`gap_to_median_tco2e`, `unit`←`metric_unit` | `id` from `stream_key` + `rule` |
+
+  Nothing is missing from the engine any more. Three fields the dashboard needed
+  were genuinely absent and were **added to the API on 2026-09-12** (see §11),
+  so this task is pure mapping with no contract change required.
+
+  Sanity check that the numbers line up: the engine returns electricity p25=620,
+  p50=850, percentile 78 for textile dyeing — identical to the values in
+  `FIXTURE-PROVENANCE.md`, because the fixtures were transcribed from this
+  engine's own report. The dashboard should render the same figures on live data.
 
 **Done when:** every page renders from a running backend with
 `datasets/`-backed numbers, and `FIXTURE-PROVENANCE.md` is updated to say which
@@ -476,7 +493,7 @@ python -m alembic upgrade head
 python -m scripts.seed_demo          # password: prangara-demo-2026
 python -m uvicorn app.main:app --reload      # http://localhost:8000/api/docs
 python -m app.workers.outbox                 # second terminal
-python -m pytest tests -q                    # 148 passing
+python -m pytest tests -q                    # 178 passing
 python -m scripts.export_openapi             # after ANY schema change
 
 # Mobile
@@ -490,3 +507,22 @@ cd apps/web && npm install && npm run dev
 node datasets/08_automated_test_suites/test_chakra_invariants.js       # 18/18
 node datasets/08_automated_test_suites/verify_dataset_authenticity.js  # 22/23, see B7
 ```
+
+
+---
+
+## 11. Contract additions made for the web dashboard
+
+Made 2026-09-12 after auditing FE-1's `src/types/domain.ts` against a live
+engine response. All three are **additive output fields** — no calculation
+changed, every engine invariant still passes, and no stored assessment was
+invalidated. They exist so that W2 needs no contract change.
+
+| Field | Where | Why |
+|---|---|---|
+| `leak.p25` | every benchmarked leak | `HANDOFF_WEB.md` says expanded leak cards show p25/median/p75. The engine tested against p75 and reported only p50/p75, so p25 was unavailable. A reader needs it to see how far ahead the best of their peers are. `structural_hotspot` leaks have no benchmark, so all three are correctly null there. |
+| `stream.factor_keys` | every footprint stream | PRD §3.2 — a number must point at the factor behind it. A **list**, because process heat is a fuel mix and freight is a modal mix; naming one factor for a blended stream would be a false citation. |
+| `recommendation.substitution_cap_pct` | capped recommendations | `substitution_capped` was a bare boolean. A UI that can only say "capped" cannot tell the user capped *at what* — now it reads 25% for recycled cotton, 35% for food-contact rPET. |
+
+Pinned by tests in `backend/tests/test_engine_invariants.py` so a later refactor
+cannot silently remove a field another repository is rendering.

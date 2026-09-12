@@ -98,6 +98,7 @@ class Recommendation:
     physical_note: str
     savings_model: str = "avoided_purchase"
     capped: bool = False
+    cap_pct: float | None = None
     restriction_note: str = ""
     portfolio_abatement: float = 0.0
 
@@ -141,6 +142,11 @@ class Recommendation:
             "physical_note": self.physical_note,
             "savings_model": self.savings_model,
             "substitution_capped": self.capped,
+            # The ceiling itself, not just the fact that one applied. A UI that
+            # can only say "capped" cannot tell the user capped at what.
+            "substitution_cap_pct": (
+                round(100 * self.cap_pct, 1) if self.cap_pct is not None else None
+            ),
             "restriction_note": self.restriction_note,
             "portfolio_abatement_tco2e": round(self.portfolio_abatement, 1),
             "derating_pct": round(100 * (1 - self.portfolio_abatement / self.abatement), 1) if self.abatement > 0 else 0.0,
@@ -257,6 +263,7 @@ def _evaluate(spec: dict[str, Any], fp: Footprint, sector_key: str,
     gross_saving = 0.0
     switched_t = 0.0
     capped = False
+    applied_cap_pct: float | None = None
     restriction_note = ""
     physical_note = _physical_saving_note(fp, stream_key, frac, db)
     savings_model = spec.get("savings_model", "avoided_purchase")
@@ -283,6 +290,7 @@ def _evaluate(spec: dict[str, Any], fp: Footprint, sector_key: str,
             if sector_cap:
                 cap_pct = min(cap_pct, sector_cap[0])
                 restriction_note = sector_cap[1]
+            applied_cap_pct = cap_pct
             max_t = src_stream.activity_qty * cap_pct
             if switched_t > max_t:
                 switched_t = max_t
@@ -376,7 +384,7 @@ def _evaluate(spec: dict[str, Any], fp: Footprint, sector_key: str,
         net_annual_benefit=net_annual_benefit, lcoa=lcoa, payback_yrs=payback, npv=npv,
         target_stream=stream_key, target_stream_label=stream_label,
         target_stream_tco2e=base_t, physical_note=physical_note,
-        savings_model=savings_model, capped=capped,
+        savings_model=savings_model, capped=capped, cap_pct=applied_cap_pct,
         restriction_note=restriction_note,
     )
 
