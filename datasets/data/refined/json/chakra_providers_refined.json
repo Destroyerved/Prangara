@@ -1,304 +1,123 @@
 [
   {
     "provider_id": "PROV-AUD-001",
-    "name": "Rajesh Kumar Sharma",
-    "organization": "Encon Thermal Energy Solutions LLP",
     "provider_type": "ACCREDITED_ENERGY_AUDITOR",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "AEA-0142",
-      "status": "VERIFIED_GOVERNMENT",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Energy Audits",
-      "M&V Verification",
-      "ISO 50001 Baseline"
-    ],
-    "coverage_area": [
-      "Gujarat",
-      "Western India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 7,
-      "reported_at": "2026-09-12T02:08:48.681Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Rajesh Kumar Sharma",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-AUD-002",
-    "name": "Anand M. Patel",
-    "organization": "GreenEdge Carbon Audits Pvt Ltd",
     "provider_type": "ACCREDITED_ENERGY_AUDITOR",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "AEA-0218",
-      "status": "VERIFIED_GOVERNMENT",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Energy Audits",
-      "M&V Verification",
-      "ISO 50001 Baseline"
-    ],
-    "coverage_area": [
-      "Gujarat",
-      "Western India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 7,
-      "reported_at": "2026-09-12T02:08:48.681Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Anand M. Patel",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-AUD-003",
-    "name": "Suresh Narayanan",
-    "organization": "Vidyut Energy Services",
     "provider_type": "ACCREDITED_ENERGY_AUDITOR",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "AEA-0089",
-      "status": "VERIFIED_GOVERNMENT",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Energy Audits",
-      "M&V Verification",
-      "ISO 50001 Baseline"
-    ],
-    "coverage_area": [
-      "Maharashtra",
-      "Western India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 7,
-      "reported_at": "2026-09-12T02:08:48.681Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Suresh Narayanan",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-AUD-004",
-    "name": "Dr. Meenakshi Sundaram",
-    "organization": "Apex Carbon & Energy Consulting",
     "provider_type": "ACCREDITED_ENERGY_AUDITOR",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "AEA-0345",
-      "status": "VERIFIED_GOVERNMENT",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Energy Audits",
-      "M&V Verification",
-      "ISO 50001 Baseline"
-    ],
-    "coverage_area": [
-      "Tamil Nadu",
-      "Western India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 7,
-      "reported_at": "2026-09-12T02:08:48.681Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Dr. Meenakshi Sundaram",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-ESCO-001",
-    "name": "Energy Efficiency Services Limited (EESL)",
-    "organization": "Energy Efficiency Services Limited (EESL)",
     "provider_type": "EMPANELLED_ESCO",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "BEE-ESCO-G1-001",
-      "grade": "Grade 1",
-      "status": "VERIFIED_GOVERNMENT",
-      "valid_until": "2028-12-31",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Motors",
-      "HVAC",
-      "Boilers",
-      "Street Lighting"
-    ],
-    "coverage_area": [
-      "National / Delhi"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 14,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Energy Efficiency Services Limited (EESL)",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-ESCO-002",
-    "name": "Schneider Electric India ESCO Division",
-    "organization": "Schneider Electric India ESCO Division",
     "provider_type": "EMPANELLED_ESCO",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "BEE-ESCO-G1-014",
-      "grade": "Grade 1",
-      "status": "VERIFIED_GOVERNMENT",
-      "valid_until": "2027-08-31",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "VFDs",
-      "Industrial Automation",
-      "Waste Heat Recovery"
-    ],
-    "coverage_area": [
-      "National / Karnataka"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 14,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Schneider Electric India ESCO Division",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-ESCO-003",
-    "name": "Thermax Onsite Energy Solutions Ltd",
-    "organization": "Thermax Onsite Energy Solutions Ltd",
     "provider_type": "EMPANELLED_ESCO",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "BEE-ESCO-G1-007",
-      "grade": "Grade 1",
-      "status": "VERIFIED_GOVERNMENT",
-      "valid_until": "2028-03-31",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Biomass Boilers",
-      "Waste Heat to Power",
-      "Absorption Chillers"
-    ],
-    "coverage_area": [
-      "Maharashtra"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 14,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Thermax Onsite Energy Solutions Ltd",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-ESCO-004",
-    "name": "Forbes Marshall Energy Conservation Services",
-    "organization": "Forbes Marshall Energy Conservation Services",
     "provider_type": "EMPANELLED_ESCO",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency (BEE)",
-      "registration_number": "BEE-ESCO-G1-022",
-      "grade": "Grade 1",
-      "status": "VERIFIED_GOVERNMENT",
-      "valid_until": "2027-11-30",
-      "source_id": "SRC-BEE-AUDITORS-ESCO"
-    },
-    "service_categories": [
-      "Steam Trapping",
-      "Condensate Recovery",
-      "Boiler Tuning"
-    ],
-    "coverage_area": [
-      "Maharashtra / Gujarat"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 14,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "Forbes Marshall Energy Conservation Services",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-VVB-001",
-    "name": "TUV SUD South Asia Pvt Ltd",
-    "organization": "TUV SUD South Asia Pvt Ltd",
     "provider_type": "CCTS_VERIFICATION_AGENCY",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency & CCTS Administrator",
-      "registration_number": "CCTS-VVB-003",
-      "status": "VERIFIED_REGULATOR",
-      "valid_until": "2027-10-31",
-      "source_id": "SRC-BEE-CCTS-2025"
-    },
-    "service_categories": [
-      "CCTS Audit",
-      "BRSR Core Assurance",
-      "GHG Verification"
-    ],
-    "coverage_area": [
-      "All India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 21,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "TUV SUD South Asia Pvt Ltd",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-VVB-002",
-    "name": "BSI Group India",
-    "organization": "BSI Group India",
     "provider_type": "CCTS_VERIFICATION_AGENCY",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency & CCTS Administrator",
-      "registration_number": "CCTS-VVB-008",
-      "status": "VERIFIED_REGULATOR",
-      "valid_until": "2026-12-31",
-      "source_id": "SRC-BEE-CCTS-2025"
-    },
-    "service_categories": [
-      "CCTS Audit",
-      "BRSR Core Assurance",
-      "GHG Verification"
-    ],
-    "coverage_area": [
-      "All India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 21,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "BSI Group India",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   },
   {
     "provider_id": "PROV-VVB-003",
-    "name": "KPMG Assurance and Consulting Services LLP",
-    "organization": "KPMG Assurance and Consulting Services LLP",
     "provider_type": "CCTS_VERIFICATION_AGENCY",
-    "official_registration": {
-      "authority": "Bureau of Energy Efficiency & CCTS Administrator",
-      "registration_number": "CCTS-VVB-012",
-      "status": "VERIFIED_REGULATOR",
-      "valid_until": "2028-03-31",
-      "source_id": "SRC-BEE-CCTS-2025"
-    },
-    "service_categories": [
-      "CCTS Audit",
-      "BRSR Core Assurance",
-      "GHG Verification"
-    ],
-    "coverage_area": [
-      "All India"
-    ],
-    "availability": {
-      "status": "AVAILABLE",
-      "lead_time_days": 21,
-      "reported_at": "2026-09-12T02:08:48.682Z",
-      "source_type": "PROVIDER_REPORTED"
-    }
+    "organization_name": "KPMG Assurance and Consulting Services LLP",
+    "empanelment_grade": "Grade-1",
+    "valid_until_year": 2027,
+    "headquarters_city": "Delhi",
+    "state": "National",
+    "accreditation_body": "Bureau of Energy Efficiency (BEE)",
+    "verified_status": "ACTIVE_VALIDATED"
   }
 ]

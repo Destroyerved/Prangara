@@ -1,6 +1,6 @@
-transport_factor_id,mode,vehicle_class,fuel,factor_value,unit,boundary,load_factor,geography,source_id,source_record,verification_status
-"TF-001","road","Rigid Truck (>20t)","diesel",0.098,"kgCO2e/t-km","WTW","75%","India","SRC-GLEC-INDIA-2024","GLEC Framework India Addendum Table 1.4","VERIFIED_OFFICIAL"
-"TF-002","road","Articulated Heavy (>32t)","diesel",0.062,"kgCO2e/t-km","WTW","80%","India","SRC-GLEC-INDIA-2024","GLEC Framework India Addendum Table 1.4","VERIFIED_OFFICIAL"
-"TF-003","road","Electric Heavy Commercial (55t)","grid_electricity",0.048,"kgCO2e/t-km","WTW","80%","India","SRC-GLEC-INDIA-2024","GLEC Framework India Addendum Table 1.4","DERIVED_TRANSPARENT"
-"TF-004","rail","Electric Container Freight","overhead_catenary",0.018,"kgCO2e/t-km","WTW","90%","India","SRC-GLEC-INDIA-2024","GLEC Framework India Addendum Table 1.4","VERIFIED_OFFICIAL"
-"TF-005","water","Inland Waterways Barge","marine_diesel",0.024,"kgCO2e/t-km","WTW","85%","India","SRC-GLEC-INDIA-2024","GLEC Framework India Addendum Table 1.4","VERIFIED_OFFICIAL"
+transport_mode_id,mode_name,vehicle_type,emission_factor_kgco2e_per_tkm,fuel_type,geography,source_id,authenticity
+undefined,undefined,Standard Commercial Freight,NaN,Diesel,India,SRC-GLEC-INDIA-2024,GREEN_OFFICIAL
+undefined,undefined,Standard Commercial Freight,NaN,Diesel,India,SRC-GLEC-INDIA-2024,GREEN_OFFICIAL
+undefined,undefined,Standard Commercial Freight,NaN,Diesel,India,SRC-GLEC-INDIA-2024,GREEN_OFFICIAL
+undefined,undefined,Standard Commercial Freight,NaN,Diesel,India,SRC-GLEC-INDIA-2024,GREEN_OFFICIAL
+undefined,undefined,Standard Commercial Freight,NaN,Diesel,India,SRC-GLEC-INDIA-2024,GREEN_OFFICIAL

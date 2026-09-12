@@ -1,12 +1,12 @@
-provider_id,name,organization,provider_type,registration_number,status,valid_until,availability
-"PROV-AUD-001","Rajesh Kumar Sharma","Encon Thermal Energy Solutions LLP","ACCREDITED_ENERGY_AUDITOR","AEA-0142","VERIFIED_GOVERNMENT",,"AVAILABLE"
-"PROV-AUD-002","Anand M. Patel","GreenEdge Carbon Audits Pvt Ltd","ACCREDITED_ENERGY_AUDITOR","AEA-0218","VERIFIED_GOVERNMENT",,"AVAILABLE"
-"PROV-AUD-003","Suresh Narayanan","Vidyut Energy Services","ACCREDITED_ENERGY_AUDITOR","AEA-0089","VERIFIED_GOVERNMENT",,"AVAILABLE"
-"PROV-AUD-004","Dr. Meenakshi Sundaram","Apex Carbon & Energy Consulting","ACCREDITED_ENERGY_AUDITOR","AEA-0345","VERIFIED_GOVERNMENT",,"AVAILABLE"
-"PROV-ESCO-001","Energy Efficiency Services Limited (EESL)","Energy Efficiency Services Limited (EESL)","EMPANELLED_ESCO","BEE-ESCO-G1-001","VERIFIED_GOVERNMENT","2028-12-31","AVAILABLE"
-"PROV-ESCO-002","Schneider Electric India ESCO Division","Schneider Electric India ESCO Division","EMPANELLED_ESCO","BEE-ESCO-G1-014","VERIFIED_GOVERNMENT","2027-08-31","AVAILABLE"
-"PROV-ESCO-003","Thermax Onsite Energy Solutions Ltd","Thermax Onsite Energy Solutions Ltd","EMPANELLED_ESCO","BEE-ESCO-G1-007","VERIFIED_GOVERNMENT","2028-03-31","AVAILABLE"
-"PROV-ESCO-004","Forbes Marshall Energy Conservation Services","Forbes Marshall Energy Conservation Services","EMPANELLED_ESCO","BEE-ESCO-G1-022","VERIFIED_GOVERNMENT","2027-11-30","AVAILABLE"
-"PROV-VVB-001","TUV SUD South Asia Pvt Ltd","TUV SUD South Asia Pvt Ltd","CCTS_VERIFICATION_AGENCY","CCTS-VVB-003","VERIFIED_REGULATOR","2027-10-31","AVAILABLE"
-"PROV-VVB-002","BSI Group India","BSI Group India","CCTS_VERIFICATION_AGENCY","CCTS-VVB-008","VERIFIED_REGULATOR","2026-12-31","AVAILABLE"
-"PROV-VVB-003","KPMG Assurance and Consulting Services LLP","KPMG Assurance and Consulting Services LLP","CCTS_VERIFICATION_AGENCY","CCTS-VVB-012","VERIFIED_REGULATOR","2028-03-31","AVAILABLE"
+provider_id,provider_type,organization_name,empanelment_grade,valid_until_year,headquarters_city,state,accreditation_body,verified_status
+PROV-AUD-001,ACCREDITED_ENERGY_AUDITOR,Rajesh Kumar Sharma,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-AUD-002,ACCREDITED_ENERGY_AUDITOR,Anand M. Patel,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-AUD-003,ACCREDITED_ENERGY_AUDITOR,Suresh Narayanan,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-AUD-004,ACCREDITED_ENERGY_AUDITOR,Dr. Meenakshi Sundaram,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-ESCO-001,EMPANELLED_ESCO,Energy Efficiency Services Limited (EESL),Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-ESCO-002,EMPANELLED_ESCO,Schneider Electric India ESCO Division,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-ESCO-003,EMPANELLED_ESCO,Thermax Onsite Energy Solutions Ltd,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-ESCO-004,EMPANELLED_ESCO,Forbes Marshall Energy Conservation Services,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-VVB-001,CCTS_VERIFICATION_AGENCY,TUV SUD South Asia Pvt Ltd,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-VVB-002,CCTS_VERIFICATION_AGENCY,BSI Group India,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED
+PROV-VVB-003,CCTS_VERIFICATION_AGENCY,KPMG Assurance and Consulting Services LLP,Grade-1,2027,Delhi,National,Bureau of Energy Efficiency (BEE),ACTIVE_VALIDATED

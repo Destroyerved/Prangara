@@ -1,0 +1,32 @@
+[
+  {
+    "byproduct_id": "undefined",
+    "producer_industry": "undefined",
+    "byproduct_name": "undefined",
+    "typical_quantity_t_per_month": 100,
+    "recipient_industry": "undefined",
+    "circular_pathway": "Industrial Symbiosis Resource Recovery",
+    "landfill_avoided_emission_tco2e_per_t": 0.45,
+    "statutory_compliance_rule": "MoEFCC Hazardous Waste Rules 2016"
+  },
+  {
+    "byproduct_id": "undefined",
+    "producer_industry": "undefined",
+    "byproduct_name": "undefined",
+    "typical_quantity_t_per_month": 100,
+    "recipient_industry": "undefined",
+    "circular_pathway": "Industrial Symbiosis Resource Recovery",
+    "landfill_avoided_emission_tco2e_per_t": 0.45,
+    "statutory_compliance_rule": "MoEFCC Hazardous Waste Rules 2016"
+  },
+  {
+    "byproduct_id": "undefined",
+    "producer_industry": "undefined",
+    "byproduct_name": "undefined",
+    "typical_quantity_t_per_month": 100,
+    "recipient_industry": "undefined",
+    "circular_pathway": "Industrial Symbiosis Resource Recovery",
+    "landfill_avoided_emission_tco2e_per_t": 0.45,
+    "statutory_compliance_rule": "MoEFCC Hazardous Waste Rules 2016"
+  }
+]
