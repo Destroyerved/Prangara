@@ -1,0 +1,35 @@
+[
+  {
+    "rule_id": "CCTS-RULE-STEEL-01",
+    "sector": "iron_and_steel",
+    "obligated_threshold_toe_year": 30000,
+    "target_intensity_metric": "tCO2e / tonne crude steel",
+    "target_reduction_pct_per_cycle": 4.5,
+    "baseline_years": "FY2021-22 to FY2023-24",
+    "compliance_years": "FY2025-26 to FY2027-28",
+    "verification_mandate": "Annual verification by BEE-accredited VVB",
+    "status": "VERIFIED_REGULATOR"
+  },
+  {
+    "rule_id": "CCTS-RULE-CEMENT-01",
+    "sector": "cement",
+    "obligated_threshold_toe_year": 10000,
+    "target_intensity_metric": "tCO2e / tonne cement equivalent",
+    "target_reduction_pct_per_cycle": 3.8,
+    "baseline_years": "FY2021-22 to FY2023-24",
+    "compliance_years": "FY2025-26 to FY2027-28",
+    "verification_mandate": "Annual verification by BEE-accredited VVB",
+    "status": "VERIFIED_REGULATOR"
+  },
+  {
+    "rule_id": "CCTS-RULE-ALUM-01",
+    "sector": "aluminium",
+    "obligated_threshold_toe_year": 7500,
+    "target_intensity_metric": "tCO2e / tonne aluminium ingot",
+    "target_reduction_pct_per_cycle": 4,
+    "baseline_years": "FY2021-22 to FY2023-24",
+    "compliance_years": "FY2025-26 to FY2027-28",
+    "verification_mandate": "Annual verification by BEE-accredited VVB",
+    "status": "VERIFIED_REGULATOR"
+  }
+]

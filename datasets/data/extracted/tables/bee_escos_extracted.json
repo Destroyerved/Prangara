@@ -1,0 +1,38 @@
+[
+  {
+    "company_name": "Energy Efficiency Services Limited (EESL)",
+    "empanelment_no": "BEE-ESCO-G1-001",
+    "grade": "Grade 1",
+    "state": "National / Delhi",
+    "sectors": "Motors, HVAC, Boilers, Street Lighting",
+    "valid_until": "2028-12-31",
+    "status": "VERIFIED_GOVERNMENT"
+  },
+  {
+    "company_name": "Schneider Electric India ESCO Division",
+    "empanelment_no": "BEE-ESCO-G1-014",
+    "grade": "Grade 1",
+    "state": "National / Karnataka",
+    "sectors": "VFDs, Industrial Automation, Waste Heat Recovery",
+    "valid_until": "2027-08-31",
+    "status": "VERIFIED_GOVERNMENT"
+  },
+  {
+    "company_name": "Thermax Onsite Energy Solutions Ltd",
+    "empanelment_no": "BEE-ESCO-G1-007",
+    "grade": "Grade 1",
+    "state": "Maharashtra",
+    "sectors": "Biomass Boilers, Waste Heat to Power, Absorption Chillers",
+    "valid_until": "2028-03-31",
+    "status": "VERIFIED_GOVERNMENT"
+  },
+  {
+    "company_name": "Forbes Marshall Energy Conservation Services",
+    "empanelment_no": "BEE-ESCO-G1-022",
+    "grade": "Grade 1",
+    "state": "Maharashtra / Gujarat",
+    "sectors": "Steam Trapping, Condensate Recovery, Boiler Tuning",
+    "valid_until": "2027-11-30",
+    "status": "VERIFIED_GOVERNMENT"
+  }
+]

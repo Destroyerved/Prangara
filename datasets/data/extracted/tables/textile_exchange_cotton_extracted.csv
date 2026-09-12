@@ -1,0 +1,5 @@
+product,route,geography,value,unit,boundary,data_year,status
+"Raw Seed/Lint Cotton","Conventional Agriculture & Ginning","India",1.43,"kgCO2e/kg","cradle-to-gin gate",2026,"VERIFIED_INDUSTRY_LCI"
+"Organic Cotton Lint","Certified Organic Agriculture","India",0.98,"kgCO2e/kg","cradle-to-gin gate",2026,"VERIFIED_INDUSTRY_LCI"
+"Cotton Ring-Spun Yarn 30s","Ginned Cotton + Ring Spinning (Derived)","India",3.85,"kgCO2e/kg","cradle-to-yarn gate",2026,"DERIVED_TRANSPARENT"
+"Mechanically Recycled Cotton Fiber","Post-Industrial Clip Shredding","India",0.48,"kgCO2e/kg","cradle-to-gate",2026,"VERIFIED_INDUSTRY_LCI"

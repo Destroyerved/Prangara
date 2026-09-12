@@ -1,152 +1,182 @@
 {
-  "version": "1.0.0",
-  "pipeline": "PS11 Data Refining & Type Conversion",
-  "standard_units": {
-    "mass": "tonnes",
-    "daily_capacity": "tonnes_per_day",
-    "annual_capacity": "tonnes_per_year",
-    "distance": "km",
-    "area": "hectares",
-    "carbon": "kgCO2e",
-    "carbon_reporting": "tCO2e",
-    "currency": "INR",
-    "percentage": "0_to_100_decimal"
-  },
-  "geospatial": {
-    "crs": "EPSG:4326 (WGS84)",
-    "geojson_coordinate_order": "[longitude, latitude]",
-    "postgis_type": "geometry(Point, 4326)",
-    "precision_tiers": [
-      "EXACT_GPS",
-      "VERIFIED_ADDRESS",
-      "CITY_LEVEL",
-      "DISTRICT_LEVEL",
-      "UNKNOWN"
-    ]
-  },
-  "authenticity_classes": [
-    {
-      "code": "OFFICIAL_REPORTED",
-      "badge": "🟢 OFFICIAL",
-      "description": "Statutory data published by government ministries, census, or scientific bodies."
+  "version": "2.0",
+  "standards": "Strict SQL & JSON typing with traceability",
+  "tables": {
+    "emission_factors": {
+      "factor_id": {
+        "type": "VARCHAR(64) PRIMARY KEY",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Unique factor ID"
+      },
+      "name": {
+        "type": "VARCHAR(255)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Display factor title"
+      },
+      "category": {
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "electricity, fuel, or material"
+      },
+      "scope": {
+        "type": "SMALLINT",
+        "nullable": false,
+        "unit": "1, 2, or 3",
+        "desc": "GHG Protocol Scope"
+      },
+      "base": {
+        "type": "NUMERIC(10,4)",
+        "nullable": false,
+        "unit": "canonical",
+        "desc": "Central verified emission factor"
+      },
+      "unit": {
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Canonical measurement unit"
+      },
+      "geography": {
+        "type": "VARCHAR(128)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Applicable region"
+      },
+      "proxy_for_india": {
+        "type": "BOOLEAN",
+        "nullable": false,
+        "unit": "bool",
+        "desc": "True if international proxy used"
+      },
+      "source_id": {
+        "type": "VARCHAR(64) REFERENCES source_registry",
+        "nullable": false,
+        "unit": "FK",
+        "desc": "Authoritative citation"
+      },
+      "verification_status": {
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "unit": "enum",
+        "desc": "VERIFIED_OFFICIAL, etc."
+      }
     },
-    {
-      "code": "OPERATOR_REPORTED",
-      "badge": "🔵 OPERATOR",
-      "description": "Operational inventory directly entered by generator or facility operator."
+    "sector_benchmarks": {
+      "benchmark_id": {
+        "type": "VARCHAR(64) PRIMARY KEY",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Unique benchmark ID"
+      },
+      "sector": {
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Sector slug"
+      },
+      "median_thermal": {
+        "type": "NUMERIC(10,2)",
+        "nullable": true,
+        "unit": "GJ/t",
+        "desc": "Reported median thermal SEC"
+      },
+      "median_elec": {
+        "type": "NUMERIC(10,2)",
+        "nullable": true,
+        "unit": "kWh/t",
+        "desc": "Reported median electrical SEC"
+      },
+      "benchmark_type": {
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "reported_range"
+      },
+      "source_id": {
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "unit": "FK",
+        "desc": "Citation"
+      }
     },
-    {
-      "code": "CALCULATED_DERIVED",
-      "badge": "🟡 CALCULATED",
-      "description": "Values computed by platform algorithms using documented formulas."
+    "circular_interventions": {
+      "intervention_id": {
+        "type": "VARCHAR(64) PRIMARY KEY",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Unique intervention ID"
+      },
+      "name": {
+        "type": "VARCHAR(255)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Intervention name"
+      },
+      "abatement_base_pct": {
+        "type": "NUMERIC(5,2)",
+        "nullable": false,
+        "unit": "%",
+        "desc": "Base abatement percentage"
+      },
+      "capex_inr": {
+        "type": "NUMERIC(14,2)",
+        "nullable": false,
+        "unit": "INR",
+        "desc": "Indicative planning capital expenditure"
+      },
+      "payback_months": {
+        "type": "INTEGER",
+        "nullable": false,
+        "unit": "months",
+        "desc": "Expected simple payback"
+      },
+      "dpr_source": {
+        "type": "VARCHAR(128)",
+        "nullable": false,
+        "unit": "text",
+        "desc": "Official DPR citation"
+      }
+    },
+    "raw_material_marketplace": {
+      "listing_id": {
+        "type": "VARCHAR(64) PRIMARY KEY",
+        "nullable": false
+      },
+      "material": {
+        "type": "VARCHAR(255)",
+        "nullable": false
+      },
+      "price_per_t_inr": {
+        "type": "NUMERIC(12,2)",
+        "unit": "INR",
+        "nullable": false
+      },
+      "recycled_content_pct": {
+        "type": "NUMERIC(5,2)",
+        "unit": "%",
+        "nullable": false
+      }
+    },
+    "transport_factors": {
+      "transport_factor_id": {
+        "type": "VARCHAR(64) PRIMARY KEY",
+        "nullable": false
+      },
+      "mode": {
+        "type": "VARCHAR(32)",
+        "nullable": false
+      },
+      "factor_value": {
+        "type": "NUMERIC(8,4)",
+        "unit": "kgCO2e/t-km",
+        "nullable": false
+      }
     }
-  ],
-  "null_handling_rules": {
-    "raw_tokens_to_null": [
-      "NA",
-      "N/A",
-      "-",
-      "--",
-      "Unknown",
-      "Not Available",
-      "null",
-      ""
-    ],
-    "zero_policy": "Never convert unknown or null to 0. Zero is reserved exclusively for measured zero quantities."
   },
   "datasets": {
-    "facilities": {
-      "facility_id": {
-        "type": "VARCHAR(64)",
-        "format": "FAC-MNRE-XXX",
-        "nullable": false
-      },
-      "official_application_id": {
-        "type": "VARCHAR(64)",
-        "format": "MNRE-GJ-YYYY-XXX",
-        "nullable": false
-      },
-      "project_name": {
-        "type": "VARCHAR(255)",
-        "nullable": false
-      },
-      "project_developer": {
-        "type": "VARCHAR(255)",
-        "nullable": false
-      },
-      "district_id": {
-        "type": "VARCHAR(16)",
-        "format": "GJ_XXX",
-        "nullable": false
-      },
-      "installed_capacity_tpd": {
-        "type": "NUMERIC(10,2)",
-        "unit": "tonnes_per_day",
-        "min": 0.1,
-        "nullable": false
-      },
-      "primary_technology": {
-        "type": "ENUM(BIOCNG, BIOGAS, BIOCHAR, WASTE_TO_ENERGY)",
-        "nullable": false
-      },
-      "commissioning_status": {
-        "type": "ENUM(PROPOSED, SANCTIONED, COMMISSIONED, OPERATIONAL)",
-        "nullable": false
-      },
-      "latitude": {
-        "type": "NUMERIC(9,6)",
-        "min": 20,
-        "max": 24.8,
-        "nullable": false
-      },
-      "longitude": {
-        "type": "NUMERIC(9,6)",
-        "min": 68,
-        "max": 74.8,
-        "nullable": false
-      },
-      "location_precision": {
-        "type": "VARCHAR(32)",
-        "default": "EXACT_GPS",
-        "nullable": false
-      }
-    },
-    "municipal_waste": {
-      "ulb_code": {
-        "type": "VARCHAR(16)",
-        "nullable": false
-      },
-      "ulb_name": {
-        "type": "VARCHAR(255)",
-        "nullable": false
-      },
-      "district_id": {
-        "type": "VARCHAR(16)",
-        "nullable": false
-      },
-      "population": {
-        "type": "BIGINT",
-        "min": 0,
-        "nullable": false
-      },
-      "waste_generated_tpd": {
-        "type": "NUMERIC(10,2)",
-        "unit": "tonnes_per_day",
-        "nullable": false
-      },
-      "waste_processed_tpd": {
-        "type": "NUMERIC(10,2)",
-        "unit": "tonnes_per_day",
-        "nullable": false
-      },
-      "processing_percent": {
-        "type": "NUMERIC(5,2)",
-        "unit": "percentage",
-        "min": 0,
-        "max": 100,
-        "nullable": false
-      }
-    },
     "chakra_emission_factors": {
       "factor_key": {
         "type": "VARCHAR(64)",
@@ -346,5 +376,21 @@
         "nullable": false
       }
     }
+  },
+  "standard_units": {
+    "mass": "tonnes",
+    "daily_capacity": "tonnes_per_day",
+    "annual_capacity": "tonnes_per_year",
+    "distance": "km",
+    "area": "hectares",
+    "carbon": "kgCO2e",
+    "carbon_reporting": "tCO2e",
+    "currency": "INR",
+    "percentage": "0_to_100_decimal"
+  },
+  "geospatial": {
+    "crs": "EPSG:4326 (WGS84)",
+    "geojson_coordinate_order": "[longitude, latitude]",
+    "postgis_type": "geometry(Point, 4326)"
   }
 }

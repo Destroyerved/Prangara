@@ -1,0 +1,72 @@
+[
+  {
+    "chunk_id": "RAG-CEA-001",
+    "source_id": "SRC-CEA-V21",
+    "source_version": "21.0 / 22.0",
+    "document_title": "CO2 Baseline Database for the Indian Power Sector User Guide",
+    "page": "Page 8",
+    "section": "Executive Summary & Baseline Emission Factors",
+    "jurisdiction": "India",
+    "effective_date": "2025-12-01",
+    "url": "https://cea.nic.in/cdm-co2-baseline-database/?lang=en",
+    "text_content": "The weighted average emission factor for the Indian national electricity grid (including renewable energy sources) stands at 0.716 tCO2/MWh for the evaluated reporting period. Operating Margin (OM) is established at 0.892 tCO2/MWh, while Build Margin (BM) is calculated at 0.540 tCO2/MWh. State-level emission variations arise from regional generation mixes but CEA officially publishes national and regional grid values.",
+    "token_estimate": 88,
+    "checksum_sha256": "f774708e54a4c87ec022c2adc46aa0242702e250eedf7ff97d3a099185cc1879"
+  },
+  {
+    "chunk_id": "RAG-DESNZ-001",
+    "source_id": "SRC-DESNZ-2026",
+    "source_version": "2026.1",
+    "document_title": "UK Government GHG Conversion Factors for Company Reporting 2026",
+    "page": "Methodology Report Section 3.2",
+    "section": "Liquid and Gaseous Fuels Combustion",
+    "jurisdiction": "United Kingdom (Combustion Reference)",
+    "effective_date": "2026-06-01",
+    "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026",
+    "text_content": "Stationary combustion conversion factors for standard industrial fuels: 100% mineral diesel accounts for 2.684 kgCO2e per litre; standard commercial natural gas yields 2.023 kgCO2e per standard cubic metre (Gross CV basis); and LPG produces 2.939 kgCO2e per kilogram. All factors include CO2, CH4, and N2O expressed in CO2 equivalent using IPCC AR5 Global Warming Potentials.",
+    "token_estimate": 82,
+    "checksum_sha256": "7202605144c573df777af6569ea70f646a4d8479df3e611d860b36f535e9d05d"
+  },
+  {
+    "chunk_id": "RAG-BEE-001",
+    "source_id": "SRC-BEE-MSME-2024",
+    "source_version": "2024.1",
+    "document_title": "BEE Energy & Resource Mapping in 55 Indian MSME Clusters",
+    "page": "Morbi Ceramics Manual Section 4",
+    "section": "Thermal & Electrical Specific Energy Consumption Benchmarks",
+    "jurisdiction": "India",
+    "effective_date": "2024-08-30",
+    "url": "https://beeindia.gov.in/",
+    "text_content": "In the Morbi Ceramics cluster, vitrified and wall tile manufacturing exhibits an official reported thermal SEC range between 4.80 and 9.20 GJ per tonne of finished product, with a median of 6.40 GJ/t. Electrical SEC ranges between 120 and 260 kWh/t, with a median of 180 kWh/t. Roller kilns represent over 78% of total thermal energy consumption, making flue gas waste heat recovery the single highest impact intervention.",
+    "token_estimate": 91,
+    "checksum_sha256": "bcba0d572da1668b21c8ecc402a2502e147b8d37f5b9fae041d360f75a98a90b"
+  },
+  {
+    "chunk_id": "RAG-CBAM-001",
+    "source_id": "SRC-EU-CBAM-2026",
+    "source_version": "Regulation (EU) 2023/956",
+    "document_title": "Guidance for Importers on the Definitive Regime of the EU CBAM",
+    "page": "Annex III & Default Emissions",
+    "section": "Covered Goods in Iron, Steel and Aluminium",
+    "jurisdiction": "European Union / Non-EU Exporters",
+    "effective_date": "2026-01-01",
+    "url": "https://taxation-customs.ec.europa.eu/",
+    "text_content": "Under the definitive regime beginning 2026, Indian exporters of covered iron, steel, and aluminium goods into the European Union must report both direct (Scope 1) and indirect (Scope 2) embedded emissions. If primary producer EPDs are absent, European Commission default benchmarks apply (e.g. 2.19 tCO2e/t for HRC, 1.98 tCO2e/t for rebar). PRANGARA outputs for CBAM liability are classified as INDICATIVE CBAM EXPOSURE.",
+    "token_estimate": 96,
+    "checksum_sha256": "82145e7a9dc57d5b2b2e7a36c38be795d81db2538b9ad1baf41e17ab1e27b59a"
+  },
+  {
+    "chunk_id": "RAG-CCTS-001",
+    "source_id": "SRC-BEE-CCTS-2025",
+    "source_version": "Notification 2025.1",
+    "document_title": "Carbon Credit Trading Scheme (CCTS) Framework & Sector Guidelines",
+    "page": "Clauses 4-7",
+    "section": "Obligated Entity Thresholds and Third-Party Verification",
+    "jurisdiction": "India",
+    "effective_date": "2025-05-18",
+    "url": "https://beeindia.gov.in/",
+    "text_content": "Under the Carbon Credit Trading Scheme (CCTS), industrial plants with an annual energy consumption exceeding sector thresholds (e.g., 30,000 toe/year for Iron & Steel, 10,000 toe/year for Cement) are notified as Obligated Entities. Obligated entities must reduce specific GHG emission intensity against baseline targets or purchase Carbon Credit Certificates (CCCs). Verification must be performed by BEE-accredited Validation & Verification Bodies (VVBs).",
+    "token_estimate": 94,
+    "checksum_sha256": "263510206f5e6cd83fa71eae105ca89d6c11e8b38defccbf5f8f181f0a2d1ac3"
+  }
+]

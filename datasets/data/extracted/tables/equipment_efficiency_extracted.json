@@ -1,0 +1,80 @@
+[
+  {
+    "equipment_type": "Electric Motor",
+    "rated_power_kw": 0.75,
+    "poles": 4,
+    "ie1_efficiency_pct": 72.1,
+    "ie2_efficiency_pct": 79.6,
+    "ie3_efficiency_pct": 82.5,
+    "ie4_efficiency_pct": 85.7,
+    "standard": "IEC 60034-30-1 / IS 12615"
+  },
+  {
+    "equipment_type": "Electric Motor",
+    "rated_power_kw": 2.2,
+    "poles": 4,
+    "ie1_efficiency_pct": 79.7,
+    "ie2_efficiency_pct": 84.3,
+    "ie3_efficiency_pct": 86.7,
+    "ie4_efficiency_pct": 89.5,
+    "standard": "IEC 60034-30-1 / IS 12615"
+  },
+  {
+    "equipment_type": "Electric Motor",
+    "rated_power_kw": 7.5,
+    "poles": 4,
+    "ie1_efficiency_pct": 86,
+    "ie2_efficiency_pct": 88.7,
+    "ie3_efficiency_pct": 90.4,
+    "ie4_efficiency_pct": 92.6,
+    "standard": "IEC 60034-30-1 / IS 12615"
+  },
+  {
+    "equipment_type": "Electric Motor",
+    "rated_power_kw": 22,
+    "poles": 4,
+    "ie1_efficiency_pct": 90.5,
+    "ie2_efficiency_pct": 92.2,
+    "ie3_efficiency_pct": 93.3,
+    "ie4_efficiency_pct": 94.9,
+    "standard": "IEC 60034-30-1 / IS 12615"
+  },
+  {
+    "equipment_type": "Electric Motor",
+    "rated_power_kw": 75,
+    "poles": 4,
+    "ie1_efficiency_pct": 93.6,
+    "ie2_efficiency_pct": 94.7,
+    "ie3_efficiency_pct": 95.4,
+    "ie4_efficiency_pct": 96.5,
+    "standard": "IEC 60034-30-1 / IS 12615"
+  },
+  {
+    "equipment_type": "Electric Motor",
+    "rated_power_kw": 160,
+    "poles": 4,
+    "ie1_efficiency_pct": 94.8,
+    "ie2_efficiency_pct": 95.6,
+    "ie3_efficiency_pct": 96.2,
+    "ie4_efficiency_pct": 97.1,
+    "standard": "IEC 60034-30-1 / IS 12615"
+  },
+  {
+    "equipment_type": "Industrial Boiler",
+    "rated_capacity_tph": 5,
+    "fuel": "Coal / Biomass",
+    "baseline_efficiency_pct": 72,
+    "improved_efficiency_pct": 84,
+    "benchmark_type": "BEE Boiler Manual",
+    "standard": "Indian Boiler Regulations"
+  },
+  {
+    "equipment_type": "Rotary Screw Compressor",
+    "rated_power_kw": 45,
+    "pressure_bar": 7.5,
+    "baseline_specific_power_kw_m3_min": 7.8,
+    "vfd_specific_power_kw_m3_min": 6.2,
+    "benchmark_type": "ISO 1217",
+    "standard": "ISO 1217 Annex C"
+  }
+]

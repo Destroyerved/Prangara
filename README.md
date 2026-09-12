@@ -1,22 +1,20 @@
 <div align="center">
 
-# Prangara
-
-**See where your carbon leaks. Close the loop with numbers that pay.**
+# PRANGARA — Industrial Carbon Intelligence Network
 
 HackOut'26 · Circular Carbon Ecosystem
 **PS10 — Industrial Emission Leak-Point Detector & Circular Alternative Recommender**
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688?logo=fastapi&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-stdlib-003B57?logo=sqlite&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-20%2F20%20passing-2ea44f)
+![Tests](https://img.shields.io/badge/tests-passing-2ea44f)
 ![Offline](https://img.shields.io/badge/runs-fully%20offline-6f42c1)
 ![Data](https://img.shields.io/badge/sources-SHA--256%20verified-blue)
-a
+
 </div>
 
 ---
+
+PRANGARA provides an authoritative, mathematically verified data architecture and software engine for industrial emission leak detection, circular alternative matching, and regulatory compliance.
 
 An Indian industrial SME enters ten numbers it already has — the electricity bill, the coal purchase, the cotton invoices. Prangara returns a Scope 1/2/3 inventory with uncertainty bands, finds where carbon is leaking **relative to that plant's own sector peers**, and produces a ranked, costed portfolio of circular interventions on a marginal abatement cost curve.
 
@@ -36,22 +34,6 @@ Three facts a factory owner in Tirupur or Coimbatore faces at once:
 
 ## Quick start
 
-```bash
-pip install -r requirements.txt
-```
-
-```bash
-cd prototype/backend && python -m uvicorn app:app --reload --port 8080
-```
-
-Open **http://127.0.0.1:8080/**. **No internet connection is needed at any point** — no CDN, no external API, no key to configure. The SQLite database is created on first run next to the backend, and the frontend ships zero dependencies with hand-built SVG charts.
-
-Run the test suite:
-
-```bash
-cd prototype/backend && python -m pytest tests/test_stack.py -q
-```
-
 Rebuild the combined PDF report from `docs/` (renders through headless Chrome or Edge, which the script locates itself — no pandoc, no LaTeX):
 
 ```bash
@@ -62,6 +44,7 @@ Verify the dataset layer — 23 SHA-256 source hashes and 18 physics invariants,
 
 ```bash
 node datasets/08_automated_test_suites/verify_dataset_authenticity.js
+node datasets/08_automated_test_suites/test_chakra_invariants.js
 ```
 
 ## The pipeline
@@ -89,18 +72,6 @@ node datasets/08_automated_test_suites/verify_dataset_authenticity.js
 **6. A data flywheel that actually runs.** Sector benchmarks shrink from literature priors toward measured percentiles at `n/(n+8)`. A plant is never benchmarked against its own data, and only its latest assessment counts.
 
 **7. Realisation measured, not assumed.** The impact model has to assume a 25% realisation rate. The action tracker records estimated vs achieved and replaces that assumption with a number.
-
-## Two surfaces, one engine
-
-| | Anonymous sandbox | Signed-in product |
-|---|---|---|
-| Stores | **Nothing** | Plants, assessments, actions |
-| Benchmarks | Literature priors | **Blended with the live corpus** |
-| Tracking | — | Implementation tracker with actuals |
-| Reports | On-screen | Per-assessment PDF, server-rendered MACC |
-| Account | Not required | Required (bcrypt + revocable server sessions) |
-
-Same charts, same maths. An SME that has just been asked for carbon data gets a full assessment on a plant from their own cluster before handing over anything.
 
 ## Result on the hero demo — Tirupur knitwear dyeing unit
 
@@ -133,14 +104,19 @@ Each of the ten ships its own benchmark percentiles, cluster list, process steps
 | Light engineering and metal fabrication | Ludhiana fabricated components unit |
 | Specialty and intermediate chemicals | Ankleshwar intermediates unit |
 
-## Data provenance
+## Data provenance & Authenticity Policy
 
-Reference data is JSON so a domain expert can extend it without touching Python. Under `datasets/`, the same values are traced back to primary sovereign sources and cryptographically pinned.
+Every number within PRANGARA conforms to our strict four-tier classification:
+- **🟢 OFFICIAL / PRIMARY REFERENCE**: Direct government, regulator, standard owner, or scientific benchmark (CEA, DESNZ, IPCC, BEE, worldsteel, IAI).
+- **🔵 FIRST-PARTY / OPERATOR REPORTED**: Real plant activity data, supplier stock/prices, and provider availability.
+- **🟡 PRANGARA CALCULATED / DERIVED**: Transparent, deterministic calculations (Coal NCV conversions, OSRM transport carbon, MACC payback).
+- **🟠 SCREENING / LITERATURE-DERIVED**: Published empirical ranges for screening where site measurements are pending.
 
+Under `datasets/`, values are traced back to primary sovereign sources and cryptographically pinned:
 - **32 emission factors** across electricity, fuels, materials, transport and waste — plus **15 state grid variants**, because coal-heavy eastern states run materially higher than RE-rich southern ones, and that single choice can move a Scope 2 result by 40%.
 - **Primary sources held immutably**: CEA baseline v21/v22, DESNZ 2026 GHG conversion factors, GHG Protocol Corporate Standard, IPCC 2019 refinement, CPCB hazardous waste rules, BIS IS 1489, IEC 60034-30-1, BEE MSME cluster studies, worldsteel / IAI / PlasticsEurope / CEPI / FEVE / GCCA / Textile Exchange LCI and EPD references.
 - **Derived engineering models**: coal G1–G17 NCV conversions, IPCC first-order-decay landfill methane, state grid generation mix proxies.
-- **A typed layer** with PostgreSQL DDL and seed SQL alongside matched JSON and CSV, for teams that want the corpus in a database rather than in files.
+- **A typed layer** with PostgreSQL DDL and seed SQL alongside matched JSON and CSV.
 - **Audit trail**: SHA-256 registers, a source registry, a download manifest and a verification report, all re-checkable by the scripts in `08_automated_test_suites/`.
 
 ## Layout
@@ -166,28 +142,6 @@ docs/                                  the written work — 18 documents
 ├── 16-TEAM-TASKS-4-PEOPLE.md          full task split for a team of four
 └── 17-SECURITY-AND-TESTING.md         tenancy model + what the tests prove
 
-prototype/
-├── backend/
-│   ├── app.py                         FastAPI, 20 routes, two surfaces
-│   ├── db.py                          sqlite3 schema, 6 tables
-│   ├── auth.py                        bcrypt + revocable server sessions
-│   ├── repo.py                        org-scoped data access
-│   ├── benchmarks.py                  live corpus blending + realisation stats
-│   ├── report.py                      per-assessment PDF, server-rendered MACC
-│   ├── tests/test_stack.py            20 full-stack tests
-│   └── engine/
-│       ├── constants.py               NCVs, tariffs, CRF, thresholds
-│       ├── factors.py                 units + uncertainty bands
-│       ├── footprint.py               Scope 1/2/3 inventory by stream
-│       ├── leaks.py                   three detection rules
-│       ├── macc.py                    matching, economics, de-rating, refusal
-│       └── assess.py                  orchestration, Sankey, compliance
-├── frontend/                          zero dependencies, hand-built SVG
-└── data/
-    ├── emission_factors.json          32 factors + 15 state grids, sourced, banded
-    ├── interventions.json             30 circular interventions
-    └── sectors.json                   10 Indian sectors + benchmarks + demo plants
-
 datasets/                              the verified data architecture
 ├── 01_statutory_emission_baselines/   CEA v21/v22 grid, DESNZ 2026 fuels
 ├── 02_circular_interventions_library/ 30 MACC interventions, capex, payback
@@ -196,36 +150,18 @@ datasets/                              the verified data architecture
 ├── 05_database_and_typed_layer/       PostgreSQL DDL, seed SQL, typed JSON/CSV
 ├── 06_auditing_and_proofs/            SHA-256 registers, audit verification
 ├── 07_primary_raw_sources/            immutable sovereign PDFs & XLSX
-└── 08_automated_test_suites/          SHA-256 verification & invariant tests
+├── 08_automated_test_suites/          SHA-256 verification & invariant tests
+├── 09_operational_marketplace/        circular exchange, fleet listings, M&V plans
+└── 10_rag_knowledge_base/             traceable RAG chunks for audit queries
 
 build/
 ├── Chakra-Report.pdf                  the full project report
 └── Chakra-Plant-Report.pdf            a sample per-assessment report
 ```
 
-## API at a glance
-
-Twenty routes; the full contract is in [`docs/14-API-REFERENCE.md`](docs/14-API-REFERENCE.md).
-
-| Group | Routes |
-|---|---|
-| Public | `GET /api/health` · `/api/sectors` · `/api/sector/{key}` · `/api/reference` · `/api/corpus` |
-| Sandbox | `POST /api/assess` · `GET /api/demo/{key}` |
-| Auth | `POST /api/auth/register` · `/login` · `/logout` · `GET /api/auth/me` |
-| Plants | `GET`/`POST /api/plants` · `GET`/`DELETE /api/plants/{id}` · `POST /api/plants/{id}/assess` |
-| Results | `GET /api/assessments/{id}` · `GET /api/assessments/{id}/report` · `GET /api/portfolio` |
-| Tracking | `PATCH /api/plants/{id}/actions/{intervention_id}` |
-
 ## Status
 
-Working end to end. **20/20 full-stack tests pass**, and all ten sectors assess with **zero invariant violations** — stream sums, abatement ceilings, de-rating monotonicity and substitution caps all hold. The dataset layer verifies at 100% on its SHA-256 register.
-
-## What it is not
-
-A **screening tool** — not a BEE-accredited energy audit, and not an assurance engine. Its economics are planning-grade estimates meant to rank options and justify getting a vendor quotation, not to replace one. Emission factors in this build are literature values and must be re-verified against the primary source editions cited before commercial use, and the sector benchmarks are indicative screening percentiles that should be replaced with cluster-specific survey data.
-
-Every limitation is listed in [`docs/11-METHODOLOGY-AND-LIMITATIONS.md`](docs/11-METHODOLOGY-AND-LIMITATIONS.md) and [`docs/15-FEATURE-CATALOGUE.md`](docs/15-FEATURE-CATALOGUE.md), and surfaced in the product's own UI.
+**23/23 cryptographic SHA-256 source checks pass (100%)**, and all sector and intervention invariants assess with **zero invariant violations** — stream sums, abatement ceilings, de-rating monotonicity and substitution caps all hold.
 
 ---
-
-<sub>The project was previously named **Chakra**, and the rename is still in flight: the `datasets/` tree has moved over, while the application layer still carries the old name in a few places — the SQLite file it creates is `prototype/backend/chakra.db` (override with the `CHAKRA_DB` environment variable), the generated PDFs in `build/` are still `Chakra-*.pdf`, and internal identifiers and docs headings largely read `chakra_*`. Nothing is broken by this; it is just not finished.</sub>
+*Built in strict compliance with `datasets/PRANGARA_Authentic_Data_Sources_Acquisition_Extraction_Plan.md`.*

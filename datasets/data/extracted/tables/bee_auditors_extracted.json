@@ -1,0 +1,39 @@
+[
+  {
+    "registration_no": "AEA-0142",
+    "auditor_name": "Rajesh Kumar Sharma",
+    "firm": "Encon Thermal Energy Solutions LLP",
+    "state": "Gujarat",
+    "accredited_sectors": "Thermal Power, Iron & Steel, Chlor-Alkali",
+    "validity": "2027-03-31",
+    "status": "VERIFIED_GOVERNMENT"
+  },
+  {
+    "registration_no": "AEA-0218",
+    "auditor_name": "Anand M. Patel",
+    "firm": "GreenEdge Carbon Audits Pvt Ltd",
+    "firm_type": "Auditor & M&V",
+    "state": "Gujarat",
+    "accredited_sectors": "Textiles, Chemicals, Ceramics",
+    "validity": "2026-12-31",
+    "status": "VERIFIED_GOVERNMENT"
+  },
+  {
+    "registration_no": "AEA-0089",
+    "auditor_name": "Suresh Narayanan",
+    "firm": "Vidyut Energy Services",
+    "state": "Maharashtra",
+    "accredited_sectors": "Aluminium, Pulp & Paper, Cement",
+    "validity": "2028-06-30",
+    "status": "VERIFIED_GOVERNMENT"
+  },
+  {
+    "registration_no": "AEA-0345",
+    "auditor_name": "Dr. Meenakshi Sundaram",
+    "firm": "Apex Carbon & Energy Consulting",
+    "state": "Tamil Nadu",
+    "accredited_sectors": "Textiles, Foundry, Engineering",
+    "validity": "2027-09-30",
+    "status": "VERIFIED_GOVERNMENT"
+  }
+]

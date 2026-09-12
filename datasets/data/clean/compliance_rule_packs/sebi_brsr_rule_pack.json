@@ -1,0 +1,43 @@
+{
+  "rule_pack_id": "RP-SEBI-BRSR-2025",
+  "title": "SEBI BRSR Core Value Chain ESG Assurance Pack",
+  "jurisdiction": "India",
+  "rules": [
+    {
+      "metric_id": "BRSR-CORE-E1",
+      "category": "Greenhouse Gas Emissions",
+      "metric": "Scope 1 Emissions (tCO2e)",
+      "applicability": "Top 250 Listed Companies & Value Chain Partners",
+      "assurance_type": "Reasonable Assurance",
+      "source_circular": "SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122",
+      "status": "VERIFIED_REGULATOR"
+    },
+    {
+      "metric_id": "BRSR-CORE-E2",
+      "category": "Greenhouse Gas Emissions",
+      "metric": "Scope 2 Emissions (Location-based tCO2e)",
+      "applicability": "Top 250 Listed Companies & Value Chain Partners",
+      "assurance_type": "Reasonable Assurance",
+      "source_circular": "SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122",
+      "status": "VERIFIED_REGULATOR"
+    },
+    {
+      "metric_id": "BRSR-CORE-E3",
+      "category": "Energy Intensity",
+      "metric": "Total Energy Intensity per Rupee of Turnover",
+      "applicability": "Top 250 Listed Companies",
+      "assurance_type": "Reasonable Assurance",
+      "source_circular": "SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122",
+      "status": "VERIFIED_REGULATOR"
+    },
+    {
+      "metric_id": "BRSR-CORE-E4",
+      "category": "Waste & Circularity",
+      "metric": "Waste Diverted from Disposal (Recycled/Reused %)",
+      "applicability": "Top 250 Listed Companies & Value Chain Partners",
+      "assurance_type": "Reasonable Assurance",
+      "source_circular": "SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122",
+      "status": "VERIFIED_REGULATOR"
+    }
+  ]
+}

@@ -394,15 +394,15 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 </div>
 </div>
 </div>
-<nav role="navigation"  id="14153887block-mainmenu" class="block block-menu navigation menu--main-menu">
+<nav role="navigation"  id="14425705block-mainmenu" class="block block-menu navigation menu--main-menu">
 
-<h1 class="visually-hidden" id="16478669block-mainmenu-menu">MAIN MENU FOR BUREAU OF INDIAN STANDARDS HEADER MAIN MENU</h1>
+<h1 class="visually-hidden" id="16649172block-mainmenu-menu">MAIN MENU FOR BUREAU OF INDIAN STANDARDS HEADER MAIN MENU</h1>
 
 
 <div class="content" >
-<div class="menu-toggle-target menu-toggle-target-show" id="20176565show-block-mainmenu"></div>
-<div class="menu-toggle-target" id="21439198hide-block-mainmenu"></div>
-<a  title=" Hide — MAIN MENU" id="2260360022956621Hide—MAIN"  class="menu-toggle menu-toggle--hide" href="https://www.bis.gov.in">Hide — MAIN MENU</a>
+<div class="menu-toggle-target menu-toggle-target-show" id="20982636show-block-mainmenu"></div>
+<div class="menu-toggle-target" id="21348314hide-block-mainmenu"></div>
+<a  title=" Hide — MAIN MENU" id="2276360722713891Hide—MAIN"  class="menu-toggle menu-toggle--hide" href="https://www.bis.gov.in">Hide — MAIN MENU</a>
 
 
 <ul class="clearfix menu" style="line-height:18px;">
@@ -418,26 +418,26 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 <a href="https://www.bis.gov.in/the-bureau/about-bis/?lang=hi">सिंहावलोकन</a>
 </li>
 <li class="menu-item" style="width: auto;position:relative;">
-<a id="38818925" title="संगठन"  href="https://www.bis.gov.in/the-bureau/organization-2/?lang=hi">संगठन »</a>
+<a id="38802039" title="संगठन"  href="https://www.bis.gov.in/the-bureau/organization-2/?lang=hi">संगठन »</a>
 
 <ul class="abis1" style="width: 130px;">
-<li id="41112053_Governing_Council" title="Governing Council"  class="menu-item2" style="width: 100%;">
-<a id="42681707_Governing_Council" title="Governing Council"  href="#" target="_blank">शासी परिषद् »</a>
+<li id="41368065_Governing_Council" title="Governing Council"  class="menu-item2" style="width: 100%;">
+<a id="42243647_Governing_Council" title="Governing Council"  href="#" target="_blank">शासी परिषद् »</a>
 
 <!-- ✅ Nested UL is now inside LI -->
 <ul class="menu-new">
 <li title="GC Members"  class="menu-item2" style="width: 100%;">
-<a id="47507979_GC_Members" title="जीसी सदस्य"  href="https://www.bis.gov.in/the-bureau/organization-2/gc-members/?lang=hi" target="_blank">जीसी सदस्य</a>
+<a id="47209551_GC_Members" title="जीसी सदस्य"  href="https://www.bis.gov.in/the-bureau/organization-2/gc-members/?lang=hi" target="_blank">जीसी सदस्य</a>
 </li>
 
 <li title="GC proceedings"  class="menu-item2" style="width: 100%;">
-<a id="51542414_GC_proceedings" title="जीसी कार्यवाही"  href="https://www.bis.gov.in/the-bureau/organization-2/gc-proceedings/?lang=hi" target="_blank">जीसी कार्यवाही</a>
+<a id="51548450_GC_proceedings" title="जीसी कार्यवाही"  href="https://www.bis.gov.in/the-bureau/organization-2/gc-proceedings/?lang=hi" target="_blank">जीसी कार्यवाही</a>
 </li>
 </ul>
 </li>
 
-<li id="56685832_Executive_Committeess" title="कार्यकारी समिति"  class="menu-item2" style="width: 100%;">
-<a id="57789935_Executive_Committeed" title="कार्यकारी समिति"  href="#">कार्यकारी समिति »</a>
+<li id="56605069_Executive_Committeess" title="कार्यकारी समिति"  class="menu-item2" style="width: 100%;">
+<a id="57984923_Executive_Committeed" title="कार्यकारी समिति"  href="#">कार्यकारी समिति »</a>
 
 <!-- ✅ Nested UL is now inside LI -->
 <ul class="menu-new">
@@ -451,7 +451,7 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 </ul>
 </li>
 <li  class="menu-item2" style="width: 100%;float: left;">
-<a id="71455606" title="प्रशासनिक संरचना"  href="https://www.bis.gov.in/wp-content/uploads/2018/09/bis-org.pdf" target="_blank" >प्रशासनिक संरचना</a></li>
+<a id="71666508" title="प्रशासनिक संरचना"  href="https://www.bis.gov.in/wp-content/uploads/2018/09/bis-org.pdf" target="_blank" >प्रशासनिक संरचना</a></li>
 
 <li  class="menu-item2" style="width: 100%;float: left;"><a href="https://www.bis.gov.in/wp-content/uploads/2024/12/Organisation-Chart-Dec-24-Hindi-Corrected.pdf" target="_blank" >संगठन चार्ट</a></li>
 </ul>
@@ -462,10 +462,10 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 </li>
 
 <li class="menu-item" style="width: auto;">
-<a id="82894288" title="बीआईएस महिमा"   href="http://164.100.105.198:8097/archivewebsite/" target="_blank" >बीआईएस महिमा</a>
+<a id="82546894" title="बीआईएस महिमा"   href="http://164.100.105.198:8097/archivewebsite/" target="_blank" >बीआईएस महिमा</a>
 </li>
 <li class="menu-item" style="width: auto;">
-<a id="85159273" title="अध्यक्ष"  href="https://www.bis.gov.in/the-bureau/president/?lang=hi">अध्यक्ष</a>
+<a id="85213099" title="अध्यक्ष"  href="https://www.bis.gov.in/the-bureau/president/?lang=hi">अध्यक्ष</a>
 </li>
 <li  class="menu-item" style="width: auto;">
 <a href="https://www.bis.gov.in/the-bureau-2/vice-president/?lang=hi">उपाध्यक्ष</a>
@@ -478,11 +478,11 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 <a href="https://www.bis.gov.in/the-bureau/annual-report/?lang=hi">वार्षिक रिपोर्ट »</a>
 
 <ul class="abis2" style="height:auto;">
-<li  class="menu-item2" style="width: 100%"><a id="98141248" title="वर्ष 2020-2021" href="https://www.bis.gov.in/wp-content/uploads/2022/02/Annual_report_for_final_approval_on_12-1-2022.pdf" target="_blank" >वर्ष 2020-2021</a></li>
-<li  class="menu-item2" style="width: 100%" ><a id="99883210" title="वर्ष 2019-2020b" href="https://www.bis.gov.in/wp-content/uploads/2021/03/Annual_Report_2019-20_new.pdf" target="_blank" >वर्ष 2019-2020</a></li>
-<li class="menu-item2" style="width: 100%"><a id="100362247" title="वर्ष 2018-2019b" href="https://www.bis.gov.in/wp-content/uploads/2020/03/BISAnnualReport2019.pdf" target="_blank" >वर्ष 2018-2019</a></li>
-<li class="menu-item2" style="width: 100%"><a id="101620780" title="वर्ष 2017-2018b"  href="https://www.bis.gov.in/PDF/org/AnnualReportforPrinting2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
-<li class="menu-item2" style="width: 100%"><a id="102367250" title="वर्ष 2016-2017new"  href="https://www.bis.gov.in/org/AnnualReport2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
+<li  class="menu-item2" style="width: 100%"><a id="98496267" title="वर्ष 2020-2021" href="https://www.bis.gov.in/wp-content/uploads/2022/02/Annual_report_for_final_approval_on_12-1-2022.pdf" target="_blank" >वर्ष 2020-2021</a></li>
+<li  class="menu-item2" style="width: 100%" ><a id="99836755" title="वर्ष 2019-2020b" href="https://www.bis.gov.in/wp-content/uploads/2021/03/Annual_Report_2019-20_new.pdf" target="_blank" >वर्ष 2019-2020</a></li>
+<li class="menu-item2" style="width: 100%"><a id="100198657" title="वर्ष 2018-2019b" href="https://www.bis.gov.in/wp-content/uploads/2020/03/BISAnnualReport2019.pdf" target="_blank" >वर्ष 2018-2019</a></li>
+<li class="menu-item2" style="width: 100%"><a id="101399593" title="वर्ष 2017-2018b"  href="https://www.bis.gov.in/PDF/org/AnnualReportforPrinting2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
+<li class="menu-item2" style="width: 100%"><a id="102557087" title="वर्ष 2016-2017new"  href="https://www.bis.gov.in/org/AnnualReport2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
 <li class="menu-item2"  style="width: 100%"><a href="https://www.bis.gov.in/org/ANNUALREPORT2015-16.pdf" target="_blank" >वर्ष 2015-2016</a></li>
 <li class="menu-item2"  style="width: 100%"><a href="https://www.bis.gov.in/org/ANNUALREPORT2014-15.pdf" target="_blank" >वर्ष 2014-2015</a></li>
 <li  class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/org/ANNUALREPORT2013.pdf" target="_blank" >वर्ष 2013-2014</a></li>
@@ -495,15 +495,15 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 <a href="https://www.bis.gov.in/index.php/the-bureau-2/review-statements/">वार्षिक रिपोर्ट पर समीक्षा वक्तव्य »</a>
 
 <ul class="abis2" style="height:auto;">
-<li class="menu-item2" style="width: 100%"><a id="115434037" title="2020-2021" href="https://www.bis.gov.in/wp-content/uploads/2023/12/Review-Statement-2021-2022-Hindi.pdf" target="_blank" >वर्ष 2021-2022</a></li>
-<li class="menu-item2" style="width: 100%"><a id="116770892" title="2020-2021" href="https://www.bis.gov.in/wp-content/uploads/2022/02/Review-Statement-BIS-AR-2020-21.pdf" target="_blank" >वर्ष 2020-2021</a></li>
-<li class="menu-item2" style="width: 100%"><a id="117147874" title="वर्ष 2019-2020" href="https://www.bis.gov.in/wp-content/uploads/2021/03/Review_Statement_2019-20.pdf" target="_blank" >वर्ष 2019-2020</a></li>
-<li class="menu-item2" style="width: 100%"><a id="118245404" title="वर्ष 2018-2019" href="https://www.bis.gov.in/wp-content/uploads/2020/03/ReviewStatementofBISAR201819.pdf" target="_blank" >वर्ष 2018-2019</a></li>
+<li class="menu-item2" style="width: 100%"><a id="115907785" title="2020-2021" href="https://www.bis.gov.in/wp-content/uploads/2023/12/Review-Statement-2021-2022-Hindi.pdf" target="_blank" >वर्ष 2021-2022</a></li>
+<li class="menu-item2" style="width: 100%"><a id="116317891" title="2020-2021" href="https://www.bis.gov.in/wp-content/uploads/2022/02/Review-Statement-BIS-AR-2020-21.pdf" target="_blank" >वर्ष 2020-2021</a></li>
+<li class="menu-item2" style="width: 100%"><a id="117595119" title="वर्ष 2019-2020" href="https://www.bis.gov.in/wp-content/uploads/2021/03/Review_Statement_2019-20.pdf" target="_blank" >वर्ष 2019-2020</a></li>
+<li class="menu-item2" style="width: 100%"><a id="118966842" title="वर्ष 2018-2019" href="https://www.bis.gov.in/wp-content/uploads/2020/03/ReviewStatementofBISAR201819.pdf" target="_blank" >वर्ष 2018-2019</a></li>
 <li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
 <li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
 <li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2015-16.pdf" target="_blank" >वर्ष 2015-2016</a></li>	
 <li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2014-15.pdf" target="_blank" >वर्ष 2014-2015</a></li>
-<li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2013-14.pdf" target="_blank"  id="123235427" title="Year 2013-2014" >वर्ष 2013-2014</a></li>	
+<li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2013-14.pdf" target="_blank"  id="123916584" title="Year 2013-2014" >वर्ष 2013-2014</a></li>	
 <li  class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2012-13.pdf" target="_blank" >वर्ष 2012-2013</a></li>
 <li class="menu-item2" style="width: 100%"><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2011-12.pdf" target="_blank" >वर्ष 2011-2012</a></li>
 
@@ -511,14 +511,14 @@ var cc_ajax_object = {"ajax_url":"https://www.bis.gov.in/wp-admin/admin-ajax.php
 </ul>
 </li>
 
-<li id="131960674" title="देरी बयान"  class="menu-item" style="width: auto;">
+<li id="131735876" title="देरी बयान"  class="menu-item" style="width: auto;">
 <a href="https://www.bis.gov.in/the-bureau/delay-statement/?lang=hi">देरी बयान»</a>
 
 <ul class="abis2" style="height:auto;">
-<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2023/12/Delay-statement-2021-2022-Hindi.pdf" target="_blank"  id="135547002" title="2020-2021">वर्ष 2021-2022</a></li>
-<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/02/DELAY-STATEMENT-BIS-AR-2020-21.pdf" target="_blank"  id="136393357" title="2020-2021">वर्ष 2020-2021</a></li>
-<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2021/03/Delay_Statement_2019-20.pdf" target="_blank"  id="137764927" title="वर्ष 2019-2020">वर्ष 2019-2020</a></li>
-<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2020/04/Delay-Statement-for-BIS-AR-2018-19.pdf" target="_blank"  id="138724090" title="वर्ष 2018-2019">वर्ष 2018-2019</a></li>
+<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2023/12/Delay-statement-2021-2022-Hindi.pdf" target="_blank"  id="135719520" title="2020-2021">वर्ष 2021-2022</a></li>
+<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/02/DELAY-STATEMENT-BIS-AR-2020-21.pdf" target="_blank"  id="136134890" title="2020-2021">वर्ष 2020-2021</a></li>
+<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2021/03/Delay_Statement_2019-20.pdf" target="_blank"  id="137285725" title="वर्ष 2019-2020">वर्ष 2019-2020</a></li>
+<li class="menu-item2" style="width: 100%;; height: auto;"><a href="https://www.bis.gov.in/wp-content/uploads/2020/04/Delay-Statement-for-BIS-AR-2018-19.pdf" target="_blank"  id="138316691" title="वर्ष 2018-2019">वर्ष 2018-2019</a></li>
 </ul>
 </li>
 
@@ -668,16 +668,16 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank"   href="https://standards.bis.gov.in/website/technical-departments/program-of-work?id=eyJpdiI6IjVlUDhKTGJScGZKZWkwQXZWZHFlc0E9PSIsInZhbHVlIjoiZldQd29qY0loUEFlcU5PUTV2Y2t6Zz09IiwibWFjIjoiZjc1YjdmYTQxZTRkYmZmOTBjZTBjZGRhZGI2Zjc1OTA5OWI0Y2Q5Y2JlZDJmYmJjYTMxZDJkNzUwMzEwMjE3NyIsInRhZyI6IiJ9">प्रोग्राम ऑफ़ वर्क </a>
 </li>
 
-<li id="288567057road_maps" title="रणनीति रोडमैप"  class="menu-item" style="width:100%">
-<a  id="289335156road_maps" title="रणनीति रोडमैप"  onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/strategic-roadmaps">रणनीति रोडमैप </a>
+<li id="288679207road_maps" title="रणनीति रोडमैप"  class="menu-item" style="width:100%">
+<a  id="289911701road_maps" title="रणनीति रोडमैप"  onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/strategic-roadmaps">रणनीति रोडमैप </a>
 </li>
 
-<li id="292103958road_maps" title="मानक निर्माण नियमावली 2022"  class="menu-item" style="width:100%">
-<a  id="293333944road_maps" title="मानक निर्माण नियमावली 2022"  onclick="return confirm" onkeypress="return confirm" target="_blank"  href="https://www.bis.gov.in/wp-content/uploads/2022/12/Revised-SFM.pdf">मानक निर्माण नियमावली 2022</a>
+<li id="292569073road_maps" title="मानक निर्माण नियमावली 2022"  class="menu-item" style="width:100%">
+<a  id="293820452road_maps" title="मानक निर्माण नियमावली 2022"  onclick="return confirm" onkeypress="return confirm" target="_blank"  href="https://www.bis.gov.in/wp-content/uploads/2022/12/Revised-SFM.pdf">मानक निर्माण नियमावली 2022</a>
 </li>
 
-<li id="296747004road_maps" title="टीसी सदस्यों के लिए हैंडबुक"  class="menu-item" style="width:100%">
-<a  id="297427791road_maps" title="टीसी सदस्यों के लिए हैंडबुक"  onclick="return confirm" onkeypress="return confirm" target="_blank"  href="https://www.bis.gov.in/wp-content/uploads/2024/06/Handbook-for-TC-Members.pdf">टीसी सदस्यों के लिए हैंडबुक</a>
+<li id="296649508road_maps" title="टीसी सदस्यों के लिए हैंडबुक"  class="menu-item" style="width:100%">
+<a  id="297184401road_maps" title="टीसी सदस्यों के लिए हैंडबुक"  onclick="return confirm" onkeypress="return confirm" target="_blank"  href="https://www.bis.gov.in/wp-content/uploads/2024/06/Handbook-for-TC-Members.pdf">टीसी सदस्यों के लिए हैंडबुक</a>
 </li>
 
 
@@ -742,7 +742,7 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 
 <li style="width:100%;float: left;" class="menu-item" onMouseover="drop('menu_ap')" onMouseout="hide('menu_ap')" onblur="hide('menu_ap')" onfocus="hide('menu_ap')"><a href="https://www.bis.gov.in/system-certification-overview/system-certification-licence/?lang=hi"  style="width:200px;float: left;">लाइसेंस »</a>
 
-<ul class="ap" id="362629625" style="display:none">
+<ul class="ap" id="362259931" style="display:none">
 <li class="menu-item2" ><a href="https://www.bis.gov.in/system-certification-overview/system-certification-licence/surveillance/?lang=hi" target="_blank" >निगरानी</a></li>
 <li class="menu-item2" ><a href="https://www.bis.gov.in/system-certification-overview/system-certification-licence/renewal-of-licence/?lang=hi" target="_blank" >लाइसेंस का नवीनीकरण</a></li>
 
@@ -891,7 +891,7 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 <span class="states_heading is-active" >लैब मान्यता योजना</span>
 </li>
 
-<li id="514412991" title="लैब मान्यता योजना 2020"  class="menu-item">
+<li id="514947433" title="लैब मान्यता योजना 2020"  class="menu-item">
 <a href="https://www.bis.gov.in/wp-content/uploads/2020/06/LRS_23062020.pdf" target="_blank"  role="link">लैब मान्यता योजना 2020</a>
 </li>
 <li  class="menu-item">
@@ -919,74 +919,74 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 <a href="https://www.bis.gov.in/hallmarking-overview/?lang=hi">सिंहावलोकन</a>
 </li>
 
-<li id="542849367" title="हॉलमार्किंग संक्षिप्त" class="menu-item" style="width:100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2020/12/brief-on-Hallmarking.pdf" target="_blank">हॉलमार्किंग संक्षिप्त</a>
+<li id="542317914" title="हॉलमार्किंग संक्षिप्त" class="menu-item" style="width:100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2020/12/brief-on-Hallmarking.pdf" target="_blank">हॉलमार्किंग संक्षिप्त</a>
 </li>
 
-<li id="545430071" title="हॉलमार्किंग विनियमन 2018"  class="menu-item" style="width:100%;position:relative;">
+<li id="545605766" title="हॉलमार्किंग विनियमन 2018"  class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-regulation-2018/?lang=hi">हॉलमार्किंग विनियमन 2018 »</a>
 
 <ul class="hm1">
-<li id="549850608" title="विनियमन"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/bs/BIS_Hallmarking_Regulations_2018_Gazette_notification.pdf" target="_blank" >विनियमन</a></li>
-<li id="550821309" title="अधिसूचना"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/bs/DoCA_BIS_Hallmarking_Regulations_2018_Gazette_notification.pdf" target="_blank" >अधिसूचना</a></li>
+<li id="549714109" title="विनियमन"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/bs/BIS_Hallmarking_Regulations_2018_Gazette_notification.pdf" target="_blank" >विनियमन</a></li>
+<li id="550115914" title="अधिसूचना"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/bs/DoCA_BIS_Hallmarking_Regulations_2018_Gazette_notification.pdf" target="_blank" >अधिसूचना</a></li>
 
-<li id="552349597" title="संशोधन 2021"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2021/11/BIS_HM_Amdt_Regulations_2021_Gazette.pdf" target="_blank" >संशोधन 27 अक्टूबर 2021</a></li>
+<li id="552444823" title="संशोधन 2021"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2021/11/BIS_HM_Amdt_Regulations_2021_Gazette.pdf" target="_blank" >संशोधन 27 अक्टूबर 2021</a></li>
 
-<li id="554464549" title="संशोधन 2022"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/03/BIS-HM-Amendment-Regulations-2022.pdf" target="_blank" >संशोधन 04 मार्च 2022</a></li>
+<li id="554148209" title="संशोधन 2022"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/03/BIS-HM-Amendment-Regulations-2022.pdf" target="_blank" >संशोधन 04 मार्च 2022</a></li>
 
 </ul>
 
 </li>
 
-<li id="560626066" title="हॉलमार्किंग अनिवार्य आदेश" class="menu-item" style="width:100%;position:relative;">
+<li id="560490462" title="हॉलमार्किंग अनिवार्य आदेश" class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/hallmarking-overview/mandatory-hallmarking-order/?lang=hi">हॉलमार्किंग अनिवार्य आदेश »</a>
 
 <ul class="hm1">
-<li id="564313052" title="आदेश"  class="menu-item2" style="width: 100%;"><a id="564677184" title="Order"  href="https://www.bis.gov.in/wp-content/uploads/2020/01/Mandatory-Hallmarking-Order-15.01.2020.pdf" target="_blank" >आदेश</a></li>
-<li id="565743667" title="संशोधन दिनांक 9 अक्टूबर 2020"  class="menu-item2" style="width: 100%;"><a id="565526630_Amendment" title="संशोधन दिनांक 9 अक्टूबर 2020"  href="https://www.bis.gov.in/wp-content/uploads/2020/10/Hallmarking-of-Gold-Jewellery-and-Gold-Artefacts-Amendment-Order-2020.pdf" target="_blank" >संशोधन दिनांक 9 अक्टूबर 2020</a></li>
+<li id="564800842" title="आदेश"  class="menu-item2" style="width: 100%;"><a id="564551331" title="Order"  href="https://www.bis.gov.in/wp-content/uploads/2020/01/Mandatory-Hallmarking-Order-15.01.2020.pdf" target="_blank" >आदेश</a></li>
+<li id="565875924" title="संशोधन दिनांक 9 अक्टूबर 2020"  class="menu-item2" style="width: 100%;"><a id="565396216_Amendment" title="संशोधन दिनांक 9 अक्टूबर 2020"  href="https://www.bis.gov.in/wp-content/uploads/2020/10/Hallmarking-of-Gold-Jewellery-and-Gold-Artefacts-Amendment-Order-2020.pdf" target="_blank" >संशोधन दिनांक 9 अक्टूबर 2020</a></li>
 
-<li id="567918218" title="संशोधन दिनांक 1 जून 2021 "  class="menu-item2"  style="width: 100%;"><a id="567770053_Amendment" title="संशोधन दिनांक 1 जून 2021"  href="https://www.bis.gov.in/wp-content/uploads/2021/06/227306.pdf" target="_blank" >संशोधन दिनांक 1 जून 2021</a></li>	
-<li id="568552734" title="गुणवत्ता नियंत्रण आदेश 23rd जून 2021"  class="menu-item2"  style="width: 100%;"><a id="568669131_Amendment" title="गुणवत्ता नियंत्रण आदेश 23rd जून 2021"  href="https://www.bis.gov.in/wp-content/uploads/2021/06/qc-order-June-2021-2.pdf" target="_blank" >गुणवत्ता नियंत्रण आदेश 23rd जून 2021</a></li>		
+<li id="567448133" title="संशोधन दिनांक 1 जून 2021 "  class="menu-item2"  style="width: 100%;"><a id="567106921_Amendment" title="संशोधन दिनांक 1 जून 2021"  href="https://www.bis.gov.in/wp-content/uploads/2021/06/227306.pdf" target="_blank" >संशोधन दिनांक 1 जून 2021</a></li>	
+<li id="568221776" title="गुणवत्ता नियंत्रण आदेश 23rd जून 2021"  class="menu-item2"  style="width: 100%;"><a id="568154496_Amendment" title="गुणवत्ता नियंत्रण आदेश 23rd जून 2021"  href="https://www.bis.gov.in/wp-content/uploads/2021/06/qc-order-June-2021-2.pdf" target="_blank" >गुणवत्ता नियंत्रण आदेश 23rd जून 2021</a></li>		
 
-<li id="570180124" title="QCO में छूट (दिशानिर्देश)"  class="menu-item2"  style="width: 100%;"><a id="570402967_Amendment" title="QCO में छूट (दिशानिर्देश)"  href="https://www.bis.gov.in/wp-content/uploads/2022/01/QCO_HMD.pdf" target="_blank" >QCO में छूट (दिशानिर्देश)</a></li>	
-<li id="571982757" title="संशोधन दिनांक 04 अप्रैल 2022"  class="menu-item2"  style="width: 100%;"><a id="571738555_Amendment" title="संशोधन दिनांक 04 अप्रैल 2022"  href="https://www.bis.gov.in/wp-content/uploads/2022/04/Hallmarking-of-Gold-Jewellery-and-Gold-Artefacts-Amendment-Order-2022.pdf" target="_blank" >संशोधन दिनांक 04 अप्रैल 2022</a></li>				
-<li id="572128956" title="संशोधन दिनांक 04 अप्रैल 2022"  class="menu-item2"  style="width: 100%;"><a id="572822384_Amendment" title="संशोधन दिनांक 04 अप्रैल 2022"  href="https://www.bis.gov.in/wp-content/uploads/2023/03/GAZETTE.pdf" target="_blank" >संशोधन दिनांक 03 मार्च 2023</a></li>	
-<li id="573774638" title="संशोधन दिनांक 04 अप्रैल 2022"  class="menu-item2"  style="width: 100%;"><a id="573404611_Amendment" title="संशोधन दिनांक 04 अप्रैल 2022"  href="https://www.bis.gov.in/wp-content/uploads/2023/04/Hallmarking-notification-dt-31.3.2023.pdf" target="_blank" >संशोधन दिनांक 31 मार्च 2023</a></li>
-<li id="574142246" title="संशोधन दिनांक 06 सितंबर 2023"  class="menu-item2"  style="width: 100%;"><a id="574513273_Amendment" title="संशोधन दिनांक 06 सितंबर 2023"  href="https://www.bis.gov.in/wp-content/uploads/2023/09/Hallmarking-Third-Amendment-Order-06092023.pdf" target="_blank" >संशोधन दिनांक 06 सितंबर 2023</a></li>
-<li id="575914774" title="संशोधन दिनांक 05 नवंबर 2024"  class="menu-item2"  style="width: 100%;"><a id="575104377_Amendment" title="संशोधन दिनांक 05 नवंबर 2024"  href="https://www.bis.gov.in/wp-content/uploads/2024/11/Amendment-05-Nov-2024-1.pdf" target="_blank" >संशोधन दिनांक 05 नवंबर 2024</a></li>
-<li id="576484336" title="संशोधन दिनांक 31 जुलाई 2025"  class="menu-item2"  style="width: 100%;"><a id="576467197_Amendment" title="संशोधन दिनांक 31 जुलाई 2025"  href="https://www.bis.gov.in/wp-content/uploads/2025/08/Hallmarking-of-Gold-Jewellery-and-Gold-Artefacts-Amendment-Order-2025-1-1.pdf" target="_blank" >संशोधन दिनांक 31 जुलाई 2025</a></li>
-<li id="577769196" title="संशोधन दिनांक 02 मार्च 2026"  class="menu-item2"  style="width: 100%;"><a id="577992709_Amendment" title="संशोधन दिनांक 02 मार्च 2026"  href="https://www.bis.gov.in/wp-content/uploads/2026/03/Gazette-Notification-dt-02-March-2026-Mandatory-Hallmarking-amendment-order-1-1.pdf" target="_blank" >संशोधन दिनांक 02 मार्च 2026</a></li>
-<li id="578191025" title="संशोधन दिनांक 28 अप्रैल 2026"  class="menu-item2"  style="width: 100%;"><a id="578799125_Amendment" title="संशोधन दिनांक 28 अप्रैल 2026"  href="https://www.bis.gov.in/wp-content/uploads/2026/05/Hallmarking-of-gold-jewellery-and-gold-artefacts-order-2026-second-amendments-385-districts-1.pdf" target="_blank" >संशोधन दिनांक 28 अप्रैल 2026</a></li>
-<li id="579441762" title="संशोधन 03 अगस्त 2026" class="menu-item2"  style="width: 100%;"><a id="579447001_Amendment" title="संशोधन 03 अगस्त 2026"  href="https://www.bis.gov.in/wp-content/uploads/2026/08/Notification-related-to-mandatory-Hallmarking-2.pdf" target="_blank" >संशोधन 03 अगस्त 2026</a></li>
-<li id="580961815" title="ज़िलों को चरण-वार कवर करना" class="menu-item2"  style="width: 100%;"><a id="580748272_Amendment" title="ज़िलों को चरण-वार कवर करना" href="https://www.bis.gov.in/wp-content/uploads/2026/09/Phase-wise-coverage-of-districts-under-gold-mandatory-hallmarking.pdf" target="_blank" >ज़िलों को चरण-वार कवर करना</a></li>
+<li id="570711202" title="QCO में छूट (दिशानिर्देश)"  class="menu-item2"  style="width: 100%;"><a id="570455799_Amendment" title="QCO में छूट (दिशानिर्देश)"  href="https://www.bis.gov.in/wp-content/uploads/2022/01/QCO_HMD.pdf" target="_blank" >QCO में छूट (दिशानिर्देश)</a></li>	
+<li id="571346085" title="संशोधन दिनांक 04 अप्रैल 2022"  class="menu-item2"  style="width: 100%;"><a id="571588945_Amendment" title="संशोधन दिनांक 04 अप्रैल 2022"  href="https://www.bis.gov.in/wp-content/uploads/2022/04/Hallmarking-of-Gold-Jewellery-and-Gold-Artefacts-Amendment-Order-2022.pdf" target="_blank" >संशोधन दिनांक 04 अप्रैल 2022</a></li>				
+<li id="572551426" title="संशोधन दिनांक 04 अप्रैल 2022"  class="menu-item2"  style="width: 100%;"><a id="572869812_Amendment" title="संशोधन दिनांक 04 अप्रैल 2022"  href="https://www.bis.gov.in/wp-content/uploads/2023/03/GAZETTE.pdf" target="_blank" >संशोधन दिनांक 03 मार्च 2023</a></li>	
+<li id="573721805" title="संशोधन दिनांक 04 अप्रैल 2022"  class="menu-item2"  style="width: 100%;"><a id="573427517_Amendment" title="संशोधन दिनांक 04 अप्रैल 2022"  href="https://www.bis.gov.in/wp-content/uploads/2023/04/Hallmarking-notification-dt-31.3.2023.pdf" target="_blank" >संशोधन दिनांक 31 मार्च 2023</a></li>
+<li id="574146387" title="संशोधन दिनांक 06 सितंबर 2023"  class="menu-item2"  style="width: 100%;"><a id="574515924_Amendment" title="संशोधन दिनांक 06 सितंबर 2023"  href="https://www.bis.gov.in/wp-content/uploads/2023/09/Hallmarking-Third-Amendment-Order-06092023.pdf" target="_blank" >संशोधन दिनांक 06 सितंबर 2023</a></li>
+<li id="575228414" title="संशोधन दिनांक 05 नवंबर 2024"  class="menu-item2"  style="width: 100%;"><a id="575221291_Amendment" title="संशोधन दिनांक 05 नवंबर 2024"  href="https://www.bis.gov.in/wp-content/uploads/2024/11/Amendment-05-Nov-2024-1.pdf" target="_blank" >संशोधन दिनांक 05 नवंबर 2024</a></li>
+<li id="576357923" title="संशोधन दिनांक 31 जुलाई 2025"  class="menu-item2"  style="width: 100%;"><a id="576260438_Amendment" title="संशोधन दिनांक 31 जुलाई 2025"  href="https://www.bis.gov.in/wp-content/uploads/2025/08/Hallmarking-of-Gold-Jewellery-and-Gold-Artefacts-Amendment-Order-2025-1-1.pdf" target="_blank" >संशोधन दिनांक 31 जुलाई 2025</a></li>
+<li id="577372968" title="संशोधन दिनांक 02 मार्च 2026"  class="menu-item2"  style="width: 100%;"><a id="577938811_Amendment" title="संशोधन दिनांक 02 मार्च 2026"  href="https://www.bis.gov.in/wp-content/uploads/2026/03/Gazette-Notification-dt-02-March-2026-Mandatory-Hallmarking-amendment-order-1-1.pdf" target="_blank" >संशोधन दिनांक 02 मार्च 2026</a></li>
+<li id="578253481" title="संशोधन दिनांक 28 अप्रैल 2026"  class="menu-item2"  style="width: 100%;"><a id="578291098_Amendment" title="संशोधन दिनांक 28 अप्रैल 2026"  href="https://www.bis.gov.in/wp-content/uploads/2026/05/Hallmarking-of-gold-jewellery-and-gold-artefacts-order-2026-second-amendments-385-districts-1.pdf" target="_blank" >संशोधन दिनांक 28 अप्रैल 2026</a></li>
+<li id="579467179" title="संशोधन 03 अगस्त 2026" class="menu-item2"  style="width: 100%;"><a id="579446194_Amendment" title="संशोधन 03 अगस्त 2026"  href="https://www.bis.gov.in/wp-content/uploads/2026/08/Notification-related-to-mandatory-Hallmarking-2.pdf" target="_blank" >संशोधन 03 अगस्त 2026</a></li>
+<li id="580150371" title="ज़िलों को चरण-वार कवर करना" class="menu-item2"  style="width: 100%;"><a id="580390086_Amendment" title="ज़िलों को चरण-वार कवर करना" href="https://www.bis.gov.in/wp-content/uploads/2026/09/Phase-wise-coverage-of-districts-under-gold-mandatory-hallmarking.pdf" target="_blank" >ज़िलों को चरण-वार कवर करना</a></li>
 </ul>
 
 </li>
 
-<li id="585520147" title="ज्वैलर्स पंजीकरण योजना"  class="menu-item" style="width:100%;position:relative;">
+<li id="585268673" title="ज्वैलर्स पंजीकरण योजना"  class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/hallmarking-overview/jewellers-registration-scheme/?lang=hi">ज्वैलर्स पंजीकरण योजना »</a>
 
 <ul class="hm2">
-    <li title="ज्वैलर्स हेतु दिशानिर्देश" id="589348303_Guidelines_for_Jewellers" class="menu-item2" style="width: 100%;">
-        <a title="ज्वैलर्स हेतु दिशानिर्देश" id="590913161_Guidelines_for_Registration_of_Jewellers" href="https://www.bis.gov.in/wp-content/uploads/2026/07/Guidelines-for-Jewellers.pdf" target="_blank">ज्वैलर्स हेतु दिशानिर्देश</a>
+    <li title="ज्वैलर्स हेतु दिशानिर्देश" id="589810942_Guidelines_for_Jewellers" class="menu-item2" style="width: 100%;">
+        <a title="ज्वैलर्स हेतु दिशानिर्देश" id="590908231_Guidelines_for_Registration_of_Jewellers" href="https://www.bis.gov.in/wp-content/uploads/2026/07/Guidelines-for-Jewellers.pdf" target="_blank">ज्वैलर्स हेतु दिशानिर्देश</a>
     </li>
 
-    <li title="लाइसेंस प्राप्त ज्वैलर्स की सूची" id="593183075_List_Jewellers" class="menu-item2" style="width: 100%;">
-        <a title="लाइसेंस प्राप्त ज्वैलर्स की सूची" id="594706201_List_Jewellers" href="https://www.bis.gov.in/hallmarking-overview/jewellers-registration-scheme/list-of-licensed-jewellers/?lang=hi" target="_blank">लाइसेंस प्राप्त ज्वैलर्स की सूची</a>
+    <li title="लाइसेंस प्राप्त ज्वैलर्स की सूची" id="593983086_List_Jewellers" class="menu-item2" style="width: 100%;">
+        <a title="लाइसेंस प्राप्त ज्वैलर्स की सूची" id="594108736_List_Jewellers" href="https://www.bis.gov.in/hallmarking-overview/jewellers-registration-scheme/list-of-licensed-jewellers/?lang=hi" target="_blank">लाइसेंस प्राप्त ज्वैलर्स की सूची</a>
     </li>
 
-    <li title="ज्वैलर पंजीकरण हेतु आवेदन करने की प्रक्रिया" class="menu-item2" style="width: auto;" id="597622034_Procedure_to_apply">
-        <a href="https://www.bis.gov.in/wp-content/uploads/2020/10/Guide_Jeweller_Registration_v1.1.pdf" download="" target="_blank" id="598818983_Procedure_to_apply">ज्वैलर पंजीकरण हेतु आवेदन करने की प्रक्रिया</a>
+    <li title="ज्वैलर पंजीकरण हेतु आवेदन करने की प्रक्रिया" class="menu-item2" style="width: auto;" id="597367885_Procedure_to_apply">
+        <a href="https://www.bis.gov.in/wp-content/uploads/2020/10/Guide_Jeweller_Registration_v1.1.pdf" download="" target="_blank" id="598443072_Procedure_to_apply">ज्वैलर पंजीकरण हेतु आवेदन करने की प्रक्रिया</a>
     </li>
 </ul>
 
 </li>
 
-<li id="604565752_Hallmarking_centre" title="Hallmarking centre"  class="menu-item" style="width:100%;position:relative;">
+<li id="604492008_Hallmarking_centre" title="Hallmarking centre"  class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-centre/?lang=hi">हॉलमार्किंग केंद्र »</a>
 
 <ul class="hm3">
-<li id="608175184" title="के लिए दिशा-निर्देश"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2026/07/GuidelinesForAHCs.pdf" target="_blank" >ए और एच के लिए दिशा-निर्देश</a></li>
-<li id="609755390" title="हॉलमार्किंग केंद्र की सूची"  class="menu-item2" style="width: 100%;"><a href="https://huid.manakonline.in/MANAK/AHCListForWebsite" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">हॉलमार्किंग केंद्र की सूची</a></li>
+<li id="608140496" title="के लिए दिशा-निर्देश"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2026/07/GuidelinesForAHCs.pdf" target="_blank" >ए और एच के लिए दिशा-निर्देश</a></li>
+<li id="609726748" title="हॉलमार्किंग केंद्र की सूची"  class="menu-item2" style="width: 100%;"><a href="https://huid.manakonline.in/MANAK/AHCListForWebsite" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">हॉलमार्किंग केंद्र की सूची</a></li>
 <li class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2018/11/Hm_Manual.pdf" target="_blank" >सामान्य गुणवत्ता मैनुअल</a></li>
 <li class="menu-item2" style="width: 100%;"><a href="https://huid.manakonline.in/MANAK/AHCSuspendCancelledAppsForWebsite" target="_blank" >रद्द/समाप्त/स्थगित एएचसी की सूची</a></li>
 <!--<li class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/03/Guidelines-on-Offsite-centres-of-AHCs.pdf" target="_blank" >एएचसी के ऑफसाइट केंद्रों पर दिशानिर्देश</a></li>-->
@@ -995,33 +995,33 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 
 </li>
 
-<li id="618161844" title="गोल्ड रिफाइनरी" class="menu-item" style="width:100%;position:relative;">
+<li id="618361161" title="गोल्ड रिफाइनरी" class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/hallmarking-overview/gold-refinery/?lang=hi">गोल्ड रिफाइनरी  »</a>
 
 <ul class="hm4">
-<li id="622396571" title="रिफाइनरी के लिए दिशा निर्देश"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2018/11/Guidelines_for_Refinery_or_Mint_08102018.pdf" target="_blank" >रिफाइनरी के लिए दिशा निर्देश</a></li>
-<li id="623665574" title="परीक्षण योजना (एसटीआई)"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2018/11/RevisedSTI_GoldCoin-bullion.pdf" target="_blank" >परीक्षण योजना (एसटीआई)</a></li>
-<li id="624535337" title="अंकन शुल्क"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/index.php/hallmarking-overview/gold-refinery/marking-fee/?lang=hi" target="_blank" >अंकन शुल्क</a></li>
+<li id="622555466" title="रिफाइनरी के लिए दिशा निर्देश"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2018/11/Guidelines_for_Refinery_or_Mint_08102018.pdf" target="_blank" >रिफाइनरी के लिए दिशा निर्देश</a></li>
+<li id="623181995" title="परीक्षण योजना (एसटीआई)"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2018/11/RevisedSTI_GoldCoin-bullion.pdf" target="_blank" >परीक्षण योजना (एसटीआई)</a></li>
+<li id="624654666" title="अंकन शुल्क"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/index.php/hallmarking-overview/gold-refinery/marking-fee/?lang=hi" target="_blank" >अंकन शुल्क</a></li>
 
-<li id="626995147" title="रिफाइनरियों की सूची दी गई लाइसेंस"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/11/Refineries-latest-list.pdf" target="_blank" >रिफाइनरियों की सूची दी गई लाइसेंस</a></li>
+<li id="626691629" title="रिफाइनरियों की सूची दी गई लाइसेंस"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/wp-content/uploads/2022/11/Refineries-latest-list.pdf" target="_blank" >रिफाइनरियों की सूची दी गई लाइसेंस</a></li>
 </ul>
 
 </li>
 
-<li id="631431701" title="स्वर्ण मुद्रीकरण योजना" class="menu-item" style="width:100%;">
+<li id="631756373" title="स्वर्ण मुद्रीकरण योजना" class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/hallmarking-overview/gold-monetization-scheme/?lang=hi">स्वर्ण मुद्रीकरण योजना</a>
 </li>
 
 
-<li id="636587441" title="उपभोक्ता संरक्षण"  class="menu-item" style="width:100%;">
+<li id="636682706" title="उपभोक्ता संरक्षण"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/hallmarking-overview/consumer-protection/?lang=hi">उपभोक्ता संरक्षण   </a>
 </li>
 
-<li id="640764477" title="केंद्रीय सहायता योजना के तहत ई.ओ.आई."  class="menu-item" style="width:100%;">
+<li id="640250271" title="केंद्रीय सहायता योजना के तहत ई.ओ.आई."  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/wp-content/uploads/2020/07/EOI.pdf" target="_blank" >केंद्रीय सहायता योजना के तहत ई.ओ.आई.   </a>
 </li>
 
-<li id="644877300" title="प्रपत्र और प्रारूप"  class="menu-item" style="width:100%;">
+<li id="644450397" title="प्रपत्र और प्रारूप"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/forms-formats/?lang=hi">प्रपत्र और प्रारूप</a>
 </li>
 
@@ -1032,17 +1032,17 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 <li class="menu-item" style="width:100%;">
 <a href="https://huid.manakonline.in/MANAK/searchHMAProfileByHMAID" target="_blank" >बीआईएस हॉलमार्किंग प्रतिनिधि</a>
 </li>
-<li id="655361674" title="अधिकतर पूछे जाने वाले प्रश्न"  class="menu-item" style="width:100%;position:relative;">
+<li id="655411263" title="अधिकतर पूछे जाने वाले प्रश्न"  class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/?lang=hi">अधिकतर पूछे जाने वाले प्रश्न »</a>
 <ul class="hm4">
 <li style="width: 100%;"><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/hallmarking-faq/?lang=hi" target="_blank" >सामान्य</a></li>
-<li id="659207123" title="अनिवार्य"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/mandatory/?lang=hi" target="_blank" >अनिवार्य</a></li>
-<li id="660593607" title="बीआईएस अधिनियम और विनियमन"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/bis-act-and-regulation-faq/?lang=hi" target="_blank" >बीआईएस अधिनियम और विनियमन</a></li>
+<li id="659209511" title="अनिवार्य"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/mandatory/?lang=hi" target="_blank" >अनिवार्य</a></li>
+<li id="660295810" title="बीआईएस अधिनियम और विनियमन"  class="menu-item2" style="width: 100%;"><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/bis-act-and-regulation-faq/?lang=hi" target="_blank" >बीआईएस अधिनियम और विनियमन</a></li>
 <!--<li class="menu-item2" style="width: 100%;"><a href="<?php/// echo get_permalink(126450);?>" target="_blank" >सामान्य उपभोक्ता</a></li>-->
 </ul>
 
 </li>
-<li id="665908662" title="हमें संपर्क करें"  class="menu-item" style="width:100%;">
+<li id="665835816" title="हमें संपर्क करें"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-contact-us/?lang=hi">हमें संपर्क करेंं</a>
 </li>      
 </ul>
@@ -1050,52 +1050,52 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 <div class="open-li"> </div></li>
 
 
-<li id="673941594" title="प्रशिक्षण"  class="menu-item menu-item--expanded menu_full_li">
+<li id="673246249" title="प्रशिक्षण"  class="menu-item menu-item--expanded menu_full_li">
 <span style="padding:25px 3px;" class="menu_full state_menu is-active" ><a href="https://www.bis.gov.in" class="fixmenu">प्रशिक्षण</a></span>
 <ul class="menu" style="margin-right:-100px !important;">
-<li id="676546567" title="प्रशिक्षण"  class="menu-item states_heading_li">
+<li id="676528037" title="प्रशिक्षण"  class="menu-item states_heading_li">
 <span class="states_heading is-active" >प्रशिक्षण</span>
 </li>
 
 
-<li id="681476406" title="सिंहावलोकन"  class="menu-item" style="width:100%;">
+<li id="681364089" title="सिंहावलोकन"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/overview-of-nits/?lang=hi">सिंहावलोकन</a>
 </li>
 
-<li id="685455975" title="आवेदन के लिए प्रक्रिया"  class="menu-item" style="width:100%;">
+<li id="685919531" title="आवेदन के लिए प्रक्रिया"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/procedure-for-applying-for-a-training-programme/?lang=hi">आवेदन के लिए प्रक्रिया  </a>
 </li>
-<li id="688128658" title="प्रशिक्षण कार्यक्रम"  class="menu-item" style="width:100%;">
+<li id="688907930" title="प्रशिक्षण कार्यक्रम"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/training-programmes/?lang=hi">प्रशिक्षण कार्यक्रम</a>
 </li>
-<li id="691995437" title="प्रशिक्षण कैलेंडर"  class="menu-item" style="width:100%;">
+<li id="691523272" title="प्रशिक्षण कैलेंडर"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/training-calender/?lang=hi">प्रशिक्षण कैलेंडर</a>
 </li>
-<li id="694949429" title="आईटीपी पूर्व पोर्टल"  class="menu-item" style="width:100%;">
+<li id="694605559" title="आईटीपी पूर्व पोर्टल"  class="menu-item" style="width:100%;">
 <a href="https://www.services.bis.gov.in/php/BIS_2.0/trainings/index.php/login"  onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">आईटीपी पूर्व पोर्टल </a>
 </li>
-<li id="697391178" title="आईटीईसी के तहत आईटीपी"  class="menu-item" style="width:100%;">
+<li id="697917640" title="आईटीईसी के तहत आईटीपी"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/index.php/international-training-programmes-under-itec/?lang=hi"  target="_blank" >आईटीईसी के तहत आईटीपी </a>
 </li>
-<li id="700871765" title="शुल्क"  class="menu-item" style="width:100%;">
+<li id="700735911" title="शुल्क"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/training-fee/?lang=hi">शुल्क</a>
 </li>
 
-<li id="704853895" title="704857194_प्रपत्र"  class="menu-item" style="width:100%;">
+<li id="704558727" title="704877423_प्रपत्र"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/training-form/?lang=hi">प्रपत्र</a>
 </li>
 
-<li id="708429892" title="अधिकतर पूछे जाने वाले प्रश्न"  class="menu-item" style="width:100%;">
+<li id="708541246" title="अधिकतर पूछे जाने वाले प्रश्न"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/training-faq/?lang=hi">अधिकतर पूछे जाने वाले प्रश्न</a>
 </li>
 
 
-<li id="713769261" title="हमें संपर्क करेंं"  class="menu-item" style="width:100%;">
+<li id="713948061" title="हमें संपर्क करेंं"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/training-2/training-contact-us/?lang=hi">हमें संपर्क करेंं</a>
 </li>
 
 
-<li id="718361231" title="हप्रशिक्षण पोर्टल"  class="menu-item" style="width:100%;">
+<li id="718207442" title="हप्रशिक्षण पोर्टल"  class="menu-item" style="width:100%;">
 <a href="https://www.services.bis.gov.in/php/BIS_2.0/trainings/dashboardnew/" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">प्रशिक्षण पोर्टल</a>
 </li>
 <li title="BIS Quality Talk on NITS Training" class="menu-item" style="width:100%;" data-cya11y-org-font-size="15">
@@ -1106,114 +1106,114 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 
 <div class="open-li"> </div></li>
 
-<li id="729390155" title="कैरियर के अवसर"  class="menu-item menu-item--expanded menu_full_li">
+<li id="729442754" title="कैरियर के अवसर"  class="menu-item menu-item--expanded menu_full_li">
 <span style="padding:25px 3px;" class="menu_full state_menu is-active" ><a href="https://www.bis.gov.in/career-opportunities/?lang=hi" class="fixmenu">कैरियर के अवसर</a></span>
 <ul class="menu" style="margin-right:-100px !important;">
-<li id="732406729" title="कैरियर के अवसर"  class="menu-item states_heading_li">
+<li id="732790083" title="कैरियर के अवसर"  class="menu-item states_heading_li">
 <span class="states_heading is-active" >कैरियर के अवसर</span>
 </li>
 
 
-<li id="737539803" title="भर्ती विज्ञापन / परिणाम"  class="menu-item" style="width:100%;">
+<li id="737790260" title="भर्ती विज्ञापन / परिणाम"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/career-opportunities/1961-2/?lang=hi">भर्ती विज्ञापन / परिणाम</a>
 </li>
 
-<li id="741850920" title="भर्ती विनियमन"  class="menu-item" style="width:100%;">
+<li id="741974796" title="भर्ती विनियमन"  class="menu-item" style="width:100%;">
 <a href="https://www.bis.gov.in/career-opportunities/recruitment-regulations/?lang=hi">भर्ती विनियमन</a>
 </li>
 </ul>
 <div class="open-li"> </div></li>    
 
 
-<li id="748955992" title="उपभोक्ता नियुक्ति"  class="menu-item menu-item--expanded menu_full_li">
+<li id="748158734" title="उपभोक्ता नियुक्ति"  class="menu-item menu-item--expanded menu_full_li">
 <span style="padding:25px 3px;" class="menu_full state_menu is-active" ><a href="https://www.bis.gov.in" class="fixmenu">उपभोक्ता नियुक्ति</a></span>
 <ul class="menu" style="margin-right:-20px !important;">
-<li id="751511755" title="उपभोक्ता नियुक्ति"  class="menu-item states_heading_li">
+<li id="751820538" title="उपभोक्ता नियुक्ति"  class="menu-item states_heading_li">
 <span class="states_heading is-active" >उपभोक्ता नियुक्ति </span>
 </li>
 
-<li id="755830105" title="सिंहावलोकन"  class="menu-item" style="width:100%; ">
+<li id="755167386" title="सिंहावलोकन"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/?lang=hi">सिंहावलोकन</a>
 </li>
 
 
-<li id="760762252" title="उपभोक्ता संरक्षण"  class="menu-item" style="width:100%; ">
+<li id="760353936" title="उपभोक्ता संरक्षण"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/consumer-protection/?lang=hi">उपभोक्ता संरक्षण </a>
 </li>
 
-<li id="764770915" title="सतर्कता पोर्टल"  class="menu-item" style="width:100%; ">
+<li id="764503996" title="सतर्कता पोर्टल"  class="menu-item" style="width:100%; ">
 <a href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank"  role="link">सतर्कता पोर्टल</a>
 </li>
 
-<li id="768211819" title="राष्ट्रीय गुणवत्ता पुरस्कार"  class="menu-item" style="width:100%; ">
+<li id="768908449" title="राष्ट्रीय गुणवत्ता पुरस्कार"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/national-quality-award/?lang=hi">राष्ट्रीय गुणवत्ता पुरस्कार </a>
 </li>
 
-<li id="772716024" title="ब्रोशर"  class="menu-item" style="width:100%; ">
+<li id="772348178" title="ब्रोशर"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/brochures/?lang=hi">ब्रोशर</a>
 </li>
-<li id="775859371" title="मानक भारत"  class="menu-item" style="width:100%; ">
+<li id="775461377" title="मानक भारत"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/standards-india/?lang=hi">मानक भारत</a>
 </li>
-<li id="778217524" title="कॉपीराइट भारतीय मानक"  class="menu-item" style="width:100%; ">
+<li id="778253809" title="कॉपीराइट भारतीय मानक"  class="menu-item" style="width:100%; ">
 <a href="https://bis.gov.in/PDF/lab/copyright.pdf" target="_blank" >कॉपीराइट भारतीय मानक</a>
 </li>
-<li id="781136845" title="ऑनलाइन शिकायत पंजीकरण"  class="menu-item" style="width:100%; ">
+<li id="781863831" title="ऑनलाइन शिकायत पंजीकरण"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/online-complaint-registration/?lang=hi">ऑनलाइन शिकायत पंजीकरण</a>
 </li>
-<li id="784581444" title="सिटीजन चार्टर"  class="menu-item" style="width:100%; ">
+<li id="784291986" title="सिटीजन चार्टर"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/citizen-charter/?lang=hi">सिटीजन चार्टर</a>
 </li>
 
-<li id="788402420" title="प्रवर्तन गतिविधि"  class="menu-item" style="width:100%;position:relative;">
+<li id="788768853" title="प्रवर्तन गतिविधि"  class="menu-item" style="width:100%;position:relative;">
 <a href="https://www.bis.gov.in/enforcement-activities/?lang=hi">प्रवर्तन गतिविधि</a>
 <ul class="menu_consumer" style="margin-left:100px;">
 
-<!--<li id="792773155" title="अपराध की भरपाई"  class="menu-item2" style="width: 100%;">
+<!--<li id="792133512" title="अपराध की भरपाई"  class="menu-item2" style="width: 100%;">
 <a href="https://www.bis.gov.in/consumer-overview/compounding-of-offence/?lang=hi">अपराध की भरपाई</a></li>-->
 
-<!--<li id="795620477" title="निर्णय"  class="menu-item2" style="width: 100%;">
+<!--<li id="795719422" title="निर्णय"  class="menu-item2" style="width: 100%;">
 <a href="https://www.bis.gov.in/consumer-overview/judgements/?lang=hi">निर्णय</a></li>-->
 </ul>
 
 </li>
 
-<li id="801186499" title="अधिकतर पूछे जाने वाले प्रश्न"  class="menu-item" style="width:100%; ">
+<li id="801769623" title="अधिकतर पूछे जाने वाले प्रश्न"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/for-consumers-faq/?lang=hi">अधिकतर पूछे जाने वाले प्रश्न</a>
 </li>
-<li id="804619329" title="हमें संपर्क करेंं"  class="menu-item" style="width:100%; ">
+<li id="804334463" title="हमें संपर्क करेंं"  class="menu-item" style="width:100%; ">
 <a href="https://www.bis.gov.in/consumer-overview/for-consumers-contact-us/?lang=hi">हमें संपर्क करेंं</a>
 </li>
 
 </ul>
 
 <div class="open-li"> </div></li>      
-<li id="811483789" title="उपभोक्ता नियुक्ति"  class="menu-item menu_full_li"><a href="https://www.bis.gov.in/index.php/directory/enquiry/?lang=hi" ID="811264578" aria-label="संपर्क करे" title="संपर्क करे">हमें संपर्क करें</a></li>
+<li id="811458871" title="उपभोक्ता नियुक्ति"  class="menu-item menu_full_li"><a href="https://www.bis.gov.in/index.php/directory/enquiry/?lang=hi" ID="811549540" aria-label="संपर्क करे" title="संपर्क करे">हमें संपर्क करें</a></li>
 </ul>
 
 </div>
 </nav>
 <div id='cssmenu'>
 <ul class="mkmenu">
-<li title="Home" id="1813377422Home" ><a href='https://www.bis.gov.in' class='active'>होम</a></li>
+<li title="Home" id="1813879505Home" ><a href='https://www.bis.gov.in' class='active'>होम</a></li>
 
-<li title="About Us" id="1815471185" ><a href="https://www.bis.gov.in">बीआईएस के बारे में</a>
+<li title="About Us" id="1815511543" ><a href="https://www.bis.gov.in">बीआईएस के बारे में</a>
 <ul>
-<li title="The Bureau" id="1817878615_The_Bureau" ><a href="https://www.bis.gov.in">ब्यूरो</a>
+<li title="The Bureau" id="1817209943_The_Bureau" ><a href="https://www.bis.gov.in">ब्यूरो</a>
 <ul>
-<li title="Overview" id="1819185826_Overview" ><a href='https://www.bis.gov.in/the-bureau/about-bis/?lang=hi'>सिंहावलोकन</a></li>
-<li id="1820338507Organization" title="Organization"  class="menu-item-new" style="width: auto; position: relative;">
+<li title="Overview" id="1819950181_Overview" ><a href='https://www.bis.gov.in/the-bureau/about-bis/?lang=hi'>सिंहावलोकन</a></li>
+<li id="1820826544Organization" title="Organization"  class="menu-item-new" style="width: auto; position: relative;">
 
-<a id="1822622591Organization" title="Organization"  href="https://www.bis.gov.in/the-bureau/organization-2/?lang=hi">संगठन »</a>
+<a id="1822833476Organization" title="Organization"  href="https://www.bis.gov.in/the-bureau/organization-2/?lang=hi">संगठन »</a>
 
 <ul class="abis1">
 
-<li id="1826934891_Governing_Council" title="Governing Council"  class="menu-item2" style="width: 100%;">
-<a id="1827831626_Governing_Council" title="Governing Council"  href="https://www.bis.gov.in/the-bureau/organization-2/bureau-members/?lang=hi" target="_blank">शासी परिषद् »</a>
+<li id="1826368111_Governing_Council" title="Governing Council"  class="menu-item2" style="width: 100%;">
+<a id="1827641332_Governing_Council" title="Governing Council"  href="https://www.bis.gov.in/the-bureau/organization-2/bureau-members/?lang=hi" target="_blank">शासी परिषद् »</a>
 </li>
 
-<li id="1830698255_Executive_Committeess" title="Executive Committee"  class="menu-item2" style="width: 100%;">
-<a id="1831563773_Executive_Committeed" title="Executive Committee"  href="#">कार्यकारी समिति »</a>
+<li id="1830429231_Executive_Committeess" title="Executive Committee"  class="menu-item2" style="width: 100%;">
+<a id="1831318482_Executive_Committeed" title="Executive Committee"  href="#">कार्यकारी समिति »</a>
 
 <!-- ✅ Nested UL is now inside LI -->
 <ul class="menu-new">
@@ -1227,242 +1227,242 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 </ul>
 </li>
 
-<li id="1845377886_Administrative_Structure" title="Administrative Structure"  class="menu-item2" style="width: 100%;">
-<a id="1846343997_Administrative_Structure" title="Administrative Structure"  href="https://www.bis.gov.in/wp-content/uploads/2018/09/bis-org.pdf" target="_blank">प्रशासनिक संरचना</a>
+<li id="1845819183_Administrative_Structure" title="Administrative Structure"  class="menu-item2" style="width: 100%;">
+<a id="1846185944_Administrative_Structure" title="Administrative Structure"  href="https://www.bis.gov.in/wp-content/uploads/2018/09/bis-org.pdf" target="_blank">प्रशासनिक संरचना</a>
 </li>
 
-<li id="1849172104_Organization_Chart" title="Organization Chart"  class="menu-item2" style="width: 100%;">
-<a id="1850913371_Organization_Chart" title="Organization Chart"  href="https://www.bis.gov.in/wp-content/uploads/2024/12/Organisation-Chart-Dec24-Eng-Corrected.pdf" target="_blank">संगठन चार्ट</a>
+<li id="1849520783_Organization_Chart" title="Organization Chart"  class="menu-item2" style="width: 100%;">
+<a id="1850572209_Organization_Chart" title="Organization Chart"  href="https://www.bis.gov.in/wp-content/uploads/2024/12/Organisation-Chart-Dec24-Eng-Corrected.pdf" target="_blank">संगठन चार्ट</a>
 </li>
 
 </ul>
 </li>
 
-<li title="Origin of BIS" id="1856287826_Origin_of_BIS" ><a href='https://www.bis.gov.in/the-bureau/origin-of-bis/?lang=hi/?page_id=2384'>बीआईएस की उत्पत्ति</a></li>
-<li title="BIS Glory" id="1857370093BIS_Glory" ><a href='http://164.100.105.198:8097/archivewebsite/' target="_blank" >बीआईएस महिमा</a></li>
-<li title="Presidents" id="1858900590_Presidents" ><a href='https://www.bis.gov.in/the-bureau/president/?lang=hi'>अध्यक्ष</a></li>
-<li title="Vice Presidents" id="1859661152_Vice_Presidents" ><a href='https://www.bis.gov.in/the-bureau-2/vice-president/?lang=hi'>उपाध्यक्ष</a></li>
-<li title="Director Generals" id="1860699023_Director_Generals" ><a href='https://www.bis.gov.in/the-bureau/director-general/?lang=hi'>महानिदेशक</a></li>
+<li title="Origin of BIS" id="1856642077_Origin_of_BIS" ><a href='https://www.bis.gov.in/the-bureau/origin-of-bis/?lang=hi/?page_id=2384'>बीआईएस की उत्पत्ति</a></li>
+<li title="BIS Glory" id="1857786062BIS_Glory" ><a href='http://164.100.105.198:8097/archivewebsite/' target="_blank" >बीआईएस महिमा</a></li>
+<li title="Presidents" id="1858599150_Presidents" ><a href='https://www.bis.gov.in/the-bureau/president/?lang=hi'>अध्यक्ष</a></li>
+<li title="Vice Presidents" id="1859824245_Vice_Presidents" ><a href='https://www.bis.gov.in/the-bureau-2/vice-president/?lang=hi'>उपाध्यक्ष</a></li>
+<li title="Director Generals" id="1860992386_Director_Generals" ><a href='https://www.bis.gov.in/the-bureau/director-general/?lang=hi'>महानिदेशक</a></li>
 
-<li title="Annual Report" id="1862365148_Annual_Report" ><a href='https://www.bis.gov.in/the-bureau/annual-report/?lang=hi'>वार्षिक रिपोर्ट</a>
+<li title="Annual Report" id="1862523339_Annual_Report" ><a href='https://www.bis.gov.in/the-bureau/annual-report/?lang=hi'>वार्षिक रिपोर्ट</a>
 <ul>
-<li><a id="1864385274_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/2022/02/Annual_report_for_final_approval_on_12-1-2022.pdf" target="_blank" >वर्ष 2020-2021</a></li>
-<li><a id="1865205293_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/021/03/Annual_Report_2019-20_new.pdf" target="_blank" >वर्ष 2019-2020</a></li>
-<li id="1866541418_Year_2017-2018ee" ><a title="Year 2017-2018" id="1866639937_Year_2017-2018ff"  href="https://www.bis.gov.in/wp-content/uploads/2020/03/BISAnnualReport2019.pdf" target="_blank" >वर्ष 2018-2019</a></li>
-<li id="1867170787_Year_2016-2017ff" ><a href="https://www.bis.gov.in/org/AnnualReport2016-17.pdf" target="_blank" >Year 2016-2017</a></li>
-<li id="1868787070_Year_2015-2016ee" ><a title="Year 2015-2016" id="1868356593_Year_2015_2016ff"  href="https://www.bis.gov.in/org/AnnualReportforPrinting2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
-<li id="1869476532_Year_2014-2015dd" ><a title="Year 2014-2015" id="1869117454_Year_2014-2015ee"  href="https://www.bis.gov.in/org/AnnualReport2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
-<li id="1870786382_Year_2013-2014dd" ><a title="Year 2013-2014" id="1870225125_Year_2013-2014ee"  href="https://www.bis.gov.in/org/ANNUALREPORT2015-16.pdf" target="_blank" >वर्ष 2015-2016</a></li>
-<li id="1871913506_Year_2012-2013ee" ><a title="Year 2012-2013" id="1871298258_Year_2012_2013ff"  href="https://www.bis.gov.in/org/ANNUALREPORT2014-15.pdf" target="_blank" >वर्ष 2014-2015</a></li>
-<li id="1872415579_Year_2011-2012gg" ><a title="Year 2011-2012" id="1872198952_Year_2011-2012hh"  href="https://www.bis.gov.in/org/ANNUALREPORT2013.pdf" target="_blank" >वर्ष 2013-2014</a></li>
-<li id="1873930361_Year_2011-2012gg" ><a title="Year 2011-2012" id="1873777768_Year_2011-2012hh"  href="https://www.bis.gov.in/org/ANNUALREPORT1213.pdf" target="_blank" >वर्ष 2012-2013</a></li>
-<li id="1874749412_Year_2011-2012gg" ><a title="Year 2011-2012" id="1874226125_Year_2011-2012hh"  href="https://www.bis.gov.in/org/ANNUALREPORT1112.pdf" target="_blank" >वर्ष 2011-2012</a></li>
+<li><a id="1864126607_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/2022/02/Annual_report_for_final_approval_on_12-1-2022.pdf" target="_blank" >वर्ष 2020-2021</a></li>
+<li><a id="1865265980_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/021/03/Annual_Report_2019-20_new.pdf" target="_blank" >वर्ष 2019-2020</a></li>
+<li id="1866929922_Year_2017-2018ee" ><a title="Year 2017-2018" id="1866599672_Year_2017-2018ff"  href="https://www.bis.gov.in/wp-content/uploads/2020/03/BISAnnualReport2019.pdf" target="_blank" >वर्ष 2018-2019</a></li>
+<li id="1867555309_Year_2016-2017ff" ><a href="https://www.bis.gov.in/org/AnnualReport2016-17.pdf" target="_blank" >Year 2016-2017</a></li>
+<li id="1868885185_Year_2015-2016ee" ><a title="Year 2015-2016" id="1868431600_Year_2015_2016ff"  href="https://www.bis.gov.in/org/AnnualReportforPrinting2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
+<li id="1869270350_Year_2014-2015dd" ><a title="Year 2014-2015" id="1869951415_Year_2014-2015ee"  href="https://www.bis.gov.in/org/AnnualReport2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
+<li id="1870114375_Year_2013-2014dd" ><a title="Year 2013-2014" id="1870589558_Year_2013-2014ee"  href="https://www.bis.gov.in/org/ANNUALREPORT2015-16.pdf" target="_blank" >वर्ष 2015-2016</a></li>
+<li id="1871122667_Year_2012-2013ee" ><a title="Year 2012-2013" id="1871956135_Year_2012_2013ff"  href="https://www.bis.gov.in/org/ANNUALREPORT2014-15.pdf" target="_blank" >वर्ष 2014-2015</a></li>
+<li id="1872653625_Year_2011-2012gg" ><a title="Year 2011-2012" id="1872729863_Year_2011-2012hh"  href="https://www.bis.gov.in/org/ANNUALREPORT2013.pdf" target="_blank" >वर्ष 2013-2014</a></li>
+<li id="1873614548_Year_2011-2012gg" ><a title="Year 2011-2012" id="1873957395_Year_2011-2012hh"  href="https://www.bis.gov.in/org/ANNUALREPORT1213.pdf" target="_blank" >वर्ष 2012-2013</a></li>
+<li id="1874656640_Year_2011-2012gg" ><a title="Year 2011-2012" id="1874558694_Year_2011-2012hh"  href="https://www.bis.gov.in/org/ANNUALREPORT1112.pdf" target="_blank" >वर्ष 2011-2012</a></li>
 </ul>
 </li>
-<li title="Review Statements on Annual Report" id="1877726048Review_Statements_on_Annual_Report" ><a href="https://www.bis.gov.in/the-bureau/annual-report/?lang=hi">वार्षिक रिपोर्ट पर समीक्षा वक्तव्य</a>
+<li title="Review Statements on Annual Report" id="1877726401Review_Statements_on_Annual_Report" ><a href="https://www.bis.gov.in/the-bureau/annual-report/?lang=hi">वार्षिक रिपोर्ट पर समीक्षा वक्तव्य</a>
 <ul>
-<li><a id="1879304499_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/2023/12/Review-Statement-2021-2022-Hindi.pdf" target="_blank" >वर्ष 2021-2022</a></li>
-<li><a id="1880626597_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/2022/02/Review-Statement-BIS-AR-2020-21.pdf" target="_blank" >वर्ष 2020-2021</a></li>
-<li id="1881490970_Year2017-2018gg" ><a title="Year 2017-2018" id="1881350856_Year_2017-2018hh"  href="https://www.bis.gov.in/wp-content/uploads/2021/03/Review_Statement_2019-20.pdf" target="_blank" >वर्ष 2019-2020</a></li>
-<li id="1882209732_Year_2016-2017gg" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2016-17.pdf" target="_blank" >Year 2016-2017</a></li>
-<li id="1883345970_Year_2015-2016hh" ><a title="Year 2015-2016" id="1883353741_Year_2015-2016ii"  href="https://www.bis.gov.in/wp-content/uploads/2020/03/ReviewStatementofBISAR201819.pdf" target="_blank" >वर्ष 2018-2019</a></li>
-<li id="1884739287_Year014-2015aa" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2014-15.pdf" target="_blank" >Year 2014-2015</a></li>
-<li id="1885698248_Year_2013-2014ff" ><a title="Year 2013-2014" id="1885987096_Year_2013-2014gg"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
-<li id="1886273213_Year_2012-2013gg" ><a title="Year 2012-2013" id="1886499062_Year_2012-2013hh"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
-<li id="1887912808_Year_2011-2012aa" ><a title="Year 2011-2012" id="1887773711_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2015-16.pdf" target="_blank" >वर्ष 2015-2016</a></li>
-<li id="1888271278_Year_2011-2012aa" ><a title="Year 2011-2012" id="1888872953_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2014-15.pdf" target="_blank" >वर्ष 2014-2015</a></li>
-<li id="1889641638_Year_2011-2012aa" ><a title="Year 2011-2012" id="1889701741_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2013-14.pdf" target="_blank" >वर्ष 2013-2014</a></li>
-<li id="1890428387_Year_2011-2012aa" ><a title="Year 2011-2012" id="1890733068_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2012-13.pdf" target="_blank" >वर्ष 2012-2013</a></li>
-<li id="1891508493_Year_2011-2012aa" ><a title="Year 2011-2012" id="1891272439_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2011-12.pdf" target="_blank" >वर्ष 2011-2012</a></li>
+<li><a id="1879943889_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/2023/12/Review-Statement-2021-2022-Hindi.pdf" target="_blank" >वर्ष 2021-2022</a></li>
+<li><a id="1880819278_Year_2018-2019"  href="https://www.bis.gov.in/wp-content/uploads/2022/02/Review-Statement-BIS-AR-2020-21.pdf" target="_blank" >वर्ष 2020-2021</a></li>
+<li id="1881820811_Year2017-2018gg" ><a title="Year 2017-2018" id="1881622538_Year_2017-2018hh"  href="https://www.bis.gov.in/wp-content/uploads/2021/03/Review_Statement_2019-20.pdf" target="_blank" >वर्ष 2019-2020</a></li>
+<li id="1882498835_Year_2016-2017gg" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2016-17.pdf" target="_blank" >Year 2016-2017</a></li>
+<li id="1883636808_Year_2015-2016hh" ><a title="Year 2015-2016" id="1883675783_Year_2015-2016ii"  href="https://www.bis.gov.in/wp-content/uploads/2020/03/ReviewStatementofBISAR201819.pdf" target="_blank" >वर्ष 2018-2019</a></li>
+<li id="1884652930_Year014-2015aa" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2014-15.pdf" target="_blank" >Year 2014-2015</a></li>
+<li id="1885850039_Year_2013-2014ff" ><a title="Year 2013-2014" id="1885897795_Year_2013-2014gg"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2017-18.pdf" target="_blank" >वर्ष 2017-2018</a></li>
+<li id="1886795630_Year_2012-2013gg" ><a title="Year 2012-2013" id="1886101993_Year_2012-2013hh"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2016-17.pdf" target="_blank" >वर्ष 2016-2017</a></li>
+<li id="1887448626_Year_2011-2012aa" ><a title="Year 2011-2012" id="1887913261_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2015-16.pdf" target="_blank" >वर्ष 2015-2016</a></li>
+<li id="1888132126_Year_2011-2012aa" ><a title="Year 2011-2012" id="1888481011_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2014-15.pdf" target="_blank" >वर्ष 2014-2015</a></li>
+<li id="1889282253_Year_2011-2012aa" ><a title="Year 2011-2012" id="1889589299_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2013-14.pdf" target="_blank" >वर्ष 2013-2014</a></li>
+<li id="1890352719_Year_2011-2012aa" ><a title="Year 2011-2012" id="1890728704_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2012-13.pdf" target="_blank" >वर्ष 2012-2013</a></li>
+<li id="1891791449_Year_2011-2012aa" ><a title="Year 2011-2012" id="1891433409_Year_2011-2012bb"  href="https://www.bis.gov.in/wp-content/uploads/2020/02/Review-Statement-of-BIS-AR-2011-12.pdf" target="_blank" >वर्ष 2011-2012</a></li>
 </ul>
 </li>
 
-<li title="Delay Statement" id="1895381744_Delay_Statement" ><a href="https://www.bis.gov.in/the-bureau/delay-statement/?lang=hi">देरी बयान»</a>
+<li title="Delay Statement" id="1895716801_Delay_Statement" ><a href="https://www.bis.gov.in/the-bureau/delay-statement/?lang=hi">देरी बयान»</a>
 <ul>
-<li><a title="Year 2019-2020" id="1897310143_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2024/10/Delay-statement-2022-2023.pdf" target="_blank" >वर्ष 2022-2023</a></li>
-<li><a title="Year 2018-2019" id="1898879767_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2023/12/Delay-statement-2021-2022-English.pdf" target="_blank" >वर्ष 2021-2022</a></li>
-<li><a title="Year 2018-2019" id="1899635977_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2022/02/DELAY-STATEMENT-BIS-AR-2020-21.pdf" target="_blank" >वर्ष 2020-2021</a></li>
-<li><a title="Year 2018-2019" id="1900502886_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2021/03/Delay_Statement_2019-20.pdf" target="_blank" >वर्ष 2019-2020</a></li>
-<li><a title="Year 2018-2019" id="1901635530_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2020/04/Delay-Statement-for-BIS-AR-2018-19.pdf" target="_blank" >वर्ष 2018-2019</a></li>
+<li><a title="Year 2019-2020" id="1897903438_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2024/10/Delay-statement-2022-2023.pdf" target="_blank" >वर्ष 2022-2023</a></li>
+<li><a title="Year 2018-2019" id="1898798153_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2023/12/Delay-statement-2021-2022-English.pdf" target="_blank" >वर्ष 2021-2022</a></li>
+<li><a title="Year 2018-2019" id="1899363198_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2022/02/DELAY-STATEMENT-BIS-AR-2020-21.pdf" target="_blank" >वर्ष 2020-2021</a></li>
+<li><a title="Year 2018-2019" id="1900609604_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2021/03/Delay_Statement_2019-20.pdf" target="_blank" >वर्ष 2019-2020</a></li>
+<li><a title="Year 2018-2019" id="1901881216_Year_2018-2019kk"  href="https://www.bis.gov.in/wp-content/uploads/2020/04/Delay-Statement-for-BIS-AR-2018-19.pdf" target="_blank" >वर्ष 2018-2019</a></li>
 </ul>
 </li>
-<li title="BIS Act, Rules &amp; Regulations" id="1904611140_BIS_Regulations" ><a href="https://www.bis.gov.in/the-bureau/bis-act-rules-and-regulations/?lang=hi">बीआईएस अधिनियम, नियम</a></li>
-<li title="Solar Power Initiative" id="1905296258_Sola_Power_Initiative" ><a href="https://www.bis.gov.in/the-bureau/solar-power-initiative/?lang=hi">सौर ऊर्जा पहल</a></li>
-<li title="Pensioners" id="1906368572_Pensioners" ><a href="https://www.bis.gov.in/pensioners/?lang=hi">पेंशनभोगी</a></li>
+<li title="BIS Act, Rules &amp; Regulations" id="1904911694_BIS_Regulations" ><a href="https://www.bis.gov.in/the-bureau/bis-act-rules-and-regulations/?lang=hi">बीआईएस अधिनियम, नियम</a></li>
+<li title="Solar Power Initiative" id="1905390038_Sola_Power_Initiative" ><a href="https://www.bis.gov.in/the-bureau/solar-power-initiative/?lang=hi">सौर ऊर्जा पहल</a></li>
+<li title="Pensioners" id="1906223447_Pensioners" ><a href="https://www.bis.gov.in/pensioners/?lang=hi">पेंशनभोगी</a></li>
 </ul>
 </li>
-<li title="Directory" id="1909304605_Directory" ><a href="https://www.bis.gov.in">निर्देशिका</a>
+<li title="Directory" id="1909538648_Directory" ><a href="https://www.bis.gov.in">निर्देशिका</a>
 <ul>
-<li title="Enquiry" id="1911416771_Enquiry" ><a href="https://www.bis.gov.in/directory/enquiry/?lang=hi">पूछताछ</a></li>
-<li title="Head Quarter" id="1912741644_Head_Quarter" ><a href="https://www.bis.gov.in/head-quarter/?lang=hi">मुख्यालय</a></li>
-<li title="Regional Office" id="1913993964_Regional_Office" ><a href="https://www.bis.gov.in/directory/regional-offices/?lang=hi">क्षेत्रीय कार्यालय</a></li>
+<li title="Enquiry" id="1911166090_Enquiry" ><a href="https://www.bis.gov.in/directory/enquiry/?lang=hi">पूछताछ</a></li>
+<li title="Head Quarter" id="1912416391_Head_Quarter" ><a href="https://www.bis.gov.in/head-quarter/?lang=hi">मुख्यालय</a></li>
+<li title="Regional Office" id="1913766871_Regional_Office" ><a href="https://www.bis.gov.in/directory/regional-offices/?lang=hi">क्षेत्रीय कार्यालय</a></li>
 <li><a href="https://www.bis.gov.in/branch-office/?lang=hi">शाखा कार्यालय</a></li>
-<li title="Sales Office" id="1915317732_Sales_Office" ><a href="https://www.bis.gov.in/directory/sales-office/?lang=hi">बिक्री कार्यालय</a></li>
-<li title="Laboratory" id="1916880746_Laboratory" ><a href="https://www.bis.gov.in/directory/laboratory/?lang=hi">प्रयोगशाला</a></li>
-<li title="BIS Apps" id="1917738510_BIS_Apps" ><a href="https://www.bis.gov.in/bis-apps/?lang=hi">बीआईएस ऐप्स</a></li>
-<li title="BIS  E-Book" id="1918472496_BIS_E_Book" ><a href="https://www.bis.gov.in/e-book/?lang=hi">बीआईएस ई-बुक</a></li>
-<li title=" BIS  E-Book" id="19199751071919563771_BIS_E-Book" ><a href="https://www.bis.gov.in/comic-books/?lang=hi">हास्य किताबें</a></li>
+<li title="Sales Office" id="1915913229_Sales_Office" ><a href="https://www.bis.gov.in/directory/sales-office/?lang=hi">बिक्री कार्यालय</a></li>
+<li title="Laboratory" id="1916561183_Laboratory" ><a href="https://www.bis.gov.in/directory/laboratory/?lang=hi">प्रयोगशाला</a></li>
+<li title="BIS Apps" id="1917914670_BIS_Apps" ><a href="https://www.bis.gov.in/bis-apps/?lang=hi">बीआईएस ऐप्स</a></li>
+<li title="BIS  E-Book" id="1918654455_BIS_E_Book" ><a href="https://www.bis.gov.in/e-book/?lang=hi">बीआईएस ई-बुक</a></li>
+<li title=" BIS  E-Book" id="19195806771919890710_BIS_E-Book" ><a href="https://www.bis.gov.in/comic-books/?lang=hi">हास्य किताबें</a></li>
 
-<li title="BIS Logo Guidelines" id="19218874571921615360_BIS_E-Book" ><a href="https://www.bis.gov.in/bis-logo-guidelines/?lang=hi">बीआईएस लोगो दिशानिर्देश</a></li>
+<li title="BIS Logo Guidelines" id="19216137891921124884_BIS_E-Book" ><a href="https://www.bis.gov.in/bis-logo-guidelines/?lang=hi">बीआईएस लोगो दिशानिर्देश</a></li>
 </ul>
 </li>
 </ul>
 </li>
 
-<li title="Standards" id="1927423018_Standards" ><a href='https://www.services.bis.gov.in/php/BIS_2.0/eBIS/' onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">मानकीकरण </a>
+<li title="Standards" id="1927335153_Standards" ><a href='https://www.services.bis.gov.in/php/BIS_2.0/eBIS/' onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">मानकीकरण </a>
 
 <ul> 
-<li title="Download Indian Standards" id="1930666135__IndianStandards" >
+<li title="Download Indian Standards" id="1930233538__IndianStandards" >
 <a href="https://standardsbis.bsbedge.com/" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">भारतीय मानक डाउनलोड करें</a>
 </li>
-<li title="Technical Departments" id="1933976648_Technical_Departments" >
+<li title="Technical Departments" id="1933627714_Technical_Departments" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" href="https://standards.bis.gov.in/website/technical-departments/department-list" target="_blank">तकनीकी विभाग</a>
 </li>
-<li title="Standardization Cells" id="1936282038_Standardization_Cells" >
+<li title="Standardization Cells" id="1936331719_Standardization_Cells" >
 <a target="_blank" href="https://standards.bis.gov.in/website/standardization-cells"> मानकीकरण प्रकोष्ठ</a>
 </li>
-<li title="Published Standards" id="1939168129_Published_Standards" >
+<li title="Published Standards" id="1939111289_Published_Standards" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/published-standards/department-wise"> प्रकाशित मानक</a>
 </li>
-<li title="Proposal for New Standards" id="1942107188_Proposal" >
+<li title="Proposal for New Standards" id="1942326395_Proposal" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/proposals-for-standards"> नए मानकों का प्रस्ताव</a>
 </li>
-<li title="Standards under Review" id="1945997953_Standards_Reviewed" >
+<li title="Standards under Review" id="1945863432_Standards_Reviewed" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/review-of-standards"> मानकों के तहत समीक्षा </a>
 </li>
 
-<li title="Wide Circulation Drafts" id="1949594108_Wide_Circulation_Drafts" >
+<li title="Wide Circulation Drafts" id="1949460459_Wide_Circulation_Drafts" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/wc-drafts"> वाइड सर्कुलेशन ड्राफ्ट</a>
 </li>
-<li title="Accreditation of SDOs" id="1952369825_Accreditation_of_SDOs" >
+<li title="Accreditation of SDOs" id="1952200994_Accreditation_of_SDOs" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/sdo-list"> एसडीओ का प्रत्यायन</a>
 </li>
 
-<li title="MoU" id="1956731116_MoU" >
+<li title="MoU" id="1956707260_MoU" >
 <a target="_blank" href="https://standards.bis.gov.in/website/mou">एमओयू</a>
 </li>
-<li title="RD Projects" id="1959639954_RD_Projects" >
+<li title="RD Projects" id="1959835504_RD_Projects" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/r-and-d-projects/projects-on-the-offer">अनुसंधान एवं विकास परियोजनाए</a>
 </li>
-<li title="International Relations" id="1962239312_International_Relations" >
+<li title="International Relations" id="1962439831_International_Relations" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://irportal.bis.gov.in/home">अंतर्राष्ट्रीय सम्बन्ध</a>
 </li>
 
-<li title="Program of work" id="1966720024_Program_of_work" >
+<li title="Program of work" id="1966142049_Program_of_work" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/technical-departments/program-of-work?id=eyJpdiI6IjVlUDhKTGJScGZKZWkwQXZWZHFlc0E9PSIsInZhbHVlIjoiZldQd29qY0loUEFlcU5PUTV2Y2t6Zz09IiwibWFjIjoiZjc1YjdmYTQxZTRkYmZmOTBjZTBjZGRhZGI2Zjc1OTA5OWI0Y2Q5Y2JlZDJmYmJjYTMxZDJkNzUwMzEwMjE3NyIsInRhZyI6IiJ9">प्रोग्राम ऑफ़ वर्क </a>
 </li>
-<li title="Strategic Roadmaps" id="1969298897_Strategic_Roadmaps" >
+<li title="Strategic Roadmaps" id="1969629937_Strategic_Roadmaps" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/strategic-roadmaps">रणनीतिक रोडमैप </a>
 </li>
 
-<li title="Strategic Roadmaps" id="1973982143_Strategic_Roadmaps" >
+<li title="Strategic Roadmaps" id="1973658459_Strategic_Roadmaps" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://www.bis.gov.in/wp-content/uploads/2022/12/Revised-SFM.pdf">मानक निर्माण नियमावली 2022</a>
 </li>
-<li title="Strategic Roadmaps" id="1976557766_Strategic_Roadmaps" >
+<li title="Strategic Roadmaps" id="1976771464_Strategic_Roadmaps" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://www.bis.gov.in/wp-content/uploads/2024/06/Handbook-for-TC-Members.pdf">टीसी सदस्यों के लिए पुस्तिका</a>
 </li>
 </ul>
 </li>
 
 
-<li title="Conformity Assessment" id="1983210866_Conformity_Assessment" ><a href="https://www.bis.gov.in">अनुरूपता मूल्यांकन  </a>
+<li title="Conformity Assessment" id="1983481709_Conformity_Assessment" ><a href="https://www.bis.gov.in">अनुरूपता मूल्यांकन  </a>
 <ul>
-<li title="Product Certification" id="1985920038_Product_Certification" ><a href="https://www.bis.gov.in">उत्पाद प्रमाणन</a>
+<li title="Product Certification" id="1985326043_Product_Certification" ><a href="https://www.bis.gov.in">उत्पाद प्रमाणन</a>
 <ul>
-<li title="Overview" id="1987559260_Overview" ><a href='https://www.bis.gov.in/product-certification/product-certification-overview/?lang=hi'>सिंहावलोकन</a></li>
-<li title="Products under Compulsory Certification" id="1988849146_Products_under_Compulsory_Certification" ><a href='https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=hi'>अनिवार्य प्रमाणन के अंतर्गत उत्पाद</a></li>
-<li title="Certification Process" id="1989611152_Certification_Process" ><a href="https://www.bis.gov.in/product-certification/product-certification-process/?lang=hi">उत्पाद प्रमाणन प्रक्रिया</a></li>
-<li title="Product Specific information" id="1990673088_Product_Specific_Information" ><a href='https://www.bis.gov.in/product-certification/product-specific-information-2/?lang=hi'>उत्पाद विशिष्ट जानकारी</a></li>
-<li title="Product Specific Information" id="1991723175_Product_Specific_Information" ><a href='https://www.bis.gov.in/product-certification/product-specific-guideline/?lang=hi'>उत्पाद विशिष्ट सूचना</a></li>
-<li title="Fee" id="1992573719_Fee" ><a href='https://www.bis.gov.in/product-certification/product-certification-fee/?lang=hi'>शुल्क</a></li>
-<li title="Products Under Simplified Procedure" id="1993786133Simplified" ><a href="https://www.bis.gov.in/wp-content/uploads/2021/04/List-of-Products-Under-Simplified-Procedure.pdf"  target="_blank">सरलीकृत प्रक्रिया के अंतर्गत उत्पादों की सूची</a></li>   
+<li title="Overview" id="1987792266_Overview" ><a href='https://www.bis.gov.in/product-certification/product-certification-overview/?lang=hi'>सिंहावलोकन</a></li>
+<li title="Products under Compulsory Certification" id="1988903775_Products_under_Compulsory_Certification" ><a href='https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=hi'>अनिवार्य प्रमाणन के अंतर्गत उत्पाद</a></li>
+<li title="Certification Process" id="1989413402_Certification_Process" ><a href="https://www.bis.gov.in/product-certification/product-certification-process/?lang=hi">उत्पाद प्रमाणन प्रक्रिया</a></li>
+<li title="Product Specific information" id="1990891537_Product_Specific_Information" ><a href='https://www.bis.gov.in/product-certification/product-specific-information-2/?lang=hi'>उत्पाद विशिष्ट जानकारी</a></li>
+<li title="Product Specific Information" id="1991368751_Product_Specific_Information" ><a href='https://www.bis.gov.in/product-certification/product-specific-guideline/?lang=hi'>उत्पाद विशिष्ट सूचना</a></li>
+<li title="Fee" id="1992763511_Fee" ><a href='https://www.bis.gov.in/product-certification/product-certification-fee/?lang=hi'>शुल्क</a></li>
+<li title="Products Under Simplified Procedure" id="1993132121Simplified" ><a href="https://www.bis.gov.in/wp-content/uploads/2021/04/List-of-Products-Under-Simplified-Procedure.pdf"  target="_blank">सरलीकृत प्रक्रिया के अंतर्गत उत्पादों की सूची</a></li>   
 
-<li title="Testing Facilities" id="1995792054_Testing_Facilities" ><a href='https://lims.bis.gov.in/home/search_is_number/' target="_blank">परीक्षण सुविधाएं</a></li>
-<li title="Apply Online" id="1996808611_Apply_Online" ><a href='https://www.bis.gov.in/product-certification/product-certificatin-apply-online/?lang=hi'>ऑनलाइन आवेदन</a></li>
-<li title="Online Information" id="1997355899_Online_Information" ><a href='https://www.bis.gov.in/product-certification/online-information/?lang=hi'>ऑनलाइन सूचना</a></li>
-<li title="FAQ" id="1998887686_FAQ" ><a href='https://www.bis.gov.in/product-certification/product-certification-faq/?lang=hi'>अक्सर पूछे जाने वाले प्रश्नस</a></li>
+<li title="Testing Facilities" id="1995922588_Testing_Facilities" ><a href='https://lims.bis.gov.in/home/search_is_number/' target="_blank">परीक्षण सुविधाएं</a></li>
+<li title="Apply Online" id="1996483324_Apply_Online" ><a href='https://www.bis.gov.in/product-certification/product-certificatin-apply-online/?lang=hi'>ऑनलाइन आवेदन</a></li>
+<li title="Online Information" id="1997416255_Online_Information" ><a href='https://www.bis.gov.in/product-certification/online-information/?lang=hi'>ऑनलाइन सूचना</a></li>
+<li title="FAQ" id="1998991570_FAQ" ><a href='https://www.bis.gov.in/product-certification/product-certification-faq/?lang=hi'>अक्सर पूछे जाने वाले प्रश्नस</a></li>
 <li><a href='https://www.bis.gov.in/product-certification/product-certification-contact-us/?lang=hi'>हमें संपर्क करेंं</a></li>
 </ul>
 </li>
 
-<li title="प्रणाली प्रमाणन" id="2003106560_Systems_Certification">
+<li title="प्रणाली प्रमाणन" id="2003280911_Systems_Certification">
 <a href="https://www.bis.gov.in">प्रणाली प्रमाणन</a>
 <ul>
-<li title="सारांश" id="2006646954_Overview">
+<li title="सारांश" id="2006893817_Overview">
 <a href='https://www.bis.gov.in/system-certification-overview/?lang=hi'>सारांश</a>
 </li>
 
-<li title="प्रमाणीकरण प्रक्रिया" id="2010567528_Certification_Process">
+<li title="प्रमाणीकरण प्रक्रिया" id="2010368237_Certification_Process">
 <a href='https://www.bis.gov.in/system-certification-overview/systems-certification/?lang=hi'>प्रमाणीकरण प्रक्रिया</a>
 <ul>
-<li title="प्रमाणीकरण के अंतर्गत प्रणालियाँ" id="2013300779_SystemsunderCertification">
+<li title="प्रमाणीकरण के अंतर्गत प्रणालियाँ" id="2013145360_SystemsunderCertification">
 <a href='https://www.bis.gov.in/system-certification-overview/systems-under-certification/?lang=hi'>प्रमाणीकरण के अंतर्गत प्रणालियाँ</a>
 </li>
 
-<li title="कौन आवेदन कर सकता है?" id="2017684317_Who">
+<li title="कौन आवेदन कर सकता है?" id="2017457423_Who">
 <a href='https://www.bis.gov.in/system-certification-overview/who-can-apply/?lang=hi'>कौन आवेदन कर सकता है?</a>
 </li>
 
-<li title="आवेदन कैसे करें?" id="2021834361_How_To_Apply">
+<li title="आवेदन कैसे करें?" id="2021410452_How_To_Apply">
 <a href='https://www.bis.gov.in/system-certification-overview/download-approach-forms/?lang=hi'>आवेदन कैसे करें?</a>
 </li>
 
-<li title="शुल्क" id="2025613631Fees">
+<li title="शुल्क" id="2025294244Fees">
 <a href='https://www.bis.gov.in/system-certification-overview/fee-structure-for-mscs/?lang=hi'>शुल्क</a>
 </li>
 </ul>
 </li>
 
-<li title="एमएससीडी लॉगिन" id="2031638070_MSCD_Login">
+<li title="एमएससीडी लॉगिन" id="2031246917_MSCD_Login">
 <a href='https://www.services.bis.gov.in/php/BIS_2.0/login' target="_blank">एमएससीडी लॉगिन</a>
 </li>
 
-<li title="ऑनलाइन आवेदन करें" id="2035695069_Apply_Online">
+<li title="ऑनलाइन आवेदन करें" id="2035416183_Apply_Online">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-apply-online/?lang=hi'>ऑनलाइन आवेदन करें</a>
 </li>
 
-<li title="लाइसेंसधारी" id="2039829463Licensee">
+<li title="लाइसेंसधारी" id="2039334865Licensee">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-licence/?lang=hi'>लाइसेंसधारी</a>
 <ul>
-<li title="निगरानी" id="2042378143Surveillance">
+<li title="निगरानी" id="2042729965Surveillance">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-licence/surveillance/?lang=hi'>निगरानी</a>
 </li>
 
-<li title="लाइसेंस का नवीनीकरण" id="2046647728_Renewal">
+<li title="लाइसेंस का नवीनीकरण" id="2046717837_Renewal">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-licence/renewal-of-licence/?lang=hi'>लाइसेंस का नवीनीकरण</a>
 </li>
 
-<li title="मानक चिह्न का उपयोग" id="2050490954Use_ofStandardMark">
+<li title="मानक चिह्न का उपयोग" id="2050673211Use_ofStandardMark">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-licence/use-of-standard-mark/?lang=hi'>मानक चिह्न का उपयोग</a>
 </li>
 
-<li title="विशेष परिस्थितियाँ" id="2054453122_Special_Situations">
+<li title="विशेष परिस्थितियाँ" id="2054871689_Special_Situations">
 <a href=''>विशेष परिस्थितियाँ</a>
 </li>
 
-<li title="रद्दीकरण एवं निलंबन" id="2058382849_Cancellation_Suspension">
+<li title="रद्दीकरण एवं निलंबन" id="2058338747_Cancellation_Suspension">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-licence/cancellation-suspension/?lang=hi'>रद्दीकरण एवं निलंबन</a>
 </li>
 </ul>
 </li>
 
-<li title="ऑडिटर" id="2064595033_Auditors">
+<li title="ऑडिटर" id="2064993037_Auditors">
 <a href='https://www.bis.gov.in/system-certification-overview/auditors/?lang=hi'>ऑडिटर</a>
 </li>
 
-<li title="ऑडिटर हैंडबुक" id="2068832576_Auditor_HandBook">
+<li title="ऑडिटर हैंडबुक" id="2068682320_Auditor_HandBook">
 <a href='https://www.bis.gov.in/system-certification-overview/auditor-handbook/?lang=hi'>ऑडिटर हैंडबुक</a>
 </li>
 
-<li title="शिकायतें" id="2072404561Complaints">
+<li title="शिकायतें" id="2072261931Complaints">
 <a href='https://www.bis.gov.in/system-certification-overview/public-grievance/complaints/?lang=hi'>शिकायतें</a>
 </li>
 
-<li title="अपील" id="2076661963Appeals">
+<li title="अपील" id="2076441607Appeals">
 <a href='https://www.bis.gov.in/system-certification-overview/public-grievance/appeals/?lang=hi'>अपील</a>
 </li>
 
-<li title="अक्सर पूछे जाने वाले प्रश्न" id="2080244653_FAQ">
+<li title="अक्सर पूछे जाने वाले प्रश्न" id="2080667125_FAQ">
 <a href='https://www.bis.gov.in/system-certification-overview/system-certification-faq/?lang=hi'>अक्सर पूछे जाने वाले प्रश्न</a>
 </li>
 
@@ -1472,80 +1472,80 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 </ul>
 </li>
 
-<li title="एफएमसीएस" id="2090592827FMCS">
+<li title="एफएमसीएस" id="2090388392FMCS">
 <a href="https://www.bis.gov.in">एफएमसीएस</a>
 <ul>
-<li title="सारांश" id="2093303312_Overview">
+<li title="सारांश" id="2093890355_Overview">
 <a href='https://www.bis.gov.in/fmcs/fmcs-overview/?lang=hi'>सारांश</a>
 </li>
 
-<li title="प्रमाणीकरण प्रक्रिया" id="2097423235_Certification_Process">
+<li title="प्रमाणीकरण प्रक्रिया" id="2097400169_Certification_Process">
 <a href='https://www.bis.gov.in/fmcs/inclusion-of-new-varieties/?lang=hi'>प्रमाणीकरण प्रक्रिया</a>
 
 <ul>
-<li title="एफएमसीएस के बारे में" id="2101407837_About_FMCS">
+<li title="एफएमसीएस के बारे में" id="2101600022_About_FMCS">
 <a href='https://www.bis.gov.in/fmcs/certification-process/aboutfmcs/?lang=hi'>एफएमसीएस के बारे में</a>
 </li>
 
-<li title="एफएमसीएस के अंतर्गत उत्पाद" id="2105831442_Products_Under_FMCS">
+<li title="एफएमसीएस के अंतर्गत उत्पाद" id="2105227016_Products_Under_FMCS">
 <a href='https://www.bis.gov.in/fmcs/certification-process/products-under-fmcs/?lang=hi'>एफएमसीएस के अंतर्गत उत्पाद</a>
 </li>
 
-<li title="बीआईएस मानक चिह्न" id="2109519942_BIS_Standard_Mark">
+<li title="बीआईएस मानक चिह्न" id="2109339663_BIS_Standard_Mark">
 <a href='https://www.bis.gov.in/fmcs/certification-process/bis-standard-mark/?lang=hi'>बीआईएस मानक चिह्न</a>
 </li>
 
-<li title="कौन आवेदन कर सकता है" id="2113476926_Who_Can_Apply">
+<li title="कौन आवेदन कर सकता है" id="2113454754_Who_Can_Apply">
 <a href='https://www.bis.gov.in/fmcs/certification-process/who-can-apply/?lang=hi'>कौन आवेदन कर सकता है</a>
 </li>
 
-<li title="आवेदन कैसे करें" id="2117753103_How_To_Apply">
+<li title="आवेदन कैसे करें" id="2117300565_How_To_Apply">
 <a href='https://www.bis.gov.in/fmcs/certification-process/how-to-apply/?lang=hi'>आवेदन कैसे करें</a>
 </li>
 
-<li title="एआईआर का नामांकन" id="2121153769_Nomination_of_AIR">
+<li title="एआईआर का नामांकन" id="2121455115_Nomination_of_AIR">
 <a href='https://www.bis.gov.in/fmcs/certification-process/nomination-of-air/?lang=hi'>एआईआर का नामांकन</a>
 </li>
 
-<li title="लाइसेंस प्रदान करना" id="2125564679_Grant">
+<li title="लाइसेंस प्रदान करना" id="2125231840_Grant">
 <a href='https://www.bis.gov.in/fmcs/certification-process/grant-of-licence/?lang=hi'>लाइसेंस प्रदान करना</a>
 </li>
 
-<li title="लाइसेंस का संचालन" id="2129924938_Operation_oF_License">
+<li title="लाइसेंस का संचालन" id="2129971901_Operation_oF_License">
 <a href='https://www.bis.gov.in'>लाइसेंस का संचालन</a>
 </li>
 </ul>
 </li>
 
-<li title="समावेशन" id="2135462797_Inclusion">
+<li title="समावेशन" id="2135799532_Inclusion">
 <a href='https://www.bis.gov.in/fmcs/inclusion-of-new-varieties/?lang=hi'>समावेशन</a>
 </li>
 
-<li title="नवीनीकरण" id="2139237968Renewal">
+<li title="नवीनीकरण" id="2139483979Renewal">
 <a href='https://www.bis.gov.in/fmcs/renewal-of-licence/?lang=hi'>नवीनीकरण</a>
 </li>
 
-<li title="प्रपत्र एवं प्रारूप" id="2143331560_Forms_Formats">
+<li title="प्रपत्र एवं प्रारूप" id="2143809796_Forms_Formats">
 <a href='https://www.bis.gov.in/fmcs/forms-and-formats/?lang=hi'>प्रपत्र एवं प्रारूप</a>
 </li>
 
-<li title="प्रयोगशालाएँ" id="2147857839Laboratories">
+<li title="प्रयोगशालाएँ" id="2147429595Laboratories">
 <a href='https://www.bis.gov.in/fmcs/fmcs-laboratories/?lang=hi'>प्रयोगशालाएँ</a>
 </li>
 
-<li title="लाइसेंसधारी" id="2151890771Licensee">
+<li title="लाइसेंसधारी" id="2151381322Licensee">
 <a href="https://www.bis.gov.in/fmcs/licensee/?lang=hi">लाइसेंसधारी</a>
 </li>
 
-<li title="शुल्क" id="2155435485_Fee">
+<li title="शुल्क" id="2155837436_Fee">
 <a href='https://www.bis.gov.in/fmcs/fmcs-fee/?lang=hi'>शुल्क</a>
 </li>
 
-<li title="मंत्रालय लॉगिन" id="2159380730minstry">
+<li title="मंत्रालय लॉगिन" id="2159314573minstry">
 <a href='http://203.153.41.213:8098/fmcs/'>मंत्रालय लॉगिन</a>
 </li>
 
-<li title="अक्सर पूछे जाने वाले प्रश्न" id="2163744454_FAQ">
+<li title="अक्सर पूछे जाने वाले प्रश्न" id="2163360945_FAQ">
 <a href='https://www.bis.gov.in/fmcs/fmcs-faqs/?lang=hi'>अक्सर पूछे जाने वाले प्रश्न</a>
 </li>
 
@@ -1555,55 +1555,55 @@ href="https://standards.bis.gov.in/website/standardization-cells">मानक�
 </ul>
 </li>
 
-<li title="पंजीकरण योजना" id="2173745591_Registration_Scheme">
+<li title="पंजीकरण योजना" id="2173883397_Registration_Scheme">
 <a href="https://www.bis.gov.in">पंजीकरण योजना</a>
 <ul>
-<li title="सारांश" id="2176400054_Overview">
+<li title="सारांश" id="2176742601_Overview">
 <a href='https://www.crsbis.in/BIS/about-crs.do'
 onclick="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 onkeypress="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 target="_blank">सारांश</a>
 </li>
 
-<li title="पंजीकरण प्रक्रिया" id="2183806420_Registration_Process">
+<li title="पंजीकरण प्रक्रिया" id="2183483839_Registration_Process">
 <a href='https://www.crsbis.in/BIS/registration-page.do'
 onclick="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 onkeypress="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 target="_blank">पंजीकरण प्रक्रिया</a>
 </li>
 
-<li title="बीआईएस मान्यता प्राप्त प्रयोगशालाएँ" id="2190212324_BIS_Recognised_Labs">
+<li title="बीआईएस मान्यता प्राप्त प्रयोगशालाएँ" id="2190816947_BIS_Recognised_Labs">
 <a href='https://www.crsbis.in/BIS/bis_lab.do'
 onclick="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 onkeypress="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 target="_blank">बीआईएस मान्यता प्राप्त प्रयोगशालाएँ</a>
 </li>
 
-<li title="ऑनलाइन आवेदन हेतु निर्देश" id="2197986219_Instructions">
+<li title="ऑनलाइन आवेदन हेतु निर्देश" id="2197664062_Instructions">
 <a href='https://www.crsbis.in/BIS/registration-page.do'
 target="_blank">ऑनलाइन आवेदन हेतु निर्देश</a>
 </li>
 
-<li title="समावेशन" id="2202321426_Inclusion">
+<li title="समावेशन" id="2202982421_Inclusion">
 <a href='https://www.crsbis.in/BIS/inclusion_renewal.do'
 onclick="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 onkeypress="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 target="_blank">समावेशन</a>
 </li>
 
-<li title="नवीनीकरण" id="2209643307Renewal">
+<li title="नवीनीकरण" id="2209535059Renewal">
 <a href='https://www.crsbis.in/BIS/inclusion_renewal.do'
 target="_blank">नवीनीकरण</a>
 </li>
 
-<li title="पंजीकृत निर्माता" id="2214872738_Registered_Manufacturers">
+<li title="पंजीकृत निर्माता" id="2214603597_Registered_Manufacturers">
 <a href='https://www.crsbis.in/BIS/Lims_registrationc.do?hmode=getLimsData'
 onclick="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 onkeypress="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 target="_blank">पंजीकृत निर्माता</a>
 </li>
 
-<li title="अक्सर पूछे जाने वाले प्रश्न" id="2221268229_FAQ">
+<li title="अक्सर पूछे जाने वाले प्रश्न" id="2221924876_FAQ">
 <a href='https://www.crsbis.in/BIS/faq-bis.do'
 onclick="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
 onkeypress="return confirm('यह लिंक आपको एक बाहरी वेबसाइट पर ले जाएगा।')"
@@ -1622,19 +1622,19 @@ target="_blank">संपर्क करें</a>
 </ul>
 </li>
 
-<li title="प्रयोगशाला सेवाएँ" id="2240513034_Laboratory_Services" >
+<li title="प्रयोगशाला सेवाएँ" id="2240927582_Laboratory_Services" >
 <a href="https://www.bis.gov.in">प्रयोगशाला सेवाएँ</a>
 <ul>
 
-<li title="प्रयोगशाला सेवाएँ" id="2244347139_Laboratory_Services" >
+<li title="प्रयोगशाला सेवाएँ" id="2244515050_Laboratory_Services" >
 <a href="https://www.bis.gov.in">प्रयोगशाला सेवाएँ</a>
 <ul>
 
-<li title="परिचय" id="2248596611_Overview" >
+<li title="परिचय" id="2248455150_Overview" >
 <a href='https://www.bis.gov.in/laboratorys/laboratory-services-overview/?lang=hi'>परिचय</a>
 </li>
 
-<li title="परीक्षण सुविधाएँ एवं परीक्षण शुल्क" id="2252160731Test_facilities" >
+<li title="परीक्षण सुविधाएँ एवं परीक्षण शुल्क" id="2252796816Test_facilities" >
 <a href='https://www.bis.gov.in/laboratorys/testing-facility-and-testing-charges/?lang=hi'>परीक्षण सुविधाएँ एवं परीक्षण शुल्क</a>
 <ul>
 
@@ -1779,15 +1779,15 @@ target="_blank">संपर्क करें</a>
 </ul>
 </li>
 
-<li title="हॉलमार्किंग" id="2397999434Hallmarking" >
+<li title="हॉलमार्किंग" id="2397194666Hallmarking" >
 <a href="https://www.bis.gov.in">हॉलमार्किंग</a>
 <ul>
 
-<li title="हॉलमार्किंग" id="2401749574Hallmarking" >
+<li title="हॉलमार्किंग" id="2401954342Hallmarking" >
 <a href="https://www.bis.gov.in">हॉलमार्किंग</a>
 <ul>
 
-<li title="परिचय" id="2405323997_Overview" >
+<li title="परिचय" id="2405286732_Overview" >
 <a href='https://www.bis.gov.in/hallmarking-overview/?lang=hi'>परिचय</a>
 </li>
 
@@ -1985,38 +1985,38 @@ target="_blank">संपर्क करें</a>
 </ul>
 </li>
 
-<li title="प्रशिक्षण" id="2603362756Training" >
+<li title="प्रशिक्षण" id="2603120835Training" >
 <a href="https://www.bis.gov.in">प्रशिक्षण</a>
 <ul>
 
-<li title="प्रशिक्षण" id="2607488703Training" >
+<li title="प्रशिक्षण" id="2607886838Training" >
 <a href="https://www.bis.gov.in">प्रशिक्षण</a>
 <ul>
 
-<li title="परिचय" id="2611364896_Overview" >
+<li title="परिचय" id="2611431752_Overview" >
 <a href='https://www.bis.gov.in/training-2/overview-of-nits/?lang=hi'>परिचय</a>
 </li>
 
-<li title="आवेदन करने की प्रक्रिया" id="2615894522_Procedure_for_Applying" >
+<li title="आवेदन करने की प्रक्रिया" id="2615891217_Procedure_for_Applying" >
 <a href='https://www.bis.gov.in/training-2/procedure-for-applying-for-a-training-programme/?lang=hi'>आवेदन करने की प्रक्रिया</a>
 </li>
 
-<li title="प्रशिक्षण कार्यक्रम" id="2619747672_Training_Programmes" >
+<li title="प्रशिक्षण कार्यक्रम" id="2619167650_Training_Programmes" >
 <a href='https://www.bis.gov.in/training-2/training-programmes/?lang=hi'>प्रशिक्षण कार्यक्रम</a>
 </li>
 
-<li title="प्रशिक्षण कैलेंडर" id="2623328152_Training_Calendar" class="menu-item" style="width:100%;position:relative;">
-<a title="प्रशिक्षण कैलेंडर" id="2624496606_Training_Calendar" href="#">प्रशिक्षण कैलेंडर »</a>
+<li title="प्रशिक्षण कैलेंडर" id="2623198541_Training_Calendar" class="menu-item" style="width:100%;position:relative;">
+<a title="प्रशिक्षण कैलेंडर" id="2624981311_Training_Calendar" href="#">प्रशिक्षण कैलेंडर »</a>
 <ul class="hm3">
 
-<li title="वार्षिक प्रशिक्षण कैलेंडर" id="2627890076_Annual_Training_Calendar" class="menu-item2" style="width: 100%;">
-<a title="वार्षिक प्रशिक्षण कैलेंडर" id="2628100026_Annual_Training_Calendar" href="https://www.bis.gov.in/training-2/annual-training-calendar/?lang=hi" target="_blank">
+<li title="वार्षिक प्रशिक्षण कैलेंडर" id="2627450468_Annual_Training_Calendar" class="menu-item2" style="width: 100%;">
+<a title="वार्षिक प्रशिक्षण कैलेंडर" id="2628906144_Annual_Training_Calendar" href="https://www.bis.gov.in/training-2/annual-training-calendar/?lang=hi" target="_blank">
 वार्षिक प्रशिक्षण कैलेंडर
 </a>
 </li>
 
 <li class="menu-item2" style="width: 100%;">
-<a title="माह-वार प्रशिक्षण कैलेंडर" id="2634227981_Month_Wise_Training_Calendar" href="https://www.bis.gov.in/training-2/month-wise-training-calendar/?lang=hi" target="_blank">
+<a title="माह-वार प्रशिक्षण कैलेंडर" id="2634854979_Month_Wise_Training_Calendar" href="https://www.bis.gov.in/training-2/month-wise-training-calendar/?lang=hi" target="_blank">
 माह-वार प्रशिक्षण कैलेंडर
 </a>
 </li>
@@ -2024,22 +2024,22 @@ target="_blank">संपर्क करें</a>
 </ul>
 </li>
 
-<li title="2025-26 के लिए उत्पाद-विशिष्ट कैप्सूल पाठ्यक्रम" id="2642478216Product_Specific_Capsule_Courses" class="menu-item" style="width:100%;">
-<a title="प्रशिक्षण पोर्टल" id="2643629787_Product_Specific_Capsule_Courses"
+<li title="2025-26 के लिए उत्पाद-विशिष्ट कैप्सूल पाठ्यक्रम" id="2642708604Product_Specific_Capsule_Courses" class="menu-item" style="width:100%;">
+<a title="प्रशिक्षण पोर्टल" id="2643436532_Product_Specific_Capsule_Courses"
 href="https://www.services.bis.gov.in/php/BIS_2.0/trainings/HomeUser/capsule_courses_factsheet"
 style="font-size:12px !important;" target="_blank">
 2025-26 के लिए उत्पाद-विशिष्ट कैप्सूल पाठ्यक्रम
 </a>
 </li>
 
-<li title="प्रशिक्षण रणनीति" id="2650858516_Training-Strategy" class="menu-item" style="width:100%;">
-<a title="प्रशिक्षण रणनीति" id="2651616634_Training-Strategy"
+<li title="प्रशिक्षण रणनीति" id="2650146495_Training-Strategy" class="menu-item" style="width:100%;">
+<a title="प्रशिक्षण रणनीति" id="2651507628_Training-Strategy"
 href="https://www.bis.gov.in/wp-content/uploads/2023/03/Training-Strategy_14-March-2023.pdf" target="_blank">
 प्रशिक्षण रणनीति
 </a>
 </li>
 
-<li title="आईटीपी एलुमनी पोर्टल" id="2657326534_ITP_Alumni_Portal" >
+<li title="आईटीपी एलुमनी पोर्टल" id="2657994765_ITP_Alumni_Portal" >
 <a onclick="return confirm('यह लिंक आपको अन्य बीआईएस एप्लिकेशन पर पुनर्निर्देशित करेगा।')"
 onkeypress="return confirm('यह लिंक आपको अन्य बीआईएस एप्लिकेशन पर पुनर्निर्देशित करेगा।')"
 href="https://www.services.bis.gov.in/php/BIS_2.0/trainings/index.php/login" target="_blank">
@@ -2047,7 +2047,7 @@ href="https://www.services.bis.gov.in/php/BIS_2.0/trainings/index.php/login" tar
 </a>
 </li>
 
-<li title="आईटीईसी के अंतर्गत आईटीपी" id="2665595816_ITP_Alumni_Portal" >
+<li title="आईटीईसी के अंतर्गत आईटीपी" id="2665221973_ITP_Alumni_Portal" >
 <a onclick="return confirm('यह लिंक आपको अन्य बीआईएस एप्लिकेशन पर पुनर्निर्देशित करेगा।')"
 onkeypress="return confirm('यह लिंक आपको अन्य बीआईएस एप्लिकेशन पर पुनर्निर्देशित करेगा।')"
 target="_blank"
@@ -2056,11 +2056,11 @@ href="https://www.bis.gov.in/index.php/international-training-programmes-under-i
 </a>
 </li>
 
-<li title="शुल्क" id="2674838033_Fee" >
+<li title="शुल्क" id="2674620410_Fee" >
 <a href='https://www.bis.gov.in/training-2/training-fee/?lang=hi'>शुल्क</a>
 </li>
 
-<li title="प्रपत्र" id="2678334211Form" >
+<li title="प्रपत्र" id="2678325143Form" >
 <a href='https://www.bis.gov.in/training-2/training-form/?lang=hi'>प्रपत्र</a>
 </li>
 
@@ -2083,30 +2083,30 @@ target="_blank">
 </ul>
 </li>
 
-<li title="उपभोक्ता सहभागिता" id="2701867085_Consumer_Engagement">
+<li title="उपभोक्ता सहभागिता" id="2701426029_Consumer_Engagement">
 <a href="https://www.bis.gov.in">उपभोक्ता सहभागिता</a>
 <ul>
 
-<li title="अवलोकन" id="2705335607_Overview">
+<li title="अवलोकन" id="2705893061_Overview">
 <a href='https://www.bis.gov.in/consumer-overview/?lang=hi'>अवलोकन</a>
 </li>
 
-<li title="उपभोक्ता संरक्षण" id="2709775119_Consumer_protection">
+<li title="उपभोक्ता संरक्षण" id="2709633928_Consumer_protection">
 <a href='https://www.bis.gov.in/consumer-overview/consumer-protection/?lang=hi'>उपभोक्ता संरक्षण</a>
 </li>
 
-<li title="सतर्कता पोर्टल" id="2713687875_Vigilance_Portal">
+<li title="सतर्कता पोर्टल" id="2713621339_Vigilance_Portal">
 <a onclick="return confirm('यह लिंक आपको बीआईएस के एक अन्य एप्लिकेशन पर ले जाएगा।')" target="_blank"
 href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/">
 सतर्कता पोर्टल
 </a>
 </li>
 
-<li title="राष्ट्रीय गुणवत्ता पुरस्कार" id="2720140448_NQA">
+<li title="राष्ट्रीय गुणवत्ता पुरस्कार" id="2720939357_NQA">
 <a href='https://www.bis.gov.in/consumer-overview/national-quality-award/?lang=hi'>राष्ट्रीय गुणवत्ता पुरस्कार</a>
 </li>
 
-<li title="पुस्तिकाएँ" id="2724626904Brochures">
+<li title="पुस्तिकाएँ" id="2724345883Brochures">
 <a href='https://www.bis.gov.in/consumer-overview/brochures/?lang=hi'>पुस्तिकाएँ</a>
 </li>
 
@@ -2189,11 +2189,11 @@ href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/">
 <div class="covidlist">
 <div class="covid-leftlist">
 <div class="topnavlist" id="myTopnavlist">
-<a href="https://www.bis.gov.in/?lang=hi" ID="158619525" aria-label="158194920_होम" title="होम">होम</a>
-<a href="https://www.bis.gov.in/index.php/standard-of-the-week/?lang=hi" ID="159359444" aria-label="159123616_सप्ताह का मानक" title="सप्ताह का मानक">सप्ताह का मानक</a>
-<a href="https://www.bis.gov.in/index.php/standard-of-the-month/?lang=hi" ID="160914205" aria-label="माह का मानक" title="माह का मानक">माह का मानक </a>
-<a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/Published_Standards_new/new_standards" ID="161913706" aria-label="नए मानक" title="नए मानक" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">नए मानक</a>
-<a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/Published_Standards_new/revised_standards" ID="162636285" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" aria-label="संशोधित मानक" title="संशोधित मानक">
+<a href="https://www.bis.gov.in/?lang=hi" ID="158437252" aria-label="158487127_होम" title="होम">होम</a>
+<a href="https://www.bis.gov.in/index.php/standard-of-the-week/?lang=hi" ID="159225900" aria-label="159205928_सप्ताह का मानक" title="सप्ताह का मानक">सप्ताह का मानक</a>
+<a href="https://www.bis.gov.in/index.php/standard-of-the-month/?lang=hi" ID="160957528" aria-label="माह का मानक" title="माह का मानक">माह का मानक </a>
+<a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/Published_Standards_new/new_standards" ID="161230378" aria-label="नए मानक" title="नए मानक" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">नए मानक</a>
+<a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/Published_Standards_new/revised_standards" ID="162163224" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" aria-label="संशोधित मानक" title="संशोधित मानक">
 संशोधित मानक</a>
 <a href="https://standards.bis.gov.in/website/know-your-standards" data-title="'Know Your Standards' सुविधा आपको अपने मानक से संबंधित सभी दस्तावेजों और डेटा का एक ही स्थान पर पहुंच प्रदान करती है। Know Your Standards  के माध्यम से खोज बॉक्स में भारतीय मानक (आईएस) संख्या या कोई कीवर्ड (जैसे उत्पाद का नाम) या संबंधित अंतर्राष्ट्रीय मानक संख्या दर्ज करके मानक खोजा जा सकता है। सूची से वांछित मानक का चयन करने के बाद, यह इंटरफ़ेस आपको मानक के मूल विवरण के साथ-साथ मानक, संशोधन, राजपत्र दस्तावेज़, संबंधित उत्पाद मैनुअल और निरीक्षण और परीक्षण की योजना डाउनलोड करने के लिए लिंक प्रदान करेगा। इसके अलावा, प्रयोगशालाओं के विवरण जहां ऐसी परीक्षण सुविधाएं उपलब्ध हैं, मौजूदा लाइसेंसों के विवरण, आईएस के वर्गीकरण और क्रॉस-रेफरेंस आदि का विवरण भी इंटरफेस पर उपलब्ध है।" aria-label="KnowStandards2" id="KnowStandards1" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">अपने मानक के बारे में जाने</a>
 <!--
@@ -2205,16 +2205,16 @@ href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/">
 <a href="https://www.bis.gov.in/wp-content/uploads/2021/07/listofproducts.pdf" target="_blank">उत्पादों और संबद्धों की सूची<br/> भारतीय मानक</a>
 </div>
 </div> -->
-<a href="https://www.bis.gov.in/wp-content/uploads/2023/05/SNPbookBilingual.pdf" ID="174141906" aria-label="SNP book"  title="SNP book" target="_blank">स्नैप</a>
-<a href="https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=hi" ID="175520737" aria-label="अनिवार्य प्रमाणन के अंतर्गत उत्पाद" title="अनिवार्य प्रमाणन के अंतर्गत उत्पाद">अनिवार्य प्रमाणन के अंतर्गत उत्पाद</a>
-<a href="https://www.bis.gov.in/index.php/standardized-development-and-building-regulations-2023/?lang=hi" ID="176998144" aria-label="मानक विकास और भवन विनियम" title="मानक विकास और भवन विनियम">मानक विकास और भवन विनियम</a>
+<a href="https://www.bis.gov.in/wp-content/uploads/2023/05/SNPbookBilingual.pdf" ID="174935875" aria-label="SNP book"  title="SNP book" target="_blank">स्नैप</a>
+<a href="https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=hi" ID="175915321" aria-label="अनिवार्य प्रमाणन के अंतर्गत उत्पाद" title="अनिवार्य प्रमाणन के अंतर्गत उत्पाद">अनिवार्य प्रमाणन के अंतर्गत उत्पाद</a>
+<a href="https://www.bis.gov.in/index.php/standardized-development-and-building-regulations-2023/?lang=hi" ID="176886425" aria-label="मानक विकास और भवन विनियम" title="मानक विकास और भवन विनियम">मानक विकास और भवन विनियम</a>
 <a href="https://www.services.bis.gov.in/php/BIS_2.0/bistalks/" ID="बीआईएस-टॉक्स" aria-label="बीआईएस टॉक" data-title="The 'BIS Talks' Portal provides you access to all the films launched by BIS. These films are primarily educational in nature and present an overview of the activities/processes carried out by BIS. Films about Standardization, Hallmarking, Conformity Assessment, Toys, Dunnage Pallet, etc. have already been launched." onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank">बीआईएस टॉक </a>
-<a ID="178756203" aria-label="ContactUs" href="https://www.services.bis.gov.in/php/BIS_2.0/consumer/manakmunch" onclick="return confirm('This link will redirect to another BIS application..')" onkeypress="return confirm('This link will redirect to another BIS application..')" target="_blank" title="मानक मंच">मानक मंच</a>
-<a href="https://www.bis.gov.in/manak-geet/?lang=hi" target="_blank" ID="179776290" aria-label="मानक गीत" title="मानक गीत">मानक गीत</a>
-<a href="https://www.bis.gov.in/rajbhasa-hindi-2/?lang=hi" target="_blank" ID="180895781" aria-label="राजभाषा हिन्दी" title="राजभाषा हिन्दी">राजभाषा हिन्दी</a>
-<a href="https://www.services.bis.gov.in/php/BIS_2.0/Library/" target="_blank" ID="181685735" aria-label="बीआईएस पुस्तकालय" title="बीआईएस पुस्तकालय" onclick="return confirm('This link will redirect to BIS Library..')" onkeypress="return confirm('This link will redirect to BIS Library..')">बीआईएस पुस्तकालय </a>
-<a href="https://www.bis.gov.in/monthly-bis-newsletter/?lang=hi" target="_blank" ID="182195384" aria-label="मासिक बीआईएस समाचार पत्र" title="मासिक बीआईएस समाचार पत्र">मासिक बीआईएस समाचार पत्र</a>
-<a href="https://www.bis.gov.in/compliance-of-provisions/?lang=en" target="_blank" ID="183552706" aria-label="आईसीसी संरचना" title="आईसीसी संरचना">आईसीसी संरचना</a>
+<a ID="178897262" aria-label="ContactUs" href="https://www.services.bis.gov.in/php/BIS_2.0/consumer/manakmunch" onclick="return confirm('This link will redirect to another BIS application..')" onkeypress="return confirm('This link will redirect to another BIS application..')" target="_blank" title="मानक मंच">मानक मंच</a>
+<a href="https://www.bis.gov.in/manak-geet/?lang=hi" target="_blank" ID="179260178" aria-label="मानक गीत" title="मानक गीत">मानक गीत</a>
+<a href="https://www.bis.gov.in/rajbhasa-hindi-2/?lang=hi" target="_blank" ID="180751766" aria-label="राजभाषा हिन्दी" title="राजभाषा हिन्दी">राजभाषा हिन्दी</a>
+<a href="https://www.services.bis.gov.in/php/BIS_2.0/Library/" target="_blank" ID="181670087" aria-label="बीआईएस पुस्तकालय" title="बीआईएस पुस्तकालय" onclick="return confirm('This link will redirect to BIS Library..')" onkeypress="return confirm('This link will redirect to BIS Library..')">बीआईएस पुस्तकालय </a>
+<a href="https://www.bis.gov.in/monthly-bis-newsletter/?lang=hi" target="_blank" ID="182360047" aria-label="मासिक बीआईएस समाचार पत्र" title="मासिक बीआईएस समाचार पत्र">मासिक बीआईएस समाचार पत्र</a>
+<a href="https://www.bis.gov.in/compliance-of-provisions/?lang=en" target="_blank" ID="183655841" aria-label="आईसीसी संरचना" title="आईसीसी संरचना">आईसीसी संरचना</a>
 
 <a href="javascript:void(0);" style="font-size:15px;" class="iconlist" onclick="myFunctionlist()"  onkeypress="myFunctionlist()">&#9776;</a>
 </div>
@@ -2227,30 +2227,30 @@ href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/">
 <aside id="sticky-bislogin">
 <div class="sidehoverbar"> 
 
-<a href="https://www.services.bis.gov.in/php/BIS_2.0/" onclick="return confirm('This link will redirect to another BIS application..')" onkeypress="return confirm('This link will redirect to another BIS application..')" target="_blank" class="article" title="BIS Login" id="224607198BISLogin" aria-label="BIS Login"> 
+<a href="https://www.services.bis.gov.in/php/BIS_2.0/" onclick="return confirm('This link will redirect to another BIS application..')" onkeypress="return confirm('This link will redirect to another BIS application..')" target="_blank" class="article" title="BIS Login" id="224263590BISLogin" aria-label="BIS Login"> 
 <span>BIS लॉगिन</span> 
 <img src="https://www.bis.gov.in/wp-content/themes/bisnew/images/newlogin-icon.png" alt="BISLogin"> 
 </a> 
 
-<a href="https://www.bis.gov.in/index.php/full-faq/?lang=hi" class="talks" title="BIS FAQ" id="462602Talks" aria-label="BISFAQ"> 
+<a href="https://www.bis.gov.in/index.php/full-faq/?lang=hi" class="talks" title="BIS FAQ" id="707770Talks" aria-label="BISFAQ"> 
 <span style="text-decoration: none !important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;एफएक्यू</span> 
 <img src="https://www.bis.gov.in/wp-content/themes/bisnew/images/BIS-talks1.jpg" alt="FAQ icon"> 
 </a>
 
-<a href="https://www.bis.gov.in/media/?lang=hi" class="Interview" title="media" id="234683860media" aria-label="media"> 
+<a href="https://www.bis.gov.in/media/?lang=hi" class="Interview" title="media" id="234750182media" aria-label="media"> 
 <span>मीडिया</span>
 <img src="https://www.bis.gov.in/wp-content/themes/bisnew/images/media1.png" alt="mediaicon"> 
 </a> 
-<a onclick="return confirm('This link will redirect to another BIS application..')" onkeypress="return confirm('This link will redirect to another BIS application..')" target="_blank" href="https://www.services.bis.gov.in/php/BIS_2.0/BISBlog/" title="BISBlog" id="238510898BISBlog" aria-label="BISBlog"  class="Scripter"> 
+<a onclick="return confirm('This link will redirect to another BIS application..')" onkeypress="return confirm('This link will redirect to another BIS application..')" target="_blank" href="https://www.services.bis.gov.in/php/BIS_2.0/BISBlog/" title="BISBlog" id="238765917BISBlog" aria-label="BISBlog"  class="Scripter"> 
 <span>बीआईएस ब्लॉग</span>
 <img src="https://www.bis.gov.in/wp-content/themes/bisnew/images/blog.png"  alt="BIS Blog"> 
 </a> 
-<a id="243485594EnglishLang" aria-label="English Lang" href="https://www.bis.gov.in" class="Suggested"> 
+<a id="243804848EnglishLang" aria-label="English Lang" href="https://www.bis.gov.in" class="Suggested"> 
 <span>इंग्लिश</span>
 <img class="sugimg" src="https://www.bis.gov.in/wp-content/themes/bisnew/images/english.jpg" alt="English Languages"> 
 </a>
  
-<a id="255611391" aria-label="Skip to main content"  href="#skip-to-main-content" class="Practice"> 
+<a id="255884443" aria-label="Skip to main content"  href="#skip-to-main-content" class="Practice"> 
 <span>स्किप कंटेंट </span>
 <img src="https://www.bis.gov.in/wp-content/themes/bisnew/images/skip0.jpg" alt="Skiptomaincontent" title="skip to main content"> 
 </a>
@@ -5174,63 +5174,63 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:20%; line-height:30px; ">
 <h2>काय़्रालय</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title=" सिंहावलोकन" id="33751814593375972192" ><a href="https://www.bis.gov.in/the-bureau/about-bis/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title=" संगठन" id="33767679073376460215" ><a href="https://www.bis.gov.in/the-bureau/organization-2/?lang=hi" ><i class="fa fa-chevron-right"></i>संगठन</a></li>
-<li title=" बीआईएस की उत्पत्ति" id="33773919323377635226"  ><a href="https://www.bis.gov.in/the-bureau/origin-of-bis/?lang=hi"><i class="fa fa-chevron-right"></i>बीआईएस की उत्पत्ति</a> </li>
-<li title=" अध्यक्ष" id="33788131353378110134" ><a href="https://www.bis.gov.in/the-bureau/president/?lang=hi"><i class="fa fa-chevron-right"></i>अध्यक्ष</a></li>
-<li title=" उपाध्यक्ष" id="33796026333379695405" ><a href="https://www.bis.gov.in/the-bureau-2/vice-president/?lang=hi"><i class="fa fa-chevron-right"></i>उपाध्यक्ष</a></li>
-<li title=" महानिदेशक" id="33807849393380881982" ><a href="https://www.bis.gov.in/the-bureau/director-general/?lang=hi"><i class="fa fa-chevron-right"></i>महानिदेशक</a></li>
+<li title=" सिंहावलोकन" id="33753189593375247099" ><a href="https://www.bis.gov.in/the-bureau/about-bis/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title=" संगठन" id="33762041203376200291" ><a href="https://www.bis.gov.in/the-bureau/organization-2/?lang=hi" ><i class="fa fa-chevron-right"></i>संगठन</a></li>
+<li title=" बीआईएस की उत्पत्ति" id="33773777883377483705"  ><a href="https://www.bis.gov.in/the-bureau/origin-of-bis/?lang=hi"><i class="fa fa-chevron-right"></i>बीआईएस की उत्पत्ति</a> </li>
+<li title=" अध्यक्ष" id="33788658433378323949" ><a href="https://www.bis.gov.in/the-bureau/president/?lang=hi"><i class="fa fa-chevron-right"></i>अध्यक्ष</a></li>
+<li title=" उपाध्यक्ष" id="33797173253379648588" ><a href="https://www.bis.gov.in/the-bureau-2/vice-president/?lang=hi"><i class="fa fa-chevron-right"></i>उपाध्यक्ष</a></li>
+<li title=" महानिदेशक" id="33807551953380355871" ><a href="https://www.bis.gov.in/the-bureau/director-general/?lang=hi"><i class="fa fa-chevron-right"></i>महानिदेशक</a></li>
 
 <li><a href="https://www.bis.gov.in/the-bureau/annual-report/?lang=hi" ><i class="fa fa-chevron-right"></i>वार्षिक विवरण</a></li>
 
 <li><a href="https://www.bis.gov.in/the-bureau/bis-act-rules-and-regulations/?lang=hi" ><i class="fa fa-chevron-right"></i>बीआईएस अधिनियम, नियम..</a></li>
-<li title=" सौर ऊर्जा पहल" id="33854462303385294096" ><a href="https://www.bis.gov.in/the-bureau/solar-power-initiative/?lang=hi" ><i class="fa fa-chevron-right"></i>सौर ऊर्जा पहल</a></li>
+<li title=" सौर ऊर्जा पहल" id="33855932373385808379" ><a href="https://www.bis.gov.in/the-bureau/solar-power-initiative/?lang=hi" ><i class="fa fa-chevron-right"></i>सौर ऊर्जा पहल</a></li>
 
 
 </ul>
 </div>
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:22%;line-height:30px;">
-<h2 style="color:#fff;"><a href="https://www.services.bis.gov.in/php/BIS_2.0/eBIS/"  title="मानक" id="3391940001"  onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" style="color:#fff;">मानकीकरण</a></h2>
+<h2 style="color:#fff;"><a href="https://www.services.bis.gov.in/php/BIS_2.0/eBIS/"  title="मानक" id="3391915157"  onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" style="color:#fff;">मानकीकरण</a></h2>
 
 <ul class="quick_link" style="margin-top:20px"> 
-<li title=" भारतीय मानक डाउनलोड करें" id="33946396293394322415_मानक" >
+<li title=" भारतीय मानक डाउनलोड करें" id="33948508873394961724_मानक" >
 <a href="https://standardsbis.bsbedge.com/" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" ><i class="fa fa-chevron-right"></i> भारतीय मानक डाउनलोड करें</a>
 </li>             
 
-<li title=" तकनीकी विभाग" id="33986703963398269346" >
+<li title=" तकनीकी विभाग" id="33989652513398932704" >
 <a href="https://standards.bis.gov.in/website/technical-departments/department-list" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank"><i class="fa fa-chevron-right"></i> तकनीकी विभाग</a>
 </li>
-<li title="मानकीकरण प्रकोष्ठ" id="3401717612" >
+<li title="मानकीकरण प्रकोष्ठ" id="3401630957" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/standardization-cells"><i class="fa fa-chevron-right"></i> मानकीकरण प्रकोष्ठ</a>
 </li>
-<li title="प्रकाशित मानक" id="3404250137" >
+<li title="प्रकाशित मानक" id="3404264257" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/published-standards/department-wise"><i class="fa fa-chevron-right"></i> प्रकाशित मानक</a>
 </li>
-<li title=" नए मानकों का प्रस्ताव" id="34076986593407241614" >
+<li title=" नए मानकों का प्रस्ताव" id="34071908053407324053" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/proposals-for-standards"><i class="fa fa-chevron-right"></i> नए मानकों का प्रस्ताव</a>
 </li>
-<li title="मानकों की समीक्षा" id="3410215534" >
+<li title="मानकों की समीक्षा" id="3410833947" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/review-of-standards"><i class="fa fa-chevron-right"></i> मानकों के तहत समीक्षा </a>
 </li>
 
-<li title=" वाइड सर्कुलेशन ड्राफ्ट" id="34146794943414361343" >
+<li title=" वाइड सर्कुलेशन ड्राफ्ट" id="34149095933414195744" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/wc-drafts"><i class="fa fa-chevron-right"></i> वाइड सर्कुलेशन ड्राफ्ट</a>
 </li>
-<li title=" एसडीओ का प्रत्यायन" id="34179185033417649824" >
+<li title=" एसडीओ का प्रत्यायन" id="34171923983417365477" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://www.services.bis.gov.in/php/BIS_2.0/sdo/sdonew"><i class="fa fa-chevron-right"></i> एसडीओ का प्रत्यायन</a>
 </li>
 
-<li title="एमओयू" id="3421304850" >
+<li title="एमओयू" id="3421219334" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/mou"><i class="fa fa-chevron-right"></i> एमओयू</a>
 </li>
-<li title="आर एंड डी परियोजनां" id="3424198844ं" >
+<li title="आर एंड डी परियोजनां" id="3424966901ं" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/research-development-projects"><i class="fa fa-chevron-right"></i> आर एंड डी परियोजनां</a>
 </li>
-<li title="अंतर्राष्ट्रीय सम्बन्ध" id="3427256537" >
+<li title="अंतर्राष्ट्रीय सम्बन्ध" id="3427555972" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://irportal.bis.gov.in/home"><i class="fa fa-chevron-right"></i> अंतर्राष्ट्रीय सम्बन्ध</a>
 </li>
 
-<li title="प्रोग्राम ऑफ़ वर्क" id="3431113081" >
+<li title="प्रोग्राम ऑफ़ वर्क" id="3431485898" >
 <a onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" href="https://standards.bis.gov.in/website/technical-departments/program-of-work?id=eyJpdiI6IjVlUDhKTGJScGZKZWkwQXZWZHFlc0E9PSIsInZhbHVlIjoiZldQd29qY0loUEFlcU5PUTV2Y2t6Zz09IiwibWFjIjoiZjc1YjdmYTQxZTRkYmZmOTBjZTBjZGRhZGI2Zjc1OTA5OWI0Y2Q5Y2JlZDJmYmJjYTMxZDJkNzUwMzEwMjE3NyIsInRhZyI6IiJ9"><i class="fa fa-chevron-right"></i>प्रोग्राम ऑफ़ वर्क </a>
 </li>
 
@@ -5242,16 +5242,16 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:20%;line-height:30px;">
 <h2>उत्पाद प्रमाणन</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3443769580" ><a href="https://www.bis.gov.in/product-certification/product-certification-overivews/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="सिंहावलोकन" id="3443797310" ><a href="https://www.bis.gov.in/product-certification/product-certification-overivews/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
 <li><a href="https://www.bis.gov.in/product-certification/product-certification-process/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रमाणन के तहत उत्पाद</a></li>
 <li><a href="https://www.bis.gov.in/product-certification/product-specific-information-2/?lang=hi" ><i class="fa fa-chevron-right"></i>उत्पाद विशिष्ट दिशानिर्देश</a></li>
-<li title="शुल्क" id="3446537593" ><a href="https://www.bis.gov.in/product-certification/product-certification-fee/?lang=hi/?page_id=1725?lang=hi"><i class="fa fa-chevron-right"></i>शुल्क</a></li>
+<li title="शुल्क" id="3446690711" ><a href="https://www.bis.gov.in/product-certification/product-certification-fee/?lang=hi/?page_id=1725?lang=hi"><i class="fa fa-chevron-right"></i>शुल्क</a></li>
 <li><a href="https://lims.bis.gov.in/home/search_is_number/" target="_blank"><i class="fa fa-chevron-right"></i>परीक्षण सुविधाएं</a></li>
 <li><a href="https://www.bis.gov.in/product-certification/product-certificatin-apply-online/?lang=hi" ><i class="fa fa-chevron-right"></i>ऑनलाइन अर्जी कीजिए</a></li>
 <li><a href="https://www.bis.gov.in/product-certification/online-information/?lang=hi" ><i class="fa fa-chevron-right"></i>ऑनलाइन जानकारी</a></li>
 
 <li><a href="https://www.bis.gov.in/product-certification/product-certification-faq/?lang=hi"><i class="fa fa-chevron-right"></i>सामान्य प्रश्न</a></li>
-<li title="हमें संपर्क करें" id="3452181923" ><a href="https://www.bis.gov.in/product-certification/product-certification-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
+<li title="हमें संपर्क करें" id="3452189798" ><a href="https://www.bis.gov.in/product-certification/product-certification-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
 
 </ul>
 </div>
@@ -5259,14 +5259,14 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:18%;line-height:30px;">
 <h2>सिस्टम प्रमाणन</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3460398731" ><a href="https://www.bis.gov.in/system-certification-overview/?lang=hi"><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="प्रमाणन प्रक्रिया" id="3461877622" ><a href="https://www.bis.gov.in/system-certification-overview/systems-certification/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रमाणन प्रक्रिया</a></li>
+<li title="सिंहावलोकन" id="3460720833" ><a href="https://www.bis.gov.in/system-certification-overview/?lang=hi"><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="प्रमाणन प्रक्रिया" id="3461680744" ><a href="https://www.bis.gov.in/system-certification-overview/systems-certification/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रमाणन प्रक्रिया</a></li>
 <li><a href="https://www.bis.gov.in/system-certification-overview/system-certification-apply-online/?lang=hi" ><i class="fa fa-chevron-right"></i>ऑनलाइन अर्जी कीजिए</a></li>
-<li title="लाइसेंसधारी" id="3463222020धारी" ><a href="https://www.bis.gov.in/system-certification-overview/system-certification-licence/?lang=hi" ><i class="fa fa-chevron-right"></i>लाइसेंसधारी</a></li>
-<li title="लेखा परीक्षकों" id="3464675799ों" ><a href="https://www.bis.gov.in/system-certification-overview/auditors/?lang=hi" ><i class="fa fa-chevron-right"></i>लेखा परीक्षकों	</a></li>
-<li title="शिकायतें" id="3465610352" ><a href="https://www.bis.gov.in/index.php/system-certification-overview/public-grievance/complaints/?lang=hi"><i class="fa fa-chevron-right"></i>शिकायतें</a></li>
+<li title="लाइसेंसधारी" id="3463673929धारी" ><a href="https://www.bis.gov.in/system-certification-overview/system-certification-licence/?lang=hi" ><i class="fa fa-chevron-right"></i>लाइसेंसधारी</a></li>
+<li title="लेखा परीक्षकों" id="3464328810ों" ><a href="https://www.bis.gov.in/system-certification-overview/auditors/?lang=hi" ><i class="fa fa-chevron-right"></i>लेखा परीक्षकों	</a></li>
+<li title="शिकायतें" id="3465627943" ><a href="https://www.bis.gov.in/index.php/system-certification-overview/public-grievance/complaints/?lang=hi"><i class="fa fa-chevron-right"></i>शिकायतें</a></li>
 <li><a href="https://www.bis.gov.in/system-certification-overview/system-certification-faq/?lang=hi" ><i class="fa fa-chevron-right"></i>सामान्य प्रश्न</a></li>
-<li title="हमें संपर्क करें" id="3467684181" ><a href="https://www.bis.gov.in/system-certification-overview/system-certification-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
+<li title="हमें संपर्क करें" id="3467442658" ><a href="https://www.bis.gov.in/system-certification-overview/system-certification-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
 
 
 </ul>
@@ -5275,16 +5275,16 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:20%;line-height:30px;">
 <h2>पंजीकरण योजना</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3476669104" ><a href="https://www.crsbis.in/BIS/about-crs.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="पंजीकरण की प्रक्रिया" id="3477794101" ><a href="https://www.crsbis.in/BIS/registration-page.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>पंजीकरण की प्रक्रिया</a></li>
-<li title="बीआईएस से मान्यता प्राप्त प्रयोगशालाऍं" id="3478512617" ><a href='https://www.crsbis.in/BIS/registration-page.do' onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>बीआईएस से मान्यता प्राप्त.. </a></li>
+<li title="सिंहावलोकन" id="3476725023" ><a href="https://www.crsbis.in/BIS/about-crs.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="पंजीकरण की प्रक्रिया" id="3477627191" ><a href="https://www.crsbis.in/BIS/registration-page.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>पंजीकरण की प्रक्रिया</a></li>
+<li title="बीआईएस से मान्यता प्राप्त प्रयोगशालाऍं" id="3478837114" ><a href='https://www.crsbis.in/BIS/registration-page.do' onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>बीआईएस से मान्यता प्राप्त.. </a></li>
 <li><a href="https://www.crsbis.in/BIS/bis_lab.do" target="_blank" ><i class="fa fa-chevron-right"></i>ऑनलाइन अर्जी कीजिए</a></li>
-<li title="समावेश" id="3480761513" ><a href="https://www.crsbis.in/BIS/inclusion_renewal.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>समावेश</a></li>
-<li title="नवीकरण" id="3481107039" ><a href="https://www.crsbis.in/BIS/inclusion_renewal.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>नवीकरण	</a></li>
+<li title="समावेश" id="3480246884" ><a href="https://www.crsbis.in/BIS/inclusion_renewal.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>समावेश</a></li>
+<li title="नवीकरण" id="3481136111" ><a href="https://www.crsbis.in/BIS/inclusion_renewal.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>नवीकरण	</a></li>
 
 <li><a href="https://www.crsbis.in/BIS/Lims_registrationc.do?hmode=getLimsData" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>पंजीकृत निर्माता</a></li>
-<li title="अधिकतर पूछे जाने वाले प्रश्न" id="3484788373" ><a href="https://www.crsbis.in/BIS/faq-bis.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>अधिकतर पूछे जाने वाले प्रश्न</a></li>
-<li title="हमें संपर्क करें" id="3485892393" ><a href="https://www.crsbis.in/BIS/contact.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
+<li title="अधिकतर पूछे जाने वाले प्रश्न" id="3484305418" ><a href="https://www.crsbis.in/BIS/faq-bis.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>अधिकतर पूछे जाने वाले प्रश्न</a></li>
+<li title="हमें संपर्क करें" id="3485182870" ><a href="https://www.crsbis.in/BIS/contact.do" onclick="return confirm('This link will take you to an external web site.')" onkeypress="return confirm('This link will take you to an external web site.')" target="_blank" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
 
 </ul>
 </div>
@@ -5295,41 +5295,41 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:20%;line-height:30px;">
 <h2>विदेशी निर्माता प्रमाणन योजना</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3496917602" ><a href="https://www.bis.gov.in/fmcs/fmcs-overview/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="समावेश" id="3497482301" ><a href="https://www.bis.gov.in/fmcs/inclusion-of-new-varieties/?lang=hi" ><i class="fa fa-chevron-right"></i>समावेश</a></li>
-<li title="नवीकरण" id="3498736159" ><a href="https://www.bis.gov.in/fmcs/renewal-of-licence/?lang=hi" ><i class="fa fa-chevron-right"></i>नवीनीकरण</a></li>
+<li title="सिंहावलोकन" id="3496433708" ><a href="https://www.bis.gov.in/fmcs/fmcs-overview/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="समावेश" id="3497169104" ><a href="https://www.bis.gov.in/fmcs/inclusion-of-new-varieties/?lang=hi" ><i class="fa fa-chevron-right"></i>समावेश</a></li>
+<li title="नवीकरण" id="3498212922" ><a href="https://www.bis.gov.in/fmcs/renewal-of-licence/?lang=hi" ><i class="fa fa-chevron-right"></i>नवीनीकरण</a></li>
 <li><a href="https://www.bis.gov.in/fmcs/forms-and-formats/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रपत्र और प्रारूप </a></li>
-<li title="प्रयोगशालाएं" id="3500748551एं" ><a href="https://www.bis.gov.in/fmcs/fmcs-laboratories/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रयोगशालाएं</a></li>
+<li title="प्रयोगशालाएं" id="3500643108एं" ><a href="https://www.bis.gov.in/fmcs/fmcs-laboratories/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रयोगशालाएं</a></li>
 
 
-<li title="लाइसेंसी" id="3503799545" ><a href="https://www.bis.gov.in/fmcs/licensee/?lang=hi"><i class="fa fa-chevron-right"></i>लाइसेंसी</a></li>
-<li title="शुल्क" id="3504515433" ><a href="https://www.bis.gov.in/fmcs/fmcs-fee/?lang=hi" ><i class="fa fa-chevron-right"></i>शुल्क</a></li>
+<li title="लाइसेंसी" id="3503681990" ><a href="https://www.bis.gov.in/fmcs/licensee/?lang=hi"><i class="fa fa-chevron-right"></i>लाइसेंसी</a></li>
+<li title="शुल्क" id="3504153779" ><a href="https://www.bis.gov.in/fmcs/fmcs-fee/?lang=hi" ><i class="fa fa-chevron-right"></i>शुल्क</a></li>
 
-<li title="मंत्रालय का लॉगिन" id="3506244815मंत्रालयकालॉगिन" ><a href="http://203.153.41.213:8098/fmcs/" target="_blank"  ><i class="fa fa-chevron-right"></i>मंत्रालय का लॉगिन</a></li>
-<li title="अधिकतर पूछे जाने वाले प्रश्न" id="3507229121" ><a href="https://www.bis.gov.in/fmcs/fmcs-faqs/?lang=hi" ><i class="fa fa-chevron-right"></i>अधिकतर पूछे जाने वाले प्रश्न</a></li>
-<li title="हमें संपर्क करें" id="3508709257" ><a href="https://www.bis.gov.in/fmcs/fmcs-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करें</a></li>
+<li title="मंत्रालय का लॉगिन" id="3506779193मंत्रालयकालॉगिन" ><a href="http://203.153.41.213:8098/fmcs/" target="_blank"  ><i class="fa fa-chevron-right"></i>मंत्रालय का लॉगिन</a></li>
+<li title="अधिकतर पूछे जाने वाले प्रश्न" id="3507104020" ><a href="https://www.bis.gov.in/fmcs/fmcs-faqs/?lang=hi" ><i class="fa fa-chevron-right"></i>अधिकतर पूछे जाने वाले प्रश्न</a></li>
+<li title="हमें संपर्क करें" id="3508549430" ><a href="https://www.bis.gov.in/fmcs/fmcs-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करें</a></li>
 </ul>
 </div>
 
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:22%;line-height:30px;">
 <h2 style="padding-bottom: 25px;">प्रयोगशाला</h2>
 <ul class="quick_link">
-<li title="सिंहावलोकन" id="3515651695_Overview" ><a href="https://www.bis.gov.in/index.php/laboratorys/laboratory-services-overview/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="परीक्षण सुविधा और परीक्षण शुल्क" id="3516961948Test_facilities" ><a href="https://www.bis.gov.in/index.php/laboratorys/testing-facility-and-testing-charges/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>परीक्षण सुविधा और परीक्षण शुल्क</a></li>
-<li title="प्रयोगशाला मान्यता योजना" id="3517804453_List_of_BIS_Recognized_Labs" ><a href="https://www.bis.gov.in/index.php/laboratorys/list-of-bis-recognized-lab/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना</a></li>
-<li title="एनएबीएल मान्यता प्राप्त प्रयोगशालाएं" id="3518313114_NABL" ><a href="https://nablwp.qci.org.in/laboratorysearchone" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>एनएबीएल मान्यता प्राप्त प्रयोगशालाएं</a></li>
-<li title="सीआरएस के लिए यूटीआरएफ" id="3519216877_UTRS" ><a href="https://www.bis.gov.in/index.php/laboratorys/utrf/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>सीआरएस के लिए यूटीआरएफ...</a></li>
+<li title="सिंहावलोकन" id="3515286009_Overview" ><a href="https://www.bis.gov.in/index.php/laboratorys/laboratory-services-overview/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="परीक्षण सुविधा और परीक्षण शुल्क" id="3516117214Test_facilities" ><a href="https://www.bis.gov.in/index.php/laboratorys/testing-facility-and-testing-charges/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>परीक्षण सुविधा और परीक्षण शुल्क</a></li>
+<li title="प्रयोगशाला मान्यता योजना" id="3517680838_List_of_BIS_Recognized_Labs" ><a href="https://www.bis.gov.in/index.php/laboratorys/list-of-bis-recognized-lab/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना</a></li>
+<li title="एनएबीएल मान्यता प्राप्त प्रयोगशालाएं" id="3518925680_NABL" ><a href="https://nablwp.qci.org.in/laboratorysearchone" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>एनएबीएल मान्यता प्राप्त प्रयोगशालाएं</a></li>
+<li title="सीआरएस के लिए यूटीआरएफ" id="3519105990_UTRS" ><a href="https://www.bis.gov.in/index.php/laboratorys/utrf/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>सीआरएस के लिए यूटीआरएफ...</a></li>
 
-<li title="प्रयोगशाला मान्यता योजना 2020" id="3521472995_Lab" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/06/LRS_23062020.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना 2020 </a></li>
+<li title="प्रयोगशाला मान्यता योजना 2020" id="3521623197_Lab" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/06/LRS_23062020.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना 2020 </a></li>
 
-<li title="प्रयोगशाला मान्यता योजना संशोधन 2020" id="3523770867_LRS" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/10/amendment.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना संशोधन 2020</a></li> 
-<li title="प्रयोगशाला मान्यता योजना संशोधन 2020" id="3524453875_LRS" ><a href="https://www.bis.gov.in/wp-content/uploads/2022/07/LRS-Fee-Annex-A-and-B.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना संशोधन 2022</a></li> 
-<li title="एलआरएस प्रपत्र और वचनबद्धता" id="3525930206_LRS_NEW" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/11/LRS-Forms-and-Undertakings.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>एलआरएस प्रपत्र और वचनबद्धता</a></li>
+<li title="प्रयोगशाला मान्यता योजना संशोधन 2020" id="3523274609_LRS" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/10/amendment.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना संशोधन 2020</a></li> 
+<li title="प्रयोगशाला मान्यता योजना संशोधन 2020" id="3524746379_LRS" ><a href="https://www.bis.gov.in/wp-content/uploads/2022/07/LRS-Fee-Annex-A-and-B.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>प्रयोगशाला मान्यता योजना संशोधन 2022</a></li> 
+<li title="एलआरएस प्रपत्र और वचनबद्धता" id="3525797461_LRS_NEW" ><a href="https://www.bis.gov.in/wp-content/uploads/2020/11/LRS-Forms-and-Undertakings.pdf" target="_blank"  role="link"><i class="fa fa-chevron-right"></i>एलआरएस प्रपत्र और वचनबद्धता</a></li>
 
 
 
-<li title="अक्‍सर पूछे जाने वाले प्रश्न" id="3529199091_FAQ" ><a href="https://www.bis.gov.in/index.php/laboratorys/laboratory-services-overview/laboratory-faq/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>अक्‍सर पूछे जाने वाले प्रश्न</a></li>
-<li title="हमें संपर्क करें" id="3530410314_Contact_us" ><a href="https://www.bis.gov.in/index.php/laboratorys/testing-overview/laboratory-contact-us/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>हमें संपर्क करें</a></li>
+<li title="अक्‍सर पूछे जाने वाले प्रश्न" id="3529632677_FAQ" ><a href="https://www.bis.gov.in/index.php/laboratorys/laboratory-services-overview/laboratory-faq/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>अक्‍सर पूछे जाने वाले प्रश्न</a></li>
+<li title="हमें संपर्क करें" id="3530369816_Contact_us" ><a href="https://www.bis.gov.in/index.php/laboratorys/testing-overview/laboratory-contact-us/?lang=hi" role="link"><i class="fa fa-chevron-right"></i>हमें संपर्क करें</a></li>
 
 
 </ul>
@@ -5338,38 +5338,38 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:20%;line-height:30px;">
 <h2>हॉलमार्किंग</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3539673293" ><a href="https://www.bis.gov.in/hallmarking-overview/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="हॉलमार्किंग संक्षिप्त" id="3540452218"><a href="https://www.bis.gov.in/wp-content/uploads/2020/12/brief-on-Hallmarking.pdf" target="_blank"><i class="fa fa-chevron-right"></i>हॉलमार्किंग संक्षिप्त</a></li>    
+<li title="सिंहावलोकन" id="3539861479" ><a href="https://www.bis.gov.in/hallmarking-overview/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="हॉलमार्किंग संक्षिप्त" id="3540460609"><a href="https://www.bis.gov.in/wp-content/uploads/2020/12/brief-on-Hallmarking.pdf" target="_blank"><i class="fa fa-chevron-right"></i>हॉलमार्किंग संक्षिप्त</a></li>    
 
-<li title="हॉलमार्किंग विनियमन 2018" id="3542399990" ><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-regulation-2018/?lang=hi" ><i class="fa fa-chevron-right" ></i>हॉलमार्किंग विनियमन 2018</a></li>
-<li title="हॉलमार्किंग अनिवार्य आदेश" id="3543378019"><a href="https://www.bis.gov.in/hallmarking-overview/mandatory-hallmarking-order/?lang=hi"><i class="fa fa-chevron-right"></i>हॉलमार्किंग अनिवार्य आदेश</a>
+<li title="हॉलमार्किंग विनियमन 2018" id="3542239070" ><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-regulation-2018/?lang=hi" ><i class="fa fa-chevron-right" ></i>हॉलमार्किंग विनियमन 2018</a></li>
+<li title="हॉलमार्किंग अनिवार्य आदेश" id="3543485610"><a href="https://www.bis.gov.in/hallmarking-overview/mandatory-hallmarking-order/?lang=hi"><i class="fa fa-chevron-right"></i>हॉलमार्किंग अनिवार्य आदेश</a>
 </li>
 <li><a href="https://www.bis.gov.in/hallmarking-overview/jewellers-registration-scheme/?lang=hi" ><i class="fa fa-chevron-right" ></i>ज्वैलर्स प्रमाणन योजना</a></li>    
 <li><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-centre/?lang=hi" ><i class="fa fa-chevron-right"></i>हॉलमार्किंग सेंटर</a></li>
-<li title="गोल्ड रिफाइनरी" id="3547424294"><a href="https://www.bis.gov.in/laboratorys/list-of-bis-recognized-lab/?lang=hi" ><i class="fa fa-chevron-right"></i>गोल्ड रिफाइनरी</a></li>
-<li title="स्वर्ण मुद्रीकरण योजना" id="3548803208"><a href="https://www.bis.gov.in/hallmarking-overview/gold-monetization-scheme/?lang=hi" ><i class="fa fa-chevron-right"></i>स्वर्ण मुद्रीकरण योजना</a></li>
-<li title="उपभोक्ता संरक्षण" id="3549498677" ><a href="https://www.bis.gov.in/hallmarking-overview/consumer-protection/?lang=hi" ><i class="fa fa-chevron-right"></i>उपभोक्ता संरक्षण</a></li>
+<li title="गोल्ड रिफाइनरी" id="3547130234"><a href="https://www.bis.gov.in/laboratorys/list-of-bis-recognized-lab/?lang=hi" ><i class="fa fa-chevron-right"></i>गोल्ड रिफाइनरी</a></li>
+<li title="स्वर्ण मुद्रीकरण योजना" id="3548559128"><a href="https://www.bis.gov.in/hallmarking-overview/gold-monetization-scheme/?lang=hi" ><i class="fa fa-chevron-right"></i>स्वर्ण मुद्रीकरण योजना</a></li>
+<li title="उपभोक्ता संरक्षण" id="3549218608" ><a href="https://www.bis.gov.in/hallmarking-overview/consumer-protection/?lang=hi" ><i class="fa fa-chevron-right"></i>उपभोक्ता संरक्षण</a></li>
 <li><a href="https://www.bis.gov.in/wp-content/uploads/2020/07/EOI.pdf" target="_blank" ><i class="fa fa-chevron-right"></i>केंद्रीय सहायता योजना के...</a></li>
 
 <li> <a href="https://www.bis.gov.in/wp-content/uploads/2022/04/List-of-89-Centres-provided-Central-Assistance-with-amount.pdf" target="_blank" ><i class="fa fa-chevron-right"></i>A &amp;H केंद्रों ने केंद्रीय सहायता...</a></li>  
 <li><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/?lang=hi" ><i class="fa fa-chevron-right"></i>सामान्य प्रश्न</a></li>
-<li title="हमें संपर्क करें" id="3554155785" ><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करें</a></li>
+<li title="हमें संपर्क करें" id="3554902690" ><a href="https://www.bis.gov.in/hallmarking-overview/hallmarking-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करें</a></li>
 </ul>
 </div>
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:19%;line-height:30px;">
 <h2>उपभोक्ताओं के लिए</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3560305596" ><a href="https://www.bis.gov.in/consumer-overview/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="उपभोक्ता संरक्षण" id="3561618666" ><a href="https://www.bis.gov.in/consumer-overview/consumer-protection/?lang=hi" ><i class="fa fa-chevron-right"></i>उपभोक्ता संरक्षण</a></li>
+<li title="सिंहावलोकन" id="3560516230" ><a href="https://www.bis.gov.in/consumer-overview/?lang=hi" ><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="उपभोक्ता संरक्षण" id="3561971854" ><a href="https://www.bis.gov.in/consumer-overview/consumer-protection/?lang=hi" ><i class="fa fa-chevron-right"></i>उपभोक्ता संरक्षण</a></li>
 
-<li title="सतर्कता पोर्टल" id="3563419438" ><a href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" role="link"><i class="fa fa-chevron-right"></i>सतर्कता पोर्टल</a></li>   
+<li title="सतर्कता पोर्टल" id="3563174126" ><a href="https://www.services.bis.gov.in/php/BIS_2.0/vigilance/" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank" role="link"><i class="fa fa-chevron-right"></i>सतर्कता पोर्टल</a></li>   
 
-<li title="विवरणिका" id="3565227369विवरणिका" ><a href="https://www.bis.gov.in/consumer-overview/brochures/?lang=hi" ><i class="fa fa-chevron-right"></i>विवरणिका</a></li>
-<li title="मानक भारत" id="3566581775" ><a href="https://www.bis.gov.in/consumer-overview/standards-india/?lang=hi" ><i class="fa fa-chevron-right"></i>मानक भारत</a></li>
-<li title="कॉपीराइट भारतीय मानक" id="3567475716" ><a href="https://bis.gov.in/PDF/lab/copyright.pdf" target="_blank" ><i class="fa fa-chevron-right"></i>कॉपीराइट भारतीय मानक</a></li>
-<li title="ऑनलाइन शिकायत पंजीकरण" id="3568913118" ><a href="https://www.bis.gov.in/consumer-overview/online-complaint-registration/?lang=hi" ><i class="fa fa-chevron-right"></i>ऑनलाइन शिकायत पंजीकरण</a></li>
+<li title="विवरणिका" id="3565184995विवरणिका" ><a href="https://www.bis.gov.in/consumer-overview/brochures/?lang=hi" ><i class="fa fa-chevron-right"></i>विवरणिका</a></li>
+<li title="मानक भारत" id="3566375048" ><a href="https://www.bis.gov.in/consumer-overview/standards-india/?lang=hi" ><i class="fa fa-chevron-right"></i>मानक भारत</a></li>
+<li title="कॉपीराइट भारतीय मानक" id="3567147746" ><a href="https://bis.gov.in/PDF/lab/copyright.pdf" target="_blank" ><i class="fa fa-chevron-right"></i>कॉपीराइट भारतीय मानक</a></li>
+<li title="ऑनलाइन शिकायत पंजीकरण" id="3568429051" ><a href="https://www.bis.gov.in/consumer-overview/online-complaint-registration/?lang=hi" ><i class="fa fa-chevron-right"></i>ऑनलाइन शिकायत पंजीकरण</a></li>
 <li><a href="https://www.bis.gov.in/consumer-overview/citizen-charter/?lang=hi" ><i class="fa fa-chevron-right"></i>नागरिक चार्टर</a></li>
-<li title="प्रवर्तन" id="3570526803" ><a href="https://www.bis.gov.in/enforcement-activities/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रवर्तन</a></li>
+<li title="प्रवर्तन" id="3570316250" ><a href="https://www.bis.gov.in/enforcement-activities/?lang=hi" ><i class="fa fa-chevron-right"></i>प्रवर्तन</a></li>
 <li><a href="https://www.bis.gov.in/consumer-overview/for-consumers-faq/?lang=hi" ><i class="fa fa-chevron-right"></i>सामान्य प्रश्न</a> </li>
 <li><a href="https://www.bis.gov.in/consumer-overview/for-consumers-contact-us/?lang=hi" ><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>
 <li></li>
@@ -5379,17 +5379,17 @@ jQuery('.slider-for').slick('slickPlay');
 <div class="col-md-3 col-sm-6 footer_about quick" style="width:19%;line-height:30px;">
 <h2>प्रशिक्षण</h2>
 <ul class="quick_link" style="margin-top:20px">
-<li title="सिंहावलोकन" id="3580420056" ><a href="https://www.bis.gov.in/training-2/overview-of-nits/?lang=hi"><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
-<li title="आवेदन के लिए प्रक्रिया" id="3581778396" ><a href="https://www.bis.gov.in/training-2/procedure-for-applying-for-a-training-programme/?lang=hi"><i class="fa fa-chevron-right"></i>आवेदन के लिए प्रक्रिया</a></li>
+<li title="सिंहावलोकन" id="3580888305" ><a href="https://www.bis.gov.in/training-2/overview-of-nits/?lang=hi"><i class="fa fa-chevron-right"></i>सिंहावलोकन</a></li>
+<li title="आवेदन के लिए प्रक्रिया" id="3581989721" ><a href="https://www.bis.gov.in/training-2/procedure-for-applying-for-a-training-programme/?lang=hi"><i class="fa fa-chevron-right"></i>आवेदन के लिए प्रक्रिया</a></li>
 
-<li title="प्रशिक्षण कार्यक्रम" id="3583173816" ><a href="https://www.bis.gov.in/training-2/training-programmes/?lang=hi"><i class="fa fa-chevron-right"></i>प्रशिक्षण कार्यक्रम</a></li>
-<li title="प्रशिक्षण कैलेंडर" id="3584803846" ><a href="https://www.bis.gov.in/training-2/training-calender/?lang=hi"><i class="fa fa-chevron-right"></i>प्रशिक्षण कैलेंडर</a></li>
+<li title="प्रशिक्षण कार्यक्रम" id="3583845404" ><a href="https://www.bis.gov.in/training-2/training-programmes/?lang=hi"><i class="fa fa-chevron-right"></i>प्रशिक्षण कार्यक्रम</a></li>
+<li title="प्रशिक्षण कैलेंडर" id="3584648048" ><a href="https://www.bis.gov.in/training-2/training-calender/?lang=hi"><i class="fa fa-chevron-right"></i>प्रशिक्षण कैलेंडर</a></li>
 <li><a href="https://www.services.bis.gov.in/php/BIS_2.0/trainings/index.php/login" onclick="return confirm('This link will redirect to another BIS application.')" onkeypress="return confirm('This link will redirect to another BIS application.')" target="_blank"><i class="fa fa-chevron-right"></i>आईटीपी अलम्नाइ पोर्टल</a></li>
 <li><a href="https://www.bis.gov.in/index.php/international-training-programmes-under-itec/?lang=hi"><i class="fa fa-chevron-right"></i>आईटीईसी के तहत आईटीपी</a></li>
-<li title="शुल्क" id="3587527569" ><a href="https://www.bis.gov.in/training-2/training-fee/?lang=hi"><i class="fa fa-chevron-right"></i>शुल्क</a></li>
+<li title="शुल्क" id="3587696501" ><a href="https://www.bis.gov.in/training-2/training-fee/?lang=hi"><i class="fa fa-chevron-right"></i>शुल्क</a></li>
 
 
-<li title="3590904773_प्रपत्र" id="3590490682" ><a href="https://www.bis.gov.in/training-2/training-form/?lang=hi"><i class="fa fa-chevron-right"></i>प्रपत्र</a></li>
+<li title="3590852300_प्रपत्र" id="3590194859" ><a href="https://www.bis.gov.in/training-2/training-form/?lang=hi"><i class="fa fa-chevron-right"></i>प्रपत्र</a></li>
 
 
 <li><a href="https://www.bis.gov.in/training-2/training-contact-us/?lang=hi"><i class="fa fa-chevron-right"></i>हमें संपर्क करेंं</a></li>

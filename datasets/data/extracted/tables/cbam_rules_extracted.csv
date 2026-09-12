@@ -1,0 +1,5 @@
+cn_code,product_group,description,default_direct_tco2e_t,default_indirect_tco2e_t,benchmark_value,unit,export_exposure_formula,label,status
+"7208","Iron and Steel","Flat-rolled products of iron or non-alloy steel (HRC)",2.19,0.716,1.35,"tCO2e/tonne","EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR","INDICATIVE CBAM EXPOSURE","VERIFIED_GOVERNMENT"
+"7214","Iron and Steel","Bars and rods of iron or non-alloy steel (Rebar)",1.98,0.716,0.4,"tCO2e/tonne","EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR","INDICATIVE CBAM EXPOSURE","VERIFIED_GOVERNMENT"
+"7601","Aluminium","Unwrought aluminium (ingots, billets)",2.15,12.05,1.48,"tCO2e/tonne","EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR","INDICATIVE CBAM EXPOSURE","VERIFIED_GOVERNMENT"
+"2523","Cement","Portland cement, aluminous cement, slag cement",0.76,0.04,0.69,"tCO2e/tonne","EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR","INDICATIVE CBAM EXPOSURE","VERIFIED_GOVERNMENT"

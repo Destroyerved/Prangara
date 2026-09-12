@@ -1,47 +1,26 @@
-# CHAKRA PS10 — Industrial Decarbonization & Circular Economy Framework
+# PRANGARA — Industrial Carbon Intelligence Network
+## Problem Statement: HackOut'26 PS10 — Industrial Emission Leak-Point Detector & Circular Alternative Recommender
 
-**Repository Path**: `prangara/datasets/`  
-**Purpose**: End-to-end verified data pipeline, MACC recommender engine assets, and statutory baselines for industrial decarbonization across 10 SME manufacturing sectors in India.  
-**Authenticity Status**: **100.0% Cryptographically Verified (SHA-256)**  
-**Proof Document**: [`DATASET_AUTHENTICITY_PROOF.md`](./DATASET_AUTHENTICITY_PROOF.md)
+PRANGARA provides an authoritative, mathematically verified data architecture and software engine for industrial emission leak detection, circular alternative matching, and regulatory compliance.
 
----
+### Authenticity Policy
+Every number within PRANGARA conforms to our strict four-tier classification:
+- **🟢 OFFICIAL / PRIMARY REFERENCE**: Direct government, regulator, standard owner, or scientific benchmark (CEA, DESNZ, IPCC, BEE, worldsteel, IAI).
+- **🔵 FIRST-PARTY / OPERATOR REPORTED**: Real plant activity data, supplier stock/prices, and provider availability.
+- **🟡 PRANGARA CALCULATED / DERIVED**: Transparent, deterministic calculations (Coal NCV conversions, OSRM transport carbon, MACC payback).
+- **🟠 SCREENING / LITERATURE-DERIVED**: Published empirical ranges for screening where site measurements are pending.
 
-## Directory Organization by Use Case
-
-This workspace is cleanly organized into **8 dedicated use-case directories** for maximum developer, auditor, and engineering productivity:
-
-| Directory | Use Case Description | Primary Files & Formats | Target Audience |
-|---|---|---|---|
-| [`01_statutory_emission_baselines/`](./01_statutory_emission_baselines/) | Statutory national electricity grid (CEA v21/v22), stationary fuels (DESNZ 2026), and regulatory standards. | JSON | ESG auditors, BRSR Core compliance teams |
-| [`02_circular_interventions_library/`](./02_circular_interventions_library/) | 30 techno-economic decarbonization interventions with Capex, Payback, and interaction ceilings. | JSON, CSV | Energy auditors, plant engineers, MACC planners |
-| [`03_industrial_sector_benchmarks/`](./03_industrial_sector_benchmarks/) | 10 SME industrial sector SEC ranges, GHG breakdowns, and synthetic demonstration plants. | JSON, CSV | Sector analysts, software testers |
-| [`04_derived_engineering_models/`](./04_derived_engineering_models/) | Algorithmic calculation models for coal G1-G17 NCV, IPCC FOD landfill methane, and 15 state grid mix proxies. | JSON, CSV | Modelers, technical researchers |
-| [`05_database_and_typed_layer/`](./05_database_and_typed_layer/) | PostgreSQL/Supabase DDL schemas, seed scripts, and strictly typed JSON/CSV datasets. | SQL, JSON, CSV | Backend developers, DB admins, API engineers |
-| [`06_auditing_and_proofs/`](./06_auditing_and_proofs/) | Full cryptographic SHA-256 registers, source registry metadata, and audit verification reports. | MD, CSV, JSON | External auditors, accreditation bodies |
-| [`07_primary_raw_sources/`](./07_primary_raw_sources/) | Immutable original PDFs, XLSX spreadsheets, and EPD specifications from sovereign bodies. | PDF, XLSX, JSON | Assurance reviewers, scientific verifiers |
-| [`08_automated_test_suites/`](./08_automated_test_suites/) | Executable test suites for SHA-256 cryptographic verification and 18/18 physics invariant tests. | JS | QA engineers, CI/CD pipeline |
-
----
-
-## Quick Start: How to Run Audits & Tests
-
-1. **Verify Cryptographic Authenticity (23/23 Hashes)**:
-   ```bash
-   node 08_automated_test_suites/verify_dataset_authenticity.js
-   ```
-
-2. **Verify Decarbonization Physics Invariants (18/18 Invariants)**:
-   ```bash
-   node 08_automated_test_suites/test_chakra_invariants.js
-   ```
-
-3. **Import into PostgreSQL / Supabase**:
-   ```bash
-   psql -U postgres -d chakra_db -f 05_database_and_typed_layer/sql/chakra_decarbonization_schema.sql
-   psql -U postgres -d chakra_db -f 05_database_and_typed_layer/sql/chakra_decarbonization_seed_data.sql
-   ```
+### Dataset Directory Layout [`datasets/`](./datasets/)
+- **[`01_statutory_emission_baselines/`](./datasets/01_statutory_emission_baselines/)**: Official CEA Grid, DESNZ Fuels, IPCC Combustion baselines.
+- **[`02_circular_interventions_library/`](./datasets/02_circular_interventions_library/)**: 30 verified MACC interventions with DPR citations and CAPEX.
+- **[`03_industrial_sector_benchmarks/`](./datasets/03_industrial_sector_benchmarks/)**: 10 SME sector SEC benchmarks from BEE cluster studies.
+- **[`04_derived_engineering_models/`](./datasets/04_derived_engineering_models/)**: Coal G1-G17 NCV models, State Grid mixes, OSRM route emissions.
+- **[`05_database_and_typed_layer/`](./datasets/05_database_and_typed_layer/)**: Strictly typed CSV, JSON, and PostgreSQL PostGIS DDL/Seed scripts.
+- **[`06_auditing_and_proofs/`](./datasets/06_auditing_and_proofs/)**: SHA-256 Checksums, Source Registry, and Source Extractions.
+- **[`07_primary_raw_sources/`](./datasets/07_primary_raw_sources/)**: Primary government PDFs, spreadsheets, and reference records.
+- **[`08_automated_test_suites/`](./datasets/08_automated_test_suites/)**: Verification test suites guaranteeing invariant mathematical integrity.
+- **[`09_operational_marketplace/`](./datasets/09_operational_marketplace/)**: Live circular raw material listings, verified providers, and M&V plans.
+- **[`10_rag_knowledge_base/`](./datasets/10_rag_knowledge_base/)**: Traceable, page/section-aware text chunks for LLM audit queries.
 
 ---
-
-*Certified by Antigravity Autonomous Data Architecture & Verification Pipeline on 2026-09-12.*
+*Built in strict compliance with `PRANGARA_Authentic_Data_Sources_Acquisition_Extraction_Plan.md`.*

@@ -17,7 +17,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_OFFICIAL",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "fuel_diesel",
@@ -37,7 +37,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_OFFICIAL",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "fuel_natural_gas",
@@ -57,7 +57,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_OFFICIAL",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "fuel_lpg",
@@ -77,7 +77,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_OFFICIAL",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "fuel_furnace_oil",
@@ -97,7 +97,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_OFFICIAL",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "fuel_indian_coal",
@@ -117,7 +117,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "DERIVED_TRANSPARENT",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "fuel_biomass_briquette",
@@ -137,7 +137,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_METHODOLOGY",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_aluminium_primary",
@@ -157,7 +157,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_aluminium_secondary",
@@ -177,7 +177,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_steel_primary",
@@ -197,7 +197,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_steel_secondary",
@@ -217,7 +217,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_cotton_yarn_primary",
@@ -237,7 +237,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "DERIVED_TRANSPARENT",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_cotton_yarn_recycled",
@@ -257,7 +257,7 @@
     "proxy_for_india": false,
     "confidence_rating": "MEDIUM",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_pet_virgin",
@@ -277,7 +277,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_pet_recycled",
@@ -297,7 +297,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_cement_opc",
@@ -317,7 +317,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_cement_blended",
@@ -337,7 +337,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.126Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_paper_virgin",
@@ -357,7 +357,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_paper_recycled",
@@ -377,7 +377,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_glass_virgin",
@@ -397,7 +397,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "mat_glass_recycled",
@@ -417,7 +417,7 @@
     "proxy_for_india": true,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "freight_road",
@@ -437,7 +437,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "freight_rail",
@@ -457,7 +457,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "VERIFIED_INDUSTRY_LCI",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "waste_landfill_organic",
@@ -477,7 +477,7 @@
     "proxy_for_india": false,
     "confidence_rating": "HIGH",
     "verification_status": "DERIVED_TRANSPARENT",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   },
   {
     "factor_key": "waste_anaerobic_digestion",
@@ -497,6 +497,6 @@
     "proxy_for_india": false,
     "confidence_rating": "MEDIUM",
     "verification_status": "DERIVED_TRANSPARENT",
-    "verified_at_utc": "2026-09-11T20:43:51.127Z"
+    "verified_at_utc": "2026-09-12T02:08:48.268Z"
   }
 ]
