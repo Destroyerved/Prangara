@@ -1,43 +1,50 @@
 /**
  * Mobile design tokens.
  *
- * Deliberately not a copy of the web dashboard's scale. PRD section 5.2 says the
- * mobile companion is for capture and quick decisions on a factory floor, not
- * for dense analytics, so this scale is larger, higher contrast and built around
- * one-handed use.
+ * Aligned with the Web App's Deep Onyx, Dark Navy Glassmorphism and
+ * Vivid Electric Cyan & Emerald color system.
  */
 
 export const colour = {
-  // Surfaces aligned with Web Glassmorphic palette
-  bg: '#080E1A',
-  surface: '#0E1726',
-  surfaceRaised: '#142036',
-  surfaceCard: '#0D1525',
-  border: '#1E2D45',
+  // Surfaces - Matching Web App Deep Onyx & Navy Glass
+  bg: '#080B11',
+  surface: '#0F1626',
+  surfaceRaised: '#172239',
+  surfaceCard: '#0F1626',
+  surfaceGlass: 'rgba(15, 22, 38, 0.85)',
+  border: 'rgba(255, 255, 255, 0.09)',
+  borderStrong: 'rgba(255, 255, 255, 0.16)',
   borderHighlight: 'rgba(16, 185, 129, 0.25)',
 
-  // Text
+  // Text - High Legibility Slate White & Muted Accents
   text: '#F8FAFC',
   textMuted: '#94A3B8',
   textFaint: '#64748B',
 
-  // Brand (Emerald & Sky Cyan)
-  primary: '#10B981',
-  primaryPressed: '#059669',
-  onPrimary: '#022C22',
+  // Brand - Web App Electric Cyan & Vivid Emerald
+  primary: '#38BDF8',
+  primaryPressed: '#0284C7',
+  onPrimary: '#081018',
   accent: '#38BDF8',
   accentGlow: 'rgba(56, 189, 248, 0.2)',
-  positive: '#34D399',
+  positive: '#10B981',
 
-  // GHG Scope Colors (matching web footprint & charts)
-  scope1: '#F59E0B',
-  scope2: '#38BDF8',
-  scope3: '#A855F7',
+  // Accent Tones
+  emerald: '#10B981',
+  emeraldGlow: 'rgba(16, 185, 129, 0.12)',
+  cyanGlow: 'rgba(56, 189, 248, 0.12)',
+  violet: '#C084FC',
+  violetGlow: 'rgba(192, 132, 252, 0.12)',
 
-  // Severity. Never the only carrier of meaning - PRD section 30
-  critical: '#EF4444',
-  high: '#F97316',
-  moderate: '#FBBF24',
+  // GHG Scope Colors (Exact Match to Web MACC & Footprint)
+  scope1: '#FFB689', // Peach / Direct Combustion
+  scope2: '#BEC2FF', // Lavender / Electricity Grid
+  scope3: '#38BDF8', // Cyan / Value Chain
+
+  // Severity Chips
+  critical: '#FF7676',
+  high: '#FFA94D',
+  moderate: '#FFD43B',
   watch: '#38BDF8',
   ok: '#10B981',
   info: '#38BDF8',
@@ -45,9 +52,9 @@ export const colour = {
   // Data-state badges
   verified: '#10B981',
   documentConfirmed: '#38BDF8',
-  declared: '#FBBF24',
-  estimated: '#F97316',
-  missing: '#EF4444',
+  declared: '#FFD43B',
+  estimated: '#FFA94D',
+  missing: '#FF7676',
 } as const;
 
 export const space = {

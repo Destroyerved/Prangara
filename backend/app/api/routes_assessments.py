@@ -14,11 +14,11 @@ from fastapi import APIRouter, Query, Response, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy import select
 
-from app.api.deps import ClientIp, CurrentPrincipal, DbSession
-from app.core.errors import NotFound
+from app.api.deps import ClientIp, CurrentPrincipal, DbSession, OptionalPrincipal
+from app.core.errors import NotFound, Unauthorized
 from app.models.action import Action
 from app.models.assessment import Assessment, Scenario
-from app.models.factory import FactoryProfile
+from app.models.factory import Factory, FactoryProfile
 from app.schemas.assessment import (
     AssessmentDetail, AssessmentSummary, RunAssessmentRequest, ScenarioComparison,
     ScenarioCreate, ScenarioOut,
@@ -30,6 +30,7 @@ from app.services.benchmarks import corpus_stats
 from app.services.profile_mapper import build_from_records
 from app.services.report import build_report_html, render_pdf
 from app.services.scenario import apply_modifications
+from engine import assess, sector_db, version_stamp
 
 router = APIRouter(prefix="/api", tags=["assessments"])
 
@@ -96,16 +97,62 @@ def get_assessment(assessment_id: str, principal: CurrentPrincipal,
 
 
 @router.get("/assessments/{assessment_id}/report")
-def get_assessment_report(assessment_id: str, principal: CurrentPrincipal, db: DbSession,
+def get_assessment_report(assessment_id: str, db: DbSession,
+                          principal: OptionalPrincipal = None,
                           fmt: str = Query(default="html", pattern="^(html|pdf)$")) -> Response:
     """Export the assessment as an audited working paper in HTML or PDF format."""
-    assessment = db.get(Assessment, assessment_id)
-    if assessment is None:
-        raise NotFound("Assessment not found.")
-    factory = resolve_factory(db, principal, assessment.factory_id)
-    profile = db.get(FactoryProfile, assessment.profile_id) if assessment.profile_id else None
+    is_demo = assessment_id.startswith("demo") or assessment_id.startswith("development-")
+    if is_demo:
+        clean_key = (
+            assessment_id.replace("demo-", "")
+            .replace("demo_", "")
+            .replace("development-", "")
+            .split("-")[0]
+        )
+        s_db = sector_db()
+        target_sector = None
+        for k in s_db.sectors:
+            if k == clean_key or k == clean_key.replace("-", "_") or clean_key in k:
+                target_sector = k
+                break
+        if not target_sector:
+            target_sector = "textile_dyeing"
 
-    html_content = build_report_html(assessment, factory, profile)
+        sector_data = s_db.get(target_sector)
+        profile_data = dict(sector_data.get("demo_profile", {}))
+        profile_data["sector"] = target_sector
+        profile_data.setdefault("eu_export_share_pct", 25)
+        res = assess(profile_data)
+
+        demo_assessment = Assessment(
+            id=assessment_id,
+            factory_id="demo-factory",
+            is_baseline=True,
+            total_tco2e=res["footprint"]["total_tco2e"],
+            result=res,
+            engine_profile=profile_data,
+            version_stamp=version_stamp(),
+        )
+        demo_factory = Factory(
+            id="demo-factory",
+            name=profile_data.get(
+                "name",
+                f"{sector_data.get('label', target_sector.replace('_', ' ').title())} Demo Facility",
+            ),
+            sector=target_sector,
+            state=profile_data.get("state", "Tamil Nadu"),
+        )
+        html_content = build_report_html(demo_assessment, demo_factory, None)
+    else:
+        assessment = db.get(Assessment, assessment_id)
+        if assessment is None:
+            raise NotFound("Assessment not found.")
+        if principal is None:
+            raise Unauthorized("Authentication required to access factory assessment reports.")
+        factory = resolve_factory(db, principal, assessment.factory_id)
+        profile = db.get(FactoryProfile, assessment.profile_id) if assessment.profile_id else None
+        html_content = build_report_html(assessment, factory, profile)
+
     if fmt == "pdf":
         pdf_bytes = render_pdf(html_content)
         if pdf_bytes:
@@ -113,7 +160,7 @@ def get_assessment_report(assessment_id: str, principal: CurrentPrincipal, db: D
                 content=pdf_bytes,
                 media_type="application/pdf",
                 headers={
-                    "Content-Disposition": f'attachment; filename="prangara-report-{factory.id}-{assessment.id[:8]}.pdf"',
+                    "Content-Disposition": f'attachment; filename="prangara-report-{assessment_id[:12]}.pdf"',
                 },
             )
         # Headless browser not available; return HTML with warning header

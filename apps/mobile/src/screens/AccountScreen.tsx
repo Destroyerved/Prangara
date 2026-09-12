@@ -1,33 +1,36 @@
 /**
  * Account and diagnostics.
  *
- * The health block is here on purpose. When a demo fails on a phone it is
- * almost always the API URL, and "cannot reach PRANGARA at http://10.0.0.4:8000"
- * is a fixable message where "something went wrong" is not.
+ * Shows the active organization, connection health diagnostics,
+ * server URL switcher for LAN/cloud demoing, and clean sign-out.
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Modal, Text, TextInput, View } from 'react-native';
 
-import { API_BASE_URL, describeError } from '../api/client';
+import { describeError, getBaseUrl, setCustomBaseUrl } from '../api/client';
 import { system } from '../api/endpoints';
 import { useAuth } from '../auth/AuthContext';
 import {
   Button,
   Card,
   Divider,
+  Eyebrow,
   Heading,
   Loading,
   Note,
   Row,
   Screen,
 } from '../components/ui';
-import { colour, space, type as typeScale } from '../theme/tokens';
+import { colour, radius, space, type as typeScale } from '../theme/tokens';
 
 export default function AccountScreen() {
   const { me, signOut } = useAuth();
+  const queryClient = useQueryClient();
   const [busy, setBusy] = useState(false);
+  const [serverModalOpen, setServerModalOpen] = useState(false);
+  const [tempUrl, setTempUrl] = useState(getBaseUrl());
 
   const health = useQuery({
     queryKey: ['health'],
@@ -40,8 +43,9 @@ export default function AccountScreen() {
       <Heading sub={me?.user.email}>{me?.user.full_name || 'Account'}</Heading>
 
       <Card>
-        <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.sm }}>
-          Organizations
+        <Eyebrow>ORGANIZATION</Eyebrow>
+        <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.sm }}>
+          Memberships
         </Text>
         {me?.memberships.map((membership) => (
           <Row
@@ -54,21 +58,30 @@ export default function AccountScreen() {
       </Card>
 
       <Card>
-        <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.sm }}>
-          Connection
-        </Text>
-        <Row left="API" right={API_BASE_URL} />
-        {health.isLoading ? <Loading label="Checking" /> : null}
+        <Eyebrow>CONNECTIVITY</Eyebrow>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: space.xs, marginBottom: space.sm }}>
+          <Text style={{ ...typeScale.heading, color: colour.text }}>
+            FastAPI Backend
+          </Text>
+          <Button
+            title="Switch"
+            variant="secondary"
+            onPress={() => {
+              setTempUrl(getBaseUrl());
+              setServerModalOpen(true);
+            }}
+          />
+        </View>
+        <Row left="Active URL" right={getBaseUrl()} strong />
+        {health.isLoading ? <Loading label="Testing server connection..." /> : null}
         {health.isError ? (
           <Note tone="warning">
-            {describeError(health.error)} Set EXPO_PUBLIC_API_URL to the LAN
-            address of the machine running the API - on a physical phone,
-            localhost is the phone.
+            {describeError(health.error)} If on a physical phone, ensure phone and laptop are on the same Wi-Fi and use your machine's LAN IP.
           </Note>
         ) : null}
         {health.data ? (
           <>
-            <Row left="Status" right={health.data.status} />
+            <Row left="Status" right={health.data.status} strong />
             <Row left="Version" right={health.data.version} />
             <Row left="Engine" right={health.data.engine.engine_version} />
             <Divider />
@@ -85,26 +98,27 @@ export default function AccountScreen() {
             <Text
               style={{ ...typeScale.caption, color: colour.textMuted, marginBottom: space.xs }}
             >
-              Optional features on this deployment
+              System capabilities
             </Text>
             <Row
-              left="PostgreSQL"
-              right={health.data.features.postgres ? 'yes' : 'SQLite'}
+              left="Database"
+              right={health.data.features.postgres ? 'PostgreSQL' : 'SQLite'}
             />
             <Row
               left="Object storage"
-              right={health.data.features.object_storage ? 'MinIO' : 'local disk'}
+              right={health.data.features.object_storage ? 'MinIO S3' : 'local disk'}
             />
             <Row
-              left="Language-model intake"
-              right={health.data.features.llm_intake ? 'yes' : 'deterministic parser'}
+              left="LLM Intake Engine"
+              right={health.data.features.llm_intake ? 'Active' : 'deterministic parser'}
             />
           </>
         ) : null}
       </Card>
 
       <Card>
-        <Text style={{ ...typeScale.heading, color: colour.text, marginBottom: space.sm }}>
+        <Eyebrow>GOVERNANCE</Eyebrow>
+        <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs, marginBottom: space.sm }}>
           What PRANGARA is
         </Text>
         <Text style={{ ...typeScale.body, color: colour.textMuted, lineHeight: 21 }}>
@@ -132,6 +146,65 @@ export default function AccountScreen() {
         }}
       />
       <View style={{ height: space.xl }} />
+
+      {/* Backend Endpoint Switcher Modal */}
+      <Modal visible={serverModalOpen} animationType="fade" transparent>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.75)',
+            justifyContent: 'center',
+            padding: space.lg,
+          }}
+        >
+          <Card style={{ borderWidth: 1, borderColor: colour.border }}>
+            <Eyebrow>SERVER CONFIGURATION</Eyebrow>
+            <Text style={{ ...typeScale.heading, color: colour.text, marginTop: space.xs }}>
+              Backend Endpoint URL
+            </Text>
+            <Text style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 4, marginBottom: space.md }}>
+              Enter the HTTP address of your FastAPI server (e.g., http://10.227.95.161:8000).
+            </Text>
+
+            <TextInput
+              value={tempUrl}
+              onChangeText={setTempUrl}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="http://10.227.95.161:8000"
+              placeholderTextColor={colour.textFaint}
+              style={{
+                backgroundColor: colour.surfaceRaised,
+                borderRadius: radius.md,
+                borderWidth: 1,
+                borderColor: colour.border,
+                padding: space.md,
+                color: colour.text,
+                ...typeScale.body,
+                marginBottom: space.md,
+              }}
+            />
+
+            <View style={{ flexDirection: 'row', gap: space.sm }}>
+              <Button
+                title="Cancel"
+                variant="secondary"
+                onPress={() => setServerModalOpen(false)}
+                style={{ flex: 1 }}
+              />
+              <Button
+                title="Save & Connect"
+                onPress={() => {
+                  setCustomBaseUrl(tempUrl.trim());
+                  setServerModalOpen(false);
+                  queryClient.invalidateQueries({ queryKey: ['health'] });
+                }}
+                style={{ flex: 1 }}
+              />
+            </View>
+          </Card>
+        </View>
+      </Modal>
     </Screen>
   );
 }
