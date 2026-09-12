@@ -29,6 +29,7 @@ import {
   RefreshCw,
   X,
   Sparkles,
+  Globe2,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { navigation } from "./navigation";
@@ -605,6 +606,29 @@ export default function Shell() {
                   color={theme === "dark" ? "#ffffff" : "#09090b"}
                 />
               </button>
+              <Link
+                to="/"
+                className="icon-button"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "0 12px",
+                  width: "auto",
+                  height: "36px",
+                  borderRadius: "10px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "var(--text-muted)",
+                  textDecoration: "none",
+                  border: "1px solid var(--border)",
+                  background: "var(--surface)",
+                }}
+                title="View 3D Storytelling Landing Page"
+              >
+                <Globe2 size={14} style={{ color: "var(--accent-blue, #61B8F5)" }} />
+                <span>Story</span>
+              </Link>
               <LiquidButton
                 variant="blue"
                 size="sm"
