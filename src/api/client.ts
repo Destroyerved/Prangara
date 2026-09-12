@@ -76,6 +76,7 @@ import {
   adaptSectors,
   adaptSector,
   adaptReference,
+  toEngineProfile,
 } from "./adapter";
 export const api = {
   health: async (signal?: AbortSignal) =>
@@ -102,8 +103,8 @@ export const api = {
       ),
     );
   },
-  reference: async (signal?: AbortSignal) =>
-    dataMode === "demo"
+  reference: async (signal?: AbortSignal, connected = false) =>
+    dataMode === "demo" && !connected
       ? reference
       : parse(
           z.array(factorSchema),
@@ -115,12 +116,12 @@ export const api = {
       if (!a) throw new ApiError("This demo is unavailable.");
       return structuredClone(a);
     }
-    return parse(
-      assessmentSchema,
-      adaptAssessment(
-        await request("/demo/" + encodeURIComponent(key), {}, signal),
-      ),
-    );
+    const [result, sector] = await Promise.all([
+      request("/demo/" + encodeURIComponent(key), {}, signal),
+      request("/sectors/" + encodeURIComponent(key), {}, signal),
+    ]);
+    const source = z.object({demo_profile:z.record(z.string(),z.unknown())}).parse(sector);
+    return parse(assessmentSchema, adaptAssessment(result, {...source.demo_profile,sector:key,eu_export_share_pct:25}));
   },
   assess: async (profile: PlantProfile) => {
     plantSchema.parse(profile);
@@ -133,8 +134,9 @@ export const api = {
       adaptAssessment(
         await request("/assess", {
           method: "POST",
-          body: JSON.stringify(profile),
+          body: JSON.stringify(toEngineProfile(profile)),
         }),
+        profile,
       ),
     );
   },

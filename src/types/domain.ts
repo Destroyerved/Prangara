@@ -26,6 +26,8 @@ export const streamSchema = z.object({
   quantity: maybe,
   unit: z.string(),
   factor_key: z.string().nullable(),
+  factor_keys: z.array(z.string()).optional(),
+  detail: z.record(z.string(),z.unknown()).optional(),
   emissions: bandSchema,
   share_pct: num,
   working: z.string(),
@@ -107,7 +109,7 @@ export const sectorSchema = z.object({
   name: z.string(),
   cluster: z.string(),
   state: z.string(),
-  demo_profile: plantSchema,
+  demo_profile: z.object({name:z.string()}).passthrough(),
   benchmarks: z.array(
     z.object({
       name: z.string(),
@@ -120,6 +122,7 @@ export const sectorSchema = z.object({
   regulatory_flags: z.array(z.string()),
 });
 export const assessmentSchema = z.object({
+  metadata: z.record(z.string(),z.unknown()).optional(),
   id: z.string(),
   plant: plantSchema,
   origin: z.object({
@@ -159,7 +162,7 @@ export const assessmentSchema = z.object({
   leaks: z.object({ peer_percentile: maybe, findings: z.array(leakSchema) }),
   recommendations: z.object({
     items: z.array(actionSchema),
-    blocked: z.array(actionSchema),
+    blocked: z.array(z.object({id:z.string(),name:z.string(),restriction:z.string().nullable(),cap_pct:maybe})),
     portfolios: z.object({
       all: portfolioSchema,
       cash_positive_only: portfolioSchema,

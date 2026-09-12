@@ -5,6 +5,7 @@ import type { Assessment, DrawerRecord, PlantProfile } from "../types/domain";
 function useWorkspaceState() {
   const [sectorKey, setSectorKey] = useState("textile_dyeing");
   const [custom, setCustom] = useState<Assessment | null>(null);
+  const [factoryId,setFactoryId] = useState<string|null>(null);
   const [drafts, setDrafts] = useState<Record<string, PlantProfile>>({});
   const [drawer, setDrawer] = useState<DrawerRecord | null>(null);
   const [toast, setToast] = useState("");
@@ -14,8 +15,8 @@ function useWorkspaceState() {
     queryFn: ({ signal }) => api.sectors(signal),
   });
   const reference = useQuery({
-    queryKey: ["reference"],
-    queryFn: ({ signal }) => api.reference(signal),
+    queryKey: ["reference",!!custom],
+    queryFn: ({ signal }) => api.reference(signal,!!custom),
   });
   const health = useQuery({
     queryKey: ["health"],
@@ -45,11 +46,14 @@ function useWorkspaceState() {
   const selectPlant = (key: string) => {
     setSectorKey(key);
     setCustom(null);
+    setFactoryId(null);
     setDrawer(null);
     assess.reset();
   };
   return {
     assessment,
+    factoryId,
+    loadAssessment: (data:Assessment, id:string) => {setCustom(data);setSectorKey(data.plant.sector);setFactoryId(id);setDrawer(null);},
     inputDraft: assessment ? drafts[assessment.id] : undefined,
     setInputDraft: (profile: PlantProfile) => {
       if (assessment)

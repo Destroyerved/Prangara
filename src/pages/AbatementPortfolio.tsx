@@ -84,7 +84,7 @@ export default function AbatementPortfolio() {
           {
             label: "Annual abatement",
             value:
-              known || mode === "cash_positive_only"
+              p.abatement_t != null
                 ? number(p.abatement_t)
                 : "Unavailable",
             unit: p.abatement_t == null ? "" : "tCO₂e",
@@ -105,7 +105,7 @@ export default function AbatementPortfolio() {
             : "Intervention count unavailable"}
         </span>
         <span>
-          {known || mode === "cash_positive_only"
+          {p.abatement_t != null
             ? number(p.share_pct, 1) + "% of footprint"
             : "Share unavailable"}
         </span>

@@ -93,6 +93,7 @@ export default function CircularActions() {
           Select an intervention name to inspect
         </span>
       </div>
+      {view === "quick_wins" && a.metadata?.quick_win_membership_available === false && <Note>The engine supplies quick-win totals, but does not identify the individual members. No membership is inferred here.</Note>}
       <ActionTable items={items} />
       <Note>
         Abatement is interaction-de-rated; financial columns are returned
@@ -112,7 +113,7 @@ export default function CircularActions() {
               <button
                 key={b.id}
                 className="constraint-row"
-                onClick={() => w.setDrawer({ kind: "action", data: b })}
+                onClick={() => w.setDrawer({ kind: "calculation", title:b.name, formula:"Technical constraint", rows:[["Restriction",b.restriction||"Not supplied"]], note:"A blocked intervention has no fabricated economic estimate." })}
               >
                 <ShieldBan size={22} />
                 <div>
@@ -138,7 +139,7 @@ export default function CircularActions() {
             <button
               className="constraint-row"
               key={b.id}
-              onClick={() => w.setDrawer({ kind: "action", data: b })}
+              onClick={() => w.setDrawer({ kind: "calculation", title:b.name, formula:"Technical constraint", rows:[["Restriction",b.restriction||"Not supplied"]], note:"A blocked intervention has no fabricated economic estimate." })}
             >
               <ShieldBan size={22} />
               <div>

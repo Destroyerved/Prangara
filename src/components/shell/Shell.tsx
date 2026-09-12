@@ -18,12 +18,14 @@ import {
   Check,
   RefreshCw,
   X,
+  Sparkles,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { navigation } from "./navigation";
 import { SearchBox, Badge } from "../ui/common";
 import { RecordDrawer } from "../drawers/RecordDrawer";
 import { CommandPalette } from "./CommandPalette";
+import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { WavesShaderBackground } from "../ui/WavesShaderBackground";
 import {
@@ -100,6 +102,7 @@ export default function Shell() {
   const [theme, setTheme] = useState(() => pref("prangara-theme", "dark"));
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
+  const [ragOpen, setRagOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
 
   const popoverContentRef = useRef<HTMLDivElement>(null);
@@ -430,6 +433,27 @@ export default function Shell() {
             </Popover.Root>
             <div className="top-actions">
               <button
+                className="chip positive"
+                onClick={() => setRagOpen(true)}
+                style={{
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  fontSize: "0.825rem",
+                  padding: "0.35rem 0.75rem",
+                  background: "rgba(16, 185, 129, 0.12)",
+                  border: "1px solid rgba(16, 185, 129, 0.35)",
+                  color: "#10b981",
+                  fontWeight: 600,
+                  borderRadius: "999px"
+                }}
+                aria-label="Ask PRANGARA"
+              >
+                <Sparkles size={14} />
+                Ask PRANGARA ✨
+              </button>
+              <button
                 className="command-trigger"
                 onClick={() => w.setCommandOpen(true)}
                 aria-label="Search commands"
@@ -457,6 +481,7 @@ export default function Shell() {
             </div>
           </header>
           <main id="main" tabIndex={-1}>
+            {w.factoryId && <div className="platform-context">Saved factory assessment · {w.assessment?.plant.name}<Link to={"/workspace/"+w.factoryId}>Factory records ↗</Link></div>}
             <Outlet />
             <footer className="page-footer">
               <span>
@@ -468,6 +493,7 @@ export default function Shell() {
         </div>
       </div>
       <RecordDrawer />
+      <RagAssistant isOpen={ragOpen} onClose={() => setRagOpen(false)} />
       <CommandPalette />
       <AnimatePresence>
         {w.toast && (
