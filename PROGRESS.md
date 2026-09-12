@@ -34,7 +34,7 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Factor provenance (BE-2 datasets) | Done — 25/31 factors traced to source |
 | Compliance evaluator | Not mine (BE-2). Events are raised and visible. |
 
-**Backend tests:** 147 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
+**Backend tests:** 148 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
 
 ---
 
@@ -230,6 +230,20 @@ which is exactly where a twelve-fold error gets waved through.
 
 ---
 
+## Next steps
+
+The full task list from here to a deployed product — web dashboard on live data,
+every P0/P1 feature, Docker, CI and hosting — is in
+[`ROADMAP.md`](ROADMAP.md), with owners, blockers and acceptance criteria per
+task.
+
+The highest-value item is **W1/W2**: FE-1's dashboard was built against fixtures
+because no backend existed at the time. It calls six endpoints and all six now
+resolve against the live API, so most of `FRONTEND-PRD-GAP.md`'s "P0
+backend-blocked" rows are no longer blocked.
+
+---
+
 ## Merged with `main`
 
 `origin/main` was merged in on 2026-09-12. Three files conflicted
@@ -358,7 +372,7 @@ URL was resolved and whether the API answered.
 ### Checks
 
 ```bash
-cd backend && python -m pytest tests -q          # 147 passing
+cd backend && python -m pytest tests -q          # 148 passing
 cd apps/mobile && npm run typecheck              # clean
 cd apps/mobile && npm run bundle:android         # Android bundle builds
 ```

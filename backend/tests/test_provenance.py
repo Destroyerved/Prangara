@@ -136,3 +136,13 @@ def test_reference_endpoints_expose_provenance(client: TestClient) -> None:
     assert full["material_difference_threshold_pct"] == pytest.approx(5.0)
     # The endpoint states plainly that it never changes a stored result.
     assert "never change a stored result" in full["note"]
+
+
+def test_legacy_singular_sector_alias_still_resolves(client: TestClient) -> None:
+    """The web dashboard was built against `/api/sector/{key}` before this
+    service existed. Renaming it broke a client that had no way to know."""
+    plural = client.get("/api/sectors/textile_dyeing")
+    singular = client.get("/api/sector/textile_dyeing")
+    assert singular.status_code == 200
+    assert singular.json() == plural.json()
+    assert client.get("/api/sector/not_a_sector").status_code == 404

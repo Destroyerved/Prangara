@@ -34,6 +34,18 @@ def get_sector(key: str) -> dict[str, Any]:
         raise NotFound(f"Unknown sector '{key}'.") from None
 
 
+@router.get("/sector/{key}", include_in_schema=False)
+def get_sector_singular(key: str) -> dict[str, Any]:
+    """Alias for the singular spelling this endpoint had in the PS10 prototype.
+
+    The web dashboard was built against `/api/sector/{key}` before this service
+    existed. Renaming it to the plural for consistency with `/api/sectors` broke
+    a client that had no way to know, so the old spelling keeps working. Hidden
+    from the OpenAPI schema so new clients only learn the current name.
+    """
+    return get_sector(key)
+
+
 @router.get("/reference")
 def reference() -> dict[str, Any]:
     """The full factor registry, grouped, with source and band on every row."""
