@@ -15,7 +15,7 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Area | State |
 |---|---|
 | Deterministic carbon engine | Ported, version-stamped, 85 invariant tests green |
-| Platform API (FastAPI) | 70 endpoints, running |
+| Platform API (FastAPI) | 71 endpoints, running |
 | Database + migrations | 29 tables, Alembic head applied |
 | Auth / RBAC / tenant isolation | Done, 12 access-control tests green |
 | Assessment + scenarios | Done |
@@ -31,9 +31,10 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Membership + delegated factory access | Done |
 | Auth rate limiting | Done |
 | Mobile offline capture queue | Done |
+| Factor provenance (BE-2 datasets) | Done — 25/31 factors traced to source |
 | Compliance evaluator | Not mine (BE-2). Events are raised and visible. |
 
-**Backend tests:** 139 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
+**Backend tests:** 147 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
 
 ---
 
@@ -229,32 +230,47 @@ which is exactly where a twelve-fold error gets waved through.
 
 ---
 
-## Open: this branch has not been merged to `main`, on purpose
+## Merged with `main`
 
-As of 2026-09-12, `origin/main` is 10 commits ahead of the point this branch was
-cut from, and it contains **a second backend** occupying the same folders:
+`origin/main` was merged in on 2026-09-12. Three files conflicted
+(`.gitignore`, `backend/engine/constants.py`, `backend/engine/factors.py`); all
+were resolved in favour of the running system, and main's two Python engine
+files were orphans there in any case — its engine is JavaScript and nothing on
+main imported them.
 
-| | `origin/main` | `prangara-main-app` (this branch) |
-|---|---|---|
-| Server | `backend/server.js` (Node) | `backend/app/main.py` (FastAPI) |
-| Engine | `backend/engine/*.js` | `backend/engine/*.py` |
-| RAG / compliance / ML | `backend/rag/*.js`, `backend/compliance/evaluator.js`, `backend/ml/*.js` | BE-2's, not built here |
-| Contracts | `packages/contracts/schemas.json`, `index.ts` | `packages/contracts/openapi.json` |
-| Seed | `backend/scripts/seed_demo.js` | `backend/scripts/seed_demo.py` |
+**One runtime, both implementations kept.** main carried a Node/Express backend
+in the same folders as this one, so `backend/engine/` briefly held both
+`assess.py` and `assess.js`. PRD section 3.1 allows exactly one deterministic
+engine as the source of truth, so the Node sources moved intact to
+[`backend-node/`](backend-node/README.md), which documents what they are and
+which parts are worth porting. `backend/` (Python/FastAPI) is the one that runs,
+per PRD section 24 and task.md BE-1. Nothing was deleted.
 
-`main` has also removed `prototype/` and added `datasets/`.
+**BE-2's `datasets/` came across and is now wired in.** 300+ files of audited
+reference data, including a source registry with publisher, document, version,
+URL, retrieval date and a SHA-256 per artefact.
+`app/services/provenance.py` joins it to the engine's active factors, and
+`GET /api/reference/provenance` traces **25 of 31 factors (81%)** to an official
+source. It changes no computed number — a test asserts that — and where the two
+registries disagree it reports the difference rather than choosing:
 
-A merge would conflict on exactly three files — `.gitignore`,
-`backend/engine/constants.py` and `backend/engine/factors.py` (both sides added
-them; the JS-side Python files rename `NCV_GJ` to `NCV_GJ_PER_UNIT`). Everything
-else merges clean only because the filenames differ by extension.
+| Factor | Engine | Verified | Δ |
+|---|---|---|---|
+| `COAL_INDIAN` | 1.70 | 1.504 | −11.5% |
+| `STEEL_SECONDARY` | 0.55 | 0.58 | +5.5% |
 
-The file conflicts are the small part. `PRD.md` section 24 and `task.md` BE-1
-both specify Python and FastAPI, and `AI_AGENT_PLAYBOOK.md` section 1 requires
-one repository, one contract layer and clear folder ownership. Two backends for
-one product is a team decision, not a merge to be resolved by whoever pushes
-last, so this branch stays separate until the team settles it. Nothing here has
-been merged into `main` and nothing on `main` has been overwritten.
+Coal dominates Scope 1 for a foundry or dyeing plant, so that gap matters.
+Which value is right is BE-2's call; adopting either silently would change the
+basis of results factories have already been shown.
+
+**One real integrity failure, recorded not rounded away.**
+`verify_dataset_authenticity.js` reports 22/23:
+`cpcb_hazardous_waste_rules_2016.pdf` is a 140-byte HTML redirect stub, not the
+rules document. No emission factor cites `SRC-CPCB-RULES`, so no carbon number
+rests on it — it backs compliance rule text, which is not yet implemented.
+Re-fetching it is an open BE-2 task.
+
+The web dashboard (FE-1) is on the `Frontend` branch and has not been merged.
 
 ---
 
@@ -342,7 +358,7 @@ URL was resolved and whether the API answered.
 ### Checks
 
 ```bash
-cd backend && python -m pytest tests -q          # 139 passing
+cd backend && python -m pytest tests -q          # 147 passing
 cd apps/mobile && npm run typecheck              # clean
 cd apps/mobile && npm run bundle:android         # Android bundle builds
 ```
