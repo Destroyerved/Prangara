@@ -26,3 +26,22 @@ build/*.html
 Thumbs.db
 desktop.ini
 *.swp
+
+# PRANGARA platform
+backend/prangara.db
+backend/prangara.db-wal
+backend/prangara.db-shm
+prangara.db*
+var/
+.env
+.env.local
+
+# Node / Expo (apps/mobile, apps/web)
+node_modules/
+.expo/
+dist/
+*.apk
+*.aab
+# Expo prebuild output. The managed workflow regenerates these.
+apps/mobile/android/
+apps/mobile/ios/

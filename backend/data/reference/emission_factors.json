@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "schema_version": "1.0",
+    "basis": "GHG Protocol Corporate Standard (Scope 1/2/3)",
+    "gwp_set": "IPCC AR6 GWP100",
+    "currency": "INR",
+    "note": "Every factor carries a source and an uncertainty band. The engine propagates the band to every result. Point estimates are never shown without their range.",
+    "verification_status": "HACKATHON BUILD - factors are literature values and must be re-verified against the primary source editions cited before commercial use."
+  },
+
+  "electricity": {
+    "IN_GRID_NATIONAL": {
+      "label": "India national grid (weighted average)",
+      "value": 0.716, "low": 0.680, "high": 0.760,
+      "unit": "tCO2e/MWh", "scope": 2,
+      "source": "CEA CO2 Baseline Database for the Indian Power Sector",
+      "note": "Declining year on year as RE share grows. Re-check latest CEA database version."
+    },
+    "IN_GRID_STATE": {
+      "label": "State grid variants (regional mix adjustment)",
+      "unit": "tCO2e/MWh", "scope": 2,
+      "source": "Derived from CEA regional grid mixes",
+      "states": {
+        "Tamil Nadu": 0.63, "Gujarat": 0.70, "Maharashtra": 0.74,
+        "Punjab": 0.72, "Karnataka": 0.56, "Rajasthan": 0.65,
+        "Uttar Pradesh": 0.82, "West Bengal": 0.88, "Telangana": 0.69,
+        "Haryana": 0.78, "Madhya Pradesh": 0.80, "Odisha": 0.86,
+        "Kerala": 0.48, "Andhra Pradesh": 0.68, "Delhi": 0.72
+      },
+      "note": "Coal-heavy eastern states run materially higher than RE-rich southern states. This single choice can move a Scope 2 result by 40 percent."
+    },
+    "IN_SOLAR_CAPTIVE": {
+      "label": "Captive rooftop solar (operational)",
+      "value": 0.0, "low": 0.0, "high": 0.045,
+      "unit": "tCO2e/MWh", "scope": 2,
+      "source": "Operational emissions nil; high bound reflects embodied lifecycle if amortised",
+      "note": "Reported as zero at the operational boundary, consistent with GHG Protocol Scope 2."
+    }
+  },
+
+  "fuels": {
+    "DIESEL": {
+      "label": "High speed diesel (genset / captive)",
+      "value": 2.68, "low": 2.60, "high": 2.75,
+      "unit": "kgCO2e/litre", "scope": 1,
+      "source": "DEFRA GHG Conversion Factors - stationary combustion",
+      "typical_price_inr": 92.0, "price_unit": "INR/litre"
+    },
+    "NATURAL_GAS": {
+      "label": "Natural gas (PNG, industrial)",
+      "value": 2.02, "low": 1.92, "high": 2.12,
+      "unit": "kgCO2e/Sm3", "scope": 1,
+      "source": "DEFRA gross CV basis",
+      "typical_price_inr": 48.0, "price_unit": "INR/Sm3"
+    },
+    "LPG": {
+      "label": "LPG (industrial)",
+      "value": 2.94, "low": 2.88, "high": 3.00,
+      "unit": "kgCO2e/kg", "scope": 1,
+      "source": "DEFRA GHG Conversion Factors",
+      "typical_price_inr": 92.0, "price_unit": "INR/kg"
+    },
+    "FURNACE_OIL": {
+      "label": "Furnace oil / LDO",
+      "value": 3.15, "low": 3.05, "high": 3.25,
+      "unit": "kgCO2e/kg", "scope": 1,
+      "source": "IPCC 2006 Guidelines Vol.2 residual fuel oil NCV and EF",
+      "typical_price_inr": 52.0, "price_unit": "INR/kg"
+    },
+    "COAL_INDIAN": {
+      "label": "Indian non-coking coal (high ash, grade dependent)",
+      "value": 1.70, "low": 1.45, "high": 2.00,
+      "unit": "tCO2e/tonne", "scope": 1,
+      "source": "IPCC 2006 Vol.2 other bituminous, adjusted for Indian ash content and NCV",
+      "typical_price_inr": 6500, "price_unit": "INR/tonne",
+      "note": "Widest uncertainty band of any fuel here. Indian coal grade G1-G17 swings NCV substantially."
+    },
+    "BIOMASS_BRIQUETTE": {
+      "label": "Agri-residue briquette",
+      "value": 0.06, "low": 0.02, "high": 0.12,
+      "unit": "tCO2e/tonne", "scope": 1,
+      "source": "Biogenic CO2 excluded per GHG Protocol; value covers CH4 and N2O from combustion only",
+      "typical_price_inr": 7200, "price_unit": "INR/tonne",
+      "note": "CRITICAL METHOD POINT: biogenic CO2 is reported separately and not counted in the Scope 1 total. Only non-CO2 combustion products are counted. A tool that silently zeroes biomass is not auditable."
+    }
+  },
+
+  "materials": {
+    "STEEL_PRIMARY":   {"label":"Primary steel (BF-BOF route)","value":2.20,"low":1.80,"high":2.50,"unit":"tCO2e/tonne","scope":3,"source":"worldsteel LCI / IPCC industry defaults","typical_price_inr":58000},
+    "STEEL_SECONDARY": {"label":"Secondary steel (scrap, EAF/induction)","value":0.55,"low":0.40,"high":0.75,"unit":"tCO2e/tonne","scope":3,"source":"worldsteel LCI scrap route","typical_price_inr":52000},
+    "ALU_PRIMARY":     {"label":"Primary aluminium","value":13.0,"low":11.0,"high":16.0,"unit":"tCO2e/tonne","scope":3,"source":"IAI global average, electricity-mix sensitive","typical_price_inr":245000},
+    "ALU_SECONDARY":   {"label":"Recycled aluminium","value":0.60,"low":0.45,"high":0.80,"unit":"tCO2e/tonne","scope":3,"source":"IAI recycling LCI","typical_price_inr":205000,"note":"Roughly 95 percent lower than primary. Largest single circular lever in the library."},
+    "PET_VIRGIN":      {"label":"Virgin PET resin","value":3.00,"low":2.70,"high":3.30,"unit":"tCO2e/tonne","scope":3,"source":"PlasticsEurope eco-profile","typical_price_inr":105000},
+    "PET_RECYCLED":    {"label":"rPET (mechanical)","value":1.30,"low":1.10,"high":1.50,"unit":"tCO2e/tonne","scope":3,"source":"Mechanical recycling LCI","typical_price_inr":98000},
+    "PAPER_VIRGIN":    {"label":"Virgin kraft / corrugate","value":1.25,"low":1.00,"high":1.50,"unit":"tCO2e/tonne","scope":3,"source":"CEPI / DEFRA material factors","typical_price_inr":42000},
+    "PAPER_RECYCLED":  {"label":"Recycled content board","value":0.80,"low":0.65,"high":0.95,"unit":"tCO2e/tonne","scope":3,"source":"CEPI recycled grades","typical_price_inr":38000},
+    "CEMENT_OPC":      {"label":"OPC cement","value":0.85,"low":0.75,"high":0.95,"unit":"tCO2e/tonne","scope":3,"source":"GCCA / IPCC clinker factors","typical_price_inr":8500},
+    "CEMENT_BLENDED":  {"label":"PPC / PSC blended cement","value":0.55,"low":0.45,"high":0.68,"unit":"tCO2e/tonne","scope":3,"source":"GCCA blended clinker ratio","typical_price_inr":8200},
+    "COTTON_CONV":     {"label":"Conventional cotton yarn","value":5.50,"low":4.20,"high":7.00,"unit":"tCO2e/tonne","scope":3,"source":"Textile Exchange LCA","typical_price_inr":230000},
+    "COTTON_RECYCLED": {"label":"Recycled cotton yarn","value":1.80,"low":1.20,"high":2.50,"unit":"tCO2e/tonne","scope":3,"source":"Textile Exchange recycled LCA","typical_price_inr":195000},
+    "GLASS_VIRGIN":    {"label":"Virgin container glass","value":1.10,"low":0.90,"high":1.30,"unit":"tCO2e/tonne","scope":3,"source":"FEVE eco-profile","typical_price_inr":32000},
+    "GLASS_CULLET":    {"label":"High-cullet glass","value":0.70,"low":0.55,"high":0.88,"unit":"tCO2e/tonne","scope":3,"source":"FEVE cullet substitution","typical_price_inr":29000}
+  },
+
+  "transport": {
+    "ROAD_FREIGHT_HCV": {"label":"Road freight, heavy truck","value":0.095,"low":0.075,"high":0.120,"unit":"kgCO2e/tonne-km","scope":3,"source":"DEFRA HGV average laden"},
+    "ROAD_FREIGHT_LCV": {"label":"Road freight, light commercial","value":0.210,"low":0.170,"high":0.260,"unit":"kgCO2e/tonne-km","scope":3,"source":"DEFRA van average"},
+    "RAIL_FREIGHT":     {"label":"Rail freight","value":0.022,"low":0.015,"high":0.032,"unit":"kgCO2e/tonne-km","scope":3,"source":"Indian Railways electrified corridor estimate","note":"Roughly 4x better than road per tonne-km. Modal shift is a large low-capex Scope 3 lever for bulk inbound."},
+    "SEA_FREIGHT":      {"label":"Sea freight, container","value":0.016,"low":0.011,"high":0.022,"unit":"kgCO2e/tonne-km","scope":3,"source":"IMO / DEFRA container shipping"}
+  },
+
+  "waste": {
+    "LANDFILL_ORGANIC": {"label":"Organic waste to landfill","value":0.58,"low":0.40,"high":0.80,"unit":"tCO2e/tonne","scope":3,"source":"IPCC Waste Model, CH4 from anaerobic decay, AR6 GWP100"},
+    "LANDFILL_INERT":   {"label":"Inert waste to landfill","value":0.02,"low":0.01,"high":0.04,"unit":"tCO2e/tonne","scope":3,"source":"DEFRA waste disposal"},
+    "INCINERATION":     {"label":"Incineration without energy recovery","value":0.42,"low":0.30,"high":0.60,"unit":"tCO2e/tonne","scope":3,"source":"DEFRA waste disposal"},
+    "ANAEROBIC_DIGEST": {"label":"Anaerobic digestion (organic)","value":-0.12,"low":-0.25,"high":-0.02,"unit":"tCO2e/tonne","scope":3,"source":"Net of avoided landfill CH4 and displaced fossil gas","note":"Negative: diverting organics from landfill avoids methane that would otherwise have been emitted."},
+    "RECYCLING_GENERIC":{"label":"Segregated recycling","value":0.03,"low":0.01,"high":0.06,"unit":"tCO2e/tonne","scope":3,"source":"Processing burden only; material credit is booked on the input side"}
+  }
+}
