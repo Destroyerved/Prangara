@@ -195,6 +195,35 @@ which is exactly where a twelve-fold error gets waved through.
 
 ---
 
+## Open: this branch has not been merged to `main`, on purpose
+
+As of 2026-09-12, `origin/main` is 10 commits ahead of the point this branch was
+cut from, and it contains **a second backend** occupying the same folders:
+
+| | `origin/main` | `prangara-main-app` (this branch) |
+|---|---|---|
+| Server | `backend/server.js` (Node) | `backend/app/main.py` (FastAPI) |
+| Engine | `backend/engine/*.js` | `backend/engine/*.py` |
+| RAG / compliance / ML | `backend/rag/*.js`, `backend/compliance/evaluator.js`, `backend/ml/*.js` | BE-2's, not built here |
+| Contracts | `packages/contracts/schemas.json`, `index.ts` | `packages/contracts/openapi.json` |
+| Seed | `backend/scripts/seed_demo.js` | `backend/scripts/seed_demo.py` |
+
+`main` has also removed `prototype/` and added `datasets/`.
+
+A merge would conflict on exactly three files — `.gitignore`,
+`backend/engine/constants.py` and `backend/engine/factors.py` (both sides added
+them; the JS-side Python files rename `NCV_GJ` to `NCV_GJ_PER_UNIT`). Everything
+else merges clean only because the filenames differ by extension.
+
+The file conflicts are the small part. `PRD.md` section 24 and `task.md` BE-1
+both specify Python and FastAPI, and `AI_AGENT_PLAYBOOK.md` section 1 requires
+one repository, one contract layer and clear folder ownership. Two backends for
+one product is a team decision, not a merge to be resolved by whoever pushes
+last, so this branch stays separate until the team settles it. Nothing here has
+been merged into `main` and nothing on `main` has been overwritten.
+
+---
+
 ## Deliberate deviations from the PRD, and why
 
 1. **SQLite is the default database, PostgreSQL is supported.**
