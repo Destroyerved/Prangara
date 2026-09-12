@@ -19,7 +19,7 @@ try {
     nav?.type === "reload" || window.performance.navigation?.type === 1;
   const currentPath = window.location.pathname;
   const isPublicRoute = currentPath === "/" || currentPath === "/signin" || currentPath === "/signup";
-  if (isReload && !isPublicRoute && currentPath !== "/overview") {
+  if (isReload && !isPublicRoute && currentPath !== "/overview" && currentPath !== "/account") {
     window.history.replaceState(null, "", "/overview");
   }
 } catch {

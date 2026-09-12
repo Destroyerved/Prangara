@@ -28,6 +28,20 @@ export default function Landing({ defaultHash }: { defaultHash?: string }) {
             expires_in: 86400,
           };
           setSession({ tokens });
+          try {
+            const prof = {
+              full_name: event.data.user.name || "Rajesh Kumar",
+              email: event.data.user.email || "rajesh@textiles.in",
+              organization_name: event.data.user.company || "Tirupur Knitwear Works",
+              role: event.data.user.role || "Plant / Energy Engineer",
+              phone: "+91 98421 77320",
+              cluster: "Tirupur Textile MSME Cluster, Tamil Nadu",
+              organization_kind: "manufacturer",
+            };
+            localStorage.setItem('prangara_user_profile', JSON.stringify(prof));
+          } catch {
+            /* storage fallback */
+          }
         }
         navigate(event.data.path);
       }
