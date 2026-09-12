@@ -98,7 +98,7 @@ export const intake = {
       profile_updates?: Record<string, unknown>;
       activity_records?: ActivityRecordIn[];
       evidence_id?: string | null;
-      source_kind?: 'conversation' | 'document_ocr' | 'equipment_scan' | 'manual';
+      source_kind?: 'conversation' | 'document_ocr' | 'equipment_scan' | 'manual' | 'vlm';
     },
   ) =>
     api.post<{

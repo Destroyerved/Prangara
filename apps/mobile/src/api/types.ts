@@ -126,7 +126,7 @@ export interface ConversationExtractResponse {
 export interface DocumentExtractResponse {
   evidence_id: string;
   document_type?: string | null;
-  extractor: 'ocr' | 'unavailable';
+  extractor: 'ocr' | 'vlm' | 'unavailable';
   extractor_detail: string;
   fields: ExtractedField[];
   suggested_activity_records: ActivityRecordIn[];
@@ -138,7 +138,7 @@ export interface DocumentExtractResponse {
 
 export interface EquipmentExtractResponse {
   evidence_id?: string | null;
-  extractor: 'ocr' | 'unavailable';
+  extractor: 'ocr' | 'vlm' | 'unavailable';
   extractor_detail: string;
   fields: ExtractedField[];
   required_questions: string[];
