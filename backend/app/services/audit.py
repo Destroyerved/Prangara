@@ -49,6 +49,14 @@ def record(db: Session, *, action: str, object_type: str, object_id: str,
            new_value: dict[str, Any] | None = None, reason: str | None = None,
            evidence_ids: list[str] | None = None, correlation_id: str | None = None,
            ip_address: str | None = None) -> AuditLog:
+    if not object_id:
+        # Almost always a missing db.flush() before reading a new row's id. The
+        # database would catch it too, but as an opaque IntegrityError at commit
+        # time, pointing at the wrong line.
+        raise ValueError(
+            f"audit.record for '{action}' on '{object_type}' has no object_id. "
+            "Flush the session before auditing a newly created row."
+        )
     entry = AuditLog(
         organization_id=organization_id,
         actor_user_id=actor_user_id,

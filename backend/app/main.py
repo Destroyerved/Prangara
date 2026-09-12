@@ -98,15 +98,17 @@ def create_app() -> FastAPI:
         }})
 
     from app.api import (  # noqa: PLC0415 - imported here to avoid a circular import
-        routes_actions, routes_assessments, routes_auth, routes_evidence,
-        routes_factories, routes_health, routes_intake, routes_marketplace,
-        routes_notifications, routes_reference, routes_sandbox,
+        routes_actions, routes_assessments, routes_auth, routes_compliance,
+        routes_evidence, routes_factories, routes_health, routes_intake,
+        routes_marketplace, routes_notifications, routes_org, routes_reference,
+        routes_sandbox,
     )
 
     for module in (
         routes_health, routes_auth, routes_reference, routes_sandbox,
-        routes_factories, routes_assessments, routes_intake, routes_evidence,
-        routes_marketplace, routes_actions, routes_notifications,
+        routes_org, routes_factories, routes_assessments, routes_intake,
+        routes_evidence, routes_marketplace, routes_actions, routes_compliance,
+        routes_notifications,
     ):
         application.include_router(module.router)
 

@@ -10,6 +10,16 @@ from app.workers.outbox import process_once
 from tests.conftest import register_org
 
 
+def drain() -> int:
+    """Process every pending event, the way the worker loop does."""
+    total = 0
+    while True:
+        handled = process_once()
+        total += handled
+        if handled == 0:
+            return total
+
+
 def test_assessment_events_become_notifications(client: TestClient) -> None:
     maker = register_org(client, "outbox@example.com", "Outbox Works", "manufacturer")
     headers = maker["headers"]
@@ -35,7 +45,10 @@ def test_assessment_events_become_notifications(client: TestClient) -> None:
     # Compliance evaluation is raised by BE-1 and consumed by BE-2.
     assert "COMPLIANCE_EVALUATION_REQUESTED" in types
 
-    assert process_once() > 0
+    # Drain fully rather than one batch. `process_once` handles up to BATCH_SIZE
+    # events, and this suite shares a database, so a single call is not a
+    # guarantee that this factory's events were reached.
+    assert drain() > 0
 
     with SessionLocal() as db:
         remaining = db.scalars(
@@ -75,7 +88,7 @@ def test_notifications_never_cross_tenants(client: TestClient) -> None:
                 })
     client.post(f"/api/factories/{factory['id']}/assessments",
                 headers=maker["headers"], json={})
-    process_once()
+    drain()
 
     assert client.get("/api/notifications", headers=other["headers"]).json() == []
     with SessionLocal() as db:
