@@ -70,19 +70,38 @@ const screenOptions = {
  */
 function TabGlyph({ glyph, focused }: { glyph: string; focused: boolean }) {
   return (
-    <Text style={{ fontSize: 18, color: focused ? colour.primary : colour.textFaint }}>
-      {glyph}
-    </Text>
+    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text
+        style={{
+          fontSize: 19,
+          color: focused ? colour.primary : colour.textFaint,
+          fontWeight: focused ? '700' : '400',
+        }}
+      >
+        {glyph}
+      </Text>
+      {focused ? (
+        <View
+          style={{
+            width: 4,
+            height: 4,
+            borderRadius: 2,
+            backgroundColor: colour.primary,
+            marginTop: 2,
+          }}
+        />
+      ) : null}
+    </View>
   );
 }
 
-function UnreadDot() {
+function UnreadDot({ focused }: { focused: boolean }) {
   const { data } = useQuery({
     queryKey: ['notifications', 'unread'],
     queryFn: () => notificationsApi.list(true),
     refetchInterval: 60_000,
   });
-  if (!data?.length) return <TabGlyph glyph="!" focused={false} />;
+  if (!data?.length) return <TabGlyph glyph="!" focused={focused} />;
   return (
     <View
       style={{
@@ -95,7 +114,7 @@ function UnreadDot() {
         justifyContent: 'center',
       }}
     >
-      <Text style={{ ...typeScale.micro, color: colour.text }}>
+      <Text style={{ ...typeScale.micro, color: colour.text, fontWeight: '700' }}>
         {data.length > 9 ? '9+' : data.length}
       </Text>
     </View>
@@ -108,15 +127,16 @@ function TabNavigator() {
       screenOptions={{
         ...screenOptions,
         tabBarStyle: {
-          backgroundColor: colour.surface,
-          borderTopColor: colour.border,
-          height: 62,
+          backgroundColor: '#080B11',
+          borderTopColor: '#1E293B',
+          borderTopWidth: 1,
+          height: 64,
           paddingBottom: 8,
           paddingTop: 6,
         },
         tabBarActiveTintColor: colour.primary,
         tabBarInactiveTintColor: colour.textFaint,
-        tabBarLabelStyle: { ...typeScale.micro },
+        tabBarLabelStyle: { ...typeScale.micro, fontWeight: '600', marginTop: 1 },
       }}
     >
       <Tabs.Screen
@@ -125,7 +145,7 @@ function TabNavigator() {
         options={{
           title: 'Factories',
           headerShown: false,
-          tabBarIcon: ({ focused }) => <TabGlyph glyph="■" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabGlyph glyph="🏢" focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -134,7 +154,7 @@ function TabNavigator() {
         options={{
           title: 'Capture',
           headerShown: false,
-          tabBarIcon: ({ focused }) => <TabGlyph glyph="◉" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabGlyph glyph="📷" focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -143,7 +163,7 @@ function TabNavigator() {
         options={{
           title: 'Alerts',
           headerShown: false,
-          tabBarIcon: () => <UnreadDot />,
+          tabBarIcon: ({ focused }) => <UnreadDot focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -152,7 +172,7 @@ function TabNavigator() {
         options={{
           title: 'Account',
           headerShown: false,
-          tabBarIcon: ({ focused }) => <TabGlyph glyph="●" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabGlyph glyph="⚙️" focused={focused} />,
         }}
       />
     </Tabs.Navigator>

@@ -8,38 +8,50 @@
  */
 
 export const colour = {
-  // Surfaces
-  bg: '#0B1220',
-  surface: '#121B2E',
-  surfaceRaised: '#1A2538',
-  border: '#26344C',
+  // Surfaces - Matching Web App Deep Onyx & Navy Glass
+  bg: '#080B11',
+  surface: '#0F1626',
+  surfaceRaised: '#172239',
+  surfaceGlass: 'rgba(15, 22, 38, 0.85)',
+  border: 'rgba(255, 255, 255, 0.09)',
+  borderStrong: 'rgba(255, 255, 255, 0.16)',
 
-  // Text
-  text: '#F2F6FC',
-  textMuted: '#9AA9C2',
-  textFaint: '#6B7C99',
+  // Text - High Legibility Slate White & Muted Accents
+  text: '#F8FAFC',
+  textMuted: '#94A3B8',
+  textFaint: '#64748B',
 
-  // Brand
-  primary: '#3DDC97',
-  primaryPressed: '#2FB87C',
-  onPrimary: '#06231A',
+  // Brand - Web App Electric Cyan & Vivid Emerald
+  primary: '#38BDF8',
+  primaryPressed: '#0284C7',
+  onPrimary: '#081018',
 
-  // Severity. Never the only carrier of meaning - PRD section 30 requires
-  // status not to be encoded by colour alone, so every severity chip also
-  // carries a word.
-  critical: '#FF6B6B',
+  // Accent Tones
+  emerald: '#10B981',
+  emeraldGlow: 'rgba(16, 185, 129, 0.12)',
+  cyanGlow: 'rgba(56, 189, 248, 0.12)',
+  violet: '#C084FC',
+  violetGlow: 'rgba(192, 132, 252, 0.12)',
+
+  // GHG Scope Colors (Exact Match to Web MACC & Footprint)
+  scope1: '#FFB689', // Peach / Direct Combustion
+  scope2: '#BEC2FF', // Lavender / Electricity Grid
+  scope3: '#38BDF8', // Cyan / Value Chain
+
+  // Severity Chips
+  critical: '#FF7676',
   high: '#FFA94D',
   moderate: '#FFD43B',
-  watch: '#74C0FC',
-  ok: '#3DDC97',
-  info: '#74C0FC',
+  watch: '#38BDF8',
+  ok: '#10B981',
+  info: '#38BDF8',
 
   // Data-state badges
-  verified: '#3DDC97',
-  documentConfirmed: '#74C0FC',
+  verified: '#10B981',
+  documentConfirmed: '#38BDF8',
   declared: '#FFD43B',
   estimated: '#FFA94D',
-  missing: '#FF6B6B',
+  missing: '#FF7676',
 } as const;
 
 export const space = {

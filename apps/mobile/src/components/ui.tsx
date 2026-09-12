@@ -88,6 +88,55 @@ export function Card({
   return <View style={[styles.card, style]}>{children}</View>;
 }
 
+export function Eyebrow({
+  children,
+  dotColour = colour.primary,
+  style,
+}: {
+  children: React.ReactNode;
+  dotColour?: string;
+  style?: StyleProp<TextStyle>;
+}) {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: space.xs }}>
+      <View style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: dotColour, marginRight: 7 }} />
+      <Text
+        style={[
+          {
+            ...typeScale.micro,
+            color: colour.textMuted,
+            letterSpacing: 1.2,
+            textTransform: 'uppercase',
+          },
+          style,
+        ]}
+      >
+        {children}
+      </Text>
+    </View>
+  );
+}
+
+export function ScopeBadge({ scope }: { scope: 1 | 2 | 3 | '1' | '2' | '3' }) {
+  const s = String(scope);
+  const color = s === '1' ? colour.scope1 : s === '2' ? colour.scope2 : colour.scope3;
+  return (
+    <View
+      style={{
+        paddingHorizontal: 8,
+        paddingVertical: 2,
+        borderRadius: radius.pill,
+        borderWidth: 1,
+        borderColor: color,
+        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+        alignSelf: 'flex-start',
+      }}
+    >
+      <Text style={{ fontSize: 11, fontWeight: '700', color }}>Scope {s}</Text>
+    </View>
+  );
+}
+
 export function Button({
   title,
   onPress,
@@ -98,7 +147,7 @@ export function Button({
 }: {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'emerald';
   loading?: boolean;
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
@@ -114,6 +163,7 @@ export function Button({
       style={({ pressed }) => [
         styles.button,
         variant === 'primary' && styles.buttonPrimary,
+        variant === 'emerald' && styles.buttonEmerald,
         variant === 'secondary' && styles.buttonSecondary,
         variant === 'ghost' && styles.buttonGhost,
         variant === 'danger' && styles.buttonDanger,
@@ -123,12 +173,12 @@ export function Button({
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'primary' ? colour.onPrimary : colour.text} />
+        <ActivityIndicator color={variant === 'primary' || variant === 'emerald' ? colour.onPrimary : colour.text} />
       ) : (
         <Text
           style={[
             styles.buttonLabel,
-            variant === 'primary' && { color: colour.onPrimary },
+            (variant === 'primary' || variant === 'emerald') && { color: colour.onPrimary, fontWeight: '700' },
             variant === 'danger' && { color: colour.critical },
           ]}
         >
@@ -359,7 +409,10 @@ const styles = StyleSheet.create({
     padding: space.lg,
     marginBottom: space.md,
   },
-  cardPressed: { backgroundColor: colour.surfaceRaised },
+  cardPressed: {
+    backgroundColor: colour.surfaceRaised,
+    borderColor: colour.borderStrong,
+  },
 
   button: {
     minHeight: MIN_TOUCH,
@@ -370,7 +423,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'transparent',
   },
-  buttonPrimary: { backgroundColor: colour.primary },
+  buttonPrimary: { backgroundColor: colour.primary, borderColor: colour.primary },
+  buttonEmerald: { backgroundColor: colour.emerald, borderColor: colour.emerald },
   buttonSecondary: { backgroundColor: colour.surfaceRaised, borderColor: colour.border },
   buttonGhost: { backgroundColor: 'transparent', borderColor: colour.border },
   buttonDanger: { backgroundColor: 'transparent', borderColor: colour.critical },
@@ -383,7 +437,7 @@ const styles = StyleSheet.create({
   inputWrap: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colour.surface,
+    backgroundColor: colour.surfaceRaised,
     borderRadius: radius.md,
     borderWidth: 1,
     borderColor: colour.border,

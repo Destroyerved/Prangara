@@ -207,8 +207,11 @@ export const api = {
     );
   },
 
-  reportUrl: (assessmentId: string, format: "html" | "pdf" = "html") =>
-    `${base}/assessments/${encodeURIComponent(assessmentId)}/report?fmt=${format}`,
+  reportUrl: (assessmentId: string, format: "html" | "pdf" = "html") => {
+    const token = getStoredToken();
+    const tokenQuery = token ? `&token=${encodeURIComponent(token)}` : "";
+    return `${base}/assessments/${encodeURIComponent(assessmentId)}/report?fmt=${format}${tokenQuery}`;
+  },
 
   askAssistant: async (question: string, topic?: string) => {
     if (dataMode === "demo") {

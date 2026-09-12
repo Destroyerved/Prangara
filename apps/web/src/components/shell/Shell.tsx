@@ -25,7 +25,7 @@ import { navigation } from "./navigation";
 import { SearchBox, Badge } from "../ui/common";
 import { RecordDrawer } from "../drawers/RecordDrawer";
 import { CommandPalette } from "./CommandPalette";
-import { SovereignAssistantModal } from "../assistant/SovereignAssistantModal";
+import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { WavesShaderBackground } from "../ui/WavesShaderBackground";
 import {
@@ -433,26 +433,25 @@ export default function Shell() {
             </Popover.Root>
             <div className="top-actions">
               <button
-                className="icon-button assistant-trigger-btn"
-                aria-label="Sovereign Statutory Assistant"
-                title="Ask Sovereign RAG Assistant (EU CBAM · BEE PAT · SEBI BRSR)"
+                className="chip positive"
                 onClick={() => setAssistantOpen(true)}
                 style={{
+                  cursor: "pointer",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "6px",
-                  padding: "6px 12px",
-                  background: "rgba(167, 139, 250, 0.12)",
-                  border: "1px solid rgba(167, 139, 250, 0.3)",
-                  borderRadius: "8px",
-                  color: "#c084fc",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  cursor: "pointer",
+                  gap: "0.4rem",
+                  fontSize: "0.825rem",
+                  padding: "0.35rem 0.75rem",
+                  background: "rgba(16, 185, 129, 0.12)",
+                  border: "1px solid rgba(16, 185, 129, 0.35)",
+                  color: "#10b981",
+                  fontWeight: 600,
+                  borderRadius: "999px",
                 }}
+                aria-label="Ask PRANGARA"
               >
-                <Sparkles size={15} />
-                <span>Ask Assistant</span>
+                <Sparkles size={14} />
+                <span>Ask PRANGARA ✨</span>
               </button>
               <button
                 className="command-trigger"
@@ -493,9 +492,9 @@ export default function Shell() {
         </div>
       </div>
       <RecordDrawer />
-      <SovereignAssistantModal
-        open={assistantOpen}
-        onOpenChange={setAssistantOpen}
+      <RagAssistant
+        isOpen={assistantOpen}
+        onClose={() => setAssistantOpen(false)}
       />
       <CommandPalette />
       <AnimatePresence>

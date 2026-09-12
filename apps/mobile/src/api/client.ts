@@ -28,7 +28,14 @@ const DEFAULT_TIMEOUT_MS = 20000;
  * from (so a physical Android device talks to the laptop rather than to itself),
  * then localhost.
  */
-function resolveBaseUrl(): string {
+let customBaseUrl: string | null = null;
+
+export function setCustomBaseUrl(url: string | null) {
+  customBaseUrl = url ? url.trim().replace(/\/$/, '') : null;
+}
+
+export function getBaseUrl(): string {
+  if (customBaseUrl) return customBaseUrl;
   const fromEnv = process.env.EXPO_PUBLIC_API_URL;
   if (fromEnv) return fromEnv.replace(/\/$/, '');
 
@@ -39,10 +46,11 @@ function resolveBaseUrl(): string {
     const host = hostUri.split(':')[0];
     if (host) return `http://${host}:8000`;
   }
-  return 'http://localhost:8000';
+  // Default to machine LAN IP for standalone APK on Android devices
+  return 'http://10.227.95.161:8000';
 }
 
-export const API_BASE_URL = resolveBaseUrl();
+export const API_BASE_URL = getBaseUrl();
 
 export class ApiError extends Error {
   readonly status: number;
@@ -99,7 +107,7 @@ async function refreshAccessToken(): Promise<string | null> {
     const tokens = await loadTokens();
     if (!tokens?.refreshToken) return null;
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/refresh`, {
+      const response = await fetch(`${getBaseUrl()}/api/auth/refresh`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refresh_token: tokens.refreshToken }),
@@ -138,7 +146,7 @@ interface RequestOptions {
   _retried?: boolean;
 }
 
-async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
+export async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const {
     method = 'GET',
     body,
@@ -148,7 +156,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     timeoutMs = DEFAULT_TIMEOUT_MS,
   } = options;
 
-  let url = `${API_BASE_URL}${path}`;
+  let url = `${getBaseUrl()}${path}`;
   if (query) {
     const params = new URLSearchParams();
     Object.entries(query).forEach(([key, value]) => {

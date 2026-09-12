@@ -56,10 +56,10 @@ export function MenuCloseIcon({ size = 40, color = "currentColor", className, du
   const open = useAutoToggle(duration);
   return (
     <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
-      <motion.line x1="10" x2="30" stroke={color} strokeWidth={2.5} strokeLinecap="round"
+      <motion.line x1="10" y1="20" x2="30" y2="20" stroke={color} strokeWidth={2.5} strokeLinecap="round"
         animate={open
-          ? { y1: 20, y2: 20, rotate: 45 }
-          : { y1: 12, y2: 12, rotate: 0 }}
+          ? { y: 0, rotate: 45 }
+          : { y: -8, rotate: 0 }}
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
         style={{ transformOrigin: "20px 20px" }}
       />
@@ -68,10 +68,10 @@ export function MenuCloseIcon({ size = 40, color = "currentColor", className, du
         transition={{ duration: 0.2 }}
         style={{ transformOrigin: "20px 20px" }}
       />
-      <motion.line x1="10" x2="30" stroke={color} strokeWidth={2.5} strokeLinecap="round"
+      <motion.line x1="10" y1="20" x2="30" y2="20" stroke={color} strokeWidth={2.5} strokeLinecap="round"
         animate={open
-          ? { y1: 20, y2: 20, rotate: -45 }
-          : { y1: 28, y2: 28, rotate: 0 }}
+          ? { y: 0, rotate: -45 }
+          : { y: 8, rotate: 0 }}
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
         style={{ transformOrigin: "20px 20px" }}
       />
@@ -117,9 +117,7 @@ export function LockUnlockIcon({ size = 40, color = "currentColor", className, d
     <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
       <rect x="9" y="18" width="22" height="16" rx="3" stroke={color} strokeWidth={2} />
       <motion.path d="M14 18V13a6 6 0 0112 0v5" stroke={color} strokeWidth={2} strokeLinecap="round"
-        animate={unlocked
-          ? { d: "M14 18V13a6 6 0 0112 0v2" }
-          : { d: "M14 18V13a6 6 0 0112 0v5" }}
+        animate={unlocked ? { y: -4 } : { y: 0 }}
         transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
       />
       <motion.circle cx="20" cy="26" r="2" fill={color}
@@ -262,8 +260,8 @@ export function ToggleIcon({ size = 40, color = "currentColor", className, durat
       />
       <rect x="5" y="13" width="30" height="14" rx="7" stroke={color} strokeWidth={2}
         opacity={on ? 1 : 0.4} />
-      <motion.circle cy="20" r="5" fill={color}
-        animate={on ? { cx: 28 } : { cx: 12 }}
+      <motion.circle cx="12" cy="20" r="5" fill={color}
+        animate={{ x: on ? 16 : 0 }}
         transition={{ type: "spring", stiffness: 500, damping: 25 }}
       />
     </svg>
@@ -369,16 +367,19 @@ export function AbatementPortfolioIcon({ size = 40, color = "currentColor", clas
   const high = useAutoToggle(duration);
   return (
     <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
-      <motion.line x1="10" y1="30" x2="10" stroke={color} strokeWidth={3} strokeLinecap="round"
-        animate={high ? { y2: 18 } : { y2: 24 }}
+      <motion.line x1="10" y1="30" x2="10" y2="18" stroke={color} strokeWidth={3} strokeLinecap="round"
+        style={{ transformOrigin: "10px 30px" }}
+        animate={{ scaleY: high ? 1 : 0.5 }}
         transition={{ duration: 0.35 }}
       />
-      <motion.line x1="18" y1="30" x2="18" stroke={color} strokeWidth={3} strokeLinecap="round"
-        animate={high ? { y2: 12 } : { y2: 20 }}
+      <motion.line x1="18" y1="30" x2="18" y2="12" stroke={color} strokeWidth={3} strokeLinecap="round"
+        style={{ transformOrigin: "18px 30px" }}
+        animate={{ scaleY: high ? 1 : 0.55 }}
         transition={{ duration: 0.35, delay: 0.06 }}
       />
-      <motion.line x1="26" y1="30" x2="26" stroke={color} strokeWidth={3} strokeLinecap="round"
-        animate={high ? { y2: 8 } : { y2: 16 }}
+      <motion.line x1="26" y1="30" x2="26" y2="8" stroke={color} strokeWidth={3} strokeLinecap="round"
+        style={{ transformOrigin: "26px 30px" }}
+        animate={{ scaleY: high ? 1 : 0.63 }}
         transition={{ duration: 0.35, delay: 0.12 }}
       />
       <motion.path d="M8 22l8-7 8 4 8-10" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
@@ -391,7 +392,7 @@ export function AbatementPortfolioIcon({ size = 40, color = "currentColor", clas
 
 /* ─── Demo Component ─── */
 
-export const ALL_ICONS = [
+const ALL_ICONS = [
   { name: "Overview", Icon: OverviewIcon },
   { name: "Success", Icon: SuccessIcon },
   { name: "Menu", Icon: MenuCloseIcon },

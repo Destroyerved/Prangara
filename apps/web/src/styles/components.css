@@ -1214,3 +1214,121 @@ kbd {
   cursor: not-allowed;
 }
 
+/* Ask PRANGARA Assistant iOS Glass UI & Scroll System */
+.rag-aside-glass {
+  background: rgba(13, 20, 36, 0.58);
+  backdrop-filter: blur(40px) saturate(210%) contrast(105%) brightness(115%);
+  -webkit-backdrop-filter: blur(40px) saturate(210%) contrast(105%) brightness(115%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 30px 80px -15px rgba(0, 0, 0, 0.65), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.35), 
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08), 
+    0 0 35px rgba(56, 189, 248, 0.12);
+  color: #f8fafc;
+}
+
+:root[data-theme="light"] .rag-aside-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(40px) saturate(200%) brightness(105%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(105%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 
+    0 25px 70px -15px rgba(15, 23, 42, 0.2), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.95), 
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+    0 0 30px rgba(14, 165, 233, 0.1);
+  color: #0f172a;
+}
+
+/* iOS Glass Scrollbar with high-precision tracking */
+.rag-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.05);
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.rag-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rag-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  margin: 8px 0;
+}
+
+.rag-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s ease;
+}
+
+.rag-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+  background-clip: content-box;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+:root[data-theme="light"] .rag-scroll-container {
+  scrollbar-color: rgba(15, 23, 42, 0.3) rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme="light"] .rag-scroll-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+:root[data-theme="light"] .rag-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.28);
+}
+
+:root[data-theme="light"] .rag-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #0284c7;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.4);
+}
+
+/* Inner iOS Frosted Glass Cards */
+.rag-glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+:root[data-theme="light"] .rag-glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Question Header Typography */
+.rag-heading {
+  color: #ffffff;
+}
+:root[data-theme="light"] .rag-heading {
+  color: #0f172a;
+}
+
+/* Body Paragraphs Typography */
+.rag-body-text {
+  color: #e2e8f0;
+}
+:root[data-theme="light"] .rag-body-text {
+  color: #334155;
+}
+
+/* Search input glass style */
+.rag-search-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+:root[data-theme="light"] .rag-search-pill {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
