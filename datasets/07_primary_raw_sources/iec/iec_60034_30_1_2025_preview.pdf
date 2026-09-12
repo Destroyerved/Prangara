@@ -830,7 +830,7 @@
             </div>
 
             <nav
-    x-data="initMenuMobile_6aa46744975c8()"
+    x-data="initMenuMobile_6aa4ade146961()"
     @load.window="setActiveMenu($root)"
     @keydown.window.escape="closeMenu()"
     class="navigation header-action z-20 lg:hidden"
@@ -1471,7 +1471,7 @@
 <script>
     'use strict';
 
-    const initMenuMobile_6aa46744975c8 = () => {
+    const initMenuMobile_6aa4ade146961 = () => {
         return {
             mobilePanelActiveId: null,
             subMobilePanelActiveId: null,
@@ -2043,7 +2043,7 @@
 <div class="sub-header container">
     <div class="flex h-20">
         <div class="sub-header-categories">
-            <div x-data="initMenuDesktop_6aa45f0a4ae17()"
+            <div x-data="initMenuDesktop_6aa4a55d7cd68()"
      class="navigation hidden lg:flex h-full"
 >
     <!-- desktop -->
@@ -2339,7 +2339,7 @@
 <script>
     'use strict';
 
-    const initMenuDesktop_6aa45f0a4ae17 = () => {
+    const initMenuDesktop_6aa4a55d7cd68 = () => {
         return {
             hoverPanelActiveId: null,
             activeSubmenu: null,

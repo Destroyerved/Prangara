@@ -3447,7 +3447,7 @@ $(document).ready(function() {
 
          <div class="col-md-12 text-end mt-3">
             <p class="row mb-0 text-white" aria-live="polite">
-              <span class="col-md-6 d-block">Visitor No.: <span aria-hidden="false">3879621</span></span>
+              <span class="col-md-6 d-block">Visitor No.: <span aria-hidden="false">3883675</span></span>
               <span class="col-md-6 d-block">Last Updated on: <span aria-hidden="false">12-09-2026</span></span>
             </p>
           </div>
