@@ -140,7 +140,7 @@ python -m app.workers.outbox --once
   its content hash, which is what makes past assessments distinguishable from
   future ones — that is intended, so bump `meta.schema_version` when the shape
   changes.
-- **Data quality weights.** Implemented from `DATA_RAG_COMPLIANCE.md` section 31
+- **Data quality weights.** Implemented from `docs/DATA_RAG_COMPLIANCE.md` section 31
   in `app/services/data_quality.py`; retuning is yours, the weights are one dict.
 - **RAG and logistics.** No backend surface built for either yet.
 

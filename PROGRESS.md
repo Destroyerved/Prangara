@@ -1,10 +1,10 @@
 # PRANGARA — Progress
 
 **Branch:** `prangara-main-app`
-**Roles being built here:** BE-1 (platform/API + carbon engine) and FE-2 (APK/mobile), per `task.md` section 1.
+**Roles being built here:** BE-1 (platform/API + carbon engine) and FE-2 (APK/mobile), per `docs/task.md` section 1.
 **Not built here:** FE-1 `apps/web/`, BE-2 `backend/data/` evolution, `backend/rag/`, `backend/compliance/`, `backend/logistics/`, `scripts/data/`.
 
-Specification source: `New folder (4)/README_START_HERE.md`, `PRD.md`, `task.md`, `DATA_RAG_COMPLIANCE.md`, `AI_AGENT_PLAYBOOK.md`.
+Specification source: `New folder (4)/README_START_HERE.md`, `docs/PRD.md`, `docs/task.md`, `docs/DATA_RAG_COMPLIANCE.md`, `docs/AI_AGENT_PLAYBOOK.md`.
 
 Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HANDOFF_MOBILE.md).
 
@@ -89,7 +89,7 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
   each factory's latest baseline counts, and cohorts under
   `BENCHMARK_MIN_COHORT` report the literature value unchanged.
 - **Data quality** (FR-08) using the published weights from
-  `DATA_RAG_COMPLIANCE.md` section 31, plus the plausibility checks from §32.
+  `docs/DATA_RAG_COMPLIANCE.md` section 31, plus the plausibility checks from §32.
 - **Scenarios** (FR-34). A closed set of declarative modifications applied to the
   engine *input*, rerun through the same engine. The baseline is never
   overwritten, and scenario runs are excluded from the benchmark corpus.
@@ -142,7 +142,7 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 ### Phase 3 — Marketplace (BE-1 half)
 
 - Provider profiles, services, verification (platform-admin only, because
-  `AI_AGENT_PLAYBOOK.md` section 17 makes it a human decision).
+  `docs/AI_AGENT_PLAYBOOK.md` section 17 makes it a human decision).
 - Weighted, explained provider matching (FR-36) — no ML, every match returns its
   reasons.
 - RFQ with per-provider invites. The RFQ carries a **copy** of the few fields a
@@ -381,7 +381,7 @@ cd apps/mobile && npm run bundle:android         # Android bundle builds
 
 ## Claim boundary
 
-Unchanged from `README_START_HERE.md`. PRANGARA is screening, decision support,
+Unchanged from `docs/README_START_HERE.md`. PRANGARA is screening, decision support,
 implementation support and evidence/readiness support. It is not a BEE-accredited
 audit, a legal assurance service, a regulator, or a carbon-credit verifier, and
 it does not replace a site engineering study or a vendor quotation. The API

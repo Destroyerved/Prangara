@@ -1,6 +1,6 @@
 # PRANGARA mobile (APK)
 
-FE-2 scope from `task.md`: the Android companion. Camera, bill scanning,
+FE-2 scope from `docs/task.md`: the Android companion. Camera, bill scanning,
 equipment scanning, conversational onboarding, quick results, alerts and
 evidence capture.
 

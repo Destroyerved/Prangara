@@ -6,15 +6,15 @@ are preserved here, unchanged, rather than deleted.
 
 **They are not the running backend.** `backend/` is, for three reasons:
 
-1. `PRD.md` section 24 and `task.md` BE-1 both specify Python and FastAPI.
+1. `docs/PRD.md` section 24 and `docs/task.md` BE-1 both specify Python and FastAPI.
 2. The deterministic carbon engine is the source of truth for every number in
-   the product (`PRD.md` section 3.1). `backend/engine/` is the PS10 engine
-   ported unchanged, with 85 invariant tests from `task.md` section 15 running
+   the product (`docs/PRD.md` section 3.1). `backend/engine/` is the PS10 engine
+   ported unchanged, with 85 invariant tests from `docs/task.md` section 15 running
    against it across all ten sectors.
 3. `backend/` is what the mobile app and `packages/contracts/openapi.json` are
    built against, and what the 139-test suite and the demo seed exercise.
 
-Two implementations of one engine is exactly what `AI_AGENT_PLAYBOOK.md`
+Two implementations of one engine is exactly what `docs/AI_AGENT_PLAYBOOK.md`
 section 1 warns about — one repository, one contract layer, clear folder
 ownership. Keeping both live would mean two sets of emission factors and two
 answers to the same question.

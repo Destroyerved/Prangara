@@ -41,8 +41,8 @@ class AssessmentDetail(AssessmentSummary):
 
     `result` is intentionally untyped here. It is the engine's own contract and
     mirroring its 200-odd fields in Pydantic would create a second definition
-    that drifts. The engine's shape is documented in docs/14-API-REFERENCE.md
-    and pinned by the engine tests.
+    that drifts. The engine's shape is pinned by the engine tests and published
+    in packages/contracts/openapi.json.
     """
 
     engine_profile: dict[str, Any]

@@ -210,11 +210,11 @@ the machine-readable contract is
 with `python -m scripts.export_openapi`.
 
 > **Two backends live in this repository.** `backend/` (Python/FastAPI) is the
-> one that runs, per `PRD.md` §24 and `task.md` BE-1. A parallel Node
+> one that runs, per `docs/PRD.md` §24 and `docs/task.md` BE-1. A parallel Node
 > implementation is preserved in [`backend-node/`](backend-node/README.md) — see
 > that README for what is worth porting across. Keeping two live would mean two
 > sets of emission factors and two answers to the same question, which is what
-> `AI_AGENT_PLAYBOOK.md` §1 exists to prevent.
+> `docs/AI_AGENT_PLAYBOOK.md` §1 exists to prevent.
 
 ### Anonymous sandbox — no account required
 - `GET  /api/health` — status, engine version, reference dataset hashes, and which optional features this deployment actually has
@@ -326,7 +326,7 @@ node datasets/08_automated_test_suites/test_chakra_invariants.js        # 18/18
 node datasets/08_automated_test_suites/verify_dataset_authenticity.js   # 22/23 — see below
 ```
 
-The 147 Python tests include 85 engine invariants from `task.md` §15 run across
+The 147 Python tests include 85 engine invariants from `docs/task.md` §15 run across
 all ten sectors, full tenant-isolation checks, and the PRD §32 demo path
 end to end.
 
@@ -363,7 +363,7 @@ Every emission factor, conversion ratio, and benchmark in PRANGARA is cryptograp
 
   Coal matters — it dominates Scope 1 for a foundry or a dyeing plant.
   Assessments are computed with the engine value and the difference is reported,
-  because which one is correct is a reference-data decision (BE-2, `task.md` §5),
+  because which one is correct is a reference-data decision (BE-2, `docs/task.md` §5),
   and adopting either silently would change the basis of results factories have
   already been shown.
 
@@ -416,7 +416,13 @@ PRANGARA/
 │   ├── 07_primary_raw_sources/        # the actual PDFs and spreadsheets
 │   ├── 08_automated_test_suites/      # integrity and invariant checks
 │   └── 10_rag_knowledge_base/         # regulatory chunks for grounded RAG
-├── docs/                              # technical specifications and architectural PRDs
+├── docs/                              # ★ the specification — read these first
+│   ├── README_START_HERE.md           # reading order and claim boundaries
+│   ├── PRD.md                         # product definition, FR-01..FR-57
+│   ├── task.md                        # role ownership and phase plan
+│   ├── DATA_RAG_COMPLIANCE.md         # sources, provenance, RAG, compliance
+│   └── AI_AGENT_PLAYBOOK.md           # rules for AI agents working here
+├── ROADMAP.md                         # tasks to a deployed product, with owners
 ├── PROGRESS.md                        # what is built, what is not, and why
 ├── HANDOFF_BACKEND.md                 # BE-1 handoff
 ├── HANDOFF_MOBILE.md                  # FE-2 handoff

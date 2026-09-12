@@ -26,10 +26,6 @@ var/
 .env
 .env.local
 
-# Build intermediates. The generated PDFs ARE committed, since they are the
-# deliverable a teammate or judge wants without running the build.
-build/*.html
-
 # Node / Expo
 node_modules/
 .expo/
@@ -42,13 +38,17 @@ apps/mobile/ios/
 # Expo export output, produced only to verify the bundle builds.
 apps/mobile/.expo-export/
 
-# Internal task and sprint notes, and the competition problem statements.
-task.md
+# Competition problem statements and scratch notes.
 build_report.py
 HackOut26_Problem_Statements.pdf
 *Problem_Statements*
 README_ARCHIVE.md
 *.bak
+
+# `task.md` used to be ignored as a sprint-notes file. It is now the committed
+# role/ownership specification at docs/task.md, so only a stray copy at the
+# repository root stays out.
+/task.md
 
 # Editors / OS
 .vscode/

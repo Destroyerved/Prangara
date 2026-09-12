@@ -1,7 +1,7 @@
 # PRANGARA — Roadmap to a working, deployed product
 
 **Updated:** 2026-09-12 · **Branch:** `main`
-**Read first:** `README_START_HERE.md` → `PRD.md` → `task.md` → `DATA_RAG_COMPLIANCE.md` → `AI_AGENT_PLAYBOOK.md`, then `PROGRESS.md`, then this file.
+**Read first:** the specification in [`docs/`](docs/) — [`README_START_HERE.md`](docs/README_START_HERE.md) → [`PRD.md`](docs/PRD.md) → [`task.md`](docs/task.md) → [`DATA_RAG_COMPLIANCE.md`](docs/DATA_RAG_COMPLIANCE.md) → [`AI_AGENT_PLAYBOOK.md`](docs/AI_AGENT_PLAYBOOK.md) — then [`PROGRESS.md`](PROGRESS.md), then this file.
 
 This is the task list from where the repository actually is today to **APK +
 API + web dashboard, every P0/P1 feature working, deployed**. It is written to
@@ -42,8 +42,8 @@ document lists as "BACKEND-BLOCKED P0" is now built and testable.
 
 ## 1. Ownership
 
-Unchanged from `task.md` §1. Do not edit another role's folders without the
-contract-change protocol in `AI_AGENT_PLAYBOOK.md` §7.
+Unchanged from `docs/task.md` §1. Do not edit another role's folders without the
+contract-change protocol in `docs/AI_AGENT_PLAYBOOK.md` §7.
 
 | Role | Owns |
 |---|---|
@@ -195,7 +195,7 @@ events.register(events.COMPLIANCE_EVALUATION_REQUESTED, my_handler)
 Write `ComplianceCase` rows. Every rule needs `rule_id`, `rule_pack`,
 `rule_pack_version` and `source_ids` — the API rejects a case without them.
 Reference implementation: `backend-node/compliance/evaluator.js`.
-Rule schema: `DATA_RAG_COMPLIANCE.md` §24. **Never invent a threshold.**
+Rule schema: `docs/DATA_RAG_COMPLIANCE.md` §24. **Never invent a threshold.**
 
 **Done when:** running an assessment on a plant with EU export exposure opens a
 CBAM screening case with a real source citation, and the event no longer says
@@ -204,7 +204,7 @@ CBAM screening case with a real source citation, and the event no longer says
 ### B3 · RAG assistant — **BE-2** · ~12h · blocked by: nothing
 
 FR-53. `datasets/10_rag_knowledge_base/` already has the corpus.
-Pipeline and answer contract: `DATA_RAG_COMPLIANCE.md` §18–22.
+Pipeline and answer contract: `docs/DATA_RAG_COMPLIANCE.md` §18–22.
 
 - `POST /api/assistant/ask` → `{answer, confidence, citations[], limitations[]}`
 - Weak retrieval must return *"I cannot support that answer from the currently
@@ -218,7 +218,7 @@ actually supports it.
 
 FR-41 to FR-43. `POST /api/routes/plan`, `/api/shipments`, `/api/pooling/match`.
 OSRM + OR-Tools. Reference: `backend-node/ml/logistics_optimizer.js`.
-Save every field in `DATA_RAG_COMPLIANCE.md` §33 so a route is reproducible.
+Save every field in `docs/DATA_RAG_COMPLIANCE.md` §33 so a route is reproducible.
 
 ### B5 · Report export (PDF/HTML working paper) — **BE-1** · ~4h · blocked by: nothing
 
@@ -249,6 +249,22 @@ checksum in `datasets/06_auditing_and_proofs/chakra_source_registry.json`.
 Also: that script prints `22 (100.0% Pass Rate)` alongside `Hash Mismatches: 1`
 — the percentage is computed wrongly. Fix it, because a "100%" that is not 100%
 is worse than no badge.
+
+### B7b · (Optional) retire the `chakra_` filename prefix — **BE-2** · ~2h · blocked by: nothing
+
+The Chakra-era documentation was removed on 2026-09-12 and the engine docstrings
+renamed, but ~40 data files in `datasets/` still carry a `chakra_` prefix
+(`chakra_source_registry.json`, `chakra_emission_factors_verified.json`,
+`test_chakra_invariants.js`, …).
+
+These were **deliberately left alone**. They are referenced by path in
+`download_manifest.csv`, `source_registry.json`, the SHA-256 verification script
+and `backend/app/services/provenance.py`. Renaming them is a wide, breakage-prone
+change for a cosmetic gain, and it is BE-2's folder.
+
+If you do it: rename, update every manifest path, re-run
+`verify_dataset_authenticity.js`, and update `_VERIFIED_FACTORS` /
+`_SOURCE_REGISTRY` in `provenance.py`. Do it in one commit, not piecemeal.
 
 ### B8 · Resolve the two factor discrepancies — **BE-2** · ~2h · blocked by: nothing
 
@@ -401,7 +417,7 @@ evaluator), M1 (an actual APK), D1+D4 (a URL).
 
 ## 7. Definition of done — the whole product
 
-From `PRD.md` §31 and §36. A feature is done when UI, API, validation,
+From `docs/PRD.md` §31 and §36. A feature is done when UI, API, validation,
 loading/error/empty states and tests all exist, permissions are enforced, and
 source/audit metadata survives.
 
@@ -431,7 +447,7 @@ source/audit metadata survives.
 
 ## 8. Rules that do not bend
 
-From `AI_AGENT_PLAYBOOK.md` and `PRD.md`. Breaking one is worse than missing a
+From `docs/AI_AGENT_PLAYBOOK.md` and `docs/PRD.md`. Breaking one is worse than missing a
 feature.
 
 1. **The deterministic engine is the source of truth.** No LLM calculates,
@@ -444,7 +460,7 @@ feature.
 5. **Say what you cannot do.** "OCR is not configured" beats a fabricated
    extraction. An honest gap is a feature.
 6. **Readiness, not compliance.** Never "certified", "approved" or "guaranteed
-   compliant" (`DATA_RAG_COMPLIANCE.md` §34).
+   compliant" (`docs/DATA_RAG_COMPLIANCE.md` §34).
 7. **Regenerate the contract** after any schema change, and never invent a field
    on the client.
 8. **Tenant isolation is not negotiable.** Cross-tenant reads return 404.

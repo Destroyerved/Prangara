@@ -1,5 +1,5 @@
 """
-Physical and financial constants used by the Chakra engine.
+Physical and financial constants used by the PRANGARA carbon engine.
 
 Everything here is a screening-grade default that the user can override in the
 UI. They live in one place so that a judge (or an auditor) can see every number
