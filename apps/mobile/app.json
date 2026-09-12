@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "PRANGARA",
+    "slug": "prangara",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "prangara",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0B1220",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B1220"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "in.prangara.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "PRANGARA uses the camera to photograph bills, meters and equipment nameplates so the readings can be recorded with the document as evidence.",
+        "NSPhotoLibraryUsageDescription": "PRANGARA uses your photo library so you can upload a bill or certificate you have already photographed."
+      }
+    },
+    "android": {
+      "package": "in.prangara.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B1220",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["android.permission.CAMERA"],
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "PRANGARA uses the camera to photograph bills, meters and equipment nameplates."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "PRANGARA uses your photo library so you can upload a bill or certificate you have already photographed."
+        }
+      ]
+    ],
+    "extra": {
+      "claimBoundary": "Screening and decision support. Not a BEE-accredited audit, legal assurance service, regulator or carbon-credit verifier."
+    }
+  }
+}
