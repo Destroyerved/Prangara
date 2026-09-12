@@ -82,3 +82,73 @@ describe("access failures", () => {
     },
   );
 });
+
+describe("live engine response adaptation", () => {
+  it("adapts a live FastAPI engine assessment response cleanly into domain schema", async () => {
+    vi.stubEnv("VITE_DATA_MODE", "api");
+    const scratch = await import("../data/live_engine_fixture.json");
+    const fetch = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify(scratch.default), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    vi.stubGlobal("fetch", fetch);
+    const { api } = await import("./client");
+    const res = await api.demo("textile_dyeing");
+    expect(Math.round(res.footprint.total.base)).toBe(24069);
+    expect(res.footprint.scopes).toHaveLength(3);
+    expect(res.recommendations.items.length).toBeGreaterThan(0);
+    expect(res.recommendations.portfolios.all.curve.length).toBeGreaterThan(0);
+    expect(res.leaks.findings.length).toBeGreaterThan(0);
+    expect(res.sankey.nodes.length).toBeGreaterThan(0);
+    expect(res.sankey.links.length).toBeGreaterThan(0);
+  });
+
+  it("adapts live grouped reference registry into canonical factor array", async () => {
+    vi.stubEnv("VITE_DATA_MODE", "api");
+    const rawRef = {
+      meta: { count: 2 },
+      groups: {
+        Fuel: [
+          {
+            key: "COAL_INDIAN",
+            label: "Indian steam coal",
+            value: 2.45,
+            low: 2.2,
+            high: 2.7,
+            unit: "kgCO2e/kg",
+            scope: 1,
+            source: "CEA",
+          },
+        ],
+        Electricity: [
+          {
+            key: "GRID_TAMIL_NADU",
+            label: "Tamil Nadu Grid",
+            value: 0.82,
+            unit: "kgCO2e/kWh",
+            scope: 2,
+            source: "CEA",
+          },
+        ],
+      },
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify(rawRef), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      ),
+    );
+    const { api } = await import("./client");
+    const factors = await api.reference();
+    expect(factors).toHaveLength(2);
+    expect(factors[0].key).toBe("COAL_INDIAN");
+    expect(factors[0].scope).toBe("1");
+    expect(factors[1].scope).toBe("2");
+  });
+});
+

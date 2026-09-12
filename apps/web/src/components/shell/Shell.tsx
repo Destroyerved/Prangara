@@ -18,12 +18,14 @@ import {
   Check,
   RefreshCw,
   X,
+  Sparkles,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { navigation } from "./navigation";
 import { SearchBox, Badge } from "../ui/common";
 import { RecordDrawer } from "../drawers/RecordDrawer";
 import { CommandPalette } from "./CommandPalette";
+import { SovereignAssistantModal } from "../assistant/SovereignAssistantModal";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { WavesShaderBackground } from "../ui/WavesShaderBackground";
 import {
@@ -101,6 +103,7 @@ export default function Shell() {
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
   const [navVisible, setNavVisible] = useState(true);
+  const [assistantOpen, setAssistantOpen] = useState(false);
 
   const popoverContentRef = useRef<HTMLDivElement>(null);
   const plantOptionsRef = useRef<HTMLDivElement>(null);
@@ -430,6 +433,28 @@ export default function Shell() {
             </Popover.Root>
             <div className="top-actions">
               <button
+                className="icon-button assistant-trigger-btn"
+                aria-label="Sovereign Statutory Assistant"
+                title="Ask Sovereign RAG Assistant (EU CBAM · BEE PAT · SEBI BRSR)"
+                onClick={() => setAssistantOpen(true)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "6px 12px",
+                  background: "rgba(167, 139, 250, 0.12)",
+                  border: "1px solid rgba(167, 139, 250, 0.3)",
+                  borderRadius: "8px",
+                  color: "#c084fc",
+                  fontSize: "12px",
+                  fontWeight: 500,
+                  cursor: "pointer",
+                }}
+              >
+                <Sparkles size={15} />
+                <span>Ask Assistant</span>
+              </button>
+              <button
                 className="command-trigger"
                 onClick={() => w.setCommandOpen(true)}
                 aria-label="Search commands"
@@ -468,6 +493,10 @@ export default function Shell() {
         </div>
       </div>
       <RecordDrawer />
+      <SovereignAssistantModal
+        open={assistantOpen}
+        onOpenChange={setAssistantOpen}
+      />
       <CommandPalette />
       <AnimatePresence>
         {w.toast && (

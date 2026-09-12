@@ -17,6 +17,8 @@ import { LeakCard } from "../components/leaks/LeakCard";
 import { ActionTable } from "../components/actions/ActionTable";
 import MaccChart from "../components/charts/MaccChart";
 import type { PortfolioMode } from "../types/domain";
+import { ReportExportButton } from "../components/reports/ReportExportButton";
+
 export default function Overview() {
   const w = useWorkspace(),
     a = w.assessment,
@@ -47,7 +49,12 @@ export default function Overview() {
         eyebrow="WORKSPACE / OVERVIEW"
         title="Assessment overview"
         description="A clearer footprint. A stronger business case."
-        action={<span className="meta">Annual snapshot · Screening grade</span>}
+        action={
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <ReportExportButton assessmentId={a.id} />
+            <span className="meta">Annual snapshot · Screening grade</span>
+          </div>
+        }
       />
       <section className="executive-hero">
         <div className="financial-hero">
