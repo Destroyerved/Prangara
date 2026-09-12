@@ -213,10 +213,11 @@ export function MaccChart({
                 fontSize={9.5}
                 textAnchor="end"
               >
-                {tick < 0 ? "-" : ""}
-                {Math.abs(tick) >= 1000
-                  ? `${number(Math.abs(tick) / 1000)}k`
-                  : number(Math.abs(tick))}
+                {`${tick < 0 ? '-' : ''}${
+                  Math.abs(tick) >= 1000
+                    ? `${number(Math.abs(tick) / 1000)}k`
+                    : number(Math.abs(tick))
+                }`}
               </SvgText>
             </G>
           ))}
@@ -277,7 +278,7 @@ export function MaccChart({
             fontSize={9.5}
             textAnchor="end"
           >
-            {number(chart.total)} tCO2e cumulative
+            {`${number(chart.total)} tCO2e total`}
           </SvgText>
         </Svg>
       </View>
@@ -445,7 +446,7 @@ export function UncertaintyBar({
           fontSize={9.5}
           textAnchor="end"
         >
-          {number(high)} {unit}
+          {`${number(high)} ${unit}`}
         </SvgText>
       </Svg>
     </View>
@@ -788,7 +789,7 @@ export function EmissionFlow({
               fill={colour.text}
               fontSize={10}
             >
-              S{band.link.scope} {number(band.link.value)} t
+              {`S${band.link.scope}  ${number(band.link.value)} t`}
             </SvgText>
           </G>
         ))}
@@ -815,7 +816,7 @@ export function EmissionFlow({
           fill={colour.muted}
           fontSize={10}
         >
-          {number(total)} tCO2e
+          {`${number(total)} tCO2e`}
         </SvgText>
       </Svg>
     </ScrollView>
