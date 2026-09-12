@@ -43,6 +43,9 @@ class Settings:
         self.database_url: str = os.environ.get(
             "DATABASE_URL", f"sqlite:///{os.path.join(here, 'prangara.db')}"
         )
+        self.database_backend: str = os.environ.get("DATABASE_BACKEND", "sqlite").lower()
+        self.firestore_project_id: str = os.environ.get("FIRESTORE_PROJECT_ID", "")
+        self.firebase_credentials_json: str = os.environ.get("FIREBASE_CREDENTIALS_JSON", "")
         self.sql_echo: bool = _bool("SQL_ECHO", False)
 
         # JWT. In development a stable fallback keeps tokens valid across
@@ -88,6 +91,10 @@ class Settings:
     @property
     def is_sqlite(self) -> bool:
         return self.database_url.startswith("sqlite")
+
+    @property
+    def is_firestore(self) -> bool:
+        return self.database_backend == "firestore"
 
 
 @lru_cache(maxsize=1)

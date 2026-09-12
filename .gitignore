@@ -26,6 +26,11 @@ build/*.html
 # Secrets. `.env.example` is committed; `.env` never is.
 .env
 .env.local
+*firebase*.json
+*firestore*.json
+*serviceAccount*.json
+service_account.json
+serviceAccountKey.json
 
 # Node / Web Frontend / Expo
 node_modules/
