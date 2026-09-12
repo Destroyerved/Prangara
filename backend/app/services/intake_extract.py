@@ -363,6 +363,16 @@ def extract(message: str, known: dict[str, Any] | None = None) -> dict[str, Any]
 def extract_document_content(content_bytes: bytes, filename: str,
                              evidence_type: str = "electricity_bill") -> dict[str, Any]:
     """Parse document/bill text. Extracts consumption, bill amount, supplier, and activity records."""
+    from app.services.ollama_service import get_ollama_service, is_image
+
+    # If it's an image file, attempt multimodal local VLM visual extraction first
+    if is_image(content_bytes):
+        ollama = get_ollama_service()
+        if ollama.is_available():
+            vlm_res = ollama.extract_document_from_image(content_bytes, filename, evidence_type)
+            if vlm_res and (vlm_res.get("fields") or vlm_res.get("suggested_activity_records")):
+                return vlm_res
+
     text = ""
     try:
         text = content_bytes.decode("utf-8", errors="ignore")
@@ -467,6 +477,16 @@ def extract_document_content(content_bytes: bytes, filename: str,
 
 def extract_equipment_content(content_bytes: bytes, filename: str) -> dict[str, Any]:
     """Parse nameplate text or metadata for rated power, RPM, voltage."""
+    from app.services.ollama_service import get_ollama_service, is_image
+
+    # If it's an image file, attempt multimodal local VLM visual extraction first
+    if is_image(content_bytes):
+        ollama = get_ollama_service()
+        if ollama.is_available():
+            vlm_res = ollama.extract_equipment_from_image(content_bytes, filename)
+            if vlm_res and vlm_res.get("fields"):
+                return vlm_res
+
     text = ""
     try:
         text = content_bytes.decode("utf-8", errors="ignore")

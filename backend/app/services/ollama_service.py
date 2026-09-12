@@ -143,15 +143,273 @@ class OllamaService:
 
         user_prompt = f"VERIFIED STATUTORY EXCERPTS:\n{context_str}\n\nUSER QUESTION: {question}"
 
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ]
+    def is_vision_available(self) -> bool:
+        """Checks if a vision-capable multimodal model is available in Ollama."""
+        models = self.list_installed_models()
+        vision_names = [m.get("name", "") for m in models]
+        for name in vision_names:
+            lower = name.lower()
+            if any(k in lower for k in ("gemma", "vision", "llava", "moondream", "vl", "bakllava")):
+                return True
+        return False
 
-        response = self.chat(messages, temperature=0.0, timeout=timeout)
-        if response and response.strip():
-            return response.strip()
+    def get_vision_model(self) -> str:
+        """Returns the configured or first discovered vision-capable model."""
+        if settings.ollama_vision_model:
+            return settings.ollama_vision_model
+        models = self.list_installed_models()
+        for m in models:
+            name = m.get("name", "")
+            lower = name.lower()
+            if any(k in lower for k in ("gemma", "vision", "llava", "moondream", "vl", "bakllava")):
+                return name
+        return "gemma4:latest"
+
+    def analyze_image(
+        self,
+        image_bytes: bytes,
+        prompt: str,
+        *,
+        system_prompt: str | None = None,
+        model: str | None = None,
+        timeout: float = 25.0,
+    ) -> str | None:
+        """Passes an image to a local Vision Language Model (VLM) for multimodal visual analysis."""
+        if not image_bytes or not self.is_available():
+            return None
+
+        import base64
+        b64_image = base64.b64encode(image_bytes).decode("utf-8")
+        target_model = model or self.get_vision_model()
+
+        try:
+            import httpx
+
+            payload: dict[str, Any] = {
+                "model": target_model,
+                "prompt": prompt,
+                "images": [b64_image],
+                "stream": False,
+                "options": {"temperature": 0.0},
+            }
+            if system_prompt:
+                payload["system"] = system_prompt
+
+            resp = httpx.post(f"{self.base_url}/api/generate", json=payload, timeout=timeout)
+            if resp.status_code == 200:
+                body = resp.json()
+                return body.get("response", "")
+            log.warning("Ollama VLM generate failed with HTTP %d: %s", resp.status_code, resp.text)
+        except Exception as ex:
+            log.warning("Ollama VLM error on %s: %s", target_model, ex)
         return None
+
+    def extract_equipment_from_image(self, image_bytes: bytes, filename: str) -> dict[str, Any] | None:
+        """Uses local VLM to inspect equipment nameplate photos (motor, compressor, boiler, pump)."""
+        prompt = (
+            "Analyze this industrial equipment nameplate image.\n"
+            "Extract the following technical parameters:\n"
+            "- Rated power (kW or HP)\n"
+            "- Rated voltage (V)\n"
+            "- Rated speed / RPM\n"
+            "- Efficiency class (e.g. IE2, IE3, IE4)\n"
+            "- Equipment type (e.g. induction motor, screw compressor, centrifugal pump)\n"
+            "- Manufacturer / Brand name\n\n"
+            "Output JSON format:\n"
+            "{\n"
+            '  "rated_power_kw": <number or null>,\n'
+            '  "rated_voltage_v": <number or null>,\n'
+            '  "rpm": <number or null>,\n'
+            '  "efficiency_class": <string or null>,\n'
+            '  "equipment_type": <string or null>,\n'
+            '  "manufacturer": <string or null>\n'
+            "}"
+        )
+        response = self.analyze_image(
+            image_bytes,
+            prompt,
+            system_prompt="You are an industrial equipment engineer. Extract exact nameplate specifications. Return JSON only.",
+        )
+        if not response:
+            return None
+
+        try:
+            import re
+            json_match = re.search(r"\{.*\}", response, re.DOTALL)
+            if not json_match:
+                return None
+            data = json.loads(json_match.group(0))
+
+            fields: list[dict[str, Any]] = []
+            if data.get("rated_power_kw") is not None:
+                fields.append({
+                    "field": "rated_power_kw",
+                    "value": float(data["rated_power_kw"]),
+                    "unit": "kW",
+                    "confidence": 0.90,
+                    "evidence_text": f"VLM visual nameplate readout: {data.get('rated_power_kw')} kW",
+                    "needs_confirmation": True,
+                })
+            if data.get("rated_voltage_v") is not None:
+                fields.append({
+                    "field": "rated_voltage_v",
+                    "value": int(data["rated_voltage_v"]),
+                    "unit": "V",
+                    "confidence": 0.90,
+                    "evidence_text": f"VLM visual readout: {data.get('rated_voltage_v')} V",
+                    "needs_confirmation": True,
+                })
+            if data.get("rpm") is not None:
+                fields.append({
+                    "field": "rated_rpm",
+                    "value": int(data["rpm"]),
+                    "unit": "RPM",
+                    "confidence": 0.85,
+                    "evidence_text": f"VLM visual readout: {data.get('rpm')} RPM",
+                    "needs_confirmation": True,
+                })
+            if data.get("efficiency_class"):
+                fields.append({
+                    "field": "efficiency_class",
+                    "value": str(data["efficiency_class"]),
+                    "unit": None,
+                    "confidence": 0.85,
+                    "evidence_text": f"VLM visual readout: {data.get('efficiency_class')}",
+                    "needs_confirmation": True,
+                })
+            if data.get("equipment_type"):
+                fields.append({
+                    "field": "equipment_type",
+                    "value": str(data["equipment_type"]),
+                    "unit": None,
+                    "confidence": 0.85,
+                    "evidence_text": f"VLM visual readout: {data.get('equipment_type')}",
+                    "needs_confirmation": True,
+                })
+            if data.get("manufacturer"):
+                fields.append({
+                    "field": "manufacturer",
+                    "value": str(data["manufacturer"]),
+                    "unit": None,
+                    "confidence": 0.85,
+                    "evidence_text": f"VLM visual readout: {data.get('manufacturer')}",
+                    "needs_confirmation": True,
+                })
+
+            if fields:
+                return {
+                    "extractor": "vlm",
+                    "extractor_detail": f"Local VLM visual nameplate inspection ({self.get_vision_model()}).",
+                    "fields": fields,
+                }
+        except Exception as ex:
+            log.debug("failed to parse VLM nameplate output: %s", ex)
+        return None
+
+    def extract_document_from_image(
+        self,
+        image_bytes: bytes,
+        filename: str,
+        evidence_type: str = "electricity_bill",
+    ) -> dict[str, Any] | None:
+        """Uses local VLM to inspect utility bills or invoice photos (electricity, gas, fuel)."""
+        prompt = (
+            f"Analyze this industrial {evidence_type.replace('_', ' ')} image.\n"
+            "Extract the following values:\n"
+            "- Total billed consumption quantity (kWh for electricity, litres or tonnes for fuel)\n"
+            "- Unit of measurement (kWh, tonne, litre)\n"
+            "- Total billed amount in INR\n"
+            "- Tariff rate per unit in INR\n"
+            "- Period start date (YYYY-MM-DD)\n"
+            "- Period end date (YYYY-MM-DD)\n\n"
+            "Output JSON format:\n"
+            "{\n"
+            '  "quantity": <number or null>,\n'
+            '  "unit": <string or null>,\n'
+            '  "cost_inr": <number or null>,\n'
+            '  "tariff_rate": <number or null>,\n'
+            '  "period_start": <string YYYY-MM-DD or null>,\n'
+            '  "period_end": <string YYYY-MM-DD or null>\n'
+            "}"
+        )
+        response = self.analyze_image(
+            image_bytes,
+            prompt,
+            system_prompt="You are an industrial energy auditor. Extract exact utility bill quantities. Return JSON only.",
+        )
+        if not response:
+            return None
+
+        try:
+            import re
+            json_match = re.search(r"\{.*\}", response, re.DOTALL)
+            if not json_match:
+                return None
+            data = json.loads(json_match.group(0))
+
+            fields: list[dict[str, Any]] = []
+            suggested: list[dict[str, Any]] = []
+            qty = data.get("quantity")
+            if qty is not None:
+                qty_val = float(qty)
+                unit_val = data.get("unit") or ("kWh" if "elec" in evidence_type else "tonne")
+                stream_kind = "electricity" if "elec" in evidence_type else "fuel"
+                factor_key = "IN_GRID_NATIONAL" if stream_kind == "electricity" else "DIESEL_STATIONARY"
+                fields.append({
+                    "field": f"{stream_kind}_kwh" if stream_kind == "electricity" else "fuel_consumption",
+                    "value": qty_val,
+                    "unit": unit_val,
+                    "confidence": 0.88,
+                    "evidence_text": f"VLM visual bill extraction: {qty_val} {unit_val}",
+                    "needs_confirmation": True,
+                })
+                suggested.append({
+                    "stream_kind": stream_kind,
+                    "factor_key": factor_key,
+                    "quantity": qty_val,
+                    "unit": unit_val,
+                    "label": f"VLM Extracted {evidence_type.replace('_', ' ').title()}",
+                    "data_state": "extracted_unverified",
+                    "source_kind": "document_ocr",
+                    "extraction_confidence": 0.88,
+                })
+
+            if data.get("tariff_rate") is not None:
+                fields.append({
+                    "field": "tariff_inr_per_kwh",
+                    "value": float(data["tariff_rate"]),
+                    "unit": "INR/kWh",
+                    "confidence": 0.85,
+                    "evidence_text": f"VLM visual tariff readout: ₹{data.get('tariff_rate')}/unit",
+                    "needs_confirmation": True,
+                })
+
+            if fields:
+                return {
+                    "extractor": "vlm",
+                    "extractor_detail": f"Local VLM visual document inspection ({self.get_vision_model()}).",
+                    "fields": fields,
+                    "suggested_activity_records": suggested,
+                    "warnings": [],
+                }
+        except Exception as ex:
+            log.debug("failed to parse VLM document output: %s", ex)
+        return None
+
+
+def is_image(content_bytes: bytes) -> bool:
+    """Detects if raw bytes are an image file (PNG, JPEG, WEBP, GIF, BMP, TIFF)."""
+    if not content_bytes or len(content_bytes) < 4:
+        return False
+    return (
+        content_bytes.startswith(b"\x89PNG")
+        or content_bytes.startswith(b"\xff\xd8")
+        or (len(content_bytes) > 12 and content_bytes[:4] == b"RIFF" and content_bytes[8:12] == b"WEBP")
+        or content_bytes.startswith(b"GIF8")
+        or content_bytes.startswith(b"BM")
+        or content_bytes.startswith(b"II*\x00")
+        or content_bytes.startswith(b"MM\x00*")
+    )
 
 
 _ollama_instance: OllamaService | None = None
@@ -162,3 +420,4 @@ def get_ollama_service() -> OllamaService:
     if _ollama_instance is None:
         _ollama_instance = OllamaService()
     return _ollama_instance
+

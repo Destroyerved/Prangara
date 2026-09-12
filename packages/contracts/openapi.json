@@ -2473,7 +2473,8 @@
               "conversation",
               "document_ocr",
               "equipment_scan",
-              "manual"
+              "manual",
+              "vlm"
             ],
             "title": "Source Kind",
             "type": "string"
@@ -2835,6 +2836,7 @@
           "extractor": {
             "enum": [
               "ocr",
+              "vlm",
               "unavailable"
             ],
             "title": "Extractor",
@@ -2919,6 +2921,7 @@
           "extractor": {
             "enum": [
               "ocr",
+              "vlm",
               "unavailable"
             ],
             "title": "Extractor",

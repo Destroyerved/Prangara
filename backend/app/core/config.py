@@ -76,6 +76,7 @@ class Settings:
         # inventing extractions.
         self.ollama_base_url: str = os.environ.get("OLLAMA_BASE_URL", "")
         self.ollama_model: str = os.environ.get("OLLAMA_MODEL", "")
+        self.ollama_vision_model: str = os.environ.get("OLLAMA_VISION_MODEL", "")
 
         self.cors_origins: list[str] = [
             o.strip() for o in os.environ.get(

@@ -56,7 +56,7 @@ class ConfirmIntakeRequest(ApiModel):
     profile_updates: dict[str, Any] = Field(default_factory=dict)
     activity_records: list[ActivityRecordIn] = Field(default_factory=list)
     evidence_id: str | None = None
-    source_kind: Literal["conversation", "document_ocr", "equipment_scan", "manual"] = "manual"
+    source_kind: Literal["conversation", "document_ocr", "equipment_scan", "manual", "vlm"] = "manual"
 
 
 class ConfirmIntakeResponse(ApiModel):
@@ -68,7 +68,7 @@ class ConfirmIntakeResponse(ApiModel):
 class DocumentExtractResponse(ApiModel):
     evidence_id: str
     document_type: str | None = None
-    extractor: Literal["ocr", "unavailable"]
+    extractor: Literal["ocr", "vlm", "unavailable"]
     extractor_detail: str
     fields: list[ExtractedField] = Field(default_factory=list)
     suggested_activity_records: list[ActivityRecordIn] = Field(default_factory=list)
@@ -80,7 +80,7 @@ class DocumentExtractResponse(ApiModel):
 
 class EquipmentExtractResponse(ApiModel):
     evidence_id: str | None = None
-    extractor: Literal["ocr", "unavailable"]
+    extractor: Literal["ocr", "vlm", "unavailable"]
     extractor_detail: str
     fields: list[ExtractedField] = Field(default_factory=list)
     # PRD FR-06 is explicit: a nameplate gives rated power, not consumption.
