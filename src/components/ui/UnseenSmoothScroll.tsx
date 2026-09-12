@@ -20,6 +20,13 @@ export function UnseenSmoothScroll() {
       wheelMultiplier: 0.95,
       touchMultiplier: 1.5,
       infinite: false,
+      allowNestedScroll: true,
+      prevent: (node) => {
+        return Boolean(
+          node.hasAttribute?.('data-lenis-prevent') ||
+            node.closest?.('[data-lenis-prevent], .rag-scroll-container, [role="dialog"], aside')
+        );
+      },
     });
 
     let rafId: number;

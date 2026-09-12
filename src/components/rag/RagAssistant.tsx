@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Sparkles,
   BookOpen,
@@ -232,6 +232,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [copiedFormula, setCopiedFormula] = useState(false);
   const [copiedAnswer, setCopiedAnswer] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape key
   useEffect(() => {
@@ -243,6 +244,54 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
+
+  // Isolate wheel scrolling to prevent background page interception
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !isOpen) return;
+
+    const onWheel = (e: WheelEvent) => {
+      e.stopPropagation();
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: true });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+    };
+  }, [isOpen]);
+
+  // Forward wheel events anywhere on aside to the scrollable container
+  const handlePanelWheel = (e: React.WheelEvent<HTMLElement>) => {
+    if (!scrollRef.current) return;
+    const target = e.target as HTMLElement;
+    if (!target.closest(".rag-scroll-container")) {
+      scrollRef.current.scrollTop += e.deltaY;
+    }
+  };
+
+  // Keyboard navigation for scrollable content
+  const handleKeyDownOnScroll = (e: React.KeyboardEvent) => {
+    if (!scrollRef.current) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      scrollRef.current.scrollTop += 60;
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      scrollRef.current.scrollTop -= 60;
+    } else if (e.key === "PageDown") {
+      e.preventDefault();
+      scrollRef.current.scrollTop += 280;
+    } else if (e.key === "PageUp") {
+      e.preventDefault();
+      scrollRef.current.scrollTop -= 280;
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      scrollRef.current.scrollTop = 0;
+    } else if (e.key === "End") {
+      e.preventDefault();
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
 
   // Filter topics based on search query and category
   const filteredTopics = KNOWLEDGE_BASE.filter((t) => {
@@ -287,18 +336,20 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(8, 12, 20, 0.55)",
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
+              background: "rgba(8, 12, 20, 0.45)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
               zIndex: 998,
             }}
           />
 
-          {/* Assistant Floating Island Panel (Detached with 16px gap & curved borders) */}
+          {/* Assistant Floating Island Panel (Detached iOS Frosted Glass UI) */}
           <motion.aside
             role="dialog"
             aria-label="Ask PRANGARA Intelligence Assistant"
+            className="rag-aside-glass"
             data-lenis-prevent="true"
+            onWheel={handlePanelWheel}
             initial={{ opacity: 0, x: 50, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 40, scale: 0.96 }}
@@ -308,55 +359,50 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
               top: "16px",
               right: "16px",
               bottom: "16px",
-              width: "min(580px, calc(100vw - 32px))",
+              width: "min(620px, calc(100vw - 32px))",
               height: "calc(100vh - 32px)",
               maxHeight: "calc(100vh - 32px)",
-              borderRadius: "24px",
+              borderRadius: "26px",
               overflow: "hidden",
-              border: "1px solid rgba(255, 255, 255, 0.14)",
-              background: "rgba(11, 18, 30, 0.84)",
-              backdropFilter: "blur(32px) saturate(200%)",
-              WebkitBackdropFilter: "blur(32px) saturate(200%)",
-              boxShadow: "0 25px 70px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 8px 32px rgba(0, 0, 0, 0.45)",
               zIndex: 999,
               display: "flex",
               flexDirection: "column",
-              color: "var(--text)",
             }}
           >
             {/* Header */}
             <div
               style={{
-                padding: "1.25rem 1.5rem",
-                borderBottom: "1px solid var(--border)",
+                flexShrink: 0,
+                padding: "0.95rem 1.4rem",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: "1rem",
-                background: "var(--surface)",
+                background: "rgba(255, 255, 255, 0.03)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
                 <div
                   style={{
-                    width: "38px",
-                    height: "38px",
-                    borderRadius: "12px",
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "11px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     background:
-                      "linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(16, 185, 129, 0.25) 100%)",
-                    border: "1px solid rgba(56, 189, 248, 0.35)",
+                      "linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(16, 185, 129, 0.25) 100%)",
+                    border: "1px solid rgba(56, 189, 248, 0.4)",
                     color: "#38bdf8",
                     flexShrink: 0,
                   }}
                 >
-                  <Sparkles size={20} />
+                  <Sparkles size={18} />
                 </div>
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                    <h2 style={{ margin: 0, fontSize: "1.12rem", fontWeight: 700, letterSpacing: "-0.01em" }}>
+                    <h2 style={{ margin: 0, fontSize: "1.08rem", fontWeight: 700, letterSpacing: "-0.01em" }}>
                       Ask PRANGARA
                     </h2>
                     <span
@@ -368,9 +414,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         borderRadius: "999px",
                         fontSize: "0.68rem",
                         fontWeight: 600,
-                        background: "rgba(16, 185, 129, 0.12)",
+                        background: "rgba(16, 185, 129, 0.15)",
                         color: "#10b981",
-                        border: "1px solid rgba(16, 185, 129, 0.25)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
                       }}
                     >
                       <span
@@ -384,7 +430,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       Grounded
                     </span>
                   </div>
-                  <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.78rem", color: "var(--text-muted)" }}>
+                  <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.76rem", opacity: 0.7 }}>
                     Regulatory Intelligence & Formula Provenance
                   </p>
                 </div>
@@ -399,37 +445,36 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: "34px",
-                    height: "34px",
-                    borderRadius: "8px",
-                    border: "1px solid var(--border)",
-                    background: "var(--surface)",
-                    color: "var(--text)",
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    color: "inherit",
                     cursor: "pointer",
                     transition: "all 0.15s ease",
                   }}
                 >
-                  <X size={18} />
+                  <X size={17} />
                 </button>
               </div>
             </div>
 
             {/* Modern Search & Prompt Box */}
-            <div style={{ padding: "1rem 1.5rem 0.6rem 1.5rem" }}>
+            <div style={{ flexShrink: 0, padding: "0.55rem 1.4rem 0.35rem 1.4rem" }}>
               <div
+                className="rag-search-pill"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   gap: "0.65rem",
-                  padding: "0.65rem 0.95rem",
+                  padding: "0.55rem 0.9rem",
                   borderRadius: "12px",
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                   transition: "border-color 0.2s ease, box-shadow 0.2s ease",
                 }}
               >
-                <Search size={17} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
+                <Search size={16} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
                 <input
                   type="text"
                   value={searchQuery}
@@ -439,9 +484,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     background: "transparent",
                     border: "none",
                     outline: "none",
-                    color: "var(--text)",
+                    color: "inherit",
                     width: "100%",
-                    fontSize: "0.88rem",
+                    fontSize: "0.86rem",
                   }}
                 />
                 {searchQuery ? (
@@ -456,17 +501,17 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       padding: "2px",
                     }}
                   >
-                    <X size={16} />
+                    <X size={15} />
                   </button>
                 ) : (
                   <span
                     style={{
-                      fontSize: "0.72rem",
+                      fontSize: "0.7rem",
                       color: "var(--text-muted)",
-                      background: "var(--surface-hover)",
+                      background: "rgba(255, 255, 255, 0.08)",
                       padding: "0.15rem 0.4rem",
                       borderRadius: "4px",
-                      border: "1px solid var(--border)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
                       fontFamily: "monospace",
                     }}
                   >
@@ -479,7 +524,8 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
             {/* Category Filter Tabs */}
             <div
               style={{
-                padding: "0.25rem 1.5rem 0.5rem 1.5rem",
+                flexShrink: 0,
+                padding: "0.2rem 1.4rem 0.35rem 1.4rem",
                 display: "flex",
                 gap: "0.4rem",
                 overflowX: "auto",
@@ -502,9 +548,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       whiteSpace: "nowrap",
                       cursor: "pointer",
                       transition: "all 0.15s ease",
-                      background: isActive ? "var(--text)" : "var(--surface)",
-                      color: isActive ? "var(--bg)" : "var(--text)",
-                      border: isActive ? "1px solid var(--text)" : "1px solid var(--border)",
+                      background: isActive ? "rgba(56, 189, 248, 0.22)" : "rgba(255, 255, 255, 0.06)",
+                      color: isActive ? "#38bdf8" : "inherit",
+                      border: isActive ? "1px solid rgba(56, 189, 248, 0.5)" : "1px solid rgba(255, 255, 255, 0.12)",
                     }}
                   >
                     {cat.label}
@@ -516,13 +562,14 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
             {/* Quick Question Chips Carousel (clean, NO harsh scrollbar) */}
             <div
               style={{
-                padding: "0.2rem 1.5rem 0.75rem 1.5rem",
+                flexShrink: 0,
+                padding: "0.15rem 1.4rem 0.65rem 1.4rem",
                 display: "flex",
-                gap: "0.5rem",
+                gap: "0.45rem",
                 overflowX: "auto",
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
-                borderBottom: "1px solid var(--border)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
               }}
             >
               {filteredTopics.map((topic) => {
@@ -533,9 +580,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     type="button"
                     onClick={() => setSelectedTopic(topic)}
                     style={{
-                      fontSize: "0.76rem",
+                      fontSize: "0.75rem",
                       fontWeight: isSelected ? 600 : 400,
-                      padding: "0.4rem 0.85rem",
+                      padding: "0.35rem 0.8rem",
                       borderRadius: "8px",
                       whiteSpace: "nowrap",
                       cursor: "pointer",
@@ -544,12 +591,12 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       gap: "0.4rem",
                       transition: "all 0.2s ease",
                       background: isSelected
-                        ? "rgba(56, 189, 248, 0.12)"
-                        : "var(--surface)",
+                        ? "rgba(56, 189, 248, 0.16)"
+                        : "rgba(255, 255, 255, 0.05)",
                       border: isSelected
                         ? "1px solid rgba(56, 189, 248, 0.45)"
-                        : "1px solid var(--border)",
-                      color: isSelected ? "#38bdf8" : "var(--text)",
+                        : "1px solid rgba(255, 255, 255, 0.1)",
+                      color: isSelected ? "#38bdf8" : "inherit",
                     }}
                   >
                     <span style={{ opacity: isSelected ? 1 : 0.6 }}>•</span>
@@ -577,9 +624,11 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
             {/* Body Content Area with sleek scrollbar & high-contrast typography */}
             <div
+              ref={scrollRef}
+              tabIndex={0}
+              onKeyDown={handleKeyDownOnScroll}
               className="rag-scroll-container"
               data-lenis-prevent="true"
-              onWheel={(e) => e.stopPropagation()}
               style={{
                 flex: "1 1 0%",
                 minHeight: 0,
@@ -587,10 +636,11 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 overflowY: "auto",
                 overscrollBehavior: "contain",
                 WebkitOverflowScrolling: "touch",
-                padding: "1.25rem 1.65rem 2.5rem 1.65rem",
+                padding: "1.1rem 1.4rem 4.5rem 1.4rem",
                 display: "flex",
                 flexDirection: "column",
-                gap: "1.5rem",
+                gap: "1.4rem",
+                outline: "none",
               }}
             >
               {/* Question Header & Category */}
@@ -613,12 +663,12 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 </div>
 
                 <h3
+                  className="rag-heading"
                   style={{
-                    margin: "0 0 0.85rem 0",
-                    fontSize: "1.32rem",
+                    margin: "0 0 0.95rem 0",
+                    fontSize: "1.34rem",
                     fontWeight: 700,
                     lineHeight: 1.35,
-                    color: "#ffffff",
                     letterSpacing: "-0.01em",
                   }}
                 >
@@ -628,26 +678,28 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 {/* Key Insight Hero Card */}
                 <div
                   style={{
-                    padding: "1.1rem 1.25rem",
-                    borderRadius: "14px",
+                    padding: "1.15rem 1.3rem",
+                    borderRadius: "16px",
                     background:
-                      "linear-gradient(135deg, rgba(16, 185, 129, 0.14) 0%, rgba(56, 189, 248, 0.08) 100%)",
+                      "linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(56, 189, 248, 0.08) 100%)",
                     border: "1px solid rgba(16, 185, 129, 0.38)",
-                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
+                    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+                    backdropFilter: "blur(16px)",
+                    WebkitBackdropFilter: "blur(16px)",
                   }}
                 >
                   <div style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
                     <div
                       style={{
-                        padding: "0.35rem",
-                        borderRadius: "8px",
-                        background: "rgba(16, 185, 129, 0.2)",
+                        padding: "0.4rem",
+                        borderRadius: "9px",
+                        background: "rgba(16, 185, 129, 0.22)",
                         color: "#10b981",
                         marginTop: "1px",
                         flexShrink: 0,
                       }}
                     >
-                      <Sparkles size={17} />
+                      <Sparkles size={18} />
                     </div>
                     <div>
                       <div
@@ -663,12 +715,12 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         Authoritative Key Takeaway
                       </div>
                       <p
+                        className="rag-heading"
                         style={{
                           margin: 0,
-                          fontSize: "0.95rem",
+                          fontSize: "0.96rem",
                           fontWeight: 500,
-                          lineHeight: 1.6,
-                          color: "#f8fafc",
+                          lineHeight: 1.62,
                         }}
                       >
                         {selectedTopic.summary}
@@ -680,13 +732,13 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
               {/* Detailed Explanation Paragraphs (Easy to See & High Contrast) */}
               <div
+                className="rag-body-text"
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.9rem",
-                  fontSize: "0.94rem",
+                  gap: "0.95rem",
+                  fontSize: "0.95rem",
                   lineHeight: 1.72,
-                  color: "#e2e8f0",
                 }}
               >
                 {selectedTopic.body.map((para, idx) => (
@@ -699,11 +751,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
               {/* Deterministic Mathematical Formula Block */}
               {selectedTopic.formula && (
                 <div
+                  className="rag-glass-card"
                   style={{
-                    borderRadius: "14px",
-                    border: "1px solid rgba(56, 189, 248, 0.28)",
-                    background: "rgba(10, 15, 26, 0.6)",
-                    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+                    borderRadius: "16px",
                     overflow: "hidden",
                   }}
                 >
@@ -712,7 +762,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      padding: "0.65rem 1rem",
+                      padding: "0.7rem 1.1rem",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                       background: "rgba(255, 255, 255, 0.03)",
                     }}
@@ -743,8 +793,8 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         padding: "0.25rem 0.65rem",
                         borderRadius: "6px",
                         border: "1px solid rgba(255, 255, 255, 0.15)",
-                        background: "rgba(255, 255, 255, 0.06)",
-                        color: copiedFormula ? "#10b981" : "#f1f5f9",
+                        background: "rgba(255, 255, 255, 0.07)",
+                        color: copiedFormula ? "#10b981" : "inherit",
                         cursor: "pointer",
                         transition: "all 0.15s ease",
                       }}
@@ -760,7 +810,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, monospace)",
                       fontSize: "0.88rem",
                       color: "#38bdf8",
-                      background: "rgba(0, 0, 0, 0.35)",
+                      background: "rgba(0, 0, 0, 0.3)",
                       overflowX: "auto",
                       whiteSpace: "pre-wrap",
                       wordBreak: "break-all",
@@ -784,12 +834,12 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 >
                   <BookOpen size={16} style={{ color: "#10b981" }} />
                   <span
+                    className="rag-heading"
                     style={{
                       fontSize: "0.76rem",
                       fontWeight: 700,
                       textTransform: "uppercase",
                       letterSpacing: "0.06em",
-                      color: "#ffffff",
                     }}
                   >
                     Verified Source Provenance ({selectedTopic.sources.length})
@@ -800,12 +850,10 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                   {selectedTopic.sources.map((src, idx) => (
                     <div
                       key={idx}
+                      className="rag-glass-card"
                       style={{
-                        padding: "1.1rem 1.2rem",
-                        borderRadius: "14px",
-                        background: "rgba(255, 255, 255, 0.04)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                        padding: "1.1rem 1.25rem",
+                        borderRadius: "16px",
                       }}
                     >
                       <div
@@ -819,7 +867,10 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
                           <ShieldCheck size={17} style={{ color: "#10b981", flexShrink: 0 }} />
-                          <h4 style={{ margin: 0, fontSize: "0.93rem", fontWeight: 600, color: "#f8fafc" }}>
+                          <h4
+                            className="rag-heading"
+                            style={{ margin: 0, fontSize: "0.93rem", fontWeight: 600 }}
+                          >
                             {src.title}
                           </h4>
                         </div>
@@ -836,7 +887,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         }}
                       >
                         <span>
-                          Ref: <strong style={{ color: "#e2e8f0" }}>{src.refId}</strong>
+                          Ref: <strong style={{ color: "inherit" }}>{src.refId}</strong>
                         </span>
                         <span>•</span>
                         <span>{src.version}</span>
@@ -849,10 +900,10 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                           borderLeft: "3px solid #10b981",
                           fontSize: "0.86rem",
                           lineHeight: 1.6,
-                          color: "#e2e8f0",
-                          background: "rgba(0, 0, 0, 0.25)",
+                          background: "rgba(0, 0, 0, 0.2)",
                           borderRadius: "0 8px 8px 0",
                           fontStyle: "italic",
+                          opacity: 0.9,
                         }}
                       >
                         "{src.excerpt}"
@@ -868,8 +919,8 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  paddingTop: "0.75rem",
-                  borderTop: "1px solid var(--border)",
+                  paddingTop: "0.85rem",
+                  borderTop: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
               >
                 <button
@@ -880,10 +931,10 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                     alignItems: "center",
                     gap: "0.45rem",
                     padding: "0.5rem 0.95rem",
-                    borderRadius: "8px",
-                    border: "1px solid var(--border)",
-                    background: "var(--surface)",
-                    color: copiedAnswer ? "#10b981" : "var(--text)",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    color: copiedAnswer ? "#10b981" : "inherit",
                     fontSize: "0.82rem",
                     fontWeight: 500,
                     cursor: "pointer",
@@ -910,17 +961,16 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
               {/* Disclaimer Note */}
               <div
+                className="rag-glass-card"
                 style={{
-                  fontSize: "0.74rem",
+                  fontSize: "0.75rem",
                   color: "var(--text-muted)",
-                  lineHeight: 1.5,
-                  padding: "0.85rem 1rem",
-                  borderRadius: "10px",
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
+                  lineHeight: 1.55,
+                  padding: "0.85rem 1.1rem",
+                  borderRadius: "12px",
                 }}
               >
-                <strong>Audit Compliance Guarantee:</strong> PRANGARA RAG Intelligence queries strictly verified regulatory repositories (CEA v22, SEBI BRSR Core, EU CBAM 2023/956, IPCC 2006). AI text explanations never alter deterministic computation values or plant baseline ledgers.
+                <strong style={{ color: "inherit", opacity: 0.9 }}>Audit Compliance Guarantee:</strong> PRANGARA RAG Intelligence queries strictly verified regulatory repositories (CEA v22, SEBI BRSR Core, EU CBAM 2023/956, IPCC 2006). AI text explanations never alter deterministic computation values or plant baseline ledgers.
               </div>
             </div>
           </motion.aside>
