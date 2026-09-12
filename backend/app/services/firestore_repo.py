@@ -118,6 +118,70 @@ class FirestoreRepository:
         doc = self.client.collection("scenarios").document(scenario_id).get()
         return doc.to_dict() if doc.exists else None
 
+    # --- Marketplace: Providers ---
+    def save_provider(self, provider_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("providers").document(provider_id)
+        payload = {**data, "id": provider_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    def get_provider(self, provider_id: str) -> dict[str, Any] | None:
+        doc = self.client.collection("providers").document(provider_id).get()
+        return doc.to_dict() if doc.exists else None
+
+    def list_providers(self, provider_type: str | None = None, state: str | None = None,
+                       limit: int = 50) -> list[dict[str, Any]]:
+        query = self.client.collection("providers")
+        if provider_type:
+            query = query.where("provider_type", "==", provider_type)
+        if state:
+            query = query.where("state", "==", state)
+        docs = query.limit(limit).stream()
+        return [d.to_dict() for d in docs]
+
+    # --- Marketplace: Materials ---
+    def save_material(self, material_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("materials").document(material_id)
+        payload = {**data, "id": material_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    def get_material(self, material_id: str) -> dict[str, Any] | None:
+        doc = self.client.collection("materials").document(material_id).get()
+        return doc.to_dict() if doc.exists else None
+
+    def list_materials(self, limit: int = 50) -> list[dict[str, Any]]:
+        docs = self.client.collection("materials").limit(limit).stream()
+        return [d.to_dict() for d in docs]
+
+    # --- Marketplace: RFQs & Quotes ---
+    def save_rfq(self, rfq_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("rfqs").document(rfq_id)
+        payload = {**data, "id": rfq_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    def get_rfq(self, rfq_id: str) -> dict[str, Any] | None:
+        doc = self.client.collection("rfqs").document(rfq_id).get()
+        return doc.to_dict() if doc.exists else None
+
+    def list_rfqs(self, factory_id: str | None = None, limit: int = 50) -> list[dict[str, Any]]:
+        query = self.client.collection("rfqs")
+        if factory_id:
+            query = query.where("factory_id", "==", factory_id)
+        docs = query.limit(limit).stream()
+        return [d.to_dict() for d in docs]
+
+    def save_quote(self, quote_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("quotes").document(quote_id)
+        payload = {**data, "id": quote_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    def list_quotes_by_rfq(self, rfq_id: str) -> list[dict[str, Any]]:
+        docs = self.client.collection("quotes").where("rfq_id", "==", rfq_id).stream()
+        return [d.to_dict() for d in docs]
+
 
 _repo: FirestoreRepository | None = None
 

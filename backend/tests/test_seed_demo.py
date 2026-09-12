@@ -49,12 +49,20 @@ def test_seed_creates_a_working_demo_and_can_remove_it(client: TestClient) -> No
     assert actions, "the hero factory should have tracked actions"
 
     rfqs = client.get("/api/rfqs", headers=headers).json()
-    assert len(rfqs) == 1
-    comparison = client.get(f"/api/rfqs/{rfqs[0]['id']}/compare", headers=headers).json()
+    assert len(rfqs) >= 1
+    quoted_rfq = next(r for r in rfqs if r["status"] == "QUOTED")
+    comparison = client.get(f"/api/rfqs/{quoted_rfq['id']}/compare", headers=headers).json()
     assert len(comparison["quotes"]) == 3
     # Quotes are ranked by the payback recomputed at each quoted price.
     paybacks = [q["revised_payback_yrs"] for q in comparison["quotes"]]
     assert paybacks == sorted(paybacks, key=lambda v: v if v is not None else 1e9)
+
+    providers = client.get("/api/providers", headers=headers).json()
+    demo_providers = [p for p in providers if p.get("is_demo_seed")]
+    assert len(demo_providers) == len(PROVIDERS)
+    materials = client.get("/api/materials", headers=headers).json()
+    demo_materials = [m for m in materials if m.get("is_demo_seed")]
+    assert len(demo_materials) >= 9
 
     # The consultant reaches exactly the one factory they were granted.
     consultant = client.post(
@@ -93,3 +101,31 @@ def test_seed_creates_a_working_demo_and_can_remove_it(client: TestClient) -> No
     assert client.post(
         "/api/auth/login", json={"email": _email("owner"), "password": DEMO_PASSWORD}
     ).status_code == 401
+
+
+def test_seed_marketplace_idempotent_multiple_executions() -> None:
+    """Verifies that seed and seed_marketplace can be run multiple times safely without errors."""
+    from app.models.identity import Organization, User
+    from scripts.seed_demo import seed_marketplace
+
+    with SessionLocal() as db:
+        wipe(db)
+        # First execution
+        created1 = seed(db)
+        assert len(created1) == len(ACCOUNTS) + len(PROVIDERS)
+
+        # Second execution (idempotent marketplace refresh)
+        hero_fac = db.scalar(select(Factory).where(Factory.name == "Rajkot Metal Works"))
+        owner_u = db.scalar(select(User).where(User.email == _email("owner")))
+        owner_o = db.scalar(select(Organization).where(Organization.name == "Rajkot Metal Works"))
+        m_created2 = seed_marketplace(db, hero_fac.id if hero_fac else None, owner_u, owner_o)
+        assert len(m_created2) == len(PROVIDERS)
+
+        # Third execution
+        m_created3 = seed_marketplace(db, hero_fac.id if hero_fac else None, owner_u, owner_o)
+        assert len(m_created3) == len(PROVIDERS)
+
+        # Clean wipe
+        removed = wipe(db)
+        assert removed == len(ACCOUNTS) + len(PROVIDERS)
+

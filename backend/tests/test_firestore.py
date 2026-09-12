@@ -50,3 +50,35 @@ def test_firestore_repo_mocked_crud():
     assert res_asm["id"] == "asm_test_789"
     assert res_asm["headline_metrics"]["total_tco2e"] == 1240.5
     mock_doc.set.assert_called_once()
+
+    # Test save provider
+    mock_doc.reset_mock()
+    res_prv = repo.save_provider("prv_test_001", {
+        "name": "Coimbatore Circular Fibres",
+        "provider_type": "recycler",
+        "rating": 4.8,
+    })
+    assert res_prv["id"] == "prv_test_001"
+    assert res_prv["provider_type"] == "recycler"
+    mock_doc.set.assert_called_once()
+
+    # Test save material
+    mock_doc.reset_mock()
+    res_mtl = repo.save_material("mtl_test_001", {
+        "name": "Recycled Cotton Yarn",
+        "price_inr_per_t": 85000.0,
+    })
+    assert res_mtl["id"] == "mtl_test_001"
+    assert res_mtl["price_inr_per_t"] == 85000.0
+    mock_doc.set.assert_called_once()
+
+    # Test save rfq
+    mock_doc.reset_mock()
+    res_rfq = repo.save_rfq("rfq_test_001", {
+        "title": "VFD retrofit tender",
+        "status": "OPEN",
+    })
+    assert res_rfq["id"] == "rfq_test_001"
+    assert res_rfq["status"] == "OPEN"
+    mock_doc.set.assert_called_once()
+

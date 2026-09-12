@@ -153,10 +153,85 @@ def seed_firestore():
         },
     })
 
+    # 6. Seed Marketplace Providers
+    logger.info("Seeding Marketplace Providers...")
+    repo.save_provider("prv_coimbatore_circular", {
+        "name": "Coimbatore Circular Fibres",
+        "provider_type": "recycler",
+        "state": "Tamil Nadu",
+        "district": "Coimbatore",
+        "latitude": 11.0168,
+        "longitude": 76.9558,
+        "service_states": ["Tamil Nadu", "Kerala", "Karnataka"],
+        "verification_status": "verified",
+        "rating": 4.8,
+        "rating_count": 32,
+        "typical_lead_time_days": 10,
+        "is_demo_seed": True,
+    })
+    repo.save_provider("prv_gujarat_energy", {
+        "name": "Gujarat Energy Services",
+        "provider_type": "installation_contractor",
+        "state": "Gujarat",
+        "district": "Rajkot",
+        "latitude": 22.31,
+        "longitude": 70.81,
+        "service_states": ["Gujarat", "Maharashtra", "Rajasthan"],
+        "verification_status": "verified",
+        "rating": 4.6,
+        "rating_count": 24,
+        "typical_lead_time_days": 21,
+        "is_demo_seed": True,
+    })
+
+    # 7. Seed Circular Materials
+    logger.info("Seeding Marketplace Materials...")
+    repo.save_material("mtl_cotton_yarn_recycled", {
+        "name": "Mechanical Post-Industrial Recycled Cotton Yarn (20s Count)",
+        "material_key": "COTTON_RECYCLED",
+        "grade": "Ring-Spun 20s",
+        "recycled_content_pct": 80.0,
+        "embodied_tco2e_per_t": 0.65,
+        "embodied_source": "PRANGARA reference registry (COTTON_RECYCLED)",
+        "price_inr_per_t": 85000.0,
+        "moq_t": 2.0,
+        "stock_t": 85.0,
+        "state": "Tamil Nadu",
+        "is_active": True,
+        "is_demo_seed": True,
+    })
+    repo.save_material("mtl_rpet_flake", {
+        "name": "Food-grade rPET flake",
+        "material_key": "PET_RECYCLED",
+        "grade": "FG-100",
+        "recycled_content_pct": 100.0,
+        "embodied_tco2e_per_t": 1.4,
+        "embodied_source": "PRANGARA reference registry (PET_RECYCLED)",
+        "price_inr_per_t": 78000.0,
+        "moq_t": 5.0,
+        "stock_t": 240.0,
+        "state": "Gujarat",
+        "is_active": True,
+        "is_demo_seed": True,
+    })
+
+    # 8. Seed RFQs
+    logger.info("Seeding Marketplace RFQ...")
+    repo.save_rfq("rfq_tirupur_vfd", {
+        "factory_id": fac_id,
+        "organization_id": org_id,
+        "title": "Variable frequency drives on stenter exhaust fans",
+        "intervention_id": "VFD_MOTORS",
+        "status": "QUOTED",
+        "scope_of_work": "Supply, installation and baseline verification report.",
+        "quote_count": 2,
+    })
+
     logger.info("Successfully seeded Firestore collections!")
-    logger.info("Check your Firebase Console to see 'organizations', 'users', 'factories', 'assessments', and 'evidence_vault'.")
+    logger.info("Check your Firebase Console to see 'organizations', 'users', 'factories', 'assessments', 'evidence_vault', 'providers', 'materials', and 'rfqs'.")
     return True
 
 
 if __name__ == "__main__":
     seed_firestore()
+
