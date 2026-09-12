@@ -298,6 +298,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
           <motion.aside
             role="dialog"
             aria-label="Ask PRANGARA Intelligence Assistant"
+            data-lenis-prevent="true"
             initial={{ opacity: 0, x: 50, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 40, scale: 0.96 }}
@@ -577,10 +578,16 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
             {/* Body Content Area with sleek scrollbar & high-contrast typography */}
             <div
               className="rag-scroll-container"
+              data-lenis-prevent="true"
+              onWheel={(e) => e.stopPropagation()}
               style={{
-                flex: 1,
+                flex: "1 1 0%",
+                minHeight: 0,
+                maxHeight: "100%",
                 overflowY: "auto",
-                padding: "1.25rem 1.65rem 2rem 1.65rem",
+                overscrollBehavior: "contain",
+                WebkitOverflowScrolling: "touch",
+                padding: "1.25rem 1.65rem 2.5rem 1.65rem",
                 display: "flex",
                 flexDirection: "column",
                 gap: "1.5rem",

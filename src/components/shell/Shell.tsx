@@ -163,20 +163,25 @@ export default function Shell() {
     };
   }, [plantOpen]);
 
-  // Background Blur & Lenis Scroll Pause when Facility Profiles Popover is open
+  // Background Blur & Lenis Scroll Pause when Facility Profiles Popover or RAG Assistant is open
   useEffect(() => {
     if (plantOpen) {
       document.body.classList.add("has-plant-popover-open");
-      window.__lenis?.stop();
     } else {
       document.body.classList.remove("has-plant-popover-open");
+    }
+
+    if (plantOpen || ragOpen) {
+      window.__lenis?.stop();
+    } else {
       window.__lenis?.start();
     }
+
     return () => {
       document.body.classList.remove("has-plant-popover-open");
       window.__lenis?.start();
     };
-  }, [plantOpen]);
+  }, [plantOpen, ragOpen]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
