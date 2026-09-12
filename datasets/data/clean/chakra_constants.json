@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "description": "Chakra PS10 Engine Constants, NCV Table, Financial Defaults, and Evaluation Thresholds",
+    "source": "ChakraReport.pdf §09 Architecture and Modules (constants.py)",
+    "version": "1.0-verified"
+  },
+  "net_calorific_values_gj_per_unit": {
+    "fuel_diesel": {
+      "value": 0.036,
+      "unit": "GJ/litre",
+      "basis": "Net CV"
+    },
+    "fuel_natural_gas": {
+      "value": 0.038,
+      "unit": "GJ/Sm3",
+      "basis": "Gross to Net CV factor 0.90"
+    },
+    "fuel_lpg": {
+      "value": 0.0461,
+      "unit": "GJ/kg",
+      "basis": "Net CV"
+    },
+    "fuel_furnace_oil": {
+      "value": 0.0404,
+      "unit": "GJ/kg",
+      "basis": "IPCC 2006 Vol 2 Table 2.2"
+    },
+    "fuel_indian_coal": {
+      "value": 15.9,
+      "unit": "GJ/tonne",
+      "basis": "Coal India Grade G11 median non-coking coal"
+    },
+    "fuel_biomass_briquette": {
+      "value": 15,
+      "unit": "GJ/tonne",
+      "basis": "Agricultural residue briquette median"
+    }
+  },
+  "financial_defaults": {
+    "electricity_tariff_inr_per_kwh": 8,
+    "cost_of_capital_rate": 0.12,
+    "cost_of_capital_range": [
+      0.11,
+      0.14
+    ],
+    "fuel_prices_inr": {
+      "diesel_per_litre": 90,
+      "natural_gas_per_sm3": 45,
+      "lpg_per_kg": 85,
+      "furnace_oil_per_kg": 52,
+      "indian_coal_per_tonne": 6500,
+      "biomass_briquette_per_tonne": 7200
+    },
+    "material_prices_inr_per_tonne": {
+      "aluminium_primary": 220000,
+      "aluminium_secondary": 180000,
+      "steel_primary": 55000,
+      "steel_secondary": 48000,
+      "cotton_yarn_primary": 280000,
+      "cotton_yarn_recycled": 210000,
+      "pet_virgin": 110000,
+      "pet_recycled": 85000,
+      "cement_opc": 7000,
+      "cement_blended": 6200,
+      "paper_virgin": 65000,
+      "paper_recycled": 48000,
+      "glass_virgin": 25000,
+      "glass_recycled": 18000
+    }
+  },
+  "compliance_defaults": {
+    "cbam_reference_certificate_price_eur": 85,
+    "eur_to_inr_exchange_rate": 90,
+    "indicative_cbam_price_inr_per_tco2e": 7650,
+    "brsr_core_reporting_threshold": "Top 250 listed companies in India + voluntary MSME value chain"
+  },
+  "leak_detection_thresholds": {
+    "benchmark_breach": {
+      "trigger": "stream_intensity > sector_p75",
+      "severity_formula": "min(1.0, over / 0.5) * stream_share + 0.15_floor"
+    },
+    "material_concentration": {
+      "trigger": "stream_share > 0.15 AND stream_intensity > sector_p50",
+      "severity_formula": "(distance_above_p50 / p50) * stream_share"
+    },
+    "structural_hotspot": {
+      "trigger": "stream_share > 0.25 AND no_applicable_benchmark",
+      "severity_formula": "(stream_share - 0.25) / 0.75"
+    },
+    "severity_bands": {
+      "critical": ">= 0.60",
+      "high": ">= 0.35",
+      "moderate": ">= 0.15",
+      "watch": "< 0.15"
+    }
+  },
+  "economic_formulas": {
+    "capital_recovery_factor": "r * (1 + r)^n / ((1 + r)^n - 1)",
+    "annualised_capex": "CRF * capex",
+    "lcoa_inr_per_tco2e": "(annualised_capex + delta_opex - gross_saving) / annual_abatement",
+    "simple_payback_years": "capex / (gross_saving - delta_opex)",
+    "gap_to_median_tonnes": "stream_tco2e * (actual_intensity - p50_intensity) / actual_intensity",
+    "size_multiplier_revenue": {
+      "below_20_cr": 0.85,
+      "between_20_and_50_cr": 1,
+      "between_50_and_100_cr": 1.25,
+      "above_100_cr": 1.5
+    }
+  }
+}

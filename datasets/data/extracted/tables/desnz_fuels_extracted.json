@@ -1,0 +1,72 @@
+[
+  {
+    "fuel": "Diesel (average biofuel blend)",
+    "raw_value": 2.684,
+    "raw_unit": "kgCO2e/litre",
+    "norm_value": 2.684,
+    "norm_unit": "kgCO2e/litre",
+    "scope": 1,
+    "boundary": "direct combustion",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "fuel": "Natural Gas (Gross CV)",
+    "raw_value": 2.023,
+    "raw_unit": "kgCO2e/m3",
+    "norm_value": 2.023,
+    "norm_unit": "kgCO2e/Sm3",
+    "scope": 1,
+    "boundary": "direct combustion",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "fuel": "LPG",
+    "raw_value": 2.939,
+    "raw_unit": "kgCO2e/kg",
+    "norm_value": 2.939,
+    "norm_unit": "kgCO2e/kg",
+    "scope": 1,
+    "boundary": "direct combustion",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "fuel": "Heavy Fuel Oil (Residual Oil)",
+    "raw_value": 3.178,
+    "raw_unit": "kgCO2e/litre",
+    "norm_value": 3.178,
+    "norm_unit": "kgCO2e/litre",
+    "scope": 1,
+    "boundary": "direct combustion",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "fuel": "Domestic Industrial Coal (Average)",
+    "raw_value": 2.419,
+    "raw_unit": "kgCO2e/kg",
+    "norm_value": 2.419,
+    "norm_unit": "tCO2e/t",
+    "scope": 1,
+    "boundary": "direct combustion",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "fuel": "Petcoke",
+    "raw_value": 3.15,
+    "raw_unit": "kgCO2e/kg",
+    "norm_value": 3.15,
+    "norm_unit": "tCO2e/t",
+    "scope": 1,
+    "boundary": "direct combustion",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "fuel": "Biomass / Agricultural Bagasse",
+    "raw_value": 0.045,
+    "raw_unit": "kgCO2e/kg",
+    "norm_value": 0.045,
+    "norm_unit": "tCO2e/t",
+    "scope": 1,
+    "boundary": "combustion biogenic + transport",
+    "status": "VERIFIED_OFFICIAL"
+  }
+]

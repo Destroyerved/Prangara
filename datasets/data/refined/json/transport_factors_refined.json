@@ -1,0 +1,52 @@
+[
+  {
+    "transport_mode_id": "undefined",
+    "mode_name": "undefined",
+    "vehicle_type": "Standard Commercial Freight",
+    "emission_factor_kgco2e_per_tkm": null,
+    "fuel_type": "Diesel",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "authenticity": "GREEN_OFFICIAL"
+  },
+  {
+    "transport_mode_id": "undefined",
+    "mode_name": "undefined",
+    "vehicle_type": "Standard Commercial Freight",
+    "emission_factor_kgco2e_per_tkm": null,
+    "fuel_type": "Diesel",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "authenticity": "GREEN_OFFICIAL"
+  },
+  {
+    "transport_mode_id": "undefined",
+    "mode_name": "undefined",
+    "vehicle_type": "Standard Commercial Freight",
+    "emission_factor_kgco2e_per_tkm": null,
+    "fuel_type": "Diesel",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "authenticity": "GREEN_OFFICIAL"
+  },
+  {
+    "transport_mode_id": "undefined",
+    "mode_name": "undefined",
+    "vehicle_type": "Standard Commercial Freight",
+    "emission_factor_kgco2e_per_tkm": null,
+    "fuel_type": "Diesel",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "authenticity": "GREEN_OFFICIAL"
+  },
+  {
+    "transport_mode_id": "undefined",
+    "mode_name": "undefined",
+    "vehicle_type": "Standard Commercial Freight",
+    "emission_factor_kgco2e_per_tkm": null,
+    "fuel_type": "Diesel",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "authenticity": "GREEN_OFFICIAL"
+  }
+]

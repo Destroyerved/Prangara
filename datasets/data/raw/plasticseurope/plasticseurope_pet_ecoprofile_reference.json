@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-PLASTICSEUROPE-2024",
+  "agency": "PlasticsEurope",
+  "dataset": "Eco-profiles and Environmental Product Declarations of the European Plastics Industry",
+  "version": "2024 Update",
+  "official_url": "https://plasticseurope.org/wp-content/uploads/2021/10/PlasticsEurope-PET-Eco-profile-Summary.pdf",
+  "portal_url": "https://plasticseurope.org/sustainability/circularity/life-cycle-thinking/eco-profiles-set/",
+  "access_method": "industry_epd",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-12T01:57:31.213Z",
+  "notes": "Virgin PET resin: 3.00 tCO2e/t (cradle-to-gate). Mechanical rPET flakes: 1.30 tCO2e/t. 57% reduction."
+}

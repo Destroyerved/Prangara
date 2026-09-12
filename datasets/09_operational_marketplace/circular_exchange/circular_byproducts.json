@@ -1,0 +1,41 @@
+[
+  {
+    "exchange_id": "CIRC-BYP-001",
+    "plant_id": "PLANT-GJ-01",
+    "plant_name": "Morbi Vitrified Tiles Cluster Unit A",
+    "byproduct": "Fired Ceramic Tile Broken Scrap / Grog",
+    "monthly_generation_tonnes": 120,
+    "contamination_pct": 1.2,
+    "recommended_sink_sector": "Cement & Refractory Aggregates",
+    "compatibility_score": 94.5,
+    "match_status": "COMPATIBLE_MATCHED",
+    "location": "Morbi, Gujarat",
+    "data_mode": "FIRST_PARTY_OPERATOR_REPORTED"
+  },
+  {
+    "exchange_id": "CIRC-BYP-002",
+    "plant_id": "PLANT-GJ-04",
+    "plant_name": "Rajkot Castings & Valves Foundry",
+    "byproduct": "Chemically Bonded Foundry Spent Core Sand",
+    "monthly_generation_tonnes": 350,
+    "contamination_pct": 3.5,
+    "recommended_sink_sector": "Brick Kiln Aggregates / Road Sub-base",
+    "compatibility_score": 88,
+    "match_status": "COMPATIBLE_MATCHED",
+    "location": "Rajkot, Gujarat",
+    "data_mode": "FIRST_PARTY_OPERATOR_REPORTED"
+  },
+  {
+    "exchange_id": "CIRC-BYP-003",
+    "plant_id": "PLANT-GJ-07",
+    "plant_name": "Surat Synthetic Dyeing Mills Pvt Ltd",
+    "byproduct": "ETP Non-Hazardous Biological Sludge Cake",
+    "monthly_generation_tonnes": 85,
+    "contamination_pct": 4.8,
+    "recommended_sink_sector": "Biomass Co-firing / Cement Kiln Alternative Fuel",
+    "compatibility_score": 82.5,
+    "match_status": "UNDER_REVIEW",
+    "location": "Surat, Gujarat",
+    "data_mode": "FIRST_PARTY_OPERATOR_REPORTED"
+  }
+]

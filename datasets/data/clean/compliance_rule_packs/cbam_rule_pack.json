@@ -1,0 +1,55 @@
+{
+  "rule_pack_id": "RP-CBAM-2026",
+  "title": "EU CBAM Definitive Regime Sectoral & CN Default Rules",
+  "jurisdiction": "European Union / Cross-Border",
+  "rules": [
+    {
+      "cn_code": "7208",
+      "product_group": "Iron and Steel",
+      "description": "Flat-rolled products of iron or non-alloy steel (HRC)",
+      "default_direct_tco2e_t": 2.19,
+      "default_indirect_tco2e_t": 0.716,
+      "benchmark_value": 1.35,
+      "unit": "tCO2e/tonne",
+      "export_exposure_formula": "EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR",
+      "label": "INDICATIVE CBAM EXPOSURE",
+      "status": "VERIFIED_GOVERNMENT"
+    },
+    {
+      "cn_code": "7214",
+      "product_group": "Iron and Steel",
+      "description": "Bars and rods of iron or non-alloy steel (Rebar)",
+      "default_direct_tco2e_t": 1.98,
+      "default_indirect_tco2e_t": 0.716,
+      "benchmark_value": 0.4,
+      "unit": "tCO2e/tonne",
+      "export_exposure_formula": "EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR",
+      "label": "INDICATIVE CBAM EXPOSURE",
+      "status": "VERIFIED_GOVERNMENT"
+    },
+    {
+      "cn_code": "7601",
+      "product_group": "Aluminium",
+      "description": "Unwrought aluminium (ingots, billets)",
+      "default_direct_tco2e_t": 2.15,
+      "default_indirect_tco2e_t": 12.05,
+      "benchmark_value": 1.48,
+      "unit": "tCO2e/tonne",
+      "export_exposure_formula": "EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR",
+      "label": "INDICATIVE CBAM EXPOSURE",
+      "status": "VERIFIED_GOVERNMENT"
+    },
+    {
+      "cn_code": "2523",
+      "product_group": "Cement",
+      "description": "Portland cement, aluminous cement, slag cement",
+      "default_direct_tco2e_t": 0.76,
+      "default_indirect_tco2e_t": 0.04,
+      "benchmark_value": 0.69,
+      "unit": "tCO2e/tonne",
+      "export_exposure_formula": "EU_Export_Tonnes * (Embedded_CO2 - EU_Benchmark) * CBAM_Certificate_Price_EUR",
+      "label": "INDICATIVE CBAM EXPOSURE",
+      "status": "VERIFIED_GOVERNMENT"
+    }
+  ]
+}

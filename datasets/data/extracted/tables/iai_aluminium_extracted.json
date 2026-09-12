@@ -1,0 +1,32 @@
+[
+  {
+    "product": "Primary Aluminium Ingot",
+    "route": "Smelting (Global Average Grid)",
+    "geography": "Global",
+    "value": 14.2,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2024,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Primary Aluminium Ingot",
+    "route": "Smelting (India Coal Grid Intensive)",
+    "geography": "India",
+    "value": 16.8,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2024,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Recycled / Secondary Aluminium Ingot",
+    "route": "Scrap Remelt",
+    "geography": "India / Global",
+    "value": 0.62,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2024,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  }
+]

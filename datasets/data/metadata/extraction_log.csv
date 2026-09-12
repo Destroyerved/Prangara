@@ -1,0 +1,8 @@
+extraction_id,source_id,timestamp,records_extracted,raw_file_path,status,checksum_verified,extracted_by
+EXT-20260912-001,SRC001,2026-09-12T00:45:00Z,15,data/raw/mnre/mnre_biourja_gujarat.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1
+EXT-20260912-002,SRC002,2026-09-12T00:45:10Z,20,data/raw/sbm/sbm_urban_gujarat_ulb_waste.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1
+EXT-20260912-003,SRC003,2026-09-12T00:45:20Z,4,data/raw/cpcb/cpcb_gujarat_solid_waste_benchmark.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1
+EXT-20260912-004,SRC004,2026-09-12T00:45:30Z,25,data/raw/gujarat_des/gujarat_crop_production_des.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1
+EXT-20260912-005,SRC005,2026-09-12T00:45:40Z,15,data/raw/livestock/dahd_livestock_census_gujarat.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1
+EXT-20260912-006,SRC006,2026-09-12T00:45:50Z,8,data/raw/sansaadhan/mohua_sansaadhan_mrf_gujarat.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1
+EXT-20260912-007,SRC007,2026-09-12T00:46:00Z,10,data/raw/ipcc/ipcc_emission_factors_waste_energy.csv,SUCCESS,TRUE,DataEngineering_Pipeline_v1

@@ -1,0 +1,38 @@
+[
+  {
+    "material": "Virgin Kraft Linerboard",
+    "sector": "Paper",
+    "value": 0.78,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "source_id": "SRC-CEPI-2024",
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "material": "Recycled Corrugated Testliner",
+    "sector": "Paper",
+    "value": 0.39,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "source_id": "SRC-CEPI-2024",
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "material": "Virgin Container Glass",
+    "sector": "Glass",
+    "value": 0.95,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "source_id": "SRC-FEVE-2024",
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "material": "High-Cullet Recycled Container Glass (70% cullet)",
+    "sector": "Glass",
+    "value": 0.58,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "source_id": "SRC-FEVE-2024",
+    "status": "VERIFIED_INDUSTRY_LCI"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "leak_id": "LEAK-01",
+    "facility": "Morbi Tiles Plant #12",
+    "leak_point": "Roller Kiln Flue Gas Heat Dissipation",
+    "severity": "CRITICAL",
+    "annual_energy_lost_gj": 38400,
+    "annual_carbon_leak_tco2e": 2112,
+    "monetary_loss_inr": 15360000,
+    "recommended_intervention_id": "INT-01",
+    "score_1_to_100": 92.4,
+    "formula": "Calculated from Kiln exhaust temp (260°C) vs ambient (35°C) and mass flow rate",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "leak_id": "LEAK-02",
+    "facility": "Rajkot Foundry Unit #05",
+    "leak_point": "Sub-optimal IE1 Cupola Induction Motors",
+    "severity": "HIGH",
+    "annual_energy_lost_gj": 4800,
+    "annual_carbon_leak_tco2e": 264,
+    "monetary_loss_inr": 2880000,
+    "recommended_intervention_id": "INT-02",
+    "score_1_to_100": 84,
+    "formula": "Calculated from IE1 full load efficiency (79.7%) vs IE4 (89.5%) across 6000 running hours",
+    "status": "DERIVED_TRANSPARENT"
+  }
+]

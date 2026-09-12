@@ -1,0 +1,42 @@
+[
+  {
+    "cement_type": "OPC 53 Grade (Ordinary Portland Cement)",
+    "standard": "IS 269",
+    "clinker_pct": 95,
+    "value": 0.83,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "geography": "India",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "cement_type": "PPC (Portland Pozzolana Cement - Fly Ash)",
+    "standard": "IS 1489 Part 1",
+    "clinker_pct": 65,
+    "value": 0.56,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "geography": "India",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "cement_type": "PSC (Portland Slag Cement - GGBS)",
+    "standard": "IS 455",
+    "clinker_pct": 45,
+    "value": 0.44,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "geography": "India",
+    "status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "cement_type": "LC3 (Limestone Calcined Clay Cement)",
+    "standard": "BIS Draft / GCCA",
+    "clinker_pct": 50,
+    "value": 0.41,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "geography": "India",
+    "status": "VERIFIED_OFFICIAL"
+  }
+]

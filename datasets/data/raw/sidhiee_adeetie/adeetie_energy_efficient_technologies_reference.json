@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-BEE-SIDHIEE-ADEETIE",
+  "agency": "BEE / SIDHIEE / ADEETIE",
+  "dataset": "Assistance in Deploying Energy Efficient Technologies in Industries & Establishments (ADEETIE)",
+  "version": "2024-2026",
+  "official_url": "https://adeetie.beeindia.gov.in/sites/default/files/Technology_Catalogue_2025.pdf",
+  "portal_url": "https://adeetie.beeindia.gov.in/energy-efficient-technologies",
+  "access_method": "technology_database",
+  "authority_class": "GOVERNMENT_OFFICIAL",
+  "retrieved_at": "2026-09-12T01:58:10.756Z",
+  "notes": "BEE verified investment costs, annual energy savings %, and payback periods for VFD, IE3/IE4 motors, WHR, and boiler economizers."
+}

@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "description": "Experimental State Generation-Mix Grid Factors (Relabeled from Legacy). Not official CEA state grid factors.",
+    "official_status": false,
+    "methodology": "State regional generation-mix simulation model",
+    "canonical_official_factor": "grid_india (0.716 tCO2e/MWh from SRC-CEA-V21)"
+  },
+  "state_variants": {
+    "GJ": {
+      "name": "Gujarat",
+      "derived_value": 0.72,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "MH": {
+      "name": "Maharashtra",
+      "derived_value": 0.74,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "TN": {
+      "name": "Tamil Nadu",
+      "derived_value": 0.7,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "KA": {
+      "name": "Karnataka",
+      "derived_value": 0.62,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "DL": {
+      "name": "Delhi",
+      "derived_value": 0.71,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "WB": {
+      "name": "West Bengal",
+      "derived_value": 0.88,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "KL": {
+      "name": "Kerala",
+      "derived_value": 0.48,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "AP": {
+      "name": "Andhra Pradesh",
+      "derived_value": 0.73,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "TS": {
+      "name": "Telangana",
+      "derived_value": 0.75,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "UP": {
+      "name": "Uttar Pradesh",
+      "derived_value": 0.76,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "RJ": {
+      "name": "Rajasthan",
+      "derived_value": 0.73,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "PB": {
+      "name": "Punjab",
+      "derived_value": 0.71,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "HR": {
+      "name": "Haryana",
+      "derived_value": 0.72,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "OR": {
+      "name": "Odisha",
+      "derived_value": 0.82,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    },
+    "CH": {
+      "name": "Chhattisgarh",
+      "derived_value": 0.8,
+      "confidence": "MEDIUM",
+      "status": "DERIVED_TRANSPARENT"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+[
+  {
+    "grade": "G1",
+    "gross_calorific_value_kcal_per_kg": 7000,
+    "ncv_tj_per_ktonne": 29.288,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.7706,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G2",
+    "gross_calorific_value_kcal_per_kg": 6700,
+    "ncv_tj_per_ktonne": 28.0328,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.6519,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G3",
+    "gross_calorific_value_kcal_per_kg": 6400,
+    "ncv_tj_per_ktonne": 26.7776,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.5332,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G4",
+    "gross_calorific_value_kcal_per_kg": 6100,
+    "ncv_tj_per_ktonne": 25.5224,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.4144,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G5",
+    "gross_calorific_value_kcal_per_kg": 5800,
+    "ncv_tj_per_ktonne": 24.2672,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.2957,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G6",
+    "gross_calorific_value_kcal_per_kg": 5500,
+    "ncv_tj_per_ktonne": 23.012,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.1769,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G7",
+    "gross_calorific_value_kcal_per_kg": 5200,
+    "ncv_tj_per_ktonne": 21.7568,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 2.0582,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G8",
+    "gross_calorific_value_kcal_per_kg": 4900,
+    "ncv_tj_per_ktonne": 20.5016,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.9395,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G9",
+    "gross_calorific_value_kcal_per_kg": 4600,
+    "ncv_tj_per_ktonne": 19.2464,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.8207,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G10",
+    "gross_calorific_value_kcal_per_kg": 4300,
+    "ncv_tj_per_ktonne": 17.9912,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.702,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G11",
+    "gross_calorific_value_kcal_per_kg": 4000,
+    "ncv_tj_per_ktonne": 16.736,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.5832,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G12",
+    "gross_calorific_value_kcal_per_kg": 3700,
+    "ncv_tj_per_ktonne": 15.4808,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.4645,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G13",
+    "gross_calorific_value_kcal_per_kg": 3400,
+    "ncv_tj_per_ktonne": 14.2256,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.3457,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G14",
+    "gross_calorific_value_kcal_per_kg": 3100,
+    "ncv_tj_per_ktonne": 12.9704,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.227,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G15",
+    "gross_calorific_value_kcal_per_kg": 2800,
+    "ncv_tj_per_ktonne": 11.7152,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 1.1083,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G16",
+    "gross_calorific_value_kcal_per_kg": 2500,
+    "ncv_tj_per_ktonne": 10.46,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 0.9895,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "grade": "G17",
+    "gross_calorific_value_kcal_per_kg": 2200,
+    "ncv_tj_per_ktonne": 9.2048,
+    "ipcc_default_factor_kg_co2_per_tj": 94600,
+    "derived_emission_factor_tco2_per_tonne": 0.8708,
+    "conversion_formula": "NCV_TJ * 94600 kgCO2/TJ / 1,000,000",
+    "status": "DERIVED_TRANSPARENT"
+  }
+]

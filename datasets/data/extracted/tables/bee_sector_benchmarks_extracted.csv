@@ -1,0 +1,11 @@
+sector_key,sector_name,clusters,sec_thermal_gj_t_min,sec_thermal_gj_t_max,sec_thermal_gj_t_median,sec_elec_kwh_t_min,sec_elec_kwh_t_max,sec_elec_kwh_t_median,carbon_tco2e_t_median,benchmark_type,status
+"steel_rerolling","Secondary Steel Re-Rolling","Mandi Gobindgarh (PB), Jalna (MH), Bhavnagar (GJ)",1.4,2.6,1.85,80,160,110,0.22,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"aluminium_diecasting","Aluminium Die-Casting & Extrusion","Pune (MH), Coimbatore (TN), Ahmedabad (GJ)",4.2,8.5,5.8,450,950,620,0.94,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"textile_processing","Textile Dyeing & Finishing","Surat (GJ), Tirupur (TN), Panipat (HR)",12,28,18.5,350,800,520,2.15,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"chemicals_dyes","Specialty Chemicals & Dyes Intermediates","Ankleshwar (GJ), Vapi (GJ), Tarapur (MH)",8,22,14.2,500,1400,880,1.85,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"ceramics_tiles","Ceramics & Vitrified Tiles","Morbi (GJ), Thangadh (GJ), Khurja (UP)",4.8,9.2,6.4,120,260,180,0.51,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"foundry_castings","Foundry & Casting Units","Rajkot (GJ), Belgaum (KA), Coimbatore (TN)",3.5,7.2,4.9,520,980,680,0.88,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"cement_grinding","Standalone Cement Grinding Units","Neemuch (MP), Chanderiya (RJ), Kalaburagi (KA)",0.1,0.4,0.22,32,52,38,0.027,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"paper_packaging","Recycled Paper & Kraft Packaging","Vapi (GJ), Muzaffarnagar (UP), Morbi (GJ)",7.5,15,10.2,280,520,360,1.12,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"plastics_processing","Plastics Injection Molding & Extrusion","Daman (UT), Ahmedabad (GJ), Peenya (KA)",0.5,2.2,1.1,600,1600,950,0.74,"reported_range","VERIFIED_OFFICIAL_SCREENING"
+"food_agro","Grain Milling, Oil Extraction & Food Processing","Indore (MP), Khanna (PB), Unjha (GJ)",1.8,5.5,3.2,90,240,150,0.35,"reported_range","VERIFIED_OFFICIAL_SCREENING"

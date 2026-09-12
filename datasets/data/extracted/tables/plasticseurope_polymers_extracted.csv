@@ -1,0 +1,7 @@
+polymer,form,geography,value,unit,boundary,proxy_for_india,status
+"Virgin PET (Polyethylene Terephthalate)","Bottle-grade Granulate","Europe / Proxy",2.15,"kgCO2e/kg","cradle-to-gate",true,"VERIFIED_INDUSTRY_LCI"
+"Recycled rPET (Mechanical Flake/Pellet)","Post-Consumer Washed Flake","India / Global",0.52,"kgCO2e/kg","cradle-to-gate",false,"VERIFIED_INDUSTRY_LCI"
+"Virgin HDPE (High-Density Polyethylene)","Granulate","Europe / Proxy",1.8,"kgCO2e/kg","cradle-to-gate",true,"VERIFIED_INDUSTRY_LCI"
+"Recycled rHDPE (Regranulate)","Circular Pellet","India / Global",0.45,"kgCO2e/kg","cradle-to-gate",false,"VERIFIED_INDUSTRY_LCI"
+"Virgin PP (Polypropylene)","Molding Granulate","Europe / Proxy",1.63,"kgCO2e/kg","cradle-to-gate",true,"VERIFIED_INDUSTRY_LCI"
+"Recycled rPP (Regranulate)","Circular Pellet","India / Global",0.42,"kgCO2e/kg","cradle-to-gate",false,"VERIFIED_INDUSTRY_LCI"

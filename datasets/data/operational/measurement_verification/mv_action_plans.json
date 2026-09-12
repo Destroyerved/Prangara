@@ -1,0 +1,23 @@
+[
+  {
+    "action_id": "MV-2026-001",
+    "facility_name": "Morbi Vitrified Tiles Cluster Demo Factory",
+    "sector": "ceramics_tiles",
+    "intervention_implemented": "Waste Heat Recovery on Roller Kiln Cooling Zone",
+    "baseline_period": "FY2023-24 (12 months)",
+    "reporting_period": "H1 FY2025-26 (6 months)",
+    "baseline_production_t": 45000,
+    "actual_production_t": 46200,
+    "production_normalized": true,
+    "baseline_thermal_energy_gj": 288000,
+    "actual_thermal_energy_gj": 251200,
+    "measured_thermal_saving_gj": 36800,
+    "measured_saving_pct": 12.8,
+    "expected_saving_pct": 12,
+    "achievement_rate_pct": 106.7,
+    "carbon_abated_tco2e": 2024,
+    "auditor_firm": "GreenEdge Carbon Audits Pvt Ltd (BEE Reg AEA-0218)",
+    "verification_state": "VERIFIED_DOCUMENT",
+    "data_mode": "PLANT_MEASURED_REPORTED"
+  }
+]

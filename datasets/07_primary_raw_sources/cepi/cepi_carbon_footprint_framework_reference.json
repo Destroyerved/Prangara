@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-CEPI-2020",
+  "agency": "Confederation of European Paper Industries (CEPI)",
+  "dataset": "Framework for Carbon Footprints for Paper and Board Products",
+  "version": "Revision 2020",
+  "official_url": "https://www.cepi.org/wp-content/uploads/2020/10/Framework-for-Carbon-Footprints-for-Paper-and-Board-Products.pdf",
+  "portal_url": "https://www.cepi.org/framework-for-carbon-footprints-for-paper-and-board-products/",
+  "access_method": "methodology_document",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-11T20:42:51.475Z",
+  "notes": "Virgin Kraft Paper: 1.25 tCO2e/t. 100% Recycled Containerboard / Testliner: 0.80 tCO2e/t."
+}

@@ -1,0 +1,8 @@
+fuel,raw_value,raw_unit,norm_value,norm_unit,scope,boundary,status
+"Diesel (average biofuel blend)",2.684,"kgCO2e/litre",2.684,"kgCO2e/litre",1,"direct combustion","VERIFIED_OFFICIAL"
+"Natural Gas (Gross CV)",2.023,"kgCO2e/m3",2.023,"kgCO2e/Sm3",1,"direct combustion","VERIFIED_OFFICIAL"
+"LPG",2.939,"kgCO2e/kg",2.939,"kgCO2e/kg",1,"direct combustion","VERIFIED_OFFICIAL"
+"Heavy Fuel Oil (Residual Oil)",3.178,"kgCO2e/litre",3.178,"kgCO2e/litre",1,"direct combustion","VERIFIED_OFFICIAL"
+"Domestic Industrial Coal (Average)",2.419,"kgCO2e/kg",2.419,"tCO2e/t",1,"direct combustion","VERIFIED_OFFICIAL"
+"Petcoke",3.15,"kgCO2e/kg",3.15,"tCO2e/t",1,"direct combustion","VERIFIED_OFFICIAL"
+"Biomass / Agricultural Bagasse",0.045,"kgCO2e/kg",0.045,"tCO2e/t",1,"combustion biogenic + transport","VERIFIED_OFFICIAL"

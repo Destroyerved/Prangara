@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-TEXTILE-2026",
+  "agency": "Textile Exchange",
+  "dataset": "Global Cotton Life Cycle Assessment",
+  "version": "March 2026",
+  "official_url": "https://textileexchange.org/app/uploads/2026/03/Textile-Exchange-Cotton-LCA-Summary.pdf",
+  "portal_url": "https://textileexchange.org/knowledge-center/reports/cotton-life-cycle-assessment/",
+  "access_method": "technical_report",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-12T01:57:27.350Z",
+  "notes": "Conventional India seed cotton to lint (1.70 tCO2e/t cradle-to-gin-gate) + spinning energy (3.80 tCO2e/t) = 5.50 tCO2e/t yarn. Recycled yarn: 1.80 tCO2e/t."
+}

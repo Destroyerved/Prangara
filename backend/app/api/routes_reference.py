@@ -15,6 +15,7 @@ from typing import Any
 from fastapi import APIRouter
 
 from app.core.errors import NotFound
+from app.services import provenance
 from engine import default_db, intervention_db, reference_versions, sector_db
 
 router = APIRouter(prefix="/api", tags=["reference"])
@@ -59,12 +60,16 @@ def reference() -> dict[str, Any]:
             })
         groups[group] = rows
 
+    active = {key: fdb.band(key).base for key in fdb.list_keys()}
+    units = {key: fdb.get(key)["unit"] for key in fdb.list_keys()}
+
     return {
         "meta": fdb.meta,
         "groups": groups,
         "interventions_meta": intervention_db().meta,
         "intervention_count": len(intervention_db().items),
         "versions": reference_versions(),
+        "provenance": provenance.coverage(active, units),
     }
 
 
@@ -81,6 +86,11 @@ def get_factor(key: str) -> dict[str, Any]:
         **spec,
         "denominator_unit": fdb.denominator_unit(key),
         "versions": reference_versions()["factors"],
+        # PRD section 3.2: a number a user can question must point at the
+        # document it came from, not just a label.
+        "provenance": provenance.for_factor(
+            key, fdb.band(key).base, spec.get("unit")
+        ),
     }
 
 
@@ -96,3 +106,25 @@ def list_interventions(sector: str | None = None) -> dict[str, Any]:
         "meta": intervention_db().meta,
         "versions": reference_versions()["interventions"],
     }
+
+
+@router.get("/reference/provenance")
+def factor_provenance() -> dict[str, Any]:
+    """Where every active emission factor came from, and where sources disagree.
+
+    Backs the methodology view and the "why should I believe this number"
+    question. Disagreements between the engine's registry and the verified
+    source set are reported here rather than resolved silently - which value is
+    right is a reference-data decision owned by BE-2, and changing one would
+    change the basis of assessments factories have already been shown.
+    """
+    fdb = default_db()
+    active = {key: fdb.band(key).base for key in fdb.list_keys()}
+    units = {key: fdb.get(key)["unit"] for key in fdb.list_keys()}
+
+    summary = provenance.coverage(active, units)
+    summary["factors"] = {
+        key: provenance.for_factor(key, value, units.get(key))
+        for key, value in active.items()
+    }
+    return summary

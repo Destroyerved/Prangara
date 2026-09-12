@@ -1,0 +1,6 @@
+mode,vehicle_class,fuel,boundary,factor_value,unit,load_factor,geography,source_id,status
+"road","Rigid Truck (>20t)","diesel","WTW",0.098,"kgCO2e/t-km","75%","India","SRC-GLEC-INDIA-2024","VERIFIED_OFFICIAL"
+"road","Articulated Heavy (>32t)","diesel","WTW",0.062,"kgCO2e/t-km","80%","India","SRC-GLEC-INDIA-2024","VERIFIED_OFFICIAL"
+"road","Electric Heavy Commercial (55t)","grid_electricity","WTW",0.048,"kgCO2e/t-km","80%","India","SRC-GLEC-INDIA-2024","DERIVED_TRANSPARENT"
+"rail","Electric Container Freight","overhead_catenary","WTW",0.018,"kgCO2e/t-km","90%","India","SRC-GLEC-INDIA-2024","VERIFIED_OFFICIAL"
+"water","Inland Waterways Barge","marine_diesel","WTW",0.024,"kgCO2e/t-km","85%","India","SRC-GLEC-INDIA-2024","VERIFIED_OFFICIAL"

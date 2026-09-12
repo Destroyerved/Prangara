@@ -1,0 +1,72 @@
+[
+  {
+    "transport_factor_id": "TF-001",
+    "mode": "road",
+    "vehicle_class": "Rigid Truck (>20t)",
+    "fuel": "diesel",
+    "factor_value": 0.098,
+    "unit": "kgCO2e/t-km",
+    "boundary": "WTW",
+    "load_factor": "75%",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "source_record": "GLEC Framework India Addendum Table 1.4",
+    "verification_status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "transport_factor_id": "TF-002",
+    "mode": "road",
+    "vehicle_class": "Articulated Heavy (>32t)",
+    "fuel": "diesel",
+    "factor_value": 0.062,
+    "unit": "kgCO2e/t-km",
+    "boundary": "WTW",
+    "load_factor": "80%",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "source_record": "GLEC Framework India Addendum Table 1.4",
+    "verification_status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "transport_factor_id": "TF-003",
+    "mode": "road",
+    "vehicle_class": "Electric Heavy Commercial (55t)",
+    "fuel": "grid_electricity",
+    "factor_value": 0.048,
+    "unit": "kgCO2e/t-km",
+    "boundary": "WTW",
+    "load_factor": "80%",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "source_record": "GLEC Framework India Addendum Table 1.4",
+    "verification_status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "transport_factor_id": "TF-004",
+    "mode": "rail",
+    "vehicle_class": "Electric Container Freight",
+    "fuel": "overhead_catenary",
+    "factor_value": 0.018,
+    "unit": "kgCO2e/t-km",
+    "boundary": "WTW",
+    "load_factor": "90%",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "source_record": "GLEC Framework India Addendum Table 1.4",
+    "verification_status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "transport_factor_id": "TF-005",
+    "mode": "water",
+    "vehicle_class": "Inland Waterways Barge",
+    "fuel": "marine_diesel",
+    "factor_value": 0.024,
+    "unit": "kgCO2e/t-km",
+    "boundary": "WTW",
+    "load_factor": "85%",
+    "geography": "India",
+    "source_id": "SRC-GLEC-INDIA-2024",
+    "source_record": "GLEC Framework India Addendum Table 1.4",
+    "verification_status": "VERIFIED_OFFICIAL"
+  }
+]

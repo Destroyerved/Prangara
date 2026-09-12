@@ -8,35 +8,29 @@ __pycache__/
 venv/
 env/
 
-# Local development database — contains test accounts and seeded demo plants.
-# The schema lives in prototype/backend/db.py and is created on first run.
+# Local development databases. Schemas are created by migrations or on first
+# run; these files hold test accounts and seeded demo plants.
 prototype/backend/chakra.db
 prototype/backend/chakra.db-wal
 prototype/backend/chakra.db-shm
+backend/prangara.db
+backend/prangara.db-wal
+backend/prangara.db-shm
+prangara.db*
 *.db-journal
+
+# Runtime state: uploaded evidence, generated artefacts.
+var/
+
+# Secrets. `.env.example` is committed; `.env` never is.
+.env
+.env.local
 
 # Build intermediates. The generated PDFs ARE committed, since they are the
 # deliverable a teammate or judge wants without running the build.
 build/*.html
 
-# Editors / OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-desktop.ini
-*.swp
-
-# PRANGARA platform
-backend/prangara.db
-backend/prangara.db-wal
-backend/prangara.db-shm
-prangara.db*
-var/
-.env
-.env.local
-
-# Node / Expo (apps/mobile, apps/web)
+# Node / Expo
 node_modules/
 .expo/
 dist/
@@ -45,6 +39,21 @@ dist/
 # Expo prebuild output. The managed workflow regenerates these.
 apps/mobile/android/
 apps/mobile/ios/
-
-# Expo export output (bundle verification only)
+# Expo export output, produced only to verify the bundle builds.
 apps/mobile/.expo-export/
+
+# Internal task and sprint notes, and the competition problem statements.
+task.md
+build_report.py
+HackOut26_Problem_Statements.pdf
+*Problem_Statements*
+README_ARCHIVE.md
+*.bak
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp

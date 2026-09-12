@@ -1,0 +1,12 @@
+material_id,material_name,material_category,route,recycled_content_pct,emission_factor_tco2e_per_t,uncertainty_low,uncertainty_high,system_boundary,geography,source_id,confidence_rating
+undefined,undefined,material,primary,0,2.19,,,cradle-to-gate,Global / India,SRC-WORLDSTEEL-2025,HIGH
+undefined,undefined,material,primary,0,1.98,,,cradle-to-gate,India,SRC-WORLDSTEEL-2025,HIGH
+undefined,undefined,material,primary,0,0.45,,,cradle-to-gate,India,SRC-WORLDSTEEL-2025,HIGH
+undefined,undefined,material,primary,0,16.8,,,cradle-to-gate,India,SRC-IAI-2024,HIGH
+undefined,undefined,material,primary,0,0.62,,,cradle-to-gate,India / Global,SRC-IAI-2024,HIGH
+undefined,undefined,material,primary,0,1.43,,,cradle-to-gin gate,India,SRC-TEXTILE-2026,HIGH
+undefined,undefined,material,primary,0,3.85,,,cradle-to-yarn gate,India,SRC-TEXTILE-2026,HIGH
+undefined,undefined,material,primary,0,2.15,,,cradle-to-gate,Europe / Proxy,SRC-PLASTICSEUROPE-2024,HIGH
+undefined,undefined,material,primary,0,0.52,,,cradle-to-gate,India,SRC-PLASTICSEUROPE-2024,HIGH
+undefined,undefined,material,primary,0,0.83,,,cradle-to-gate,India,SRC-GCCA-2023,HIGH
+undefined,undefined,material,primary,0,0.56,,,cradle-to-gate,India,SRC-GCCA-2023,HIGH

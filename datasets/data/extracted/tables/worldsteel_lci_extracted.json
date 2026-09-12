@@ -1,0 +1,72 @@
+[
+  {
+    "product": "Hot Rolled Coil (HRC)",
+    "route": "BF-BOF",
+    "geography": "Global / India Proxy",
+    "value": 2.19,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Cold Rolled Coil (CRC)",
+    "route": "BF-BOF",
+    "geography": "Global / India Proxy",
+    "value": 2.38,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Heavy Steel Plate",
+    "route": "BF-BOF",
+    "geography": "Global / India Proxy",
+    "value": 2.25,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Steel Rebar (BF-BOF)",
+    "route": "BF-BOF",
+    "geography": "India Average",
+    "value": 1.98,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Steel Rebar (Scrap-EAF / Circular)",
+    "route": "Scrap-EAF",
+    "geography": "India Average",
+    "value": 0.45,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Hot-Dip Galvanized Sheet",
+    "route": "BF-BOF + Zinc Coating",
+    "geography": "Global",
+    "value": 2.45,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  },
+  {
+    "product": "Structural Steel Sections",
+    "route": "BF-BOF",
+    "geography": "India Average",
+    "value": 2.05,
+    "unit": "tCO2e/t",
+    "boundary": "cradle-to-gate",
+    "data_year": 2025,
+    "status": "VERIFIED_INDUSTRY_LCI"
+  }
+]

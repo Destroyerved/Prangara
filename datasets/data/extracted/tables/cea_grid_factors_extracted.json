@@ -1,0 +1,42 @@
+[
+  {
+    "metric": "Weighted Average Grid Factor (incl. RES)",
+    "raw_value": 0.716,
+    "raw_unit": "tCO2/MWh",
+    "norm_value": 0.716,
+    "norm_unit": "tCO2e/MWh",
+    "scope": 2,
+    "status": "VERIFIED_OFFICIAL",
+    "record": "Table 1 User Guide v21"
+  },
+  {
+    "metric": "Operating Margin (OM)",
+    "raw_value": 0.892,
+    "raw_unit": "tCO2/MWh",
+    "norm_value": 0.892,
+    "norm_unit": "tCO2e/MWh",
+    "scope": 2,
+    "status": "VERIFIED_OFFICIAL",
+    "record": "Table 2 Database v22"
+  },
+  {
+    "metric": "Build Margin (BM)",
+    "raw_value": 0.54,
+    "raw_unit": "tCO2/MWh",
+    "norm_value": 0.54,
+    "norm_unit": "tCO2e/MWh",
+    "scope": 2,
+    "status": "VERIFIED_OFFICIAL",
+    "record": "Table 2 Database v22"
+  },
+  {
+    "metric": "Combined Margin (CM 50/50)",
+    "raw_value": 0.716,
+    "raw_unit": "tCO2/MWh",
+    "norm_value": 0.716,
+    "norm_unit": "tCO2e/MWh",
+    "scope": 2,
+    "status": "VERIFIED_OFFICIAL",
+    "record": "Table 2 Database v22"
+  }
+]

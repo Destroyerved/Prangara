@@ -1,0 +1,11 @@
+benchmark_id,sector_name,cluster_name,state,sec_thermal_gj_per_t_low,sec_thermal_gj_per_t_typical,sec_thermal_gj_per_t_high,sec_elec_kwh_per_t_low,sec_elec_kwh_per_t_typical,sec_elec_kwh_per_t_high,source_id,authenticity_status
+secondary_steel_re_rolling,Secondary Steel Re-Rolling,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+aluminium_die_casting___extrusion,Aluminium Die-Casting & Extrusion,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+textile_dyeing___finishing,Textile Dyeing & Finishing,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+specialty_chemicals___dyes_intermediates,Specialty Chemicals & Dyes Intermediates,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+ceramics___vitrified_tiles,Ceramics & Vitrified Tiles,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+foundry___casting_units,Foundry & Casting Units,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+standalone_cement_grinding_units,Standalone Cement Grinding Units,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+recycled_paper___kraft_packaging,Recycled Paper & Kraft Packaging,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+plastics_injection_molding___extrusion,Plastics Injection Molding & Extrusion,Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING
+grain_milling__oil_extraction___food_processing,"Grain Milling, Oil Extraction & Food Processing",Multi-Cluster Composite,National,0,0,0,0,0,0,SRC-BEE-MSME-2024,VERIFIED_OFFICIAL_SCREENING

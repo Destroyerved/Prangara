@@ -1,0 +1,28 @@
+[
+  {
+    "route_id": "RT-MORBI-MUNDRA-01",
+    "origin": "Morbi Tiles Cluster (22.8120° N, 70.8378° E)",
+    "destination": "Mundra Port Container Terminal (22.7500° N, 69.7000° E)",
+    "distance_km": 148.5,
+    "cargo_tonnes": 28,
+    "road_diesel_emissions_tco2e": 0.4075,
+    "electric_truck_emissions_tco2e": 0.1996,
+    "rail_intermodal_emissions_tco2e": 0.0748,
+    "avoided_emissions_tco2e": 0.3326,
+    "formula": "Distance_km * Tonnes * Factor_kgCO2e_tkm / 1000",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "route_id": "RT-ANKLESHWAR-JNPT-02",
+    "origin": "Ankleshwar GIDC Chemicals (21.6264° N, 73.0152° E)",
+    "destination": "JNPT Port Navi Mumbai (18.9500° N, 72.9500° E)",
+    "distance_km": 362,
+    "cargo_tonnes": 20,
+    "road_diesel_emissions_tco2e": 0.7095,
+    "electric_truck_emissions_tco2e": 0.3475,
+    "rail_intermodal_emissions_tco2e": 0.1303,
+    "avoided_emissions_tco2e": 0.5792,
+    "formula": "Distance_km * Tonnes * Factor_kgCO2e_tkm / 1000",
+    "status": "DERIVED_TRANSPARENT"
+  }
+]

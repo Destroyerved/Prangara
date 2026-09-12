@@ -1,0 +1,7 @@
+state,baseline_grid_tco2e_mwh,thermal_pct,renewable_pct,source,status
+"Gujarat",0.724,64.2,35.8,"Derived from CEA v22 Generation Mix Table","DERIVED_TRANSPARENT"
+"Maharashtra",0.782,74,26,"Derived from CEA v22 Generation Mix Table","DERIVED_TRANSPARENT"
+"Tamil Nadu",0.654,54.5,45.5,"Derived from CEA v22 Generation Mix Table","DERIVED_TRANSPARENT"
+"Karnataka",0.582,46,54,"Derived from CEA v22 Generation Mix Table","DERIVED_TRANSPARENT"
+"Uttar Pradesh",0.812,82.1,17.9,"Derived from CEA v22 Generation Mix Table","DERIVED_TRANSPARENT"
+"Rajasthan",0.738,65,35,"Derived from CEA v22 Generation Mix Table","DERIVED_TRANSPARENT"

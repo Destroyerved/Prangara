@@ -1,0 +1,26 @@
+[
+  {
+    "vehicle_id": "TRK-GJ-01-AB-1234",
+    "fleet_operator": "GreenFreight Electric Logistics Ltd",
+    "vehicle_class": "Electric Heavy Commercial (55t)",
+    "fuel_type": "Battery Electric (282 kWh)",
+    "payload_capacity_t": 35,
+    "current_location": "Ahmedabad, Gujarat",
+    "route_capability": "Ahmedabad - Vadodara - Surat Corridor",
+    "well_to_wheel_factor_kgco2e_per_tkm": 0.048,
+    "status": "AVAILABLE",
+    "data_mode": "FIRST_PARTY_OPERATOR_REPORTED"
+  },
+  {
+    "vehicle_id": "TRK-GJ-03-XY-9876",
+    "fleet_operator": "Bhavnagar Industrial Transporters",
+    "vehicle_class": "Rigid Multi-Axle Truck (>20t)",
+    "fuel_type": "Diesel BS-VI",
+    "payload_capacity_t": 22,
+    "current_location": "Bhavnagar, Gujarat",
+    "route_capability": "Gujarat Intra-State",
+    "well_to_wheel_factor_kgco2e_per_tkm": 0.098,
+    "status": "AVAILABLE",
+    "data_mode": "FIRST_PARTY_OPERATOR_REPORTED"
+  }
+]

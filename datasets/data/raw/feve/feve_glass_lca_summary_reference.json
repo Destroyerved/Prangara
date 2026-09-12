@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-FEVE-2020",
+  "agency": "Fédération Européenne du Verre d'Emballage (FEVE)",
+  "dataset": "Life Cycle Assessment of Container Glass",
+  "version": "2020 / 2022",
+  "official_url": "https://feve.org/wp-content/uploads/2020/05/FEVE_LCA_Executive_Summary.pdf",
+  "portal_url": "https://feve.org/glass-industry-positions/life-cycle-assessment/",
+  "access_method": "technical_study",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-12T01:58:00.159Z",
+  "notes": "0% cullet container glass: 1.10 tCO2e/t; EU-average (52% cullet): 0.70 tCO2e/t; 100% cullet: 0.45 tCO2e/t."
+}

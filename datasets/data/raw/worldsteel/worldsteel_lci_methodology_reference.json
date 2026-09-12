@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-WORLDSTEEL-2026",
+  "agency": "World Steel Association (worldsteel)",
+  "dataset": "worldsteel Life Cycle Inventory (LCI) Data",
+  "version": "2026 Release (2024 Data)",
+  "official_url": "https://worldsteel.org/wp-content/uploads/worldsteel-LCI-study-policy.pdf",
+  "portal_url": "https://worldsteel.org/wider-sustainability/life-cycle-thinking/life-cycle-inventory-data-and-eco-profiles/",
+  "access_method": "industry_epd",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-12T01:57:21.192Z",
+  "notes": "Cradle-to-gate LCI for Hot Rolled Coil (HRC: 2.20 tCO2e/t primary BF-BOF, 0.55 tCO2e/t secondary EAF scrap)."
+}

@@ -1,0 +1,687 @@
+{
+  "metadata": {
+    "schema_version": "2.0",
+    "reporting_period": "2024-2026",
+    "benchmark_basis": "Gate-to-gate Scope 1 + 2 Energy and Carbon Intensity"
+  },
+  "sectors": [
+    {
+      "sector_key": "textile_dyeing",
+      "sector_name": "Textile Dyeing & Finishing",
+      "clusters": [
+        {
+          "name": "Tirupur",
+          "state": "Tamil Nadu",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Surat",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 850,
+          "median": 1200,
+          "high": 1650,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 18,
+          "median": 24.5,
+          "high": 32,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 2.2,
+          "median": 3.1,
+          "high": 4.2,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [
+        "State PCB Zero Liquid Discharge (ZLD) Mandate"
+      ],
+      "demo_profile": {
+        "company_name": "Tirupur Processors Pvt Ltd",
+        "annual_output_t": 3600,
+        "revenue_cr": 42,
+        "electricity_kwh": 4800000,
+        "coal_t": 5200,
+        "diesel_l": 45000,
+        "cotton_yarn_t": 3900,
+        "waste_t": 720,
+        "freight_tkm": 1800000,
+        "state": "Tamil Nadu",
+        "reported_footprint_tco2e": 24069,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "foundry_casting",
+      "sector_name": "Cast Iron & Steel Foundry",
+      "clusters": [
+        {
+          "name": "Coimbatore",
+          "state": "Tamil Nadu",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Rajkot",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Kolhapur",
+          "state": "Maharashtra",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 620,
+          "median": 850,
+          "high": 1100,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 8.5,
+          "median": 12,
+          "high": 16.5,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 1.1,
+          "median": 1.6,
+          "high": 2.3,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [
+        "CPCB Hazardous Waste Authorisation (Used Foundry Sand)",
+        "EU CBAM Annex I Covered Product (Iron & Steel / Aluminium)"
+      ],
+      "demo_profile": {
+        "company_name": "Rajkot Auto Castings",
+        "annual_output_t": 7200,
+        "revenue_cr": 58,
+        "electricity_kwh": 7200000,
+        "coal_t": 3100,
+        "diesel_l": 60000,
+        "steel_t": 7800,
+        "waste_t": 1400,
+        "freight_tkm": 2400000,
+        "state": "Gujarat",
+        "reported_footprint_tco2e": 18786,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "ceramics",
+      "sector_name": "Ceramic Floor & Wall Tiles",
+      "clusters": [
+        {
+          "name": "Morbi",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Kadi",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 140,
+          "median": 190,
+          "high": 260,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 4.8,
+          "median": 6.5,
+          "high": 8.5,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 0.55,
+          "median": 0.72,
+          "high": 0.95,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [],
+      "demo_profile": {
+        "company_name": "Morbi Vitrified Ceramics Ltd",
+        "annual_output_t": 32000,
+        "revenue_cr": 75,
+        "electricity_kwh": 6800000,
+        "natural_gas_sm3": 6500000,
+        "coal_t": 4200,
+        "diesel_l": 35000,
+        "clay_minerals_t": 35000,
+        "waste_t": 2200,
+        "freight_tkm": 5500000,
+        "state": "Gujarat",
+        "reported_footprint_tco2e": 26075,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "food_processing",
+      "sector_name": "Food Processing & Packaged Goods",
+      "clusters": [
+        {
+          "name": "Anand",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Pune",
+          "state": "Maharashtra",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 280,
+          "median": 420,
+          "high": 580,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 3.2,
+          "median": 4.8,
+          "high": 6.8,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 0.45,
+          "median": 0.65,
+          "high": 0.88,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [
+        "CPCB Plastic Waste Management Rules 2016 / EPR Registration"
+      ],
+      "demo_profile": {
+        "company_name": "Western Agro Foods",
+        "annual_output_t": 12000,
+        "revenue_cr": 48,
+        "electricity_kwh": 3800000,
+        "coal_t": 1600,
+        "diesel_l": 40000,
+        "pet_resin_t": 850,
+        "waste_t": 950,
+        "freight_tkm": 1900000,
+        "state": "Maharashtra",
+        "reported_footprint_tco2e": 7623,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "auto_components",
+      "sector_name": "Automotive Precision Machining & Forging",
+      "clusters": [
+        {
+          "name": "Pune",
+          "state": "Maharashtra",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Chennai",
+          "state": "Tamil Nadu",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Gurugram",
+          "state": "Haryana",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 750,
+          "median": 1050,
+          "high": 1450,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 5.5,
+          "median": 8,
+          "high": 11.5,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 1.1,
+          "median": 1.5,
+          "high": 2.1,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [
+        "EU CBAM Annex I Covered Product (Iron & Steel / Aluminium)"
+      ],
+      "demo_profile": {
+        "company_name": "Precision Auto Drives",
+        "annual_output_t": 4500,
+        "revenue_cr": 65,
+        "electricity_kwh": 5200000,
+        "diesel_l": 85000,
+        "steel_t": 5100,
+        "aluminium_t": 600,
+        "waste_t": 480,
+        "freight_tkm": 2100000,
+        "state": "Maharashtra",
+        "reported_footprint_tco2e": 11807,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "pharma_formulation",
+      "sector_name": "Pharmaceutical Formulations",
+      "clusters": [
+        {
+          "name": "Baddi",
+          "state": "Himachal Pradesh",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Ahmedabad",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Hyderabad",
+          "state": "Telangana",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 1200,
+          "median": 1800,
+          "high": 2500,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 8,
+          "median": 12.5,
+          "high": 18,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 1.6,
+          "median": 2.4,
+          "high": 3.4,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [
+        "GMP Pharmacopeia Primary Packaging Constraints (rPET Blocked)"
+      ],
+      "demo_profile": {
+        "company_name": "Auro Healthcare Formulations",
+        "annual_output_t": 1800,
+        "revenue_cr": 55,
+        "electricity_kwh": 3600000,
+        "furnace_oil_kg": 850000,
+        "diesel_l": 30000,
+        "pet_blister_t": 420,
+        "waste_t": 310,
+        "freight_tkm": 1200000,
+        "state": "Gujarat",
+        "reported_footprint_tco2e": 7127,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "plastic_moulding",
+      "sector_name": "Polymer Injection & Blow Moulding",
+      "clusters": [
+        {
+          "name": "Daman",
+          "state": "DNH & Daman",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Ahmedabad",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 850,
+          "median": 1150,
+          "high": 1550,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 1,
+          "median": 2,
+          "high": 3.5,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 0.75,
+          "median": 0.98,
+          "high": 1.35,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [
+        "CPCB Plastic Waste Management Rules 2016 / EPR Registration"
+      ],
+      "demo_profile": {
+        "company_name": "Daman Polymers Ltd",
+        "annual_output_t": 3800,
+        "revenue_cr": 34,
+        "electricity_kwh": 4600000,
+        "diesel_l": 25000,
+        "pet_virgin_t": 3950,
+        "waste_t": 280,
+        "freight_tkm": 1400000,
+        "state": "Gujarat",
+        "reported_footprint_tco2e": 8053,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "paper_packaging",
+      "sector_name": "Kraft Paper & Corrugated Packaging",
+      "clusters": [
+        {
+          "name": "Vapi",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Muzaffarnagar",
+          "state": "Uttar Pradesh",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 450,
+          "median": 620,
+          "high": 850,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 12,
+          "median": 16.5,
+          "high": 22,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 1.4,
+          "median": 1.9,
+          "high": 2.7,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [],
+      "demo_profile": {
+        "company_name": "Vapi Paper Mills",
+        "annual_output_t": 8500,
+        "revenue_cr": 46,
+        "electricity_kwh": 5500000,
+        "coal_t": 3600,
+        "diesel_l": 30000,
+        "waste_paper_t": 9200,
+        "waste_t": 1250,
+        "freight_tkm": 2600000,
+        "state": "Gujarat",
+        "reported_footprint_tco2e": 13960,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "fabrication",
+      "sector_name": "Structural & Heavy Fabrication",
+      "clusters": [
+        {
+          "name": "Faridabad",
+          "state": "Haryana",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Peenya",
+          "state": "Karnataka",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 350,
+          "median": 520,
+          "high": 750,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 2.5,
+          "median": 4,
+          "high": 6,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 0.55,
+          "median": 0.78,
+          "high": 1.1,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [],
+      "demo_profile": {
+        "company_name": "Haryana Heavy Structures",
+        "annual_output_t": 3200,
+        "revenue_cr": 38,
+        "electricity_kwh": 2200000,
+        "diesel_l": 45000,
+        "steel_t": 3400,
+        "waste_t": 320,
+        "freight_tkm": 1700000,
+        "state": "Haryana",
+        "reported_footprint_tco2e": 5169,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    },
+    {
+      "sector_key": "chemicals",
+      "sector_name": "Specialty Chemicals & Intermediates",
+      "clusters": [
+        {
+          "name": "Ankleshwar",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        },
+        {
+          "name": "Dahej",
+          "state": "Gujarat",
+          "source_id": "SRC-BEE-MAPPING"
+        }
+      ],
+      "benchmarks": {
+        "electricity_kwh_per_t": {
+          "type": "reported_range",
+          "low": 650,
+          "median": 950,
+          "high": 1350,
+          "unit": "kWh/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "thermal_gj_per_t": {
+          "type": "reported_range",
+          "low": 9,
+          "median": 13.5,
+          "high": 19,
+          "unit": "GJ/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        },
+        "gate_to_gate_tco2e_per_t": {
+          "type": "reported_range",
+          "low": 1.3,
+          "median": 1.8,
+          "high": 2.6,
+          "unit": "tCO2e/t",
+          "source_id": "SRC-BEE-MAPPING",
+          "status": "VERIFIED_OFFICIAL_SCREENING"
+        }
+      },
+      "legacy_percentiles": {
+        "enabled": false,
+        "reason": "Literature-derived screening percentiles; replaced with BEE reported cluster study ranges (§46)."
+      },
+      "regulatory_flags": [],
+      "demo_profile": {
+        "company_name": "Ankleshwar Organics",
+        "annual_output_t": 2400,
+        "revenue_cr": 52,
+        "electricity_kwh": 2800000,
+        "natural_gas_sm3": 1200000,
+        "furnace_oil_kg": 450000,
+        "diesel_l": 25000,
+        "solvents_t": 1200,
+        "waste_t": 580,
+        "freight_tkm": 1600000,
+        "state": "Gujarat",
+        "reported_footprint_tco2e": 7458,
+        "synthetic": true,
+        "must_not_be_labelled_real_factory": true
+      }
+    }
+  ]
+}

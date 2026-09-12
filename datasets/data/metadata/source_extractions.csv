@@ -1,0 +1,12 @@
+extraction_id,artifact_id,page,table,row,raw_field,raw_value,raw_unit,normalized_field,normalized_value,normalized_unit,conversion_applied,conversion_formula,verification_status
+"EXT-0001","ART-SRC-CEA-V21","Table 1","Grid Baselines",1,"weighted_avg",0.716,"tCO2/MWh","grid_india",0.716,"tCO2e/MWh",false,,"VERIFIED_OFFICIAL"
+"EXT-0002","ART-SRC-DESNZ-2026","Fuels Sheet","Liquid Fuels",14,"Diesel",2.684,"kgCO2e/litre","fuel_diesel",2.684,"kgCO2e/litre",false,,"VERIFIED_OFFICIAL"
+"EXT-0003","ART-SRC-DESNZ-2026","Fuels Sheet","Gaseous Fuels",3,"Natural Gas",2.023,"kgCO2e/m3","fuel_natural_gas",2.023,"kgCO2e/Sm3",false,,"VERIFIED_OFFICIAL"
+"EXT-0004","ART-SRC-IPCC-2019","Vol 2 Ch 2","Table 2.2",1,"Other Bituminous Coal",94600,"kgCO2/TJ","coal_g1_g17_models",2.419,"tCO2e/t",true,"NCV(TJ/kt) * 94.600 / 1000","DERIVED_TRANSPARENT"
+"EXT-0005","ART-SRC-WORLDSTEEL-2025","Eco-profile","Table 4",2,"HRC BF-BOF",2.19,"tCO2e/t","steel_hrc_virgin",2.19,"tCO2e/t",false,,"VERIFIED_OFFICIAL"
+"EXT-0006","ART-SRC-IAI-2024","Benchmark Report","Table 1",1,"Primary Al India",16.8,"tCO2e/t","aluminium_primary_india",16.8,"tCO2e/t",false,,"VERIFIED_OFFICIAL"
+"EXT-0007","ART-SRC-TEXTILE-2026","LCA Summary","Table 2",3,"India Lint Cotton",1.43,"kgCO2e/kg","cotton_lint_india",1.43,"kgCO2e/kg",false,,"VERIFIED_OFFICIAL"
+"EXT-0008","ART-SRC-PLASTICSEUROPE-2024","PET Eco-profile","Table 3.1",1,"Virgin PET",2.15,"kgCO2e/kg","polymer_pet_virgin",2.15,"kgCO2e/kg",false,,"VERIFIED_OFFICIAL"
+"EXT-0009","ART-SRC-GCCA-2023","EPD Tool eBook","Table 2",1,"OPC 53 India",0.83,"tCO2e/t","cement_opc_53",0.83,"tCO2e/t",false,,"VERIFIED_OFFICIAL"
+"EXT-0010","ART-SRC-BEE-MSME-2024","Cluster Study","SEC Table 3.2",1,"Morbi Ceramics",6.4,"GJ/t","sec_thermal_ceramics",6.4,"GJ/t",false,,"VERIFIED_OFFICIAL"
+"EXT-0011","ART-SRC-GLEC-INDIA-2024","Table 1.4","Freight Default WTW",2,"Rigid Truck",0.098,"kgCO2e/t-km","freight_road_rigid",0.098,"kgCO2e/t-km",false,,"VERIFIED_OFFICIAL"

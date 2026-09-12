@@ -1,0 +1,50 @@
+[
+  {
+    "state": "Gujarat",
+    "baseline_grid_tco2e_mwh": 0.724,
+    "thermal_pct": 64.2,
+    "renewable_pct": 35.8,
+    "source": "Derived from CEA v22 Generation Mix Table",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "state": "Maharashtra",
+    "baseline_grid_tco2e_mwh": 0.782,
+    "thermal_pct": 74,
+    "renewable_pct": 26,
+    "source": "Derived from CEA v22 Generation Mix Table",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "state": "Tamil Nadu",
+    "baseline_grid_tco2e_mwh": 0.654,
+    "thermal_pct": 54.5,
+    "renewable_pct": 45.5,
+    "source": "Derived from CEA v22 Generation Mix Table",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "state": "Karnataka",
+    "baseline_grid_tco2e_mwh": 0.582,
+    "thermal_pct": 46,
+    "renewable_pct": 54,
+    "source": "Derived from CEA v22 Generation Mix Table",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "baseline_grid_tco2e_mwh": 0.812,
+    "thermal_pct": 82.1,
+    "renewable_pct": 17.9,
+    "source": "Derived from CEA v22 Generation Mix Table",
+    "status": "DERIVED_TRANSPARENT"
+  },
+  {
+    "state": "Rajasthan",
+    "baseline_grid_tco2e_mwh": 0.738,
+    "thermal_pct": 65,
+    "renewable_pct": 35,
+    "source": "Derived from CEA v22 Generation Mix Table",
+    "status": "DERIVED_TRANSPARENT"
+  }
+]

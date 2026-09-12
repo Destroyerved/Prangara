@@ -1,0 +1,12 @@
+{
+  "source_id": "SRC-IAI-2022",
+  "agency": "International Aluminium Institute (IAI)",
+  "dataset": "Life Cycle Inventory (LCI) Data and Environmental Metrics",
+  "version": "2022 / 2024 Update",
+  "official_url": "https://international-aluminium.org/wp-content/uploads/2021/04/IAI-Energy-Benchmark-Report.pdf",
+  "portal_url": "https://international-aluminium.org/resources/2019-life-cycle-inventory-lci-data-and-environmental-metrics/",
+  "access_method": "industry_report",
+  "authority_class": "INDUSTRY_LCI",
+  "retrieved_at": "2026-09-12T01:57:24.466Z",
+  "notes": "Primary aluminium ingot: 13.0 tCO2e/t (cradle-to-gate); Secondary recycled ingot: 0.60 tCO2e/t (gate-to-gate remelting). 95% saving."
+}

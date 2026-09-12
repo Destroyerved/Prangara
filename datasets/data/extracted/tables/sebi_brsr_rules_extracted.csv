@@ -1,0 +1,5 @@
+metric_id,category,metric,applicability,assurance_type,source_circular,status
+"BRSR-CORE-E1","Greenhouse Gas Emissions","Scope 1 Emissions (tCO2e)","Top 250 Listed Companies & Value Chain Partners","Reasonable Assurance","SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122","VERIFIED_REGULATOR"
+"BRSR-CORE-E2","Greenhouse Gas Emissions","Scope 2 Emissions (Location-based tCO2e)","Top 250 Listed Companies & Value Chain Partners","Reasonable Assurance","SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122","VERIFIED_REGULATOR"
+"BRSR-CORE-E3","Energy Intensity","Total Energy Intensity per Rupee of Turnover","Top 250 Listed Companies","Reasonable Assurance","SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122","VERIFIED_REGULATOR"
+"BRSR-CORE-E4","Waste & Circularity","Waste Diverted from Disposal (Recycled/Reused %)","Top 250 Listed Companies & Value Chain Partners","Reasonable Assurance","SEBI/HO/CFD/CFD-SEC-2/P/CIR/2023/122","VERIFIED_REGULATOR"

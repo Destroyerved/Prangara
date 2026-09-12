@@ -13254,6 +13254,30 @@
         ]
       }
     },
+    "/api/reference/provenance": {
+      "get": {
+        "description": "Where every active emission factor came from, and where sources disagree.\n\nBacks the methodology view and the \"why should I believe this number\"\nquestion. Disagreements between the engine's registry and the verified\nsource set are reported here rather than resolved silently - which value is\nright is a reference-data decision owned by BE-2, and changing one would\nchange the basis of assessments factories have already been shown.",
+        "operationId": "factor_provenance_api_reference_provenance_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Factor Provenance Api Reference Provenance Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Factor Provenance",
+        "tags": [
+          "reference"
+        ]
+      }
+    },
     "/api/rfqs": {
       "get": {
         "description": "A manufacturer's own RFQs, or - for a provider - the ones it was invited to.",

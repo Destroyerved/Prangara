@@ -1,0 +1,5 @@
+company_name,empanelment_no,grade,state,sectors,valid_until,status
+"Energy Efficiency Services Limited (EESL)","BEE-ESCO-G1-001","Grade 1","National / Delhi","Motors, HVAC, Boilers, Street Lighting","2028-12-31","VERIFIED_GOVERNMENT"
+"Schneider Electric India ESCO Division","BEE-ESCO-G1-014","Grade 1","National / Karnataka","VFDs, Industrial Automation, Waste Heat Recovery","2027-08-31","VERIFIED_GOVERNMENT"
+"Thermax Onsite Energy Solutions Ltd","BEE-ESCO-G1-007","Grade 1","Maharashtra","Biomass Boilers, Waste Heat to Power, Absorption Chillers","2028-03-31","VERIFIED_GOVERNMENT"
+"Forbes Marshall Energy Conservation Services","BEE-ESCO-G1-022","Grade 1","Maharashtra / Gujarat","Steam Trapping, Condensate Recovery, Boiler Tuning","2027-11-30","VERIFIED_GOVERNMENT"

@@ -1,0 +1,26 @@
+[
+  {
+    "agency_name": "TUV SUD South Asia Pvt Ltd",
+    "accreditation_id": "CCTS-VVB-003",
+    "mechanism": "CCTS & PAT Scheme",
+    "accredited_sectors": "Iron & Steel, Cement, Pulp & Paper, Fertilizer",
+    "validity": "2027-10-31",
+    "status": "VERIFIED_REGULATOR"
+  },
+  {
+    "agency_name": "BSI Group India",
+    "accreditation_id": "CCTS-VVB-008",
+    "mechanism": "CCTS & BRSR Core Assurance",
+    "accredited_sectors": "Chemicals, Textile, Aluminium, Refinery",
+    "validity": "2026-12-31",
+    "status": "VERIFIED_REGULATOR"
+  },
+  {
+    "agency_name": "KPMG Assurance and Consulting Services LLP",
+    "accreditation_id": "CCTS-VVB-012",
+    "mechanism": "CCTS / Carbon Market Verification",
+    "accredited_sectors": "Thermal Power, Iron & Steel, Commercial Buildings",
+    "validity": "2028-03-31",
+    "status": "VERIFIED_REGULATOR"
+  }
+]

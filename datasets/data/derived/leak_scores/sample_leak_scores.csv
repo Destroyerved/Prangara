@@ -1,0 +1,3 @@
+leak_id,facility,leak_point,severity,annual_energy_lost_gj,annual_carbon_leak_tco2e,monetary_loss_inr,recommended_intervention_id,score_1_to_100,formula,status
+"LEAK-01","Morbi Tiles Plant #12","Roller Kiln Flue Gas Heat Dissipation","CRITICAL",38400,2112,15360000,"INT-01",92.4,"Calculated from Kiln exhaust temp (260°C) vs ambient (35°C) and mass flow rate","DERIVED_TRANSPARENT"
+"LEAK-02","Rajkot Foundry Unit #05","Sub-optimal IE1 Cupola Induction Motors","HIGH",4800,264,2880000,"INT-02",84,"Calculated from IE1 full load efficiency (79.7%) vs IE4 (89.5%) across 6000 running hours","DERIVED_TRANSPARENT"

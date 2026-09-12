@@ -1,0 +1,8 @@
+coal_grade,gross_cv_band_kcal_per_kg,ncv_gj_per_tonne,calculated_emission_factor_tco2_per_t,reference_source,oxidation_factor
+"G1","6701-7000",26.5,2.457,"SRC-IPCC-2019",0.98
+"G4","5801-6100",23.2,2.151,"SRC-IPCC-2019",0.98
+"G7","4901-5200",19.8,1.836,"SRC-IPCC-2019",0.98
+"G9","4301-4600",17.5,1.622,"SRC-IPCC-2019",0.98
+"G11","3701-4000",15.9,1.474,"SRC-IPCC-2019",0.98
+"G13","3101-3400",13.5,1.251,"SRC-IPCC-2019",0.98
+"G17","2201-2500",9.8,0.908,"SRC-IPCC-2019",0.98

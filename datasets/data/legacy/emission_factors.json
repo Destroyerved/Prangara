@@ -1,0 +1,430 @@
+{
+  "metadata": {
+    "description": "Legacy Chakra Reference Emission Factors as described in ChakraReport.pdf",
+    "version": "1.0-legacy",
+    "source_type": "literature_screening"
+  },
+  "factors": {
+    "grid_india": {
+      "value": 0.716,
+      "low": 0.68,
+      "high": 0.76,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "CEA CO2 Baseline Database (unverified vintage)",
+      "notes": "National average operating margin/weighted grid factor"
+    },
+    "grid_state_gj": {
+      "value": 0.72,
+      "low": 0.69,
+      "high": 0.75,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Gujarat"
+    },
+    "grid_state_mh": {
+      "value": 0.74,
+      "low": 0.7,
+      "high": 0.78,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Maharashtra"
+    },
+    "grid_state_tn": {
+      "value": 0.7,
+      "low": 0.66,
+      "high": 0.74,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Tamil Nadu"
+    },
+    "grid_state_ka": {
+      "value": 0.62,
+      "low": 0.58,
+      "high": 0.66,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Karnataka"
+    },
+    "grid_state_dl": {
+      "value": 0.71,
+      "low": 0.67,
+      "high": 0.75,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Delhi"
+    },
+    "grid_state_wb": {
+      "value": 0.88,
+      "low": 0.84,
+      "high": 0.92,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "West Bengal"
+    },
+    "grid_state_kl": {
+      "value": 0.48,
+      "low": 0.44,
+      "high": 0.52,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Kerala"
+    },
+    "grid_state_ap": {
+      "value": 0.73,
+      "low": 0.69,
+      "high": 0.77,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Andhra Pradesh"
+    },
+    "grid_state_ts": {
+      "value": 0.75,
+      "low": 0.71,
+      "high": 0.79,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Telangana"
+    },
+    "grid_state_up": {
+      "value": 0.76,
+      "low": 0.72,
+      "high": 0.8,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Uttar Pradesh"
+    },
+    "grid_state_rj": {
+      "value": 0.73,
+      "low": 0.69,
+      "high": 0.77,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Rajasthan"
+    },
+    "grid_state_pb": {
+      "value": 0.71,
+      "low": 0.67,
+      "high": 0.75,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Punjab"
+    },
+    "grid_state_hr": {
+      "value": 0.72,
+      "low": 0.68,
+      "high": 0.76,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Haryana"
+    },
+    "grid_state_or": {
+      "value": 0.82,
+      "low": 0.78,
+      "high": 0.86,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Odisha"
+    },
+    "grid_state_ch": {
+      "value": 0.8,
+      "low": 0.76,
+      "high": 0.84,
+      "unit": "tCO2e/MWh",
+      "scope": 2,
+      "group": "electricity",
+      "source": "Derived from CEA regional mixes",
+      "state": "Chhattisgarh"
+    },
+    "fuel_diesel": {
+      "value": 2.68,
+      "low": 2.6,
+      "high": 2.75,
+      "unit": "kgCO2e/litre",
+      "scope": 1,
+      "group": "fuels",
+      "source": "DEFRA stationary combustion"
+    },
+    "fuel_natural_gas": {
+      "value": 2.02,
+      "low": 1.92,
+      "high": 2.12,
+      "unit": "kgCO2e/Sm3",
+      "scope": 1,
+      "group": "fuels",
+      "source": "DEFRA gross CV"
+    },
+    "fuel_lpg": {
+      "value": 2.94,
+      "low": 2.88,
+      "high": 3,
+      "unit": "kgCO2e/kg",
+      "scope": 1,
+      "group": "fuels",
+      "source": "DEFRA"
+    },
+    "fuel_furnace_oil": {
+      "value": 3.15,
+      "low": 3.05,
+      "high": 3.25,
+      "unit": "kgCO2e/kg",
+      "scope": 1,
+      "group": "fuels",
+      "source": "IPCC 2006 Vol.2 residual fuel oil"
+    },
+    "fuel_indian_coal": {
+      "value": 1.7,
+      "low": 1.45,
+      "high": 2,
+      "unit": "tCO2e/t",
+      "scope": 1,
+      "group": "fuels",
+      "source": "IPCC adjusted for Indian ash/NCV"
+    },
+    "fuel_biomass_briquette": {
+      "value": 0.06,
+      "low": 0.02,
+      "high": 0.12,
+      "unit": "tCO2e/t",
+      "scope": 1,
+      "group": "fuels",
+      "source": "CH4/N2O only (GHG Protocol biogenic exclusion)"
+    },
+    "mat_aluminium_primary": {
+      "value": 13,
+      "low": 12,
+      "high": 14,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "IAI generic / literature"
+    },
+    "mat_aluminium_secondary": {
+      "value": 0.6,
+      "low": 0.5,
+      "high": 0.7,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "IAI generic / literature"
+    },
+    "mat_steel_primary": {
+      "value": 2.2,
+      "low": 1.9,
+      "high": 2.5,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "worldsteel generic / literature"
+    },
+    "mat_steel_secondary": {
+      "value": 0.55,
+      "low": 0.45,
+      "high": 0.65,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "worldsteel generic / literature"
+    },
+    "mat_cotton_yarn_primary": {
+      "value": 5.5,
+      "low": 4.8,
+      "high": 6.2,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature screening"
+    },
+    "mat_cotton_yarn_recycled": {
+      "value": 1.8,
+      "low": 1.4,
+      "high": 2.2,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature screening"
+    },
+    "mat_pet_virgin": {
+      "value": 3,
+      "low": 2.7,
+      "high": 3.3,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "PlasticsEurope / literature"
+    },
+    "mat_pet_recycled": {
+      "value": 1.3,
+      "low": 1.1,
+      "high": 1.5,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature screening"
+    },
+    "mat_cement_opc": {
+      "value": 0.85,
+      "low": 0.8,
+      "high": 0.92,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "GCCA / literature"
+    },
+    "mat_cement_blended": {
+      "value": 0.55,
+      "low": 0.5,
+      "high": 0.62,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "GCCA / literature"
+    },
+    "mat_paper_virgin": {
+      "value": 1.25,
+      "low": 1.1,
+      "high": 1.4,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "CEPI / literature"
+    },
+    "mat_paper_recycled": {
+      "value": 0.8,
+      "low": 0.7,
+      "high": 0.9,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "CEPI / literature"
+    },
+    "mat_glass_virgin": {
+      "value": 1.1,
+      "low": 1,
+      "high": 1.2,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "FEVE / literature"
+    },
+    "mat_glass_recycled": {
+      "value": 0.7,
+      "low": 0.6,
+      "high": 0.8,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "FEVE / literature"
+    },
+    "mat_caustic_soda": {
+      "value": 1.4,
+      "low": 1.25,
+      "high": 1.55,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature"
+    },
+    "mat_packaging_film": {
+      "value": 2.8,
+      "low": 2.5,
+      "high": 3.1,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature"
+    },
+    "mat_foundry_resin": {
+      "value": 3.5,
+      "low": 3.1,
+      "high": 3.9,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature"
+    },
+    "mat_organic_solvent": {
+      "value": 2.1,
+      "low": 1.85,
+      "high": 2.35,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "materials",
+      "source": "literature"
+    },
+    "freight_road": {
+      "value": 0.095,
+      "low": 0.085,
+      "high": 0.11,
+      "unit": "kgCO2e/t-km",
+      "scope": 3,
+      "group": "logistics",
+      "source": "DEFRA road freight average"
+    },
+    "freight_rail": {
+      "value": 0.022,
+      "low": 0.018,
+      "high": 0.028,
+      "unit": "kgCO2e/t-km",
+      "scope": 3,
+      "group": "logistics",
+      "source": "Indian Railways / literature"
+    },
+    "waste_landfill_organic": {
+      "value": 0.58,
+      "low": 0.45,
+      "high": 0.72,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "waste",
+      "source": "IPCC AR6 GWP100 anaerobic decay"
+    },
+    "waste_anaerobic_digestion": {
+      "value": -0.12,
+      "low": -0.2,
+      "high": -0.05,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "waste",
+      "source": "Avoided landfill CH4 and fossil gas displacement"
+    },
+    "waste_hazardous_incineration": {
+      "value": 1.15,
+      "low": 0.95,
+      "high": 1.35,
+      "unit": "tCO2e/t",
+      "scope": 3,
+      "group": "waste",
+      "source": "CPCB / literature"
+    }
+  }
+}
