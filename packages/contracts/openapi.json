@@ -323,6 +323,17 @@
       },
       "ActivityRecordIn": {
         "properties": {
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
           "data_state": {
             "default": "DECLARED",
             "title": "Data State",
@@ -439,6 +450,17 @@
       },
       "ActivityRecordOut": {
         "properties": {
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
           "confirmed_at": {
             "anyOf": [
               {
@@ -592,8 +614,78 @@
         "title": "ActivityRecordOut",
         "type": "object"
       },
+      "AskRequest": {
+        "properties": {
+          "factory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Factory Id"
+          },
+          "question": {
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Question",
+            "type": "string"
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskRequest",
+        "type": "object"
+      },
+      "AskResponse": {
+        "properties": {
+          "answer": {
+            "title": "Answer",
+            "type": "string"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/Citation"
+            },
+            "title": "Citations",
+            "type": "array"
+          },
+          "confidence": {
+            "description": "high | medium | low",
+            "title": "Confidence",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          }
+        },
+        "required": [
+          "answer",
+          "confidence"
+        ],
+        "title": "AskResponse",
+        "type": "object"
+      },
       "AssessmentDetail": {
-        "description": "Summary plus the full engine payload.\n\n`result` is intentionally untyped here. It is the engine's own contract and\nmirroring its 200-odd fields in Pydantic would create a second definition\nthat drifts. The engine's shape is documented in docs/14-API-REFERENCE.md\nand pinned by the engine tests.",
+        "description": "Summary plus the full engine payload.\n\n`result` is intentionally untyped here. It is the engine's own contract and\nmirroring its 200-odd fields in Pydantic would create a second definition\nthat drifts. The engine's shape is pinned by the engine tests and published\nin packages/contracts/openapi.json.",
         "properties": {
           "cash_positive_abatement_tco2e": {
             "anyOf": [
@@ -1503,6 +1595,60 @@
         "title": "AuditEntryOut",
         "type": "object"
       },
+      "BackhaulMatchRequest": {
+        "properties": {
+          "destination_cluster": {
+            "default": "Chennai Port",
+            "title": "Destination Cluster",
+            "type": "string"
+          },
+          "empty_truck_capacity_tonnes": {
+            "default": 16.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Empty Truck Capacity Tonnes",
+            "type": "number"
+          }
+        },
+        "title": "BackhaulMatchRequest",
+        "type": "object"
+      },
+      "BackhaulMatchResponse": {
+        "properties": {
+          "candidate_backhauls": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Candidate Backhauls",
+            "type": "array"
+          },
+          "matched_backhauls_count": {
+            "title": "Matched Backhauls Count",
+            "type": "integer"
+          },
+          "outbound_destination": {
+            "title": "Outbound Destination",
+            "type": "string"
+          },
+          "potential_cost_recovery_inr": {
+            "title": "Potential Cost Recovery Inr",
+            "type": "number"
+          },
+          "truck_capacity_tonnes": {
+            "title": "Truck Capacity Tonnes",
+            "type": "number"
+          }
+        },
+        "required": [
+          "outbound_destination",
+          "truck_capacity_tonnes",
+          "matched_backhauls_count",
+          "candidate_backhauls",
+          "potential_cost_recovery_inr"
+        ],
+        "title": "BackhaulMatchResponse",
+        "type": "object"
+      },
       "Body_document_extract_api_intake_document_extract_post": {
         "properties": {
           "evidence_type": {
@@ -1572,6 +1718,17 @@
       },
       "Body_upload_evidence_api_evidence_post": {
         "properties": {
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
           "description": {
             "anyOf": [
               {
@@ -1668,6 +1825,118 @@
           "file"
         ],
         "title": "Body_upload_evidence_api_evidence_post",
+        "type": "object"
+      },
+      "Citation": {
+        "properties": {
+          "badge": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Badge"
+          },
+          "effective_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Effective Date"
+          },
+          "jurisdiction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jurisdiction"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "publisher": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher"
+          },
+          "section": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section"
+          },
+          "sha256_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256 Hash"
+          },
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          }
+        },
+        "required": [
+          "source_id"
+        ],
+        "title": "Citation",
         "type": "object"
       },
       "CloseCaseRequest": {
@@ -2842,6 +3111,17 @@
       },
       "EvidenceOut": {
         "properties": {
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
           "content_sha256": {
             "title": "Content Sha256",
             "type": "string"
@@ -3028,6 +3308,17 @@
       },
       "EvidenceUpdate": {
         "properties": {
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
           "description": {
             "anyOf": [
               {
@@ -4593,6 +4884,106 @@
         "title": "PlantProfileIn",
         "type": "object"
       },
+      "PoolingMatchRequest": {
+        "properties": {
+          "shipment_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shipment Ids"
+          },
+          "shipments": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shipments"
+          }
+        },
+        "title": "PoolingMatchRequest",
+        "type": "object"
+      },
+      "PoolingMatchResponse": {
+        "properties": {
+          "algorithm": {
+            "title": "Algorithm",
+            "type": "string"
+          },
+          "net_savings": {
+            "additionalProperties": true,
+            "title": "Net Savings",
+            "type": "object"
+          },
+          "pooled_runs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Pooled Runs",
+            "type": "array"
+          },
+          "pooled_summary": {
+            "additionalProperties": true,
+            "title": "Pooled Summary",
+            "type": "object"
+          },
+          "standalone_summary": {
+            "additionalProperties": true,
+            "title": "Standalone Summary",
+            "type": "object"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "total_shipments_evaluated": {
+            "title": "Total Shipments Evaluated",
+            "type": "integer"
+          },
+          "truck_count_reduction_pct": {
+            "title": "Truck Count Reduction Pct",
+            "type": "number"
+          },
+          "trucks_dispatched_after": {
+            "title": "Trucks Dispatched After",
+            "type": "integer"
+          },
+          "trucks_dispatched_before": {
+            "title": "Trucks Dispatched Before",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "status",
+          "algorithm",
+          "total_shipments_evaluated",
+          "trucks_dispatched_before",
+          "trucks_dispatched_after",
+          "truck_count_reduction_pct",
+          "pooled_runs",
+          "standalone_summary",
+          "pooled_summary",
+          "net_savings"
+        ],
+        "title": "PoolingMatchResponse",
+        "type": "object"
+      },
       "ProfileOut": {
         "properties": {
           "annual_output_t": {
@@ -6073,6 +6464,133 @@
         "title": "RegisterRequest",
         "type": "object"
       },
+      "RouteAlternativeOut": {
+        "properties": {
+          "carbon_reduction_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Carbon Reduction Pct"
+          },
+          "cost_inr": {
+            "title": "Cost Inr",
+            "type": "number"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "distance_km": {
+            "title": "Distance Km",
+            "type": "number"
+          },
+          "emissions_kgco2e": {
+            "title": "Emissions Kgco2E",
+            "type": "number"
+          },
+          "preset": {
+            "title": "Preset",
+            "type": "string"
+          },
+          "transit_hours": {
+            "title": "Transit Hours",
+            "type": "number"
+          },
+          "vehicle": {
+            "title": "Vehicle",
+            "type": "string"
+          }
+        },
+        "required": [
+          "preset",
+          "distance_km",
+          "transit_hours",
+          "cost_inr",
+          "emissions_kgco2e",
+          "vehicle",
+          "description"
+        ],
+        "title": "RouteAlternativeOut",
+        "type": "object"
+      },
+      "RoutePlanRequest": {
+        "properties": {
+          "cargo_type": {
+            "default": "General Freight",
+            "title": "Cargo Type",
+            "type": "string"
+          },
+          "destination_gps": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Destination Gps",
+            "type": "array"
+          },
+          "options": {
+            "additionalProperties": true,
+            "title": "Options",
+            "type": "object"
+          },
+          "origin_gps": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Origin Gps",
+            "type": "array"
+          },
+          "payload_tonnes": {
+            "default": 12.0,
+            "minimum": 0.01,
+            "title": "Payload Tonnes",
+            "type": "number"
+          }
+        },
+        "title": "RoutePlanRequest",
+        "type": "object"
+      },
+      "RoutePlanResponse": {
+        "properties": {
+          "destination_gps": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Destination Gps",
+            "type": "array"
+          },
+          "origin_gps": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Origin Gps",
+            "type": "array"
+          },
+          "payload_tonnes": {
+            "title": "Payload Tonnes",
+            "type": "number"
+          },
+          "routes": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RouteAlternativeOut"
+            },
+            "title": "Routes",
+            "type": "object"
+          }
+        },
+        "required": [
+          "origin_gps",
+          "destination_gps",
+          "payload_tonnes",
+          "routes"
+        ],
+        "title": "RoutePlanResponse",
+        "type": "object"
+      },
       "RunAssessmentRequest": {
         "properties": {
           "label": {
@@ -6320,6 +6838,329 @@
         "title": "ScenarioOut",
         "type": "object"
       },
+      "ShipmentCreate": {
+        "properties": {
+          "cargo_type": {
+            "default": "General Freight",
+            "title": "Cargo Type",
+            "type": "string"
+          },
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
+          "dest_lat": {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Dest Lat",
+            "type": "number"
+          },
+          "dest_lon": {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Dest Lon",
+            "type": "number"
+          },
+          "destination_name": {
+            "default": "Destination Hub",
+            "title": "Destination Name",
+            "type": "string"
+          },
+          "earliest_pickup": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earliest Pickup"
+          },
+          "factory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Factory Id"
+          },
+          "latest_delivery": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Delivery"
+          },
+          "origin_lat": {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Origin Lat",
+            "type": "number"
+          },
+          "origin_lon": {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Origin Lon",
+            "type": "number"
+          },
+          "origin_name": {
+            "default": "Origin Facility",
+            "title": "Origin Name",
+            "type": "string"
+          },
+          "payload_tonnes": {
+            "default": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Payload Tonnes",
+            "type": "number"
+          },
+          "selected_route_preset": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selected Route Preset"
+          }
+        },
+        "required": [
+          "origin_lat",
+          "origin_lon",
+          "dest_lat",
+          "dest_lon"
+        ],
+        "title": "ShipmentCreate",
+        "type": "object"
+      },
+      "ShipmentOut": {
+        "properties": {
+          "assigned_vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Vehicle Id"
+          },
+          "cargo_type": {
+            "title": "Cargo Type",
+            "type": "string"
+          },
+          "client_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Ref"
+          },
+          "cost_inr": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Inr"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "dest_lat": {
+            "title": "Dest Lat",
+            "type": "number"
+          },
+          "dest_lon": {
+            "title": "Dest Lon",
+            "type": "number"
+          },
+          "destination_name": {
+            "title": "Destination Name",
+            "type": "string"
+          },
+          "distance_km": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance Km"
+          },
+          "earliest_pickup": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earliest Pickup"
+          },
+          "emissions_kgco2e": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emissions Kgco2E"
+          },
+          "factory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Factory Id"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "latest_delivery": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Delivery"
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id"
+          },
+          "origin_lat": {
+            "title": "Origin Lat",
+            "type": "number"
+          },
+          "origin_lon": {
+            "title": "Origin Lon",
+            "type": "number"
+          },
+          "origin_name": {
+            "title": "Origin Name",
+            "type": "string"
+          },
+          "payload_tonnes": {
+            "title": "Payload Tonnes",
+            "type": "number"
+          },
+          "pooled_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pooled Run Id"
+          },
+          "selected_route_preset": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selected Route Preset"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "tracking_metadata": {
+            "additionalProperties": true,
+            "title": "Tracking Metadata",
+            "type": "object"
+          },
+          "transit_hours": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transit Hours"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "origin_name",
+          "origin_lat",
+          "origin_lon",
+          "destination_name",
+          "dest_lat",
+          "dest_lon",
+          "payload_tonnes",
+          "cargo_type",
+          "status",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ShipmentOut",
+        "type": "object"
+      },
       "SiteCreate": {
         "properties": {
           "address": {
@@ -6494,6 +7335,107 @@
         "title": "SiteOut",
         "type": "object"
       },
+      "SourceDetail": {
+        "properties": {
+          "agency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agency"
+          },
+          "authority_class": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authority Class"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          },
+          "dataset_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dataset Name"
+          },
+          "jurisdiction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jurisdiction"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "source_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Type"
+          }
+        },
+        "required": [
+          "source_id"
+        ],
+        "title": "SourceDetail",
+        "type": "object"
+      },
       "TokenResponse": {
         "properties": {
           "access_token": {
@@ -6617,6 +7559,200 @@
           "type"
         ],
         "title": "ValidationError",
+        "type": "object"
+      },
+      "VehicleCreate": {
+        "properties": {
+          "current_lat": {
+            "anyOf": [
+              {
+                "maximum": 90.0,
+                "minimum": -90.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Lat"
+          },
+          "current_location": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Current Location",
+            "type": "string"
+          },
+          "current_lon": {
+            "anyOf": [
+              {
+                "maximum": 180.0,
+                "minimum": -180.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Lon"
+          },
+          "fleet_operator": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Fleet Operator",
+            "type": "string"
+          },
+          "fuel_type": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Fuel Type",
+            "type": "string"
+          },
+          "payload_capacity_t": {
+            "exclusiveMinimum": 0.0,
+            "title": "Payload Capacity T",
+            "type": "number"
+          },
+          "route_capability": {
+            "default": "",
+            "title": "Route Capability",
+            "type": "string"
+          },
+          "vehicle_class": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Vehicle Class",
+            "type": "string"
+          },
+          "vehicle_id_plate": {
+            "maxLength": 64,
+            "minLength": 3,
+            "title": "Vehicle Id Plate",
+            "type": "string"
+          },
+          "well_to_wheel_factor_kgco2e_per_tkm": {
+            "exclusiveMinimum": 0.0,
+            "title": "Well To Wheel Factor Kgco2E Per Tkm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "vehicle_id_plate",
+          "fleet_operator",
+          "vehicle_class",
+          "fuel_type",
+          "payload_capacity_t",
+          "current_location",
+          "well_to_wheel_factor_kgco2e_per_tkm"
+        ],
+        "title": "VehicleCreate",
+        "type": "object"
+      },
+      "VehicleOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_lat": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Lat"
+          },
+          "current_location": {
+            "title": "Current Location",
+            "type": "string"
+          },
+          "current_lon": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Lon"
+          },
+          "data_mode": {
+            "title": "Data Mode",
+            "type": "string"
+          },
+          "fleet_operator": {
+            "title": "Fleet Operator",
+            "type": "string"
+          },
+          "fuel_type": {
+            "title": "Fuel Type",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "organization_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organization Id"
+          },
+          "payload_capacity_t": {
+            "title": "Payload Capacity T",
+            "type": "number"
+          },
+          "route_capability": {
+            "title": "Route Capability",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          },
+          "vehicle_class": {
+            "title": "Vehicle Class",
+            "type": "string"
+          },
+          "vehicle_id_plate": {
+            "title": "Vehicle Id Plate",
+            "type": "string"
+          },
+          "well_to_wheel_factor_kgco2e_per_tkm": {
+            "title": "Well To Wheel Factor Kgco2E Per Tkm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "vehicle_id_plate",
+          "fleet_operator",
+          "vehicle_class",
+          "fuel_type",
+          "payload_capacity_t",
+          "current_location",
+          "route_capability",
+          "well_to_wheel_factor_kgco2e_per_tkm",
+          "status",
+          "data_mode",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "VehicleOut",
         "type": "object"
       },
       "VerificationPeriodIn": {
@@ -7310,6 +8446,132 @@
         "summary": "Get Assessment",
         "tags": [
           "assessments"
+        ]
+      }
+    },
+    "/api/assessments/{assessment_id}/report": {
+      "get": {
+        "description": "Export the assessment as an audited working paper in HTML or PDF format.",
+        "operationId": "get_assessment_report_api_assessments__assessment_id__report_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "assessment_id",
+            "required": true,
+            "schema": {
+              "title": "Assessment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fmt",
+            "required": false,
+            "schema": {
+              "default": "html",
+              "pattern": "^(html|pdf)$",
+              "title": "Fmt",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Assessment Report",
+        "tags": [
+          "assessments"
+        ]
+      }
+    },
+    "/api/assistant/ask": {
+      "post": {
+        "description": "Query sovereign statutory knowledge base with grounded SHA-256 citations.",
+        "operationId": "ask_assistant_api_assistant_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask Assistant",
+        "tags": [
+          "assistant"
         ]
       }
     },
@@ -11903,6 +13165,266 @@
         ]
       }
     },
+    "/api/logistics/backhaul": {
+      "post": {
+        "description": "Matches returning empty trucks with compatible return loads.",
+        "operationId": "match_backhaul_api_logistics_backhaul_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BackhaulMatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackhaulMatchResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Match Backhaul",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
+    "/api/logistics/pool": {
+      "post": {
+        "description": "Matches LTL shipments within industrial clusters into high-efficiency shared FTL trucks.",
+        "operationId": "match_pooling_api_logistics_pool_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PoolingMatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolingMatchResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Match Pooling",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
+    "/api/logistics/routes": {
+      "post": {
+        "description": "Evaluates 4 multi-objective route presets: FASTEST, CHEAPEST, LOWEST_CARBON, BALANCED.",
+        "operationId": "plan_route_api_logistics_routes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoutePlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutePlanResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Plan Route",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
+    "/api/logistics/vehicles": {
+      "get": {
+        "description": "Lists registered commercial freight vehicles.",
+        "operationId": "list_vehicles_api_logistics_vehicles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleOut"
+                  },
+                  "title": "Response List Vehicles Api Logistics Vehicles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Vehicles",
+        "tags": [
+          "logistics"
+        ]
+      },
+      "post": {
+        "description": "Registers a carrier vehicle in the fleet network.",
+        "operationId": "create_vehicle_api_logistics_vehicles_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Vehicle",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
     "/api/materials": {
       "get": {
         "description": "Raw-material listings. FR-39 ranking modes.\n\nCost and carbon are ranked separately and the balanced mode is a declared\nblend, so the user can always see which axis a listing won on rather than\nbeing handed one opaque score.",
@@ -12548,6 +14070,82 @@
         "summary": "Remove Member",
         "tags": [
           "organization"
+        ]
+      }
+    },
+    "/api/pooling/match": {
+      "post": {
+        "description": "Matches LTL shipments within industrial clusters into high-efficiency shared FTL trucks.",
+        "operationId": "match_pooling_api_pooling_match_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PoolingMatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolingMatchResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Match Pooling",
+        "tags": [
+          "logistics"
         ]
       }
     },
@@ -13670,6 +15268,48 @@
         ]
       }
     },
+    "/api/routes/plan": {
+      "post": {
+        "description": "Evaluates 4 multi-objective route presets: FASTEST, CHEAPEST, LOWEST_CARBON, BALANCED.",
+        "operationId": "plan_route_api_routes_plan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoutePlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutePlanResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Plan Route",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
     "/api/scenarios/{scenario_id}/run": {
       "post": {
         "description": "Apply the scenario's modifications and rerun the same engine.\n\nThe baseline is untouched. The scenario produces its own assessment row with\n`is_baseline = False`, which also keeps scenario runs out of the peer\nbenchmark corpus - a factory's hypothetical must not move its sector.",
@@ -13809,6 +15449,325 @@
         "summary": "Get Sector",
         "tags": [
           "reference"
+        ]
+      }
+    },
+    "/api/shipments": {
+      "get": {
+        "description": "Lists registered shipments.",
+        "operationId": "list_shipments_api_shipments_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "factory_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Factory Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentOut"
+                  },
+                  "title": "Response List Shipments Api Shipments Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Shipments",
+        "tags": [
+          "logistics"
+        ]
+      },
+      "post": {
+        "description": "Registers a consignment for green dispatch and pooling. Supports offline client_ref idempotency.",
+        "operationId": "create_shipment_api_shipments_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipmentCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipmentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Shipment",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
+    "/api/shipments/{shipment_id}": {
+      "get": {
+        "operationId": "get_shipment_api_shipments__shipment_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipment_id",
+            "required": true,
+            "schema": {
+              "title": "Shipment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-organization-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Organization-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipmentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Shipment",
+        "tags": [
+          "logistics"
+        ]
+      }
+    },
+    "/api/sources": {
+      "get": {
+        "description": "List all registered sovereign statutory sources.",
+        "operationId": "list_sources_api_sources_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SourceDetail"
+                  },
+                  "title": "Response List Sources Api Sources Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Sources",
+        "tags": [
+          "assistant"
+        ]
+      }
+    },
+    "/api/sources/{source_id}": {
+      "get": {
+        "description": "Inspect verified source provenance, authority class, and canonical URL.",
+        "operationId": "get_source_api_sources__source_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_id",
+            "required": true,
+            "schema": {
+              "title": "Source Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Source",
+        "tags": [
+          "assistant"
         ]
       }
     },

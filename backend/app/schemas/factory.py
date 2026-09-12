@@ -171,6 +171,7 @@ class ActivityRecordIn(ApiModel):
     extraction_confidence: float | None = Field(default=None, ge=0, le=1)
     unit_cost_inr: float | None = Field(default=None, ge=0)
     notes: str | None = None
+    client_ref: str | None = None
 
     @field_validator("stream_kind")
     @classmethod

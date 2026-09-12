@@ -12,6 +12,7 @@ from app.models.governance import (
 from app.models.identity import (
     FactoryAccess, Membership, Organization, RefreshToken, User,
 )
+from app.models.logistics import Shipment, Vehicle
 from app.models.marketplace import (
     ImplementationJob, MaterialListing, Provider, ProviderService, Quote, RFQ, RFQInvite,
 )
@@ -22,6 +23,6 @@ __all__ = [
     "EvidenceLink", "Factory", "FactoryAccess", "FactoryProfile", "FactorySite",
     "ImplementationJob", "MaterialListing", "Membership", "Notification",
     "Organization", "Provider", "ProviderService", "Quote", "RFQ", "RFQInvite",
-    "RefreshToken", "Scenario", "TimestampMixin", "User", "VerificationPeriod",
-    "VerificationResult", "new_id", "utcnow",
+    "RefreshToken", "Scenario", "Shipment", "TimestampMixin", "User", "Vehicle",
+    "VerificationPeriod", "VerificationResult", "new_id", "utcnow",
 ]

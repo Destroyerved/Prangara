@@ -162,6 +162,7 @@ class ActivityRecord(TimestampMixin, Base):
     confirmed_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
     unit_cost_inr: Mapped[float | None] = mapped_column(Float)
     notes: Mapped[str | None] = mapped_column(Text)
+    client_ref: Mapped[str | None] = mapped_column(String(128), index=True)
 
     profile: Mapped[FactoryProfile] = relationship(back_populates="activity_records")
 

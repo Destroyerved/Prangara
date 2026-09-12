@@ -120,9 +120,9 @@ class ComplianceCase(TimestampMixin, Base):
     __table_args__ = (Index("ix_cases_factory_status", "factory_id", "status"),)
 
     id: Mapped[str] = id_column("cmp")
-    organization_id: Mapped[str] = mapped_column(ForeignKey("organizations.id"), nullable=False)
-    factory_id: Mapped[str] = mapped_column(ForeignKey("factories.id"), nullable=False, index=True)
-    assessment_id: Mapped[str | None] = mapped_column(ForeignKey("assessments.id"))
+    organization_id: Mapped[str] = mapped_column(ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    factory_id: Mapped[str] = mapped_column(ForeignKey("factories.id", ondelete="CASCADE"), nullable=False, index=True)
+    assessment_id: Mapped[str | None] = mapped_column(ForeignKey("assessments.id", ondelete="SET NULL"))
 
     rule_id: Mapped[str] = mapped_column(String(64), nullable=False)
     rule_pack: Mapped[str] = mapped_column(String(48), nullable=False)
@@ -150,7 +150,7 @@ class CorrectiveAction(TimestampMixin, Base):
 
     id: Mapped[str] = id_column("cra")
     case_id: Mapped[str] = mapped_column(
-        ForeignKey("compliance_cases.id"), nullable=False, index=True
+        ForeignKey("compliance_cases.id", ondelete="CASCADE"), nullable=False, index=True
     )
     title: Mapped[str] = mapped_column(String(240), nullable=False)
     description: Mapped[str | None] = mapped_column(Text)

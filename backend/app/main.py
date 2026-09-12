@@ -48,6 +48,8 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
             "DATABASE_URL to PostgreSQL for PostGIS and pgvector features.",
             settings.database_url,
         )
+    from app.services.compliance_evaluator import register_handlers as register_compliance_handlers
+    register_compliance_handlers()
     yield
 
 
@@ -98,9 +100,9 @@ def create_app() -> FastAPI:
         }})
 
     from app.api import (  # noqa: PLC0415 - imported here to avoid a circular import
-        routes_actions, routes_assessments, routes_auth, routes_compliance,
+        routes_actions, routes_assessments, routes_assistant, routes_auth, routes_compliance,
         routes_evidence, routes_factories, routes_health, routes_intake,
-        routes_marketplace, routes_notifications, routes_org, routes_reference,
+        routes_logistics, routes_marketplace, routes_notifications, routes_org, routes_reference,
         routes_sandbox,
     )
 
@@ -108,7 +110,7 @@ def create_app() -> FastAPI:
         routes_health, routes_auth, routes_reference, routes_sandbox,
         routes_org, routes_factories, routes_assessments, routes_intake,
         routes_evidence, routes_marketplace, routes_actions, routes_compliance,
-        routes_notifications,
+        routes_notifications, routes_assistant, routes_logistics,
     ):
         application.include_router(module.router)
 

@@ -368,3 +368,168 @@ def extract_with_llm(message: str, known: dict[str, Any] | None = None,
 def extract(message: str, known: dict[str, Any] | None = None) -> dict[str, Any]:
     """LLM when configured and working, deterministic parser otherwise."""
     return extract_with_llm(message, known) or extract_rule_based(message, known)
+
+
+def extract_document_content(content_bytes: bytes, filename: str,
+                             evidence_type: str = "electricity_bill") -> dict[str, Any]:
+    """Parse document/bill text. Extracts consumption, bill amount, supplier, and activity records."""
+    text = ""
+    try:
+        text = content_bytes.decode("utf-8", errors="ignore")
+    except Exception:
+        text = ""
+
+    if b"%PDF" in content_bytes[:10]:
+        pdf_matches = re.findall(r"\(([^\(\)]{3,100})\)", text)
+        if pdf_matches:
+            text = " ".join(pdf_matches)
+
+    search_corpus = f"{filename}\n{text}"
+    fields: list[dict[str, Any]] = []
+    suggested_records: list[dict[str, Any]] = []
+    warnings: list[str] = []
+
+    # 1. Electricity / DISCOM bill patterns
+    elec_match = re.search(
+        r"(?:billed\s*units|consumption|active\s*energy|total\s*units|units)[\s:]*([0-9,]+(?:\.[0-9]+)?)\s*(?:kwh|units)?",
+        search_corpus, re.I,
+    )
+    if elec_match:
+        val_str = elec_match.group(1).replace(",", "")
+        try:
+            kwh = float(val_str)
+            if kwh > 0:
+                fields.append({
+                    "field": "electricity_kwh",
+                    "value": kwh,
+                    "unit": "kWh",
+                    "confidence": 0.85 if len(text) > 50 else 0.65,
+                    "evidence_text": elec_match.group(0),
+                    "needs_confirmation": True,
+                })
+                suggested_records.append({
+                    "stream_kind": "electricity",
+                    "quantity": kwh,
+                    "unit": "kWh",
+                    "label": f"Billed Electricity ({filename[:30]})",
+                    "data_state": "extracted_unverified",
+                    "source_kind": "document_ocr",
+                    "extraction_confidence": 0.85,
+                })
+        except ValueError:
+            pass
+
+    # 2. Fuel invoice patterns (Diesel, Coal, Gas)
+    fuel_match = re.search(
+        r"(?:diesel|coal|furnace\s*oil|lpg|natural\s*gas)[\s\w:]*?([0-9,]+(?:\.[0-9]+)?)\s*(litres?|l|tonnes?|t|mt|kg|scm)",
+        search_corpus, re.I,
+    )
+    if fuel_match:
+        val_str = fuel_match.group(1).replace(",", "")
+        unit_str = fuel_match.group(2).lower()
+        try:
+            qty = float(val_str)
+            matched_text = fuel_match.group(0).lower()
+            fuel_type = "diesel" if "diesel" in matched_text else ("coal" if "coal" in matched_text else "gas")
+            std_unit = "litre" if "l" in unit_str else "tonne"
+            factor_key = "DIESEL_STATIONARY" if fuel_type == "diesel" else ("COAL_INDIAN" if fuel_type == "coal" else "NATURAL_GAS")
+            fields.append({
+                "field": f"fuel_{fuel_type}",
+                "value": qty,
+                "unit": std_unit,
+                "confidence": 0.80,
+                "evidence_text": fuel_match.group(0),
+                "needs_confirmation": True,
+            })
+            suggested_records.append({
+                "stream_kind": "fuel",
+                "factor_key": factor_key,
+                "quantity": qty,
+                "unit": std_unit,
+                "label": f"Purchased {fuel_type.title()}",
+                "data_state": "extracted_unverified",
+                "source_kind": "document_ocr",
+                "extraction_confidence": 0.80,
+            })
+        except ValueError:
+            pass
+
+    if fields or suggested_records:
+        return {
+            "extractor": "ocr",
+            "extractor_detail": "Heuristic document text stream and field pattern extraction.",
+            "fields": fields,
+            "suggested_activity_records": suggested_records,
+            "warnings": warnings,
+        }
+
+    return {
+        "extractor": "unavailable",
+        "extractor_detail": (
+            "No legible text or recognized utility billing pattern was found in the document. "
+            "The file has been stored as evidence - enter values manually to link them."
+        ),
+        "fields": [],
+        "suggested_activity_records": [],
+        "warnings": ["Manual entry required: document did not contain recognizable billing patterns."],
+    }
+
+
+def extract_equipment_content(content_bytes: bytes, filename: str) -> dict[str, Any]:
+    """Parse nameplate text or metadata for rated power, RPM, voltage."""
+    text = ""
+    try:
+        text = content_bytes.decode("utf-8", errors="ignore")
+    except Exception:
+        text = ""
+
+    search_corpus = f"{filename}\n{text}"
+    fields: list[dict[str, Any]] = []
+
+    # Power rating: e.g. "45 kW", "75 HP", "150 kW", "1.5 MW"
+    power_match = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*(kw|hp|mw)", search_corpus, re.I)
+    if power_match:
+        val = float(power_match.group(1))
+        unit = power_match.group(2).lower()
+        if unit == "hp":
+            kw = round(val * 0.7457, 2)
+        elif unit == "mw":
+            kw = round(val * 1000.0, 2)
+        else:
+            kw = val
+        fields.append({
+            "field": "rated_power_kw",
+            "value": kw,
+            "unit": "kW",
+            "confidence": 0.80,
+            "evidence_text": power_match.group(0),
+            "needs_confirmation": True,
+        })
+
+    # Operating voltage: e.g. "415 V", "440V"
+    volt_match = re.search(r"([0-9]{3,4})\s*v\b", search_corpus, re.I)
+    if volt_match:
+        fields.append({
+            "field": "rated_voltage_v",
+            "value": int(volt_match.group(1)),
+            "unit": "V",
+            "confidence": 0.85,
+            "evidence_text": volt_match.group(0),
+            "needs_confirmation": True,
+        })
+
+    if fields:
+        return {
+            "extractor": "ocr",
+            "extractor_detail": "Nameplate OCR extraction of rated equipment parameters.",
+            "fields": fields,
+        }
+
+    return {
+        "extractor": "unavailable",
+        "extractor_detail": (
+            "Nameplate rated power could not be determined automatically from the image. "
+            "Please enter rated power (kW/HP) manually."
+        ),
+        "fields": [],
+    }

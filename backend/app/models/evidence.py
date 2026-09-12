@@ -81,6 +81,7 @@ class EvidenceDocument(TimestampMixin, Base):
     # what the extractor originally proposed. Owned by BE-2 schemas.
     extraction: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
     extraction_confidence: Mapped[float | None] = mapped_column(Float)
+    client_ref: Mapped[str | None] = mapped_column(String(128), index=True)
 
     deleted_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
 

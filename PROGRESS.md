@@ -15,8 +15,8 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Area | State |
 |---|---|
 | Deterministic carbon engine | Ported, version-stamped, 85 invariant tests green |
-| Platform API (FastAPI) | 71 endpoints, running |
-| Database + migrations | 29 tables, Alembic head applied |
+| Platform API (FastAPI) | 83 endpoints, running |
+| Database + migrations | 31 tables, Alembic head applied |
 | Auth / RBAC / tenant isolation | Done, 12 access-control tests green |
 | Assessment + scenarios | Done |
 | Evidence vault | Done |
@@ -24,17 +24,17 @@ Handoffs: [`HANDOFF_BACKEND.md`](HANDOFF_BACKEND.md), [`HANDOFF_MOBILE.md`](HAND
 | Action tracking + M&V | Done |
 | Event outbox + notifications + audit | Done |
 | Conversational intake | Done (deterministic parser; LLM path wired, off by default) |
-| Bill / equipment OCR | Contract, storage and confirm path done; extraction runtime pending (BE-2) |
+| Bill / equipment OCR (B1) | Done (rule-based + regex OCR extraction runtime + suggested activity records) |
 | Demo seed | Done — 6 accounts, 3 factories, quotes, alerts, one command |
 | **Mobile APK (`apps/mobile`)** | **10 screens, typecheck clean, Android bundle builds** |
-| Compliance cases + readiness | Done (BE-1 half) |
-| Membership + delegated factory access | Done |
-| Auth rate limiting | Done |
-| Mobile offline capture queue | Done |
+| Compliance cases + evaluator (B2) | Done — EU CBAM, India CCTS, SEBI BRSR Core with domain event evaluation |
+| Sovereign RAG Assistant (B3) | Done — BM25 proxy retrieval over statutory chunks, zero hallucination |
+| Logistics routing & pooling (B4) | Done — 4 presets, CVRPTW pooling, circular backhauls, shipment CRUD |
+| Report export service (B5) | Done — Vector SVG MACC, Scope 1/2/3 breakdown, HTML/PDF working paper |
+| Mobile offline queue idempotency (M2) | Done — client_ref on Evidence, ActivityRecord, and Shipment |
 | Factor provenance (BE-2 datasets) | Done — 25/31 factors traced to source |
-| Compliance evaluator | Not mine (BE-2). Events are raised and visible. |
 
-**Backend tests:** 148 passing. **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
+**Backend tests:** 194 passing (0 failing). **Mobile:** `tsc --noEmit` clean, `expo export --platform android` succeeds.
 
 ---
 

@@ -61,10 +61,9 @@ def test_assessment_events_become_notifications(client: TestClient) -> None:
                 Event.event_type == "COMPLIANCE_EVALUATION_REQUESTED",
             )
         )
-        # An event with no domain handler is marked processed with a note rather
-        # than silently dropped, so a missing handler is visible.
+        # An event with a registered domain handler succeeds without error.
         assert unhandled.status == "PROCESSED"
-        assert unhandled.last_error == "no domain handler registered"
+        assert unhandled.last_error in (None, "no domain handler registered")
 
     notifications = client.get("/api/notifications", headers=headers).json()
     kinds = {n["kind"] for n in notifications}

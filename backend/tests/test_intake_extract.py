@@ -102,3 +102,40 @@ def test_nothing_is_invented() -> None:
     assert result["extractor"] == "rule_based"
     assert "annual_output_t" in result["missing_fields"]
     assert result["follow_up_questions"]
+
+
+def test_document_extraction_bill_and_fuel() -> None:
+    from app.services.intake_extract import extract_document_content
+
+    # 1. Electricity bill text
+    elec_doc = b"Paschim Gujarat Vij Company Limited. Billed Units: 45,200 kWh. Amount: Rs 3,84,200."
+    res = extract_document_content(elec_doc, "electricity_bill_aug.pdf", "electricity_bill")
+    assert res["extractor"] == "ocr"
+    fields = {f["field"]: f["value"] for f in res["fields"]}
+    assert fields["electricity_kwh"] == 45_200.0
+    assert len(res["suggested_activity_records"]) == 1
+    assert res["suggested_activity_records"][0]["stream_kind"] == "electricity"
+    assert res["suggested_activity_records"][0]["quantity"] == 45_200.0
+    assert res["suggested_activity_records"][0]["data_state"] == "extracted_unverified"
+
+    # 2. Fuel delivery invoice
+    fuel_doc = b"Indian Oil Commercial Delivery Invoice. High Speed Diesel: 3,500 Litres. Total Rs 3,15,000."
+    res_fuel = extract_document_content(fuel_doc, "diesel_invoice_120.pdf", "fuel_invoice")
+    assert res_fuel["extractor"] == "ocr"
+    fuel_fields = {f["field"]: f["value"] for f in res_fuel["fields"]}
+    assert fuel_fields["fuel_diesel"] == 3500.0
+    assert len(res_fuel["suggested_activity_records"]) == 1
+    assert res_fuel["suggested_activity_records"][0]["stream_kind"] == "fuel"
+    assert res_fuel["suggested_activity_records"][0]["quantity"] == 3500.0
+
+
+def test_equipment_nameplate_extraction() -> None:
+    from app.services.intake_extract import extract_equipment_content
+
+    nameplate_data = b"ABB Induction Motor. Type M3BP 280. Rated Power: 75 kW. Voltage: 415 V. 50 Hz. 1485 RPM."
+    res = extract_equipment_content(nameplate_data, "motor_nameplate.jpg")
+    assert res["extractor"] == "ocr"
+    fields = {f["field"]: f["value"] for f in res["fields"]}
+    assert fields["rated_power_kw"] == 75.0
+    assert fields["rated_voltage_v"] == 415
+

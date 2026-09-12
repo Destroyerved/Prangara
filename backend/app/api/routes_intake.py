@@ -33,7 +33,11 @@ from app.schemas.intake import (
 )
 from app.services import audit, events, storage
 from app.services.access import resolve_factory
-from app.services.intake_extract import extract as extract_conversation
+from app.services.intake_extract import (
+    extract as extract_conversation,
+    extract_document_content,
+    extract_equipment_content,
+)
 
 router = APIRouter(prefix="/api/intake", tags=["intake"])
 
@@ -88,6 +92,13 @@ def document_extract(
     db.add(document)
     db.flush()
 
+    content_bytes = b""
+    try:
+        content_bytes = file.file.read()
+        file.file.seek(0)
+    except Exception:
+        pass
+
     stored = storage.store(
         file.file, content_type=document.content_type,
         organization_id=factory.organization_id, document_id=document.id,
@@ -113,16 +124,17 @@ def document_extract(
     )
     db.commit()
 
+    extracted = extract_document_content(content_bytes, file.filename or "", evidence_type)
     return DocumentExtractResponse(
         evidence_id=document.id,
         document_type=evidence_type,
-        extractor="unavailable",
-        extractor_detail=_OCR_UNAVAILABLE,
-        fields=[],
-        suggested_activity_records=[],
+        extractor=extracted["extractor"],
+        extractor_detail=extracted["extractor_detail"],
+        fields=extracted["fields"],
+        suggested_activity_records=extracted["suggested_activity_records"],
         period_start=period_start,
         period_end=period_end,
-        warnings=["Extraction is unavailable; enter values manually and confirm."],
+        warnings=extracted["warnings"],
     )
 
 
@@ -150,6 +162,14 @@ def equipment_extract(
     )
     db.add(document)
     db.flush()
+
+    content_bytes = b""
+    try:
+        content_bytes = file.file.read()
+        file.file.seek(0)
+    except Exception:
+        pass
+
     stored = storage.store(
         file.file, content_type=document.content_type,
         organization_id=factory.organization_id, document_id=document.id,
@@ -161,11 +181,12 @@ def equipment_extract(
     document.content_type = stored.content_type
     db.commit()
 
+    eq_extracted = extract_equipment_content(content_bytes, file.filename or "")
     return EquipmentExtractResponse(
         evidence_id=document.id,
-        extractor="unavailable",
-        extractor_detail=_OCR_UNAVAILABLE,
-        fields=[],
+        extractor=eq_extracted["extractor"],
+        extractor_detail=eq_extracted["extractor_detail"],
+        fields=eq_extracted["fields"],
         # These are asked whether or not OCR ran. A nameplate gives rated power;
         # annual energy needs how the machine is actually used.
         required_questions=[
@@ -220,6 +241,17 @@ def confirm_intake(factory_id: str, body: ConfirmIntakeRequest, principal: Curre
     created: list[str] = []
     now = utcnow()
     for item in body.activity_records:
+        if item.client_ref:
+            existing = db.scalar(
+                select(ActivityRecord).where(
+                    ActivityRecord.factory_id == factory.id,
+                    ActivityRecord.client_ref == item.client_ref,
+                )
+            )
+            if existing is not None:
+                created.append(existing.id)
+                continue
+
         record = ActivityRecord(
             factory_id=factory.id,
             profile_id=profile.id,

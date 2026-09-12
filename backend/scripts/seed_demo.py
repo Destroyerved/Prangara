@@ -199,8 +199,12 @@ def wipe(db) -> int:
         r.id for r in db.scalars(select(RFQ).where(RFQ.factory_id.in_(factory_ids or [""]))).all()
     ]
 
-    from app.models.governance import AuditLog, Event, Notification
+    from app.models.governance import AuditLog, ComplianceCase, CorrectiveAction, Event, Notification
     from app.models.identity import RefreshToken
+
+    case_ids = [
+        c.id for c in db.scalars(select(ComplianceCase).where(ComplianceCase.factory_id.in_(factory_ids or [""]))).all()
+    ]
 
     user_ids = [u.id for u in users]
 
@@ -215,6 +219,8 @@ def wipe(db) -> int:
         (MaterialListing, MaterialListing.provider_id, provider_ids),
         (ProviderService, ProviderService.provider_id, provider_ids),
         (Provider, Provider.id, provider_ids),
+        (CorrectiveAction, CorrectiveAction.case_id, case_ids),
+        (ComplianceCase, ComplianceCase.factory_id, factory_ids),
         (Action, Action.factory_id, factory_ids),
         (Assessment, Assessment.factory_id, factory_ids),
         (ActivityRecord, ActivityRecord.factory_id, factory_ids),

@@ -52,6 +52,7 @@ class EvidenceOut(ApiModel):
     created_at: dt.datetime
     links: list[EvidenceLinkOut] = Field(default_factory=list)
     download_url: str | None = None
+    client_ref: str | None = None
 
 
 class EvidenceUpdate(ApiModel):
@@ -62,6 +63,7 @@ class EvidenceUpdate(ApiModel):
     period_start: dt.date | None = None
     period_end: dt.date | None = None
     expires_at: dt.date | None = None
+    client_ref: str | None = None
 
     @field_validator("evidence_type")
     @classmethod

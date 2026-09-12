@@ -10,7 +10,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from fastapi import APIRouter, Query, status
+from fastapi import APIRouter, Query, Response, status
+from fastapi.responses import HTMLResponse
 from sqlalchemy import select
 
 from app.api.deps import ClientIp, CurrentPrincipal, DbSession
@@ -27,6 +28,7 @@ from app.services.access import resolve_factory
 from app.services.assessment_service import run_assessment
 from app.services.benchmarks import corpus_stats
 from app.services.profile_mapper import build_from_records
+from app.services.report import build_report_html, render_pdf
 from app.services.scenario import apply_modifications
 
 router = APIRouter(prefix="/api", tags=["assessments"])
@@ -91,6 +93,35 @@ def get_assessment(assessment_id: str, principal: CurrentPrincipal,
     # enough to read someone else's result.
     resolve_factory(db, principal, assessment.factory_id)
     return AssessmentDetail.model_validate(assessment)
+
+
+@router.get("/assessments/{assessment_id}/report")
+def get_assessment_report(assessment_id: str, principal: CurrentPrincipal, db: DbSession,
+                          fmt: str = Query(default="html", pattern="^(html|pdf)$")) -> Response:
+    """Export the assessment as an audited working paper in HTML or PDF format."""
+    assessment = db.get(Assessment, assessment_id)
+    if assessment is None:
+        raise NotFound("Assessment not found.")
+    factory = resolve_factory(db, principal, assessment.factory_id)
+    profile = db.get(FactoryProfile, assessment.profile_id) if assessment.profile_id else None
+
+    html_content = build_report_html(assessment, factory, profile)
+    if fmt == "pdf":
+        pdf_bytes = render_pdf(html_content)
+        if pdf_bytes:
+            return Response(
+                content=pdf_bytes,
+                media_type="application/pdf",
+                headers={
+                    "Content-Disposition": f'attachment; filename="prangara-report-{factory.id}-{assessment.id[:8]}.pdf"',
+                },
+            )
+        # Headless browser not available; return HTML with warning header
+        return HTMLResponse(
+            content=html_content,
+            headers={"X-Report-Fallback": "pdf_engine_unavailable"},
+        )
+    return HTMLResponse(content=html_content)
 
 
 @router.get("/corpus")

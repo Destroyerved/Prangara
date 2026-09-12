@@ -29,7 +29,10 @@ from app.core.database import SessionLocal
 from app.models.base import utcnow
 from app.models.governance import Event
 from app.services import events as bus
+from app.services.compliance_evaluator import register_handlers as register_compliance_handlers
 from app.services.notify import fan_out
+
+register_compliance_handlers()
 
 log = logging.getLogger("prangara.outbox")
 

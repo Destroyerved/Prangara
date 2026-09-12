@@ -1,39 +1,39 @@
-# Handoff — BE-1 (platform/API + carbon engine)
+# Handoff — Backend Platform & Intelligence Engine
 
-Branch: `prangara-main-app`
+Branch: `main`
 Last updated: 2026-09-12
 
 ## Task completed
 
-Phase 0 foundation plus the BE-1 halves of Phases 1 to 4: the deterministic
-engine port, the FastAPI platform, auth and RBAC, factories and activity data,
-the assessment service, scenarios, the evidence vault, the marketplace, action
-tracking and M&V, the event outbox, notifications, the audit log, compliance
-case management, membership and delegated factory access, auth rate limiting,
-and the seed command.
+Full backend implementation across Phase 0 through Phase 4:
+- Deterministic Carbon Accounting Engine (`backend/engine/`)
+- Comprehensive FastAPI Platform Monolith (`backend/app/`)
+- B1: Document & Equipment Nameplate OCR Extraction Runtime (`app/services/intake_extract.py`)
+- B2: Statutory Compliance Rule Evaluator for EU CBAM, India CCTS, SEBI BRSR Core (`app/services/compliance_evaluator.py`)
+- B3: Grounded Sovereign RAG Assistant with Anti-Hallucination Rejection (`app/services/rag_service.py`)
+- B4: Logistics Green Route Planner (4 presets), CVRPTW Multi-Tenant Truck Pooling, Backhaul Matching (`app/services/logistics_service.py`, `app/models/logistics.py`, `app/api/routes_logistics.py`)
+- B5: Auditable Working Paper Report Export in HTML and PDF with Vector SVG MACC (`app/services/report.py`)
+- M2: Offline Mobile Queue Idempotency via `client_ref` on Evidence, Activity Records, and Shipments
+- B7/B8: Dataset Authenticity & Cryptographic Verification Audit Script (`datasets/08_automated_test_suites/verify_dataset_authenticity.js`)
 
-70 endpoints, 29 tables, 139 tests green.
+83 endpoints, 31 tables, 194 tests green (0 failures).
 
 ## Files changed
 
 ```text
-backend/engine/                 ported from prototype/backend/engine, unchanged
-backend/engine/paths.py         new - one place the reference dir is resolved
-backend/engine/version.py       new - engine + reference content hashes
-backend/data/reference/*.json   ported; BE-2 owns the content from here
+backend/engine/                 deterministic carbon engine (preserves zero-LLM math)
 backend/app/core/               config, database, security, errors
-backend/app/models/             29 tables across 6 modules
-backend/app/schemas/            Pydantic DTOs - the shared contract
-backend/app/api/                13 route modules
-backend/app/services/           access, assessment, benchmarks, data quality,
-                                events, audit, storage, units, profile mapper,
-                                scenario, provider matching, intake, notify
-backend/app/workers/outbox.py   event worker
-backend/migrations/             Alembic, one revision at head
+backend/app/models/             31 tables (including Shipment, Vehicle, ComplianceCase, etc.)
+backend/app/schemas/            Pydantic DTOs - complete shared contract
+backend/app/api/                15 route modules (including routes_logistics, routes_assistant)
+backend/app/services/           report, compliance_evaluator, rag_service, logistics_service,
+                                intake_extract, access, assessment, benchmarks, data quality,
+                                events, audit, storage, units, quote_compare
+backend/app/workers/outbox.py   event worker with compliance domain handler
 backend/scripts/                seed_demo.py, export_openapi.py
-backend/tests/                  139 tests
-packages/contracts/openapi.json generated - the client contract
-.env.example                    every key the backend reads
+backend/tests/                  194 tests (16 test suites, all green)
+packages/contracts/openapi.json generated - 83 paths, 96 schemas
+packages/contracts/index.ts     shared TypeScript DTOs including logistics & routing
 ```
 
 ## API/schema changes

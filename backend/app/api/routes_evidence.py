@@ -49,6 +49,7 @@ def upload_evidence(
     period_start: dt.date | None = Form(default=None),
     period_end: dt.date | None = Form(default=None),
     expires_at: dt.date | None = Form(default=None),
+    client_ref: str | None = Form(default=None),
 ) -> EvidenceOut:
     if evidence_type not in EVIDENCE_TYPES:
         raise BadRequest(
@@ -61,6 +62,19 @@ def upload_evidence(
         organization_id = factory.organization_id
     if not organization_id:
         raise Forbidden("You are not a member of any organization.")
+
+    # M2: Offline queue idempotency check
+    if client_ref:
+        stmt = select(EvidenceDocument).where(
+            EvidenceDocument.organization_id == organization_id,
+            EvidenceDocument.client_ref == client_ref,
+            EvidenceDocument.deleted_at.is_(None),
+        )
+        if factory_id:
+            stmt = stmt.where(EvidenceDocument.factory_id == factory_id)
+        existing_client_ref = db.scalar(stmt)
+        if existing_client_ref is not None:
+            return _out(db, existing_client_ref)
 
     document = EvidenceDocument(
         organization_id=organization_id,
@@ -77,6 +91,7 @@ def upload_evidence(
         period_start=period_start,
         period_end=period_end,
         expires_at=expires_at,
+        client_ref=client_ref,
     )
     db.add(document)
     db.flush()

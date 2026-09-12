@@ -270,6 +270,16 @@ def add_activity(factory_id: str, body: ActivityRecordIn, principal: CurrentPrin
     if profile is None or profile.factory_id != factory_id:
         raise NotFound("Reporting period not found for this factory.")
 
+    if body.client_ref:
+        existing = db.scalar(
+            select(ActivityRecord).where(
+                ActivityRecord.factory_id == factory.id,
+                ActivityRecord.client_ref == body.client_ref,
+            )
+        )
+        if existing is not None:
+            return ActivityRecordOut.model_validate(existing)
+
     record = ActivityRecord(factory_id=factory.id, profile_id=profile.id, **body.model_dump())
     db.add(record)
     db.flush()
