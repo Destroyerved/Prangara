@@ -20,6 +20,10 @@ os.environ.setdefault("APP_ENV", "test")
 os.environ.setdefault("JWT_SECRET", "test-secret-not-used-anywhere-real")
 os.environ["DATABASE_URL"] = f"sqlite:///{os.path.join(_TMP, 'test.db')}"
 os.environ["STORAGE_LOCAL_DIR"] = os.path.join(_TMP, "evidence")
+# The suite registers dozens of organizations from one client address, which is
+# exactly what the limiter exists to stop. It is switched on deliberately in
+# tests/test_ratelimit.py rather than left on here.
+os.environ["RATE_LIMIT_ENABLED"] = "false"
 
 from fastapi.testclient import TestClient  # noqa: E402
 

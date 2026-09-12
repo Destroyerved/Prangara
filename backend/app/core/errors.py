@@ -54,6 +54,15 @@ class PayloadTooLarge(ApiError):
         super().__init__(413, code, message)
 
 
+class TooManyRequests(ApiError):
+    """429, with a Retry-After header so a client can back off properly."""
+
+    def __init__(self, message: str, retry_after: int,
+                 code: str = "rate_limited") -> None:
+        super().__init__(429, code, message, {"retry_after_seconds": retry_after})
+        self.headers = {"Retry-After": str(retry_after)}
+
+
 class UnprocessableEntity(ApiError):
     def __init__(self, message: str, code: str = "unprocessable",
                  details: dict[str, Any] | None = None) -> None:

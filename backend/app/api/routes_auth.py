@@ -13,7 +13,10 @@ from fastapi import APIRouter, status
 from sqlalchemy import func, select
 
 from app.api.deps import ClientIp, CurrentPrincipal, DbSession
-from app.core.errors import Conflict, NotFound, Unauthorized
+from app.core import ratelimit
+from app.core.errors import (
+    Conflict, NotFound, TooManyRequests, Unauthorized,
+)
 from app.core.security import (
     create_access_token, create_refresh_token, hash_password, hash_refresh_token,
     verify_password,
@@ -32,6 +35,13 @@ from app.services.access import load_principal
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 
+def _guard(bucket: str, identifier: str, limit: int, message: str) -> None:
+    """Refuse and say for how long, rather than failing silently or hanging."""
+    decision = ratelimit.check(bucket, identifier, limit)
+    if not decision.allowed:
+        raise TooManyRequests(message, decision.retry_after)
+
+
 def _issue(db: DbSession, user: User, device: str | None) -> TokenResponse:
     raw, token_hash, expires = create_refresh_token()
     session_row = RefreshToken(
@@ -46,6 +56,8 @@ def _issue(db: DbSession, user: User, device: str | None) -> TokenResponse:
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 def register(body: RegisterRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
+    _guard("register", ip or "unknown", ratelimit.REGISTER_PER_IP,
+           "Too many sign-up attempts from this address.")
     email = body.email.strip().lower()
     existing = db.scalar(select(User).where(func.lower(User.email) == email))
     if existing is not None:
@@ -79,6 +91,13 @@ def register(body: RegisterRequest, db: DbSession, ip: ClientIp) -> TokenRespons
 @router.post("/login", response_model=TokenResponse)
 def login(body: LoginRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
     email = body.email.strip().lower()
+    # Per-account first. IP rotation is cheap; a password is not, so the budget
+    # that actually protects a factory owner is the one attached to their
+    # account, whoever is knocking.
+    _guard("login-account", email, ratelimit.LOGIN_PER_ACCOUNT,
+           "Too many sign-in attempts for this account. Wait and try again.")
+    _guard("login-ip", ip or "unknown", ratelimit.LOGIN_PER_IP,
+           "Too many sign-in attempts from this address.")
     user = db.scalar(select(User).where(func.lower(User.email) == email))
     # Identical response whether the account is missing or the password is
     # wrong, so this endpoint cannot be used to enumerate registered addresses.
@@ -99,7 +118,9 @@ def login(body: LoginRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
 
 
 @router.post("/refresh", response_model=TokenResponse)
-def refresh(body: RefreshRequest, db: DbSession) -> TokenResponse:
+def refresh(body: RefreshRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
+    _guard("refresh", ip or "unknown", ratelimit.REFRESH_PER_IP,
+           "Too many token refreshes from this address.")
     row = db.scalar(
         select(RefreshToken).where(RefreshToken.token_hash == hash_refresh_token(body.refresh_token))
     )
