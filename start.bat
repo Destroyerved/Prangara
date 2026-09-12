@@ -5,7 +5,7 @@ title PRANGARA Launcher
 cd /d "%~dp0"
 
 echo =====================================================================
-echo                PRANGARA 2.0 - Decarbonization Platform
+echo             PRANGARA - Industrial Decarbonization Platform
 echo =====================================================================
 echo.
 

@@ -14,8 +14,6 @@ const WorkspaceHub = lazy(() => import("../pages/WorkspaceHub"));
 const Marketplace = lazy(() => import("../pages/Marketplace"));
 const Notifications = lazy(() => import("../pages/Notifications"));
 const Landing = lazy(() => import("../pages/Landing"));
-const SignIn = lazy(() => import("../pages/SignIn"));
-const SignUp = lazy(() => import("../pages/SignUp"));
 function ConnectedWorkspace({children}:{children:ReactNode}) {
   const {identity}=useSession();
   return <WorkspaceProvider key={(identity?.user.id||"public")+":"+(identity?.active_organization_id||"")}>{children}</WorkspaceProvider>;
@@ -51,8 +49,8 @@ export default function App() {
               {/* Standalone Public Routes */}
               <Route path="/" element={<Suspense fallback={<Skeleton />}><Landing /></Suspense>} />
               <Route path="/landing" element={<Navigate to="/" replace />} />
-              <Route path="/signin" element={<Suspense fallback={<Skeleton />}><SignIn /></Suspense>} />
-              <Route path="/signup" element={<Suspense fallback={<Skeleton />}><SignUp /></Suspense>} />
+              <Route path="/signin" element={<Suspense fallback={<Skeleton />}><Landing defaultHash="#signin" /></Suspense>} />
+              <Route path="/signup" element={<Suspense fallback={<Skeleton />}><Landing defaultHash="#signup" /></Suspense>} />
 
               {/* Authenticated App Routes with Shell */}
               <Route element={<Shell />}>

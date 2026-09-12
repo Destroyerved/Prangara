@@ -8,7 +8,7 @@ import "./styles/global.css";
 import "./styles/components.css";
 import "./styles/charts.css";
 import "./styles/pages.css";
-import "./styles/landing-3d.css";
+import "./styles/landing.css";
 import App from "./app/App";
 
 // Only redirect to /overview on reload if already inside private workspace routes
