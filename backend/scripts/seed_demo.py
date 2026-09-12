@@ -10,7 +10,7 @@ for the demo. BE-2 owns the seeded reference data and will extend this with
 compliance cases, logistics and RAG fixtures.
 
 Everything created here is flagged `is_demo_seed` where the model has the field,
-and every seeded organization uses an `@demo.prangara.invalid` address, so
+and every seeded organization uses an `@demo.prangara.example` address, so
 seeded rows can always be told apart from real ones and removed cleanly.
 
 The activity figures are plausible screening values for the sector, not measured
@@ -42,7 +42,11 @@ from app.models.marketplace import (  # noqa: E402
 )
 from app.services.assessment_service import run_assessment  # noqa: E402
 
-DEMO_DOMAIN = "demo.prangara.invalid"
+# RFC 2606 reserves `.example` for documentation, so a seeded address can never
+# collide with a real mailbox. `.invalid` would be equally unroutable but email
+# validators reject it outright, and a seeded account that cannot sign in defeats
+# the entire point of the seed command.
+DEMO_DOMAIN = "demo.prangara.example"
 DEMO_PASSWORD = "prangara-demo-2026"
 
 # --- people ----------------------------------------------------------------
@@ -196,7 +200,14 @@ def wipe(db) -> int:
     ]
 
     from app.models.governance import AuditLog, Event, Notification
+    from app.models.identity import RefreshToken
 
+    user_ids = [u.id for u in users]
+
+    # Order matters: children before parents, and anything pointing at a user
+    # before the users themselves. Signing in creates refresh tokens and audit
+    # rows with no organization, which is what made an earlier version of this
+    # fail with a foreign-key error the moment anyone had used the demo.
     for model, column, values in (
         (Quote, Quote.rfq_id, rfq_ids),
         (RFQInvite, RFQInvite.rfq_id, rfq_ids),
@@ -210,9 +221,14 @@ def wipe(db) -> int:
         (FactoryProfile, FactoryProfile.factory_id, factory_ids),
         (FactorySite, FactorySite.factory_id, factory_ids),
         (FactoryAccess, FactoryAccess.factory_id, factory_ids),
+        (FactoryAccess, FactoryAccess.user_id, user_ids),
         (Notification, Notification.organization_id, list(org_ids)),
+        (Notification, Notification.user_id, user_ids),
         (Event, Event.organization_id, list(org_ids)),
+        (Event, Event.actor_user_id, user_ids),
         (AuditLog, AuditLog.organization_id, list(org_ids)),
+        (AuditLog, AuditLog.actor_user_id, user_ids),
+        (RefreshToken, RefreshToken.user_id, user_ids),
         (Factory, Factory.id, factory_ids),
     ):
         if values:
@@ -394,6 +410,15 @@ def seed(db) -> dict[str, str]:
         hero_action.status = "RFQ"
 
     db.commit()
+
+    # Drain the outbox so the demo opens with real alerts rather than an empty
+    # notification centre. In a running deployment the worker process does this;
+    # for a demo on one laptop, nobody should have to remember to start it.
+    from app.workers.outbox import process_once
+
+    while process_once():
+        pass
+
     return created
 
 

@@ -45,3 +45,6 @@ dist/
 # Expo prebuild output. The managed workflow regenerates these.
 apps/mobile/android/
 apps/mobile/ios/
+
+# Expo export output (bundle verification only)
+apps/mobile/.expo-export/

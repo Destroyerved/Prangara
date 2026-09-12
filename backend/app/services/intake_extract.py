@@ -40,8 +40,65 @@ _MAGNITUDE = {
     "crore": 1e7, "crores": 1e7, "cr": 1e7,
 }
 
-_PER_MONTH = re.compile(r"\b(per|a|every)\s+month\b|\bmonthly\b|/\s*month\b|pm\b", re.I)
+_PER_MONTH = re.compile(r"\b(per|a|every)\s+month\b|\bmonthly\b|/\s*month\b|\bpm\b", re.I)
 _PER_DAY = re.compile(r"\b(per|a|every)\s+day\b|\bdaily\b|/\s*day\b", re.I)
+_PER_YEAR = re.compile(
+    r"\b(per|a|every)\s+(year|annum|yr)\b|\bannually\b|\byearly\b|/\s*(year|yr)\b|\bp\.?a\.?\b",
+    re.I,
+)
+
+# Where one clause ends and the next begins. Period markers are read from the
+# clause a quantity sits in, not from the whole message: "we produce 4200 tonnes
+# a year and use 340,000 units monthly" carries two different periods, and
+# applying either one to both numbers is a twelve-fold error.
+_CLAUSE_BREAK = re.compile(r"[,;.]|\band\b|\bbut\b", re.I)
+
+_PERIOD_MULTIPLIERS = {"year": 1.0, "month": 12.0, "day": 365.0}
+
+
+def _clause_spans(message: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    start = 0
+    for match in _CLAUSE_BREAK.finditer(message):
+        spans.append((start, match.start()))
+        start = match.end()
+    spans.append((start, len(message)))
+    return [(a, b) for a, b in spans if b > a]
+
+
+def _period_of(text: str) -> str | None:
+    """'year' | 'month' | 'day' | None for one stretch of text."""
+    if _PER_MONTH.search(text):
+        return "month"
+    if _PER_DAY.search(text):
+        return "day"
+    if _PER_YEAR.search(text):
+        return "year"
+    return None
+
+
+def _period_resolver(message: str):
+    """Return a function mapping a match position to (period, source).
+
+    A quantity takes the period stated in its own clause. Only when its clause
+    is silent does it fall back to the message, and only when the message names
+    exactly one period - a message with both a monthly and a yearly figure must
+    not lend either to a third number that named neither.
+    """
+    spans = _clause_spans(message)
+    clause_periods = [(a, b, _period_of(message[a:b])) for a, b in spans]
+    stated = {period for _, _, period in clause_periods if period}
+    fallback = next(iter(stated)) if len(stated) == 1 else None
+
+    def resolve(position: int) -> tuple[str, str]:
+        for start, end, period in clause_periods:
+            if start <= position < end and period:
+                return period, "stated here"
+        if fallback:
+            return fallback, "from elsewhere in the message"
+        return "year", "assumed annual"
+
+    return resolve
 
 _PATTERNS: list[tuple[str, re.Pattern[str], str]] = [
     ("electricity_kwh", re.compile(
@@ -105,8 +162,11 @@ def extract_rule_based(message: str, known: dict[str, Any] | None = None) -> dic
     warnings: list[str] = []
     seen: set[str] = set()
 
-    monthly = bool(_PER_MONTH.search(message))
-    daily = bool(_PER_DAY.search(message))
+    period_at = _period_resolver(message)
+
+    # Rates, not quantities. A tariff or an export share is not a per-period
+    # amount and must never be multiplied by twelve.
+    not_annualised = {"tariff_inr_per_kwh", "eu_export_share_pct", "employees"}
 
     for field, pattern, unit in _PATTERNS:
         match = pattern.search(message)
@@ -121,19 +181,33 @@ def extract_rule_based(message: str, known: dict[str, Any] | None = None) -> dic
 
         # Annualise, and say so. A plant that reports a monthly bill and gets it
         # treated as annual is out by 12x, which is the single most damaging
-        # arithmetic error in this whole intake path.
+        # arithmetic error in this whole intake path. The period is read from the
+        # clause the number sits in, so one sentence can carry several.
         annualised_note = None
-        if field != "tariff_inr_per_kwh" and field != "eu_export_share_pct":
-            if monthly:
-                value *= 12
-                annualised_note = "stated per month, annualised by x12"
-            elif daily:
-                value *= 365
-                annualised_note = "stated per day, annualised by x365"
+        assumed_period = False
+        if field not in not_annualised:
+            period, source = period_at(match.start())
+            multiplier = _PERIOD_MULTIPLIERS[period]
+            if multiplier != 1.0:
+                value *= multiplier
+                annualised_note = (
+                    f"stated per {period} ({source}), annualised by x{multiplier:g}"
+                )
+            elif source == "assumed annual":
+                assumed_period = True
 
         if field == "electricity_kwh" and unit == "MWh":
             value *= 1000.0
             unit = "kWh"
+
+        if field == "annual_revenue_cr":
+            # The engine reads this field in crore, not rupees. "48 crore" has
+            # already been expanded to 4.8e8 by the magnitude table, so it comes
+            # back down here. Leaving it expanded would put revenue intensity
+            # out by seven orders of magnitude and silently change the capex
+            # size band every intervention is scaled by.
+            value = value / 1e7
+            unit = "crore"
 
         fields.append({
             "field": field,
@@ -141,19 +215,19 @@ def extract_rule_based(message: str, known: dict[str, Any] | None = None) -> dic
             "unit": unit,
             # Rule-based extraction is a literal read of the sentence, so it is
             # reliable about *what was written* and says nothing about whether
-            # the user meant it. Confidence reflects that, not certainty.
-            "confidence": 0.6 if annualised_note else 0.75,
+            # the user meant it. Confidence reflects that, not certainty, and
+            # drops whenever the period had to be inferred rather than read.
+            "confidence": 0.6 if (annualised_note or assumed_period) else 0.75,
             "evidence_text": match.group(0).strip(),
             "needs_confirmation": True,
         })
         seen.add(field)
         if annualised_note:
             warnings.append(f"{field}: {annualised_note}. Confirm the period.")
-
-    if monthly and daily:
-        warnings.append(
-            "The message mentions both daily and monthly figures. Check each annualised value."
-        )
+        elif assumed_period:
+            warnings.append(
+                f"{field}: no period stated, read as an annual figure. Confirm it."
+            )
 
     merged = {**known, **{f["field"]: f["value"] for f in fields}}
     missing = [f for f in _CRITICAL_FIELDS if not merged.get(f)]
