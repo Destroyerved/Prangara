@@ -1,4 +1,6 @@
-# Chakra — runtime
+# Superseded by backend/requirements.txt, which is what the running
+# service installs. Kept only so an existing checkout does not break.
+# PRANGARA — legacy root requirements
 fastapi>=0.110
 uvicorn>=0.27
 pydantic>=2.6

@@ -1,230 +1,163 @@
 """
-PRANGARA Carbon Engine — Factors & Uncertainty Propagation
-Standardizes factor resolution, units, geography, and uncertainty intervals [low, base, high].
-Preserves mathematical monotonicity and raises loudly on invalid or unmapped units.
-"""
+Emission factor loading, unit resolution and uncertainty-aware arithmetic.
 
+Design note
+-----------
+Every factor in the database carries a low / base / high band. The engine
+carries that band all the way through to the answer instead of collapsing it at
+the first multiplication. A tool that prints "412 tCO2e" with no band is making
+a claim it cannot support; a tool that prints "412 tCO2e (range 360-470)" is
+making a claim an auditor can check.
+"""
 from __future__ import annotations
-import os
+
 import json
+import os
 from dataclasses import dataclass
-from typing import Dict, Optional, Any, Union
+from typing import Any
+
+from .paths import DATA_DIR as _DATA_DIR
 
 
 @dataclass(frozen=True)
 class Band:
-    """
-    Represents an empirical value with an explicit uncertainty band: [low, base, high].
-    Arithmetic maintains low <= base <= high, properly inverting bounds on negative multipliers.
-    """
+    """A value with an uncertainty range. All arithmetic keeps the band."""
     base: float
     low: float
     high: float
 
-    def __post_init__(self):
-        # Enforce invariant: low <= base <= high (with floating tolerance)
-        l, b, h = float(self.low), float(self.base), float(self.high)
-        if l > b + 1e-6 or b > h + 1e-6:
-            raise ValueError(f"Band invariant violation: low ({l}) <= base ({b}) <= high ({h}) must hold")
+    def __add__(self, other: "Band") -> "Band":
+        return Band(self.base + other.base, self.low + other.low, self.high + other.high)
 
-    def __add__(self, other: Union[Band, float, int]) -> Band:
-        if isinstance(other, Band):
-            return Band(self.base + other.base, self.low + other.low, self.high + other.high)
-        val = float(other)
-        return Band(self.base + val, self.low + val, self.high + val)
-
-    def __radd__(self, other: Union[Band, float, int]) -> Band:
-        return self.__add__(other)
-
-    def __sub__(self, other: Union[Band, float, int]) -> Band:
-        if isinstance(other, Band):
-            return Band(self.base - other.base, self.low - other.high, self.high - other.low)
-        val = float(other)
-        return Band(self.base - val, self.low - val, self.high - val)
-
-    def __mul__(self, scalar: Union[float, int]) -> Band:
-        k = float(scalar)
+    def scaled(self, k: float) -> "Band":
         if k >= 0:
             return Band(self.base * k, self.low * k, self.high * k)
-        else:
-            return Band(self.base * k, self.high * k, self.low * k)
+        # Negative multiplier flips which end of the band is the low end.
+        return Band(self.base * k, self.high * k, self.low * k)
 
-    def __rmul__(self, scalar: Union[float, int]) -> Band:
-        return self.__mul__(scalar)
+    def as_dict(self) -> dict[str, float]:
+        return {"base": round(self.base, 3), "low": round(self.low, 3), "high": round(self.high, 3)}
 
-    def __truediv__(self, scalar: Union[float, int]) -> Band:
-        k = float(scalar)
-        if k == 0:
-            raise ZeroDivisionError("Cannot divide Band by zero scalar")
-        return self.__mul__(1.0 / k)
+    @staticmethod
+    def zero() -> "Band":
+        return Band(0.0, 0.0, 0.0)
 
-    @property
-    def uncertainty_pct(self) -> float:
-        """Symmetric half-width percentage relative to base."""
-        if self.base == 0:
-            return 0.0
-        delta = max(abs(self.high - self.base), abs(self.base - self.low))
-        return round((delta / self.base) * 100.0, 1)
 
-    def to_dict(self) -> Dict[str, float]:
-        return {
-            "base": round(self.base, 4),
-            "low": round(self.low, 4),
-            "high": round(self.high, 4),
-            "uncertainty_pct": self.uncertainty_pct
-        }
+ZERO = Band.zero()
 
 
 class FactorDB:
-    """
-    Lookup engine for sovereign emission factors.
-    Loads from canonical verified datasets in datasets/01_statutory_emission_baselines/
-    and datasets/05_database_and_typed_layer/json/.
-    """
-    _instance: Optional[FactorDB] = None
+    """Loads and resolves emission factors."""
 
-    def __init__(self, dataset_path: Optional[str] = None):
-        self.factors: Dict[str, Dict[str, Any]] = {}
-        self.state_grids: Dict[str, Dict[str, Any]] = {}
-        self._load_factors(dataset_path)
+    def __init__(self, path: str | None = None):
+        path = path or os.path.join(_DATA_DIR, "emission_factors.json")
+        with open(path, "r", encoding="utf-8") as fh:
+            self.raw: dict[str, Any] = json.load(fh)
+        self.meta = self.raw.get("meta", {})
 
-    @classmethod
-    def get_instance(cls, dataset_path: Optional[str] = None) -> FactorDB:
-        if cls._instance is None:
-            cls._instance = FactorDB(dataset_path)
-        return cls._instance
+        # Flatten every factor into one lookup so callers do not need to know
+        # which category a key lives in.
+        self._flat: dict[str, dict[str, Any]] = {}
+        for group, entries in self.raw.items():
+            if group == "meta":
+                continue
+            for key, spec in entries.items():
+                if isinstance(spec, dict) and "value" in spec:
+                    self._flat[key] = {**spec, "_group": group}
 
-    def _load_factors(self, dataset_path: Optional[str]):
-        # Locate project root
-        base_dir = dataset_path or os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-        factors_file = os.path.join(base_dir, "datasets", "data", "clean", "emission_factors_verified.json")
-        
-        # Fallback to 01_statutory_emission_baselines if clean not present
-        if not os.path.exists(factors_file):
-            factors_file = os.path.join(base_dir, "datasets", "01_statutory_emission_baselines", "chakra_emission_factors.json")
+    # -- lookup -------------------------------------------------------------
 
-        if os.path.exists(factors_file):
-            with open(factors_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                self.factors = data.get("factors", {})
-                self.state_grids = data.get("state_grid_variants", {})
-        else:
-            # Fallback embedded sovereign defaults (CEA v22 / DESNZ 2026)
-            self._init_embedded_defaults()
+    def get(self, key: str) -> dict[str, Any]:
+        if key not in self._flat:
+            raise KeyError(f"Unknown emission factor: {key}")
+        return self._flat[key]
 
-    def _init_embedded_defaults(self):
-        """Standard fallback factors if json files are being loaded dynamically."""
-        self.factors = {
-            "grid_electricity_in": {
-                "key": "grid_electricity_in",
-                "value": 0.716, "low": 0.680, "high": 0.752,
-                "unit": "tCO2e/MWh", "scope": 2, "source_id": "SRC-CEA-V22"
-            },
-            "diesel_combustion": {
-                "key": "diesel_combustion",
-                "value": 2.684, "low": 2.610, "high": 2.760,
-                "unit": "kgCO2e/litre", "scope": 1, "source_id": "SRC-DESNZ-2026"
-            },
-            "natural_gas_combustion": {
-                "key": "natural_gas_combustion",
-                "value": 2.023, "low": 1.960, "high": 2.080,
-                "unit": "kgCO2e/Sm3", "scope": 1, "source_id": "SRC-DESNZ-2026"
-            },
-            "coal_indian_msme": {
-                "key": "coal_indian_msme",
-                "value": 1.395, "low": 1.250, "high": 1.540,
-                "unit": "tCO2/t", "scope": 1, "source_id": "SRC-IPCC-2019"
-            },
-            "furnace_oil_combustion": {
-                "key": "furnace_oil_combustion",
-                "value": 3.176, "low": 3.080, "high": 3.270,
-                "unit": "kgCO2e/litre", "scope": 1, "source_id": "SRC-DESNZ-2026"
-            },
-            "lpg_combustion": {
-                "key": "lpg_combustion",
-                "value": 2.939, "low": 2.850, "high": 3.030,
-                "unit": "kgCO2e/kg", "scope": 1, "source_id": "SRC-DESNZ-2026"
-            },
-            "cotton_raw_gin": {
-                "key": "cotton_raw_gin",
-                "value": 2.200, "low": 1.800, "high": 2.650,
-                "unit": "kgCO2e/kg", "scope": 3, "source_id": "SRC-TEXTILE-EXCHANGE-2026"
-            },
-            "steel_bf_bof_virgin": {
-                "key": "steel_bf_bof_virgin",
-                "value": 2.320, "low": 2.100, "high": 2.550,
-                "unit": "kgCO2e/kg", "scope": 3, "source_id": "SRC-WORLDSTEEL-2025"
-            },
-            "pet_virgin_granules": {
-                "key": "pet_virgin_granules",
-                "value": 2.150, "low": 1.950, "high": 2.350,
-                "unit": "kgCO2e/kg", "scope": 3, "source_id": "SRC-PLASTICSEUROPE-2024"
-            },
-            "aluminium_ingot_primary": {
-                "key": "aluminium_ingot_primary",
-                "value": 8.900, "low": 8.200, "high": 9.600,
-                "unit": "kgCO2e/kg", "scope": 3, "source_id": "SRC-IAI-2025"
-            },
-            "freight_road_heavy_rigid": {
-                "key": "freight_road_heavy_rigid",
-                "value": 0.089, "low": 0.075, "high": 0.105,
-                "unit": "kgCO2e/t-km", "scope": 3, "source_id": "SRC-SFC-INDIA-2024"
-            }
-        }
-        self.state_grids = {
-            "TN": {"name": "Tamil Nadu", "derived_value": 0.625, "status": "RE_HEAVY"},
-            "GJ": {"name": "Gujarat", "derived_value": 0.742, "status": "COAL_GAS_BALANCED"},
-            "MH": {"name": "Maharashtra", "derived_value": 0.785, "status": "COAL_HEAVY"},
-            "KA": {"name": "Karnataka", "derived_value": 0.580, "status": "RE_VERY_HIGH"},
-            "OR": {"name": "Odisha", "derived_value": 0.940, "status": "COAL_DOMINANT"},
-            "WB": {"name": "West Bengal", "derived_value": 0.915, "status": "COAL_DOMINANT"},
-            "PB": {"name": "Punjab", "derived_value": 0.710, "status": "MIXED_GRID"}
-        }
+    def has(self, key: str) -> bool:
+        return key in self._flat
 
-    def get_factor(self, key: str) -> Dict[str, Any]:
-        if key not in self.factors:
-            raise KeyError(f"Emission factor '{key}' is not recognized in statutory registry.")
-        return self.factors[key]
+    def list_keys(self) -> list[str]:
+        """Every factor key, so callers never have to reach into `_flat`."""
+        return sorted(self._flat)
 
-    def get_band(self, key: str) -> Band:
-        f = self.get_factor(key)
-        return Band(base=f["value"], low=f.get("low", f["value"]), high=f.get("high", f["value"]))
+    def band(self, key: str) -> Band:
+        s = self.get(key)
+        return Band(float(s["value"]), float(s.get("low", s["value"])), float(s.get("high", s["value"])))
 
-    def resolve_grid_factor(self, state_code: Optional[str]) -> Band:
+    def label(self, key: str) -> str:
+        return self.get(key).get("label", key)
+
+    def source(self, key: str) -> str:
+        return self.get(key).get("source", "unattributed")
+
+    def price(self, key: str) -> float:
+        return float(self.get(key).get("typical_price_inr", 0.0))
+
+    def scope(self, key: str) -> int:
+        return int(self.get(key).get("scope", 3))
+
+    # -- grid ---------------------------------------------------------------
+
+    def grid_factor(self, state: str | None) -> tuple[Band, str]:
+        """Return the Scope 2 grid factor for a state, falling back to national.
+
+        The state choice matters more than most people expect: West Bengal runs
+        at roughly 1.8x Kerala per unit consumed. Getting this wrong is a larger
+        error than almost anything else in the model.
         """
-        Returns grid electricity emission factor (tCO2e/MWh).
-        If an Indian state code is supplied (e.g. 'TN', 'GJ'), maps to regional grid intensity,
-        carrying national uncertainty margins.
-        """
-        national_band = self.get_band("grid_electricity_in")
-        if not state_code:
-            return national_band
-        st = state_code.upper().strip()
-        if st in self.state_grids:
-            state_val = self.state_grids[st]["derived_value"]
-            # Scale low and high proportionally
-            ratio = state_val / national_band.base
-            return Band(base=state_val, low=national_band.low * ratio, high=national_band.high * ratio)
-        return national_band
+        national = self.raw["electricity"]["IN_GRID_NATIONAL"]
+        states = self.raw["electricity"]["IN_GRID_STATE"]["states"]
+        if state and state in states:
+            v = float(states[state])
+            # Carry the national relative band width onto the state point value.
+            rel_low = float(national["low"]) / float(national["value"])
+            rel_high = float(national["high"]) / float(national["value"])
+            return Band(v, v * rel_low, v * rel_high), f"CEA regional grid mix - {state}"
+        v = float(national["value"])
+        return Band(v, float(national["low"]), float(national["high"])), "CEA national weighted average"
 
-    def convert_to_tco2e(self, factor_key: str, quantity: float, state_code: Optional[str] = None) -> Band:
-        """
-        Converts physical activity quantity into metric tonnes of CO2e (tCO2e) with Band.
-        Handles kgCO2e -> tCO2e (divide by 1000) and tCO2e/MWh -> tCO2e natively.
-        """
-        if factor_key == "grid_electricity_in":
-            # Quantity in MWh (or converted from kWh / 1000)
-            band = self.resolve_grid_factor(state_code)
-            return band * quantity
+    # -- unit handling ------------------------------------------------------
 
-        f = self.get_factor(factor_key)
-        unit = f.get("unit", "")
-        band = self.get_band(factor_key)
+    @staticmethod
+    def _numerator_multiplier(unit: str) -> float:
+        """Convert the factor's numerator to tonnes CO2e.
 
-        if unit.startswith("kgCO2") or unit.startswith("kgCO2e"):
-            # Result in tonnes: (kgCO2e * quantity) / 1000.0
-            return (band * quantity) / 1000.0
-        elif unit.startswith("tCO2") or unit.startswith("tCO2e"):
-            return band * quantity
-        else:
-            raise ValueError(f"Unrecognized canonical emission factor unit: '{unit}' for factor '{factor_key}'")
+        Factors are published in mixed units - kgCO2e/litre, tCO2e/tonne,
+        kgCO2e/tonne-km. Rather than silently assuming, we read the numerator
+        off the unit string. If a new factor is added in an unrecognised unit
+        the engine raises rather than quietly returning a wrong number.
+        """
+        u = unit.lower()
+        if u.startswith("kgco2e"):
+            return 0.001
+        if u.startswith("tco2e"):
+            return 1.0
+        raise ValueError(f"Unrecognised emission factor numerator in unit '{unit}'")
+
+    def emissions(self, key: str, quantity: float) -> Band:
+        """tCO2e for a given activity quantity, in the factor's own denominator unit.
+
+        Electricity is the one special case: the factor is per MWh but every
+        Indian SME reads their bill in kWh, so the UI collects kWh and we
+        convert here rather than asking the user to do arithmetic.
+        """
+        spec = self.get(key)
+        mult = self._numerator_multiplier(spec["unit"])
+        qty = float(quantity)
+        if "/MWh" in spec["unit"]:
+            qty = qty / 1000.0
+        return self.band(key).scaled(qty * mult)
+
+    def denominator_unit(self, key: str) -> str:
+        """The unit the user must supply a quantity in, for UI labelling."""
+        unit = self.get(key)["unit"]
+        return unit.split("/", 1)[1] if "/" in unit else ""
+
+
+_default_db: FactorDB | None = None
+
+
+def default_db() -> FactorDB:
+    global _default_db
+    if _default_db is None:
+        _default_db = FactorDB()
+    return _default_db

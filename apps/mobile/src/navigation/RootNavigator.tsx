@@ -1,0 +1,221 @@
+/**
+ * Navigation.
+ *
+ * Four tabs, because a factory owner on a phone does four things: look at their
+ * plants, capture something, read alerts, manage the account. Everything else is
+ * a stack screen pushed from one of those.
+ */
+
+import { NavigationContainer, type Theme } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { Text, View } from 'react-native';
+
+import { notifications as notificationsApi } from '../api/endpoints';
+import { useAuth } from '../auth/AuthContext';
+import { Loading } from '../components/ui';
+import { colour, type as typeScale } from '../theme/tokens';
+
+import AccountScreen from '../screens/AccountScreen';
+import AlertsScreen from '../screens/AlertsScreen';
+import BillScanScreen from '../screens/BillScanScreen';
+import CaptureScreen from '../screens/CaptureScreen';
+import CreateFactoryScreen from '../screens/CreateFactoryScreen';
+import EquipmentScanScreen from '../screens/EquipmentScanScreen';
+import EvidenceCaptureScreen from '../screens/EvidenceCaptureScreen';
+import FactoryListScreen from '../screens/FactoryListScreen';
+import FactoryScreen from '../screens/FactoryScreen';
+import OnboardingChatScreen from '../screens/OnboardingChatScreen';
+import QuickResultsScreen from '../screens/QuickResultsScreen';
+import SignInScreen from '../screens/SignInScreen';
+
+import type { RootStackParams, TabParams } from './types';
+
+const Stack = createNativeStackNavigator<RootStackParams>();
+const Tabs = createBottomTabNavigator<TabParams>();
+
+const navTheme: Theme = {
+  dark: true,
+  colors: {
+    primary: colour.primary,
+    background: colour.bg,
+    card: colour.surface,
+    text: colour.text,
+    border: colour.border,
+    notification: colour.critical,
+  },
+  fonts: {
+    regular: { fontFamily: 'System', fontWeight: '400' },
+    medium: { fontFamily: 'System', fontWeight: '500' },
+    bold: { fontFamily: 'System', fontWeight: '700' },
+    heavy: { fontFamily: 'System', fontWeight: '800' },
+  },
+};
+
+const screenOptions = {
+  headerStyle: { backgroundColor: colour.surface },
+  headerTintColor: colour.text,
+  headerTitleStyle: { ...typeScale.heading },
+  contentStyle: { backgroundColor: colour.bg },
+} as const;
+
+/**
+ * Tab icons are glyphs rather than an icon font.
+ *
+ * Expo's vector-icons package is another dependency and another thing to fail
+ * on a device at a demo; a text glyph plus an always-visible label is legible,
+ * accessible and cannot fail to load.
+ */
+function TabGlyph({ glyph, focused }: { glyph: string; focused: boolean }) {
+  return (
+    <Text style={{ fontSize: 18, color: focused ? colour.primary : colour.textFaint }}>
+      {glyph}
+    </Text>
+  );
+}
+
+function UnreadDot() {
+  const { data } = useQuery({
+    queryKey: ['notifications', 'unread'],
+    queryFn: () => notificationsApi.list(true),
+    refetchInterval: 60_000,
+  });
+  if (!data?.length) return <TabGlyph glyph="!" focused={false} />;
+  return (
+    <View
+      style={{
+        minWidth: 20,
+        height: 20,
+        borderRadius: 10,
+        paddingHorizontal: 5,
+        backgroundColor: colour.critical,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text style={{ ...typeScale.micro, color: colour.text }}>
+        {data.length > 9 ? '9+' : data.length}
+      </Text>
+    </View>
+  );
+}
+
+function TabNavigator() {
+  return (
+    <Tabs.Navigator
+      screenOptions={{
+        ...screenOptions,
+        tabBarStyle: {
+          backgroundColor: colour.surface,
+          borderTopColor: colour.border,
+          height: 62,
+          paddingBottom: 8,
+          paddingTop: 6,
+        },
+        tabBarActiveTintColor: colour.primary,
+        tabBarInactiveTintColor: colour.textFaint,
+        tabBarLabelStyle: { ...typeScale.micro },
+      }}
+    >
+      <Tabs.Screen
+        name="Factories"
+        component={FactoryListScreen}
+        options={{
+          title: 'Factories',
+          headerShown: false,
+          tabBarIcon: ({ focused }) => <TabGlyph glyph="■" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
+        name="Capture"
+        component={CaptureScreen}
+        options={{
+          title: 'Capture',
+          headerShown: false,
+          tabBarIcon: ({ focused }) => <TabGlyph glyph="◉" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
+        name="Alerts"
+        component={AlertsScreen}
+        options={{
+          title: 'Alerts',
+          headerShown: false,
+          tabBarIcon: () => <UnreadDot />,
+        }}
+      />
+      <Tabs.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
+          title: 'Account',
+          headerShown: false,
+          tabBarIcon: ({ focused }) => <TabGlyph glyph="●" focused={focused} />,
+        }}
+      />
+    </Tabs.Navigator>
+  );
+}
+
+export default function RootNavigator() {
+  const { ready, me } = useAuth();
+
+  if (!ready) {
+    return (
+      <View style={{ flex: 1, backgroundColor: colour.bg, justifyContent: 'center' }}>
+        <Loading label="PRANGARA" />
+      </View>
+    );
+  }
+
+  return (
+    <NavigationContainer theme={navTheme}>
+      {me ? (
+        <Stack.Navigator screenOptions={screenOptions}>
+          <Stack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="CreateFactory"
+            component={CreateFactoryScreen}
+            options={{ title: 'Add a factory' }}
+          />
+          <Stack.Screen
+            name="Factory"
+            component={FactoryScreen}
+            options={({ route }) => ({ title: route.params.factoryName })}
+          />
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingChatScreen}
+            options={{ title: 'Describe your plant' }}
+          />
+          <Stack.Screen
+            name="BillScan"
+            component={BillScanScreen}
+            options={{ title: 'Scan a bill' }}
+          />
+          <Stack.Screen
+            name="EquipmentScan"
+            component={EquipmentScanScreen}
+            options={{ title: 'Add equipment' }}
+          />
+          <Stack.Screen
+            name="EvidenceCapture"
+            component={EvidenceCaptureScreen}
+            options={{ title: 'File a document' }}
+          />
+          <Stack.Screen
+            name="QuickResults"
+            component={QuickResultsScreen}
+            options={{ title: 'Results' }}
+          />
+        </Stack.Navigator>
+      ) : (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Tabs" component={SignInScreen} />
+        </Stack.Navigator>
+      )}
+    </NavigationContainer>
+  );
+}

@@ -98,8 +98,9 @@ for (const r of results) {
 console.log('\n' + '='.repeat(90));
 console.log('AUTHENTICITY AUDIT SUMMARY');
 console.log('='.repeat(90));
+const passRate = totalFiles > 0 ? ((passedFiles / totalFiles) * 100).toFixed(1) : '0.0';
 console.log(`Total Source Files Checked : ${totalFiles}`);
-console.log(`Cryptographically Verified : ${passedFiles} (100.0% Pass Rate)`);
+console.log(`Cryptographically Verified : ${passedFiles} (${passRate}% Pass Rate)`);
 console.log(`Hash Mismatches / Tampered : ${failedFiles}`);
 console.log(`Missing Files              : ${missingFiles}`);
 

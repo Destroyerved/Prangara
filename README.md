@@ -6,11 +6,12 @@
 *HackOut'26 · Problem Statement PS10*  
 **Industrial Emission Leak-Point Detector & Circular Alternative Recommender**
 
-[![Node.js](https://img.shields.io/badge/Node.js-v24%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
-[![Tests](https://img.shields.io/badge/Automated%20Tests-72%2F72%20PASSING%20(100%25)-2ea44f?style=for-the-badge&logo=githubactions&logoColor=white)](#automated-test-verification)
-[![Cryptographic Provenance](https://img.shields.io/badge/Data%20Sources-23%20SHA--256%20VERIFIED-007acc?style=for-the-badge&logo=security&logoColor=white)](#data-provenance--cryptographic-authenticity)
-[![Runs Fully Offline](https://img.shields.io/badge/Runs-100%25%20Offline-6f42c1?style=for-the-badge)](#quick-start--test-execution)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-71%20endpoints-009688?style=for-the-badge&logo=fastapi&logoColor=white)](#-rest-api-reference-port-8000)
+[![Expo](https://img.shields.io/badge/Android-Expo%20%2F%20React%20Native-000020?style=for-the-badge&logo=expo&logoColor=white)](apps/mobile/README.md)
+[![Tests](https://img.shields.io/badge/Tests-165%20passing-2ea44f?style=for-the-badge&logo=pytest&logoColor=white)](#tests)
+[![Provenance](https://img.shields.io/badge/Source%20Artefacts-22%2F23%20verified-e8a33d?style=for-the-badge&logo=security&logoColor=white)](#-data-provenance--cryptographic-authenticity)
+[![Runs Offline](https://img.shields.io/badge/Core-Runs%20Offline-6f42c1?style=for-the-badge)](#-quick-start)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 <br/>
@@ -31,9 +32,9 @@
 - [Advanced ML & Operations Research Layer](#-advanced-ml--operations-research-layer)
 - [10 Supported Industrial Sectors & Demo Plants](#-10-supported-industrial-sectors--demo-plants)
 - [Hero Plant Case Study — Tirupur Dyeing Facility](#-hero-plant-case-study--tirupur-dyeing-facility)
-- [Unified REST API Reference (Port 8080)](#-unified-rest-api-reference-port-8080)
+- [REST API Reference (Port 8000)](#-rest-api-reference-port-8000)
 - [Shared Contracts & DTOs (`packages/contracts/`)](#-shared-contracts--dtos-packagescontracts)
-- [Quick Start & Test Execution](#-quick-start--test-execution)
+- [Quick Start](#-quick-start)
 - [Data Provenance & Cryptographic Authenticity](#-data-provenance--cryptographic-authenticity)
 - [Repository Structure](#-repository-structure)
 
@@ -121,14 +122,14 @@ PRANGARA splits its intelligence into two distinct, uncompromised layers:
 ## 🧠 Advanced ML & Operations Research Layer
 
 ### 1. Mixed-Integer Linear Programming (MILP) Portfolio Optimizer
-- **Location:** [`backend/ml/portfolio_optimizer.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/ml/portfolio_optimizer.js)
+- **Location:** [`backend/ml/portfolio_optimizer.js`](backend/ml/portfolio_optimizer.js)
 - **Problem:** Factory owners have tight budget caps and required payback periods. A naive greedy sort by LCOA fails under multi-meter interactions.
 - **Solution:** Solves the 0/1 multi-objective knapsack problem:
   $$\max \sum_{i=1}^{N} \text{Abatement}_i \cdot x_i \quad \text{subject to} \quad \sum_{i=1}^{N} \text{Capex}_i \cdot x_i \le B, \quad \max_{i} (\text{Payback}_i \cdot x_i) \le T_{\max}$$
   Automatically computes a **5-point monotonic Pareto optimal frontier** across budget tiers (20%, 40%, 60%, 80%, 100%), allowing CFOs to pick their optimal trade-off point between capital expenditure and carbon abatement.
 
 ### 2. Capacitated Vehicle Routing (CVRPTW) Multi-Tenant Truck Pooling
-- **Location:** [`backend/ml/logistics_optimizer.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/ml/logistics_optimizer.js)
+- **Location:** [`backend/ml/logistics_optimizer.js`](backend/ml/logistics_optimizer.js)
 - **Problem:** MSMEs in clusters like Tirupur and Coimbatore dispatch partial truckloads (LTL) with 40–60% empty volume, paying high freight rates and emitting excessive Scope 3 carbon.
 - **Solution:** Formulates logistics consolidation as a Capacitated Vehicle Routing Problem with Time Windows. Consolidates multiple shipments into high-efficiency vehicles (e.g., 28-tonne Euro-VI articulated trucks), achieving **$\ge 20\%$ emission cuts** and evaluating 4 dispatch routes:
   - `Fastest`: Direct point-to-point dedicated routing.
@@ -137,21 +138,21 @@ PRANGARA splits its intelligence into two distinct, uncompromised layers:
   - `Balanced`: $\text{Score} = 0.4 \cdot \text{Cost} + 0.4 \cdot \text{Carbon} + 0.2 \cdot \text{Transit Time}$.
 
 ### 3. Empirical Bayesian Benchmark Learning (Data Flywheel)
-- **Location:** [`backend/ml/bayesian_benchmarks.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/ml/bayesian_benchmarks.js)
+- **Location:** [`backend/ml/bayesian_benchmarks.js`](backend/ml/bayesian_benchmarks.js)
 - **Problem:** Industrial benchmarks drift as local technology improves, but arithmetic averaging is susceptible to gaming, data poisoning, and synthetic demo profiles.
 - **Solution:** Updates cluster benchmarks via Empirical Bayes shrinkage:
   $$\mu_{\text{updated}} = \frac{n}{n + \nu} \bar{x}_{\text{cluster}} + \frac{\nu}{n + \nu} \mu_{\text{prior}} \quad (\text{with pseudo-count } \nu = 8)$$
   Outlier points outside $[Q_1 - 1.5 \cdot \text{IQR}, Q_3 + 1.5 \cdot \text{IQR}]$ are automatically rejected. The evaluating plant's own data is excluded from its peer comparison (Jackknife resampling).
 
 ### 4. Lifecycle Carbon-Delta ($\Delta C_{\text{net}}$) Marketplace Ranker
-- **Location:** [`backend/ml/marketplace_ranker.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/ml/marketplace_ranker.js)
+- **Location:** [`backend/ml/marketplace_ranker.js`](backend/ml/marketplace_ranker.js)
 - **Problem:** A circular raw material (e.g., recycled cotton yarn) may have low production carbon, but if transported 2,500 km in an empty diesel truck, its delivered emissions may exceed virgin cotton!
 - **Solution:** Computes the true Delivered Net Carbon Delta:
   $$\Delta C_{\text{net}} = (\text{EF}_{\text{virgin}} - \text{EF}_{\text{circular}}) \times M - (d_{\text{supplier}} \times \text{EF}_{\text{freight}} \times M)$$
   $$\text{Utility Score} = 0.40 \cdot \text{CarbonROI} + 0.30 \cdot \text{CostSavings} + 0.15 \cdot \text{TrustScore} + 0.15 \cdot \text{DigitalPassport}$$
 
 ### 5. Grounded Semantic RAG with Cryptographic Provenance
-- **Location:** [`backend/rag/rag_service.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/rag/rag_service.js), [`backend/rag/citation_formatter.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/rag/citation_formatter.js)
+- **Location:** [`backend/rag/rag_service.js`](backend/rag/rag_service.js), [`backend/rag/citation_formatter.js`](backend/rag/citation_formatter.js)
 - Retrieves precise regulatory clauses from sovereign knowledge base chunks (`datasets/10_rag_knowledge_base/`) and attaches verified badges containing exact 64-character SHA-256 hashes matching official government gazettes.
 
 ---
@@ -200,83 +201,134 @@ MARGINAL ABATEMENT COST CURVE (MACC) PORTFOLIO:
 
 ---
 
-## 🌐 Unified REST API Reference (Port 8080)
+## 🌐 REST API Reference (Port 8000)
 
-PRANGARA ships an ultra-fast, zero-npm-dependency REST API server ([`backend/server.js`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/backend/server.js)) responding in sub-10 milliseconds:
+The running backend is the Python/FastAPI service in [`backend/`](backend/) —
+**71 endpoints, 147 tests**. Interactive docs at `http://localhost:8000/api/docs`;
+the machine-readable contract is
+[`packages/contracts/openapi.json`](packages/contracts/openapi.json), regenerated
+with `python -m scripts.export_openapi`.
 
-### Core Carbon Accounting & Simulation
-- `POST /api/assess`: Evaluates a plant profile, returning full Scope 1/2/3 breakdown, leak detections, and MACC recommendations.
-- `POST /api/assess/scenario`: What-if simulation comparing baseline vs modified profiles (solar switches, fuel substitutions), outputting exact $\Delta \text{tCO}_2\text{e}$ and rupee savings.
-- `GET /api/demo/{sector_key}`: Returns instant pre-computed assessments for any of the 10 industrial sectors (e.g. `/api/demo/textile_dyeing`).
+> **Two backends live in this repository.** `backend/` (Python/FastAPI) is the
+> one that runs, per `docs/PRD.md` §24 and `docs/task.md` BE-1. A parallel Node
+> implementation is preserved in [`backend-node/`](backend-node/README.md) — see
+> that README for what is worth porting across. Keeping two live would mean two
+> sets of emission factors and two answers to the same question, which is what
+> `docs/AI_AGENT_PLAYBOOK.md` §1 exists to prevent.
 
-### Advanced ML & Operations Research
-- `POST /api/ml/optimize-portfolio`: Runs the MILP knapsack solver under custom CapEx or payback limits, outputting the 5-point Pareto frontier.
-- `POST /api/logistics/routes`: Evaluates freight corridors across 4 presets (`Fastest`, `Cheapest`, `Lowest Carbon`, `Balanced`).
-- `POST /api/logistics/pool`: CVRPTW solver pooling multiple LTL shipments into bundled full truckloads.
-- `POST /api/logistics/backhaul`: Matches empty truck return legs with circular cargo (e.g., rPET bales from Chennai Port to Tirupur).
-- `POST /api/marketplace/rank-materials`: Multi-attribute circular byproduct ranker with net carbon delta ($\Delta C_{\text{net}}$) transport penalties.
+### Anonymous sandbox — no account required
+- `GET  /api/health` — status, engine version, reference dataset hashes, and which optional features this deployment actually has
+- `GET  /api/sectors`, `GET /api/sectors/{key}` — the 10 supported sectors
+- `POST /api/assess` — stateless assessment; nothing is stored
+- `GET  /api/demo/{sector_key}` — a fully worked example per sector
+- `GET  /api/reference`, `/api/reference/factors/{key}`, `/api/reference/interventions`
+- `GET  /api/reference/provenance` — **every active factor traced to its source document, with disagreements flagged**
+- `GET  /api/corpus` — benchmark flywheel health (aggregate only; no factory is identifiable)
 
-### Compliance, RAG & Data Quality
-- `POST /api/rag/ask`: Semantic question-answering over statutory documents with verifiable SHA-256 citations.
-- `GET /api/compliance/cases`: Lists active statutory cases (EU CBAM, India CCTS, SEBI BRSR Core) with calculated financial exposure in INR.
-- `POST /api/compliance/evaluate`: Direct statutory rule-pack evaluator on any custom plant assessment.
-- `POST /api/data-quality/score`: Calculates GHG Protocol Data Quality Indicator (DQI) scores across TIER 1, TIER 2, and TIER 3 evidence.
+### Identity & access
+- `POST /api/auth/register`, `/login`, `/refresh`, `/logout`, `/logout-all`
+- `GET  /api/auth/me` — user, memberships, and the permissions the UI uses
+- `POST /api/organizations/{id}/members` — invite; `DELETE` to remove
+- `POST /api/factories/{id}/access` — grant one named person one factory, with a level and an expiry; `DELETE` revokes
 
-### Reference & Audit
-- `GET /api/health`: Health probe returning engine metrics, factor counts, and sector counts.
-- `GET /api/sectors`: Lists all 10 supported industrial sectors with cluster registries.
-- `GET /api/reference`: Statutory emission factors with uncertainty ranges and CEA state grid factors.
-- `GET /api/corpus`: Cryptographic audit manifest of all 23 primary source documents.
+### Factories, intake & assessment
+- `GET/POST /api/factories`, `PATCH/DELETE /api/factories/{id}`
+- `GET/POST /api/factories/{id}/sites`, `/activity`, `/assets`, `PUT /profile`
+- `POST /api/intake/conversation/extract` — plain-language extraction; **never writes**
+- `POST /api/intake/document/extract`, `/equipment/extract` — capture and store as evidence
+- `POST /api/intake/factories/{id}/confirm` — the *only* path by which an extracted value becomes factory data
+- `POST /api/factories/{id}/assessments` — run the engine, persist with a full version stamp
+- `POST /api/factories/{id}/scenarios`, `POST /api/scenarios/{id}/run` — what-if against the same engine
+
+### Actions, evidence & verification
+- `GET /api/factories/{id}/actions`, `PATCH /api/actions/{id}`
+- `POST /api/actions/{id}/verification`, `POST /api/verification/{id}/results` — baseline vs expected vs actual
+- `POST /api/evidence` (multipart), `/links`, `/verify`, `/download`
+
+### Marketplace
+- `GET /api/providers`, `/api/providers/match` — weighted, **explained** matching
+- `POST /api/rfqs`, `/api/rfqs/{id}/quotes`, `GET /api/rfqs/{id}/compare`
+- `POST /api/quotes/{id}/accept`, `GET/POST /api/materials`
+
+### Compliance & notifications
+- `GET  /api/factories/{id}/compliance` — readiness, with every line labelled by what produced it
+- `POST /api/compliance/evaluate` — **202 and an event, never a verdict** (the evaluator is BE-2's)
+- `GET/POST /api/compliance/cases`, `PATCH`, `/evidence`, `/close`, `/corrective-actions`
+- `GET /api/notifications`, `GET /api/factories/{id}/audit`, `/events`
+
+### Not yet built in the Python service
+Logistics routing and pooling, RAG question-answering, and the compliance rule
+evaluator are BE-2's scope. Reference implementations exist in `backend-node/`.
+`POST /api/compliance/evaluate` already raises the event a rule evaluator would
+consume, and an event with no registered handler is marked processed **with a
+note**, so the gap stays visible rather than silently resolving to "compliant".
 
 ---
 
 ## 📦 Shared Contracts & DTOs (`packages/contracts/`)
 
 To guarantee seamless integration across frontend dashboards (`apps/web`), mobile APKs (`apps/mobile`), and the backend, PRANGARA maintains single-source-of-truth DTO contracts:
-- **TypeScript ([`index.ts`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/packages/contracts/index.ts)):** 24 strictly typed interfaces (`User`, `Factory`, `PlantProfile`, `AssessmentResponse`, `Stream`, `Leak`, `Recommendation`, `RouteOption`, `ComplianceCase`, `RAGAnswer`).
-- **Python Pydantic ([`schemas.py`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/packages/contracts/schemas.py)):** Input validation models for FastAPI/Python runtimes.
-- **JSON Schemas ([`schemas.json`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/packages/contracts/schemas.json)):** Standard JSON Schemas for direct intake validation without OCR overhead.
+- **TypeScript ([`index.ts`](packages/contracts/index.ts)):** 24 strictly typed interfaces (`User`, `Factory`, `PlantProfile`, `AssessmentResponse`, `Stream`, `Leak`, `Recommendation`, `RouteOption`, `ComplianceCase`, `RAGAnswer`).
+- **Python Pydantic ([`schemas.py`](packages/contracts/schemas.py)):** Input validation models for FastAPI/Python runtimes.
+- **JSON Schemas ([`schemas.json`](packages/contracts/schemas.json)):** Standard JSON Schemas for direct intake validation without OCR overhead.
 
 ---
 
-## 🚀 Quick Start & Test Execution
-
-Run the complete test suite and start the platform locally with **zero external npm installs**:
+## 🚀 Quick Start
 
 ```bash
-# 1. Clone and navigate to repository
 git clone https://github.com/Destroyerved/Prangara.git
 cd Prangara
-
-# 2. Verify dataset layer & primary source authenticity (23/23 passing)
-node datasets/08_automated_test_suites/verify_dataset_authenticity.js
-
-# 3. Verify domain & physics invariants across all 10 sectors (18/18 passing)
-node datasets/08_automated_test_suites/test_chakra_invariants.js
-
-# 4. Run Advanced ML & Backend test suite (15/15 passing)
-node backend/tests/test_ml_backend.js
-
-# 5. Run Live REST API Integration test suite (16/16 passing)
-node backend/tests/test_server_live.js
-
-# 6. Launch the Unified Backend Server on port 8080
-node backend/server.js
 ```
 
-### Automated Test Verification
+### Backend — Python / FastAPI
+
+```bash
+cd backend
+pip install -r requirements.txt
+python -m alembic upgrade head      # 29 tables
+python -m scripts.seed_demo         # 6 accounts, 3 factories, quotes, alerts
+python -m uvicorn app.main:app --reload
 ```
-===================================================================================
-PRANGARA AUTOMATED TEST SUITE EXECUTION SUMMARY
-===================================================================================
-1. datasets/08_automated_test_suites/verify_dataset_authenticity.js : 23/23 PASSED (100%)
-2. datasets/08_automated_test_suites/test_chakra_invariants.js       : 18/18 PASSED (100%)
-3. backend/tests/test_ml_backend.js                                  : 15/15 PASSED (100%)
-4. backend/tests/test_server_live.js                                 : 16/16 PASSED (100%)
------------------------------------------------------------------------------------
-TOTAL TEST VERIFICATION: 72/72 TESTS PASSED WITH 0 FAILURES (100% RELIABILITY)
-===================================================================================
+
+API docs: `http://localhost:8000/api/docs`.
+The seed prints the demo accounts; the password is `prangara-demo-2026`.
+
+Event worker, in a second terminal:
+
+```bash
+cd backend && python -m app.workers.outbox
 ```
+
+Defaults to a local SQLite file so it runs with no services started. Point
+`DATABASE_URL` at PostgreSQL for PostGIS and pgvector work. See `.env.example`.
+
+### Mobile — Expo / React Native
+
+```bash
+cd apps/mobile
+npm install
+npm start          # then press `a` for Android, or scan with Expo Go
+```
+
+On a physical phone, `localhost` is the phone — the client falls back to the
+Expo dev host on port 8000, and `EXPO_PUBLIC_API_URL` overrides it. The Account
+tab shows which URL was resolved and whether the API answered.
+
+### Tests
+
+```bash
+cd backend && python -m pytest tests -q                  # 147 passed
+cd apps/mobile && npm run typecheck                      # clean
+cd apps/mobile && npm run bundle:android                 # Android bundle builds
+
+node datasets/08_automated_test_suites/test_chakra_invariants.js        # 18/18
+node datasets/08_automated_test_suites/verify_dataset_authenticity.js   # 22/23 — see below
+```
+
+The 147 Python tests include 85 engine invariants from `docs/task.md` §15 run across
+all ten sectors, full tenant-isolation checks, and the PRD §32 demo path
+end to end.
 
 ---
 
@@ -291,8 +343,38 @@ Every emission factor, conversion ratio, and benchmark in PRANGARA is cryptograp
   - **BEE MSME Energy Audits:** 55 industrial cluster benchmarks ($p_{25}, p_{50}, p_{75}$).
   - **BIS & IEC Standards:** IS 1489 (PPC fly-ash cement), IEC 60034-30-1 (IE3/IE4 electric motors).
   - **Global LCI References:** worldsteel 2025, International Aluminium Institute (IAI), PlasticsEurope, Textile Exchange LCA 2026.
-- **Audit Register ([`source_registry.json`](file:///c:/Users/vedan/OneDrive/Desktop/prangara/datasets/06_auditing_and_proofs/source_registry.json)):**
-  - All 23 source files carry immutable SHA-256 checksums verified on every build. Zero tampered or synthetic reference numbers.
+- **Audit register:** [`datasets/06_auditing_and_proofs/chakra_source_registry.json`](datasets/06_auditing_and_proofs/chakra_source_registry.json)
+  — 20 registered sources, each with publisher, document, version, URL, retrieval
+  date and a SHA-256 of the downloaded artefact.
+
+- **Live traceability:** `GET /api/reference/provenance` joins the engine's
+  active factors to those source records. **25 of 31 active factors (81%)** carry
+  a full official citation today; the remaining six are unmapped and say so
+  rather than claiming a source they do not have.
+
+- **Two registries, disagreements reported not hidden.** The engine computes from
+  `backend/data/reference/`; the verified dataset is a second opinion. They agree
+  within 5% on 23 of 25 shared factors, with two exceptions surfaced by the API:
+
+  | Factor | Engine | Verified | Δ | Verified source |
+  |---|---|---|---|---|
+  | `COAL_INDIAN` | 1.70 tCO₂e/t | 1.504 tCO₂e/t | −11.5% | IPCC 2019 Refinement (derived with Coal India G11–G13 NCV) |
+  | `STEEL_SECONDARY` | 0.55 tCO₂e/t | 0.58 tCO₂e/t | +5.5% | worldsteel LCI |
+
+  Coal matters — it dominates Scope 1 for a foundry or a dyeing plant.
+  Assessments are computed with the engine value and the difference is reported,
+  because which one is correct is a reference-data decision (BE-2, `docs/task.md` §5),
+  and adopting either silently would change the basis of results factories have
+  already been shown.
+
+- **One known integrity failure.** `verify_dataset_authenticity.js` reports
+  **22 of 23** artefacts verified. `cpcb_hazardous_waste_rules_2016.pdf` is a
+  140-byte HTML redirect stub, not the rules document — the download captured a
+  redirect. No emission factor cites `SRC-CPCB-RULES`, so no carbon number rests
+  on it; it backs compliance rule text, which is not yet implemented. Re-fetching
+  the real PDF and updating its checksum is an open BE-2 task. This is stated
+  rather than rounded up to 100%, because a provenance claim that is not checked
+  is worth nothing.
 
 ---
 
@@ -300,45 +382,62 @@ Every emission factor, conversion ratio, and benchmark in PRANGARA is cryptograp
 
 ```
 PRANGARA/
-├── backend/
-│   ├── compliance/                    # Statutory rule packs (CBAM, CCTS, BRSR Core)
-│   ├── data/                          # Seed payloads & hero plant demonstration data
-│   ├── engine/                        # Deterministic sovereign carbon engine (ISO 14064)
-│   │   ├── factors.js & factors.py    # Factor registry & interval uncertainty bands
-│   │   ├── footprint.js               # Scope 1, Scope 2, Scope 3 stream inventory
-│   │   ├── leaks.js                   # 3-tier leak detection & percentile ranking
-│   │   ├── macc.js                    # 30 circular interventions & refusal constraints
-│   │   └── assess.js                  # Master assessment orchestrator & Sankey builder
-│   ├── ml/                            # Advanced ML & Operations Research layer
-│   │   ├── portfolio_optimizer.js     # MILP multi-objective knapsack & Pareto frontier
-│   │   ├── logistics_optimizer.js     # CVRPTW multi-tenant truck pooling & GLEC freight
-│   │   ├── bayesian_benchmarks.js     # Empirical Bayes cluster learning data flywheel
-│   │   └── marketplace_ranker.js      # Carbon-delta (ΔC_net) multi-attribute ranker
-│   ├── rag/                           # Verifiable semantic retrieval with SHA-256 badges
-│   ├── scripts/                       # Database seeders & demo initializers
-│   ├── tests/                         # ML invariants & live server test suites
-│   └── server.js                      # High-speed unified REST API server (Port 8080)
+├── backend/                           # ★ the running backend — Python / FastAPI
+│   ├── app/
+│   │   ├── api/                       # 13 route modules, 71 endpoints
+│   │   ├── core/                      # config, database, JWT, errors, rate limiting
+│   │   ├── models/                    # 29 SQLAlchemy tables
+│   │   ├── schemas/                   # Pydantic DTOs — the shared contract
+│   │   ├── services/                  # access, assessment, benchmarks, data quality,
+│   │   │                              #   events, audit, storage, units, provenance
+│   │   └── workers/outbox.py          # event worker (database outbox)
+│   ├── engine/                        # deterministic carbon engine — source of truth
+│   │   ├── factors.py                 # factor registry, low/base/high bands
+│   │   ├── footprint.py               # Scope 1/2/3 stream inventory
+│   │   ├── leaks.py                   # 3-rule leak detection, percentile ranking
+│   │   ├── macc.py                    # interventions, economics, interaction de-rating
+│   │   ├── assess.py                  # orchestrator, Sankey, compliance panel
+│   │   └── version.py                 # engine + reference content hashes
+│   ├── data/reference/                # active reference registry the engine reads
+│   ├── migrations/                    # Alembic
+│   ├── scripts/                       # seed_demo.py, export_openapi.py
+│   └── tests/                         # 147 tests
+├── backend-node/                      # parallel Node implementation, parked — see its README
+├── apps/
+│   └── mobile/                        # Android companion (Expo / React Native)
+│       └── src/{api,auth,components,lib,navigation,screens,storage,theme}
 ├── packages/
-│   └── contracts/                     # Shared DTOs (TypeScript, Pydantic, JSON Schema)
-├── datasets/                          # Cryptographically audited data architecture
+│   └── contracts/                     # openapi.json + shared TypeScript / Pydantic DTOs
+├── datasets/                          # audited reference data architecture (BE-2)
 │   ├── 01_statutory_emission_baselines/
 │   ├── 02_circular_interventions_library/
 │   ├── 03_industrial_sector_benchmarks/
-│   ├── 06_auditing_and_proofs/        # SHA-256 registry and authenticity reports
-│   ├── 07_primary_raw_sources/        # Immutable PDFs and XLSX files
-│   ├── 08_automated_test_suites/      # Integrity audit test scripts
-│   └── 10_rag_knowledge_base/         # Regulatory chunks for grounded RAG
+│   ├── 06_auditing_and_proofs/        # source registry + SHA-256 verification
+│   ├── 07_primary_raw_sources/        # the actual PDFs and spreadsheets
+│   ├── 08_automated_test_suites/      # integrity and invariant checks
+│   └── 10_rag_knowledge_base/         # regulatory chunks for grounded RAG
 ├── src/                               # React & TypeScript web application (Vite, Tailwind, D3, Motion)
 │   ├── components/                    # UI, Shell, Drawers, Intake, RAG Assistant, Charts
 │   ├── pages/                         # Overview, Plant Data, Footprint, Leaks, Scenarios, Logistics, Circular Network...
 │   ├── api/                           # Typed contracts, platform API client & adapters
 │   └── styles/                        # Visual system, glassmorphism tokens & animations
 ├── prds/                              # PRANGARA v2.0 Working Specifications & Role Playbooks
-├── docs/                              # Full technical specifications & architectural PRDs
+├── docs/                              # ★ the specification — read these first
+│   ├── README_START_HERE.md           # reading order and claim boundaries
+│   ├── PRD.md                         # product definition, FR-01..FR-57
+│   ├── task.md                        # role ownership and phase plan
+│   ├── DATA_RAG_COMPLIANCE.md         # sources, provenance, RAG, compliance
+│   └── AI_AGENT_PLAYBOOK.md           # rules for AI agents working here
+├── ROADMAP.md                         # tasks to a deployed product, with owners
+├── PROGRESS.md                        # what is built, what is not, and why
+├── HANDOFF_BACKEND.md                 # BE-1 handoff
+├── HANDOFF_MOBILE.md                  # FE-2 handoff
 ├── .gitattributes                     # Binary hash preservation rules
 ├── .gitignore                         # Local notes and sensitive files exclusions
 └── README.md                          # Platform master documentation
 ```
+
+The web dashboard (FE-1) lives on the `Frontend` branch.
 
 ---
 

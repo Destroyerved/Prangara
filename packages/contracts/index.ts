@@ -324,3 +324,88 @@ export interface AssessmentResponse {
     cases: ComplianceCase[];
   };
 }
+
+export interface RouteOption {
+  preset: 'FASTEST' | 'CHEAPEST' | 'LOWEST_CARBON' | 'BALANCED';
+  distance_km: number;
+  transit_hours: number;
+  cost_inr: number;
+  emissions_kgco2e: number;
+  vehicle: string;
+  description: string;
+  carbon_reduction_pct?: number;
+}
+
+export interface RoutePlanResult {
+  origin_gps: [number, number];
+  destination_gps: [number, number];
+  payload_tonnes: number;
+  routes: {
+    fastest: RouteOption;
+    cheapest: RouteOption;
+    lowest_carbon: RouteOption;
+    balanced: RouteOption;
+  };
+}
+
+export interface Shipment {
+  id: string;
+  factory_id?: string;
+  organization_id?: string;
+  origin_name: string;
+  origin_lat: number;
+  origin_lon: number;
+  destination_name: string;
+  dest_lat: number;
+  dest_lon: number;
+  payload_tonnes: number;
+  cargo_type: string;
+  status: 'PENDING' | 'POOLED' | 'DISPATCHED' | 'DELIVERED' | 'CANCELLED';
+  pooled_run_id?: string;
+  distance_km?: number;
+  transit_hours?: number;
+  cost_inr?: number;
+  emissions_kgco2e?: number;
+  client_ref?: string;
+  created_at: string;
+}
+
+export interface PooledRun {
+  run_id: string;
+  shipment_count: number;
+  shipment_ids: string[];
+  total_payload_tonnes: number;
+  utilization_capacity_pct: number;
+  total_distance_km: number;
+  destinations_routed: string[];
+  freight_carbon_kgco2e: number;
+  total_cost_inr: number;
+  carrier_assigned: string;
+}
+
+export interface PoolingMatchResult {
+  status: string;
+  algorithm: string;
+  total_shipments_evaluated: number;
+  trucks_dispatched_before: number;
+  trucks_dispatched_after: number;
+  truck_count_reduction_pct: number;
+  pooled_runs: PooledRun[];
+  standalone_summary: {
+    total_distance_km: number;
+    total_freight_carbon_tco2e: number;
+    total_freight_cost_inr: number;
+  };
+  pooled_summary: {
+    total_distance_km: number;
+    total_freight_carbon_tco2e: number;
+    total_freight_cost_inr: number;
+  };
+  net_savings: {
+    carbon_saved_tco2e: number;
+    carbon_reduction_pct: number;
+    cost_saved_inr: number;
+    cost_savings_pct: number;
+  };
+}
+

@@ -8,14 +8,48 @@ __pycache__/
 venv/
 env/
 
-# Local development database
+# Local development databases. Schemas are created by migrations or on first
+# run; these files hold test accounts and seeded demo plants.
 prototype/backend/chakra.db
 prototype/backend/chakra.db-wal
 prototype/backend/chakra.db-shm
+backend/prangara.db
+backend/prangara.db-wal
+backend/prangara.db-shm
+prangara.db*
 *.db-journal
 
-# Build intermediates
+# Runtime state: uploaded evidence, generated artefacts.
+var/
 build/*.html
+
+# Secrets. `.env.example` is committed; `.env` never is.
+.env
+.env.local
+
+# Node / Web Frontend / Expo
+node_modules/
+.expo/
+dist/
+.vite/
+.sites-runtime/
+work/
+*.apk
+*.aab
+apps/mobile/android/
+apps/mobile/ios/
+apps/mobile/.expo-export/
+
+# Competition problem statements and scratch notes.
+build_report.py
+HackOut26_Problem_Statements.pdf
+*Problem_Statements*
+README_ARCHIVE.md
+*.bak
+*.swp
+
+# `task.md` root stray copy
+/task.md
 
 # Editors / OS
 .vscode/
@@ -23,21 +57,3 @@ build/*.html
 .DS_Store
 Thumbs.db
 desktop.ini
-*.swp
-*.bak
-
-# Internal Task / Sprint Notes & Problem Statements
-task.md
-build_report.py
-HackOut26_Problem_Statements.pdf
-*Problem_Statements*
-README_ARCHIVE.md
-
-# Node / Web Frontend
-node_modules/
-dist/
-.vite/
-.env
-.env.local
-.sites-runtime/
-work/
