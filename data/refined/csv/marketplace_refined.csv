@@ -1,5 +1,0 @@
-listing_id,supplier_id,supplier_name,material_name,material_grade,recycled_content_pct,price_per_t_inr,moq_tonnes,available_stock_tonnes,warehouse_location,verified_carbon_factor_id,verified_factor_value,verified_unit,data_authenticity_mode,valid_until
-LST-MAT-001,SUP-014,Gujarat Re-Rolling & Scrap Corp,undefined,Fe 550D TMT,100,54500,20,450,"Bhavnagar, Gujarat",EF-MAT-STEEL-REBAR-EAF,0.45,tCO2e/t,FIRST_PARTY_OPERATOR_REPORTED,2026-10-31
-LST-MAT-002,SUP-029,Ambuja Cement Fly Ash Terminal,undefined,PPC 43 Grade,35,6800,30,1200,"Surat, Gujarat",EF-MAT-CEMENT-PPC,0.56,tCO2e/t,FIRST_PARTY_OPERATOR_REPORTED,2026-10-31
-LST-MAT-003,SUP-081,Alang Recycled Metals Limited,undefined,LM24 / LM6 Die-Cast Alloy,95,215000,5,85,"Alang / Bhavnagar, Gujarat",EF-MAT-ALUM-RECYCLED,0.62,tCO2e/t,FIRST_PARTY_OPERATOR_REPORTED,2026-10-31
-LST-MAT-004,SUP-052,EcoPlast Circular Solutions LLP,undefined,Clear Bottle Grade Flake,100,78000,10,220,"Ankleshwar, Gujarat",EF-MAT-PLASTIC-RPET,0.52,kgCO2e/kg,FIRST_PARTY_OPERATOR_REPORTED,2026-10-31
