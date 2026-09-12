@@ -389,7 +389,7 @@ export function AbatementPortfolioIcon({ size = 40, color = "currentColor", clas
 
 /* ─── Demo Component ─── */
 
-export const ALL_ICONS = [
+const ALL_ICONS = [
   { name: "Overview", Icon: OverviewIcon },
   { name: "Success", Icon: SuccessIcon },
   { name: "Menu", Icon: MenuCloseIcon },
