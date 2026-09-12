@@ -983,30 +983,6 @@ input, select, textarea {
   transform: translate3d(0, 0, 0);
 }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--surface-2);
-  border: 1px solid var(--glass-border);
-  padding: 8px 18px;
-  border-radius: var(--r-pill);
-  margin-bottom: 28px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-green);
-  box-shadow: 0 0 8px var(--accent-green);
-}
-.badge-text {
-  font-size: 12.5px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: var(--text-secondary);
-}
 
 .hero-headline {
   font-size: clamp(38px, 6.2vw, 76px);
@@ -1321,34 +1297,150 @@ input, select, textarea {
   z-index: 10;
 }
 
-.problem-grid {
+.problem-layout-asymmetric {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 32px;
+  align-items: stretch;
+  margin-top: 36px;
 }
 
-.problem-card {
-  padding: 36px 30px;
+.problem-editorial-col {
+  padding: 44px 38px;
   display: flex;
   flex-direction: column;
-}
-.problem-card:hover {
-  transform: translateY(-4px);
+  justify-content: space-between;
+  border-radius: var(--r-xl);
+  background: linear-gradient(145deg, rgba(16, 26, 36, 0.88), rgba(10, 18, 26, 0.94));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-deep);
+  position: relative;
+  overflow: hidden;
 }
 
-.problem-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--r-md);
+.problem-editorial-col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.35), transparent);
+}
+
+.problem-editorial-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.editorial-display-heading {
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 450;
+  letter-spacing: -0.03em;
+  line-height: 1.32;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.editorial-body {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.editorial-telemetry-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(8, 14, 20, 0.85);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(12px);
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.telemetry-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.telemetry-val {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+.telemetry-sub {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.problem-triage-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.triage-card {
+  padding: 24px 28px;
+  border-radius: var(--r-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform var(--transition-norm), border-color var(--transition-norm), box-shadow var(--transition-norm);
+}
+
+.triage-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(180, 220, 235, 0.28);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.triage-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.triage-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.triage-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
   background: var(--surface-3);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
 }
-.problem-icon svg {
-  width: 22px;
-  height: 22px;
+
+.triage-icon svg {
+  width: 16px;
+  height: 16px;
 }
 
 .problem-kicker {
@@ -1357,40 +1449,40 @@ input, select, textarea {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 8px;
 }
 
-.problem-heading {
-  font-size: 20px;
+.triage-title {
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: -0.02em;
   color: var(--text-primary);
-  margin-bottom: 14px;
-  line-height: 1.35;
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
-.problem-desc {
-  font-size: 14px;
-  line-height: 1.6;
+.triage-desc {
+  font-size: 13px;
+  line-height: 1.55;
   color: var(--text-secondary);
-  margin-bottom: 28px;
-  flex-grow: 1;
+  margin: 0;
 }
 
-.problem-stat {
-  padding-top: 18px;
+.triage-footer {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 10px;
   border-top: 1px solid var(--glass-border);
+  margin-top: 4px;
 }
-.pstat-val {
-  display: block;
-  font-size: 22px;
+
+.triage-metric {
+  font-size: 17px;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 4px;
+  font-family: var(--font-mono);
 }
-.pstat-lbl {
-  display: block;
-  font-size: 12px;
+
+.triage-metric-note {
+  font-size: 11.5px;
   color: var(--text-muted);
 }
 
@@ -2170,6 +2262,30 @@ input, select, textarea {
   flex-direction: column;
   gap: 16px;
 }
+.footer-brand-col .brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+.footer-brand-col .brand-link:hover {
+  opacity: 1;
+}
+.footer-mark {
+  width: 22px;
+  height: 22px;
+  color: var(--text-primary);
+  display: block;
+  flex-shrink: 0;
+}
+.footer-wordmark {
+  height: 14px;
+  width: auto;
+  color: var(--text-primary);
+  display: block;
+}
 .footer-desc {
   font-size: 13.5px;
   color: var(--text-secondary);
@@ -2814,6 +2930,10 @@ input, select, textarea {
   .timeline-track-bar {
     display: none;
   }
+  .problem-layout-asymmetric {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
   .dual-engine-grid {
     grid-template-columns: 1fr;
   }
@@ -3016,10 +3136,6 @@ input, select, textarea {
 
     <div class="container hero-container spatial-layer-hero">
       <div class="hero-content-wrap">
-        <div class="hero-badge hero-fade-1">
-          <span class="badge-dot"></span>
-          <span class="badge-text">Deterministic Industrial Decarbonization Engine</span>
-        </div>
 
         <h1 class="hero-headline hero-fade-2">
           Turn industrial emissions into <span class="text-accent-opportunity">measurable opportunity.</span>
@@ -3171,46 +3287,92 @@ input, select, textarea {
         <p class="section-subtitle">A typical plant produces thousands of isolated data points across utility meters, weighbridge slips, supplier invoices, and boiler logbooks. Without deterministic diagnosis, waste compounds silently.</p>
       </div>
 
-      <div class="problem-grid">
-        <!-- Block 1: Energy Loss -->
-        <div class="problem-card glass-panel rv">
-          <div class="problem-icon text-amber">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <div class="problem-layout-asymmetric">
+        <!-- Editorial Left Column: Large Statement & Telemetry Context -->
+        <div class="problem-editorial-col glass-panel rv">
+          <div>
+            <div class="problem-editorial-kicker text-amber">
+              <span class="badge-dot" style="background:var(--accent-amber);box-shadow:0 0 8px var(--accent-amber);width:6px;height:6px;border-radius:50%;display:inline-block;"></span>
+              DIAGNOSTIC TRIAGE · BEE MSME AUDIT
+            </div>
+            <h3 class="editorial-display-heading">
+              Thermodynamic decay and unmonitored Scope 3 concentration compound across industrial operations.
+            </h3>
+            <p class="editorial-body">
+              Across manufacturing facilities, carbon and energy waste is rarely a single catastrophic rupture. It is cumulative: throttled boiler pumps, uninsulated steam lines, and un-optimized supplier carbon footprints that quietly erode operational EBITDA until statutory audits demand reckoning.
+            </p>
           </div>
-          <span class="problem-kicker">ENERGY LOSS</span>
-          <h3 class="problem-heading">Unseen thermodynamic & electrical waste</h3>
-          <p class="problem-desc">Old IE1 motors, uninsulated steam valves, throttled boiler feed pumps, compressed-air header leaks, and sub-optimal liquor ratios consume up to 22% excess energy without operational warning.</p>
-          <div class="problem-stat">
-            <span class="pstat-val text-amber">780 kWh / t</span>
-            <span class="pstat-lbl">Plant intensity vs 480–690 benchmark range</span>
+          <div class="editorial-telemetry-banner">
+            <div class="telemetry-item">
+              <span class="telemetry-label">Intensity Breach</span>
+              <span class="telemetry-val text-amber">780 kWh / t</span>
+              <span class="telemetry-sub">Plant intensity vs 480–690 benchmark range</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">Scope 3 Exposure</span>
+              <span class="telemetry-val text-cyan">60.6%</span>
+              <span class="telemetry-sub">Concentrated in virgin combed cotton stream</span>
+            </div>
           </div>
         </div>
 
-        <!-- Block 2: Carbon Exposure -->
-        <div class="problem-card glass-panel rv rv-d1">
-          <div class="problem-icon text-cyan">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+        <!-- Right Column: Stacked Diagnostic Triage Cards -->
+        <div class="problem-triage-stack">
+          <!-- Triage 1: Energy Loss -->
+          <div class="triage-card glass-panel rv rv-d1">
+            <div class="triage-card-header">
+              <div class="triage-tag-row">
+                <div class="triage-icon text-amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <span class="problem-kicker">ENERGY LOSS</span>
+              </div>
+              <span class="badge-chip badge-chip--amber">Thermodynamic Leak</span>
+            </div>
+            <h4 class="triage-title">Unseen thermodynamic &amp; electrical waste</h4>
+            <p class="triage-desc">Old IE1 motors, uninsulated steam valves, throttled boiler feed pumps, compressed-air header leaks, and sub-optimal liquor ratios consume up to 22% excess energy without operational warning.</p>
+            <div class="triage-footer">
+              <span class="triage-metric text-amber">780 kWh / t</span>
+              <span class="triage-metric-note">Plant intensity vs 480–690 benchmark range</span>
+            </div>
           </div>
-          <span class="problem-kicker">CARBON EXPOSURE</span>
-          <h3 class="problem-heading">Scope 3 supply chain concentration</h3>
-          <p class="problem-desc">Purchased raw materials (virgin combed cotton, fossil polymers) and un-optimized logistics corridors carry up to 64% of total factory emissions, creating sudden vulnerability to supply chain penalties.</p>
-          <div class="problem-stat">
-            <span class="pstat-val text-cyan">60.6%</span>
-            <span class="pstat-lbl">Emissions concentrated in single material stream</span>
-          </div>
-        </div>
 
-        <!-- Block 3: Compliance Risk -->
-        <div class="problem-card glass-panel rv rv-d2">
-          <div class="problem-icon text-lavender">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          <!-- Triage 2: Carbon Exposure -->
+          <div class="triage-card glass-panel rv rv-d2">
+            <div class="triage-card-header">
+              <div class="triage-tag-row">
+                <div class="triage-icon text-cyan">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                </div>
+                <span class="problem-kicker">CARBON EXPOSURE</span>
+              </div>
+              <span class="badge-chip badge-chip--cyan">Scope 3 Bottleneck</span>
+            </div>
+            <h4 class="triage-title">Scope 3 supply chain concentration</h4>
+            <p class="triage-desc">Purchased raw materials (virgin combed cotton, fossil polymers) and un-optimized logistics corridors carry up to 64% of total factory emissions, creating sudden vulnerability to supply chain penalties.</p>
+            <div class="triage-footer">
+              <span class="triage-metric text-cyan">60.6%</span>
+              <span class="triage-metric-note">Emissions concentrated in single material stream</span>
+            </div>
           </div>
-          <span class="problem-kicker">COMPLIANCE RISK</span>
-          <h3 class="problem-heading">Defensibility & disclosure pressure</h3>
-          <p class="problem-desc">EU CBAM border adjustment taxes, SEBI BRSR Core mandatory ESG audits, and banking sustainability-linked loans demand traceable calculation formulas and verifiable primary billing evidence.</p>
-          <div class="problem-stat">
-            <span class="pstat-val text-lavender">100% Defensible</span>
-            <span class="pstat-lbl">Traceable from ton-CO2e back to original GRN bill</span>
+
+          <!-- Triage 3: Compliance Risk -->
+          <div class="triage-card glass-panel rv rv-d3">
+            <div class="triage-card-header">
+              <div class="triage-tag-row">
+                <div class="triage-icon text-lavender">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+                <span class="problem-kicker">COMPLIANCE RISK</span>
+              </div>
+              <span class="badge-chip badge-chip--teal">Traceable Lineage</span>
+            </div>
+            <h4 class="triage-title">Defensibility &amp; disclosure pressure</h4>
+            <p class="triage-desc">EU CBAM border adjustment taxes, SEBI BRSR Core mandatory ESG audits, and banking sustainability-linked loans demand traceable calculation formulas and verifiable primary billing evidence.</p>
+            <div class="triage-footer">
+              <span class="triage-metric text-lavender">100% Defensible</span>
+              <span class="triage-metric-note">Traceable from ton-CO2e back to original GRN bill</span>
+            </div>
           </div>
         </div>
       </div>
