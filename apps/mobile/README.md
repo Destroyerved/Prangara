@@ -7,11 +7,12 @@ readiness and methodology — plus the things only a phone can do: camera intake
 of bills and nameplates, conversational onboarding, evidence capture, and a
 queue that drains when the signal comes back.
 
-It shares the web app's design system value for value: the same near-black
-ground (`#070708`), the same lavender accent (`#bec2ff`) and cyan secondary
-(`#50d8e9`), the same scope palette, the same Manrope/Inter type ramp with its
-tight display tracking, and the same glass surfaces — `src/theme/tokens.ts` is a
-direct port of `src/styles/tokens.css`.
+It shares the web app's design system value for value: the monochrome dark
+theme with a near-black `#060708` ground and a white accent on glass surfaces,
+colour reserved for data (scopes `#fb923c / #818cf8 / #38bdf8`, cash-positive
+`#10b981`, net-cost `#f43f5e`), and the same Manrope/Inter type ramp with its
+tight display tracking. `src/theme/tokens.ts` is a direct port of
+`src/styles/tokens.css`.
 
 ## Running it
 

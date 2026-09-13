@@ -14,11 +14,12 @@ approximation of it, and it is usable with no backend in reach.
 ### Design system
 
 `apps/mobile/src/theme/tokens.ts` is now a direct port of the web app's
-`src/styles/tokens.css`, value for value: ground `#070708`, lavender accent
-`#bec2ff`, cyan secondary `#50d8e9`, scope palette `#ffb689 / #bec2ff /
-#50d8e9`, border `#232426`, the `rgba` glass surfaces, radius 14, and the
-Manrope/Inter ramp with the web's tight display tracking (Manrope for titles and
-numbers, Inter for prose, loaded through `@expo-google-fonts`).
+`src/styles/tokens.css`, value for value: the monochrome dark theme with a
+`#060708` ground, white accent, slate secondary `#94a3b8`, scope palette
+`#fb923c / #818cf8 / #38bdf8`, chart colours `#10b981` (cash positive) and
+`#f43f5e` (net cost), `rgba` glass surfaces, radius 14, and the Manrope/Inter
+ramp with the web's tight display tracking (Manrope for titles and numbers,
+Inter for prose, loaded through `@expo-google-fonts`).
 
 The previous tokens claimed to be "aligned with the web app" but were a
 different palette entirely — cyan/emerald on `#080B11`. That is what made the
@@ -55,8 +56,8 @@ switching plant moves the whole app.
 
 `src/components/charts.tsx` ports the web chart geometry to `react-native-svg`
 with the same scales and colours: the MACC (width = de-rated tonnes, height =
-₹/tCO₂e, 8th–92nd percentile clipping, accent below the zero line and scope-1
-peach above it), the scope band, the uncertainty band, the peer quartile strip,
+₹/tCO₂e, 8th–92nd percentile clipping, green below the zero line and red
+above it, matching the web), the scope band, the uncertainty band, the peer quartile strip,
 stream bars, a three-column stream→scope→total sankey, and before/after bars for
 the simulator. Each carries an `accessibilityLabel`, because text inside an SVG
 reaches no screen reader — and no text query either, which is how the tests

@@ -79,7 +79,13 @@ def create_assessment(factory_id: str, body: RunAssessmentRequest,
         "scope2_tco2e": assessment.scope2_tco2e,
         "scope3_tco2e": assessment.scope3_tco2e,
         "total_emissions_tco2e": assessment.total_tco2e,
-        "intensity_tco2e_per_t": assessment.intensity_tco2e_per_t,
+        # The model has no intensity column; the total per-tonne intensity
+        # lives in the stored engine result. Reading a missing attribute here
+        # raised on every assessment run.
+        "intensity_tco2e_per_t": (
+            (assessment.result or {}).get("footprint", {})
+            .get("intensities", {}).get("total_tco2e_per_t")
+        ),
         "created_at": assessment.created_at,
     })
 

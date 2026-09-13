@@ -54,9 +54,10 @@ sidebar group for group:
 ### One design system across both surfaces
 
 `apps/mobile/src/theme/tokens.ts` is now a direct port of the web app's
-`src/styles/tokens.css`: ground `#070708`, lavender accent `#bec2ff`, cyan
-secondary `#50d8e9`, scope palette `#ffb689 / #bec2ff / #50d8e9`, the `rgba`
-glass surfaces, and the Manrope/Inter type ramp with the web's tight display
+`src/styles/tokens.css`: the web's monochrome dark theme with a `#060708`
+ground, white accent, slate secondary, scope palette `#fb923c / #818cf8 /
+#38bdf8`, chart colours `#10b981` and `#f43f5e`, `rgba` glass surfaces, and
+the Manrope/Inter type ramp with the web's tight display
 tracking. The bottom tab bar is the web's detached floating navbar — a glass
 pill lifted off the bottom edge, with line icons drawn in SVG.
 

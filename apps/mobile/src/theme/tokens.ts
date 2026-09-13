@@ -1,11 +1,15 @@
 /**
  * Mobile design tokens.
  *
- * These are a direct port of the web app's `src/styles/tokens.css`, value for
+ * A direct port of the web app's `src/styles/tokens.css` dark theme, value for
  * value, so a screen looks like the same product whichever device it is on.
+ * The web moved to a monochrome system - white accent on near-black glass,
+ * with colour reserved for data: scopes, severities and the cash-positive /
+ * net-cost split in charts. These values follow it.
+ *
  * Where the web relies on `backdrop-filter` for its glass, React Native
- * composites the same rgba surface over the same near-black ground, which
- * lands in the same place visually without a blur pass.
+ * composites the same rgba surface over the same ground, which lands in the
+ * same place visually without a blur pass.
  *
  * Nothing here is invented. If a colour is needed that the web does not have,
  * the web token is added first.
@@ -13,86 +17,90 @@
 
 export const colour = {
   // Ground and glass
-  bg: '#070708',
-  bgSecondary: 'rgba(10, 10, 13, 0.75)',
-  sidebar: 'rgba(13, 14, 16, 0.75)',
-  surface: 'rgba(18, 19, 23, 0.68)',
-  surfaceHover: 'rgba(28, 30, 36, 0.78)',
-  surfaceInset: 'rgba(10, 11, 14, 0.55)',
-  surfaceHigh: 'rgba(25, 27, 32, 0.78)',
-  panel: 'rgba(16, 17, 21, 0.82)',
-  glass: 'rgba(18, 19, 23, 0.72)',
+  bg: '#060708',
+  bgSecondary: 'rgba(12, 13, 16, 0.85)',
+  sidebar: 'rgba(10, 11, 13, 0.80)',
+  surface: 'rgba(16, 17, 21, 0.82)',
+  surfaceHover: 'rgba(26, 28, 34, 0.90)',
+  surfaceInset: 'rgba(10, 11, 14, 0.85)',
+  surfaceHigh: 'rgba(22, 24, 29, 0.92)',
+  panel: 'rgba(16, 17, 21, 0.90)',
+  glass: 'rgba(16, 17, 21, 0.82)',
 
   // Type
-  text: '#e5e2e3',
-  bright: '#f0f1f2',
-  muted: '#9a9da3',
-  subtle: '#92949c',
+  text: '#e2e8f0',
+  bright: '#ffffff',
+  muted: '#94a3b8',
+  subtle: '#64748b',
 
   // Lines
-  border: '#232426',
-  borderSecondary: '#1b1c1e',
-  outline: '#454655',
+  border: 'rgba(255, 255, 255, 0.09)',
+  borderSecondary: 'rgba(255, 255, 255, 0.05)',
+  outline: '#383d47',
   cardBorder: 'rgba(255, 255, 255, 0.08)',
-  floatingBorder: 'rgba(255, 255, 255, 0.14)',
+  floatingBorder: 'rgba(255, 255, 255, 0.16)',
 
-  // Accent: lavender primary, cyan secondary
-  accent: '#bec2ff',
-  accentStrong: '#d6d8ff',
-  accentSaturated: '#5e6bff',
-  accentContainer: '#7a85ff',
-  accentInk: '#000469',
-  secondary: '#50d8e9',
-  secondaryBright: '#92f1ff',
+  // Accent: monochrome
+  accent: '#ffffff',
+  accentStrong: '#f8fafc',
+  accentSaturated: '#e2e8f0',
+  accentContainer: 'rgba(255, 255, 255, 0.12)',
+  accentInk: '#070809',
+  secondary: '#94a3b8',
+  secondaryBright: '#e2e8f0',
+
+  // Charts: the only saturated colour outside scopes and severities
+  chartPositive: '#10b981',
+  chartCost: '#f43f5e',
 
   // GHG scopes
-  scope1: '#ffb689',
-  scope2: '#bec2ff',
-  scope3: '#50d8e9',
+  scope1: '#fb923c',
+  scope2: '#818cf8',
+  scope3: '#38bdf8',
 
   // Status
-  critical: '#ffb4ab',
-  high: '#ffb689',
-  moderate: '#ffb689',
-  healthy: '#e5fd17',
-  watch: '#9a9da3',
+  critical: '#f87171',
+  high: '#fb923c',
+  moderate: '#fbbf24',
+  healthy: '#10b981',
+  watch: '#94a3b8',
 
   // Tinted grounds
-  dangerBg: 'rgba(255, 180, 171, 0.09)',
-  positiveBg: 'rgba(80, 216, 233, 0.08)',
-  warningBg: 'rgba(255, 182, 137, 0.09)',
-  selectedBg: 'rgba(190, 194, 255, 0.09)',
-  navActive: 'rgba(255, 255, 255, 0.06)',
+  dangerBg: 'rgba(248, 113, 113, 0.12)',
+  positiveBg: 'rgba(255, 255, 255, 0.08)',
+  warningBg: 'rgba(251, 191, 36, 0.12)',
+  selectedBg: 'rgba(255, 255, 255, 0.08)',
+  navActive: 'rgba(255, 255, 255, 0.08)',
 
   // Charts
-  chartGrid: 'rgba(255, 255, 255, 0.035)',
+  chartGrid: 'rgba(255, 255, 255, 0.04)',
   zeroLine: 'rgba(255, 255, 255, 0.25)',
 
-  // Names the older screens used. Kept so nothing has to be rewritten twice.
-  primary: '#bec2ff',
-  primaryPressed: '#7a85ff',
-  onPrimary: '#000469',
-  textMuted: '#9a9da3',
-  textFaint: '#92949c',
-  surfaceCard: 'rgba(18, 19, 23, 0.68)',
-  surfaceRaised: 'rgba(25, 27, 32, 0.78)',
-  surfaceGlass: 'rgba(18, 19, 23, 0.72)',
-  borderStrong: 'rgba(255, 255, 255, 0.14)',
-  borderHighlight: 'rgba(190, 194, 255, 0.28)',
-  positive: '#50d8e9',
-  ok: '#50d8e9',
-  info: '#50d8e9',
-  accentGlow: 'rgba(190, 194, 255, 0.14)',
-  emerald: '#50d8e9',
-  emeraldGlow: 'rgba(80, 216, 233, 0.1)',
-  cyanGlow: 'rgba(80, 216, 233, 0.1)',
-  violet: '#bec2ff',
-  violetGlow: 'rgba(190, 194, 255, 0.12)',
-  verified: '#50d8e9',
-  documentConfirmed: '#bec2ff',
-  declared: '#ffb689',
-  estimated: '#ffb689',
-  missing: '#ffb4ab',
+  // Names the older screens use, mapped onto the tokens above.
+  primary: '#ffffff',
+  primaryPressed: '#e2e8f0',
+  onPrimary: '#070809',
+  textMuted: '#94a3b8',
+  textFaint: '#64748b',
+  surfaceCard: 'rgba(16, 17, 21, 0.82)',
+  surfaceRaised: 'rgba(22, 24, 29, 0.92)',
+  surfaceGlass: 'rgba(16, 17, 21, 0.82)',
+  borderStrong: 'rgba(255, 255, 255, 0.16)',
+  borderHighlight: 'rgba(255, 255, 255, 0.22)',
+  positive: '#10b981',
+  ok: '#10b981',
+  info: '#94a3b8',
+  accentGlow: 'rgba(255, 255, 255, 0.12)',
+  emerald: '#10b981',
+  emeraldGlow: 'rgba(16, 185, 129, 0.12)',
+  cyanGlow: 'rgba(56, 189, 248, 0.12)',
+  violet: '#818cf8',
+  violetGlow: 'rgba(129, 140, 248, 0.12)',
+  verified: '#10b981',
+  documentConfirmed: '#ffffff',
+  declared: '#fbbf24',
+  estimated: '#fb923c',
+  missing: '#f87171',
 } as const;
 
 /** `--space-*` from the web, under the names the mobile screens already use. */
@@ -148,14 +156,14 @@ export const type = {
 export const shadow = {
   card: {
     shadowColor: '#000',
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.55,
     shadowRadius: 24,
     shadowOffset: { width: 0, height: 16 },
     elevation: 6,
   },
   floating: {
     shadowColor: '#000',
-    shadowOpacity: 0.42,
+    shadowOpacity: 0.55,
     shadowRadius: 18,
     shadowOffset: { width: 0, height: 8 },
     elevation: 12,
@@ -180,7 +188,7 @@ export const severityColour = (severity?: string): string => {
       return colour.watch;
     case 'ok':
     case 'healthy':
-      return colour.secondary;
+      return colour.healthy;
     default:
       return colour.muted;
   }
@@ -189,11 +197,11 @@ export const severityColour = (severity?: string): string => {
 export const dataStateColour = (state?: string): string => {
   switch ((state ?? '').toUpperCase()) {
     case 'VERIFIED':
-      return colour.secondary;
+      return colour.healthy;
     case 'DOCUMENT-CONFIRMED':
       return colour.accent;
     case 'DECLARED':
-      return colour.high;
+      return colour.moderate;
     case 'ESTIMATED':
       return colour.high;
     case 'MISSING':

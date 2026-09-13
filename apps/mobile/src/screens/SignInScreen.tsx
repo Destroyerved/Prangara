@@ -124,7 +124,7 @@ export default function SignInScreen() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            backgroundColor: 'rgba(15, 22, 38, 0.9)',
+            backgroundColor: colour.panel,
             borderWidth: 1,
             borderColor: colour.borderHighlight,
             borderRadius: radius.md,
@@ -272,7 +272,7 @@ export default function SignInScreen() {
                   }
                   style={{
                     backgroundColor: colour.positiveBg,
-                    borderColor: 'rgba(80, 216, 233, 0.28)',
+                    borderColor: colour.floatingBorder,
                     borderWidth: 1,
                     borderRadius: radius.pill,
                     paddingHorizontal: 12,

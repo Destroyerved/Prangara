@@ -3,7 +3,7 @@
  *
  * Ports of the web app's chart geometry to `react-native-svg`: the same
  * scales, the same colours, the same rule that a negative cost per tonne is
- * drawn in the accent and a positive one in scope 1's peach. Geometry is
+ * drawn in the chart-positive green and a positive one in chart-cost red. Geometry is
  * unchanged; only the canvas size is chosen for a phone.
  *
  * Every chart degrades to a labelled empty state rather than an empty box,
@@ -226,7 +226,7 @@ export function MaccChart({
             y={zero}
             width={plotRight - padLeft}
             height={Math.max(0, height - padBottom - zero)}
-            fill={colour.accent}
+            fill={colour.chartPositive}
             opacity={0.04}
           />
           {chart.bars.map((bar) => {
@@ -247,7 +247,7 @@ export function MaccChart({
                 width={barWidth}
                 height={barHeight}
                 rx={1}
-                fill={bar.height < 0 ? colour.accent : colour.scope1}
+                fill={bar.height < 0 ? colour.chartPositive : colour.chartCost}
                 opacity={dimmed ? 0.28 : 0.82}
                 onPress={() => {
                   setActive(bar.id === active ? null : bar.id);
@@ -329,8 +329,8 @@ export function MaccChart({
         )}
       </View>
       <View style={{ flexDirection: "row", marginTop: space.sm }}>
-        <Legend swatch={colour.accent} label="Cash positive" />
-        <Legend swatch={colour.scope1} label="Net cost" />
+        <Legend swatch={colour.chartPositive} label="Cash positive" />
+        <Legend swatch={colour.chartCost} label="Net cost" />
       </View>
     </View>
   );
@@ -476,11 +476,12 @@ export function BenchmarkStrip({
   const height = 42;
   const clamped = Math.min(99, Math.max(1, percentile));
   const marker = (clamped / 100) * width;
+  // The web strip, quartile for quartile: best to worst.
   const quartiles = [
-    colour.secondary,
-    colour.accent,
+    colour.chartPositive,
+    colour.scope3,
     colour.moderate,
-    colour.critical,
+    colour.scope1,
   ];
   return (
     <View onLayout={onLayout}>
@@ -839,7 +840,7 @@ export function DeltaBars({
     {
       label: "Scenario",
       value: scenario,
-      fill: scenario <= baseline ? colour.secondary : colour.critical,
+      fill: scenario <= baseline ? colour.chartPositive : colour.chartCost,
     },
   ];
   return (

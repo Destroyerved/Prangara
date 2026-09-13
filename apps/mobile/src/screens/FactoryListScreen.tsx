@@ -122,7 +122,7 @@ export default function FactoryListScreen() {
                 <View
                   style={{
                     backgroundColor: colour.positiveBg,
-                    borderColor: 'rgba(80, 216, 233, 0.28)',
+                    borderColor: colour.floatingBorder,
                     borderWidth: 1,
                     paddingHorizontal: space.sm,
                     paddingVertical: 3,

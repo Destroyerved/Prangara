@@ -290,10 +290,10 @@ const styles = StyleSheet.create({
   targetContainer: {
     position: 'relative',
     borderWidth: 1,
-    borderColor: 'rgba(30, 45, 69, 0.6)',
+    borderColor: 'rgba(255, 255, 255, 0.09)',
     borderRadius: radius.md,
     overflow: 'hidden',
-    backgroundColor: 'rgba(14, 23, 38, 0.35)',
+    backgroundColor: 'rgba(10, 11, 14, 0.85)',
   },
   corner: {
     position: 'absolute',

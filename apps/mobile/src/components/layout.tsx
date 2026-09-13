@@ -312,11 +312,11 @@ export function GlassPanel({
     tone === 'accent'
       ? colour.borderHighlight
       : tone === 'danger'
-        ? 'rgba(255, 180, 171, 0.32)'
+        ? 'rgba(248, 113, 113, 0.32)'
         : tone === 'warning'
-          ? 'rgba(255, 182, 137, 0.3)'
+          ? 'rgba(251, 191, 36, 0.3)'
           : tone === 'positive'
-            ? 'rgba(80, 216, 233, 0.28)'
+            ? colour.floatingBorder
             : colour.cardBorder;
 
   const body = (

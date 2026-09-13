@@ -199,7 +199,7 @@ function TabNavigator() {
           borderTopWidth: 0,
           borderWidth: 1,
           borderColor: colour.floatingBorder,
-          backgroundColor: 'rgba(11, 12, 15, 0.96)',
+          backgroundColor: 'rgba(10, 11, 13, 0.96)',
           ...shadow.floating,
         },
         tabBarActiveTintColor: colour.accentStrong,

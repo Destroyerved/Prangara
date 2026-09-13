@@ -36,6 +36,35 @@ logging.basicConfig(
 log = logging.getLogger("prangara")
 
 
+def _seed_serverless_demo() -> None:
+    """Seed the demo accounts into a fresh serverless SQLite database.
+
+    On Vercel the database lives in /tmp and starts empty on every cold
+    instance: the local prangara.db is git-ignored, so config.py has nothing to
+    copy. Without this the deployed API boots with no accounts and every
+    sign-in fails. Idempotent - an instance that already has the owner account
+    is left alone - and a seeding failure is logged rather than raised, so it
+    can never take the API down with it.
+    """
+    import os
+
+    if not os.environ.get("VERCEL"):
+        return
+    try:
+        from sqlalchemy import select
+
+        from app.core.database import SessionLocal
+        from app.models.identity import User
+        from scripts.seed_demo import _email, seed
+
+        with SessionLocal() as db:
+            if db.scalar(select(User).where(User.email == _email("owner"))) is None:
+                seed(db)
+                log.info("seeded demo accounts into the serverless database")
+    except Exception:  # noqa: BLE001
+        log.exception("demo seeding failed on serverless start")
+
+
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     from engine import ENGINE_VERSION, reference_versions
@@ -51,6 +80,7 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
         from app.core.database import Base, engine
         import app.models  # noqa: F401
         Base.metadata.create_all(bind=engine)
+        _seed_serverless_demo()
     from app.services.compliance_evaluator import register_handlers as register_compliance_handlers
     register_compliance_handlers()
     yield
