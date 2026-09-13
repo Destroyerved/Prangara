@@ -4762,7 +4762,7 @@
 
               <div class="form-group">
                 <label class="form-label" for="signup-email">Work Email</label>
-                <input class="form-input" id="signup-email" type="email" name="email" placeholder="rajesh@textiles.in"
+                <input class="form-input" id="signup-email" type="email" name="email" placeholder="rajesh@demo.prangara.example"
                   required autocomplete="email">
                 <span class="form-error-msg" id="signup-email-error"></span>
               </div>
@@ -5303,7 +5303,7 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
         var DEMO_USER = {
           id: 'usr_tirupur_01',
           name: 'Rajesh Kumar',
-          email: 'rajesh@textiles.in',
+          email: 'rajesh@demo.prangara.example',
           company: 'Tirupur Knitwear Dyeing Unit',
           role: 'Factory Owner / Director',
           roleKey: 'owner',
@@ -5349,10 +5349,10 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
                   return;
                 }
 
-                if (email === 'demo@prangara.com' || email === 'rajesh@textiles.in' || email.includes('@')) {
+                if (email === 'demo@prangara.com' || email === 'rajesh@demo.prangara.example' || email.includes('@')) {
                   var user = {
                     id: 'usr_' + Date.now().toString(36),
-                    name: email === 'rajesh@textiles.in' ? 'Rajesh Kumar' : 'Plant Engineer',
+                    name: email === 'rajesh@demo.prangara.example' ? 'Rajesh Kumar' : 'Plant Engineer',
                     email: email,
                     company: 'Tirupur Knitwear Dyeing Unit',
                     role: 'Plant / Energy Engineer',
@@ -5646,7 +5646,7 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
                   }));
                   localStorage.setItem('prangara_user_profile', JSON.stringify({
                     full_name: user.name || 'Rajesh Kumar',
-                    email: user.email || 'rajesh@textiles.in',
+                    email: user.email || 'rajesh@demo.prangara.example',
                     organization_name: user.company || 'Tirupur Knitwear Dyeing Unit',
                     role: user.role || 'Plant & Energy Operations Manager',
                     phone: '+91 98421 77320',
@@ -5746,8 +5746,8 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
           quickDemoBtn.addEventListener('click', function () {
             var emailInput = document.getElementById('signin-email');
             var passInput = document.getElementById('signin-password');
-            if (emailInput) emailInput.value = 'rajesh@textiles.in';
-            if (passInput) passInput.value = 'Tirupur2026!';
+            if (emailInput) emailInput.value = 'rajesh@demo.prangara.example';
+            if (passInput) passInput.value = 'prangara-demo-2026';
             SoundEngine.click();
             if (formSignin) {
               formSignin.dispatchEvent(new Event('submit', { cancelable: true }));
@@ -5791,7 +5791,7 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
                   }));
                   localStorage.setItem('prangara_user_profile', JSON.stringify({
                     full_name: name || 'Rajesh Kumar',
-                    email: email || 'rajesh@textiles.in',
+                    email: email || 'rajesh@demo.prangara.example',
                     organization_name: company || 'Tirupur Knitwear Works',
                     role: role || 'Plant / Energy Engineer',
                     phone: '+91 98421 77320',

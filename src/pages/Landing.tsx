@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { googleSignIn, setSession } from "../api/platform";
+import { googleSignIn, setSession, signIn } from "../api/platform";
+import { findDemoUser, usesLiveApi } from "../lib/demoAccounts";
 import { signInWithGoogle } from "../api/firebase";
 
 export default function Landing({ defaultHash }: { defaultHash?: string }) {
@@ -68,6 +69,57 @@ export default function Landing({ defaultHash }: { defaultHash?: string }) {
   useEffect(() => {
     window.scrollTo(0, 0);
 
+    type PostedUser = { name?: string; email?: string; company?: string; role?: string };
+
+    const rememberProfile = (user: PostedUser) => {
+      try {
+        localStorage.setItem('prangara_user_profile', JSON.stringify({
+          full_name: user.name || "Rajesh Kumar",
+          email: user.email || "",
+          organization_name: user.company || "Tirupur Knitwear Works",
+          role: user.role || "Plant / Energy Engineer",
+          phone: "+91 98421 77320",
+          cluster: "Tirupur Textile MSME Cluster, Tamil Nadu",
+          organization_kind: "manufacturer",
+        }));
+      } catch {
+        /* storage fallback */
+      }
+    };
+
+    // The landing page keeps its own local "session" for its marketing views.
+    // Mirroring that into the app with a made-up token is only valid with no
+    // backend: in API mode the fake token fails on the first request as
+    // "Session is not valid: Not enough segments" and every panel goes empty.
+    const enterWorkspace = async (user: PostedUser, path: string) => {
+      if (!usesLiveApi) {
+        setSession({
+          tokens: {
+            access_token: `demo-${user.email || "user"}-${Date.now()}`,
+            refresh_token: `refresh-${user.email || "user"}-${Date.now()}`,
+            token_type: "bearer",
+            expires_in: 86400,
+          },
+        });
+        rememberProfile(user);
+        navigate(path);
+        return;
+      }
+      const demo = findDemoUser(user.email);
+      if (!demo) {
+        // Not a seeded persona: sign in properly rather than borrow a session.
+        navigate("/account");
+        return;
+      }
+      try {
+        await signIn({ email: demo.email, password: demo.password }, false);
+        rememberProfile({ ...user, name: demo.name, company: demo.company, role: demo.role, email: demo.email });
+        navigate(path);
+      } catch {
+        navigate("/account");
+      }
+    };
+
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "PRANGARA_GOOGLE_AUTH") {
         setGoogleError(null);
@@ -76,30 +128,12 @@ export default function Landing({ defaultHash }: { defaultHash?: string }) {
         return;
       }
       if (event.data?.type === "PRANGARA_NAVIGATE" && event.data.path) {
-        if (event.data.user) {
-          const tokens = {
-            access_token: `demo-${event.data.user.email || "user"}-${Date.now()}`,
-            refresh_token: `refresh-${event.data.user.email || "user"}-${Date.now()}`,
-            token_type: "bearer",
-            expires_in: 86400,
-          };
-          setSession({ tokens });
-          try {
-            const prof = {
-              full_name: event.data.user.name || "Rajesh Kumar",
-              email: event.data.user.email || "rajesh@textiles.in",
-              organization_name: event.data.user.company || "Tirupur Knitwear Works",
-              role: event.data.user.role || "Plant / Energy Engineer",
-              phone: "+91 98421 77320",
-              cluster: "Tirupur Textile MSME Cluster, Tamil Nadu",
-              organization_kind: "manufacturer",
-            };
-            localStorage.setItem('prangara_user_profile', JSON.stringify(prof));
-          } catch {
-            /* storage fallback */
-          }
+        const posted = event.data.user as PostedUser | undefined;
+        if (!posted) {
+          navigate(event.data.path);
+          return;
         }
-        navigate(event.data.path);
+        void enterWorkspace(posted, event.data.path);
       }
     };
 

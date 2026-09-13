@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { useSession } from '../hooks/useSession';
 import { setSession, signIn, signOut, switchOrganization, updateProfile, googleSignIn } from '../api/platform';
+import { DEMO_USERS, DEMO_PASSWORD, usesLiveApi, type DemoUser } from '../lib/demoAccounts';
 import { signInWithGoogle } from '../api/firebase';
 import { PageHeading, Note } from '../components/ui/common';
 import { ActionButton, ErrorNotice } from '../components/platform/shared';
@@ -19,7 +20,7 @@ interface ProfileData {
 
 const DEFAULT_PROFILE: ProfileData = {
   full_name: "Rajesh Kumar",
-  email: "rajesh@textiles.in",
+  email: "rajesh@demo.prangara.example",
   organization_name: "Tirupur Knitwear Dyeing Unit",
   role: "Plant & Energy Operations Manager",
   phone: "+91 98421 77320",
@@ -27,12 +28,24 @@ const DEFAULT_PROFILE: ProfileData = {
   organization_kind: "manufacturer",
 };
 
-const DEMO_USERS = [
-  { label: "Rajesh Kumar (Plant Manager · Tirupur Textiles)", name: "Rajesh Kumar", company: "Tirupur Knitwear Dyeing Unit", role: "Plant & Energy Operations Manager", email: "rajesh@textiles.in", password: "Tirupur2026!" },
-  { label: "Hitesh Patel (Manufacturer · Rajkot Metal)", name: "Hitesh Patel", company: "Rajkot Precision Foundry", role: "Factory Owner / Director", email: "owner@demo.prangara.example", password: "prangara-demo-2026" },
-  { label: "Anita Shah (Compliance · Shah & Associates)", name: "Anita Shah", company: "Shah & Associates ESG Auditing", role: "Auditor / Consultant", email: "compliance@demo.prangara.example", password: "prangara-demo-2026" },
-  { label: "Priya Admin (Platform Administrator)", name: "Priya Admin", company: "PRANGARA Platform Core", role: "Platform Administrator", email: "admin@demo.prangara.example", password: "prangara-demo-2026" },
-];
+// A forged token is only acceptable with no backend behind it. In API mode it
+// fails later as "Session is not valid: Not enough segments" on every page,
+// which is far harder to understand than the sign-in error it replaced.
+function simulatedTokens(label: string) {
+  return {
+    access_token: `demo-${label}-${Date.now()}`,
+    refresh_token: `refresh-${Date.now()}`,
+    token_type: "bearer",
+    expires_in: 86400,
+  };
+}
+
+function signInFailure(err: unknown): string {
+  const message = err instanceof Error && err.message ? err.message : "";
+  return message
+    ? `Sign-in failed: ${message}`
+    : "Sign-in failed. Check that the API is running and the demo data has been seeded.";
+}
 
 function GoogleIcon() {
   return (
@@ -64,8 +77,8 @@ export default function Account() {
   const [editForm, setEditForm] = useState<ProfileData>(profile);
 
   // Form states for manual email/password
-  const [signinEmail, setSigninEmail] = useState('rajesh@textiles.in');
-  const [signinPassword, setSigninPassword] = useState('Tirupur2026!');
+  const [signinEmail, setSigninEmail] = useState(DEMO_USERS[0].email);
+  const [signinPassword, setSigninPassword] = useState(DEMO_PASSWORD);
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupCompany, setSignupCompany] = useState('');
@@ -103,24 +116,30 @@ export default function Account() {
     }
   }, [identity]);
 
-  const handleDemoSignIn = async (user: (typeof DEMO_USERS)[0]) => {
+  const rememberProfile = (next: ProfileData) => {
+    try {
+      localStorage.setItem('prangara_user_profile', JSON.stringify(next));
+    } catch { /* storage */ }
+    setProfile(next);
+    setEditForm(next);
+  };
+
+  const handleDemoSignIn = async (user: DemoUser) => {
     setAuthError(null);
     setLoading(true);
     try {
       await client.cancelQueries();
       client.removeQueries({ predicate: (q) => q.queryKey[0] === 'private' });
-      await signIn({ email: user.email, password: user.password }, false);
-    } catch {
-      // Client simulation mode
-      const tokens = {
-        access_token: `demo-${user.email}-${Date.now()}`,
-        refresh_token: `refresh-${Date.now()}`,
-        token_type: "bearer",
-        expires_in: 86400,
-      };
-      setSession({ tokens });
-    } finally {
-      const updatedProfile: ProfileData = {
+      try {
+        await signIn({ email: user.email, password: user.password }, false);
+      } catch (err) {
+        if (usesLiveApi) {
+          setAuthError(signInFailure(err));
+          return;
+        }
+        setSession({ tokens: simulatedTokens(user.email) });
+      }
+      rememberProfile({
         full_name: user.name,
         email: user.email,
         organization_name: user.company,
@@ -128,12 +147,8 @@ export default function Account() {
         phone: "+91 98421 77320",
         cluster: "Tirupur Textile MSME Cluster, Tamil Nadu",
         organization_kind: "manufacturer",
-      };
-      try {
-        localStorage.setItem('prangara_user_profile', JSON.stringify(updatedProfile));
-      } catch { /* storage */ }
-      setProfile(updatedProfile);
-      setEditForm(updatedProfile);
+      });
+    } finally {
       setLoading(false);
     }
   };
@@ -172,26 +187,17 @@ export default function Account() {
     try {
       await client.cancelQueries();
       client.removeQueries({ predicate: (q) => q.queryKey[0] === 'private' });
-      await signIn({ email: signinEmail, password: signinPassword }, false);
-    } catch {
-      // Client simulation mode
-      const tokens = {
-        access_token: `email-demo-${Date.now()}`,
-        refresh_token: `refresh-${Date.now()}`,
-        token_type: "bearer",
-        expires_in: 86400,
-      };
-      setSession({ tokens });
-    } finally {
-      const updatedProfile: ProfileData = {
-        ...profile,
-        email: signinEmail,
-      };
       try {
-        localStorage.setItem('prangara_user_profile', JSON.stringify(updatedProfile));
-      } catch { /* storage */ }
-      setProfile(updatedProfile);
-      setEditForm(updatedProfile);
+        await signIn({ email: signinEmail, password: signinPassword }, false);
+      } catch (err) {
+        if (usesLiveApi) {
+          setAuthError(signInFailure(err));
+          return;
+        }
+        setSession({ tokens: simulatedTokens('email') });
+      }
+      rememberProfile({ ...profile, email: signinEmail });
+    } finally {
       setLoading(false);
     }
   };
@@ -203,36 +209,30 @@ export default function Account() {
     try {
       await client.cancelQueries();
       client.removeQueries({ predicate: (q) => q.queryKey[0] === 'private' });
-      await signIn({
-        email: signupEmail,
-        password: signupPassword,
-        full_name: signupName,
-        organization_name: signupCompany,
-      }, true);
-    } catch {
-      // Client simulation mode
-      const tokens = {
-        access_token: `signup-demo-${Date.now()}`,
-        refresh_token: `refresh-${Date.now()}`,
-        token_type: "bearer",
-        expires_in: 86400,
-      };
-      setSession({ tokens });
-    } finally {
-      const updatedProfile: ProfileData = {
+      try {
+        await signIn({
+          email: signupEmail,
+          password: signupPassword,
+          full_name: signupName,
+          organization_name: signupCompany,
+        }, true);
+      } catch (err) {
+        if (usesLiveApi) {
+          setAuthError(signInFailure(err));
+          return;
+        }
+        setSession({ tokens: simulatedTokens('signup') });
+      }
+      rememberProfile({
         full_name: signupName || "Rajesh Kumar",
-        email: signupEmail || "rajesh@textiles.in",
+        email: signupEmail || DEMO_USERS[0].email,
         organization_name: signupCompany || "Tirupur Knitwear Works",
         role: signupRole || "Plant / Energy Engineer",
         phone: "+91 98421 77320",
         cluster: "Tirupur Textile MSME Cluster, Tamil Nadu",
         organization_kind: "manufacturer",
-      };
-      try {
-        localStorage.setItem('prangara_user_profile', JSON.stringify(updatedProfile));
-      } catch { /* storage */ }
-      setProfile(updatedProfile);
-      setEditForm(updatedProfile);
+      });
+    } finally {
       setLoading(false);
     }
   };
@@ -945,7 +945,7 @@ export default function Account() {
                   type="email"
                   value={signinEmail}
                   onChange={(e) => setSigninEmail(e.target.value)}
-                  placeholder="rajesh@textiles.in"
+                  placeholder="rajesh@demo.prangara.example"
                   required
                   style={{
                     width: '100%',
@@ -1084,7 +1084,7 @@ export default function Account() {
                   type="email"
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
-                  placeholder="rajesh@textiles.in"
+                  placeholder="rajesh@demo.prangara.example"
                   required
                   style={{
                     width: '100%',

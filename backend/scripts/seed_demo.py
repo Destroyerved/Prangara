@@ -53,8 +53,22 @@ DEMO_PASSWORD = "prangara-demo-2026"
 ACCOUNTS = [
     ("admin", "PRANGARA Platform", "platform", ROLE_PLATFORM_ADMIN, "Priya Admin"),
     ("owner", "Rajkot Metal Works", "manufacturer", ROLE_OWNER, "Hitesh Patel"),
+    ("rajesh", "Tirupur Knitwear Dyeing Unit", "manufacturer", ROLE_OWNER, "Rajesh Kumar"),
     ("compliance", "Shah and Associates", "consultant", ROLE_COMPLIANCE_OFFICER, "Anita Shah"),
 ]
+
+# Where an account's organization sits, when it is not Gujarat. The web
+# dashboard's one-click "Plant Manager" demo signs in as a Tirupur dyer, so his
+# organization, cluster and factory are seeded to match what the UI shows.
+ORG_LOCATION = {
+    "rajesh": ("Tamil Nadu", "Tirupur Textile MSME Cluster"),
+}
+
+# Which account's organization owns each factory. Anything not listed belongs to
+# the owner, which is what the hero demo and the seed tests expect.
+FACTORY_ORG = {
+    "tirupur": "rajesh",
+}
 
 # --- factories --------------------------------------------------------------
 # (key, name, sector, state, district, lat, lon, output_t, revenue_cr, employees,
@@ -94,6 +108,21 @@ FACTORIES = [
             ("waste", "RECYCLING_GENERIC", "Runner and purge regrind sold out",
              120, "tonne", None),
             ("freight", "ROAD_FREIGHT_HCV", "Road freight", 610_000, "tonne-km", None),
+        ],
+    ),
+    (
+        # Figures chosen to line up with the dashboard's Tirupur example:
+        # 1,250 kWh/t electricity intensity, Rs 34 Cr revenue, 180 staff and a
+        # 20 percent EU export share.
+        "tirupur", "Tirupur Knitwear Dyeing Unit", "textile_dyeing", "Tamil Nadu", "Tiruppur",
+        11.1085, 77.3411, 2400.0, 34.0, 180, 7.9, 20.0,
+        [
+            ("electricity", None, "Purchased electricity", 3_000_000, "kWh", 7.9),
+            ("fuel", "COAL_INDIAN", "Boiler coal", 1_850, "tonne", None),
+            ("material", "COTTON_CONV", "Grey knitted cotton fabric", 2_650, "tonne", None),
+            ("waste", "LANDFILL_ORGANIC", "ETP sludge", 210, "tonne", None),
+            ("freight", "ROAD_FREIGHT_HCV", "Yarn inbound and garment outbound",
+             520_000, "tonne-km", None),
         ],
     ),
 ]
@@ -485,7 +514,8 @@ def seed(db) -> dict[str, str]:
     users: dict[str, User] = {}
 
     for slug, org_name, kind, role, full_name in ACCOUNTS:
-        org = Organization(name=org_name, kind=kind, state="Gujarat")
+        state, cluster = ORG_LOCATION.get(slug, ("Gujarat", None))
+        org = Organization(name=org_name, kind=kind, state=state, cluster=cluster)
         user = User(email=_email(slug), full_name=full_name,
                     password_hash=hash_password(DEMO_PASSWORD))
         db.add_all([org, user])
@@ -504,8 +534,9 @@ def seed(db) -> dict[str, str]:
 
     for (key, name, sector, state, district, lat, lon, output_t, revenue_cr,
          employees, tariff, eu_pct, rows) in FACTORIES:
+        factory_owner = FACTORY_ORG.get(key, "owner")
         factory = Factory(
-            organization_id=owner_org.id, name=name, sector=sector, state=state,
+            organization_id=orgs[factory_owner].id, name=name, sector=sector, state=state,
             district=district, latitude=lat, longitude=lon,
         )
         db.add(factory)
@@ -534,7 +565,7 @@ def seed(db) -> dict[str, str]:
             ))
         db.flush()
 
-        assessment = run_assessment(db, factory, profile, actor_user_id=users["owner"].id,
+        assessment = run_assessment(db, factory, profile, actor_user_id=users[factory_owner].id,
                                     label="Seeded baseline")
         from app.api.routes_assessments import sync_actions
 

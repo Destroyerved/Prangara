@@ -233,6 +233,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
   const [copiedFormula, setCopiedFormula] = useState(false);
   const [copiedAnswer, setCopiedAnswer] = useState(false);
   const [isQuerying, setIsQuerying] = useState(false);
+  const [queryError, setQueryError] = useState<string | null>(null);
   const [dynamicTopics, setDynamicTopics] = useState<RagTopic[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -299,6 +300,7 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
   const handleAskEngine = async () => {
     if (!searchQuery.trim() || isQuerying) return;
     setIsQuerying(true);
+    setQueryError(null);
     try {
       const res = await service<{
         question?: string;
@@ -344,8 +346,11 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       };
       setDynamicTopics((prev) => [newTopic, ...prev]);
       setSelectedTopic(newTopic);
-    } catch {
-      /* Local topic match is preserved */
+    } catch (err) {
+      // Built-in topics still filter locally, but the user has to be told the
+      // live answer never came back, or pressing Ask looks like it did nothing.
+      const message = err instanceof Error && err.message ? err.message : "The assistant service did not respond.";
+      setQueryError(`Live answer unavailable: ${message} Showing built-in topics instead.`);
     } finally {
       setIsQuerying(false);
     }
@@ -526,7 +531,10 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setQueryError(null);
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") handleAskEngine();
                   }}
@@ -593,6 +601,18 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                   </span>
                 )}
               </div>
+              {queryError && (
+                <p
+                  role="alert"
+                  style={{
+                    margin: "0.4rem 0.2rem 0",
+                    fontSize: "0.74rem",
+                    color: "var(--tone-critical, #f87171)",
+                  }}
+                >
+                  {queryError}
+                </p>
+              )}
             </div>
 
             {/* Category Filter Tabs */}
