@@ -24,6 +24,7 @@ import {
   TrustBar,
 } from '../components/layout';
 import { AskAssistantModal } from '../components/AskAssistantModal';
+import { FadeSlideView } from '../components/animations';
 import { Button, EmptyState, Loading, Note, SeverityBadge } from '../components/ui';
 import { money, number, payback, portfolioLabels } from '../lib/format';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
@@ -99,130 +100,138 @@ export default function OverviewScreen() {
       ) : null}
 
       {/* The financial hero. */}
-      <GlassPanel tone="accent">
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View
-            style={{
-              width: 7,
-              height: 7,
-              borderRadius: 4,
-              backgroundColor: colour.secondary,
-              marginRight: 7,
-            }}
-          />
-          <Text style={{ ...typeScale.micro, color: colour.secondary }}>
-            YOUR CASH-POSITIVE OPPORTUNITY
+      <FadeSlideView delay={0}>
+        <GlassPanel tone="accent">
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View
+              style={{
+                width: 7,
+                height: 7,
+                borderRadius: 4,
+                backgroundColor: colour.secondary,
+                marginRight: 7,
+              }}
+            />
+            <Text style={{ ...typeScale.micro, color: colour.secondary }}>
+              YOUR CASH-POSITIVE OPPORTUNITY
+            </Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: space.sm }}>
+            <Text style={{ ...typeScale.hero, color: colour.bright }}>
+              {money(cash?.net_annual_benefit_inr)}
+            </Text>
+            <Text style={{ ...typeScale.caption, color: colour.muted, marginLeft: 6 }}>/ yr</Text>
+          </View>
+          <Text style={{ ...typeScale.caption, color: colour.muted, marginTop: 4 }}>
+            Potential annual net benefit
           </Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: space.sm }}>
-          <Text style={{ ...typeScale.hero, color: colour.bright }}>
-            {money(cash?.net_annual_benefit_inr)}
-          </Text>
-          <Text style={{ ...typeScale.caption, color: colour.muted, marginLeft: 6 }}>/ yr</Text>
-        </View>
-        <Text style={{ ...typeScale.caption, color: colour.muted, marginTop: 4 }}>
-          Potential annual net benefit
-        </Text>
-        <View style={{ marginTop: space.md }}>
-          <DetailRows
-            rows={[
-              ['Indicative investment', money(cash?.capex_inr)],
-              ['Blended payback', payback(cash?.blended_payback_yrs ?? null)],
-              ['Interventions', `${number(cash?.count)} cash positive`],
-            ]}
+          <View style={{ marginTop: space.md }}>
+            <DetailRows
+              rows={[
+                ['Indicative investment', money(cash?.capex_inr)],
+                ['Blended payback', payback(cash?.blended_payback_yrs ?? null)],
+                ['Interventions', `${number(cash?.count)} cash positive`],
+              ]}
+            />
+          </View>
+          <Button
+            title="Explore the cash-positive portfolio"
+            onPress={() => navigation.navigate('Portfolio', { mode: 'cash_positive_only' })}
+            style={{ marginTop: space.md }}
           />
-        </View>
-        <Button
-          title="Explore the cash-positive portfolio"
-          onPress={() => navigation.navigate('Portfolio', { mode: 'cash_positive_only' })}
-          style={{ marginTop: space.md }}
-        />
-      </GlassPanel>
+        </GlassPanel>
+      </FadeSlideView>
 
       {/* The carbon hero. */}
-      <GlassPanel onPress={() => navigation.navigate('Footprint', {})}>
-        <Text style={{ ...typeScale.micro, color: colour.subtle }}>ANNUAL CARBON FOOTPRINT</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: space.sm }}>
-          <Text style={{ ...typeScale.hero, color: colour.bright }}>
-            {number(result.footprint.total_tco2e)}
-          </Text>
-          <Text style={{ ...typeScale.caption, color: colour.muted, marginLeft: 6 }}>
-            tCO2e / year
-          </Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4 }}>
-          <Text style={{ ...typeScale.caption, color: colour.muted, flex: 1 }}>
-            {number(result.footprint.total_range.low)} to{' '}
-            {number(result.footprint.total_range.high)} tCO2e
-          </Text>
-          <Badge tone="neutral">±{number(result.footprint.uncertainty_pct, 1)}%</Badge>
-        </View>
-        <View style={{ marginTop: space.md }}>
-          <UncertaintyBar
-            low={result.footprint.total_range.low}
-            base={result.footprint.total_range.base}
-            high={result.footprint.total_range.high}
-          />
-          <ScopeBand
-            scopes={scopes}
-            onPressScope={(scope) => navigation.navigate('Footprint', { scope })}
-          />
-        </View>
-        <View
-          style={{
-            marginTop: space.lg,
-            padding: space.md,
-            borderRadius: radius.control,
-            backgroundColor: colour.selectedBg,
-            borderWidth: 1,
-            borderColor: colour.borderHighlight,
-          }}
-        >
-          <Text style={{ ...typeScale.numeric, fontSize: 22, color: colour.accentStrong }}>
-            {number(cash?.abatement_pct, 1)}%
-          </Text>
-          <Text style={{ ...typeScale.caption, color: colour.muted, marginTop: 2 }}>
-            of your footprint could be removed at no net cost.
-          </Text>
-        </View>
-      </GlassPanel>
+      <FadeSlideView delay={80}>
+        <GlassPanel onPress={() => navigation.navigate('Footprint', {})}>
+          <Text style={{ ...typeScale.micro, color: colour.subtle }}>ANNUAL CARBON FOOTPRINT</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: space.sm }}>
+            <Text style={{ ...typeScale.hero, color: colour.bright }}>
+              {number(result.footprint.total_tco2e)}
+            </Text>
+            <Text style={{ ...typeScale.caption, color: colour.muted, marginLeft: 6 }}>
+              tCO2e / year
+            </Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4 }}>
+            <Text style={{ ...typeScale.caption, color: colour.muted, flex: 1 }}>
+              {number(result.footprint.total_range.low)} to{' '}
+              {number(result.footprint.total_range.high)} tCO2e
+            </Text>
+            <Badge tone="neutral">±{number(result.footprint.uncertainty_pct, 1)}%</Badge>
+          </View>
+          <View style={{ marginTop: space.md }}>
+            <UncertaintyBar
+              low={result.footprint.total_range.low}
+              base={result.footprint.total_range.base}
+              high={result.footprint.total_range.high}
+            />
+            <ScopeBand
+              scopes={scopes}
+              onPressScope={(scope) => navigation.navigate('Footprint', { scope })}
+            />
+          </View>
+          <View
+            style={{
+              marginTop: space.lg,
+              padding: space.md,
+              borderRadius: radius.control,
+              backgroundColor: colour.selectedBg,
+              borderWidth: 1,
+              borderColor: colour.borderHighlight,
+            }}
+          >
+            <Text style={{ ...typeScale.numeric, fontSize: 22, color: colour.accentStrong }}>
+              {number(cash?.abatement_pct, 1)}%
+            </Text>
+            <Text style={{ ...typeScale.caption, color: colour.muted, marginTop: 2 }}>
+              of your footprint could be removed at no net cost.
+            </Text>
+          </View>
+        </GlassPanel>
+      </FadeSlideView>
 
       {/* The sovereign assistant, same placement as the web rail. */}
-      <GlassPanel tone="positive">
-        <Text style={{ ...typeScale.micro, color: colour.secondary }}>SOVEREIGN COPILOT</Text>
-        <Text style={{ ...typeScale.heading, color: colour.text, marginTop: 4 }}>
-          Ask PRANGARA
-        </Text>
-        <Text style={{ ...typeScale.caption, color: colour.muted, marginTop: 2 }}>
-          Statutory reasoning with verified citations: BEE PAT, SEBI BRSR Core, CEA grid factors
-          and EU CBAM.
-        </Text>
-        <Button
-          title="Ask a question"
-          variant="secondary"
-          onPress={() => setAskOpen(true)}
-          style={{ marginTop: space.md }}
-        />
-      </GlassPanel>
+      <FadeSlideView delay={160}>
+        <GlassPanel tone="positive">
+          <Text style={{ ...typeScale.micro, color: colour.secondary }}>SOVEREIGN COPILOT</Text>
+          <Text style={{ ...typeScale.heading, color: colour.text, marginTop: 4 }}>
+            Ask PRANGARA
+          </Text>
+          <Text style={{ ...typeScale.caption, color: colour.muted, marginTop: 2 }}>
+            Statutory reasoning with verified citations: BEE PAT, SEBI BRSR Core, CEA grid factors
+            and EU CBAM.
+          </Text>
+          <Button
+            title="Ask a question"
+            variant="secondary"
+            onPress={() => setAskOpen(true)}
+            style={{ marginTop: space.md }}
+          />
+        </GlassPanel>
+      </FadeSlideView>
 
-      <Metrics
-        items={[
-          {
-            label: 'Cash-positive abatement',
-            value: number(cash?.abatement_tco2e),
-            unit: 'tCO2e',
-            onPress: () => navigation.navigate('Portfolio', { mode: 'cash_positive_only' }),
-          },
-          { label: 'Total available abatement', value: number(all?.abatement_tco2e), unit: 'tCO2e' },
-          { label: 'Quick wins to start with', value: number(quick?.count), unit: 'actions' },
-          {
-            label: 'Quick-win annual benefit',
-            value: money(quick?.net_annual_benefit_inr),
-            unit: '/ yr',
-            positive: true,
-          },
-        ]}
-      />
+      <FadeSlideView delay={240}>
+        <Metrics
+          items={[
+            {
+              label: 'Cash-positive abatement',
+              value: number(cash?.abatement_tco2e),
+              unit: 'tCO2e',
+              onPress: () => navigation.navigate('Portfolio', { mode: 'cash_positive_only' }),
+            },
+            { label: 'Total available abatement', value: number(all?.abatement_tco2e), unit: 'tCO2e' },
+            { label: 'Quick wins to start with', value: number(quick?.count), unit: 'actions' },
+            {
+              label: 'Quick-win annual benefit',
+              value: money(quick?.net_annual_benefit_inr),
+              unit: '/ yr',
+              positive: true,
+            },
+          ]}
+        />
+      </FadeSlideView>
 
       <SectionHeading
         index="01 / DIAGNOSE"

@@ -28,6 +28,7 @@ import { Button, Card, Chip, Field, Heading, Note, Screen } from '../components/
 import { Badge } from '../components/layout';
 import ExtractedFields from '../components/ExtractedFields';
 import PendingBanner from '../components/PendingBanner';
+import { LaserScan, ViewfinderTarget, PulseDot } from '../components/animations';
 import { onDeviceStatus, scanDocumentOnDevice } from '../ml';
 import type { DocumentKind, DocumentReading, ScanOutcome } from '../ml';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
@@ -281,17 +282,43 @@ export default function BillScanScreen() {
 
       <Card>
         {image ? (
-          <Image
-            source={{ uri: image.uri }}
-            style={{
-              width: '100%',
-              height: 240,
-              borderRadius: radius.md,
-              marginBottom: space.md,
-              backgroundColor: colour.surfaceRaised,
-            }}
-            resizeMode="contain"
-          />
+          <ViewfinderTarget style={{ marginBottom: space.md }}>
+            <Image
+              source={{ uri: image.uri }}
+              style={{
+                width: '100%',
+                height: 240,
+                borderRadius: radius.md,
+                backgroundColor: colour.surfaceRaised,
+              }}
+              resizeMode="contain"
+            />
+            {readingNow ? (
+              <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'space-between' }}>
+                <LaserScan active={true} height={240} />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: 12,
+                    alignSelf: 'center',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(8, 14, 26, 0.88)',
+                    paddingHorizontal: 12,
+                    paddingVertical: 5,
+                    borderRadius: radius.pill,
+                    borderWidth: 1,
+                    borderColor: colour.borderHighlight,
+                  }}
+                >
+                  <PulseDot color={colour.primary} size={7} />
+                  <Text style={{ ...typeScale.micro, color: colour.primary, marginLeft: 6 }}>
+                    EXTRACTING UTILITY BILL...
+                  </Text>
+                </View>
+              </View>
+            ) : null}
+          </ViewfinderTarget>
         ) : (
           <View
             style={{

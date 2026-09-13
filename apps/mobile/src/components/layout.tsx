@@ -27,6 +27,7 @@ import {
   space,
   type as typeScale,
 } from '../theme/tokens';
+import { SpringPressable } from './animations';
 
 /**
  * The scroll body every module screen sits in. Pull to refresh is wired here
@@ -214,9 +215,9 @@ export function Metrics({ items }: { items: MetricItem[] }) {
         return (
           <View key={item.label} style={{ width: '50%', padding: space.xs }}>
             {item.onPress ? (
-              <Pressable onPress={item.onPress} accessibilityRole="button">
+              <SpringPressable onPress={item.onPress}>
                 {body}
-              </Pressable>
+              </SpringPressable>
             ) : (
               body
             )}
@@ -339,9 +340,9 @@ export function GlassPanel({
   );
   if (!onPress) return body;
   return (
-    <Pressable onPress={onPress} accessibilityRole="button">
+    <SpringPressable onPress={onPress}>
       {body}
-    </Pressable>
+    </SpringPressable>
   );
 }
 

@@ -22,6 +22,7 @@ import { factories as factoriesApi, intake } from '../api/endpoints';
 import { Button, Card, Chip, Field, Heading, Note, Screen } from '../components/ui';
 import { Badge } from '../components/layout';
 import ExtractedFields from '../components/ExtractedFields';
+import { LaserScan, ViewfinderTarget, PulseDot } from '../components/animations';
 import { onDeviceStatus, scanNameplateOnDevice } from '../ml';
 import type { NameplateReading, ScanOutcome } from '../ml';
 import { colour, radius, space, type as typeScale } from '../theme/tokens';
@@ -198,17 +199,43 @@ export default function EquipmentScanScreen() {
 
       <Card>
         {image ? (
-          <Image
-            source={{ uri: image.uri }}
-            style={{
-              width: '100%',
-              height: 200,
-              borderRadius: radius.md,
-              marginBottom: space.md,
-              backgroundColor: colour.surfaceRaised,
-            }}
-            resizeMode="contain"
-          />
+          <ViewfinderTarget style={{ marginBottom: space.md }}>
+            <Image
+              source={{ uri: image.uri }}
+              style={{
+                width: '100%',
+                height: 200,
+                borderRadius: radius.md,
+                backgroundColor: colour.surfaceRaised,
+              }}
+              resizeMode="contain"
+            />
+            {readingNow || scan.isPending ? (
+              <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'space-between' }}>
+                <LaserScan active={true} height={200} />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: 12,
+                    alignSelf: 'center',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(8, 14, 26, 0.88)',
+                    paddingHorizontal: 12,
+                    paddingVertical: 5,
+                    borderRadius: radius.pill,
+                    borderWidth: 1,
+                    borderColor: colour.borderHighlight,
+                  }}
+                >
+                  <PulseDot color={colour.primary} size={7} />
+                  <Text style={{ ...typeScale.micro, color: colour.primary, marginLeft: 6 }}>
+                    ANALYZING NAMEPLATE...
+                  </Text>
+                </View>
+              </View>
+            ) : null}
+          </ViewfinderTarget>
         ) : null}
         <Button
           title={image ? 'Retake nameplate photo' : 'Photograph the nameplate'}
