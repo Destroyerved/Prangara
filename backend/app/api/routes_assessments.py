@@ -30,6 +30,7 @@ from app.services.benchmarks import corpus_stats
 from app.services.profile_mapper import build_from_records
 from app.services.report import build_report_html, render_pdf
 from app.services.scenario import apply_modifications
+from app.services.database_sync import get_db_sync
 from engine import assess, sector_db, version_stamp
 
 router = APIRouter(prefix="/api", tags=["assessments"])
@@ -70,6 +71,18 @@ def create_assessment(factory_id: str, body: RunAssessmentRequest,
                    "versions": assessment.version_stamp},
     )
     db.commit()
+
+    get_db_sync().sync_assessment(assessment.id, {
+        "factory_id": assessment.factory_id,
+        "profile_id": assessment.profile_id,
+        "scope1_tco2e": assessment.scope1_tco2e,
+        "scope2_tco2e": assessment.scope2_tco2e,
+        "scope3_tco2e": assessment.scope3_tco2e,
+        "total_emissions_tco2e": assessment.total_tco2e,
+        "intensity_tco2e_per_t": assessment.intensity_tco2e_per_t,
+        "created_at": assessment.created_at,
+    })
+
     return AssessmentDetail.model_validate(assessment)
 
 
@@ -197,6 +210,11 @@ def create_scenario(factory_id: str, body: ScenarioCreate, principal: CurrentPri
     )
     db.add(scenario)
     db.commit()
+    get_db_sync().sync_scenario(scenario.id, {
+        "factory_id": scenario.factory_id, "organization_id": scenario.organization_id,
+        "name": scenario.name, "baseline_assessment_id": scenario.baseline_assessment_id,
+        "modifications": scenario.modifications,
+    })
     return ScenarioOut.model_validate(scenario)
 
 

@@ -1,15 +1,19 @@
-# Superseded by backend/requirements.txt, which is what the running
-# service installs. Kept only so an existing checkout does not break.
-# PRANGARA — legacy root requirements
+# PRANGARA — Root Requirements for Vercel & Deployment Runtimes
 fastapi>=0.110
-uvicorn>=0.27
+uvicorn[standard]>=0.27
 pydantic>=2.6
-bcrypt>=4.1
+email-validator>=2.0
+python-multipart>=0.0.6
 
-# Report build (docs -> PDF). Rendering uses headless Chrome/Edge, which the
-# build script locates automatically; no pandoc or LaTeX needed.
+SQLAlchemy>=2.0.30
+alembic>=1.13
+
+bcrypt>=4.1
+PyJWT>=2.8
+
+httpx>=0.27
+pytest>=8.0
 Markdown>=3.5
 
-# Tests
-pytest>=8.0
-httpx>=0.27
+# Database: Google Cloud Firestore
+google-cloud-firestore>=2.16.0

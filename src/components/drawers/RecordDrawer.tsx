@@ -184,7 +184,7 @@ function ActionDetail({ a }: { a: Action }) {
         </p>
         <Link
           className="button"
-          to={`/marketplace?intervention=${encodeURIComponent(a.id)}`}
+          to={`/marketplace?intervention=${encodeURIComponent(a.id)}${w.factoryId ? `&factory=${encodeURIComponent(w.factoryId)}` : ""}`}
           onClick={() => w.setDrawer(null)}
           style={{ width: "100%", justifyContent: "center", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
         >

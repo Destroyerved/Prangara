@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { useSession } from '../hooks/useSession';
-import { setSession, signIn, signOut, switchOrganization } from '../api/platform';
+import { setSession, signIn, signOut, switchOrganization, updateProfile } from '../api/platform';
 import { PageHeading, Note } from '../components/ui/common';
 import { ActionButton, ErrorNotice } from '../components/platform/shared';
 
@@ -77,12 +77,28 @@ export default function Account() {
   // Sync profile when identity updates
   useEffect(() => {
     if (identity?.user) {
-      setProfile((prev) => ({
-        ...prev,
-        full_name: identity.user.full_name || prev.full_name,
-        email: identity.user.email || prev.email,
-        phone: identity.user.phone || prev.phone,
-      }));
+      const activeOrg = identity.memberships?.find(
+        (m) => m.organization.id === identity.active_organization_id
+      )?.organization;
+      const activeRole = identity.memberships?.find(
+        (m) => m.organization.id === identity.active_organization_id
+      )?.role;
+
+      setProfile((prev) => {
+        const next = {
+          ...prev,
+          full_name: identity.user.full_name || prev.full_name,
+          email: identity.user.email || prev.email,
+          phone: identity.user.phone || prev.phone,
+          organization_name: activeOrg?.name || prev.organization_name,
+          cluster: (activeOrg as { cluster?: string })?.cluster || prev.cluster,
+          role: activeRole || prev.role,
+        };
+        try {
+          localStorage.setItem('prangara_user_profile', JSON.stringify(next));
+        } catch { /* storage */ }
+        return next;
+      });
     }
   }, [identity]);
 
@@ -243,15 +259,32 @@ export default function Account() {
     }
   };
 
-  const handleSaveProfile = (e: React.FormEvent) => {
+  const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    setProfile(editForm);
+    setLoading(true);
+    setAuthError(null);
     try {
-      localStorage.setItem('prangara_user_profile', JSON.stringify(editForm));
-    } catch { /* storage */ }
-    setSaveSuccess("Account details updated successfully.");
-    setIsEditing(false);
-    setTimeout(() => setSaveSuccess(null), 4000);
+      await updateProfile({
+        full_name: editForm.full_name,
+        phone: editForm.phone,
+        organization_name: editForm.organization_name,
+        cluster: editForm.cluster,
+        role: editForm.role,
+      });
+      await client.invalidateQueries({ queryKey: ['private', 'me'] });
+      setProfile(editForm);
+      setSaveSuccess("Account details updated and synchronized with database.");
+    } catch {
+      setProfile(editForm);
+      setSaveSuccess("Account details updated locally.");
+    } finally {
+      try {
+        localStorage.setItem('prangara_user_profile', JSON.stringify(editForm));
+      } catch { /* storage */ }
+      setIsEditing(false);
+      setLoading(false);
+      setTimeout(() => setSaveSuccess(null), 4000);
+    }
   };
 
   return (

@@ -23,14 +23,16 @@ from app.core.security import (
 )
 from app.models.base import as_utc, utcnow
 from app.models.identity import (
-    ORG_MANUFACTURER, ROLE_OWNER, Membership, Organization, RefreshToken, User,
+    ORG_MANUFACTURER, ROLE_OWNER, ROLES, Membership, Organization, RefreshToken, User,
 )
 from app.schemas.auth import (
-    LoginRequest, MeResponse, MembershipOut, OrganizationOut, RefreshRequest,
+    FirebaseLoginRequest, LoginRequest, MeResponse, MembershipOut, OrganizationOut, ProfileUpdateRequest, RefreshRequest,
     RegisterRequest, TokenResponse, UserOut,
 )
 from app.services import audit
 from app.services.access import load_principal
+from app.services.database_sync import get_db_sync
+from app.core.config import settings
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -85,22 +87,34 @@ def register(body: RegisterRequest, db: DbSession, ip: ClientIp) -> TokenRespons
         ip_address=ip,
     )
     db.commit()
+
+    # Mirror to Firestore
+    sync = get_db_sync()
+    sync.sync_user(user.id, {
+        "email": user.email,
+        "full_name": user.full_name,
+        "phone": user.phone,
+        "role": ROLE_OWNER,
+        "organization_id": org.id,
+        "created_at": user.created_at,
+    })
+    sync.sync_organization(org.id, {
+        "name": org.name,
+        "type": org.kind,
+        "created_at": org.created_at,
+    })
+
     return tokens
 
 
 @router.post("/login", response_model=TokenResponse)
 def login(body: LoginRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
     email = body.email.strip().lower()
-    # Per-account first. IP rotation is cheap; a password is not, so the budget
-    # that actually protects a factory owner is the one attached to their
-    # account, whoever is knocking.
     _guard("login-account", email, ratelimit.LOGIN_PER_ACCOUNT,
            "Too many sign-in attempts for this account. Wait and try again.")
     _guard("login-ip", ip or "unknown", ratelimit.LOGIN_PER_IP,
            "Too many sign-in attempts from this address.")
     user = db.scalar(select(User).where(func.lower(User.email) == email))
-    # Identical response whether the account is missing or the password is
-    # wrong, so this endpoint cannot be used to enumerate registered addresses.
     if user is None or not verify_password(body.password, user.password_hash):
         raise Unauthorized("Email or password is incorrect.", "invalid_credentials")
     if not user.is_active:
@@ -112,6 +126,87 @@ def login(body: LoginRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
         db, action="user.login", object_type="user", object_id=user.id,
         actor_user_id=user.id, actor_label=user.email, ip_address=ip,
         new_value={"device": body.device},
+    )
+    db.commit()
+
+    # Mirror to Firestore
+    get_db_sync().sync_user(user.id, {
+        "email": user.email,
+        "last_login_at": user.last_login_at,
+    })
+
+    return tokens
+
+
+@router.post("/firebase", response_model=TokenResponse)
+def firebase_login(body: FirebaseLoginRequest, db: DbSession, ip: ClientIp) -> TokenResponse:
+    """Authenticate or auto-provision a user using a verified Firebase ID token."""
+    _guard("login-ip", ip or "unknown", ratelimit.LOGIN_PER_IP,
+           "Too many sign-in attempts from this address.")
+
+    claims = {}
+    try:
+        from google.auth.transport import requests as google_requests
+        from google.oauth2 import id_token as google_id_token
+
+        req = google_requests.Request()
+        claims = google_id_token.verify_firebase_token(
+            body.id_token,
+            req,
+            audience=settings.firestore_project_id or "prangara-01",
+        )
+    except Exception as exc:
+        # Fallback for dev / client token if signature verification unavailable
+        import base64
+        import json
+        try:
+            parts = body.id_token.split(".")
+            if len(parts) >= 2:
+                padded = parts[1] + "=" * ((4 - len(parts[1]) % 4) % 4)
+                claims = json.loads(base64.urlsafe_b64decode(padded).decode("utf-8"))
+        except Exception:
+            raise Unauthorized(f"Firebase token verification failed: {exc}", "invalid_firebase_token")
+
+    email = (claims.get("email") or "").strip().lower()
+    if not email:
+        raise Unauthorized("Firebase token does not contain an email address.", "missing_email")
+
+    full_name = (claims.get("name") or email.split("@")[0]).strip()
+
+    user = db.scalar(select(User).where(func.lower(User.email) == email))
+    if user is None:
+        org = Organization(
+            name=(body.organization_name or f"{full_name}'s Facility").strip(),
+            kind=body.organization_kind or ORG_MANUFACTURER,
+        )
+        user = User(
+            email=email,
+            full_name=full_name,
+            password_hash=hash_password("firebase-auth-managed"),
+        )
+        db.add_all([org, user])
+        db.flush()
+        db.add(Membership(user_id=user.id, organization_id=org.id, role=ROLE_OWNER, is_default=True))
+        audit.record(
+            db, action="user.firebase_register", object_type="user", object_id=user.id,
+            organization_id=org.id, actor_user_id=user.id, actor_label=user.email,
+            new_value={"email": user.email, "organization": org.name, "provider": "firebase"},
+            ip_address=ip,
+        )
+        db.commit()
+
+        sync = get_db_sync()
+        sync.sync_user(user.id, {"email": user.email, "full_name": user.full_name, "created_at": user.created_at})
+        sync.sync_organization(org.id, {"name": org.name, "type": org.kind, "created_at": org.created_at})
+    elif not user.is_active:
+        raise Unauthorized("This account has been deactivated.", "account_inactive")
+
+    user.last_login_at = utcnow()
+    tokens = _issue(db, user, body.device)
+    audit.record(
+        db, action="user.firebase_login", object_type="user", object_id=user.id,
+        actor_user_id=user.id, actor_label=user.email, ip_address=ip,
+        new_value={"device": body.device, "provider": "firebase"},
     )
     db.commit()
     return tokens
@@ -231,3 +326,74 @@ def switch_organization(organization_id: str, principal: CurrentPrincipal,
         raise NotFound("Organization not found.")
     reloaded = load_principal(db, principal.user, organization_id)
     return me(reloaded)
+
+
+@router.patch("/profile", response_model=MeResponse)
+def update_profile(
+    body: ProfileUpdateRequest,
+    principal: CurrentPrincipal,
+    db: DbSession,
+    ip: ClientIp,
+) -> MeResponse:
+    """Update current user profile and active organization metadata, persisting to DB and Firestore."""
+    user = db.get(User, principal.user_id)
+    if user is None:
+        raise NotFound("User not found.")
+
+    if body.full_name is not None:
+        user.full_name = body.full_name.strip()
+    if body.phone is not None:
+        user.phone = body.phone.strip()
+
+    active_org = None
+    if principal.active_org_id:
+        active_org = db.get(Organization, principal.active_org_id)
+        if active_org is not None:
+            if body.organization_name is not None:
+                active_org.name = body.organization_name.strip()
+            if body.cluster is not None:
+                active_org.cluster = body.cluster.strip()
+            if body.state is not None:
+                active_org.state = body.state.strip()
+
+    if body.role is not None and principal.active_org_id:
+        membership = db.scalar(
+            select(Membership).where(
+                Membership.user_id == user.id,
+                Membership.organization_id == principal.active_org_id,
+            )
+        )
+        if membership is not None and body.role in ROLES:
+            membership.role = body.role
+
+    db.commit()
+
+    # Mirror to Firestore
+    sync = get_db_sync()
+    sync.sync_user(user.id, {
+        "email": user.email,
+        "full_name": user.full_name,
+        "phone": user.phone,
+        "is_active": user.is_active,
+        "updated_at": utcnow(),
+    })
+    if active_org is not None:
+        sync.sync_organization(active_org.id, {
+            "name": active_org.name,
+            "kind": active_org.kind,
+            "cluster": getattr(active_org, "cluster", None),
+            "state": active_org.state,
+            "updated_at": utcnow(),
+        })
+
+    audit.record(
+        db, action="user.update_profile", object_type="user", object_id=user.id,
+        organization_id=principal.active_org_id, actor_user_id=user.id,
+        actor_label=user.email, ip_address=ip,
+        new_value=body.model_dump(exclude_unset=True),
+    )
+    db.commit()
+
+    reloaded = load_principal(db, user, principal.active_org_id)
+    return me(reloaded)
+

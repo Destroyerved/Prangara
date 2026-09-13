@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Badge } from "../ui/common";
+import { service } from "../../api/platform";
 
 interface SourceCitation {
   title: string;
@@ -231,6 +232,8 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [copiedFormula, setCopiedFormula] = useState(false);
   const [copiedAnswer, setCopiedAnswer] = useState(false);
+  const [isQuerying, setIsQuerying] = useState(false);
+  const [dynamicTopics, setDynamicTopics] = useState<RagTopic[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape key
@@ -292,8 +295,65 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     }
   };
 
+  // Query live sovereign RAG backend
+  const handleAskEngine = async () => {
+    if (!searchQuery.trim() || isQuerying) return;
+    setIsQuerying(true);
+    try {
+      const res = await service<{
+        question?: string;
+        summary?: string;
+        answer: string;
+        confidence?: string;
+        citations?: Array<{
+          title?: string;
+          source_id: string;
+          publisher?: string;
+          page?: string;
+          section?: string;
+          badge?: string;
+          sha256_hash?: string;
+        }>;
+        sources?: Array<{
+          title: string;
+          source_id: string;
+          version?: string;
+          authority_class?: string;
+          excerpt?: string;
+        }>;
+      }>("/assistant/ask", {
+        method: "POST",
+        body: JSON.stringify({ question: searchQuery.trim() }),
+      });
+      const items = res.citations && res.citations.length > 0 ? res.citations : (res.sources || []);
+      const newTopic: RagTopic = {
+        id: "live-" + Date.now(),
+        category: "compliance",
+        categoryLabel: "Live Sovereign RAG",
+        question: res.question || searchQuery,
+        summary: res.summary || res.answer?.slice(0, 160) || "Sovereign intelligence result.",
+        body: res.answer ? [res.answer] : [res.summary || "No explanation provided."],
+        sources: items.map((s: any) => ({
+          title: s.title || s.source_id,
+          refId: s.source_id,
+          version: s.badge || s.version || "Sovereign Registry",
+          grade: s.publisher || s.authority_class || "Verified Statutory Source",
+          excerpt: s.section ? `${s.section} · ${s.page || ""}` : (s.excerpt || "Statutory citation."),
+        })),
+        keywords: searchQuery.toLowerCase().split(/\s+/),
+      };
+      setDynamicTopics((prev) => [newTopic, ...prev]);
+      setSelectedTopic(newTopic);
+    } catch {
+      /* Local topic match is preserved */
+    } finally {
+      setIsQuerying(false);
+    }
+  };
+
   // Filter topics based on search query and category
-  const filteredTopics = KNOWLEDGE_BASE.filter((t) => {
+  const allTopics = [...dynamicTopics, ...KNOWLEDGE_BASE];
+  const filteredTopics = allTopics.filter((t) => {
     const matchesCategory = activeCategory === "all" || t.category === activeCategory;
     if (!searchQuery.trim()) return matchesCategory;
 
@@ -467,6 +527,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleAskEngine();
+                  }}
                   placeholder="Ask a question (e.g. CEA grid, SEBI Scope 1, CBAM, economizer)…"
                   style={{
                     background: "transparent",
@@ -478,19 +541,42 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                   }}
                 />
                 {searchQuery ? (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    style={{
-                      border: "none",
-                      background: "transparent",
-                      color: "var(--text-muted)",
-                      cursor: "pointer",
-                      padding: "2px",
-                    }}
-                  >
-                    <X size={15} />
-                  </button>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
+                    <button
+                      type="button"
+                      onClick={handleAskEngine}
+                      disabled={isQuerying}
+                      style={{
+                        border: "none",
+                        background: "var(--brand-teal)",
+                        color: "#020617",
+                        fontWeight: 600,
+                        fontSize: "0.72rem",
+                        borderRadius: "6px",
+                        padding: "0.2rem 0.5rem",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.25rem",
+                      }}
+                    >
+                      <Sparkles size={12} />
+                      {isQuerying ? "Asking…" : "Ask ↵"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      style={{
+                        border: "none",
+                        background: "transparent",
+                        color: "var(--text-muted)",
+                        cursor: "pointer",
+                        padding: "2px",
+                      }}
+                    >
+                      <X size={15} />
+                    </button>
+                  </div>
                 ) : (
                   <span
                     style={{

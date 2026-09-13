@@ -34,21 +34,27 @@ def get_firestore_client() -> Any:
         return None
 
     project_id = os.environ.get("FIRESTORE_PROJECT_ID") or os.environ.get("GCP_PROJECT_ID")
-    raw_creds = os.environ.get("FIREBASE_CREDENTIALS_JSON")
+    raw_creds = os.environ.get("FIREBASE_CREDENTIALS_JSON") or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
-    if raw_creds:
+    # If credentials env var contains raw JSON or base64 JSON
+    if raw_creds and (raw_creds.strip().startswith("{") or "service_account" in raw_creds or len(raw_creds) > 200):
         try:
-            # Handle base64 encoded credentials if provided
-            if not raw_creds.strip().startswith("{"):
-                raw_creds = base64.b64decode(raw_creds).decode("utf-8")
-            cred_dict = json.loads(raw_creds)
-            creds = service_account.Credentials.from_service_account_info(cred_dict)
-            client = firestore.Client(project=project_id or cred_dict.get("project_id"), credentials=creds)
-            logger.info("Connected to Firestore using FIREBASE_CREDENTIALS_JSON.")
-            _firestore_client = client
-            return _firestore_client
+            project_id = os.environ.get("FIRESTORE_PROJECT_ID") or os.environ.get("GCP_PROJECT_ID")
+            content = raw_creds.strip()
+            if not content.startswith("{"):
+                try:
+                    content = base64.b64decode(content).decode("utf-8")
+                except Exception:
+                    pass
+            if content.startswith("{"):
+                cred_dict = json.loads(content)
+                creds = service_account.Credentials.from_service_account_info(cred_dict)
+                client = firestore.Client(project=project_id or cred_dict.get("project_id"), credentials=creds)
+                logger.info("Connected to Firestore using parsed service account JSON.")
+                _firestore_client = client
+                return _firestore_client
         except Exception as e:
-            logger.error(f"Failed to load credentials from FIREBASE_CREDENTIALS_JSON: {e}")
+            logger.error(f"Failed to parse credentials from JSON/base64: {e}")
 
     # Check well-known local key file paths (e.g. src/api/firestore-api.json)
     repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -59,7 +65,7 @@ def get_firestore_client() -> Any:
         os.path.join(repo_root, "backend", "serviceAccountKey.json"),
     ]
     for path in candidates:
-        if path and os.path.isfile(path):
+        if path and not path.strip().startswith("{") and os.path.isfile(path):
             try:
                 creds = service_account.Credentials.from_service_account_file(path)
                 client = firestore.Client(project=project_id or getattr(creds, "project_id", "prangara-01"), credentials=creds)

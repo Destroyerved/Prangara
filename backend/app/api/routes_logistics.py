@@ -20,6 +20,7 @@ from app.schemas.logistics import (
 )
 from app.services import audit, events
 from app.services.access import accessible_factory_ids, resolve_factory
+from app.services.database_sync import get_db_sync
 from app.services.logistics_service import LogisticsService
 
 router = APIRouter(prefix="/api", tags=["logistics"])
@@ -123,6 +124,17 @@ def create_shipment(
             payload={"shipment_id": shipment.id, "payload_tonnes": body.payload_tonnes},
         )
         db.commit()
+    else:
+        db.commit()
+
+    get_db_sync().sync_shipment(shipment.id, {
+        "factory_id": shipment.factory_id, "organization_id": shipment.organization_id,
+        "origin_name": shipment.origin_name, "destination_name": shipment.destination_name,
+        "payload_tonnes": shipment.payload_tonnes, "cargo_type": shipment.cargo_type,
+        "distance_km": shipment.distance_km, "transit_hours": shipment.transit_hours,
+        "cost_inr": shipment.cost_inr, "emissions_kgco2e": shipment.emissions_kgco2e,
+        "selected_route_preset": shipment.selected_route_preset, "status": shipment.status,
+    })
 
     return ShipmentOut.model_validate(shipment)
 

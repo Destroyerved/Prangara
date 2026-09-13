@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Share2,
   Recycle,
@@ -290,13 +291,22 @@ export default function CircularNetwork() {
                     <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                       Avoids <strong>{number(totalAnnualCarbonAvoided)} tCO₂e/yr</strong> vs virgin feedstock.
                     </div>
-                    <button
-                      className={`button ${isRequested ? "positive" : ""}`}
-                      onClick={() => setTrialRequested({ ...trialRequested, [item.id]: !isRequested })}
-                      style={{ fontSize: "0.825rem", padding: "0.4rem 0.85rem" }}
-                    >
-                      {isRequested ? "✓ Sample Requested" : "Request Material Trial ↗"}
-                    </button>
+                    <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+                      <button
+                        className={`button ${isRequested ? "positive" : ""}`}
+                        onClick={() => setTrialRequested({ ...trialRequested, [item.id]: !isRequested })}
+                        style={{ fontSize: "0.825rem", padding: "0.4rem 0.85rem" }}
+                      >
+                        {isRequested ? "✓ Sample Requested" : "Request Trial ↗"}
+                      </button>
+                      <Link
+                        to="/marketplace"
+                        className="text-button"
+                        style={{ fontSize: "0.8rem", textDecoration: "underline" }}
+                      >
+                        Source in Marketplace
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
@@ -346,13 +356,22 @@ export default function CircularNetwork() {
                     <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                       Eliminates cluster CAPEX redundancy.
                     </div>
-                    <button
-                      className={`button ${isRequested ? "positive" : ""}`}
-                      onClick={() => setTrialRequested({ ...trialRequested, [item.id]: !isRequested })}
-                      style={{ fontSize: "0.825rem", padding: "0.4rem 0.85rem" }}
-                    >
-                      {isRequested ? "✓ Booking Inquired" : "Book Capacity Slot ↗"}
-                    </button>
+                    <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+                      <button
+                        className={`button ${isRequested ? "positive" : ""}`}
+                        onClick={() => setTrialRequested({ ...trialRequested, [item.id]: !isRequested })}
+                        style={{ fontSize: "0.825rem", padding: "0.4rem 0.85rem" }}
+                      >
+                        {isRequested ? "✓ Booking Inquired" : "Book Slot ↗"}
+                      </button>
+                      <Link
+                        to="/marketplace"
+                        className="text-button"
+                        style={{ fontSize: "0.8rem", textDecoration: "underline" }}
+                      >
+                        Find Providers
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );

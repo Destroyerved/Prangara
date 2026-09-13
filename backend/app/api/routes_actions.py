@@ -21,6 +21,7 @@ from app.schemas.assessment import (
 )
 from app.services import audit, events
 from app.services.access import resolve_factory
+from app.services.database_sync import get_db_sync
 
 router = APIRouter(prefix="/api", tags=["actions"])
 
@@ -108,6 +109,17 @@ def update_action(action_id: str, body: ActionPatch, principal: CurrentPrincipal
                      "status": new_status, "name": action.name},
         )
     db.commit()
+    get_db_sync().sync_action(action.id, {
+        "name": action.name,
+        "status": action.status,
+        "factory_id": action.factory_id,
+        "intervention_id": action.intervention_id,
+        "expected_capex_inr": action.expected_capex_inr,
+        "actual_capex_inr": action.actual_capex_inr,
+        "expected_abatement_tco2e": action.expected_abatement_tco2e,
+        "actual_abatement_tco2e": action.actual_abatement_tco2e,
+        "target_date": str(action.target_date) if action.target_date else None,
+    })
     return ActionOut.model_validate(action)
 
 

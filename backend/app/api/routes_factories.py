@@ -27,6 +27,7 @@ from app.services.access import (
     accessible_factory_ids, require_org_write, resolve_factory,
 )
 from app.services.asset_energy import estimate_asset
+from app.services.database_sync import get_db_sync
 from engine import sector_db
 
 router = APIRouter(prefix="/api/factories", tags=["factories"])
@@ -108,6 +109,17 @@ def create_factory(body: FactoryCreate, principal: CurrentPrincipal, db: DbSessi
                 actor_user_id=principal.user_id,
                 payload={"name": factory.name, "sector": factory.sector})
     db.commit()
+
+    get_db_sync().sync_factory(factory.id, {
+        "organization_id": factory.organization_id,
+        "name": factory.name,
+        "sector": factory.sector,
+        "state": factory.state,
+        "cluster": factory.cluster,
+        "coordinates": {"lat": factory.latitude, "lng": factory.longitude} if factory.latitude else None,
+        "created_at": factory.created_at,
+    })
+
     return FactoryOut.model_validate(factory)
 
 
@@ -132,6 +144,17 @@ def update_factory(factory_id: str, body: FactoryUpdate, principal: CurrentPrinc
                  actor_label=principal.user.email, old_value=before, new_value=patch,
                  ip_address=ip)
     db.commit()
+
+    get_db_sync().sync_factory(factory.id, {
+        "organization_id": factory.organization_id,
+        "name": factory.name,
+        "sector": factory.sector,
+        "state": factory.state,
+        "cluster": factory.cluster,
+        "coordinates": {"lat": factory.latitude, "lng": factory.longitude} if factory.latitude else None,
+        "updated_at": utcnow(),
+    })
+
     return FactoryOut.model_validate(factory)
 
 
@@ -283,6 +306,19 @@ def add_activity(factory_id: str, body: ActivityRecordIn, principal: CurrentPrin
     record = ActivityRecord(factory_id=factory.id, profile_id=profile.id, **body.model_dump())
     db.add(record)
     db.flush()
+
+    get_db_sync().sync_activity_record(record.id, {
+        "factory_id": factory.id,
+        "profile_id": profile.id,
+        "stream_kind": record.stream_kind,
+        "factor_key": record.factor_key,
+        "quantity": float(record.quantity) if record.quantity is not None else 0.0,
+        "unit": record.unit,
+        "period_start": record.period_start.isoformat() if record.period_start else None,
+        "period_end": record.period_end.isoformat() if record.period_end else None,
+        "source_kind": record.source_kind,
+    })
+
     audit.record(db, action="activity.create", object_type="activity_record",
                  object_id=record.id, organization_id=factory.organization_id,
                  actor_user_id=principal.user_id, actor_label=principal.user.email,
@@ -292,6 +328,117 @@ def add_activity(factory_id: str, body: ActivityRecordIn, principal: CurrentPrin
                 payload={"activity_record_id": record.id, "stream_kind": record.stream_kind})
     db.commit()
     return ActivityRecordOut.model_validate(record)
+
+
+@router.post("/{factory_id}/activity/bulk", response_model=list[ActivityRecordOut],
+             status_code=status.HTTP_201_CREATED)
+def bulk_add_activity(factory_id: str, body: list[ActivityRecordIn], principal: CurrentPrincipal,
+                      db: DbSession, ip: ClientIp,
+                      profile_id: str | None = None) -> list[ActivityRecordOut]:
+    """Ingests a batch of industrial activity records from CSV, ERP, or SCADA historian."""
+    factory = resolve_factory(db, principal, factory_id, write=True)
+    profile = db.get(FactoryProfile, profile_id) if profile_id else _current_profile_row(db, factory_id)
+    if profile is None or profile.factory_id != factory_id:
+        raise NotFound("Reporting period not found for this factory.")
+
+    out: list[ActivityRecord] = []
+    sync = get_db_sync()
+    for item in body:
+        if item.client_ref:
+            existing = db.scalar(
+                select(ActivityRecord).where(
+                    ActivityRecord.factory_id == factory.id,
+                    ActivityRecord.client_ref == item.client_ref,
+                )
+            )
+            if existing is not None:
+                out.append(existing)
+                continue
+
+        rec = ActivityRecord(factory_id=factory.id, profile_id=profile.id, **item.model_dump())
+        db.add(rec)
+        db.flush()
+        sync.sync_activity_record(rec.id, {
+            "factory_id": factory.id,
+            "profile_id": profile.id,
+            "stream_kind": rec.stream_kind,
+            "factor_key": rec.factor_key,
+            "quantity": float(rec.quantity) if rec.quantity is not None else 0.0,
+            "unit": rec.unit,
+            "period_start": rec.period_start.isoformat() if rec.period_start else None,
+            "period_end": rec.period_end.isoformat() if rec.period_end else None,
+            "source_kind": rec.source_kind,
+        })
+        out.append(rec)
+
+    audit.record(db, action="activity.bulk_create", object_type="factory",
+                 object_id=factory.id, organization_id=factory.organization_id,
+                 actor_user_id=principal.user_id, actor_label=principal.user.email,
+                 new_value={"count": len(out)}, ip_address=ip)
+    db.commit()
+    return [ActivityRecordOut.model_validate(r) for r in out]
+
+
+@router.post("/{factory_id}/telemetry", status_code=status.HTTP_201_CREATED)
+def ingest_telemetry(factory_id: str, payload: dict[str, Any], principal: CurrentPrincipal,
+                     db: DbSession, ip: ClientIp) -> dict[str, Any]:
+    """Direct IoT/SCADA DCS webhook for automated meter telemetry."""
+    factory = resolve_factory(db, principal, factory_id, write=True)
+    profile = _current_profile_row(db, factory_id)
+
+    readings = payload.get("readings", {})
+    timestamp = payload.get("timestamp") or utcnow().isoformat()
+    device_id = payload.get("device_id", "SCADA_GATEWAY")
+
+    created = []
+    sync = get_db_sync()
+
+    mapping = {
+        "grid_electricity_kwh": ("electricity", "in_grid_electricity", "kWh"),
+        "steam_coal_tonnes": ("fuel", "solid_fuel_indian_coal", "tonne"),
+        "diesel_genset_litres": ("fuel", "liquid_fuel_diesel", "litre"),
+        "furnace_oil_litres": ("fuel", "liquid_fuel_furnace_oil", "litre"),
+        "natural_gas_scm": ("fuel", "gas_natural_gas", "scm"),
+        "biomass_briquettes_tonnes": ("fuel", "solid_fuel_biomass_briquettes", "tonne"),
+        "raw_limestone_tonnes": ("material", "limestone", "tonne"),
+        "clinker_tonnes": ("material", "clinker", "tonne"),
+    }
+
+    for key, (stream_kind, mat_key, unit) in mapping.items():
+        val = readings.get(key)
+        if val is not None and float(val) > 0:
+            rec = ActivityRecord(
+                factory_id=factory.id,
+                profile_id=profile.id,
+                stream_kind=stream_kind,
+                factor_key=mat_key,
+                quantity=float(val),
+                unit=unit,
+                source_kind="meter",
+                client_ref=f"iot_{device_id}_{key}_{timestamp[:19]}",
+                notes=f"Ingested from telemetry node {device_id}",
+            )
+            db.add(rec)
+            db.flush()
+            sync.sync_activity_record(rec.id, {
+                "factory_id": factory.id,
+                "profile_id": profile.id,
+                "stream_kind": stream_kind,
+                "factor_key": mat_key,
+                "quantity": float(val),
+                "unit": unit,
+                "device_id": device_id,
+                "source_kind": "meter",
+            })
+            created.append({"stream": key, "quantity": val, "unit": unit, "record_id": rec.id})
+
+    db.commit()
+    return {
+        "status": "ingested",
+        "factory_id": factory.id,
+        "records_created": len(created),
+        "details": created,
+    }
 
 
 @router.patch("/{factory_id}/activity/{record_id}", response_model=ActivityRecordOut)

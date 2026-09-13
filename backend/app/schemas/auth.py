@@ -47,6 +47,7 @@ class OrganizationOut(ApiModel):
     name: str
     kind: str
     state: str | None = None
+    cluster: str | None = None
     country: str | None = None
 
 
@@ -108,3 +109,20 @@ class FactoryAccessOut(ApiModel):
     granted_by_user_id: str | None = None
     expires_at: dt.datetime | None = None
     revoked_at: dt.datetime | None = None
+
+
+class ProfileUpdateRequest(ApiModel):
+    full_name: str | None = Field(default=None, max_length=160)
+    phone: str | None = Field(default=None, max_length=32)
+    organization_name: str | None = Field(default=None, max_length=200)
+    cluster: str | None = Field(default=None, max_length=160)
+    state: str | None = Field(default=None, max_length=80)
+    role: str | None = Field(default=None, max_length=120)
+
+
+class FirebaseLoginRequest(ApiModel):
+    id_token: str
+    organization_name: str | None = None
+    organization_kind: str = "manufacturer"
+    device: str | None = None
+

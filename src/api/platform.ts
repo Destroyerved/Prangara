@@ -76,3 +76,18 @@ export async function downloadEvidence(id: string, filename: string) {
   const url = URL.createObjectURL(await response.blob()), a = document.createElement('a');
   a.href=url; a.download=filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+export async function updateProfile(payload: {
+  full_name?: string;
+  phone?: string;
+  organization_name?: string;
+  cluster?: string;
+  state?: string;
+  role?: string;
+}) {
+  return service<MeResponse>('/auth/profile', {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+  });
+}
+
+

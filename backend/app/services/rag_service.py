@@ -109,10 +109,25 @@ class SovereignRAGService:
             if any(k in q_token_set for k in ("ccts", "bee", "credit", "trading", "gei", "obligated")):
                 if "CCTS" in src_id or "BEE" in src_id:
                     score += 3.5
-            if any(k in q_token_set for k in ("brsr", "sebi", "supply", "chain", "value")):
+            if any(k in q_token_set for k in ("brsr", "sebi", "supply", "chain", "value", "vendor", "esg")):
                 if "BRSR" in src_id:
+                    score += 4.0
+            if any(k in q_token_set for k in ("cpcb", "cto", "cte", "consent", "waste", "hazardous", "sludge", "water", "air")):
+                if "CPCB" in src_id:
+                    score += 4.0
+            if any(k in q_token_set for k in ("ash", "flyash", "thermal", "brick", "masonry")):
+                if "ASH" in src_id:
+                    score += 4.0
+            if any(k in q_token_set for k in ("motor", "motors", "induction", "ie3", "ie4", "is12615", "pump")):
+                if "MOTORS" in src_id or "BIS" in src_id:
+                    score += 4.0
+            if any(k in q_token_set for k in ("freight", "logistics", "backhaul", "truck", "glec", "pooling", "empty")):
+                if "SFC" in src_id or "GLEC" in src_id:
+                    score += 4.0
+            if any(k in q_token_set for k in ("ghg", "scope", "scope1", "scope2", "scope3", "boundary", "operational")):
+                if "GHGP" in src_id:
                     score += 3.5
-            if any(k in q_token_set for k in ("diesel", "fuel", "gas", "desnz", "combustion")):
+            if any(k in q_token_set for k in ("diesel", "fuel", "gas", "desnz", "combustion", "lpg")):
                 if "DESNZ" in src_id:
                     score += 3.0
             if any(k in q_token_set for k in ("morbi", "ceramics", "kiln", "sec")):

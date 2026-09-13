@@ -35,6 +35,7 @@ from app.schemas.compliance import (
 )
 from app.services import audit, events
 from app.services.access import accessible_factory_ids, resolve_factory
+from app.services.database_sync import get_db_sync
 
 router = APIRouter(prefix="/api", tags=["compliance"])
 
@@ -336,6 +337,11 @@ def create_case(body: ComplianceCaseCreate, principal: CurrentPrincipal,
                  "title": case.title},
     )
     db.commit()
+    get_db_sync().sync_compliance_case(case.id, {
+        "title": case.title, "factory_id": case.factory_id, "organization_id": case.organization_id,
+        "severity": case.severity, "status": case.status, "flow_state": case.flow_state,
+        "rule_id": case.rule_id, "due_date": str(case.due_date) if case.due_date else None,
+    })
     return _case_out(db, case)
 
 
@@ -371,6 +377,11 @@ def update_case(case_id: str, body: ComplianceCasePatch, principal: CurrentPrinc
         old_value=before, new_value=patch, ip_address=ip,
     )
     db.commit()
+    get_db_sync().sync_compliance_case(case.id, {
+        "title": case.title, "factory_id": case.factory_id, "organization_id": case.organization_id,
+        "severity": case.severity, "status": case.status, "flow_state": case.flow_state,
+        "due_date": str(case.due_date) if case.due_date else None,
+    })
     return _case_out(db, case)
 
 

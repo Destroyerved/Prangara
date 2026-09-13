@@ -125,19 +125,19 @@ export const api = {
   },
   assess: async (profile: PlantProfile) => {
     plantSchema.parse(profile);
-    if (dataMode === "demo")
-      throw new ApiError(
-        "Inputs validated. New calculations require the connected engine. You can export these inputs or load a fixed demo assessment.",
-      );
-    return parse(
-      assessmentSchema,
-      adaptAssessment(
-        await request("/assess", {
-          method: "POST",
-          body: JSON.stringify(toEngineProfile(profile)),
-        }),
-        profile,
-      ),
-    );
+    try {
+      const response = await request("/assess", {
+        method: "POST",
+        body: JSON.stringify(toEngineProfile(profile)),
+      });
+      return parse(assessmentSchema, adaptAssessment(response, profile));
+    } catch (e) {
+      if (dataMode === "demo") {
+        throw new ApiError(
+          "Inputs validated. Calculation engine is starting or unreachable. Please ensure the backend is running at http://127.0.0.1:8000.",
+        );
+      }
+      throw e;
+    }
   },
 };

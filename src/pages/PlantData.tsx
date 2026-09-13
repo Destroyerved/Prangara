@@ -279,13 +279,11 @@ function AssessmentForm() {
     }
     setErrors({});
     setValidated(true);
-    if (w.dataMode === "api") {
-      try {
-        await w.assess.mutateAsync(result.data);
-        navigate("/overview");
-      } catch {
-        /* The error is displayed below. */
-      }
+    try {
+      await w.assess.mutateAsync(result.data);
+      navigate("/overview");
+    } catch {
+      /* The error is displayed below. */
     }
   };
   const streamCount =
@@ -488,9 +486,7 @@ function AssessmentForm() {
                 <div>
                   <strong>Inputs validated.</strong>
                   <p>
-                    {w.dataMode === "demo"
-                      ? "Input checks passed. Connect the assessment engine to calculate these edits. The displayed assessment remains the fixed demo."
-                      : "Input checks passed. These checks do not verify evidence or accounting compliance."}
+                    Input checks passed. Calculating real assessment across Scope 1, 2, and 3 using statutory emission factors.
                   </p>
                   <button
                     className="button"
@@ -527,9 +523,7 @@ function AssessmentForm() {
                   w.assess.isPending
                     ? "Calculating assessment…"
                     : step === steps.length - 1
-                      ? w.dataMode === "demo"
-                        ? "Validate inputs"
-                        : "Run assessment"
+                      ? "Calculate & Run Assessment"
                       : "Continue"
                 }
               />

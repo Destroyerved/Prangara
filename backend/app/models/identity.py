@@ -55,6 +55,7 @@ class Organization(TimestampMixin, Base):
     kind: Mapped[str] = mapped_column(String(32), nullable=False, default=ORG_MANUFACTURER)
     country: Mapped[str | None] = mapped_column(String(2), default="IN")
     state: Mapped[str | None] = mapped_column(String(80))
+    cluster: Mapped[str | None] = mapped_column(String(120))
     gstin: Mapped[str | None] = mapped_column(String(20))
     archived_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
 

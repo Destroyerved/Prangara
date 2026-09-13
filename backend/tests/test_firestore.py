@@ -82,3 +82,33 @@ def test_firestore_repo_mocked_crud():
     assert res_rfq["status"] == "OPEN"
     mock_doc.set.assert_called_once()
 
+    # Test save activity record (telemetry / SCADA)
+    mock_doc.reset_mock()
+    res_act = repo.save_activity_record("act_test_001", {
+        "factory_id": "fac_test_456",
+        "stream_kind": "electricity",
+        "quantity": 15400.0,
+        "unit": "kWh",
+    })
+    assert res_act["id"] == "act_test_001"
+    assert res_act["quantity"] == 15400.0
+    mock_doc.set.assert_called_once()
+
+
+def test_firestore_storage_backend():
+    import io
+    from app.services import storage
+
+    mock_client = mock.MagicMock()
+    mock_doc = mock.MagicMock()
+    mock_client.collection.return_value.document.return_value = mock_doc
+
+    with mock.patch("app.core.firestore_db.get_firestore_client", return_value=mock_client), \
+         mock.patch("app.core.config.settings.storage_backend", "firestore"):
+        stream = io.BytesIO(b"DCS Meter Readings - 2026-09-13")
+        stored = storage.store(stream, content_type="application/pdf", organization_id="org_test", document_id="doc_meter_01")
+        assert stored.storage_backend == "firestore"
+        assert stored.size_bytes > 0
+        mock_doc.set.assert_called_once()
+
+

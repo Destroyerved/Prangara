@@ -29,6 +29,7 @@ from app.schemas.marketplace import (
 )
 from app.services import audit, events
 from app.services.access import require_platform_admin, require_provider, resolve_factory
+from app.services.database_sync import get_db_sync
 from app.services.provider_match import match_providers, recompute_economics
 
 router = APIRouter(prefix="/api", tags=["marketplace"])
@@ -61,7 +62,9 @@ def create_provider(body: ProviderCreate, principal: CurrentPrincipal, db: DbSes
                  organization_id=org.id, actor_user_id=principal.user_id,
                  actor_label=principal.user.email, new_value=body.model_dump(), ip_address=ip)
     db.commit()
+    get_db_sync().sync_provider(provider.id, {**body.model_dump(), "organization_id": org.id})
     return ProviderOut.model_validate(provider)
+
 
 
 @router.get("/providers", response_model=list[ProviderOut])
@@ -226,6 +229,10 @@ def create_rfq(body: RFQCreate, principal: CurrentPrincipal, db: DbSession,
                 payload={"rfq_id": rfq.id, "intervention_id": rfq.intervention_id,
                          "provider_ids": body.provider_ids})
     db.commit()
+    get_db_sync().sync_rfq(rfq.id, {
+        "title": rfq.title, "factory_id": rfq.factory_id, "organization_id": rfq.organization_id,
+        "status": rfq.status, "intervention_id": rfq.intervention_id, "needed_by": str(rfq.needed_by) if rfq.needed_by else None,
+    })
     return _rfq_out(db, rfq)
 
 
@@ -336,6 +343,10 @@ def submit_quote(rfq_id: str, body: QuoteCreate, principal: CurrentPrincipal,
                          "provider_id": provider.id, "provider_name": provider.name,
                          "price_inr": body.price_inr})
     db.commit()
+    get_db_sync().sync_quote(quote.id, {
+        "rfq_id": quote.rfq_id, "provider_id": quote.provider_id, "price_inr": quote.price_inr,
+        "status": quote.status, "revised_payback_yrs": quote.revised_payback_yrs,
+    })
     out = QuoteOut.model_validate(quote)
     out.provider_name = provider.name
     return out
@@ -412,6 +423,8 @@ def accept_quote(quote_id: str, principal: CurrentPrincipal, db: DbSession,
                 payload={"rfq_id": rfq.id, "quote_id": quote.id,
                          "provider_id": quote.provider_id})
     db.commit()
+    get_db_sync().sync_quote(quote.id, {"status": "ACCEPTED", "rfq_id": quote.rfq_id})
+    get_db_sync().sync_rfq(rfq.id, {"status": "ACCEPTED", "accepted_quote_id": quote.id})
     return QuoteOut.model_validate(quote)
 
 
@@ -435,6 +448,10 @@ def create_listing(body: MaterialListingIn, principal: CurrentPrincipal,
     listing = MaterialListing(provider_id=provider.id, **body.model_dump())
     db.add(listing)
     db.commit()
+    get_db_sync().sync_material(listing.id, {
+        "name": listing.name, "provider_id": listing.provider_id, "material_key": listing.material_key,
+        "grade": listing.grade, "price_inr_per_t": listing.price_inr_per_t, "state": listing.state,
+    })
     out = MaterialListingOut.model_validate(listing)
     out.provider_name = provider.name
     return out

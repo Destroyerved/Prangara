@@ -40,9 +40,21 @@ class Settings:
         self.app_name: str = "PRANGARA"
         self.api_version: str = "2.0.0"
 
-        self.database_url: str = os.environ.get(
-            "DATABASE_URL", f"sqlite:///{os.path.join(here, 'prangara.db')}"
-        )
+        # In serverless environments (e.g. Vercel), the application root is read-only.
+        # Fall back SQLite to /tmp/prangara.db if no custom DATABASE_URL is provided.
+        default_db = f"sqlite:///{os.path.join(here, 'prangara.db')}"
+        if os.environ.get("VERCEL") and not os.environ.get("DATABASE_URL"):
+            tmp_db = "/tmp/prangara.db"
+            orig_db = os.path.join(here, "prangara.db")
+            if os.path.exists(orig_db) and not os.path.exists(tmp_db):
+                try:
+                    import shutil
+                    shutil.copy2(orig_db, tmp_db)
+                except Exception:
+                    pass
+            default_db = f"sqlite:///{tmp_db}"
+
+        self.database_url: str = os.environ.get("DATABASE_URL", default_db)
         self.database_backend: str = os.environ.get("DATABASE_BACKEND", "sqlite").lower()
         self.firestore_project_id: str = os.environ.get("FIRESTORE_PROJECT_ID", "")
         self.firebase_credentials_json: str = os.environ.get("FIREBASE_CREDENTIALS_JSON", "")
@@ -61,11 +73,11 @@ class Settings:
         self.access_token_minutes: int = _int("ACCESS_TOKEN_MINUTES", 30)
         self.refresh_token_days: int = _int("REFRESH_TOKEN_DAYS", 30)
 
-        # Evidence storage. MinIO/S3 when configured, local filesystem otherwise
-        # so that evidence upload works on a laptop with nothing else running.
-        self.storage_backend: str = os.environ.get("STORAGE_BACKEND", "local")
+        # Evidence storage. MinIO/S3, GCS, Firestore blobs, or local filesystem
+        self.storage_backend: str = os.environ.get("STORAGE_BACKEND", "local").lower()
+        default_storage_dir = "/tmp/evidence" if os.environ.get("VERCEL") else os.path.join(here, "var", "evidence")
         self.storage_local_dir: str = os.environ.get(
-            "STORAGE_LOCAL_DIR", os.path.join(here, "var", "evidence")
+            "STORAGE_LOCAL_DIR", default_storage_dir
         )
         self.minio_endpoint: str = os.environ.get("MINIO_ENDPOINT", "")
         self.minio_access_key: str = os.environ.get("MINIO_ACCESS_KEY", "")

@@ -21,6 +21,7 @@ from app.models.evidence import EVIDENCE_TYPES, EvidenceDocument, EvidenceLink
 from app.schemas.evidence import EvidenceLinkIn, EvidenceLinkOut, EvidenceOut, EvidenceUpdate
 from app.services import audit, events, storage
 from app.services.access import accessible_factory_ids, resolve_factory
+from app.services.database_sync import get_db_sync
 
 router = APIRouter(prefix="/api/evidence", tags=["evidence"])
 
@@ -140,6 +141,18 @@ def upload_evidence(
         payload={"evidence_id": document.id, "evidence_type": evidence_type},
     )
     db.commit()
+
+    get_db_sync().sync_evidence(document.id, {
+        "factory_id": document.factory_id,
+        "organization_id": document.organization_id,
+        "title": document.title,
+        "evidence_type": document.evidence_type,
+        "filename": document.filename,
+        "sha256_hash": document.content_sha256,
+        "size_bytes": document.size_bytes,
+        "created_at": document.created_at,
+    })
+
     return _out(db, document)
 
 

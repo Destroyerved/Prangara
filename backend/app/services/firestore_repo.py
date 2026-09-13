@@ -182,6 +182,34 @@ class FirestoreRepository:
         docs = self.client.collection("quotes").where("rfq_id", "==", rfq_id).stream()
         return [d.to_dict() for d in docs]
 
+    # --- Actions & Verification ---
+    def save_action(self, action_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("actions").document(action_id)
+        payload = {**data, "id": action_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    # --- Compliance Cases ---
+    def save_compliance_case(self, case_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("compliance_cases").document(case_id)
+        payload = {**data, "id": case_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    # --- Logistics & Shipments ---
+    def save_shipment(self, shipment_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("shipments").document(shipment_id)
+        payload = {**data, "id": shipment_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
+    # --- Activity & Telemetry ---
+    def save_activity_record(self, record_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        doc_ref = self.client.collection("activity_records").document(record_id)
+        payload = {**data, "id": record_id, "updated_at": dt.datetime.now(dt.timezone.utc)}
+        doc_ref.set(payload, merge=True)
+        return payload
+
 
 _repo: FirestoreRepository | None = None
 
@@ -192,3 +220,4 @@ def get_firestore_repo() -> FirestoreRepository:
     if _repo is None:
         _repo = FirestoreRepository()
     return _repo
+
