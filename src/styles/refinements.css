@@ -21,46 +21,46 @@
 .hero-support strong span,
 .metric-strip strong span,
 .reduction-callout span {
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .page-heading p,
 .section-heading p {
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 .scope-legend small,
 .scope-legend strong,
 .uncertainty {
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .uncertainty {
   flex-wrap: wrap;
 }
 .leak-footer {
-  font-size: 12px;
-  line-height: 1.7;
+  font-size: var(--text-caption);
+  line-height: var(--leading-normal);
   flex-wrap: wrap;
 }
 .leak-value small,
 .leak-card .chip {
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .leak-card h3 {
-  font-size: 16px;
+  font-size: var(--text-subsection);
 }
 .workspace-label {
-  font-size: 10px;
+  font-size: var(--text-micro);
 }
 .nav-label {
-  font-size: 11px;
+  font-size: var(--text-micro);
 }
 .nav-item {
-  font-size: 14px;
+  font-size: 13px;
 }
 .chip {
-  font-size: 12px;
+  font-size: var(--text-micro);
 }
 .button {
-  font-size: 13px;
+  font-size: var(--text-body-sm);
 }
 .platform-toolbar .workspace-open,
 .platform-toolbar .sign-out {

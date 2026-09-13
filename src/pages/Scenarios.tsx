@@ -129,7 +129,7 @@ export default function Scenarios() {
         action={
           <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
             <Badge tone="positive">Baseline Protected (Immutable)</Badge>
-            <button className="text-button" onClick={handleReset} style={{ fontSize: "0.85rem", display: "inline-flex", alignItems: "center", gap: "0.3rem" }}>
+            <button className="text-button" onClick={handleReset} style={{ fontSize: "var(--text-body-sm)", display: "inline-flex", alignItems: "center", gap: "0.3rem" }}>
               <RotateCcw size={14} />
               Reset
             </button>
@@ -143,7 +143,7 @@ export default function Scenarios() {
           <span className="eyebrow">ANNUAL EMISSIONS IMPACT</span>
           <strong className={sim.deltaTotal <= 0 ? "positive" : "cost-text"}>
             {sim.deltaTotal <= 0 ? "-" : "+"}{number(Math.abs(sim.deltaTotal), 1)} tCO₂e
-            <small style={{ marginLeft: "0.35rem", fontSize: "0.85rem" }}>
+            <small style={{ marginLeft: "0.35rem", fontSize: "var(--text-body-sm)" }}>
               ({sim.deltaPct <= 0 ? "" : "+"}{number(sim.deltaPct, 1)}%)
             </small>
           </strong>
@@ -152,14 +152,14 @@ export default function Scenarios() {
           <span className="eyebrow">NET ANNUAL SAVINGS (CRF INCLUDED)</span>
           <strong className={sim.netAnnualBenefit >= 0 ? "positive" : "cost-text"}>
             {money(sim.netAnnualBenefit)}
-            <small style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}> / year</small>
+            <small style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}> / year</small>
           </strong>
         </div>
         <div>
           <span className="eyebrow">CARBON INTENSITY</span>
           <strong>
             {number(sim.simIntensity, 2)}
-            <small style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+            <small style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>
               {" "}tCO₂e / t ({number(baseIntensity, 2)} baseline)
             </small>
           </strong>
@@ -177,14 +177,14 @@ export default function Scenarios() {
         <div className="glass-panel" style={{ padding: "1.5rem", borderRadius: "14px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.25rem" }}>
             <Sliders size={18} className="positive" />
-            <h3 style={{ margin: 0, fontSize: "1.1rem" }}>Scenario Levers</h3>
+            <h3 style={{ margin: 0, fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>Scenario Levers</h3>
           </div>
 
           {/* Lever 1: Output Scale Slider */}
           <div style={{ marginBottom: "1.5rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem", marginBottom: "0.4rem" }}>
-              <span style={{ fontWeight: 600 }}>Production Volume Change</span>
-              <span style={{ color: "var(--brand-teal)", fontWeight: 700 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-body-sm)", marginBottom: "0.4rem" }}>
+              <span style={{ fontWeight: "var(--weight-semibold)" }}>Production Volume Change</span>
+              <span style={{ color: "var(--brand-teal)", fontWeight: "var(--weight-bold)" }}>
                 {scaleDeltaPct > 0 ? `+${scaleDeltaPct}%` : `${scaleDeltaPct}%`} ({number(sim.simOutput)} t/yr)
               </span>
             </div>
@@ -197,7 +197,7 @@ export default function Scenarios() {
               onChange={(e) => setScaleDeltaPct(Number(e.target.value))}
               style={{ width: "100%", accentColor: "var(--brand-teal)", cursor: "pointer" }}
             />
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.2rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-caption)", color: "var(--muted)", marginTop: "0.2rem" }}>
               <span>-50% (Downturn)</span>
               <span>Baseline</span>
               <span>+50% (Expansion)</span>
@@ -206,12 +206,12 @@ export default function Scenarios() {
 
           {/* Lever 2: Solar Offset Slider */}
           <div style={{ marginBottom: "1.5rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem", marginBottom: "0.4rem" }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", fontWeight: 600 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-body-sm)", marginBottom: "0.4rem" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", fontWeight: "var(--weight-semibold)" }}>
                 <Sun size={15} style={{ color: "#f59e0b" }} />
                 Rooftop Solar PV Offset
               </span>
-              <span style={{ color: "#f59e0b", fontWeight: 700 }}>{solarOffsetPct}% of grid</span>
+              <span style={{ color: "#f59e0b", fontWeight: "var(--weight-bold)" }}>{solarOffsetPct}% of grid</span>
             </div>
             <input
               type="range"
@@ -222,14 +222,14 @@ export default function Scenarios() {
               onChange={(e) => setSolarOffsetPct(Number(e.target.value))}
               style={{ width: "100%", accentColor: "#f59e0b", cursor: "pointer" }}
             />
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.25rem" }}>
+            <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)", marginTop: "0.25rem" }}>
               Generates ~{number(sim.solarGenerationKwh)} kWh clean power on-site annually.
             </div>
           </div>
 
           {/* Lever 3: Boiler Fuel Switcher */}
           <div style={{ marginBottom: "1.5rem" }}>
-            <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, marginBottom: "0.4rem" }}>
+            <label style={{ display: "block", fontSize: "var(--text-body-sm)", fontWeight: "var(--weight-semibold)", marginBottom: "0.4rem" }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}>
                 <Flame size={15} style={{ color: "#ef4444" }} />
                 Boiler Combustion Fuel Switch
@@ -252,12 +252,12 @@ export default function Scenarios() {
 
           {/* Lever 4: Recycled Material Slider */}
           <div style={{ marginBottom: "1.5rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem", marginBottom: "0.4rem" }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", fontWeight: 600 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-body-sm)", marginBottom: "0.4rem" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", fontWeight: "var(--weight-semibold)" }}>
                 <Recycle size={15} className="positive" />
                 Recycled Material Substitution
               </span>
-              <span style={{ color: "var(--brand-teal)", fontWeight: 700 }}>{recycledMaterialPct}%</span>
+              <span style={{ color: "var(--brand-teal)", fontWeight: "var(--weight-bold)" }}>{recycledMaterialPct}%</span>
             </div>
             <input
               type="range"
@@ -268,7 +268,7 @@ export default function Scenarios() {
               onChange={(e) => setRecycledMaterialPct(Number(e.target.value))}
               style={{ width: "100%", accentColor: "var(--brand-teal)", cursor: "pointer" }}
             />
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.25rem" }}>
+            <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)", marginTop: "0.25rem" }}>
               Substitutes virgin ingots/feedstock with verified secondary circular scrap.
             </div>
           </div>
@@ -276,7 +276,7 @@ export default function Scenarios() {
           {/* Lever 5: Energy Efficiency Retrofits Toggle */}
           <div style={{ padding: "0.85rem", borderRadius: "10px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}>
             <label style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.875rem", fontWeight: 600 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "var(--text-body-sm)", fontWeight: "var(--weight-semibold)" }}>
                 <Zap size={16} className="positive" />
                 IE4 Super Premium Motors & VFD Retrofits
               </span>
@@ -287,7 +287,7 @@ export default function Scenarios() {
                 style={{ width: "18px", height: "18px", accentColor: "var(--brand-teal)", cursor: "pointer" }}
               />
             </label>
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.35rem" }}>
+            <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)", marginTop: "0.35rem" }}>
               Reduces fan/pump/compressor electrical load by ~8% via variable speed control.
             </div>
           </div>
@@ -297,7 +297,7 @@ export default function Scenarios() {
         <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           {/* Comparison Cards Grid */}
           <div className="glass-panel" style={{ padding: "1.5rem", borderRadius: "14px" }}>
-            <h3 style={{ margin: "0 0 1.25rem 0", fontSize: "1.1rem" }}>
+            <h3 style={{ margin: "0 0 1.25rem 0", fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>
               Detailed Scope Breakdown: Baseline vs Scenario
             </h3>
 
@@ -305,13 +305,13 @@ export default function Scenarios() {
               {/* Scope 1 Card */}
               <div className="platform-extracted" style={{ padding: "1rem", borderRadius: "10px" }}>
                 <span className="eyebrow">SCOPE 1 (COMBUSTION)</span>
-                <div style={{ fontSize: "1.3rem", fontWeight: 700, margin: "0.25rem 0" }}>
-                  {number(sim.simScope1, 1)} <span style={{ fontSize: "0.75rem", fontWeight: 400 }}>tCO₂e</span>
+                <div style={{ fontSize: "var(--text-section)", fontWeight: "var(--weight-bold)", fontVariantNumeric: "tabular-nums", margin: "0.25rem 0" }}>
+                  {number(sim.simScope1, 1)} <span style={{ fontSize: "var(--text-caption)", fontWeight: "var(--weight-regular)", color: "var(--muted)" }}>tCO₂e</span>
                 </div>
-                <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>
                   Baseline: {number(baseScope1, 1)} tCO₂e
                 </div>
-                <div style={{ fontSize: "0.8rem", color: sim.simScope1 <= baseScope1 ? "#d1d5db" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "var(--text-body-sm)", color: sim.simScope1 <= baseScope1 ? "#d1d5db" : "#ef4444", fontWeight: "var(--weight-semibold)", marginTop: "0.25rem" }}>
                   {sim.simScope1 <= baseScope1 ? "▼" : "▲"} {number(Math.abs(sim.simScope1 - baseScope1), 1)} tCO₂e
                 </div>
               </div>
@@ -319,13 +319,13 @@ export default function Scenarios() {
               {/* Scope 2 Card */}
               <div className="platform-extracted" style={{ padding: "1rem", borderRadius: "10px" }}>
                 <span className="eyebrow">SCOPE 2 (GRID POWER)</span>
-                <div style={{ fontSize: "1.3rem", fontWeight: 700, margin: "0.25rem 0" }}>
-                  {number(sim.simScope2, 1)} <span style={{ fontSize: "0.75rem", fontWeight: 400 }}>tCO₂e</span>
+                <div style={{ fontSize: "var(--text-section)", fontWeight: "var(--weight-bold)", fontVariantNumeric: "tabular-nums", margin: "0.25rem 0" }}>
+                  {number(sim.simScope2, 1)} <span style={{ fontSize: "var(--text-caption)", fontWeight: "var(--weight-regular)", color: "var(--muted)" }}>tCO₂e</span>
                 </div>
-                <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>
                   Baseline: {number(baseScope2, 1)} tCO₂e
                 </div>
-                <div style={{ fontSize: "0.8rem", color: sim.simScope2 <= baseScope2 ? "#d1d5db" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "var(--text-body-sm)", color: sim.simScope2 <= baseScope2 ? "#d1d5db" : "#ef4444", fontWeight: "var(--weight-semibold)", marginTop: "0.25rem" }}>
                   {sim.simScope2 <= baseScope2 ? "▼" : "▲"} {number(Math.abs(sim.simScope2 - baseScope2), 1)} tCO₂e
                 </div>
               </div>
@@ -333,13 +333,13 @@ export default function Scenarios() {
               {/* Scope 3 Card */}
               <div className="platform-extracted" style={{ padding: "1rem", borderRadius: "10px" }}>
                 <span className="eyebrow">SCOPE 3 (MATERIALS)</span>
-                <div style={{ fontSize: "1.3rem", fontWeight: 700, margin: "0.25rem 0" }}>
-                  {number(sim.simScope3, 1)} <span style={{ fontSize: "0.75rem", fontWeight: 400 }}>tCO₂e</span>
+                <div style={{ fontSize: "var(--text-section)", fontWeight: "var(--weight-bold)", fontVariantNumeric: "tabular-nums", margin: "0.25rem 0" }}>
+                  {number(sim.simScope3, 1)} <span style={{ fontSize: "var(--text-caption)", fontWeight: "var(--weight-regular)", color: "var(--muted)" }}>tCO₂e</span>
                 </div>
-                <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>
                   Baseline: {number(baseScope3, 1)} tCO₂e
                 </div>
-                <div style={{ fontSize: "0.8rem", color: sim.simScope3 <= baseScope3 ? "#d1d5db" : "#ef4444", fontWeight: 600, marginTop: "0.25rem" }}>
+                <div style={{ fontSize: "var(--text-body-sm)", color: sim.simScope3 <= baseScope3 ? "#d1d5db" : "#ef4444", fontWeight: "var(--weight-semibold)", marginTop: "0.25rem" }}>
                   {sim.simScope3 <= baseScope3 ? "▼" : "▲"} {number(Math.abs(sim.simScope3 - baseScope3), 1)} tCO₂e
                 </div>
               </div>
@@ -347,7 +347,7 @@ export default function Scenarios() {
 
             {/* Visual Comparison Progress Bars */}
             <div style={{ marginBottom: "1.25rem" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", marginBottom: "0.35rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-body-sm)", marginBottom: "0.35rem" }}>
                 <span>Baseline Footprint: <strong>{number(baseTotal, 1)} tCO₂e</strong></span>
                 <span>100%</span>
               </div>
@@ -355,9 +355,9 @@ export default function Scenarios() {
                 <div style={{ width: "100%", height: "100%", background: "var(--text-muted)" }} />
               </div>
 
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", marginBottom: "0.35rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-body-sm)", marginBottom: "0.35rem" }}>
                 <span>Scenario Footprint: <strong>{number(sim.simTotal, 1)} tCO₂e</strong></span>
-                <span style={{ color: sim.deltaTotal <= 0 ? "#d1d5db" : "#ef4444", fontWeight: 700 }}>
+                <span style={{ color: sim.deltaTotal <= 0 ? "#d1d5db" : "#ef4444", fontWeight: "var(--weight-bold)" }}>
                   {number((sim.simTotal / baseTotal) * 100, 1)}%
                 </span>
               </div>
@@ -389,15 +389,15 @@ export default function Scenarios() {
             >
               <div>
                 <span className="eyebrow" style={{ color: "var(--brand-teal)" }}>CAPITAL REQUIRED</span>
-                <div style={{ fontSize: "1.1rem", fontWeight: 700 }}>{money(sim.totalCapex)}</div>
-                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Solar + Motors + Boiler Switch</div>
+                <div style={{ fontSize: "var(--text-section)", fontWeight: "var(--weight-bold)", fontVariantNumeric: "tabular-nums" }}>{money(sim.totalCapex)}</div>
+                <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>Solar + Motors + Boiler Switch</div>
               </div>
               <div>
                 <span className="eyebrow" style={{ color: "var(--brand-teal)" }}>GROSS ANNUAL OPEX SAVINGS</span>
-                <div style={{ fontSize: "1.1rem", fontWeight: 700 }} className="positive">
+                <div style={{ fontSize: "var(--text-section)", fontWeight: "var(--weight-bold)", fontVariantNumeric: "tabular-nums" }} className="positive">
                   +{money(sim.grossAnnualSavings)} / yr
                 </div>
-                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Tariff & Fuel Bill Reductions</div>
+                <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>Tariff & Fuel Bill Reductions</div>
               </div>
               <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
                 <button
@@ -431,18 +431,18 @@ export default function Scenarios() {
                       setSaving(false);
                     }
                   }}
-                  style={{ fontSize: "0.85rem", padding: "0.45rem 1rem", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                  style={{ fontSize: "var(--text-body-sm)", padding: "0.45rem 1rem", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                 >
                   <BookmarkPlus size={15} />
                   {saving ? "Saving Scenario…" : "Save to Workspace"}
                 </button>
-                <Link className="button" to="/marketplace" style={{ fontSize: "0.85rem", padding: "0.45rem 1rem" }}>
+                <Link className="button" to="/marketplace" style={{ fontSize: "var(--text-body-sm)", padding: "0.45rem 1rem" }}>
                   Find Providers for this Scenario ↗
                 </Link>
               </div>
             </div>
             {saveStatus && (
-              <div style={{ marginTop: "0.75rem", padding: "0.5rem 0.85rem", borderRadius: "8px", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", color: "#10b981", fontSize: "0.85rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+              <div style={{ marginTop: "0.75rem", padding: "0.5rem 0.85rem", borderRadius: "8px", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", color: "#10b981", fontSize: "var(--text-body-sm)", display: "flex", alignItems: "center", gap: "0.4rem" }}>
                 <CheckCircle2 size={15} />
                 {saveStatus}
               </div>

@@ -296,8 +296,8 @@ export default function Account() {
               background: 'rgba(52, 211, 153, 0.12)',
               border: '1px solid rgba(52, 211, 153, 0.3)',
               color: '#34d399',
-              fontSize: '0.88rem',
-              fontWeight: 500,
+              fontSize: 'var(--text-body-sm)',
+              fontWeight: 'var(--weight-medium)',
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
@@ -328,23 +328,23 @@ export default function Account() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '20px',
-                fontWeight: 700,
-                color: '#EDF4FB',
-                letterSpacing: '0.05em',
+                fontSize: 'var(--text-section)',
+                fontWeight: 'var(--weight-bold)',
+                color: 'var(--text)',
+                letterSpacing: 'var(--tracking-tight)',
                 boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
               }}>
                 {profile.full_name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'RK'}
               </div>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                  <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#EDF4FB', margin: 0 }}>
+                  <h2 style={{ fontSize: 'var(--text-section)', fontWeight: 'var(--weight-semibold)', color: 'var(--text)', margin: 0 }}>
                     {profile.full_name}
                   </h2>
                   <span style={{
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    letterSpacing: '0.06em',
+                    fontSize: 'var(--text-micro)',
+                    fontWeight: 'var(--weight-semibold)',
+                    letterSpacing: 'var(--tracking-wide)',
                     textTransform: 'uppercase',
                     padding: '3px 9px',
                     borderRadius: '20px',
@@ -355,7 +355,7 @@ export default function Account() {
                     Verified Industrial Account
                   </span>
                 </div>
-                <div style={{ fontSize: '13.5px', color: 'rgba(220, 235, 245, 0.65)' }}>
+                <div style={{ fontSize: 'var(--text-body)', color: 'var(--muted)' }}>
                   {profile.role} · {profile.organization_name}
                 </div>
               </div>
@@ -375,9 +375,9 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '13px',
-                    fontWeight: 600,
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body-sm)',
+                    fontWeight: 'var(--weight-semibold)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                   }}
@@ -402,8 +402,8 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'transparent',
                     border: '1px solid rgba(220, 235, 245, 0.2)',
-                    color: 'rgba(220, 235, 245, 0.7)',
-                    fontSize: '13px',
+                    color: 'var(--muted)',
+                    fontSize: 'var(--text-body-sm)',
                     cursor: 'pointer',
                   }}
                 >
@@ -422,10 +422,10 @@ export default function Account() {
                 borderRadius: '12px',
                 padding: '18px 20px',
               }}>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(200, 220, 235, 0.45)', marginBottom: '6px' }}>
+                <div style={{ fontSize: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)', color: 'var(--muted)', marginBottom: '6px', fontWeight: 'var(--weight-medium)' }}>
                   Full Legal Name
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 550, color: '#EDF4FB' }}>
+                <div style={{ fontSize: 'var(--text-subsection)', fontWeight: 'var(--weight-medium)', color: 'var(--text)' }}>
                   {profile.full_name}
                 </div>
               </div>
@@ -436,10 +436,10 @@ export default function Account() {
                 borderRadius: '12px',
                 padding: '18px 20px',
               }}>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(200, 220, 235, 0.45)', marginBottom: '6px' }}>
+                <div style={{ fontSize: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)', color: 'var(--muted)', marginBottom: '6px', fontWeight: 'var(--weight-medium)' }}>
                   Work Email Address
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 550, color: '#EDF4FB' }}>
+                <div style={{ fontSize: 'var(--text-subsection)', fontWeight: 'var(--weight-medium)', color: 'var(--text)' }}>
                   {profile.email}
                 </div>
               </div>
@@ -450,10 +450,10 @@ export default function Account() {
                 borderRadius: '12px',
                 padding: '18px 20px',
               }}>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(200, 220, 235, 0.45)', marginBottom: '6px' }}>
+                <div style={{ fontSize: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)', color: 'var(--muted)', marginBottom: '6px', fontWeight: 'var(--weight-medium)' }}>
                   Factory / Organization
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 550, color: '#EDF4FB' }}>
+                <div style={{ fontSize: 'var(--text-subsection)', fontWeight: 'var(--weight-medium)', color: 'var(--text)' }}>
                   {profile.organization_name}
                 </div>
               </div>
@@ -464,10 +464,10 @@ export default function Account() {
                 borderRadius: '12px',
                 padding: '18px 20px',
               }}>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(200, 220, 235, 0.45)', marginBottom: '6px' }}>
+                <div style={{ fontSize: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)', color: 'var(--muted)', marginBottom: '6px', fontWeight: 'var(--weight-medium)' }}>
                   Designation / Role
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 550, color: '#EDF4FB' }}>
+                <div style={{ fontSize: 'var(--text-subsection)', fontWeight: 'var(--weight-medium)', color: 'var(--text)' }}>
                   {profile.role}
                 </div>
               </div>
@@ -478,10 +478,10 @@ export default function Account() {
                 borderRadius: '12px',
                 padding: '18px 20px',
               }}>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(200, 220, 235, 0.45)', marginBottom: '6px' }}>
+                <div style={{ fontSize: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)', color: 'var(--muted)', marginBottom: '6px', fontWeight: 'var(--weight-medium)' }}>
                   Contact Phone
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 550, color: '#EDF4FB' }}>
+                <div style={{ fontSize: 'var(--text-subsection)', fontWeight: 'var(--weight-medium)', color: 'var(--text)' }}>
                   {profile.phone}
                 </div>
               </div>
@@ -492,10 +492,10 @@ export default function Account() {
                 borderRadius: '12px',
                 padding: '18px 20px',
               }}>
-                <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(200, 220, 235, 0.45)', marginBottom: '6px' }}>
+                <div style={{ fontSize: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)', color: 'var(--muted)', marginBottom: '6px', fontWeight: 'var(--weight-medium)' }}>
                   Industrial Cluster
                 </div>
-                <div style={{ fontSize: '15px', fontWeight: 550, color: '#EDF4FB' }}>
+                <div style={{ fontSize: 'var(--text-subsection)', fontWeight: 'var(--weight-medium)', color: 'var(--text)' }}>
                   {profile.cluster}
                 </div>
               </div>
@@ -504,7 +504,7 @@ export default function Account() {
             /* Edit Details Form */
             <form onSubmit={handleSaveProfile} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Full Legal Name
                 </label>
                 <input
@@ -518,15 +518,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Work Email Address
                 </label>
                 <input
@@ -540,15 +540,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Factory / Organization Name
                 </label>
                 <input
@@ -562,15 +562,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Designation / Role
                 </label>
                 <input
@@ -584,15 +584,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Contact Phone
                 </label>
                 <input
@@ -605,15 +605,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Industrial Cluster
                 </label>
                 <input
@@ -626,8 +626,8 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
@@ -642,8 +642,8 @@ export default function Account() {
                     background: 'linear-gradient(135deg, #61B8F5 0%, #3B82F6 100%)',
                     border: 'none',
                     color: '#050E16',
-                    fontWeight: 650,
-                    fontSize: '14px',
+                    fontWeight: 'var(--weight-semibold)',
+                    fontSize: 'var(--text-body)',
                     cursor: 'pointer',
                     boxShadow: '0 4px 14px rgba(97, 184, 245, 0.4)',
                   }}
@@ -658,8 +658,8 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'transparent',
                     border: '1px solid rgba(180, 220, 235, 0.2)',
-                    color: '#EDF4FB',
-                    fontSize: '14px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     cursor: 'pointer',
                   }}
                 >
@@ -672,7 +672,7 @@ export default function Account() {
           {/* Active Organization Switcher if memberships exist */}
           {identity?.memberships && identity.memberships.length > 0 && (
             <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid rgba(180, 220, 235, 0.10)' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(200, 220, 235, 0.7)', marginBottom: '8px' }}>
+              <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '8px' }}>
                 Active Connected Organization
               </label>
               <select
@@ -688,8 +688,8 @@ export default function Account() {
                   borderRadius: '8px',
                   background: 'rgba(16, 26, 36, 0.8)',
                   border: '1px solid rgba(180, 220, 235, 0.2)',
-                  color: '#EDF4FB',
-                  fontSize: '13.5px',
+                  color: 'var(--text)',
+                  fontSize: 'var(--text-body)',
                 }}
               >
                 {identity.memberships.map((m) => (
@@ -723,9 +723,9 @@ export default function Account() {
                   borderRadius: '8px',
                   background: 'linear-gradient(135deg, rgba(97, 184, 245, 0.2) 0%, rgba(121, 215, 230, 0.1) 100%)',
                   border: '1px solid rgba(121, 215, 230, 0.35)',
-                  color: '#EDF4FB',
-                  fontSize: '13.5px',
-                  fontWeight: 600,
+                  color: 'var(--text)',
+                  fontSize: 'var(--text-body)',
+                  fontWeight: 'var(--weight-semibold)',
                   textDecoration: 'none',
                 }}
               >
@@ -742,9 +742,9 @@ export default function Account() {
                   borderRadius: '8px',
                   background: 'rgba(255, 255, 255, 0.04)',
                   border: '1px solid rgba(180, 220, 235, 0.15)',
-                  color: 'rgba(220, 235, 245, 0.8)',
-                  fontSize: '13.5px',
-                  fontWeight: 500,
+                  color: 'var(--muted)',
+                  fontSize: 'var(--text-body)',
+                  fontWeight: 'var(--weight-medium)',
                   textDecoration: 'none',
                 }}
               >
@@ -786,22 +786,22 @@ export default function Account() {
           {/* Top Brand Identity */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.14em', color: '#EDF4FB' }}>PRANGARA</span>
+              <span style={{ fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-bold)', letterSpacing: 'var(--tracking-wider)', color: 'var(--text)' }}>PRANGARA</span>
               <span style={{
-                fontSize: '10px',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
+                fontSize: 'var(--text-micro)',
+                fontWeight: 'var(--weight-semibold)',
+                letterSpacing: 'var(--tracking-wide)',
                 padding: '2px 8px',
                 borderRadius: '4px',
                 background: 'rgba(255, 255, 255, 0.04)',
                 border: '1px solid rgba(180, 220, 235, 0.1)',
-                color: 'rgba(200, 220, 235, 0.6)',
+                color: 'var(--muted)',
                 textTransform: 'uppercase',
               }}>
                 Industrial Access
               </span>
             </div>
-            <div style={{ fontSize: '11px', color: 'rgba(200, 220, 235, 0.45)', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
               ZERO-LLM CORE
             </div>
           </div>
@@ -821,12 +821,12 @@ export default function Account() {
               style={{
                 flex: 1,
                 padding: '9px 16px',
-                fontSize: '13.5px',
-                fontWeight: 600,
+                fontSize: 'var(--text-body)',
+                fontWeight: 'var(--weight-semibold)',
                 borderRadius: '8px',
                 border: 'none',
                 background: !register ? 'rgba(30, 50, 68, 0.95)' : 'transparent',
-                color: !register ? '#EDF4FB' : 'rgba(220, 235, 245, 0.55)',
+                color: !register ? 'var(--text)' : 'var(--muted)',
                 cursor: 'pointer',
                 boxShadow: !register ? '0 2px 8px rgba(0, 0, 0, 0.35)' : 'none',
                 transition: 'all 0.2s ease',
@@ -840,12 +840,12 @@ export default function Account() {
               style={{
                 flex: 1,
                 padding: '9px 16px',
-                fontSize: '13.5px',
-                fontWeight: 600,
+                fontSize: 'var(--text-body)',
+                fontWeight: 'var(--weight-semibold)',
                 borderRadius: '8px',
                 border: 'none',
                 background: register ? 'rgba(30, 50, 68, 0.95)' : 'transparent',
-                color: register ? '#EDF4FB' : 'rgba(220, 235, 245, 0.55)',
+                color: register ? 'var(--text)' : 'var(--muted)',
                 cursor: 'pointer',
                 boxShadow: register ? '0 2px 8px rgba(0, 0, 0, 0.35)' : 'none',
                 transition: 'all 0.2s ease',
@@ -857,10 +857,10 @@ export default function Account() {
 
           {/* Card Heading */}
           <div style={{ marginBottom: '22px' }}>
-            <h3 style={{ fontSize: '22px', fontWeight: 600, color: '#EDF4FB', margin: '0 0 6px' }}>
+            <h3 style={{ fontSize: 'var(--text-section)', fontWeight: 'var(--weight-semibold)', color: 'var(--text)', margin: '0 0 6px' }}>
               {register ? 'Create your industrial account' : 'Sign in to workspace'}
             </h3>
-            <p style={{ fontSize: '13px', color: 'rgba(220, 235, 245, 0.6)', margin: 0, lineHeight: 1.4 }}>
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--muted)', margin: 0, lineHeight: 'var(--leading-snug)' }}>
               {register
                 ? 'Initialize deterministic carbon & financial intelligence for your factory.'
                 : 'Access your factory decarbonization workspace and records.'}
@@ -876,8 +876,8 @@ export default function Account() {
               background: 'rgba(239, 68, 68, 0.1)',
               border: '1px solid rgba(239, 68, 68, 0.25)',
               color: '#f87171',
-              fontSize: '13px',
-              lineHeight: 1.4,
+              fontSize: 'var(--text-body)',
+              lineHeight: 'var(--leading-snug)',
             }}>
               {authError}
             </div>
@@ -898,9 +898,9 @@ export default function Account() {
               borderRadius: '10px',
               background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid rgba(180, 220, 235, 0.18)',
-              color: '#EDF4FB',
-              fontSize: '13.5px',
-              fontWeight: 550,
+              color: 'var(--text)',
+              fontSize: 'var(--text-body)',
+              fontWeight: 'var(--weight-medium)',
               cursor: loading ? 'wait' : 'pointer',
               transition: 'all 0.2s ease',
               marginBottom: '18px',
@@ -928,7 +928,7 @@ export default function Account() {
             margin: '20px 0',
           }}>
             <div style={{ flex: 1, height: '1px', background: 'rgba(180, 220, 235, 0.1)' }} />
-            <span style={{ fontSize: '11.5px', color: 'rgba(200, 220, 235, 0.4)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <span style={{ fontSize: 'var(--text-label)', color: 'var(--subtle)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-wider)' }}>
               {register ? 'or register with work email' : 'or continue with email'}
             </span>
             <div style={{ flex: 1, height: '1px', background: 'rgba(180, 220, 235, 0.1)' }} />
@@ -938,7 +938,7 @@ export default function Account() {
           {!register ? (
             <form onSubmit={handleEmailSignIn}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Work Email
                 </label>
                 <input
@@ -953,15 +953,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '6px' }}>
                   Password
                 </label>
                 <input
@@ -976,8 +976,8 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
@@ -993,8 +993,8 @@ export default function Account() {
                   background: 'linear-gradient(135deg, #61B8F5 0%, #3B82F6 100%)',
                   border: 'none',
                   color: '#050E16',
-                  fontSize: '14px',
-                  fontWeight: 650,
+                  fontSize: 'var(--text-body)',
+                  fontWeight: 'var(--weight-semibold)',
                   cursor: loading ? 'wait' : 'pointer',
                   boxShadow: '0 4px 16px -2px rgba(97, 184, 245, 0.45)',
                   transition: 'all 0.2s ease',
@@ -1010,12 +1010,12 @@ export default function Account() {
                 borderTop: '1px solid rgba(180, 220, 235, 0.10)',
               }}>
                 <div style={{
-                  fontSize: '11px',
+                  fontSize: 'var(--text-label)',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  color: 'rgba(200, 220, 235, 0.5)',
+                  letterSpacing: 'var(--tracking-wider)',
+                  color: 'var(--muted)',
                   marginBottom: '10px',
-                  fontWeight: 600,
+                  fontWeight: 'var(--weight-semibold)',
                 }}>
                   Quick Demo Accounts (1-Click Test)
                 </div>
@@ -1035,16 +1035,16 @@ export default function Account() {
                         border: '1px solid rgba(180, 220, 235, 0.12)',
                         background: 'rgba(16, 26, 36, 0.5)',
                         cursor: loading ? 'wait' : 'pointer',
-                        fontSize: '12.5px',
-                        color: '#EDF4FB',
+                        fontSize: 'var(--text-body-sm)',
+                        color: 'var(--text)',
                         textAlign: 'left',
                         transition: 'background 0.2s ease',
                       }}
                       onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(16, 26, 36, 0.5)'; }}
                     >
-                      <span style={{ fontWeight: 500 }}>{u.label}</span>
-                      <span style={{ fontSize: '11px', color: '#61B8F5', fontFamily: 'monospace' }}>Sign in →</span>
+                      <span style={{ fontWeight: 'var(--weight-medium)' }}>{u.label}</span>
+                      <span style={{ fontSize: 'var(--text-caption)', color: '#61B8F5', fontFamily: 'var(--font-mono)' }}>Sign in →</span>
                     </button>
                   ))}
                 </div>
@@ -1054,7 +1054,7 @@ export default function Account() {
             /* VIEW B: CREATE ACCOUNT FORM */
             <form onSubmit={handleEmailSignUp}>
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '5px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '5px' }}>
                   Full Name
                 </label>
                 <input
@@ -1069,15 +1069,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '5px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '5px' }}>
                   Work Email
                 </label>
                 <input
@@ -1092,15 +1092,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '5px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '5px' }}>
                   Company / Factory Name
                 </label>
                 <input
@@ -1115,15 +1115,15 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
               </div>
 
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '5px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '5px' }}>
                   Role / Designation
                 </label>
                 <select
@@ -1135,8 +1135,8 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 >
@@ -1149,7 +1149,7 @@ export default function Account() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 550, color: 'rgba(220, 235, 245, 0.8)', marginBottom: '5px' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-body-sm)', fontWeight: 'var(--weight-medium)', color: 'var(--muted)', marginBottom: '5px' }}>
                   Password (min 8 characters)
                 </label>
                 <input
@@ -1165,8 +1165,8 @@ export default function Account() {
                     borderRadius: '8px',
                     background: 'rgba(16, 26, 36, 0.8)',
                     border: '1px solid rgba(180, 220, 235, 0.18)',
-                    color: '#EDF4FB',
-                    fontSize: '13.5px',
+                    color: 'var(--text)',
+                    fontSize: 'var(--text-body)',
                     boxSizing: 'border-box',
                   }}
                 />
@@ -1182,8 +1182,8 @@ export default function Account() {
                   background: 'linear-gradient(135deg, #61B8F5 0%, #3B82F6 100%)',
                   border: 'none',
                   color: '#050E16',
-                  fontSize: '14px',
-                  fontWeight: 650,
+                  fontSize: 'var(--text-body)',
+                  fontWeight: 'var(--weight-semibold)',
                   cursor: loading ? 'wait' : 'pointer',
                   boxShadow: '0 4px 16px -2px rgba(97, 184, 245, 0.45)',
                   transition: 'all 0.2s ease',

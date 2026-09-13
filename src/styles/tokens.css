@@ -3,9 +3,44 @@
   font-synthesis: none;
   color-scheme: dark;
   font-size: 14px;
-  --font-body: "Inter Variable", Arial, sans-serif;
-  --font-heading: "Manrope Variable", Arial, sans-serif;
+  --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: var(--font-sans);
+  --font-heading: "Manrope Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-editorial: "Instrument Serif", "Playfair Display", "Saol Display", Didot, "Bodoni MT", Georgia, serif;
+
+  /* Typography Scale Tokens */
+  --text-display-hero: 52px;
+  --text-display: 34px;
+  --text-title: 26px;
+  --text-section: 19px;
+  --text-subsection: 15px;
+  --text-body: 13.5px;
+  --text-body-sm: 12px;
+  --text-label: 11px;
+  --text-caption: 11px;
+  --text-micro: 10px;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.18;
+  --leading-snug: 1.32;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.70;
+
+  /* Letter Spacing (Tracking) */
+  --tracking-tighter: -0.035em;
+  --tracking-tight: -0.018em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.075em;
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
   --bg: #060708;
   --bg-secondary: rgba(12, 13, 16, 0.85);
   --sidebar: rgba(10, 11, 13, 0.80);

@@ -112,8 +112,8 @@ export default function CircularActions() {
             display: "inline-flex",
             alignItems: "center",
             gap: "6px",
-            fontSize: "13px",
-            fontWeight: 500,
+            fontSize: "var(--text-body-sm)",
+            fontWeight: "var(--weight-medium)",
             textDecoration: "none",
             color: "var(--accent, #79D7E6)",
           }}

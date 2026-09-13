@@ -151,7 +151,7 @@ export default function Logistics() {
       <div className="glass-panel" style={{ padding: "1.25rem 1.5rem", borderRadius: "14px", marginBottom: "1.25rem" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 1fr", gap: "1.25rem", alignItems: "end" }}>
           <div>
-            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.4rem" }}>
+            <label style={{ display: "block", fontSize: "var(--text-body-sm)", fontWeight: "var(--weight-semibold)", marginBottom: "0.4rem" }}>
               Freight Corridor
             </label>
             <Select
@@ -175,7 +175,7 @@ export default function Logistics() {
           </div>
 
           <div>
-            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.4rem" }}>
+            <label style={{ display: "block", fontSize: "var(--text-body-sm)", fontWeight: "var(--weight-semibold)", marginBottom: "0.4rem" }}>
               Shipment Weight (Tonnes)
             </label>
             <input
@@ -191,16 +191,16 @@ export default function Logistics() {
                 border: "1px solid var(--border-subtle)",
                 background: "transparent",
                 color: "inherit",
-                fontSize: "0.9rem"
+                fontSize: "var(--text-body)"
               }}
             />
           </div>
 
           <div>
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: "0.3rem" }}>
+            <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)", marginBottom: "0.3rem" }}>
               Origin: {selectedCorridor.origin}
             </div>
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+            <div style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>
               Destination: {selectedCorridor.destination}
             </div>
           </div>
@@ -212,9 +212,9 @@ export default function Logistics() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
           <div>
             <span className="eyebrow" style={{ color: "var(--brand-teal, #79D7E6)" }}>LIVE SPATIAL INTELLIGENCE</span>
-            <h3 style={{ margin: 0, fontSize: "1.15rem" }}>Corridor GPS Telemetry &amp; Multi-Modal Routing</h3>
+            <h3 style={{ margin: 0, fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>Corridor GPS Telemetry &amp; Multi-Modal Routing</h3>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "var(--text-caption)", color: "var(--muted)" }}>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
               <Radio size={13} className="text-emerald-400 animate-pulse" />
               <span>GNSS Fleet Active</span>
@@ -238,9 +238,9 @@ export default function Logistics() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
           <div>
             <span className="eyebrow">MULTI-MODAL ALTERNATIVES</span>
-            <h3 style={{ margin: 0, fontSize: "1.15rem" }}>Compare 4 Route Execution Profiles</h3>
+            <h3 style={{ margin: 0, fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>Compare 4 Route Execution Profiles</h3>
           </div>
-          <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+          <span style={{ fontSize: "var(--text-caption)", color: "var(--muted)" }}>
             Corridor Distance: {selectedCorridor.distanceKm} km · Cargo: {cargoWeightT} tonnes
           </span>
         </div>
@@ -268,7 +268,7 @@ export default function Logistics() {
               >
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem", marginBottom: "0.6rem" }}>
-                    <span className="eyebrow" style={{ color: isSelected ? "var(--brand-teal)" : "inherit", fontSize: "0.75rem", lineHeight: 1.3, fontWeight: 700 }}>
+                    <span className="eyebrow" style={{ color: isSelected ? "var(--brand-teal)" : "inherit", fontSize: "var(--text-micro)", lineHeight: "var(--leading-none)", fontWeight: "var(--weight-semibold)", letterSpacing: "var(--tracking-wide)" }}>
                       {r.label}
                     </span>
                     <Badge tone={r.mode === "balanced" || r.mode === "lowest_carbon" ? "positive" : "neutral"}>
@@ -276,11 +276,11 @@ export default function Logistics() {
                     </Badge>
                   </div>
 
-                  <div style={{ fontSize: "1.4rem", fontWeight: 800, margin: "0.4rem 0" }}>
+                  <div style={{ fontSize: "var(--text-title)", fontWeight: "var(--weight-bold)", fontVariantNumeric: "tabular-nums", margin: "0.4rem 0" }}>
                     {money(r.costInr)}
                   </div>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.38rem", fontSize: "0.85rem", marginTop: "0.85rem" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.38rem", fontSize: "var(--text-body-sm)", marginTop: "0.85rem" }}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                       <span style={{ color: "var(--text-muted)" }}>Transit Time:</span>
                       <strong>{r.transitHours} hrs</strong>
@@ -298,7 +298,7 @@ export default function Logistics() {
                   </div>
                 </div>
 
-                <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "1rem", paddingTop: "0.6rem", borderTop: "1px solid var(--border-subtle)" }}>
+                <div style={{ fontSize: "var(--text-caption)", color: "var(--text-secondary)", marginTop: "1rem", paddingTop: "0.6rem", borderTop: "1px solid var(--border-subtle)" }}>
                   {r.vehicle}
                 </div>
               </div>
@@ -312,10 +312,10 @@ export default function Logistics() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
           <div>
             <span className="eyebrow" style={{ color: "var(--brand-teal)" }}>ACTIVE ROUTE SELECTION</span>
-            <h3 style={{ margin: "0.2rem 0", fontSize: "1.2rem" }}>
+            <h3 style={{ margin: "0.2rem 0", fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>
               {activeRoute.label} · {money(activeRoute.costInr)} · {activeRoute.emissionsTco2e} tCO₂e
             </h3>
-            <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>
+            <p style={{ margin: 0, fontSize: "var(--text-body-sm)", color: "var(--muted)" }}>
               {activeRoute.vehicle}. Verified emission calculation following GLEC Framework & ISO 14083 freight accounting standards.
             </p>
           </div>
@@ -335,12 +335,12 @@ export default function Logistics() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <Users size={18} className="positive" />
-              <h3 style={{ margin: 0, fontSize: "1.05rem" }}>Truck Pooling Consolidation</h3>
+              <h3 style={{ margin: 0, fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>Truck Pooling Consolidation</h3>
             </div>
             <Badge tone="positive">Match Found</Badge>
           </div>
 
-          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0 0 1rem 0" }}>
+          <p style={{ fontSize: "var(--text-body-sm)", color: "var(--muted)", margin: "0 0 1rem 0" }}>
             Consolidate your partial load (LTL) with a verified partner on this corridor into a single Full Truck Load (FTL).
           </p>
 
@@ -349,10 +349,10 @@ export default function Logistics() {
               <strong>Matched Partner: Lakshmi Eco-Yarns Ltd</strong>
               <Badge tone="neutral">94% Capacity</Badge>
             </div>
-            <div style={{ fontSize: "0.825rem", color: "var(--text-secondary)", marginBottom: "0.5rem" }}>
+            <div style={{ fontSize: "var(--text-body-sm)", color: "var(--text-secondary)", marginBottom: "0.5rem" }}>
               Partner Load: 12 MT Knitted Fabric · Your Load: {cargoWeightT} MT · Same Corridor
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem", fontSize: "0.8rem", paddingTop: "0.5rem", borderTop: "1px solid var(--border-subtle)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem", fontSize: "var(--text-caption)", paddingTop: "0.5rem", borderTop: "1px solid var(--border-subtle)" }}>
               <div>
                 <span className="eyebrow">YOUR COST SAVING</span>
                 <strong className="positive">₹9,400 / trip</strong>
@@ -411,24 +411,24 @@ export default function Logistics() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <Repeat size={18} className="positive" />
-              <h3 style={{ margin: 0, fontSize: "1.05rem" }}>Backhaul Return Match</h3>
+              <h3 style={{ margin: 0, fontSize: "var(--text-section)", fontWeight: "var(--weight-semibold)" }}>Backhaul Return Match</h3>
             </div>
             <Badge tone="positive">Deadhead Elimination</Badge>
           </div>
 
-          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0 0 1rem 0" }}>
+          <p style={{ fontSize: "var(--text-body-sm)", color: "var(--muted)", margin: "0 0 1rem 0" }}>
             Eliminate empty return trips by carrying verified return cargo back to your origin industrial cluster.
           </p>
 
           <div className="platform-extracted" style={{ padding: "1rem", borderRadius: "10px", marginBottom: "1rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
               <strong>Return Cargo: Secondary Aluminum Scrap</strong>
-              <span style={{ fontSize: "0.8rem", color: "var(--brand-teal)", fontWeight: 600 }}>Port → Cluster</span>
+              <span style={{ fontSize: "var(--text-caption)", color: "var(--brand-teal)", fontWeight: "var(--weight-semibold)" }}>Port → Cluster</span>
             </div>
-            <div style={{ fontSize: "0.825rem", color: "var(--text-secondary)", marginBottom: "0.5rem" }}>
+            <div style={{ fontSize: "var(--text-body-sm)", color: "var(--text-secondary)", marginBottom: "0.5rem" }}>
               Shipper: Chennai Port Stevedores · Net Weight: 16 MT · Ready at Container Yard 4
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem", fontSize: "0.8rem", paddingTop: "0.5rem", borderTop: "1px solid var(--border-subtle)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem", fontSize: "var(--text-caption)", paddingTop: "0.5rem", borderTop: "1px solid var(--border-subtle)" }}>
               <div>
                 <span className="eyebrow">RETURN FREIGHT EARNING</span>
                 <strong className="positive">₹22,000</strong>

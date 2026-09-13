@@ -27,30 +27,34 @@ h4,
 
 h1,
 .page-heading h1 {
-  font-size: 48px;
-  line-height: 1.1;
-  letter-spacing: -0.05em;
+  font-size: var(--text-title);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
 }
 
 h2 {
-  font-size: 32px;
-  line-height: 1.2;
-  letter-spacing: -0.05em;
+  font-size: var(--text-section);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
 }
 
 h3 {
-  font-size: 24px;
-  line-height: 1.2;
-  letter-spacing: -0.04em;
+  font-size: var(--text-subsection);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
 }
 
 p {
-  line-height: 1.6;
+  line-height: var(--leading-normal);
 }
 
 .page-heading p {
-  font-size: 16px;
-  margin-top: 14px;
+  font-size: var(--text-body);
+  color: var(--muted);
+  margin-top: 6px;
 }
 
 .page-heading {
@@ -1275,14 +1279,19 @@ select:focus {
 .table-scroll th {
   background: var(--surface-inset);
   color: var(--muted);
-  font-size: 12px;
-  padding: 17px 18px;
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  font-weight: var(--weight-semibold);
+  padding: 13px 16px;
 }
 
 .table-scroll td {
   border-color: var(--border-secondary);
-  padding: 19px 18px;
-  font-size: 13px;
+  padding: 14px 16px;
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
 }
 
 .table-scroll tbody tr:hover {
@@ -1291,10 +1300,12 @@ select:focus {
 
 .record-name>span {
   color: var(--text);
+  font-weight: var(--weight-semibold);
 }
 
 .record-name small {
-  font-size: 12px;
+  font-size: var(--text-caption);
+  color: var(--subtle);
 }
 
 .row-title:hover {

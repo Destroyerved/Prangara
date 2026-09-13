@@ -321,10 +321,10 @@ function AssessmentForm() {
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
           <Sparkles size={20} className="positive" />
           <div>
-            <div style={{ fontSize: "0.925rem", fontWeight: 600 }}>
+            <div style={{ fontSize: "var(--text-body)", fontWeight: "var(--weight-semibold)" }}>
               Need rapid data entry? Use Conversational AI, Bill OCR, or Equipment Scanning.
             </div>
-            <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+            <div style={{ fontSize: "var(--text-body-sm)", color: "var(--muted)" }}>
               Extract plant metrics automatically from plain English prompts or utility bills.
             </div>
           </div>
@@ -333,7 +333,7 @@ function AssessmentForm() {
           type="button"
           className="button positive"
           onClick={() => setShowIntakeSuite(!showIntakeSuite)}
-          style={{ padding: "0.45rem 1rem", fontSize: "0.85rem", whiteSpace: "nowrap" }}
+          style={{ padding: "0.45rem 1rem", fontSize: "var(--text-body-sm)", whiteSpace: "nowrap" }}
         >
           {showIntakeSuite ? "Hide Intake Suite ▲" : "Launch AI Intake & Scanners ✨"}
         </button>
