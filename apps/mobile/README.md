@@ -32,7 +32,10 @@ The client resolves the API in this order:
    survives a restart)
 2. `EXPO_PUBLIC_API_URL`
 3. the host serving the Expo dev bundle, on port 8000
-4. the LAN address baked into `.env`
+4. the deployed API at `https://prangara.vercel.app`
+
+Release builds bake `EXPO_PUBLIC_API_URL=https://prangara.vercel.app` in, so an
+installed APK signs in over any network with no laptop in reach.
 
 Step 3 is why a physical phone usually works with no configuration: the dev
 server already knows the laptop's LAN address. If it does not, set it

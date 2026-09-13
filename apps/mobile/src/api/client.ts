@@ -72,8 +72,8 @@ export function getBaseUrl(): string {
     const host = hostUri.split(':')[0];
     if (host) return `http://${host}:8000`;
   }
-  // Default to machine LAN IP for standalone APK on Android devices
-  return 'http://10.227.95.161:8000';
+  // Default for a standalone APK: the deployed API, reachable from any network.
+  return 'https://prangara.vercel.app';
 }
 
 export class ApiError extends Error {

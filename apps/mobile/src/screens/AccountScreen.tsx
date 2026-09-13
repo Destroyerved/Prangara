@@ -181,7 +181,7 @@ export default function AccountScreen() {
               Backend Endpoint URL
             </Text>
             <Text style={{ ...typeScale.caption, color: colour.textMuted, marginTop: 4, marginBottom: space.md }}>
-              Enter the HTTP address of your FastAPI server (e.g., http://10.227.95.161:8000).
+              Enter the HTTP address of your FastAPI server (e.g., https://prangara.vercel.app).
             </Text>
 
             <TextInput
@@ -189,7 +189,7 @@ export default function AccountScreen() {
               onChangeText={setTempUrl}
               autoCapitalize="none"
               autoCorrect={false}
-              placeholder="http://10.227.95.161:8000"
+              placeholder="https://prangara.vercel.app"
               placeholderTextColor={colour.textFaint}
               style={{
                 backgroundColor: colour.surfaceRaised,

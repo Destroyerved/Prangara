@@ -153,6 +153,10 @@ demonstration**.
 
 ### Pointing the app at a backend
 
+Out of the box the APK talks to the deployed API at
+`https://prangara.vercel.app`, so a demo account signs in on any network. The
+rest of this section is only for running against your own backend.
+
 The Account screen shows the resolved endpoint and lets you change it; the
 choice is remembered. Over USB, the simplest route is a reverse tunnel:
 

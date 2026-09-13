@@ -213,6 +213,13 @@ python -m pytest -q                  # 202 passed
    version of this screen does compute locally with hardcoded factors; the
    mobile one deliberately does not.
 
+6. **The Vercel API keeps its data in `/tmp`.** Each serverless instance seeds
+   its own SQLite copy on a cold start, so demo sign-in works from anywhere,
+   but writes - a new plant, an RFQ, an uploaded document - last only as long
+   as that instance and are not shared between instances. Setting
+   `DATABASE_URL` to a hosted Postgres, or `DATABASE_BACKEND=firestore` with
+   credentials, makes it durable.
+
 ## Dependencies on another role
 
 - **BE-1:** honouring `clientRef` for idempotent replay.
