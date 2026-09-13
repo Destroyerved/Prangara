@@ -178,3 +178,26 @@ Password `prangara-demo-2026`:
 | Platform admin | `admin@demo.prangara.example` |
 
 Start the stack with `start.bat` (backend on `:8000`, web dashboard on `:5173`).
+
+---
+
+## ☁️ Deploying the web dashboard (Vercel)
+
+Push to `main` to auto-deploy. Google sign-in requires the seven
+`VITE_FIREBASE_*` keys to be set in Vercel → Settings → Environment Variables
+(scope: Production) — they are baked in **at build time**, so save them and
+then trigger a **Redeploy**. Key names (values live only in Vercel, do not
+commit them):
+
+```env
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_APP_ID
+VITE_FIREBASE_MEASUREMENT_ID
+```
+
+If adding an env var does not take effect, the live bundle is still a build
+from before the change — `Redeploy` (or push a commit) to rebuild.
