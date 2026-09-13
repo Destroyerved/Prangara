@@ -2628,26 +2628,26 @@
       filter: blur(0);
     }
 
-    /* Unified Side-by-Side Dark-Glass Authentication Surface */
+    /* Unified Dark-Glass Authentication Surface with Segmented Toggle */
     .auth-modal-card--unified {
-      max-width: 960px;
-      padding: 28px 32px 32px;
-      background: rgba(10, 18, 26, 0.90);
-      border: 1px solid rgba(180, 220, 235, 0.12);
-      border-radius: 24px;
+      max-width: 470px;
+      padding: 28px 28px 30px;
+      background: rgba(10, 18, 26, 0.94);
+      border: 1px solid rgba(180, 220, 235, 0.13);
+      border-radius: 22px;
       box-shadow: 
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        inset 0 0 24px rgba(97, 184, 245, 0.03),
-        0 32px 90px rgba(0, 0, 0, 0.65),
-        0 0 1px rgba(121, 215, 230, 0.3);
+        inset 0 0 20px rgba(97, 184, 245, 0.04),
+        0 28px 80px rgba(0, 0, 0, 0.7),
+        0 0 1px rgba(121, 215, 230, 0.35);
       backdrop-filter: blur(32px) saturate(140%);
       -webkit-backdrop-filter: blur(32px) saturate(140%);
       opacity: 0;
-      transform: translateY(18px) scale(0.96);
-      filter: blur(10px);
-      transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(18px) scale(0.97);
+      filter: blur(8px);
+      transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.38s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .auth-view-overlay.active .auth-modal-card--unified {
@@ -2660,8 +2660,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
       border-bottom: 1px solid rgba(180, 220, 235, 0.08);
       position: relative;
     }
@@ -2698,55 +2698,88 @@
       text-transform: uppercase;
     }
 
-    .auth-two-panel-grid {
-      display: grid;
-      grid-template-columns: 1fr 1px 1.08fr;
-      gap: 36px;
-      align-items: stretch;
+    /* Tactile Segmented Toggle Switch (Both Desktop & Mobile) */
+    .auth-toggle-bar {
+      display: flex;
+      background: rgba(13, 22, 32, 0.9);
+      border: 1px solid rgba(180, 220, 235, 0.12);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 22px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35);
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      font-size: 13.5px;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      border-radius: 9px;
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .auth-tab-btn:hover:not(.active) {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .auth-tab-btn.active {
+      background: linear-gradient(180deg, rgba(38, 64, 88, 0.95) 0%, rgba(26, 46, 66, 0.98) 100%);
+      color: #ffffff;
+      border-color: rgba(121, 215, 230, 0.3);
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.45),
+        0 0 14px rgba(97, 184, 245, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      font-weight: 600;
+    }
+
+    .auth-panel-container {
+      position: relative;
+      width: 100%;
     }
 
     .auth-panel {
-      display: flex;
+      display: none;
       flex-direction: column;
-      border-radius: 16px;
-      padding: 12px;
-      margin: -12px;
-      border: 1px solid transparent;
-      transition: opacity 0.28s var(--ease-primary), border-color 0.28s var(--ease-primary), background 0.28s var(--ease-primary);
+      width: 100%;
     }
 
-    .auth-two-panel-grid:hover .auth-panel:not(:hover),
-    .auth-two-panel-grid:focus-within .auth-panel:not(:focus-within) {
-      opacity: 0.72;
+    .auth-panel.active-panel {
+      display: flex;
+      animation: authTabFade 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .auth-panel:hover,
-    .auth-panel:focus-within {
-      opacity: 1 !important;
-      background: rgba(255, 255, 255, 0.015);
-      border-color: rgba(180, 220, 235, 0.08);
-    }
-
-    .auth-panel-divider {
-      width: 1px;
-      background: linear-gradient(180deg, 
-        transparent 0%, 
-        rgba(180, 220, 235, 0.12) 15%, 
-        rgba(121, 215, 230, 0.25) 50%, 
-        rgba(180, 220, 235, 0.12) 85%, 
-        transparent 100%
-      );
-      align-self: stretch;
+    @keyframes authTabFade {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .auth-panel-header {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .auth-panel-title {
-      font-size: 24px;
-      font-weight: 500;
-      letter-spacing: -0.03em;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
       color: var(--text-primary);
       margin-bottom: 4px;
     }
@@ -2796,55 +2829,38 @@
       margin: 10px 0 16px;
     }
 
-    .auth-mobile-switch {
-      display: none;
-      background: rgba(16, 26, 36, 0.85);
-      border: 1px solid rgba(180, 220, 235, 0.12);
-      border-radius: 12px;
-      padding: 4px;
-      margin-bottom: 22px;
-      width: 100%;
-      box-sizing: border-box;
+    .auth-switch-footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
-    .auth-tab-btn {
-      flex: 1;
-      padding: 9px 16px;
-      font-size: 13px;
-      font-weight: 550;
-      color: var(--text-secondary);
-      border-radius: 8px;
+    .auth-switch-link {
+      background: none;
       border: none;
-      background: transparent;
+      padding: 0;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--accent-cyan);
       cursor: pointer;
-      transition: all 0.2s ease;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color var(--transition-fast);
     }
 
-    .auth-tab-btn.active {
-      background: rgba(30, 50, 68, 0.95);
-      color: var(--text-primary);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    .auth-switch-link:hover {
+      color: var(--accent-blue);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 520px) {
       .auth-modal-card--unified {
-        max-width: 480px;
-        padding: 24px 20px 28px;
-      }
-      .auth-two-panel-grid {
-        display: block;
-      }
-      .auth-panel-divider {
-        display: none;
-      }
-      .auth-mobile-switch {
-        display: flex;
-      }
-      .auth-panel {
-        display: none;
-      }
-      .auth-panel.active-panel {
-        display: flex;
+        max-width: 100%;
+        padding: 24px 20px 26px;
       }
     }
 
@@ -4633,15 +4649,15 @@
           <button class="auth-close-btn" type="button" aria-label="Close Authentication View" data-auth-close>✕</button>
         </div>
 
-        <!-- Mobile Segmented View Switch (Visible only on mobile/tablet) -->
-        <div class="auth-mobile-switch" role="tablist" aria-label="Authentication Views">
+        <!-- Segmented View Switch (Visible on all viewports) -->
+        <div class="auth-toggle-bar" role="tablist" aria-label="Authentication Views">
           <button type="button" class="auth-tab-btn active" data-auth-tab="signin" role="tab" aria-selected="true">Sign In</button>
           <button type="button" class="auth-tab-btn" data-auth-tab="signup" role="tab" aria-selected="false">Create Account</button>
         </div>
 
-        <!-- Two-Panel Grid (Desktop Side-by-Side) -->
-        <div class="auth-two-panel-grid">
-          <!-- LEFT PANEL: SIGN IN -->
+        <!-- Single Panel Container (Switched via Toggle) -->
+        <div class="auth-panel-container">
+          <!-- PANEL: SIGN IN -->
           <div class="auth-panel auth-panel--signin active-panel">
             <div class="auth-panel-header">
               <h3 class="auth-panel-title" id="signin-heading">Sign in</h3>
@@ -4704,14 +4720,17 @@
                   ⚡ Use Demo Account (Plant Manager)
                 </button>
               </div>
+
+              <!-- Bottom Switch Prompt -->
+              <div class="auth-switch-footer">
+                <span>Don't have an account?</span>
+                <button type="button" class="auth-switch-link" data-auth-tab-target="signup">Create account</button>
+              </div>
             </form>
           </div>
 
-          <!-- Luminous Vertical Divider -->
-          <div class="auth-panel-divider" aria-hidden="true"></div>
-
-          <!-- RIGHT PANEL: SIGN UP -->
-          <div class="auth-panel auth-panel--signup active-panel">
+          <!-- PANEL: SIGN UP -->
+          <div class="auth-panel auth-panel--signup">
             <div class="auth-panel-header">
               <h3 class="auth-panel-title" id="signup-heading">Create account</h3>
               <p class="auth-panel-subtitle">Initialize deterministic carbon & financial intelligence.</p>
@@ -4779,6 +4798,12 @@
                 <span class="btn-text">Create workspace</span>
                 <span class="btn-spinner" aria-hidden="true"></span>
               </button>
+
+              <!-- Bottom Switch Prompt -->
+              <div class="auth-switch-footer">
+                <span>Already registered?</span>
+                <button type="button" class="auth-switch-link" data-auth-tab-target="signin">Sign in</button>
+              </div>
             </form>
           </div>
         </div>
@@ -5502,10 +5527,25 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
 
         window.addEventListener('hashchange', handleRoute);
 
-        // Wire mobile tab switches
+        // Wire tab switches (Toggle buttons and bottom prompt links)
         document.querySelectorAll('.auth-tab-btn').forEach(function (btn) {
           btn.addEventListener('click', function () {
             var tab = btn.getAttribute('data-auth-tab');
+            switchAuthTab(tab);
+            if (tab === 'signin') {
+              var input = document.getElementById('signin-email');
+              if (input) input.focus();
+            } else {
+              var input = document.getElementById('signup-name');
+              if (input) input.focus();
+            }
+            SoundEngine.click();
+          });
+        });
+
+        document.querySelectorAll('[data-auth-tab-target]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var tab = btn.getAttribute('data-auth-tab-target');
             switchAuthTab(tab);
             if (tab === 'signin') {
               var input = document.getElementById('signin-email');
