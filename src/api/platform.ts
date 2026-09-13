@@ -60,6 +60,11 @@ export async function signIn(body: unknown, register = false) {
   setSession({tokens});
   return service<MeResponse>('/auth/me');
 }
+export async function googleSignIn(idToken: string) {
+  const tokens = await send<TokenResponse>('/auth/firebase', { id_token: idToken });
+  setSession({tokens});
+  return service<MeResponse>('/auth/me');
+}
 export async function signOut() {
   const tokens = session?.tokens; setSession(null);
   if (tokens) await send('/auth/logout', {refresh_token: tokens.refresh_token});

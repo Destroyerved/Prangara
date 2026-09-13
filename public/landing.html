@@ -5678,52 +5678,21 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
           });
         }
 
-        // Google Auth Handlers
+        // Google Auth — the real OAuth runs in the top-level React app.
         function handleGoogleAuth(isSignUp) {
           SoundEngine.click();
-          var googleUser = isSignUp
-            ? {
-                name: (formSignup && formSignup.querySelector('#signup-name') ? formSignup.querySelector('#signup-name').value : '') || 'Rajesh Kumar (Google Verified)',
-                email: (formSignup && formSignup.querySelector('#signup-email') ? formSignup.querySelector('#signup-email').value : '') || 'rajesh.kumar@factory.prangara.com',
-                company: (formSignup && formSignup.querySelector('#signup-company') ? formSignup.querySelector('#signup-company').value : '') || 'Tirupur Knitwear Works',
-                role: 'Plant / Energy Engineer'
-              }
-            : {
-                name: 'Rajesh Kumar (Google Workspace)',
-                email: 'rajesh@textiles.in',
-                company: 'Tirupur Knitwear Dyeing Unit',
-                role: 'Plant & Energy Operations Manager'
-              };
+          var btn = document.getElementById(isSignUp ? 'btn-google-signup' : 'btn-google-signin');
+          var spinner = btn ? btn.querySelector('.btn-google-spinner') : null;
+          if (btn) btn.classList.add('is-loading');
+          if (spinner) spinner.style.display = 'inline-block';
+          var label = btn ? btn.querySelector('span') : null;
+          if (label) label.textContent = 'Connecting to Google…';
 
-          try {
-            sessionStorage.setItem('prangara-session-v2', JSON.stringify({
-              tokens: {
-                access_token: 'google-' + Date.now(),
-                refresh_token: 'refresh-google-' + Date.now(),
-                token_type: 'bearer',
-                expires_in: 86400
-              }
-            }));
-            localStorage.setItem('prangara_user_profile', JSON.stringify({
-              full_name: googleUser.name,
-              email: googleUser.email,
-              organization_name: googleUser.company,
-              role: googleUser.role,
-              phone: '+91 98421 77320',
-              cluster: 'Tirupur Textile MSME Cluster, Tamil Nadu',
-              organization_kind: 'manufacturer'
-            }));
-          } catch (e) { }
-
-          SoundEngine.success();
-          setTimeout(function () {
-            if (window.parent && window.parent !== window) {
-              window.parent.postMessage({ type: 'PRANGARA_NAVIGATE', path: '/account', user: googleUser }, '*');
-            } else if (window.location.pathname !== '/account') {
-              window.location.href = '/account';
-            }
-            Router.navigate('#account');
-          }, 350);
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'PRANGARA_GOOGLE_AUTH' }, '*');
+          } else {
+            window.location.href = '/account';
+          }
         }
 
         var btnGoogleSignin = document.getElementById('btn-google-signin');
@@ -5737,6 +5706,37 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
         if (btnGoogleSignup) {
           btnGoogleSignup.addEventListener('click', function () {
             handleGoogleAuth(true);
+          });
+        }
+
+        function resetGoogleButtons() {
+          [btnGoogleSignin, btnGoogleSignup].forEach(function (btn) {
+            if (!btn) return;
+            btn.classList.remove('is-loading');
+            var spinner = btn.querySelector('.btn-google-spinner');
+            if (spinner) spinner.style.display = 'none';
+            var label = btn.querySelector('span');
+            if (label) label.textContent = btn.id === 'btn-google-signin' ? 'Continue with Google' : 'Create account with Google';
+          });
+        }
+
+        if (window.parent && window.parent !== window) {
+          window.addEventListener('message', function (event) {
+            if (event.data && event.data.type === 'PRANGARA_GOOGLE_AUTH_RESULT' && event.data.ok) {
+              resetGoogleButtons();
+              return;
+            }
+            if (event.data && event.data.type === 'PRANGARA_GOOGLE_AUTH_RESULT' && !event.data.ok) {
+              resetGoogleButtons();
+              ['signin-alert', 'signup-alert'].forEach(function (id) {
+                var alertEl = document.getElementById(id);
+                if (alertEl) {
+                  alertEl.textContent = event.data.message || 'Google sign-in failed.';
+                  alertEl.className = 'auth-alert auth-alert--error';
+                  alertEl.style.display = 'block';
+                }
+              });
+            }
           });
         }
 

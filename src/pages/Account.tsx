@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { useSession } from '../hooks/useSession';
-import { setSession, signIn, signOut, switchOrganization, updateProfile } from '../api/platform';
+import { setSession, signIn, signOut, switchOrganization, updateProfile, googleSignIn } from '../api/platform';
+import { signInWithGoogle } from '../api/firebase';
 import { PageHeading, Note } from '../components/ui/common';
 import { ActionButton, ErrorNotice } from '../components/platform/shared';
 
@@ -143,45 +144,20 @@ export default function Account() {
     try {
       await client.cancelQueries();
       client.removeQueries({ predicate: (q) => q.queryKey[0] === 'private' });
-      const googleUser = register
-        ? {
-            name: signupName || "Rajesh Kumar (Google Verified)",
-            email: signupEmail || "rajesh.kumar@factory.prangara.com",
-            company: signupCompany || "Tirupur Knitwear Works",
-            role: signupRole || "Plant / Energy Engineer",
-          }
-        : {
-            name: "Rajesh Kumar (Google Workspace)",
-            email: "rajesh@textiles.in",
-            company: "Tirupur Knitwear Dyeing Unit",
-            role: "Plant & Energy Operations Manager",
-          };
-
-      const tokens = {
-        access_token: `google-${Date.now()}`,
-        refresh_token: `refresh-google-${Date.now()}`,
-        token_type: "bearer",
-        expires_in: 86400,
-      };
-      setSession({ tokens });
-
-      const updatedProfile: ProfileData = {
-        full_name: googleUser.name,
-        email: googleUser.email,
-        organization_name: googleUser.company,
-        role: googleUser.role,
-        phone: "+91 98421 77320",
-        cluster: "Tirupur Textile MSME Cluster, Tamil Nadu",
-        organization_kind: "manufacturer",
-      };
-      try {
-        localStorage.setItem('prangara_user_profile', JSON.stringify(updatedProfile));
-      } catch { /* storage */ }
-      setProfile(updatedProfile);
-      setEditForm(updatedProfile);
+      const idToken = await signInWithGoogle();
+      await googleSignIn(idToken);
     } catch (err: unknown) {
+      const code = (err as { code?: string })?.code ?? "";
       const msg = err instanceof Error ? err.message : "Google authentication failed";
-      setAuthError(msg);
+      setAuthError(
+        msg.includes('popup') || msg.includes('cancelled')
+          ? 'Google sign-in was cancelled.'
+          : code === 'auth/unauthorized-domain' || msg.includes('unauthorized-domain')
+            ? 'This domain is not authorized for Google login. Open the app on http://localhost:5173, or add this domain in the Firebase Console → Authentication → Authorized domains.'
+            : code === 'auth/popup-blocked'
+              ? 'The popup was blocked. Allow popups for this site and try again.'
+              : msg
+      );
     } finally {
       setLoading(false);
     }

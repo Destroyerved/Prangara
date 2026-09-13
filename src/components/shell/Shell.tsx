@@ -29,7 +29,6 @@ import {
   RefreshCw,
   X,
   Sparkles,
-  Globe2,
   Sun,
   Moon,
   Store,
@@ -44,7 +43,6 @@ import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { ShaderBackground } from "../ui/waves-shader";
 import { MenuCloseIcon } from "@/components/ui/animated-state-icons";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
-import { SpinningBorderButton } from "@/components/ui/spinning-border-button";
 import { UnseenCursor } from "@/components/ui/UnseenCursor";
 import { UnseenSmoothScroll } from "@/components/ui/UnseenSmoothScroll";
 const pref = (key: string, fallback: string) => {
@@ -559,35 +557,18 @@ export default function Shell() {
               </Popover.Portal>
             </Popover.Root>
             <div className="top-actions">
-              <SpinningBorderButton
+              <LiquidButton
+                variant="outline"
+                size="sm"
                 onClick={() => setRagOpen(true)}
                 aria-label="Ask PRANGARA"
-                showArrow={false}
-                icon={
-                  <Sparkles
-                    size={14}
-                    className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-12 text-white"
-                  />
-                }
-                contentClassName="px-3.5 py-1.5 text-[0.78rem] tracking-wider font-semibold text-neutral-200 group-hover:text-white"
+                className="shrink-0 border-white/20 bg-white/5 hover:bg-white/10"
               >
-                <span className="relative grid place-items-center select-none pointer-events-none leading-none">
-                  <span className="col-start-1 row-start-1 font-semibold whitespace-nowrap transition-opacity duration-300 ease-out group-hover:opacity-0">
-                    ASK PRANGARA
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="col-start-1 row-start-1 italic font-semibold whitespace-nowrap transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100 text-white"
-                    style={{
-                      fontFamily: "var(--font-editorial)",
-                      letterSpacing: "0.03em",
-                      fontSize: "0.95em",
-                    }}
-                  >
-                    ASK PRANGARA
-                  </span>
+                <Sparkles size={14} className="text-neutral-300 dark:text-zinc-300" />
+                <span className="text-neutral-300 dark:text-zinc-300 font-semibold tracking-wider text-xs whitespace-nowrap">
+                  ASK PRANGARA
                 </span>
-              </SpinningBorderButton>
+              </LiquidButton>
               <button
                 className="command-trigger"
                 onClick={() => w.setCommandOpen(true)}
@@ -629,29 +610,6 @@ export default function Shell() {
                   <span>Cyan</span>
                 </button>
               </div>
-              <Link
-                to="/"
-                className="icon-button"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "0 12px",
-                  width: "auto",
-                  height: "36px",
-                  borderRadius: "10px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "var(--text-muted)",
-                  textDecoration: "none",
-                  border: "1px solid var(--border)",
-                  background: "var(--surface)",
-                }}
-                title="View 3D Storytelling Landing Page"
-              >
-                <Globe2 size={14} style={{ color: "var(--accent-blue, #61B8F5)" }} />
-                <span>Story</span>
-              </Link>
               <Link
                 to="/marketplace"
                 className={`topbar-marketplace-btn ${pathname === "/marketplace" ? "active" : ""}`}
