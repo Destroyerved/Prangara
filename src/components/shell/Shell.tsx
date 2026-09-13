@@ -34,10 +34,6 @@ import {
   Store,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
-import { useSession } from "../../hooks/useSession";
-import { useResource } from "../platform/shared";
-import { openFactory } from "./openFactory";
-import type { FactorySummary } from "../../api/contracts";
 import { navigation } from "./navigation";
 import { SearchBox, Badge } from "../ui/common";
 import { RecordDrawer } from "../drawers/RecordDrawer";
@@ -205,8 +201,6 @@ export default function Shell() {
   );
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
-  const { session } = useSession();
-  const factories = useResource<FactorySummary[]>("/factories?limit=200");
   const [ragOpen, setRagOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const sidebarMouseY = useMotionValue(Infinity);
@@ -511,71 +505,52 @@ export default function Shell() {
                   data-lenis-prevent="true"
                 >
                   <div className="popover-heading">
-                    Factory records{" "}
-                    <Badge>{factories.data?.length ?? 0} facilities</Badge>
+                    Demo facility profiles{" "}
+                    <Badge>{w.sectors.data?.length ?? 0} facilities</Badge>
                   </div>
                   <SearchBox
                     value={search}
                     onChange={setSearch}
-                    placeholder="Search factory, sector or state…"
+                    placeholder="Search plant or sector…"
                   />
                   <div
                     ref={plantOptionsRef}
                     className="plant-options"
                     data-lenis-prevent="true"
                   >
-                    {!session ? (
-                      <p className="popover-empty">
-                        Sign in to view factory records.{" "}
-                        <Link to="/account" onClick={() => setPlantOpen(false)}>
-                          Go to account
-                        </Link>
-                      </p>
-                    ) : factories.isError ? (
-                      <p>
-                        Unable to load factory records. Check the API connection.
-                      </p>
-                    ) : (factories.data || [])
-                        .filter((f) =>
-                          (f.name + f.sector + (f.state || "") + (f.cluster || ""))
-                            .toLowerCase()
-                            .includes(search.toLowerCase()),
-                        )
-                        .map((f) => (
-                          <button
-                            key={f.id}
-                            onClick={() => {
-                              openFactory(f, w.loadAssessment).then((opened) => {
-                                navigate(
-                                  opened ? "/overview" : "/workspace/" + f.id,
-                                );
-                              });
-                              setPlantOpen(false);
-                              setSearch("");
-                            }}
-                          >
-                            <Factory size={17} />
-                            <span>
-                              <strong>{f.name}</strong>
-                              <small>
-                                {f.sector}
-                                {f.state ? " · " + f.state : ""}
-                              </small>
-                            </span>
-                            {w.factoryId === f.id && <Check size={16} />}
-                          </button>
-                        ))}
-                    {session && factories.isPending && (
-                      <p>Loading factory records…</p>
-                    )}
-                    {session && !factories.isPending && !factories.isError && !factories.data?.length && (
-                      <p className="popover-empty">
-                        No factory records yet.
-                      </p>
+                    {(w.sectors.data || [])
+                      .filter((s) =>
+                        (s.demo_profile.name + s.name + s.cluster + s.state)
+                          .toLowerCase()
+                          .includes(search.toLowerCase()),
+                      )
+                      .map((s) => (
+                        <button
+                          key={s.key}
+                          onClick={() => {
+                            w.selectPlant(s.key);
+                            setPlantOpen(false);
+                            setSearch("");
+                            navigate("/overview");
+                          }}
+                        >
+                          <Factory size={17} />
+                          <span>
+                            <strong>{s.demo_profile.name}</strong>
+                            <small>
+                              {s.state} · {s.name}
+                            </small>
+                          </span>
+                          {w.sectorKey === s.key && <Check size={16} />}
+                        </button>
+                      ))}
+                    {w.sectors.isError && (
+                      <p>Unable to load plants. Check the API connection.</p>
                     )}
                   </div>
                   <div className="popover-foot">
-                    Real factory records from your organization.
+                    Select a demonstration profile. These are not verified
+                    factory records.
                   </div>
                 </Popover.Content>
               </Popover.Portal>

@@ -3,10 +3,6 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Search, ArrowUpRight, X, Factory, Sparkles, Radio } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWorkspace } from "../../hooks/useWorkspace";
-import { useSession } from "../../hooks/useSession";
-import { useResource } from "../platform/shared";
-import { openFactory } from "./openFactory";
-import type { FactorySummary } from "../../api/contracts";
 import { navigation } from "./navigation";
 const itemKeywords: Record<string, string[]> = {
   "/marketplace": [
@@ -61,8 +57,6 @@ const itemKeywords: Record<string, string[]> = {
 export function CommandPalette() {
   const w = useWorkspace(),
     navigate = useNavigate();
-  const { session } = useSession();
-  const factories = useResource<FactorySummary[]>("/factories?limit=200");
   const [search, setSearch] = useState("");
   const close = () => {
     w.setCommandOpen(false);
@@ -173,28 +167,20 @@ export function CommandPalette() {
               </button>
             )}
             <div className="eyebrow">FACILITY PROFILES</div>
-            {!session && (
-              <p className="command-empty">
-                Sign in to view factory records.
-              </p>
-            )}
-            {(factories.data || [])
-              .filter((f) =>
-                matches(f.name + " " + f.sector + " " + (f.state || "")),
-              )
+            {w.sectors.data
+              ?.filter((s) => matches(s.name + " " + s.cluster))
               .slice(0, search ? 10 : 3)
-              .map((f) => (
+              .map((s) => (
                 <button
-                  key={f.id}
+                  key={s.key}
                   onClick={() => {
-                    openFactory(f, w.loadAssessment).then((opened) =>
-                      navigate(opened ? "/overview" : "/workspace/" + f.id),
-                    );
+                    w.selectPlant(s.key);
+                    navigate("/overview");
                     close();
                   }}
                 >
                   <Factory size={17} />
-                  <span>{f.name}</span>
+                  <span>{s.demo_profile.name}</span>
                 </button>
               ))}
             {search && (
