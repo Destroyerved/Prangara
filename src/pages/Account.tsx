@@ -156,7 +156,9 @@ export default function Account() {
             ? 'This domain is not authorized for Google login. Open the app on http://localhost:5173, or add this domain in the Firebase Console → Authentication → Authorized domains.'
             : code === 'auth/popup-blocked'
               ? 'The popup was blocked. Allow popups for this site and try again.'
-              : msg
+              : code === 'auth/invalid-api-key' || code === 'auth/api-key-not-valid'
+                ? 'Google sign-in is not configured for this deployment.'
+                : msg
       );
     } finally {
       setLoading(false);

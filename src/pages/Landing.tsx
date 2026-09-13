@@ -57,7 +57,9 @@ export default function Landing({ defaultHash }: { defaultHash?: string }) {
           ? "Google sign-in was cancelled."
           : code === "auth/popup-blocked"
             ? "Popups are blocked. Allow popups for this site and try again."
-            : "Google sign-in failed. Try again or use email/password."
+            : code === "auth/invalid-api-key" || code === "auth/api-key-not-valid"
+              ? "Google sign-in is not configured for this deployment."
+              : "Google sign-in failed. Try again or use email/password."
       );
       setGoogleBusy(false);
     }

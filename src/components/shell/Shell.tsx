@@ -34,6 +34,10 @@ import {
   Store,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
+import { useSession } from "../../hooks/useSession";
+import { useResource } from "../platform/shared";
+import { openFactory } from "./openFactory";
+import type { FactorySummary } from "../../api/contracts";
 import { navigation } from "./navigation";
 import { SearchBox, Badge } from "../ui/common";
 import { RecordDrawer } from "../drawers/RecordDrawer";
@@ -42,7 +46,6 @@ import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { ShaderBackground } from "../ui/waves-shader";
 import { MenuCloseIcon } from "@/components/ui/animated-state-icons";
-import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { UnseenCursor } from "@/components/ui/UnseenCursor";
 import { UnseenSmoothScroll } from "@/components/ui/UnseenSmoothScroll";
 const pref = (key: string, fallback: string) => {
@@ -197,11 +200,13 @@ export default function Shell() {
       Math.max(252, Number(pref("prangara-sidebar", "260")) || 260),
     ),
   );
-  const [theme, setTheme] = useState<"dark" | "light" | "cyan">(
-    () => (pref("prangara-theme", "dark") as "dark" | "light" | "cyan") || "dark",
+  const [theme, setTheme] = useState<"dark" | "light">(
+    () => (pref("prangara-theme", "dark") === "light" ? "light" : "dark"),
   );
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
+  const { session } = useSession();
+  const factories = useResource<FactorySummary[]>("/factories?limit=200");
   const [ragOpen, setRagOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const sidebarMouseY = useMotionValue(Infinity);
@@ -506,69 +511,85 @@ export default function Shell() {
                   data-lenis-prevent="true"
                 >
                   <div className="popover-heading">
-                    Demo facility profiles{" "}
-                    <Badge>{w.sectors.data?.length ?? 0} facilities</Badge>
+                    Factory records{" "}
+                    <Badge>{factories.data?.length ?? 0} facilities</Badge>
                   </div>
                   <SearchBox
                     value={search}
                     onChange={setSearch}
-                    placeholder="Search plant or sector…"
+                    placeholder="Search factory, sector or state…"
                   />
                   <div
                     ref={plantOptionsRef}
                     className="plant-options"
                     data-lenis-prevent="true"
                   >
-                    {(w.sectors.data || [])
-                      .filter((s) =>
-                        (s.demo_profile.name + s.name + s.cluster + s.state)
-                          .toLowerCase()
-                          .includes(search.toLowerCase()),
-                      )
-                      .map((s) => (
-                        <button
-                          key={s.key}
-                          onClick={() => {
-                            w.selectPlant(s.key);
-                            setPlantOpen(false);
-                            setSearch("");
-                            navigate("/overview");
-                          }}
-                        >
-                          <Factory size={17} />
-                          <span>
-                            <strong>{s.demo_profile.name}</strong>
-                            <small>
-                              {s.state} · {s.name}
-                            </small>
-                          </span>
-                          {w.sectorKey === s.key && <Check size={16} />}
-                        </button>
-                      ))}
-                    {w.sectors.isError && (
-                      <p>Unable to load plants. Check the API connection.</p>
+                    {!session ? (
+                      <p className="popover-empty">
+                        Sign in to view factory records.{" "}
+                        <Link to="/account" onClick={() => setPlantOpen(false)}>
+                          Go to account
+                        </Link>
+                      </p>
+                    ) : factories.isError ? (
+                      <p>
+                        Unable to load factory records. Check the API connection.
+                      </p>
+                    ) : (factories.data || [])
+                        .filter((f) =>
+                          (f.name + f.sector + (f.state || "") + (f.cluster || ""))
+                            .toLowerCase()
+                            .includes(search.toLowerCase()),
+                        )
+                        .map((f) => (
+                          <button
+                            key={f.id}
+                            onClick={() => {
+                              openFactory(f, w.loadAssessment).then((opened) => {
+                                navigate(
+                                  opened ? "/overview" : "/workspace/" + f.id,
+                                );
+                              });
+                              setPlantOpen(false);
+                              setSearch("");
+                            }}
+                          >
+                            <Factory size={17} />
+                            <span>
+                              <strong>{f.name}</strong>
+                              <small>
+                                {f.sector}
+                                {f.state ? " · " + f.state : ""}
+                              </small>
+                            </span>
+                            {w.factoryId === f.id && <Check size={16} />}
+                          </button>
+                        ))}
+                    {session && factories.isPending && (
+                      <p>Loading factory records…</p>
+                    )}
+                    {session && !factories.isPending && !factories.isError && !factories.data?.length && (
+                      <p className="popover-empty">
+                        No factory records yet.
+                      </p>
                     )}
                   </div>
                   <div className="popover-foot">
-                    Select a demonstration profile. These are not verified
-                    factory records.
+                    Real factory records from your organization.
                   </div>
                 </Popover.Content>
               </Popover.Portal>
             </Popover.Root>
             <div className="top-actions">
-              <LiquidButton
-                variant="outline"
-                size="sm"
+              <button
+                type="button"
+                className="top-action-btn shrink-0"
                 onClick={() => setRagOpen(true)}
                 aria-label="Ask PRANGARA"
-                className="shrink-0 border-white/20 bg-white/5 hover:bg-white/10"
               >
-                <Sparkles size={14} className="text-neutral-300 dark:text-zinc-300" />
-                <span className="text-neutral-300 dark:text-zinc-300 font-semibold tracking-wider text-xs whitespace-nowrap">
-                  ASK PRANGARA
-                </span>
-              </LiquidButton>
+                <Sparkles size={14} />
+                <span>ASK PRANGARA</span>
+              </button>
               <button
                 className="command-trigger"
                 onClick={() => w.setCommandOpen(true)}
@@ -577,7 +598,7 @@ export default function Shell() {
                 <Command size={15} />
                 <kbd>K</kbd>
               </button>
-              {/* 3-Way Theme Switcher (Dark, Light, Cyan) */}
+              {/* Dark / Light Theme Toggle */}
               <div className="theme-tri-switch" role="group" aria-label="Theme Selection">
                 <button
                   type="button"
@@ -599,16 +620,6 @@ export default function Shell() {
                   <Sun size={13} />
                   <span>Light</span>
                 </button>
-                <button
-                  type="button"
-                  className={`theme-tri-btn theme-tri-btn--cyan ${theme === "cyan" ? "active" : ""}`}
-                  onClick={() => setTheme("cyan")}
-                  title="Cyan (Original Electric Cyan / Blue UI)"
-                  aria-pressed={theme === "cyan"}
-                >
-                  <Sparkles size={13} />
-                  <span>Cyan</span>
-                </button>
               </div>
               <Link
                 to="/marketplace"
@@ -618,13 +629,14 @@ export default function Shell() {
                 <Store size={14} style={{ color: "var(--accent, #79D7E6)" }} />
                 <span>Marketplace</span>
               </Link>
-              <LiquidButton
-                variant="blue"
-                size="sm"
-                text="Run assessment"
+              <button
+                type="button"
+                className="top-action-btn shrink-0"
                 onClick={() => navigate("/assessment")}
-                className="shrink-0"
-              />
+                aria-label="Run assessment"
+              >
+                Run assessment
+              </button>
             </div>
           </header>
           <main id="main" tabIndex={-1}>

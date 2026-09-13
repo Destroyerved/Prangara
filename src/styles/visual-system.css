@@ -2320,59 +2320,7 @@ html.lenis::-webkit-scrollbar {
 }
 
 /* ============================================================
-   CYAN / BLUE ELECTRIC THEME OVERRIDES (Authentic Original UI)
-   ============================================================ */
-:root[data-theme="cyan"] .topbar,
-:root[data-theme="blue"] .topbar {
-  border-color: rgba(121, 215, 230, 0.28) !important;
-  background: rgba(8, 16, 25, 0.72) !important;
-  box-shadow:
-    0 16px 36px rgba(0, 0, 0, 0.5),
-    0 0 24px rgba(121, 215, 230, 0.12),
-    inset 0 1px 0 rgba(121, 215, 230, 0.32) !important;
-}
-
-:root[data-theme="cyan"] .topbar:hover,
-:root[data-theme="cyan"] .topbar:focus-within {
-  background: rgba(10, 20, 32, 0.82) !important;
-  border-color: rgba(121, 215, 230, 0.5) !important;
-  box-shadow:
-    0 20px 48px rgba(0, 0, 0, 0.55),
-    0 0 32px rgba(121, 215, 230, 0.22),
-    inset 0 1.5px 1.5px 0 rgba(121, 215, 230, 0.45) !important;
-}
-
-:root[data-theme="cyan"] .sidebar,
-:root[data-theme="blue"] .sidebar {
-  border-color: rgba(121, 215, 230, 0.16) !important;
-  background: rgba(8, 16, 25, 0.88) !important;
-}
-
-:root[data-theme="cyan"] .sidebar .nav-item.active,
-:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] {
-  background: rgba(121, 215, 230, 0.12) !important;
-  border-color: rgba(121, 215, 230, 0.4) !important;
-}
-
-:root[data-theme="cyan"] .sidebar .nav-item.active .nav-text,
-:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] .nav-text,
-:root[data-theme="cyan"] .sidebar .nav-item.active > svg,
-:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] > svg {
-  color: #79D7E6 !important;
-}
-
-:root[data-theme="cyan"] .topbar .plant-switch strong {
-  color: #79D7E6 !important;
-}
-
-:root[data-theme="cyan"] .card:hover,
-:root[data-theme="cyan"] .leak-card:hover {
-  border-color: rgba(121, 215, 230, 0.35) !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 18px rgba(121, 215, 230, 0.15) !important;
-}
-
-/* ============================================================
-   3-WAY THEME SEGMENTED SWITCHER ([ Dark ] [ Light ] [ Cyan ])
+   THEME SEGMENTED SWITCHER ([ Dark ] [ Light ])
    ============================================================ */
 .theme-tri-switch {
   display: inline-flex;
@@ -2394,13 +2342,6 @@ html.lenis::-webkit-scrollbar {
   background: rgba(255, 255, 255, 0.45);
   border-color: rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
-}
-
-:root[data-theme="cyan"] .theme-tri-switch,
-:root[data-theme="blue"] .theme-tri-switch {
-  background: rgba(8, 18, 28, 0.85);
-  border-color: rgba(121, 215, 230, 0.3);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 12px rgba(121, 215, 230, 0.12);
 }
 
 .theme-tri-btn {
@@ -2448,14 +2389,6 @@ html.lenis::-webkit-scrollbar {
   font-weight: 600;
 }
 
-.theme-tri-btn.theme-tri-btn--cyan.active {
-  background: linear-gradient(180deg, rgba(14, 165, 233, 0.3) 0%, rgba(2, 132, 199, 0.45) 100%);
-  border-color: rgba(121, 215, 230, 0.65);
-  color: #79D7E6;
-  box-shadow: 0 0 12px rgba(121, 215, 230, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  font-weight: 600;
-}
-
 @media (max-width: 1140px) {
   .theme-tri-btn span {
     display: none;
@@ -2463,6 +2396,45 @@ html.lenis::-webkit-scrollbar {
   .theme-tri-btn {
     padding: 0 7px;
   }
+}
+
+/* Topbar Themed Action Buttons (Ask PRANGARA / Run assessment) */
+.top-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface-high) 0%, var(--surface) 100%);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.top-action-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-secondary);
+  color: var(--bright);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.top-action-btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.top-action-btn svg {
+  opacity: 0.85;
 }
 
 /* Topbar Marketplace Action Button */
