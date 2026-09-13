@@ -27,34 +27,30 @@ h4,
 
 h1,
 .page-heading h1 {
-  font-size: var(--text-title);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  font-weight: var(--weight-semibold);
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
 }
 
 h2 {
-  font-size: var(--text-section);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-tight);
-  font-weight: var(--weight-semibold);
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
 }
 
 h3 {
-  font-size: var(--text-subsection);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-tight);
-  font-weight: var(--weight-semibold);
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
 }
 
 p {
-  line-height: var(--leading-normal);
+  line-height: 1.6;
 }
 
 .page-heading p {
-  font-size: var(--text-body);
-  color: var(--muted);
-  margin-top: 6px;
+  font-size: 16px;
+  margin-top: 14px;
 }
 
 .page-heading {
@@ -184,6 +180,7 @@ article {
     0 0 24px rgba(255, 255, 255, 0.5),
     inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 1) !important;
 }
+
 /* Glass Inner Controls in Topbar */
 .topbar .plant-icon {
   background: rgba(255, 255, 255, 0.07);
@@ -703,6 +700,7 @@ article {
   background: rgba(255, 255, 255, 0.06) !important;
   color: #f8fafc !important;
 }
+
 :root[data-theme="light"] .sidebar .compact-toggle,
 :root[data-theme="light"] .sidebar .compact-toggle svg,
 :root[data-theme="light"] .sidebar .compact-toggle path,
@@ -1279,19 +1277,14 @@ select:focus {
 .table-scroll th {
   background: var(--surface-inset);
   color: var(--muted);
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  font-weight: var(--weight-semibold);
-  padding: 13px 16px;
+  font-size: 12px;
+  padding: 17px 18px;
 }
 
 .table-scroll td {
   border-color: var(--border-secondary);
-  padding: 14px 16px;
-  font-size: var(--text-body);
-  font-weight: var(--weight-regular);
+  padding: 19px 18px;
+  font-size: 13px;
 }
 
 .table-scroll tbody tr:hover {
@@ -1300,12 +1293,10 @@ select:focus {
 
 .record-name>span {
   color: var(--text);
-  font-weight: var(--weight-semibold);
 }
 
 .record-name small {
-  font-size: var(--text-caption);
-  color: var(--subtle);
+  font-size: 12px;
 }
 
 .row-title:hover {
@@ -2331,7 +2322,59 @@ html.lenis::-webkit-scrollbar {
 }
 
 /* ============================================================
-   THEME SEGMENTED SWITCHER ([ Dark ] [ Light ])
+   CYAN / BLUE ELECTRIC THEME OVERRIDES (Authentic Original UI)
+   ============================================================ */
+:root[data-theme="cyan"] .topbar,
+:root[data-theme="blue"] .topbar {
+  border-color: rgba(121, 215, 230, 0.28) !important;
+  background: rgba(8, 16, 25, 0.72) !important;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(121, 215, 230, 0.12),
+    inset 0 1px 0 rgba(121, 215, 230, 0.32) !important;
+}
+
+:root[data-theme="cyan"] .topbar:hover,
+:root[data-theme="cyan"] .topbar:focus-within {
+  background: rgba(10, 20, 32, 0.82) !important;
+  border-color: rgba(121, 215, 230, 0.5) !important;
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.55),
+    0 0 32px rgba(121, 215, 230, 0.22),
+    inset 0 1.5px 1.5px 0 rgba(121, 215, 230, 0.45) !important;
+}
+
+:root[data-theme="cyan"] .sidebar,
+:root[data-theme="blue"] .sidebar {
+  border-color: rgba(121, 215, 230, 0.16) !important;
+  background: rgba(8, 16, 25, 0.88) !important;
+}
+
+:root[data-theme="cyan"] .sidebar .nav-item.active,
+:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] {
+  background: rgba(121, 215, 230, 0.12) !important;
+  border-color: rgba(121, 215, 230, 0.4) !important;
+}
+
+:root[data-theme="cyan"] .sidebar .nav-item.active .nav-text,
+:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] .nav-text,
+:root[data-theme="cyan"] .sidebar .nav-item.active>svg,
+:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"]>svg {
+  color: #79D7E6 !important;
+}
+
+:root[data-theme="cyan"] .topbar .plant-switch strong {
+  color: #79D7E6 !important;
+}
+
+:root[data-theme="cyan"] .card:hover,
+:root[data-theme="cyan"] .leak-card:hover {
+  border-color: rgba(121, 215, 230, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 18px rgba(121, 215, 230, 0.15) !important;
+}
+
+/* ============================================================
+   3-WAY THEME SEGMENTED SWITCHER ([ Dark ] [ Light ] [ Cyan ])
    ============================================================ */
 .theme-tri-switch {
   display: inline-flex;
@@ -2353,6 +2396,13 @@ html.lenis::-webkit-scrollbar {
   background: rgba(255, 255, 255, 0.45);
   border-color: rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="cyan"] .theme-tri-switch,
+:root[data-theme="blue"] .theme-tri-switch {
+  background: rgba(8, 18, 28, 0.85);
+  border-color: rgba(121, 215, 230, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 12px rgba(121, 215, 230, 0.12);
 }
 
 .theme-tri-btn {
@@ -2400,52 +2450,22 @@ html.lenis::-webkit-scrollbar {
   font-weight: 600;
 }
 
+.theme-tri-btn.theme-tri-btn--cyan.active {
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.3) 0%, rgba(2, 132, 199, 0.45) 100%);
+  border-color: rgba(121, 215, 230, 0.65);
+  color: #79D7E6;
+  box-shadow: 0 0 12px rgba(121, 215, 230, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
 @media (max-width: 1140px) {
   .theme-tri-btn span {
     display: none;
   }
+
   .theme-tri-btn {
     padding: 0 7px;
   }
-}
-
-/* Topbar Themed Action Buttons (Ask PRANGARA / Run assessment) */
-.top-action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  height: 36px;
-  padding: 0 14px;
-  border-radius: 9999px;
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--surface-high) 0%, var(--surface) 100%);
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
-    box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.top-action-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-secondary);
-  color: var(--bright);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-  transform: translateY(-1px);
-}
-
-.top-action-btn:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
-}
-
-.top-action-btn svg {
-  opacity: 0.85;
 }
 
 /* Topbar Marketplace Action Button */
@@ -2513,6 +2533,7 @@ html.lenis::-webkit-scrollbar {
   .topbar-marketplace-btn span {
     display: none;
   }
+
   .topbar-marketplace-btn {
     padding: 0 9px;
   }
@@ -2545,4 +2566,3 @@ html.lenis::-webkit-scrollbar {
   border-color: rgba(121, 215, 230, 0.4) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(121, 215, 230, 0.22) !important;
 }
-
