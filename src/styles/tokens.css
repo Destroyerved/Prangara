@@ -145,3 +145,64 @@
   --input: var(--border);
   --ring: var(--accent);
 }
+
+:root[data-theme="cyan"],
+:root[data-theme="blue"] {
+  color-scheme: dark;
+  --bg: #070E14;
+  --bg-secondary: rgba(10, 18, 26, 0.85);
+  --sidebar: rgba(10, 18, 26, 0.82);
+  --surface: rgba(13, 22, 32, 0.78);
+  --surface-hover: rgba(22, 36, 52, 0.88);
+  --surface-inset: rgba(8, 14, 22, 0.75);
+  --surface-high: rgba(24, 40, 58, 0.88);
+  --panel: rgba(13, 22, 32, 0.90);
+  --text: #e2f1f8;
+  --bright: #ffffff;
+  --muted: #8ca3b8;
+  --subtle: #5f7a92;
+  --border: rgba(121, 215, 230, 0.18);
+  --border-secondary: rgba(121, 215, 230, 0.10);
+  --outline: #345c75;
+  --accent: #79D7E6;
+  --accent-strong: #9be5f1;
+  --accent-saturated: #38bdf8;
+  --accent-container: rgba(121, 215, 230, 0.16);
+  --accent-ink: #04090e;
+  --secondary: #61B8F5;
+  --secondary-bright: #92f1ff;
+  --scope-1: #f2b77f;
+  --scope-2: #b7b5ea;
+  --scope-3: #79D7E6;
+  --critical: #f87171;
+  --high: #fb923c;
+  --moderate: #fbbf24;
+  --healthy: #5ccb94;
+  --danger-bg: rgba(248, 113, 113, 0.12);
+  --positive-bg: rgba(121, 215, 230, 0.12);
+  --warning-bg: rgba(251, 191, 36, 0.12);
+  --selected-bg: rgba(121, 215, 230, 0.15);
+  --nav-active: rgba(121, 215, 230, 0.14);
+  --card-border: rgba(121, 215, 230, 0.18);
+  --floating-border: rgba(121, 215, 230, 0.32);
+  --glass: rgba(13, 22, 32, 0.82);
+  --inner-highlight: inset 0 1px 0 rgba(121, 215, 230, 0.28);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 24px rgba(121, 215, 230, 0.08);
+  --chart-grid: rgba(121, 215, 230, 0.06);
+  --zero-line: rgba(121, 215, 230, 0.3);
+  --background: var(--bg);
+  --foreground: var(--text);
+  --popover: var(--panel);
+  --popover-foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-ink);
+  --secondary-foreground: var(--muted);
+  --muted-foreground: var(--muted);
+  --accent-foreground: var(--bright);
+  --destructive: var(--critical);
+  --destructive-foreground: #ffffff;
+  --input: var(--border);
+  --ring: var(--accent);
+}

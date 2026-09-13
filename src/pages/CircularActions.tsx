@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { ArrowUpRight, ShieldBan } from "lucide-react";
+import { useSearchParams, Link } from "react-router-dom";
+import { ArrowUpRight, ShieldBan, Store } from "lucide-react";
 import { useWorkspace } from "../hooks/useWorkspace";
 import {
   PageHeading,
@@ -104,6 +104,25 @@ export default function CircularActions() {
         <span className="filter-note">
           Select an intervention name to inspect
         </span>
+        <Link
+          to="/marketplace"
+          className="text-button"
+          style={{
+            marginLeft: "auto",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
+            fontSize: "13px",
+            fontWeight: 500,
+            textDecoration: "none",
+            color: "var(--accent, #79D7E6)",
+          }}
+          title="Open Marketplace & RFQs to find implementation providers"
+        >
+          <Store size={14} />
+          <span>Marketplace &amp; RFQs</span>
+          <ArrowUpRight size={13} />
+        </Link>
       </div>
       {view === "quick_wins" && a.metadata?.quick_win_membership_available === false && <Note>The engine supplies quick-win totals, but does not identify the individual members. No membership is inferred here.</Note>}
       <ActionTable items={items} />

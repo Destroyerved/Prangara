@@ -766,25 +766,27 @@ select {
   transform: none !important;
 }
 
-/* FlowButton Solid Monochrome White/Slate Styling */
+/* FlowButton Solid Electric Cyan / Blue Styling */
 .flow-button-blue,
 button.flow-button-blue,
 a.flow-button-blue {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%) !important;
-  background-color: #ffffff !important;
-  color: #090a0c !important;
-  -webkit-text-fill-color: #090a0c !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.22) !important;
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%) !important;
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.75) !important;
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45) !important;
 }
 
 .flow-button-blue:hover,
 button.flow-button-blue:hover,
 a.flow-button-blue:hover {
-  background: #f1f5f9 !important;
-  background-color: #f1f5f9 !important;
-  box-shadow: 0 6px 28px rgba(255, 255, 255, 0.38) !important;
-  border-color: #ffffff !important;
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%) !important;
+  background-color: #0369a1 !important;
+  box-shadow: 0 6px 28px rgba(56, 189, 248, 0.70) !important;
+  border-color: #79D7E6 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 .topbar .plant-switch strong,
@@ -2317,7 +2319,247 @@ html.lenis::-webkit-scrollbar {
   color: #0f172a !important;
 }
 
+/* ============================================================
+   CYAN / BLUE ELECTRIC THEME OVERRIDES (Authentic Original UI)
+   ============================================================ */
+:root[data-theme="cyan"] .topbar,
+:root[data-theme="blue"] .topbar {
+  border-color: rgba(121, 215, 230, 0.28) !important;
+  background: rgba(8, 16, 25, 0.72) !important;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(121, 215, 230, 0.12),
+    inset 0 1px 0 rgba(121, 215, 230, 0.32) !important;
+}
 
+:root[data-theme="cyan"] .topbar:hover,
+:root[data-theme="cyan"] .topbar:focus-within {
+  background: rgba(10, 20, 32, 0.82) !important;
+  border-color: rgba(121, 215, 230, 0.5) !important;
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.55),
+    0 0 32px rgba(121, 215, 230, 0.22),
+    inset 0 1.5px 1.5px 0 rgba(121, 215, 230, 0.45) !important;
+}
 
+:root[data-theme="cyan"] .sidebar,
+:root[data-theme="blue"] .sidebar {
+  border-color: rgba(121, 215, 230, 0.16) !important;
+  background: rgba(8, 16, 25, 0.88) !important;
+}
 
+:root[data-theme="cyan"] .sidebar .nav-item.active,
+:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] {
+  background: rgba(121, 215, 230, 0.12) !important;
+  border-color: rgba(121, 215, 230, 0.4) !important;
+}
+
+:root[data-theme="cyan"] .sidebar .nav-item.active .nav-text,
+:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] .nav-text,
+:root[data-theme="cyan"] .sidebar .nav-item.active > svg,
+:root[data-theme="cyan"] .sidebar .nav-item[aria-current="page"] > svg {
+  color: #79D7E6 !important;
+}
+
+:root[data-theme="cyan"] .topbar .plant-switch strong {
+  color: #79D7E6 !important;
+}
+
+:root[data-theme="cyan"] .card:hover,
+:root[data-theme="cyan"] .leak-card:hover {
+  border-color: rgba(121, 215, 230, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 18px rgba(121, 215, 230, 0.15) !important;
+}
+
+/* ============================================================
+   3-WAY THEME SEGMENTED SWITCHER ([ Dark ] [ Light ] [ Cyan ])
+   ============================================================ */
+.theme-tri-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(12, 16, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 3px;
+  height: 36px;
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+:root[data-theme="light"] .theme-tri-switch {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="cyan"] .theme-tri-switch,
+:root[data-theme="blue"] .theme-tri-switch {
+  background: rgba(8, 18, 28, 0.85);
+  border-color: rgba(121, 215, 230, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 12px rgba(121, 215, 230, 0.12);
+}
+
+.theme-tri-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 9px;
+  height: 28px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.theme-tri-btn:hover:not(.active) {
+  color: var(--bright);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:root[data-theme="light"] .theme-tri-btn:hover:not(.active) {
+  color: #000;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.theme-tri-btn.active {
+  background: rgba(36, 44, 56, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  font-weight: 600;
+}
+
+:root[data-theme="light"] .theme-tri-btn.active {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #09090b;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  font-weight: 600;
+}
+
+.theme-tri-btn.theme-tri-btn--cyan.active {
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.3) 0%, rgba(2, 132, 199, 0.45) 100%);
+  border-color: rgba(121, 215, 230, 0.65);
+  color: #79D7E6;
+  box-shadow: 0 0 12px rgba(121, 215, 230, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+@media (max-width: 1140px) {
+  .theme-tri-btn span {
+    display: none;
+  }
+  .theme-tri-btn {
+    padding: 0 7px;
+  }
+}
+
+/* Topbar Marketplace Action Button */
+.topbar-marketplace-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  text-decoration: none;
+  border: 1px solid var(--border, rgba(140, 170, 200, 0.2));
+  background: var(--surface, rgba(15, 23, 42, 0.5));
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.topbar-marketplace-btn:hover {
+  color: var(--text, #f8fafc);
+  border-color: var(--accent, #79D7E6);
+  background: rgba(121, 215, 230, 0.1);
+  box-shadow: 0 0 14px rgba(121, 215, 230, 0.2);
+  transform: translateY(-1px);
+}
+
+.topbar-marketplace-btn.active {
+  color: var(--text, #ffffff);
+  border-color: var(--accent, #79D7E6);
+  background: rgba(121, 215, 230, 0.18);
+  box-shadow: 0 0 16px rgba(121, 215, 230, 0.28);
+}
+
+:root[data-theme="light"] .topbar-marketplace-btn {
+  color: #475569;
+  border-color: rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+:root[data-theme="light"] .topbar-marketplace-btn:hover {
+  color: #0f172a;
+  border-color: #0284c7;
+  background: rgba(2, 132, 199, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="light"] .topbar-marketplace-btn.active {
+  color: #0369a1;
+  border-color: #0284c7;
+  background: rgba(2, 132, 199, 0.14);
+}
+
+:root[data-theme="cyan"] .platform-tabs button.active {
+  background: rgba(121, 215, 230, 0.2) !important;
+  border-color: #79D7E6 !important;
+  color: #e0f2fe !important;
+  box-shadow: 0 0 12px rgba(121, 215, 230, 0.25) !important;
+}
+
+@media (max-width: 1080px) {
+  .topbar-marketplace-btn span {
+    display: none;
+  }
+  .topbar-marketplace-btn {
+    padding: 0 9px;
+  }
+}
+
+@media (max-width: 780px) {
+  .topbar-marketplace-btn {
+    display: none;
+  }
+}
+
+/* Sleek Industrial Map Component Styles */
+.sleek-map-wrapper {
+  position: relative;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.sleek-map-wrapper:hover {
+  border-color: var(--accent, rgba(121, 215, 230, 0.35)) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 24px rgba(121, 215, 230, 0.12) !important;
+}
+
+:root[data-theme="light"] .sleek-map-wrapper {
+  background: radial-gradient(ellipse at 50% 30%, #e2e8f0 0%, #cbd5e1 100%) !important;
+  border-color: rgba(0, 0, 0, 0.14) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), inset 0 1px 1px #ffffff !important;
+}
+
+:root[data-theme="cyan"] .sleek-map-wrapper {
+  border-color: rgba(121, 215, 230, 0.4) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(121, 215, 230, 0.22) !important;
+}
 

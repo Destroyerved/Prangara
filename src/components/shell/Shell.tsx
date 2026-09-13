@@ -30,6 +30,9 @@ import {
   X,
   Sparkles,
   Globe2,
+  Sun,
+  Moon,
+  Store,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { navigation } from "./navigation";
@@ -39,10 +42,7 @@ import { CommandPalette } from "./CommandPalette";
 import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
 import { ShaderBackground } from "../ui/waves-shader";
-import {
-  MenuCloseIcon,
-  ToggleIcon,
-} from "@/components/ui/animated-state-icons";
+import { MenuCloseIcon } from "@/components/ui/animated-state-icons";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { SpinningBorderButton } from "@/components/ui/spinning-border-button";
 import { UnseenCursor } from "@/components/ui/UnseenCursor";
@@ -199,7 +199,9 @@ export default function Shell() {
       Math.max(252, Number(pref("prangara-sidebar", "260")) || 260),
     ),
   );
-  const [theme, setTheme] = useState(() => pref("prangara-theme", "dark"));
+  const [theme, setTheme] = useState<"dark" | "light" | "cyan">(
+    () => (pref("prangara-theme", "dark") as "dark" | "light" | "cyan") || "dark",
+  );
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
   const [ragOpen, setRagOpen] = useState(false);
@@ -594,18 +596,39 @@ export default function Shell() {
                 <Command size={15} />
                 <kbd>K</kbd>
               </button>
-              <button
-                className="icon-button theme-top"
-                aria-label="Toggle theme"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-              >
-                <ToggleIcon
-                  size={26}
-                  active={theme === "dark"}
-                  color={theme === "dark" ? "#ffffff" : "#09090b"}
-                />
-              </button>
+              {/* 3-Way Theme Switcher (Dark, Light, Cyan) */}
+              <div className="theme-tri-switch" role="group" aria-label="Theme Selection">
+                <button
+                  type="button"
+                  className={`theme-tri-btn ${theme === "dark" ? "active" : ""}`}
+                  onClick={() => setTheme("dark")}
+                  title="Dark (Current Dark Theme)"
+                  aria-pressed={theme === "dark"}
+                >
+                  <Moon size={13} />
+                  <span>Dark</span>
+                </button>
+                <button
+                  type="button"
+                  className={`theme-tri-btn ${theme === "light" ? "active" : ""}`}
+                  onClick={() => setTheme("light")}
+                  title="Light (Current Light Theme)"
+                  aria-pressed={theme === "light"}
+                >
+                  <Sun size={13} />
+                  <span>Light</span>
+                </button>
+                <button
+                  type="button"
+                  className={`theme-tri-btn theme-tri-btn--cyan ${theme === "cyan" ? "active" : ""}`}
+                  onClick={() => setTheme("cyan")}
+                  title="Cyan (Original Electric Cyan / Blue UI)"
+                  aria-pressed={theme === "cyan"}
+                >
+                  <Sparkles size={13} />
+                  <span>Cyan</span>
+                </button>
+              </div>
               <Link
                 to="/"
                 className="icon-button"
@@ -629,11 +652,20 @@ export default function Shell() {
                 <Globe2 size={14} style={{ color: "var(--accent-blue, #61B8F5)" }} />
                 <span>Story</span>
               </Link>
+              <Link
+                to="/marketplace"
+                className={`topbar-marketplace-btn ${pathname === "/marketplace" ? "active" : ""}`}
+                title="Vendor & Materials Marketplace"
+              >
+                <Store size={14} style={{ color: "var(--accent, #79D7E6)" }} />
+                <span>Marketplace</span>
+              </Link>
               <LiquidButton
                 variant="blue"
                 size="sm"
                 text="Run assessment"
                 onClick={() => navigate("/assessment")}
+                className="shrink-0"
               />
             </div>
           </header>

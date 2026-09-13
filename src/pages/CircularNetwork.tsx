@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Share2,
   Recycle,
+  MapPin,
 } from "lucide-react";
 import { PageHeading, Note, Badge, SearchBox } from "../components/ui/common";
 import {
@@ -13,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { number, money } from "../lib/format";
+import { SleekIndustrialMap } from "../components/maps/SleekIndustrialMap";
 
 interface SymbiosisMatch {
   id: string;
@@ -155,8 +157,18 @@ const CAPACITY_LISTINGS: SharedCapacityListing[] = [
   }
 ];
 
+const SYMBIOSIS_CLUSTERS = [
+  { lat: 11.0500, lon: 77.1500, label: "Tirupur Textile Corridor", details: "Cotton Comber Noil & Recycled Yarns (Premier Spinning Mills)" },
+  { lat: 8.7642, lon: 78.1348, label: "Tuticorin Energy Belt", details: "Class-F High Calcium Fly Ash (Captive Co-gen Plant)" },
+  { lat: 17.5169, lon: 78.4727, label: "Jeedimetla Pharma Cluster", details: "Spent Isopropyl Alcohol 84% (Bulk Drug Formulation)" },
+  { lat: 11.0168, lon: 76.9558, label: "Coimbatore Foundry Belt", details: "Crushed Cupola Slag & Thermal Sand (Consortium)" },
+  { lat: 16.7050, lon: 74.2433, label: "Kolhapur-Belgaum Sugar Belt", details: "Sugarcane Bagasse Agro-Pellets (Kalyani Bio-Sugar)" },
+  { lat: 18.6279, lon: 73.8447, label: "Bhosari MIDC Pune", details: "Conveyorized Powder Coating Line (Apex Metal Finishers)" },
+  { lat: 21.1702, lon: 72.8311, label: "Surat GIDC Belt", details: "50 MT Controlled Atmosphere Cold Store (Agri-Logistics)" },
+];
+
 export default function CircularNetwork() {
-  const [activeTab, setActiveTab] = useState<"symbiosis" | "capacity">("symbiosis");
+  const [activeTab, setActiveTab] = useState<"symbiosis" | "capacity" | "map">("symbiosis");
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [trialRequested, setTrialRequested] = useState<Record<string, boolean>>({});
@@ -190,7 +202,7 @@ export default function CircularNetwork() {
           style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.1rem" }}
         >
           <Recycle size={16} />
-          By-Product & Symbiosis Exchange
+          By-Product &amp; Symbiosis Exchange
         </button>
         <button
           className={`chip ${activeTab === "capacity" ? "positive" : ""}`}
@@ -199,6 +211,14 @@ export default function CircularNetwork() {
         >
           <Share2 size={16} />
           Shared Industrial Equipment Capacity
+        </button>
+        <button
+          className={`chip ${activeTab === "map" ? "positive" : ""}`}
+          onClick={() => setActiveTab("map")}
+          style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.1rem" }}
+        >
+          <MapPin size={16} />
+          Regional Cluster Map (GPS)
         </button>
       </div>
 
@@ -376,6 +396,60 @@ export default function CircularNetwork() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {/* TAB 3: REGIONAL CLUSTER SYMBIOSIS MAP (GPS) */}
+      {activeTab === "map" && (
+        <div style={{ marginBottom: "2rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.85rem", flexWrap: "wrap", gap: "0.5rem" }}>
+            <div>
+              <span className="eyebrow" style={{ color: "var(--brand-teal, #79D7E6)" }}>GEOGRAPHIC INDUSTRIAL SYMBIOSIS</span>
+              <h3 style={{ margin: 0, fontSize: "1.15rem" }}>Regional Cluster Material Exchange &amp; Shared Assets</h3>
+            </div>
+            <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+              Hover over circular nodes to inspect feedstock specifications &amp; proximity
+            </div>
+          </div>
+
+          <SleekIndustrialMap
+            corridorName="Regional Industrial Symbiosis Clusters"
+            origin={{ lat: 11.0500, lon: 77.1500, label: "Tirupur-Coimbatore Textile Hub", details: "Cotton Comber Noil & Recycled Yarns" }}
+            destination={{ lat: 8.7642, lon: 78.1348, label: "Tuticorin Energy Belt", details: "Class-F High Calcium Fly Ash" }}
+            clusters={SYMBIOSIS_CLUSTERS}
+            height={520}
+          />
+
+          {/* Quick Cluster Selector Cards below map */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem", marginTop: "1.25rem" }}>
+            {SYMBIOSIS_CLUSTERS.map((cl, i) => (
+              <div
+                key={i}
+                className="glass-panel"
+                style={{ padding: "1rem", borderRadius: "12px", border: "1px solid var(--border-subtle)" }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.3rem" }}>
+                  <MapPin size={14} style={{ color: "var(--accent, #79D7E6)" }} />
+                  <strong style={{ fontSize: "0.9rem" }}>{cl.label}</strong>
+                </div>
+                <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.4 }}>
+                  {cl.details}
+                </p>
+                <div style={{ marginTop: "0.6rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontSize: "0.75rem", fontFamily: "monospace", color: "var(--text-secondary)" }}>
+                    {cl.lat.toFixed(2)}° N, {cl.lon.toFixed(2)}° E
+                  </span>
+                  <Link
+                    to="/marketplace"
+                    className="text-button"
+                    style={{ fontSize: "0.75rem", color: "var(--accent, #79D7E6)" }}
+                  >
+                    Source Materials ↗
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

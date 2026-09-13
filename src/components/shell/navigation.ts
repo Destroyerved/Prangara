@@ -7,6 +7,7 @@ import {
   AbatementPortfolioIcon,
   SuccessIcon,
   LockUnlockIcon,
+  MarketplaceIcon,
 } from "@/components/ui/animated-state-icons";
 
 export const navigation = [
@@ -45,7 +46,7 @@ export const navigation = [
         label: "Abatement Portfolio",
         icon: AbatementPortfolioIcon,
       },
-      { path: "/marketplace", label: "Marketplace & RFQs", icon: SendIcon },
+      { path: "/marketplace", label: "Marketplace & RFQs", icon: MarketplaceIcon },
       { path: "/logistics", label: "Green Logistics", icon: FootprintIcon },
       { path: "/circular-network", label: "Circular Network", icon: OverviewIcon },
     ],

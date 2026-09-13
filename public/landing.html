@@ -4592,6 +4592,7 @@
             <span class="footer-col-title">Platform</span>
             <a href="#overview-preview">Overview</a>
             <a href="#system-os">Operating System</a>
+            <a href="/marketplace" target="_top">Vendor Marketplace &amp; RFQs</a>
             <a href="#journey">Factory Journey</a>
             <a href="#financial-carbon">Financial &amp; MACC</a>
             <a href="#benchmarks">Cluster Benchmarks</a>
@@ -6143,12 +6144,26 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
         }
       };
 
+      var MODULE_ROUTES = {
+        'plant-data': '/assessment',
+        'footprint': '/footprint',
+        'leak-points': '/leaks',
+        'scenarios': '/scenarios',
+        'actions': '/actions',
+        'marketplace': '/marketplace',
+        'logistics': '/logistics',
+        'circular': '/circular-network',
+        'compliance': '/compliance',
+        'methodology': '/methodology'
+      };
+
       function initOSModules() {
         var cards = document.querySelectorAll('.os-module-card');
         var titleEl = document.getElementById('os-inspect-title');
         var descEl = document.getElementById('os-inspect-desc');
 
         cards.forEach(function (card) {
+          card.style.cursor = 'pointer';
           card.addEventListener('mouseenter', function () {
             var modKey = card.getAttribute('data-module');
             var data = MODULE_DESCRIPTIONS[modKey];
@@ -6158,6 +6173,14 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
               if (titleEl) titleEl.textContent = data.title;
               if (descEl) descEl.textContent = data.desc;
               SoundEngine.hover();
+            }
+          });
+
+          card.addEventListener('click', function () {
+            var modKey = card.getAttribute('data-module');
+            var route = MODULE_ROUTES[modKey];
+            if (route) {
+              window.parent.postMessage({ type: 'PRANGARA_NAVIGATE', path: route }, '*');
             }
           });
         });

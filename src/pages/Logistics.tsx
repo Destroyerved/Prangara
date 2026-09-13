@@ -3,6 +3,7 @@ import {
   Users,
   Repeat,
   CheckCircle2,
+  Radio,
 } from "lucide-react";
 import { PageHeading, Note, Badge } from "../components/ui/common";
 import {
@@ -15,6 +16,7 @@ import {
 import { money } from "../lib/format";
 import { service } from "../api/platform";
 import { useWorkspace } from "../hooks/useWorkspace";
+import { SleekIndustrialMap } from "../components/maps/SleekIndustrialMap";
 
 interface Corridor {
   id: string;
@@ -23,6 +25,8 @@ interface Corridor {
   destination: string;
   distanceKm: number;
   typicalCommodity: string;
+  originCoords: { lat: number; lon: number };
+  destCoords: { lat: number; lon: number };
 }
 
 const CORRIDORS: Corridor[] = [
@@ -32,7 +36,9 @@ const CORRIDORS: Corridor[] = [
     origin: "Tirupur Industrial Area, Tamil Nadu",
     destination: "Chennai Sea Port (Container Terminal)",
     distanceKm: 460,
-    typicalCommodity: "Apparel & Finished Textiles"
+    typicalCommodity: "Apparel & Finished Textiles",
+    originCoords: { lat: 11.1085, lon: 77.3411 },
+    destCoords: { lat: 13.0827, lon: 80.2707 },
   },
   {
     id: "corridor-2",
@@ -40,7 +46,9 @@ const CORRIDORS: Corridor[] = [
     origin: "Coimbatore SIDCO Cluster, Tamil Nadu",
     destination: "Bhiwandi Central Warehousing, Maharashtra",
     distanceKm: 1280,
-    typicalCommodity: "Machined Castings & Industrial Motors"
+    typicalCommodity: "Machined Castings & Industrial Motors",
+    originCoords: { lat: 11.0168, lon: 76.9558 },
+    destCoords: { lat: 19.2967, lon: 73.0631 },
   },
   {
     id: "corridor-3",
@@ -48,7 +56,9 @@ const CORRIDORS: Corridor[] = [
     origin: "Surat GIDC Textile & Chemical Hub, Gujarat",
     destination: "Adani Ports Mundra, Gujarat",
     distanceKm: 540,
-    typicalCommodity: "Synthetic Textiles & Chemicals"
+    typicalCommodity: "Synthetic Textiles & Chemicals",
+    originCoords: { lat: 21.1702, lon: 72.8311 },
+    destCoords: { lat: 22.8396, lon: 69.7042 },
   },
   {
     id: "corridor-4",
@@ -56,8 +66,10 @@ const CORRIDORS: Corridor[] = [
     origin: "Chakan Auto MIDC, Pune, Maharashtra",
     destination: "JNPT Container Terminal, Navi Mumbai",
     distanceKm: 145,
-    typicalCommodity: "Automotive Stamping & Sub-Assemblies"
-  }
+    typicalCommodity: "Automotive Stamping & Sub-Assemblies",
+    originCoords: { lat: 18.7606, lon: 73.8636 },
+    destCoords: { lat: 18.9499, lon: 72.9515 },
+  },
 ];
 
 export default function Logistics() {
@@ -193,6 +205,32 @@ export default function Logistics() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* INTERACTIVE SLEEK MAP & REAL-TIME GPS COMMAND CENTER */}
+      <div style={{ marginBottom: "1.75rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
+          <div>
+            <span className="eyebrow" style={{ color: "var(--brand-teal, #79D7E6)" }}>LIVE SPATIAL INTELLIGENCE</span>
+            <h3 style={{ margin: 0, fontSize: "1.15rem" }}>Corridor GPS Telemetry &amp; Multi-Modal Routing</h3>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+              <Radio size={13} className="text-emerald-400 animate-pulse" />
+              <span>GNSS Fleet Active</span>
+            </span>
+            <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: "#10b981", boxShadow: "0 0 8px #10b981" }} />
+          </div>
+        </div>
+
+        <SleekIndustrialMap
+          corridorName={selectedCorridor.name}
+          origin={{ ...selectedCorridor.originCoords, label: selectedCorridor.origin.split(",")[0], details: selectedCorridor.origin }}
+          destination={{ ...selectedCorridor.destCoords, label: selectedCorridor.destination.split("(")[0], details: selectedCorridor.destination }}
+          selectedMode={selectedMode}
+          onModeSelect={setSelectedMode}
+          height={480}
+        />
       </div>
 
       {/* 4 ROUTING MODES COMPARISON (FR-41) */}
