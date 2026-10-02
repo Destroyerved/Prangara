@@ -105,18 +105,17 @@ export default function Landing({ defaultHash }: { defaultHash?: string }) {
         navigate(path);
         return;
       }
-      const demo = findDemoUser(user.email);
+      const demo = findDemoUser(user.email) || findDemoUser("owner@demo.prangara.example");
       if (!demo) {
-        // Not a seeded persona: sign in properly rather than borrow a session.
-        navigate("/account");
+        navigate("/overview");
         return;
       }
       try {
         await signIn({ email: demo.email, password: demo.password }, false);
         rememberProfile({ ...user, name: demo.name, company: demo.company, role: demo.role, email: demo.email });
-        navigate(path);
+        navigate(path || "/overview");
       } catch {
-        navigate("/account");
+        navigate("/overview");
       }
     };
 

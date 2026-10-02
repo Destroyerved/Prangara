@@ -5252,10 +5252,8 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
         }
 
         function init() {
-          if (!introEl || REDUCED_MOTION || isPlayed) {
-            finishImmediately();
-            return;
-          }
+          finishImmediately();
+          return;
 
           lockScroll();
 
@@ -5656,11 +5654,11 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
                 } catch (e) { }
                 setTimeout(function () {
                   if (window.parent && window.parent !== window) {
-                    window.parent.postMessage({ type: 'PRANGARA_NAVIGATE', path: '/account', user: user }, '*');
-                  } else if (window.location.pathname !== '/account') {
-                    window.location.href = '/account';
+                    window.parent.postMessage({ type: 'PRANGARA_NAVIGATE', path: '/overview', user: user }, '*');
+                  } else if (window.location.pathname !== '/overview') {
+                    window.location.href = '/overview';
                   }
-                  Router.navigate('#account');
+                  Router.navigate('#overview');
                 }, 350);
               })
               .catch(function (err) {
@@ -5801,11 +5799,11 @@ Cinematic Intro Controller (~4.5s State Machine), Auth & Interactions
                 } catch (e) { }
                 setTimeout(function () {
                   if (window.parent && window.parent !== window) {
-                    window.parent.postMessage({ type: 'PRANGARA_NAVIGATE', path: '/account', user: user }, '*');
-                  } else if (window.location.pathname !== '/account') {
-                    window.location.href = '/account';
+                    window.parent.postMessage({ type: 'PRANGARA_NAVIGATE', path: '/overview', user: user }, '*');
+                  } else if (window.location.pathname !== '/overview') {
+                    window.location.href = '/overview';
                   }
-                  Router.navigate('#account');
+                  Router.navigate('#overview');
                 }, 350);
               })
               .catch(function (err) {

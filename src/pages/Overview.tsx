@@ -2,7 +2,6 @@ import { AnimatedValue } from "../components/ui/AnimatedValue";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowUpRight, Info } from "lucide-react";
-import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { useWorkspace } from "../hooks/useWorkspace";
 import {
   PageHeading,
@@ -87,13 +86,12 @@ export default function Overview() {
               </strong>
             </div>
           </div>
-          <LiquidButton
-            variant="blue"
-            size="md"
-            text="Explore the cash-positive portfolio"
+          <Link
             to="/portfolio?view=cash_positive_only"
-            className="portfolio-cta"
-          />
+            className="button primary portfolio-cta"
+          >
+            Explore the cash-positive portfolio →
+          </Link>
         </div>
         <div className="carbon-hero">
           <button className="eyebrow full-width" onClick={totalDetails}>

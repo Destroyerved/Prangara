@@ -1,7 +1,5 @@
 import { useLocation } from "react-router-dom";
 import {
-  createContext,
-  useContext,
   useEffect,
   useRef,
   useState,
@@ -12,15 +10,7 @@ import { createPortal } from "react-dom";
 import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
 import * as Popover from "@radix-ui/react-popover";
 import * as Tooltip from "@radix-ui/react-tooltip";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  type MotionValue,
-  type SpringOptions,
-} from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Factory,
   ChevronDown,
@@ -40,10 +30,8 @@ import { RecordDrawer } from "../drawers/RecordDrawer";
 import { CommandPalette } from "./CommandPalette";
 import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
-import { ShaderBackground } from "../ui/waves-shader";
 import { MenuCloseIcon } from "@/components/ui/animated-state-icons";
-import { UnseenCursor } from "@/components/ui/UnseenCursor";
-import { UnseenSmoothScroll } from "@/components/ui/UnseenSmoothScroll";
+
 const pref = (key: string, fallback: string) => {
   try {
     return localStorage.getItem(key) || fallback;
@@ -51,15 +39,6 @@ const pref = (key: string, fallback: string) => {
     return fallback;
   }
 };
-
-const SidebarDockContext = createContext<{
-  mouseY: MotionValue<number>;
-  distance: number;
-  spring: SpringOptions;
-  collapsed: boolean;
-} | null>(null);
-
-const MotionNavLink = motion.create(NavLink);
 
 function SidebarNavItem({
   path,
@@ -80,8 +59,6 @@ function SidebarNavItem({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
-  const dockContext = useContext(SidebarDockContext);
-  const ref = useRef<HTMLAnchorElement>(null);
 
   const isItemActive =
     location.pathname === path ||
@@ -92,55 +69,17 @@ function SidebarNavItem({
   const itemClassName = [
     "nav-item",
     isItemActive ? "active" : "",
-    (isJustLanded && isItemActive) ? "just-landed" : "",
+    isJustLanded && isItemActive ? "just-landed" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
-  const fallbackMouseY = useMotionValue(Infinity);
-  const mouseY = dockContext ? dockContext.mouseY : fallbackMouseY;
-  const distance = dockContext?.distance ?? 110;
-  const springConfig = dockContext?.spring ?? { mass: 0.1, stiffness: 180, damping: 14 };
-
-  const mouseDistance = useTransform(mouseY, (val: number) => {
-    if (!ref.current || val === Infinity) return 1000;
-    const rect = ref.current.getBoundingClientRect();
-    return val - rect.y - rect.height / 2;
-  });
-
-  const iconScaleTransform = useTransform(
-    mouseDistance,
-    [-distance, 0, distance],
-    [1, collapsed ? 1.35 : 1.18, 1]
-  );
-  const iconScale = useSpring(iconScaleTransform, springConfig);
-
-  const rowTranslateXTransform = useTransform(
-    mouseDistance,
-    [-distance, 0, distance],
-    [0, collapsed ? 4 : 4, 0]
-  );
-  const rowTranslateX = useSpring(rowTranslateXTransform, springConfig);
-
-  const rowScaleTransform = useTransform(
-    mouseDistance,
-    [-distance, 0, distance],
-    [1, collapsed ? 1.15 : 1.015, 1]
-  );
-  const rowScale = useSpring(rowScaleTransform, springConfig);
-
   const link = (
-    <MotionNavLink
-      ref={ref}
+    <NavLink
       className={itemClassName}
       to={path}
       aria-label={label}
       aria-current={isItemActive ? "page" : undefined}
-      style={{
-        scale: rowScale,
-        x: rowTranslateX,
-        transformOrigin: collapsed ? "center left" : "left center",
-      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => {
@@ -149,20 +88,12 @@ function SidebarNavItem({
         }
       }}
     >
-      <motion.span
-        style={{
-          scale: iconScale,
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transformOrigin: "center center",
-        }}
-      >
-        <Icon size={collapsed ? 19 : 22} active={isItemActive} isHovered={isHovered} />
-      </motion.span>
+      <span className="nav-icon-wrap">
+        <Icon size={collapsed ? 20 : 18} active={isItemActive} isHovered={isHovered} />
+      </span>
       {!collapsed && <span className="nav-text">{label}</span>}
       {!collapsed && count ? <span className="count">{count}</span> : null}
-    </MotionNavLink>
+    </NavLink>
   );
 
   if (!collapsed) {
@@ -202,8 +133,6 @@ export default function Shell() {
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
   const [ragOpen, setRagOpen] = useState(false);
-  const [navVisible, setNavVisible] = useState(true);
-  const sidebarMouseY = useMotionValue(Infinity);
 
   const popoverContentRef = useRef<HTMLDivElement>(null);
   const plantOptionsRef = useRef<HTMLDivElement>(null);
@@ -265,66 +194,13 @@ export default function Shell() {
       document.body.classList.remove("has-plant-popover-open");
     }
 
-    if (plantOpen || ragOpen) {
-      window.__lenis?.stop();
-    } else {
-      window.__lenis?.start();
-    }
-
     return () => {
       document.body.classList.remove("has-plant-popover-open");
-      window.__lenis?.start();
     };
-  }, [plantOpen, ragOpen]);
-
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    const updateNavBand = (scrollY: number) => {
-      const maxScroll = Math.max(
-        1,
-        document.documentElement.scrollHeight - window.innerHeight,
-      );
-      const scrollRatio = Math.min(1, Math.max(0, scrollY / maxScroll));
-      const bandY = Math.round(160 + scrollRatio * 390);
-      document.documentElement.style.setProperty("--nav-band-y", `${bandY}px`);
-    };
-
-    updateNavBand(window.scrollY);
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          updateNavBand(currentScrollY);
-          if (currentScrollY <= 20) {
-            setNavVisible(true);
-          } else if (!plantOpen) {
-            const delta = currentScrollY - lastScrollY;
-            if (delta > 3) {
-              // Rapid immediate slide up as user scrolls down
-              setNavVisible(false);
-            } else if (delta < -3) {
-              // Slide back down immediately on scroll up
-              setNavVisible(true);
-            }
-          }
-          lastScrollY = Math.max(0, currentScrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, [plantOpen]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
-    setNavVisible(true);
-    document.documentElement.style.setProperty("--nav-band-y", "160px");
   }, [pathname]);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -357,13 +233,6 @@ export default function Shell() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <div className="waves-shader-container" aria-hidden="true">
-        <ShaderBackground className="waves-shader-canvas" speed={1.8} />
-        <div className="waves-shader-scrim" />
-      </div>
-      <div className="unseen-grain" aria-hidden="true" />
-      <UnseenCursor />
-      <UnseenSmoothScroll />
       <div
         className={"app-shell " + (collapsed ? "compact" : "")}
         style={
@@ -378,23 +247,7 @@ export default function Shell() {
             <span className="brand-text">PRANGARA</span>
           </Link>
           <div className="workspace-label">INDUSTRIAL INTELLIGENCE</div>
-          <SidebarDockContext.Provider
-            value={{
-              mouseY: sidebarMouseY,
-              distance: collapsed ? 80 : 95,
-              spring: { mass: 0.1, stiffness: 180, damping: 14 },
-              collapsed,
-            }}
-          >
-            <nav
-              aria-label="Main navigation"
-              onMouseMove={(e) => {
-                sidebarMouseY.set(e.clientY);
-              }}
-              onMouseLeave={() => {
-                sidebarMouseY.set(Infinity);
-              }}
-            >
+          <nav aria-label="Main navigation">
               {navigation.map((group) => (
                 <div className="nav-group" key={group.group}>
                   {group.group ? <div className="nav-label">{group.group}</div> : null}
@@ -416,7 +269,6 @@ export default function Shell() {
                 </div>
               ))}
             </nav>
-          </SidebarDockContext.Provider>
           <div className="sidebar-bottom">
             <div className="sidebar-foot">
               <span>PRANGARA</span>
@@ -462,9 +314,7 @@ export default function Shell() {
           )}
         </aside>
         <div className="workspace">
-          <header
-            className={`topbar ${navVisible ? "nav-visible" : "nav-hidden"}`}
-          >
+          <header className="topbar">
             {plantOpen &&
               typeof document !== "undefined" &&
               createPortal(
@@ -558,12 +408,12 @@ export default function Shell() {
             <div className="top-actions">
               <button
                 type="button"
-                className="top-action-btn shrink-0"
+                className="top-action-btn assistant-btn shrink-0"
                 onClick={() => setRagOpen(true)}
-                aria-label="Ask PRANGARA"
+                aria-label="Ask Sovereign Assistant"
               >
                 <Sparkles size={14} />
-                <span>ASK PRANGARA</span>
+                <span>Assistant</span>
               </button>
               <button
                 className="command-trigger"
