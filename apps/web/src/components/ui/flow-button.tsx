@@ -68,28 +68,11 @@ export function FlowButton({
 
   const innerContent = (
     <>
-      {/* Zero layout shift text container using shared grid cell */}
-      <span className="relative z-[2] grid place-items-center select-none pointer-events-none leading-none">
-        {/* Normal state: Standard bold sans-serif */}
-        <span
-          className="col-start-1 row-start-1 font-bold whitespace-nowrap transition-opacity duration-300 ease-out group-hover:opacity-0"
-          style={variant === 'blue' ? { color: '#ffffff' } : undefined}
-        >
-          {label}
-        </span>
-
-        {/* Hover state: Editorial italic serif text — exactly in place with 0px box size change */}
-        <span
-          aria-hidden="true"
-          className="col-start-1 row-start-1 italic font-medium whitespace-nowrap transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100"
-          style={{
-            fontFamily: 'var(--font-editorial)',
-            color: variant === 'blue' ? '#ffffff' : undefined,
-            letterSpacing: '0.02em',
-          }}
-        >
-          {label}
-        </span>
+      <span
+        className="relative z-[2] font-semibold whitespace-nowrap select-none pointer-events-none tracking-normal"
+        style={variant === 'blue' ? { color: '#ffffff' } : undefined}
+      >
+        {label}
       </span>
 
       {/* Right arrow — stable position with subtle responsive micro-nudge */}

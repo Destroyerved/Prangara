@@ -4,7 +4,6 @@ import {
   PageHeading,
   Segmented,
   SearchBox,
-  Note,
   Empty,
   Skeleton,
 } from "../components/ui/common";
@@ -18,7 +17,7 @@ import {
 import { LeakCard } from "../components/leaks/LeakCard";
 import { BenchmarkStrip } from "../components/charts/BenchmarkStrip";
 import { number } from "../lib/format";
-
+import { Info, AlertTriangle, TrendingDown, Target } from "lucide-react";
 
 export default function LeakPoints() {
   const w = useWorkspace(),
@@ -29,12 +28,25 @@ export default function LeakPoints() {
 
   if (!a) return <Skeleton />;
 
+  const criticalCount = a.leaks.findings.filter(
+    (l) => l.severity === "critical" || l.severity === "high",
+  ).length;
+  const totalRecoverable = a.leaks.findings.reduce(
+    (sum, l) => sum + (l.recoverable_t || 0),
+    0,
+  );
+  const maxShare = Math.max(
+    ...a.leaks.findings.map((l) => l.share_pct || 0),
+    0,
+  );
+
   const findings = a.leaks.findings.filter(
     (l) =>
       (severity === "all" || l.severity === severity) &&
       (rule === "all" || l.rule === rule) &&
       l.name.toLowerCase().includes(search.toLowerCase()),
   );
+
   return (
     <div className="page-reveal">
       <PageHeading
@@ -42,34 +54,79 @@ export default function LeakPoints() {
         title="Where performance escapes"
         description="Detect operational gaps and structural carbon concentrations."
       />
-      <div className="peer-overview">
-        <div>
-          <div className="eyebrow">OVERALL SECTOR POSITION</div>
-          <strong>
-            {a.leaks.peer_percentile == null
-              ? "Not supplied"
-              : "p" + number(a.leaks.peer_percentile)}
-          </strong>
-          <p>Gate-to-gate intensity only · {w.sector.data?.name}</p>
+
+      {/* Structured Executive Intelligence Grid */}
+      <div className="leak-kpi-grid">
+        <div className="leak-kpi-card">
+          <div className="leak-kpi-label">Active Leak Points</div>
+          <div className="leak-kpi-value">
+            <span>{a.leaks.findings.length}</span>
+            <small className="text-xs text-slate-400 font-normal">streams</small>
+          </div>
+          <div className="leak-kpi-sub">
+            <AlertTriangle size={13} className="text-amber-400 shrink-0" />
+            <span>{criticalCount} critical & high priority</span>
+          </div>
         </div>
-        <div>
-          {a.leaks.peer_percentile != null ? (
-            <BenchmarkStrip percentile={a.leaks.peer_percentile} />
-          ) : (
-            <p>
-              Individual stream positions can be available even when an overall
-              peer percentile is not supplied.
-            </p>
+
+        <div className="leak-kpi-card">
+          <div className="leak-kpi-label">Recoverable Volume</div>
+          <div className="leak-kpi-value text-emerald-400">
+            <span>{number(totalRecoverable)}</span>
+            <small className="text-xs text-slate-400 font-normal">tCO₂e / yr</small>
+          </div>
+          <div className="leak-kpi-sub">
+            <TrendingDown size={13} className="text-emerald-400 shrink-0" />
+            <span>Operational recovery potential</span>
+          </div>
+        </div>
+
+        <div className="leak-kpi-card">
+          <div className="leak-kpi-label">Peak Concentration</div>
+          <div className="leak-kpi-value text-cyan-400">
+            <span>{number(maxShare, 1)}%</span>
+            <small className="text-xs text-slate-400 font-normal">share</small>
+          </div>
+          <div className="leak-kpi-sub">
+            <Target size={13} className="text-cyan-400 shrink-0" />
+            <span>Largest single process hotspot</span>
+          </div>
+        </div>
+
+        <div className="leak-kpi-card">
+          <div className="leak-kpi-label">Sector Peer Baseline</div>
+          <div className="leak-kpi-value">
+            {a.leaks.peer_percentile != null ? (
+              <span>p{number(a.leaks.peer_percentile)}</span>
+            ) : (
+              <span className="text-sm font-semibold tracking-normal text-cyan-300 bg-cyan-950/70 border border-cyan-800/60 px-2.5 py-1 rounded-full">
+                Stream Screening
+              </span>
+            )}
+          </div>
+          <div className="leak-kpi-sub">
+            {a.leaks.peer_percentile != null ? (
+              <span>Gate-to-gate intensity</span>
+            ) : (
+              <span>Process literature calibrated</span>
+            )}
+          </div>
+          {a.leaks.peer_percentile != null && (
+            <div className="mt-2">
+              <BenchmarkStrip percentile={a.leaks.peer_percentile} />
+            </div>
           )}
         </div>
       </div>
-      <Note>
-        A carbon leak is an excess or concentrated emission stream, not a
-        physical gas leak. Peer benchmarks are indicative screening percentiles
-        from literature. Cohort identity, sample size, reporting period and
-        data-quality scores are not supplied.
-      </Note>
-      <div className="filter-bar flex items-center gap-3 flex-wrap">
+
+      <div className="leak-notice-banner">
+        <Info size={16} />
+        <span>
+          A carbon leak is an excess or concentrated emission stream identified by peer benchmark comparison or structural concentration, calibrated for {w.sector.data?.name || "your sector"}.
+        </span>
+      </div>
+
+      <div className="filter-bar">
         <Segmented
           value={severity}
           onChange={setSeverity}
@@ -78,7 +135,7 @@ export default function LeakPoints() {
           )}
         />
         <Select value={rule} onValueChange={setRule}>
-          <SelectTrigger className="w-[210px] h-[39px]" aria-label="Detection rule">
+          <SelectTrigger className="w-[210px] h-[38px] rounded-full" aria-label="Detection rule">
             <SelectValue placeholder="All detection rules" />
           </SelectTrigger>
           <SelectContent>
@@ -93,12 +150,17 @@ export default function LeakPoints() {
           onChange={setSearch}
           placeholder="Search leak points…"
         />
+        <span className="text-xs text-slate-400 font-medium ml-auto">
+          {findings.length} {findings.length === 1 ? "finding" : "findings"}
+        </span>
       </div>
+
       <div className="leak-grid expanded">
         {findings.map((l, i) => (
           <LeakCard key={l.id} leak={l} index={i} expanded />
         ))}
       </div>
+
       {!findings.length && (
         <Empty
           title={
@@ -113,6 +175,7 @@ export default function LeakPoints() {
           }
         />
       )}
+
       <section className="section rule-grid">
         {[
           [
@@ -131,7 +194,7 @@ export default function LeakPoints() {
             "A stream exceeds 25% of the footprint with no applicable benchmark. Factory efficiency alone would miss it.",
           ],
         ].map(([n, t, d]) => (
-          <div key={n}>
+          <div key={n} className="rule-card">
             <span className="eyebrow">RULE {n}</span>
             <h3>{t}</h3>
             <p>{d}</p>

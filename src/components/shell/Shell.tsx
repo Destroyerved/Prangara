@@ -408,7 +408,7 @@ export default function Shell() {
             <div className="top-actions">
               <button
                 type="button"
-                className="top-action-btn assistant-btn shrink-0"
+                className="topbar-action-pill topbar-assistant-btn shrink-0"
                 onClick={() => setRagOpen(true)}
                 aria-label="Ask Sovereign Assistant"
               >
@@ -416,20 +416,21 @@ export default function Shell() {
                 <span>Assistant</span>
               </button>
               <button
-                className="command-trigger"
+                type="button"
+                className="topbar-action-pill command-trigger topbar-command-btn shrink-0"
                 onClick={() => w.setCommandOpen(true)}
                 aria-label="Search commands"
               >
-                <Command size={15} />
-                <kbd>K</kbd>
+                <Command size={14} />
+                <kbd>⌘K</kbd>
               </button>
               {/* Dark / Light Theme Toggle */}
-              <div className="theme-tri-switch" role="group" aria-label="Theme Selection">
+              <div className="theme-tri-switch shrink-0" role="group" aria-label="Theme Selection">
                 <button
                   type="button"
                   className={`theme-tri-btn ${theme === "dark" ? "active" : ""}`}
                   onClick={() => setTheme("dark")}
-                  title="Dark (Current Dark Theme)"
+                  title="Dark Theme"
                   aria-pressed={theme === "dark"}
                 >
                   <Moon size={13} />
@@ -439,7 +440,7 @@ export default function Shell() {
                   type="button"
                   className={`theme-tri-btn ${theme === "light" ? "active" : ""}`}
                   onClick={() => setTheme("light")}
-                  title="Light (Current Light Theme)"
+                  title="Light Theme"
                   aria-pressed={theme === "light"}
                 >
                   <Sun size={13} />
@@ -448,7 +449,7 @@ export default function Shell() {
               </div>
               <Link
                 to="/marketplace"
-                className={`topbar-marketplace-btn ${pathname === "/marketplace" ? "active" : ""}`}
+                className={`topbar-action-pill topbar-marketplace-btn shrink-0 ${pathname === "/marketplace" ? "active" : ""}`}
                 title="Vendor & Materials Marketplace"
               >
                 <Store size={14} style={{ color: "var(--accent, #79D7E6)" }} />
@@ -456,11 +457,11 @@ export default function Shell() {
               </Link>
               <button
                 type="button"
-                className="top-action-btn shrink-0"
+                className="topbar-run-btn shrink-0"
                 onClick={() => navigate("/assessment")}
                 aria-label="Run assessment"
               >
-                Run assessment
+                <span>Run assessment</span>
               </button>
             </div>
           </header>

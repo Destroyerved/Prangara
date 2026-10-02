@@ -160,28 +160,13 @@ function LiquidButton({
           style={{ backdropFilter: 'url("#container-glass")' }}
         />
 
-        {/* Text Change Effect: Normal sans-serif morphs to editorial italic serif on hover with 0px shift */}
+        {/* Clean, high-contrast label with zero layout shift or font morphing */}
         {text ? (
-          <span className="relative z-[3] grid place-items-center select-none pointer-events-none leading-none">
-            {/* Normal state: Standard bold sans-serif */}
-            <span className="col-start-1 row-start-1 font-bold whitespace-nowrap transition-opacity duration-300 ease-out group-hover:opacity-0 text-white">
-              {text}
-            </span>
-
-            {/* Hover state: Editorial italic serif text — exactly in place with 0px box size change */}
-            <span
-              aria-hidden="true"
-          className="col-start-1 row-start-1 italic font-medium whitespace-nowrap transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100 text-white"
-              style={{
-                fontFamily: "var(--font-editorial)",
-                letterSpacing: "0.02em",
-              }}
-            >
-              {text}
-            </span>
+          <span className="relative z-[3] font-semibold whitespace-nowrap select-none pointer-events-none leading-none text-white tracking-normal">
+            {text}
           </span>
         ) : (
-          <div className="relative z-[3] flex items-center justify-center gap-2 pointer-events-none text-white font-medium">
+          <div className="relative z-[3] flex items-center justify-center gap-2 pointer-events-none text-white font-semibold">
             {label}
           </div>
         )}

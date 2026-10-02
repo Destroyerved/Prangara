@@ -45,8 +45,8 @@ export function UnseenPillNav({
             className={cn(
               'px-4 py-1.5 text-sm transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-full',
               isActive
-                ? 'border-[1.5px] border-slate-900 dark:border-white text-slate-900 dark:text-white font-serif italic text-[15px] font-semibold tracking-wide shadow-sm scale-[1.02]'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-sans font-medium'
+                ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-semibold tracking-normal shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium'
             )}
           >
             {item.label}
