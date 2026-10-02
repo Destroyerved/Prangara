@@ -509,6 +509,10 @@ def wipe(db) -> int:
 
 
 def seed(db) -> dict[str, str]:
+    existing = db.scalar(select(User).where(User.email == _email("owner")))
+    if existing is not None:
+        return {slug: _email(slug) for slug, *_ in ACCOUNTS}
+
     created: dict[str, str] = {}
     orgs: dict[str, Organization] = {}
     users: dict[str, User] = {}
