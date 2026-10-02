@@ -1003,21 +1003,23 @@ select:focus {
   gap: 20px;
 }
 
-.metric-strip>div,
-.metric-strip>div+div {
-  padding: 22px;
+.metric-strip > div,
+.metric-strip > div + div {
+  padding: 24px;
   background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), var(--inner-highlight);
   min-width: 0;
-  transition: transform 180ms, border-color 180ms, box-shadow 180ms;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms, box-shadow 200ms;
+  position: relative;
+  overflow: hidden;
 }
 
-.metric-strip>div:hover {
-  transform: translateY(-2px);
+.metric-strip > div:hover {
+  transform: translateY(-3px);
   border-color: var(--floating-border);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28), var(--inner-highlight);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32), var(--inner-highlight);
 }
 
 .metric-strip strong {
@@ -1042,23 +1044,26 @@ select:focus {
 }
 
 .section {
-  margin-top: 40px;
+  margin-top: 44px;
 }
 
 .section-heading {
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .section-heading p {
   font-size: 14px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.5;
 }
 
 .leak-card,
-.analytical-panel,
-.boundary-panel,
-.assessment-summary,
-.constraint-row,
-.method-hero {
+.analytical-panel {
   background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
@@ -1294,47 +1299,29 @@ select:focus {
   gap: 20px;
 }
 
-.scope-panels>button,
-.scope-panels>button:first-child {
+.scope-panels > button,
+.scope-panels > button:first-child {
   background: var(--surface);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 24px;
   box-shadow: var(--inner-highlight);
+  transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  text-align: left;
+  cursor: pointer;
 }
 
-.scope-panels>button.selected {
-  background: var(--selected-bg);
-  border-color: var(--accent-container);
+.scope-panels > button:hover {
+  border-color: var(--floating-border);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), var(--inner-highlight);
 }
 
-.scope-panels strong {
-  font-size: 32px;
-}
-
+/* compliance-preview is fully managed by pages.css */
 .compliance-preview {
-  gap: 20px;
+  gap: 16px;
   border: 0;
   padding: 0;
-}
-
-.compliance-preview>a,
-.compliance-preview>a+a {
-  background: var(--surface);
-  border: 1px solid var(--card-border);
-  padding: 26px;
-  border-radius: 14px;
-  box-shadow: var(--inner-highlight);
-}
-
-.compliance-preview>a>svg {
-  right: 24px;
-  top: 24px;
-}
-
-.compliance-preview h3 {
-  font-size: 24px;
-  padding-right: 16px;
 }
 
 .note {
@@ -2470,6 +2457,30 @@ html.lenis::-webkit-scrollbar {
   .theme-tri-btn {
     padding: 0 7px;
   }
+}
+
+/* ==========================================================================
+   Shared Glass Panel - Scenarios, WorkspaceHub, interior pages
+   ========================================================================== */
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28), var(--inner-highlight);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-panel:hover {
+  border-color: var(--floating-border);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35), var(--inner-highlight);
+}
+:root[data-theme="light"] .glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
 /* ==========================================================================

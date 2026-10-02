@@ -1,4 +1,4 @@
-.analytical-panel {
+﻿.analytical-panel {
   border: 1px solid var(--border);
   background: var(--surface-inset);
   border-radius: 8px;
@@ -363,19 +363,27 @@
 .scope-panels {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-block: 1px solid var(--border);
-  padding: 26px 0;
-  gap: 24px;
+  padding: 20px 0;
+  gap: 16px;
 }
 .scope-panels > button {
   text-align: left;
-  padding: 10px 24px;
-  border-left: 1px solid var(--border);
-  border-radius: 3px;
+  padding: 22px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 .scope-panels > button:first-child {
-  border-left: 0;
-  padding-left: 0;
+  border-left: 1px solid var(--card-border);
+  padding-left: 22px;
+}
+.scope-panels > button:hover {
+  border-color: var(--floating-border);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
 }
 .scope-panels .eyebrow > span:last-child {
   margin-left: auto;
@@ -383,8 +391,8 @@
 .scope-panels strong {
   display: block;
   font-size: 30px;
-  margin: 18px 0 8px;
-  font-weight: 500;
+  margin: 16px 0 8px;
+  font-weight: 600;
   letter-spacing: -0.5px;
 }
 .scope-panels strong small {
@@ -394,9 +402,12 @@
 }
 .scope-panels p {
   font-size: 12px;
+  color: var(--muted);
 }
 .scope-panels .selected {
-  background: var(--surface-hover);
+  background: var(--selected-bg);
+  border-color: var(--accent-container);
+  box-shadow: 0 0 0 1px var(--accent-container), 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 .intensity-grid {
   display: grid;
