@@ -9,7 +9,11 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "lint": "eslint .",
-    "test": "vitest run --exclude \"work/**\" --exclude \"apps/**\""
+    "test": "vitest run --exclude \"work/**\" --exclude \"apps/**\"",
+    "test:ml": "node backend-node/tests/test_ml_backend.js && node backend-node/tests/test_server_live.js",
+    "test:datasets": "node datasets/08_automated_test_suites/test_chakra_invariants.js && node datasets/08_automated_test_suites/verify_dataset_authenticity.js",
+    "test:motion": "node test-motion.mjs && node verify.mjs",
+    "test:all": "npm run test && npm run test:ml && npm run test:datasets && npm run test:motion"
   },
   "dependencies": {
     "@fontsource-variable/inter": "5.3.0",

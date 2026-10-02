@@ -61,7 +61,6 @@ export default function App() {
                 <Route path="marketplace" element={<Suspense fallback={<Skeleton/>}><Marketplace/></Suspense>}/>
                 <Route path="notifications" element={<Suspense fallback={<Skeleton/>}><Notifications/></Suspense>}/>
                 {[
-                  ["overview", Overview],
                   ["assessment", PlantData],
                   ["footprint", Footprint],
                   ["leaks", LeakPoints],
