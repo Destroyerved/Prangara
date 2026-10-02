@@ -35,9 +35,9 @@ if errorlevel 1 (
 echo [OK] Node.js / npm runtime detected.
 
 :: 3. Verify / Install Frontend dependencies if needed
-if not exist "%~dp0apps\web\node_modules" (
-    echo [INFO] Installing frontend dependencies in apps\web (npm install)...
-    pushd "%~dp0apps\web"
+if not exist "%~dp0node_modules" (
+    echo [INFO] Installing frontend dependencies (npm install)...
+    pushd "%~dp0"
     call npm install
     popd
     if errorlevel 1 (
@@ -59,7 +59,7 @@ start "PRANGARA Backend API (Port 8000)" cmd /c "cd /d "%~dp0backend" && "%PYTHO
 
 :: 6. Launch Vite Web Dashboard on Port 5173
 echo [INFO] Launching Vite Web Dashboard on http://127.0.0.1:5173 ...
-start "PRANGARA Web Dashboard (Port 5173)" cmd /c "cd /d "%~dp0apps\web" && npm run dev"
+start "PRANGARA Web Dashboard (Port 5173)" cmd /c "cd /d "%~dp0" && npm run dev"
 
 :: 7. Wait briefly and open browser
 echo [INFO] Waiting for servers to initialize...
