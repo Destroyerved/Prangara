@@ -85,20 +85,24 @@ export default function SankeyChart({
           <text x="886" y="17" className="chart-axis-label">
             TOTAL
           </text>
-          {graph.links.map((l, i) => (
-            <motion.path
-              key={i}
-              d={sankeyLinkHorizontal()(l) || ""}
-              fill="none"
-              stroke={scopeColor(l.scope)}
-              strokeWidth={Math.max(1, l.width || 0)}
-              initial={{ opacity: 0, pathLength: 0 }}
-              animate={{ opacity: connected(l) ? 0.24 : 0.035, pathLength: 1 }}
-              transition={{ duration: 0.5, delay: i * 0.018 }}
-              onMouseMove={(e) => move(e, (l.source as NodeData).id)}
-              onMouseLeave={() => setHover(null)}
-            />
-          ))}
+          {graph.links.map((l, i) => {
+            const linkPath = sankeyLinkHorizontal()(l);
+            if (!linkPath) return null;
+            return (
+              <motion.path
+                key={i}
+                d={linkPath}
+                fill="none"
+                stroke={scopeColor(l.scope)}
+                strokeWidth={Math.max(1, l.width || 0)}
+                initial={{ opacity: 0, pathLength: 0 }}
+                animate={{ opacity: connected(l) ? 0.24 : 0.035, pathLength: 1 }}
+                transition={{ duration: 0.5, delay: i * 0.018 }}
+                onMouseMove={(e) => move(e, (l.source as NodeData).id)}
+                onMouseLeave={() => setHover(null)}
+              />
+            );
+          })}
           {graph.nodes.map((n) => (
             <g
               key={n.id}

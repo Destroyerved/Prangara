@@ -48,7 +48,7 @@ export function FlowButton({
     sizeClasses,
     variant === 'blue'
       ? 'flow-button-blue border-[#38bdf8]/70 bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#38bdf8] !text-white text-white shadow-[0_4px_18px_rgba(2,132,199,0.48)] hover:shadow-[0_6px_28px_rgba(56,189,248,0.68)] hover:border-[#38bdf8]'
-      : 'border-[#333333]/40 bg-transparent text-[#111111] hover:border-transparent hover:text-white',
+      : 'border-[#333333]/40 bg-transparent text-white hover:border-white/30 hover:text-white',
     disabled && 'opacity-60 cursor-not-allowed pointer-events-none',
     className
   );
@@ -59,7 +59,7 @@ export function FlowButton({
           background: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)',
           backgroundColor: '#0284c7',
           color: '#ffffff',
-          borderColor: 'rgba(56, 189, 248, 0.7)',
+          borderColor: 'rgba(56, 189, 248, 0.75)',
           boxShadow: '0 4px 18px rgba(2, 132, 199, 0.45)',
         }
       : {};

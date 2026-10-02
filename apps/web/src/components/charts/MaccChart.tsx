@@ -14,12 +14,13 @@ export default function MaccChart({
   compact?: boolean;
 }) {
   const w = useWorkspace(),
-    a = w.assessment!;
+    a = w.assessment;
   const [selected, setSelected] = useState<string | null>(null);
   const { hover, setHover, move } = useChartHover();
-  const curve = a.recommendations.portfolios[mode].curve;
+  const curve = a?.recommendations.portfolios[mode]?.curve;
   const chart = useMemo(() => {
-    const ordered = [...curve]
+    const list = curve ?? [];
+    const ordered = [...list]
       .filter((v) => v.abatement_t > 0)
       .sort((a, b) => a.lcoa - b.lcoa);
     let cumulative = 0;
@@ -44,7 +45,7 @@ export default function MaccChart({
     const y = scaleLinear().domain([low, high]).range([350, 55]);
     return { bars, x, y, low, high, total: cumulative };
   }, [curve]);
-  if (!chart.bars.length)
+  if (!a || !chart.bars.length)
     return (
       <Empty
         title="MACC data unavailable"
@@ -104,8 +105,8 @@ export default function MaccChart({
               y={chart.y(0)}
               width="970"
               height={350 - chart.y(0)}
-              fill="var(--accent)"
-              opacity=".025"
+              fill="var(--chart-positive, #10b981)"
+              opacity=".03"
             />
             {chart.bars.map((v, i) => {
               const value = Math.max(chart.low, Math.min(chart.high, v.lcoa)),
@@ -162,7 +163,11 @@ export default function MaccChart({
                     y={y}
                     height={height}
                     rx="1"
-                    fill={v.lcoa < 0 ? "var(--accent)" : "var(--scope-1)"}
+                    fill={
+                      v.lcoa < 0
+                        ? "var(--chart-positive, #10b981)"
+                        : "var(--chart-cost, #f43f5e)"
+                    }
                     initial={{ opacity: 0, scaleY: 0 }}
                     animate={{
                       opacity: active && active !== v.id ? 0.28 : 0.8,

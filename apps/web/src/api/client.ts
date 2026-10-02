@@ -9,44 +9,9 @@ import {
 import rawFixtures from "../data/assessments.json";
 import rawReference from "../data/reference.json";
 import rawSectors from "../data/sectors.json";
-
 export const dataMode =
   import.meta.env.VITE_DATA_MODE === "api" ? "api" : "demo";
 const base = (import.meta.env.VITE_API_BASE_URL || "/api").replace(/\/$/, "");
-
-const TOKEN_KEY = "prangara_jwt_token";
-const ORG_KEY = "prangara_org_id";
-
-export const getStoredToken = (): string | null => {
-  try {
-    return sessionStorage.getItem(TOKEN_KEY);
-  } catch {
-    return null;
-  }
-};
-
-export const setStoredToken = (token: string | null): void => {
-  try {
-    if (token) sessionStorage.setItem(TOKEN_KEY, token);
-    else sessionStorage.removeItem(TOKEN_KEY);
-  } catch {}
-};
-
-export const getStoredOrgId = (): string | null => {
-  try {
-    return sessionStorage.getItem(ORG_KEY);
-  } catch {
-    return null;
-  }
-};
-
-export const setStoredOrgId = (orgId: string | null): void => {
-  try {
-    if (orgId) sessionStorage.setItem(ORG_KEY, orgId);
-    else sessionStorage.removeItem(ORG_KEY);
-  } catch {}
-};
-
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -56,7 +21,6 @@ export class ApiError extends Error {
     this.name = "ApiError";
   }
 }
-
 async function request(
   path: string,
   options: RequestInit = {},
@@ -64,28 +28,12 @@ async function request(
 ): Promise<unknown> {
   const timeout = AbortSignal.timeout(15000);
   const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
-
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    ...(options.headers as Record<string, string>),
-  };
-
-  const token = getStoredToken();
-  if (token && !headers["Authorization"]) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-
-  const orgId = getStoredOrgId();
-  if (orgId && !headers["X-Organization-Id"]) {
-    headers["X-Organization-Id"] = orgId;
-  }
-
   let response: Response;
   try {
     response = await fetch(base + path, {
       ...options,
       signal: combined,
-      headers,
+      headers: { "Content-Type": "application/json", ...options.headers },
     });
   } catch (e) {
     if (signal?.aborted) throw e;
@@ -93,7 +41,6 @@ async function request(
       "The assessment service is unavailable. Check your backend connection and retry.",
     );
   }
-
   if (!response.ok)
     throw new ApiError(
       response.status === 401
@@ -105,7 +52,6 @@ async function request(
             : "The assessment service could not complete this request.",
       response.status,
     );
-
   try {
     return await response.json();
   } catch {
@@ -114,7 +60,6 @@ async function request(
     );
   }
 }
-
 function parse<T>(schema: z.ZodType<T>, payload: unknown): T {
   const result = schema.safeParse(payload);
   if (!result.success)
@@ -123,24 +68,21 @@ function parse<T>(schema: z.ZodType<T>, payload: unknown): T {
     );
   return result.data;
 }
-
 const sectors = parse(z.array(sectorSchema), rawSectors);
 const fixtures = parse(z.record(z.string(), assessmentSchema), rawFixtures);
 const reference = parse(z.array(factorSchema), rawReference);
-
 import {
   adaptAssessment,
   adaptSectors,
   adaptSector,
   adaptReference,
+  toEngineProfile,
 } from "./adapter";
-
 export const api = {
   health: async (signal?: AbortSignal) =>
     dataMode === "demo"
       ? { status: "development_fixture" }
       : request("/health", {}, signal),
-
   sectors: async (signal?: AbortSignal) =>
     dataMode === "demo"
       ? sectors
@@ -148,7 +90,6 @@ export const api = {
           z.array(sectorSchema),
           adaptSectors(await request("/sectors", {}, signal)),
         ),
-
   sector: async (key: string, signal?: AbortSignal) => {
     if (dataMode === "demo") {
       const s = sectors.find((x) => x.key === key);
@@ -162,118 +103,41 @@ export const api = {
       ),
     );
   },
-
-  reference: async (signal?: AbortSignal) =>
-    dataMode === "demo"
+  reference: async (signal?: AbortSignal, connected = false) =>
+    dataMode === "demo" && !connected
       ? reference
       : parse(
           z.array(factorSchema),
           adaptReference(await request("/reference", {}, signal)),
         ),
-
-  provenance: async (signal?: AbortSignal) =>
-    dataMode === "demo"
-      ? { status: "development_fixture", coverage: { count: 31, verified: 25 } }
-      : request("/reference/provenance", {}, signal),
-
   demo: async (key: string, signal?: AbortSignal) => {
     if (dataMode === "demo") {
       const a = fixtures[key];
       if (!a) throw new ApiError("This demo is unavailable.");
       return structuredClone(a);
     }
-    return parse(
-      assessmentSchema,
-      adaptAssessment(
-        await request("/demo/" + encodeURIComponent(key), {}, signal),
-      ),
-    );
+    const [result, sector] = await Promise.all([
+      request("/demo/" + encodeURIComponent(key), {}, signal),
+      request("/sectors/" + encodeURIComponent(key), {}, signal),
+    ]);
+    const source = z.object({demo_profile:z.record(z.string(),z.unknown())}).parse(sector);
+    return parse(assessmentSchema, adaptAssessment(result, {...source.demo_profile,sector:key,eu_export_share_pct:25}));
   },
-
   assess: async (profile: PlantProfile) => {
     plantSchema.parse(profile);
-    if (dataMode === "demo")
-      throw new ApiError(
-        "Inputs validated. New calculations require the connected engine. You can export these inputs or load a fixed demo assessment.",
-      );
-    return parse(
-      assessmentSchema,
-      adaptAssessment(
-        await request("/assess", {
-          method: "POST",
-          body: JSON.stringify(profile),
-        }),
-      ),
-    );
-  },
-
-  reportUrl: (assessmentId: string, format: "html" | "pdf" = "html") => {
-    const token = getStoredToken();
-    const tokenQuery = token ? `&token=${encodeURIComponent(token)}` : "";
-    return `${base}/assessments/${encodeURIComponent(assessmentId)}/report?fmt=${format}${tokenQuery}`;
-  },
-
-  askAssistant: async (question: string, topic?: string) => {
-    if (dataMode === "demo") {
-      return {
-        answer:
-          "Sovereign RAG is grounded in statutory regulations (EU CBAM Reg 2023/956, BEE PAT rules, SEBI BRSR Core). When connected to the live backend, responses cite verifiable SHA-256 chunk IDs.",
-        confidence: "medium",
-        citations: [],
-        sources: [],
-      };
-    }
-    return request("/assistant/ask", {
-      method: "POST",
-      body: JSON.stringify({ question, topic }),
-    });
-  },
-
-  auth: {
-    login: async (email: string, password: string) => {
-      const res = (await request("/auth/login", {
+    try {
+      const response = await request("/assess", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
-      })) as { access_token?: string; user?: any };
-      if (res?.access_token) setStoredToken(res.access_token);
-      return res;
-    },
-    register: async (
-      email: string,
-      password: string,
-      full_name: string,
-      organization_name: string,
-    ) => {
-      const res = (await request("/auth/register", {
-        method: "POST",
-        body: JSON.stringify({ email, password, full_name, organization_name }),
-      })) as { access_token?: string; user?: any };
-      if (res?.access_token) setStoredToken(res.access_token);
-      return res;
-    },
-    me: async () => request("/auth/me"),
-    logout: () => {
-      setStoredToken(null);
-      setStoredOrgId(null);
-    },
-  },
-
-  factories: {
-    list: async () => (dataMode === "demo" ? [] : request("/factories")),
-    create: async (data: any) =>
-      request("/factories", { method: "POST", body: JSON.stringify(data) }),
-    assess: async (factoryId: string, profileId?: string, label?: string) => {
-      const raw = await request(`/factories/${factoryId}/assessments`, {
-        method: "POST",
-        body: JSON.stringify({ profile_id: profileId, label }),
+        body: JSON.stringify(toEngineProfile(profile)),
       });
-      return parse(assessmentSchema, adaptAssessment(raw));
-    },
-  },
-
-  compliance: {
-    readiness: async (factoryId: string) =>
-      request(`/factories/${factoryId}/compliance`),
-    cases: async () => request("/compliance/cases"),
+      return parse(assessmentSchema, adaptAssessment(response, profile));
+    } catch (e) {
+      if (dataMode === "demo") {
+        throw new ApiError(
+          "Inputs validated. Calculation engine is starting or unreachable. Please ensure the backend is running at http://127.0.0.1:8000.",
+        );
+      }
+      throw e;
+    }
   },
 };

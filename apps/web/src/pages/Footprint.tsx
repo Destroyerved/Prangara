@@ -10,18 +10,20 @@ import {
   SearchBox,
   Note,
   Badge,
+  Skeleton,
 } from "../components/ui/common";
 import { DataTable } from "../components/tables/DataTable";
 import SankeyChart from "../components/charts/SankeyChart";
 import { number } from "../lib/format";
 export default function Footprint() {
   const w = useWorkspace(),
-    a = w.assessment!,
+    a = w.assessment,
     [params, setParams] = useSearchParams();
   const scope = params.get("scope") || "all";
   const [view, setView] = useState("flow"),
     [search, setSearch] = useState("");
   const { reference, setDrawer } = w;
+
   const columns = useMemo<ColumnDef<Stream>[]>(
     () => [
       {
@@ -96,6 +98,8 @@ export default function Footprint() {
     ],
     [reference.data, setDrawer],
   );
+
+  if (!a) return <Skeleton />;
   const streams = a.footprint.streams.filter(
     (s) =>
       (scope === "all" || s.scope === scope) &&

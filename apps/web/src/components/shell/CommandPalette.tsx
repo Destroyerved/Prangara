@@ -1,9 +1,59 @@
 import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Search, ArrowUpRight, X, Factory, Sparkles } from "lucide-react";
+import { Search, ArrowUpRight, X, Factory, Sparkles, Radio } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { navigation } from "./navigation";
+const itemKeywords: Record<string, string[]> = {
+  "/marketplace": [
+    "marketplace",
+    "market",
+    "rfqs",
+    "rfq",
+    "vendors",
+    "vendor",
+    "providers",
+    "provider",
+    "materials",
+    "material",
+    "quotes",
+    "quote",
+    "esco",
+    "equipment",
+    "procurement",
+  ],
+  "/assessment": ["plant data", "assessment", "bills", "meters", "energy", "input"],
+  "/footprint": ["footprint", "emissions", "ghg", "scope 1", "scope 2", "scope 3"],
+  "/leaks": ["leak points", "diagnostics", "waste", "benchmarks"],
+  "/scenarios": ["simulator", "scenarios", "what-if", "macc"],
+  "/actions": ["circular actions", "recommendations", "projects"],
+  "/portfolio": ["abatement portfolio", "macc curve", "investments"],
+  "/logistics": [
+    "green logistics",
+    "logistics",
+    "corridors",
+    "freight",
+    "transport",
+    "map",
+    "maps",
+    "gps",
+    "fleet",
+    "tracking",
+    "telemetry",
+    "route planner",
+  ],
+  "/circular-network": [
+    "circular network",
+    "byproducts",
+    "industrial symbiosis",
+    "cluster map",
+    "clusters",
+    "waste exchange",
+  ],
+  "/compliance": ["compliance", "brsr", "cbam", "iso", "reports"],
+  "/methodology": ["methodology", "factors", "cea", "ipcc"],
+};
+
 export function CommandPalette() {
   const w = useWorkspace(),
     navigate = useNavigate();
@@ -51,7 +101,11 @@ export function CommandPalette() {
             <div className="eyebrow">NAVIGATE</div>
             {navigation
               .flatMap((g) => g.items)
-              .filter((n) => matches(n.label))
+              .filter((n) => {
+                if (matches(n.label)) return true;
+                const kw = itemKeywords[n.path];
+                return kw ? kw.some((k) => matches(k)) : false;
+              })
               .map((n) => (
                 <button
                   key={n.path}
@@ -85,6 +139,30 @@ export function CommandPalette() {
               >
                 <Sparkles size={17} />
                 <span>Glassmorphism Animation Demo</span>
+                <ArrowUpRight size={14} />
+              </button>
+            )}
+            {(matches("gps") || matches("map") || matches("fleet") || matches("tracking") || matches("corridor map")) && (
+              <button
+                onClick={() => {
+                  navigate("/logistics");
+                  close();
+                }}
+              >
+                <Radio size={17} style={{ color: "var(--accent, #79D7E6)" }} />
+                <span>Open Corridor GPS &amp; Fleet Map</span>
+                <ArrowUpRight size={14} />
+              </button>
+            )}
+            {(matches("cluster map") || matches("symbiosis map")) && (
+              <button
+                onClick={() => {
+                  navigate("/circular-network");
+                  close();
+                }}
+              >
+                <Radio size={17} style={{ color: "#c084fc" }} />
+                <span>Open Regional Cluster Symbiosis Map</span>
                 <ArrowUpRight size={14} />
               </button>
             )}

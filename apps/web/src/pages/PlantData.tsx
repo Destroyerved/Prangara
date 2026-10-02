@@ -8,14 +8,16 @@ import {
   Download,
   Check,
   ClipboardList,
+  Sparkles,
 } from "lucide-react";
 import { useWorkspace } from "../hooks/useWorkspace";
 import { plantSchema, type PlantProfile } from "../types/domain";
 import { FlowButton } from "../components/ui/flow-button";
-import { PageHeading, Note, DetailRows, Badge } from "../components/ui/common";
+import { PageHeading, Note, DetailRows, Badge, Skeleton } from "../components/ui/common";
 import { number, downloadJson } from "../lib/format";
 import { parsePlantDraft, MAX_DRAFT_BYTES } from "../lib/plantDraft";
 import { EvidenceStatus } from "../components/ui/EvidenceStatus";
+import { IntakeSuite } from "../components/intake/IntakeSuite";
 const steps = [
   "Identity",
   "Scale",
@@ -73,6 +75,7 @@ function AssessmentForm() {
   const [draftError, setDraftError] = useState("");
   const [readingDraft, setReadingDraft] = useState(false);
   const [importedDraft, setImportedDraft] = useState<PlantProfile | null>(null);
+  const [showIntakeSuite, setShowIntakeSuite] = useState(false);
   const saveDraft = () => {
     try {
       const draft = parsePlantDraft(JSON.stringify(profile));
@@ -276,13 +279,11 @@ function AssessmentForm() {
     }
     setErrors({});
     setValidated(true);
-    if (w.dataMode === "api") {
-      try {
-        await w.assess.mutateAsync(result.data);
-        navigate("/overview");
-      } catch {
-        /* The error is displayed below. */
-      }
+    try {
+      await w.assess.mutateAsync(result.data);
+      navigate("/overview");
+    } catch {
+      /* The error is displayed below. */
     }
   };
   const streamCount =
@@ -303,6 +304,41 @@ function AssessmentForm() {
           </Badge>
         }
       />
+      <div
+        style={{
+          marginBottom: "1.5rem",
+          display: "flex",
+          gap: "1rem",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          padding: "1rem 1.25rem",
+          borderRadius: "12px",
+          background: "rgba(16,185,129,0.08)",
+          border: "1px solid rgba(16,185,129,0.25)"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+          <Sparkles size={20} className="positive" />
+          <div>
+            <div style={{ fontSize: "var(--text-body)", fontWeight: "var(--weight-semibold)" }}>
+              Need rapid data entry? Use Conversational AI, Bill OCR, or Equipment Scanning.
+            </div>
+            <div style={{ fontSize: "var(--text-body-sm)", color: "var(--muted)" }}>
+              Extract plant metrics automatically from plain English prompts or utility bills.
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          className="button positive"
+          onClick={() => setShowIntakeSuite(!showIntakeSuite)}
+          style={{ padding: "0.45rem 1rem", fontSize: "var(--text-body-sm)", whiteSpace: "nowrap" }}
+        >
+          {showIntakeSuite ? "Hide Intake Suite ▲" : "Launch AI Intake & Scanners ✨"}
+        </button>
+      </div>
+      {showIntakeSuite && <IntakeSuite onClose={() => setShowIntakeSuite(false)} />}
       <div className="intake-layout">
         <div>
           <div className="step-navigation" aria-label="Assessment sections">
@@ -450,9 +486,7 @@ function AssessmentForm() {
                 <div>
                   <strong>Inputs validated.</strong>
                   <p>
-                    {w.dataMode === "demo"
-                      ? "Input checks passed. Connect the assessment engine to calculate these edits. The displayed assessment remains the fixed demo."
-                      : "Input checks passed. These checks do not verify evidence or accounting compliance."}
+                    Input checks passed. Calculating real assessment across Scope 1, 2, and 3 using statutory emission factors.
                   </p>
                   <button
                     className="button"
@@ -489,9 +523,7 @@ function AssessmentForm() {
                   w.assess.isPending
                     ? "Calculating assessment…"
                     : step === steps.length - 1
-                      ? w.dataMode === "demo"
-                        ? "Validate inputs"
-                        : "Run assessment"
+                      ? "Calculate & Run Assessment"
                       : "Continue"
                 }
               />
@@ -606,5 +638,6 @@ function AssessmentForm() {
 }
 export default function PlantData() {
   const w = useWorkspace();
-  return <AssessmentForm key={w.assessment!.id} />;
+  if (!w.assessment) return <Skeleton />;
+  return <AssessmentForm key={w.assessment.id} />;
 }

@@ -1,0 +1,6874 @@
+{
+  "ActionOut": {
+    "properties": {
+      "actual_abatement_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Abatement Tco2E"
+      },
+      "actual_annual_benefit_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Annual Benefit Inr"
+      },
+      "actual_capex_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Capex Inr"
+      },
+      "category": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Category"
+      },
+      "completed_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Completed At"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "expected_abatement_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Abatement Tco2E"
+      },
+      "expected_annual_benefit_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Annual Benefit Inr"
+      },
+      "expected_capex_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Capex Inr"
+      },
+      "expected_lcoa_inr_per_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Lcoa Inr Per Tco2E"
+      },
+      "expected_payback_yrs": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Payback Yrs"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "intervention_id": {
+        "title": "Intervention Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "restriction_note": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Restriction Note"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      },
+      "target_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Target Date"
+      },
+      "target_stream": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Target Stream"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      },
+      "verified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Verified At"
+      },
+      "was_blocked": {
+        "title": "Was Blocked",
+        "type": "boolean"
+      },
+      "was_capped": {
+        "title": "Was Capped",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "intervention_id",
+      "name",
+      "status",
+      "was_blocked",
+      "was_capped",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "ActionOut",
+    "type": "object"
+  },
+  "ActionPatch": {
+    "properties": {
+      "actual_abatement_tco2e": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Abatement Tco2E"
+      },
+      "actual_annual_benefit_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Annual Benefit Inr"
+      },
+      "actual_capex_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Capex Inr"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "owner_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Owner User Id"
+      },
+      "rejected_reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Rejected Reason"
+      },
+      "status": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Status"
+      },
+      "target_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Target Date"
+      }
+    },
+    "title": "ActionPatch",
+    "type": "object"
+  },
+  "ActivityRecordIn": {
+    "properties": {
+      "data_state": {
+        "default": "DECLARED",
+        "title": "Data State",
+        "type": "string"
+      },
+      "extraction_confidence": {
+        "anyOf": [
+          {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Extraction Confidence"
+      },
+      "factor_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factor Key"
+      },
+      "label": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Label"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "quantity": {
+        "minimum": 0.0,
+        "title": "Quantity",
+        "type": "number"
+      },
+      "source_kind": {
+        "default": "manual",
+        "title": "Source Kind",
+        "type": "string"
+      },
+      "stream_kind": {
+        "title": "Stream Kind",
+        "type": "string"
+      },
+      "unit": {
+        "default": "",
+        "title": "Unit",
+        "type": "string"
+      },
+      "unit_cost_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Unit Cost Inr"
+      }
+    },
+    "required": [
+      "stream_kind",
+      "quantity"
+    ],
+    "title": "ActivityRecordIn",
+    "type": "object"
+  },
+  "ActivityRecordOut": {
+    "properties": {
+      "confirmed_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Confirmed At"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "data_state": {
+        "default": "DECLARED",
+        "title": "Data State",
+        "type": "string"
+      },
+      "extraction_confidence": {
+        "anyOf": [
+          {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Extraction Confidence"
+      },
+      "factor_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factor Key"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "label": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Label"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "profile_id": {
+        "title": "Profile Id",
+        "type": "string"
+      },
+      "quantity": {
+        "minimum": 0.0,
+        "title": "Quantity",
+        "type": "number"
+      },
+      "source_kind": {
+        "default": "manual",
+        "title": "Source Kind",
+        "type": "string"
+      },
+      "stream_kind": {
+        "title": "Stream Kind",
+        "type": "string"
+      },
+      "unit": {
+        "default": "",
+        "title": "Unit",
+        "type": "string"
+      },
+      "unit_cost_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Unit Cost Inr"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "stream_kind",
+      "quantity",
+      "id",
+      "profile_id",
+      "factory_id",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "ActivityRecordOut",
+    "type": "object"
+  },
+  "AssessmentDetail": {
+    "description": "Summary plus the full engine payload.\n\n`result` is intentionally untyped here. It is the engine's own contract and\nmirroring its 200-odd fields in Pydantic would create a second definition\nthat drifts. The engine's shape is documented in docs/14-API-REFERENCE.md\nand pinned by the engine tests.",
+    "properties": {
+      "cash_positive_abatement_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Abatement Tco2E"
+      },
+      "cash_positive_benefit_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Benefit Inr"
+      },
+      "cash_positive_capex_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Capex Inr"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "critical_leak_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Critical Leak Count"
+      },
+      "data_quality_score": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Data Quality Score"
+      },
+      "engine_profile": {
+        "additionalProperties": true,
+        "title": "Engine Profile",
+        "type": "object"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_baseline": {
+        "title": "Is Baseline",
+        "type": "boolean"
+      },
+      "label": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Label"
+      },
+      "leak_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Leak Count"
+      },
+      "result": {
+        "additionalProperties": true,
+        "title": "Result",
+        "type": "object"
+      },
+      "scope1_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope1 Tco2E"
+      },
+      "scope2_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope2 Tco2E"
+      },
+      "scope3_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope3 Tco2E"
+      },
+      "total_high_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total High Tco2E"
+      },
+      "total_low_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total Low Tco2E"
+      },
+      "total_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total Tco2E"
+      },
+      "version_stamp": {
+        "additionalProperties": true,
+        "title": "Version Stamp",
+        "type": "object"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "is_baseline",
+      "created_at",
+      "engine_profile",
+      "result"
+    ],
+    "title": "AssessmentDetail",
+    "type": "object"
+  },
+  "AssessmentSummary": {
+    "properties": {
+      "cash_positive_abatement_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Abatement Tco2E"
+      },
+      "cash_positive_benefit_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Benefit Inr"
+      },
+      "cash_positive_capex_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Capex Inr"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "critical_leak_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Critical Leak Count"
+      },
+      "data_quality_score": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Data Quality Score"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_baseline": {
+        "title": "Is Baseline",
+        "type": "boolean"
+      },
+      "label": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Label"
+      },
+      "leak_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Leak Count"
+      },
+      "scope1_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope1 Tco2E"
+      },
+      "scope2_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope2 Tco2E"
+      },
+      "scope3_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope3 Tco2E"
+      },
+      "total_high_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total High Tco2E"
+      },
+      "total_low_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total Low Tco2E"
+      },
+      "total_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total Tco2E"
+      },
+      "version_stamp": {
+        "additionalProperties": true,
+        "title": "Version Stamp",
+        "type": "object"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "is_baseline",
+      "created_at"
+    ],
+    "title": "AssessmentSummary",
+    "type": "object"
+  },
+  "AssetIn": {
+    "properties": {
+      "asset_type": {
+        "maxLength": 48,
+        "minLength": 1,
+        "title": "Asset Type",
+        "type": "string"
+      },
+      "capacity_unit": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Capacity Unit"
+      },
+      "data_state": {
+        "default": "DECLARED",
+        "title": "Data State",
+        "type": "string"
+      },
+      "efficiency_pct": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "maximum": 100.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Efficiency Pct"
+      },
+      "energy_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Energy Type"
+      },
+      "fuel_factor_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Fuel Factor Key"
+      },
+      "load_factor": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "maximum": 1.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Load Factor"
+      },
+      "maintenance_status": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Maintenance Status"
+      },
+      "manufacturer": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Manufacturer"
+      },
+      "model": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Model"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "operating_hours_per_year": {
+        "anyOf": [
+          {
+            "maximum": 8784.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Operating Hours Per Year"
+      },
+      "rated_capacity": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Rated Capacity"
+      },
+      "rated_power_kw": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Rated Power Kw"
+      },
+      "serial_number": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Serial Number"
+      },
+      "site_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Site Id"
+      },
+      "year_installed": {
+        "anyOf": [
+          {
+            "maximum": 2100.0,
+            "minimum": 1900.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Year Installed"
+      }
+    },
+    "required": [
+      "asset_type",
+      "name"
+    ],
+    "title": "AssetIn",
+    "type": "object"
+  },
+  "AssetOut": {
+    "properties": {
+      "asset_type": {
+        "maxLength": 48,
+        "minLength": 1,
+        "title": "Asset Type",
+        "type": "string"
+      },
+      "capacity_unit": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Capacity Unit"
+      },
+      "confidence": {
+        "title": "Confidence",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "data_state": {
+        "default": "DECLARED",
+        "title": "Data State",
+        "type": "string"
+      },
+      "efficiency_pct": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "maximum": 100.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Efficiency Pct"
+      },
+      "energy_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Energy Type"
+      },
+      "estimate_basis": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Estimate Basis"
+      },
+      "estimated_annual_kwh": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Estimated Annual Kwh"
+      },
+      "estimated_annual_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Estimated Annual Tco2E"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "fuel_factor_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Fuel Factor Key"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "load_factor": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "maximum": 1.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Load Factor"
+      },
+      "maintenance_status": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Maintenance Status"
+      },
+      "manufacturer": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Manufacturer"
+      },
+      "model": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Model"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "operating_hours_per_year": {
+        "anyOf": [
+          {
+            "maximum": 8784.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Operating Hours Per Year"
+      },
+      "rated_capacity": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Rated Capacity"
+      },
+      "rated_power_kw": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Rated Power Kw"
+      },
+      "serial_number": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Serial Number"
+      },
+      "site_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Site Id"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      },
+      "year_installed": {
+        "anyOf": [
+          {
+            "maximum": 2100.0,
+            "minimum": 1900.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Year Installed"
+      }
+    },
+    "required": [
+      "asset_type",
+      "name",
+      "id",
+      "factory_id",
+      "confidence",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "AssetOut",
+    "type": "object"
+  },
+  "AuditEntryOut": {
+    "properties": {
+      "action": {
+        "title": "Action",
+        "type": "string"
+      },
+      "actor_label": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actor Label"
+      },
+      "actor_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actor User Id"
+      },
+      "correlation_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Correlation Id"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "new_value": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "New Value"
+      },
+      "object_id": {
+        "title": "Object Id",
+        "type": "string"
+      },
+      "object_type": {
+        "title": "Object Type",
+        "type": "string"
+      },
+      "old_value": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Old Value"
+      },
+      "reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reason"
+      }
+    },
+    "required": [
+      "id",
+      "action",
+      "object_type",
+      "object_id",
+      "created_at"
+    ],
+    "title": "AuditEntryOut",
+    "type": "object"
+  },
+  "Body_document_extract_api_intake_document_extract_post": {
+    "properties": {
+      "evidence_type": {
+        "default": "electricity_bill",
+        "title": "Evidence Type",
+        "type": "string"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "file": {
+        "contentMediaType": "application/octet-stream",
+        "title": "File",
+        "type": "string"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      }
+    },
+    "required": [
+      "file",
+      "factory_id"
+    ],
+    "title": "Body_document_extract_api_intake_document_extract_post",
+    "type": "object"
+  },
+  "Body_equipment_extract_api_intake_equipment_extract_post": {
+    "properties": {
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "file": {
+        "contentMediaType": "application/octet-stream",
+        "title": "File",
+        "type": "string"
+      }
+    },
+    "required": [
+      "file",
+      "factory_id"
+    ],
+    "title": "Body_equipment_extract_api_intake_equipment_extract_post",
+    "type": "object"
+  },
+  "Body_upload_evidence_api_evidence_post": {
+    "properties": {
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "document_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Document Date"
+      },
+      "evidence_type": {
+        "default": "other",
+        "title": "Evidence Type",
+        "type": "string"
+      },
+      "expires_at": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expires At"
+      },
+      "factory_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factory Id"
+      },
+      "file": {
+        "contentMediaType": "application/octet-stream",
+        "title": "File",
+        "type": "string"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "title": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Title"
+      }
+    },
+    "required": [
+      "file"
+    ],
+    "title": "Body_upload_evidence_api_evidence_post",
+    "type": "object"
+  },
+  "CloseCaseRequest": {
+    "properties": {
+      "evidence_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Evidence Ids",
+        "type": "array"
+      },
+      "reason": {
+        "maxLength": 2000,
+        "minLength": 8,
+        "title": "Reason",
+        "type": "string"
+      }
+    },
+    "required": [
+      "reason"
+    ],
+    "title": "CloseCaseRequest",
+    "type": "object"
+  },
+  "ComplianceCaseCreate": {
+    "description": "Creating a case by hand.\n\nNormally the evaluator writes these. A compliance officer can also open one\nfrom a review, which is why the route exists \u2014 but it still demands the rule\nand the pack version it rests on.",
+    "properties": {
+      "assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assessment Id"
+      },
+      "due_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Due Date"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "owner_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Owner User Id"
+      },
+      "reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reason"
+      },
+      "required_evidence": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Required Evidence",
+        "type": "array"
+      },
+      "requires_human_review": {
+        "default": false,
+        "title": "Requires Human Review",
+        "type": "boolean"
+      },
+      "rule_id": {
+        "maxLength": 64,
+        "minLength": 1,
+        "title": "Rule Id",
+        "type": "string"
+      },
+      "rule_pack": {
+        "maxLength": 48,
+        "minLength": 1,
+        "title": "Rule Pack",
+        "type": "string"
+      },
+      "rule_pack_version": {
+        "maxLength": 32,
+        "minLength": 1,
+        "title": "Rule Pack Version",
+        "type": "string"
+      },
+      "severity": {
+        "default": "medium",
+        "title": "Severity",
+        "type": "string"
+      },
+      "source_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Source Ids",
+        "type": "array"
+      },
+      "status": {
+        "default": "ACTION_REQUIRED",
+        "title": "Status",
+        "type": "string"
+      },
+      "title": {
+        "maxLength": 240,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      }
+    },
+    "required": [
+      "factory_id",
+      "rule_id",
+      "rule_pack",
+      "rule_pack_version",
+      "title"
+    ],
+    "title": "ComplianceCaseCreate",
+    "type": "object"
+  },
+  "ComplianceCaseOut": {
+    "properties": {
+      "assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assessment Id"
+      },
+      "closed_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Closed At"
+      },
+      "closed_reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Closed Reason"
+      },
+      "corrective_actions": {
+        "items": {
+          "$ref": "#/components/schemas/CorrectiveActionOut"
+        },
+        "title": "Corrective Actions",
+        "type": "array"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "due_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Due Date"
+      },
+      "evidence_count": {
+        "default": 0,
+        "title": "Evidence Count",
+        "type": "integer"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "flow_state": {
+        "title": "Flow State",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_overdue": {
+        "default": false,
+        "title": "Is Overdue",
+        "type": "boolean"
+      },
+      "organization_id": {
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "owner_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Owner User Id"
+      },
+      "reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reason"
+      },
+      "required_evidence": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Required Evidence",
+        "type": "array"
+      },
+      "requires_human_review": {
+        "title": "Requires Human Review",
+        "type": "boolean"
+      },
+      "reviewer_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reviewer User Id"
+      },
+      "rule_id": {
+        "title": "Rule Id",
+        "type": "string"
+      },
+      "rule_pack": {
+        "title": "Rule Pack",
+        "type": "string"
+      },
+      "rule_pack_version": {
+        "title": "Rule Pack Version",
+        "type": "string"
+      },
+      "severity": {
+        "title": "Severity",
+        "type": "string"
+      },
+      "source_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Source Ids",
+        "type": "array"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      },
+      "title": {
+        "title": "Title",
+        "type": "string"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "organization_id",
+      "rule_id",
+      "rule_pack",
+      "rule_pack_version",
+      "severity",
+      "status",
+      "flow_state",
+      "requires_human_review",
+      "title",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "ComplianceCaseOut",
+    "type": "object"
+  },
+  "ComplianceCasePatch": {
+    "properties": {
+      "due_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Due Date"
+      },
+      "flow_state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Flow State"
+      },
+      "owner_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Owner User Id"
+      },
+      "reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reason"
+      },
+      "required_evidence": {
+        "anyOf": [
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Required Evidence"
+      },
+      "reviewer_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reviewer User Id"
+      },
+      "severity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Severity"
+      },
+      "status": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Status"
+      }
+    },
+    "title": "ComplianceCasePatch",
+    "type": "object"
+  },
+  "ComplianceReadiness": {
+    "properties": {
+      "assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assessment Id"
+      },
+      "caveat": {
+        "title": "Caveat",
+        "type": "string"
+      },
+      "engine_panel": {
+        "additionalProperties": true,
+        "title": "Engine Panel",
+        "type": "object"
+      },
+      "evaluated_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Evaluated At"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "human_review_required": {
+        "title": "Human Review Required",
+        "type": "integer"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/components/schemas/ReadinessItem"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "open_cases": {
+        "title": "Open Cases",
+        "type": "integer"
+      },
+      "overall": {
+        "title": "Overall",
+        "type": "string"
+      },
+      "overdue_cases": {
+        "title": "Overdue Cases",
+        "type": "integer"
+      },
+      "rule_packs_evaluated": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Rule Packs Evaluated",
+        "type": "array"
+      }
+    },
+    "required": [
+      "factory_id",
+      "overall",
+      "items",
+      "open_cases",
+      "overdue_cases",
+      "human_review_required",
+      "caveat"
+    ],
+    "title": "ComplianceReadiness",
+    "type": "object"
+  },
+  "ConfirmIntakeRequest": {
+    "description": "Confirmed values, written to the profile and activity records.",
+    "properties": {
+      "activity_records": {
+        "items": {
+          "$ref": "#/components/schemas/ActivityRecordIn"
+        },
+        "title": "Activity Records",
+        "type": "array"
+      },
+      "evidence_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Evidence Id"
+      },
+      "profile_updates": {
+        "additionalProperties": true,
+        "title": "Profile Updates",
+        "type": "object"
+      },
+      "source_kind": {
+        "default": "manual",
+        "enum": [
+          "conversation",
+          "document_ocr",
+          "equipment_scan",
+          "manual"
+        ],
+        "title": "Source Kind",
+        "type": "string"
+      }
+    },
+    "title": "ConfirmIntakeRequest",
+    "type": "object"
+  },
+  "ConfirmIntakeResponse": {
+    "properties": {
+      "created_activity_record_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Created Activity Record Ids",
+        "type": "array"
+      },
+      "profile_id": {
+        "title": "Profile Id",
+        "type": "string"
+      },
+      "updated_profile_fields": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Updated Profile Fields",
+        "type": "array"
+      }
+    },
+    "required": [
+      "profile_id",
+      "created_activity_record_ids",
+      "updated_profile_fields"
+    ],
+    "title": "ConfirmIntakeResponse",
+    "type": "object"
+  },
+  "ConversationExtractRequest": {
+    "properties": {
+      "factory_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factory Id"
+      },
+      "known": {
+        "additionalProperties": true,
+        "title": "Known",
+        "type": "object"
+      },
+      "message": {
+        "maxLength": 4000,
+        "minLength": 1,
+        "title": "Message",
+        "type": "string"
+      },
+      "sector": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Sector"
+      }
+    },
+    "required": [
+      "message"
+    ],
+    "title": "ConversationExtractRequest",
+    "type": "object"
+  },
+  "ConversationExtractResponse": {
+    "properties": {
+      "extractor": {
+        "enum": [
+          "llm",
+          "rule_based"
+        ],
+        "title": "Extractor",
+        "type": "string"
+      },
+      "extractor_detail": {
+        "title": "Extractor Detail",
+        "type": "string"
+      },
+      "fields": {
+        "items": {
+          "$ref": "#/components/schemas/ExtractedField"
+        },
+        "title": "Fields",
+        "type": "array"
+      },
+      "follow_up_questions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Follow Up Questions",
+        "type": "array"
+      },
+      "missing_fields": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Missing Fields",
+        "type": "array"
+      },
+      "requires_user_confirmation": {
+        "default": true,
+        "title": "Requires User Confirmation",
+        "type": "boolean"
+      },
+      "warnings": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Warnings",
+        "type": "array"
+      }
+    },
+    "required": [
+      "extractor",
+      "extractor_detail",
+      "fields",
+      "missing_fields",
+      "follow_up_questions"
+    ],
+    "title": "ConversationExtractResponse",
+    "type": "object"
+  },
+  "CorrectiveActionIn": {
+    "properties": {
+      "assigned_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assigned User Id"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "due_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Due Date"
+      },
+      "title": {
+        "maxLength": 240,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      }
+    },
+    "required": [
+      "title"
+    ],
+    "title": "CorrectiveActionIn",
+    "type": "object"
+  },
+  "CorrectiveActionOut": {
+    "properties": {
+      "assigned_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assigned User Id"
+      },
+      "case_id": {
+        "title": "Case Id",
+        "type": "string"
+      },
+      "completed_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Completed At"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "due_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Due Date"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_overdue": {
+        "default": false,
+        "title": "Is Overdue",
+        "type": "boolean"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      },
+      "title": {
+        "title": "Title",
+        "type": "string"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "case_id",
+      "title",
+      "status",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "CorrectiveActionOut",
+    "type": "object"
+  },
+  "CorrectiveActionPatch": {
+    "properties": {
+      "assigned_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assigned User Id"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "due_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Due Date"
+      },
+      "status": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Status"
+      },
+      "title": {
+        "anyOf": [
+          {
+            "maxLength": 240,
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Title"
+      }
+    },
+    "title": "CorrectiveActionPatch",
+    "type": "object"
+  },
+  "DocumentExtractResponse": {
+    "properties": {
+      "document_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Document Type"
+      },
+      "evidence_id": {
+        "title": "Evidence Id",
+        "type": "string"
+      },
+      "extractor": {
+        "enum": [
+          "ocr",
+          "unavailable"
+        ],
+        "title": "Extractor",
+        "type": "string"
+      },
+      "extractor_detail": {
+        "title": "Extractor Detail",
+        "type": "string"
+      },
+      "fields": {
+        "items": {
+          "$ref": "#/components/schemas/ExtractedField"
+        },
+        "title": "Fields",
+        "type": "array"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "requires_user_confirmation": {
+        "default": true,
+        "title": "Requires User Confirmation",
+        "type": "boolean"
+      },
+      "suggested_activity_records": {
+        "items": {
+          "$ref": "#/components/schemas/ActivityRecordIn"
+        },
+        "title": "Suggested Activity Records",
+        "type": "array"
+      },
+      "warnings": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Warnings",
+        "type": "array"
+      }
+    },
+    "required": [
+      "evidence_id",
+      "extractor",
+      "extractor_detail"
+    ],
+    "title": "DocumentExtractResponse",
+    "type": "object"
+  },
+  "EquipmentExtractResponse": {
+    "properties": {
+      "evidence_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Evidence Id"
+      },
+      "extractor": {
+        "enum": [
+          "ocr",
+          "unavailable"
+        ],
+        "title": "Extractor",
+        "type": "string"
+      },
+      "extractor_detail": {
+        "title": "Extractor Detail",
+        "type": "string"
+      },
+      "fields": {
+        "items": {
+          "$ref": "#/components/schemas/ExtractedField"
+        },
+        "title": "Fields",
+        "type": "array"
+      },
+      "required_questions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Required Questions",
+        "type": "array"
+      },
+      "requires_user_confirmation": {
+        "default": true,
+        "title": "Requires User Confirmation",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "extractor",
+      "extractor_detail"
+    ],
+    "title": "EquipmentExtractResponse",
+    "type": "object"
+  },
+  "EvaluateRequest": {
+    "properties": {
+      "assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assessment Id"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "factory_id"
+    ],
+    "title": "EvaluateRequest",
+    "type": "object"
+  },
+  "EventOut": {
+    "properties": {
+      "correlation_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Correlation Id"
+      },
+      "event_type": {
+        "title": "Event Type",
+        "type": "string"
+      },
+      "factory_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factory Id"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "occurred_at": {
+        "format": "date-time",
+        "title": "Occurred At",
+        "type": "string"
+      },
+      "payload": {
+        "additionalProperties": true,
+        "title": "Payload",
+        "type": "object"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "event_type",
+      "occurred_at",
+      "status"
+    ],
+    "title": "EventOut",
+    "type": "object"
+  },
+  "EvidenceLinkIn": {
+    "properties": {
+      "role": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Role"
+      },
+      "target_id": {
+        "title": "Target Id",
+        "type": "string"
+      },
+      "target_type": {
+        "title": "Target Type",
+        "type": "string"
+      }
+    },
+    "required": [
+      "target_type",
+      "target_id"
+    ],
+    "title": "EvidenceLinkIn",
+    "type": "object"
+  },
+  "EvidenceLinkOut": {
+    "properties": {
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "evidence_id": {
+        "title": "Evidence Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "role": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Role"
+      },
+      "target_id": {
+        "title": "Target Id",
+        "type": "string"
+      },
+      "target_type": {
+        "title": "Target Type",
+        "type": "string"
+      }
+    },
+    "required": [
+      "target_type",
+      "target_id",
+      "id",
+      "evidence_id",
+      "created_at"
+    ],
+    "title": "EvidenceLinkOut",
+    "type": "object"
+  },
+  "EvidenceOut": {
+    "properties": {
+      "content_sha256": {
+        "title": "Content Sha256",
+        "type": "string"
+      },
+      "content_type": {
+        "title": "Content Type",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "document_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Document Date"
+      },
+      "download_url": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Download Url"
+      },
+      "evidence_type": {
+        "title": "Evidence Type",
+        "type": "string"
+      },
+      "expires_at": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expires At"
+      },
+      "extraction": {
+        "additionalProperties": true,
+        "title": "Extraction",
+        "type": "object"
+      },
+      "extraction_confidence": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Extraction Confidence"
+      },
+      "factory_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factory Id"
+      },
+      "filename": {
+        "title": "Filename",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "links": {
+        "items": {
+          "$ref": "#/components/schemas/EvidenceLinkOut"
+        },
+        "title": "Links",
+        "type": "array"
+      },
+      "organization_id": {
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "size_bytes": {
+        "title": "Size Bytes",
+        "type": "integer"
+      },
+      "title": {
+        "title": "Title",
+        "type": "string"
+      },
+      "uploaded_by_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Uploaded By User Id"
+      },
+      "verification_status": {
+        "title": "Verification Status",
+        "type": "string"
+      },
+      "verified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Verified At"
+      }
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "evidence_type",
+      "title",
+      "filename",
+      "content_type",
+      "size_bytes",
+      "content_sha256",
+      "verification_status",
+      "created_at"
+    ],
+    "title": "EvidenceOut",
+    "type": "object"
+  },
+  "EvidenceUpdate": {
+    "properties": {
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "document_date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Document Date"
+      },
+      "evidence_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Evidence Type"
+      },
+      "expires_at": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expires At"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "title": {
+        "anyOf": [
+          {
+            "maxLength": 240,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Title"
+      }
+    },
+    "title": "EvidenceUpdate",
+    "type": "object"
+  },
+  "ExtractedField": {
+    "properties": {
+      "confidence": {
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "title": "Confidence",
+        "type": "number"
+      },
+      "evidence_text": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Evidence Text"
+      },
+      "field": {
+        "title": "Field",
+        "type": "string"
+      },
+      "needs_confirmation": {
+        "default": true,
+        "title": "Needs Confirmation",
+        "type": "boolean"
+      },
+      "unit": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Unit"
+      },
+      "value": {
+        "title": "Value"
+      }
+    },
+    "required": [
+      "field",
+      "value",
+      "confidence"
+    ],
+    "title": "ExtractedField",
+    "type": "object"
+  },
+  "FactoryAccessOut": {
+    "properties": {
+      "expires_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expires At"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "granted_by_user_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Granted By User Id"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "level": {
+        "title": "Level",
+        "type": "string"
+      },
+      "revoked_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Revoked At"
+      },
+      "user_id": {
+        "title": "User Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "user_id",
+      "factory_id",
+      "level"
+    ],
+    "title": "FactoryAccessOut",
+    "type": "object"
+  },
+  "FactoryCreate": {
+    "properties": {
+      "cluster": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cluster"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "sector": {
+        "title": "Sector",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "subsector": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Subsector"
+      }
+    },
+    "required": [
+      "name",
+      "sector"
+    ],
+    "title": "FactoryCreate",
+    "type": "object"
+  },
+  "FactoryOut": {
+    "properties": {
+      "cluster": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cluster"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "organization_id": {
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "sector": {
+        "title": "Sector",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "subsector": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Subsector"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "sector",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "FactoryOut",
+    "type": "object"
+  },
+  "FactorySummary": {
+    "description": "Factory plus its latest headline, for list screens.",
+    "properties": {
+      "cash_positive_benefit_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cash Positive Benefit Inr"
+      },
+      "cluster": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cluster"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "critical_leak_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Critical Leak Count"
+      },
+      "data_quality_score": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Data Quality Score"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "latest_assessed_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latest Assessed At"
+      },
+      "latest_assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latest Assessment Id"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "open_action_count": {
+        "default": 0,
+        "title": "Open Action Count",
+        "type": "integer"
+      },
+      "organization_id": {
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "scope3_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope3 Tco2E"
+      },
+      "sector": {
+        "title": "Sector",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "subsector": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Subsector"
+      },
+      "total_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Total Tco2E"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "sector",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "FactorySummary",
+    "type": "object"
+  },
+  "FactoryUpdate": {
+    "properties": {
+      "cluster": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Cluster"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "anyOf": [
+          {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Name"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "subsector": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Subsector"
+      }
+    },
+    "title": "FactoryUpdate",
+    "type": "object"
+  },
+  "GrantFactoryAccessRequest": {
+    "properties": {
+      "email": {
+        "format": "email",
+        "title": "Email",
+        "type": "string"
+      },
+      "expires_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expires At"
+      },
+      "level": {
+        "default": "read",
+        "title": "Level",
+        "type": "string"
+      }
+    },
+    "required": [
+      "email"
+    ],
+    "title": "GrantFactoryAccessRequest",
+    "type": "object"
+  },
+  "HTTPValidationError": {
+    "properties": {
+      "detail": {
+        "items": {
+          "$ref": "#/components/schemas/ValidationError"
+        },
+        "title": "Detail",
+        "type": "array"
+      }
+    },
+    "title": "HTTPValidationError",
+    "type": "object"
+  },
+  "HealthResponse": {
+    "properties": {
+      "app": {
+        "title": "App",
+        "type": "string"
+      },
+      "counts": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "title": "Counts",
+        "type": "object"
+      },
+      "database": {
+        "title": "Database",
+        "type": "string"
+      },
+      "engine": {
+        "additionalProperties": true,
+        "title": "Engine",
+        "type": "object"
+      },
+      "environment": {
+        "title": "Environment",
+        "type": "string"
+      },
+      "features": {
+        "additionalProperties": {
+          "type": "boolean"
+        },
+        "title": "Features",
+        "type": "object"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      },
+      "version": {
+        "title": "Version",
+        "type": "string"
+      }
+    },
+    "required": [
+      "status",
+      "app",
+      "version",
+      "environment",
+      "database",
+      "engine",
+      "counts",
+      "features"
+    ],
+    "title": "HealthResponse",
+    "type": "object"
+  },
+  "InviteMemberRequest": {
+    "properties": {
+      "email": {
+        "format": "email",
+        "title": "Email",
+        "type": "string"
+      },
+      "full_name": {
+        "default": "",
+        "title": "Full Name",
+        "type": "string"
+      },
+      "role": {
+        "default": "member",
+        "title": "Role",
+        "type": "string"
+      }
+    },
+    "required": [
+      "email"
+    ],
+    "title": "InviteMemberRequest",
+    "type": "object"
+  },
+  "InviteResult": {
+    "description": "What comes back from an invite.\n\n`temporary_password` is present only when the invite created a brand-new\naccount, and it is the one and only time the platform will show it. There is\nno email delivery in this build, so the inviter has to pass it on out of\nband; pretending otherwise would leave people with accounts they cannot\nreach.",
+    "properties": {
+      "created_account": {
+        "title": "Created Account",
+        "type": "boolean"
+      },
+      "delivery_note": {
+        "title": "Delivery Note",
+        "type": "string"
+      },
+      "membership": {
+        "$ref": "#/components/schemas/MembershipOut"
+      },
+      "temporary_password": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Temporary Password"
+      },
+      "user": {
+        "$ref": "#/components/schemas/UserOut"
+      }
+    },
+    "required": [
+      "user",
+      "membership",
+      "created_account",
+      "delivery_note"
+    ],
+    "title": "InviteResult",
+    "type": "object"
+  },
+  "LoginRequest": {
+    "properties": {
+      "device": {
+        "anyOf": [
+          {
+            "maxLength": 120,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Device"
+      },
+      "email": {
+        "format": "email",
+        "title": "Email",
+        "type": "string"
+      },
+      "password": {
+        "title": "Password",
+        "type": "string"
+      }
+    },
+    "required": [
+      "email",
+      "password"
+    ],
+    "title": "LoginRequest",
+    "type": "object"
+  },
+  "MaterialListingIn": {
+    "properties": {
+      "certifications": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Certifications",
+        "type": "array"
+      },
+      "embodied_factor_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Embodied Factor Key"
+      },
+      "embodied_source": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Embodied Source"
+      },
+      "embodied_tco2e_per_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Embodied Tco2E Per T"
+      },
+      "grade": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Grade"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "material_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Material Key"
+      },
+      "moq_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Moq T"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "price_inr_per_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Price Inr Per T"
+      },
+      "recycled_content_pct": {
+        "anyOf": [
+          {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Recycled Content Pct"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "stock_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Stock T"
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "title": "MaterialListingIn",
+    "type": "object"
+  },
+  "MaterialListingOut": {
+    "properties": {
+      "certifications": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Certifications",
+        "type": "array"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "embodied_factor_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Embodied Factor Key"
+      },
+      "embodied_source": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Embodied Source"
+      },
+      "embodied_tco2e_per_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Embodied Tco2E Per T"
+      },
+      "grade": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Grade"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_active": {
+        "title": "Is Active",
+        "type": "boolean"
+      },
+      "is_demo_seed": {
+        "title": "Is Demo Seed",
+        "type": "boolean"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "material_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Material Key"
+      },
+      "moq_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Moq T"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "price_inr_per_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Price Inr Per T"
+      },
+      "provider_id": {
+        "title": "Provider Id",
+        "type": "string"
+      },
+      "provider_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Provider Name"
+      },
+      "recycled_content_pct": {
+        "anyOf": [
+          {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Recycled Content Pct"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "stock_t": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Stock T"
+      }
+    },
+    "required": [
+      "name",
+      "id",
+      "provider_id",
+      "is_active",
+      "is_demo_seed",
+      "created_at"
+    ],
+    "title": "MaterialListingOut",
+    "type": "object"
+  },
+  "MeResponse": {
+    "properties": {
+      "active_organization_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Active Organization Id"
+      },
+      "is_platform_admin": {
+        "title": "Is Platform Admin",
+        "type": "boolean"
+      },
+      "memberships": {
+        "items": {
+          "$ref": "#/components/schemas/MembershipOut"
+        },
+        "title": "Memberships",
+        "type": "array"
+      },
+      "permissions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Permissions",
+        "type": "array"
+      },
+      "user": {
+        "$ref": "#/components/schemas/UserOut"
+      }
+    },
+    "required": [
+      "user",
+      "memberships",
+      "active_organization_id",
+      "is_platform_admin",
+      "permissions"
+    ],
+    "title": "MeResponse",
+    "type": "object"
+  },
+  "MemberOut": {
+    "properties": {
+      "is_default": {
+        "title": "Is Default",
+        "type": "boolean"
+      },
+      "joined_at": {
+        "format": "date-time",
+        "title": "Joined At",
+        "type": "string"
+      },
+      "role": {
+        "title": "Role",
+        "type": "string"
+      },
+      "user": {
+        "$ref": "#/components/schemas/UserOut"
+      }
+    },
+    "required": [
+      "user",
+      "role",
+      "is_default",
+      "joined_at"
+    ],
+    "title": "MemberOut",
+    "type": "object"
+  },
+  "MembershipOut": {
+    "properties": {
+      "is_default": {
+        "title": "Is Default",
+        "type": "boolean"
+      },
+      "organization": {
+        "$ref": "#/components/schemas/OrganizationOut"
+      },
+      "role": {
+        "title": "Role",
+        "type": "string"
+      }
+    },
+    "required": [
+      "organization",
+      "role",
+      "is_default"
+    ],
+    "title": "MembershipOut",
+    "type": "object"
+  },
+  "NotificationOut": {
+    "properties": {
+      "body": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Body"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "deep_link": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Deep Link"
+      },
+      "factory_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Factory Id"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "kind": {
+        "title": "Kind",
+        "type": "string"
+      },
+      "read_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Read At"
+      },
+      "severity": {
+        "title": "Severity",
+        "type": "string"
+      },
+      "title": {
+        "title": "Title",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "kind",
+      "severity",
+      "title",
+      "created_at"
+    ],
+    "title": "NotificationOut",
+    "type": "object"
+  },
+  "OrganizationOut": {
+    "properties": {
+      "country": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Country"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "kind": {
+        "title": "Kind",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "kind"
+    ],
+    "title": "OrganizationOut",
+    "type": "object"
+  },
+  "PlantProfileIn": {
+    "description": "Exactly what `engine.assess()` consumes. Field names are engine-defined.",
+    "properties": {
+      "annual_output_t": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Annual Output T",
+        "type": "number"
+      },
+      "annual_revenue_cr": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Annual Revenue Cr",
+        "type": "number"
+      },
+      "discount_rate": {
+        "anyOf": [
+          {
+            "exclusiveMaximum": 1.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Discount Rate"
+      },
+      "electricity_kwh": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Electricity Kwh",
+        "type": "number"
+      },
+      "employees": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Employees",
+        "type": "integer"
+      },
+      "eu_export_share_pct": {
+        "default": 0,
+        "maximum": 100.0,
+        "minimum": 0.0,
+        "title": "Eu Export Share Pct",
+        "type": "number"
+      },
+      "freight": {
+        "additionalProperties": {
+          "type": "number"
+        },
+        "title": "Freight",
+        "type": "object"
+      },
+      "fuels": {
+        "additionalProperties": {
+          "type": "number"
+        },
+        "title": "Fuels",
+        "type": "object"
+      },
+      "materials": {
+        "additionalProperties": {
+          "type": "number"
+        },
+        "title": "Materials",
+        "type": "object"
+      },
+      "name": {
+        "default": "Unnamed plant",
+        "title": "Name",
+        "type": "string"
+      },
+      "sector": {
+        "title": "Sector",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "tariff_inr_per_kwh": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Tariff Inr Per Kwh"
+      },
+      "waste": {
+        "additionalProperties": {
+          "type": "number"
+        },
+        "title": "Waste",
+        "type": "object"
+      }
+    },
+    "required": [
+      "sector"
+    ],
+    "title": "PlantProfileIn",
+    "type": "object"
+  },
+  "ProfileOut": {
+    "properties": {
+      "annual_output_t": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Annual Output T",
+        "type": "number"
+      },
+      "annual_revenue_cr": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Annual Revenue Cr",
+        "type": "number"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "discount_rate": {
+        "anyOf": [
+          {
+            "exclusiveMaximum": 1.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Discount Rate"
+      },
+      "employees": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Employees",
+        "type": "integer"
+      },
+      "eu_export_share_pct": {
+        "default": 0,
+        "maximum": 100.0,
+        "minimum": 0.0,
+        "title": "Eu Export Share Pct",
+        "type": "number"
+      },
+      "export_share_pct": {
+        "default": 0,
+        "maximum": 100.0,
+        "minimum": 0.0,
+        "title": "Export Share Pct",
+        "type": "number"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "field_states": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Field States",
+        "type": "object"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_draft": {
+        "default": true,
+        "title": "Is Draft",
+        "type": "boolean"
+      },
+      "label": {
+        "default": "Current period",
+        "title": "Label",
+        "type": "string"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "operating_days": {
+        "anyOf": [
+          {
+            "maximum": 366.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Operating Days"
+      },
+      "output_unit": {
+        "default": "tonne",
+        "title": "Output Unit",
+        "type": "string"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "shifts_per_day": {
+        "anyOf": [
+          {
+            "maximum": 4.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Shifts Per Day"
+      },
+      "site_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Site Id"
+      },
+      "tariff_inr_per_kwh": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Tariff Inr Per Kwh"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "created_at",
+      "updated_at"
+    ],
+    "title": "ProfileOut",
+    "type": "object"
+  },
+  "ProfileUpsert": {
+    "properties": {
+      "annual_output_t": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Annual Output T",
+        "type": "number"
+      },
+      "annual_revenue_cr": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Annual Revenue Cr",
+        "type": "number"
+      },
+      "discount_rate": {
+        "anyOf": [
+          {
+            "exclusiveMaximum": 1.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Discount Rate"
+      },
+      "employees": {
+        "default": 0,
+        "minimum": 0.0,
+        "title": "Employees",
+        "type": "integer"
+      },
+      "eu_export_share_pct": {
+        "default": 0,
+        "maximum": 100.0,
+        "minimum": 0.0,
+        "title": "Eu Export Share Pct",
+        "type": "number"
+      },
+      "export_share_pct": {
+        "default": 0,
+        "maximum": 100.0,
+        "minimum": 0.0,
+        "title": "Export Share Pct",
+        "type": "number"
+      },
+      "field_states": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Field States",
+        "type": "object"
+      },
+      "is_draft": {
+        "default": true,
+        "title": "Is Draft",
+        "type": "boolean"
+      },
+      "label": {
+        "default": "Current period",
+        "title": "Label",
+        "type": "string"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "operating_days": {
+        "anyOf": [
+          {
+            "maximum": 366.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Operating Days"
+      },
+      "output_unit": {
+        "default": "tonne",
+        "title": "Output Unit",
+        "type": "string"
+      },
+      "period_end": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period End"
+      },
+      "period_start": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Period Start"
+      },
+      "shifts_per_day": {
+        "anyOf": [
+          {
+            "maximum": 4.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Shifts Per Day"
+      },
+      "site_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Site Id"
+      },
+      "tariff_inr_per_kwh": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Tariff Inr Per Kwh"
+      }
+    },
+    "title": "ProfileUpsert",
+    "type": "object"
+  },
+  "ProviderCreate": {
+    "properties": {
+      "certifications": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Certifications",
+        "type": "array"
+      },
+      "contact_email": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Contact Email"
+      },
+      "contact_phone": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Contact Phone"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "provider_type": {
+        "title": "Provider Type",
+        "type": "string"
+      },
+      "service_radius_km": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Service Radius Km"
+      },
+      "service_states": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Service States",
+        "type": "array"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "typical_lead_time_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Typical Lead Time Days"
+      },
+      "website": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Website"
+      }
+    },
+    "required": [
+      "name",
+      "provider_type"
+    ],
+    "title": "ProviderCreate",
+    "type": "object"
+  },
+  "ProviderMatch": {
+    "properties": {
+      "distance_km": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Distance Km"
+      },
+      "indicative_price_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Indicative Price Inr"
+      },
+      "matched_service_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Matched Service Id"
+      },
+      "provider": {
+        "$ref": "#/components/schemas/ProviderOut"
+      },
+      "reasons": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Reasons",
+        "type": "array"
+      },
+      "score": {
+        "title": "Score",
+        "type": "number"
+      }
+    },
+    "required": [
+      "provider",
+      "score",
+      "reasons"
+    ],
+    "title": "ProviderMatch",
+    "type": "object"
+  },
+  "ProviderOut": {
+    "properties": {
+      "accepting_work": {
+        "title": "Accepting Work",
+        "type": "boolean"
+      },
+      "certifications": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Certifications",
+        "type": "array"
+      },
+      "contact_email": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Contact Email"
+      },
+      "contact_phone": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Contact Phone"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_demo_seed": {
+        "title": "Is Demo Seed",
+        "type": "boolean"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "organization_id": {
+        "title": "Organization Id",
+        "type": "string"
+      },
+      "provider_type": {
+        "title": "Provider Type",
+        "type": "string"
+      },
+      "rating": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Rating"
+      },
+      "rating_count": {
+        "title": "Rating Count",
+        "type": "integer"
+      },
+      "service_radius_km": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Service Radius Km"
+      },
+      "service_states": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Service States",
+        "type": "array"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      },
+      "typical_lead_time_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Typical Lead Time Days"
+      },
+      "verification_status": {
+        "title": "Verification Status",
+        "type": "string"
+      },
+      "verified_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Verified At"
+      },
+      "website": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Website"
+      }
+    },
+    "required": [
+      "name",
+      "provider_type",
+      "id",
+      "organization_id",
+      "verification_status",
+      "rating_count",
+      "accepting_work",
+      "is_demo_seed",
+      "created_at"
+    ],
+    "title": "ProviderOut",
+    "type": "object"
+  },
+  "ProviderServiceIn": {
+    "properties": {
+      "category": {
+        "maxLength": 48,
+        "minLength": 1,
+        "title": "Category",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "indicative_price_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Indicative Price Inr"
+      },
+      "intervention_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Intervention Ids",
+        "type": "array"
+      },
+      "lead_time_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Lead Time Days"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "price_basis": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Price Basis"
+      },
+      "warranty_months": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Warranty Months"
+      }
+    },
+    "required": [
+      "category",
+      "name"
+    ],
+    "title": "ProviderServiceIn",
+    "type": "object"
+  },
+  "ProviderServiceOut": {
+    "properties": {
+      "category": {
+        "maxLength": 48,
+        "minLength": 1,
+        "title": "Category",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "indicative_price_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Indicative Price Inr"
+      },
+      "intervention_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Intervention Ids",
+        "type": "array"
+      },
+      "is_active": {
+        "title": "Is Active",
+        "type": "boolean"
+      },
+      "lead_time_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Lead Time Days"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "price_basis": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Price Basis"
+      },
+      "provider_id": {
+        "title": "Provider Id",
+        "type": "string"
+      },
+      "warranty_months": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Warranty Months"
+      }
+    },
+    "required": [
+      "category",
+      "name",
+      "id",
+      "provider_id",
+      "is_active"
+    ],
+    "title": "ProviderServiceOut",
+    "type": "object"
+  },
+  "QuoteComparison": {
+    "properties": {
+      "engine_estimate": {
+        "additionalProperties": true,
+        "title": "Engine Estimate",
+        "type": "object"
+      },
+      "note": {
+        "title": "Note",
+        "type": "string"
+      },
+      "quotes": {
+        "items": {
+          "$ref": "#/components/schemas/QuoteOut"
+        },
+        "title": "Quotes",
+        "type": "array"
+      },
+      "rfq": {
+        "$ref": "#/components/schemas/RFQOut"
+      }
+    },
+    "required": [
+      "rfq",
+      "quotes",
+      "note"
+    ],
+    "title": "QuoteComparison",
+    "type": "object"
+  },
+  "QuoteCreate": {
+    "properties": {
+      "annual_opex_delta_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Annual Opex Delta Inr"
+      },
+      "delivery_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Delivery Days"
+      },
+      "installation_included": {
+        "default": false,
+        "title": "Installation Included",
+        "type": "boolean"
+      },
+      "installation_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Installation Inr"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "price_inr": {
+        "exclusiveMinimum": 0.0,
+        "title": "Price Inr",
+        "type": "number"
+      },
+      "validity_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Validity Days"
+      },
+      "warranty_months": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Warranty Months"
+      }
+    },
+    "required": [
+      "price_inr"
+    ],
+    "title": "QuoteCreate",
+    "type": "object"
+  },
+  "QuoteOut": {
+    "properties": {
+      "annual_opex_delta_inr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Annual Opex Delta Inr"
+      },
+      "comparison": {
+        "additionalProperties": true,
+        "title": "Comparison",
+        "type": "object"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "delivery_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Delivery Days"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "installation_included": {
+        "default": false,
+        "title": "Installation Included",
+        "type": "boolean"
+      },
+      "installation_inr": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Installation Inr"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "price_inr": {
+        "exclusiveMinimum": 0.0,
+        "title": "Price Inr",
+        "type": "number"
+      },
+      "provider_id": {
+        "title": "Provider Id",
+        "type": "string"
+      },
+      "provider_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Provider Name"
+      },
+      "revised_lcoa_inr_per_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Revised Lcoa Inr Per Tco2E"
+      },
+      "revised_payback_yrs": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Revised Payback Yrs"
+      },
+      "rfq_id": {
+        "title": "Rfq Id",
+        "type": "string"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      },
+      "validity_days": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Validity Days"
+      },
+      "warranty_months": {
+        "anyOf": [
+          {
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Warranty Months"
+      }
+    },
+    "required": [
+      "price_inr",
+      "id",
+      "rfq_id",
+      "provider_id",
+      "status",
+      "created_at"
+    ],
+    "title": "QuoteOut",
+    "type": "object"
+  },
+  "RFQCreate": {
+    "properties": {
+      "action_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Action Id"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "intervention_id": {
+        "title": "Intervention Id",
+        "type": "string"
+      },
+      "needed_by": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Needed By"
+      },
+      "provider_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Provider Ids",
+        "type": "array"
+      },
+      "scope_of_work": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope Of Work"
+      },
+      "title": {
+        "maxLength": 240,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      }
+    },
+    "required": [
+      "factory_id",
+      "intervention_id",
+      "title"
+    ],
+    "title": "RFQCreate",
+    "type": "object"
+  },
+  "RFQOut": {
+    "properties": {
+      "accepted_quote_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Accepted Quote Id"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "intervention_id": {
+        "title": "Intervention Id",
+        "type": "string"
+      },
+      "invited_provider_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Invited Provider Ids",
+        "type": "array"
+      },
+      "needed_by": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Needed By"
+      },
+      "quote_count": {
+        "default": 0,
+        "title": "Quote Count",
+        "type": "integer"
+      },
+      "scope_of_work": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Scope Of Work"
+      },
+      "shared_context": {
+        "additionalProperties": true,
+        "title": "Shared Context",
+        "type": "object"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      },
+      "title": {
+        "title": "Title",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "intervention_id",
+      "title",
+      "status",
+      "created_at"
+    ],
+    "title": "RFQOut",
+    "type": "object"
+  },
+  "ReadinessItem": {
+    "description": "One line of the readiness view.\n\n`status` is a readiness state, never a legal determination. `basis` says\nwhere it came from so the UI never has to guess whether a line is engine\noutput, an evidence check or a stored case.",
+    "properties": {
+      "basis": {
+        "title": "Basis",
+        "type": "string"
+      },
+      "detail": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Detail"
+      },
+      "key": {
+        "title": "Key",
+        "type": "string"
+      },
+      "label": {
+        "title": "Label",
+        "type": "string"
+      },
+      "open_case_count": {
+        "default": 0,
+        "title": "Open Case Count",
+        "type": "integer"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      }
+    },
+    "required": [
+      "key",
+      "label",
+      "status",
+      "basis"
+    ],
+    "title": "ReadinessItem",
+    "type": "object"
+  },
+  "RefreshRequest": {
+    "properties": {
+      "refresh_token": {
+        "title": "Refresh Token",
+        "type": "string"
+      }
+    },
+    "required": [
+      "refresh_token"
+    ],
+    "title": "RefreshRequest",
+    "type": "object"
+  },
+  "RegisterRequest": {
+    "properties": {
+      "email": {
+        "format": "email",
+        "title": "Email",
+        "type": "string"
+      },
+      "full_name": {
+        "default": "",
+        "maxLength": 160,
+        "title": "Full Name",
+        "type": "string"
+      },
+      "organization_kind": {
+        "default": "manufacturer",
+        "title": "Organization Kind",
+        "type": "string"
+      },
+      "organization_name": {
+        "default": "",
+        "maxLength": 200,
+        "title": "Organization Name",
+        "type": "string"
+      },
+      "password": {
+        "maxLength": 128,
+        "minLength": 8,
+        "title": "Password",
+        "type": "string"
+      },
+      "phone": {
+        "anyOf": [
+          {
+            "maxLength": 24,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Phone"
+      }
+    },
+    "required": [
+      "email",
+      "password"
+    ],
+    "title": "RegisterRequest",
+    "type": "object"
+  },
+  "RunAssessmentRequest": {
+    "properties": {
+      "label": {
+        "anyOf": [
+          {
+            "maxLength": 160,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Label"
+      },
+      "profile_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Profile Id"
+      }
+    },
+    "title": "RunAssessmentRequest",
+    "type": "object"
+  },
+  "ScenarioComparison": {
+    "properties": {
+      "baseline": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AssessmentSummary"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "delta_pct": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Delta Pct"
+      },
+      "delta_tco2e": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Delta Tco2E"
+      },
+      "result": {
+        "$ref": "#/components/schemas/AssessmentSummary"
+      },
+      "scenario": {
+        "$ref": "#/components/schemas/ScenarioOut"
+      },
+      "unsupported": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Unsupported",
+        "type": "array"
+      }
+    },
+    "required": [
+      "scenario",
+      "baseline",
+      "result"
+    ],
+    "title": "ScenarioComparison",
+    "type": "object"
+  },
+  "ScenarioCreate": {
+    "properties": {
+      "baseline_assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Baseline Assessment Id"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "modifications": {
+        "items": {
+          "$ref": "#/components/schemas/ScenarioModification"
+        },
+        "title": "Modifications",
+        "type": "array"
+      },
+      "name": {
+        "maxLength": 160,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "title": "ScenarioCreate",
+    "type": "object"
+  },
+  "ScenarioModification": {
+    "description": "One declarative change applied to a baseline profile. PRD FR-34.\n\nDeliberately a small closed set. A free-form patch would let the client\nwrite any number into the engine input, which is exactly the door PRD\nsection 3.1 closes.",
+    "properties": {
+      "kind": {
+        "enum": [
+          "electricity_efficiency_pct",
+          "solar_share_pct",
+          "recycled_material_pct",
+          "fuel_switch",
+          "logistics_mode_shift_pct",
+          "waste_recovery_pct",
+          "output_change_pct"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "replacement_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Replacement Key"
+      },
+      "target_key": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Target Key"
+      },
+      "value": {
+        "title": "Value",
+        "type": "number"
+      }
+    },
+    "required": [
+      "kind",
+      "value"
+    ],
+    "title": "ScenarioModification",
+    "type": "object"
+  },
+  "ScenarioOut": {
+    "properties": {
+      "baseline_assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Baseline Assessment Id"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Description"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "latest_assessment_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latest Assessment Id"
+      },
+      "modifications": {
+        "additionalProperties": true,
+        "title": "Modifications",
+        "type": "object"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "factory_id",
+      "name",
+      "modifications",
+      "created_at"
+    ],
+    "title": "ScenarioOut",
+    "type": "object"
+  },
+  "SiteCreate": {
+    "properties": {
+      "address": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Address"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "is_primary": {
+        "default": false,
+        "title": "Is Primary",
+        "type": "boolean"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "title": "SiteCreate",
+    "type": "object"
+  },
+  "SiteOut": {
+    "properties": {
+      "address": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Address"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "district": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "District"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_primary": {
+        "default": false,
+        "title": "Is Primary",
+        "type": "boolean"
+      },
+      "latitude": {
+        "anyOf": [
+          {
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Latitude"
+      },
+      "longitude": {
+        "anyOf": [
+          {
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Longitude"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "State"
+      }
+    },
+    "required": [
+      "name",
+      "id",
+      "factory_id",
+      "created_at"
+    ],
+    "title": "SiteOut",
+    "type": "object"
+  },
+  "TokenResponse": {
+    "properties": {
+      "access_token": {
+        "title": "Access Token",
+        "type": "string"
+      },
+      "expires_in": {
+        "title": "Expires In",
+        "type": "integer"
+      },
+      "refresh_token": {
+        "title": "Refresh Token",
+        "type": "string"
+      },
+      "token_type": {
+        "default": "bearer",
+        "title": "Token Type",
+        "type": "string"
+      }
+    },
+    "required": [
+      "access_token",
+      "refresh_token",
+      "expires_in"
+    ],
+    "title": "TokenResponse",
+    "type": "object"
+  },
+  "UserOut": {
+    "properties": {
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "email": {
+        "title": "Email",
+        "type": "string"
+      },
+      "full_name": {
+        "title": "Full Name",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "is_active": {
+        "title": "Is Active",
+        "type": "boolean"
+      },
+      "last_login_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Last Login At"
+      },
+      "phone": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Phone"
+      }
+    },
+    "required": [
+      "id",
+      "email",
+      "full_name",
+      "is_active",
+      "created_at"
+    ],
+    "title": "UserOut",
+    "type": "object"
+  },
+  "ValidationError": {
+    "properties": {
+      "ctx": {
+        "title": "Context",
+        "type": "object"
+      },
+      "input": {
+        "title": "Input"
+      },
+      "loc": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "title": "Location",
+        "type": "array"
+      },
+      "msg": {
+        "title": "Message",
+        "type": "string"
+      },
+      "type": {
+        "title": "Error Type",
+        "type": "string"
+      }
+    },
+    "required": [
+      "loc",
+      "msg",
+      "type"
+    ],
+    "title": "ValidationError",
+    "type": "object"
+  },
+  "VerificationPeriodIn": {
+    "properties": {
+      "normalisation": {
+        "additionalProperties": true,
+        "title": "Normalisation",
+        "type": "object"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "period_end": {
+        "format": "date",
+        "title": "Period End",
+        "type": "string"
+      },
+      "period_start": {
+        "format": "date",
+        "title": "Period Start",
+        "type": "string"
+      }
+    },
+    "required": [
+      "period_start",
+      "period_end"
+    ],
+    "title": "VerificationPeriodIn",
+    "type": "object"
+  },
+  "VerificationPeriodOut": {
+    "properties": {
+      "action_id": {
+        "title": "Action Id",
+        "type": "string"
+      },
+      "factory_id": {
+        "title": "Factory Id",
+        "type": "string"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "normalisation": {
+        "additionalProperties": true,
+        "title": "Normalisation",
+        "type": "object"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Notes"
+      },
+      "period_end": {
+        "format": "date",
+        "title": "Period End",
+        "type": "string"
+      },
+      "period_start": {
+        "format": "date",
+        "title": "Period Start",
+        "type": "string"
+      },
+      "results": {
+        "items": {
+          "$ref": "#/components/schemas/VerificationResultOut"
+        },
+        "title": "Results",
+        "type": "array"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string"
+      }
+    },
+    "required": [
+      "period_start",
+      "period_end",
+      "id",
+      "action_id",
+      "factory_id",
+      "status"
+    ],
+    "title": "VerificationPeriodOut",
+    "type": "object"
+  },
+  "VerificationResultIn": {
+    "properties": {
+      "actual_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Value"
+      },
+      "assumptions": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assumptions"
+      },
+      "baseline_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Baseline Value"
+      },
+      "confidence": {
+        "default": "medium",
+        "title": "Confidence",
+        "type": "string"
+      },
+      "expected_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Value"
+      },
+      "metric": {
+        "title": "Metric",
+        "type": "string"
+      },
+      "unit": {
+        "default": "",
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "required": [
+      "metric"
+    ],
+    "title": "VerificationResultIn",
+    "type": "object"
+  },
+  "VerificationResultOut": {
+    "properties": {
+      "achievement_pct": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Achievement Pct"
+      },
+      "actual_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Actual Value"
+      },
+      "assumptions": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Assumptions"
+      },
+      "baseline_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Baseline Value"
+      },
+      "confidence": {
+        "default": "medium",
+        "title": "Confidence",
+        "type": "string"
+      },
+      "expected_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Expected Value"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "metric": {
+        "title": "Metric",
+        "type": "string"
+      },
+      "period_id": {
+        "title": "Period Id",
+        "type": "string"
+      },
+      "unit": {
+        "default": "",
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "required": [
+      "metric",
+      "id",
+      "period_id"
+    ],
+    "title": "VerificationResultOut",
+    "type": "object"
+  }
+}

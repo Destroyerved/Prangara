@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { ArrowUpRight, ShieldBan } from "lucide-react";
+import { useSearchParams, Link } from "react-router-dom";
+import { ArrowUpRight, ShieldBan, Store } from "lucide-react";
 import { useWorkspace } from "../hooks/useWorkspace";
 import {
   PageHeading,
@@ -10,16 +10,27 @@ import {
   Badge,
   Empty,
   Note,
+  Skeleton,
 } from "../components/ui/common";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ActionTable } from "../components/actions/ActionTable";
 import { money } from "../lib/format";
 export default function CircularActions() {
   const w = useWorkspace(),
-    a = w.assessment!,
+    a = w.assessment,
     [params, setParams] = useSearchParams();
   const view = params.get("view") || "all";
   const [search, setSearch] = useState(""),
     [category, setCategory] = useState("all");
+
+  if (!a) return <Skeleton />;
+
   const items = a.recommendations.items.filter(
     (x) =>
       (view === "all" ||
@@ -77,22 +88,43 @@ export default function CircularActions() {
           onChange={setSearch}
           placeholder="Search interventions or targets…"
         />
-        <select
-          aria-label="Intervention category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="all">All categories</option>
-          {["energy", "material", "process", "waste", "logistics"].map((v) => (
-            <option key={v} value={v}>
-              {v[0].toUpperCase() + v.slice(1)}
-            </option>
-          ))}
-        </select>
+        <Select value={category} onValueChange={setCategory}>
+          <SelectTrigger className="w-[180px] h-[39px]" aria-label="Intervention category">
+            <SelectValue placeholder="All categories" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All categories</SelectItem>
+            {["energy", "material", "process", "waste", "logistics"].map((v) => (
+              <SelectItem key={v} value={v}>
+                {v[0].toUpperCase() + v.slice(1)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <span className="filter-note">
           Select an intervention name to inspect
         </span>
+        <Link
+          to="/marketplace"
+          className="text-button"
+          style={{
+            marginLeft: "auto",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
+            fontSize: "var(--text-body-sm)",
+            fontWeight: "var(--weight-medium)",
+            textDecoration: "none",
+            color: "var(--accent, #79D7E6)",
+          }}
+          title="Open Marketplace & RFQs to find implementation providers"
+        >
+          <Store size={14} />
+          <span>Marketplace &amp; RFQs</span>
+          <ArrowUpRight size={13} />
+        </Link>
       </div>
+      {view === "quick_wins" && a.metadata?.quick_win_membership_available === false && <Note>The engine supplies quick-win totals, but does not identify the individual members. No membership is inferred here.</Note>}
       <ActionTable items={items} />
       <Note>
         Abatement is interaction-de-rated; financial columns are returned
@@ -112,7 +144,7 @@ export default function CircularActions() {
               <button
                 key={b.id}
                 className="constraint-row"
-                onClick={() => w.setDrawer({ kind: "action", data: b })}
+                onClick={() => w.setDrawer({ kind: "calculation", title:b.name, formula:"Technical constraint", rows:[["Restriction",b.restriction||"Not supplied"]], note:"A blocked intervention has no fabricated economic estimate." })}
               >
                 <ShieldBan size={22} />
                 <div>
@@ -138,7 +170,7 @@ export default function CircularActions() {
             <button
               className="constraint-row"
               key={b.id}
-              onClick={() => w.setDrawer({ kind: "action", data: b })}
+              onClick={() => w.setDrawer({ kind: "calculation", title:b.name, formula:"Technical constraint", rows:[["Restriction",b.restriction||"Not supplied"]], note:"A blocked intervention has no fabricated economic estimate." })}
             >
               <ShieldBan size={22} />
               <div>

@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import {
+  createContext,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -10,7 +12,15 @@ import { createPortal } from "react-dom";
 import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
 import * as Popover from "@radix-ui/react-popover";
 import * as Tooltip from "@radix-ui/react-tooltip";
-import { AnimatePresence, motion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type MotionValue,
+  type SpringOptions,
+} from "motion/react";
 import {
   Factory,
   ChevronDown,
@@ -19,6 +29,9 @@ import {
   RefreshCw,
   X,
   Sparkles,
+  Sun,
+  Moon,
+  Store,
 } from "lucide-react";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { navigation } from "./navigation";
@@ -27,15 +40,10 @@ import { RecordDrawer } from "../drawers/RecordDrawer";
 import { CommandPalette } from "./CommandPalette";
 import { RagAssistant } from "../rag/RagAssistant";
 import { PrangaraLogoMark } from "../brand/PrangaraLogo";
-import { WavesShaderBackground } from "../ui/WavesShaderBackground";
-import {
-  MenuCloseIcon,
-  ToggleIcon,
-} from "@/components/ui/animated-state-icons";
-import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { ShaderBackground } from "../ui/waves-shader";
+import { MenuCloseIcon } from "@/components/ui/animated-state-icons";
 import { UnseenCursor } from "@/components/ui/UnseenCursor";
 import { UnseenSmoothScroll } from "@/components/ui/UnseenSmoothScroll";
-import { TextRoll } from "@/components/ui/text-roll";
 const pref = (key: string, fallback: string) => {
   try {
     return localStorage.getItem(key) || fallback;
@@ -43,40 +51,129 @@ const pref = (key: string, fallback: string) => {
     return fallback;
   }
 };
+
+const SidebarDockContext = createContext<{
+  mouseY: MotionValue<number>;
+  distance: number;
+  spring: SpringOptions;
+  collapsed: boolean;
+} | null>(null);
+
+const MotionNavLink = motion.create(NavLink);
+
 function SidebarNavItem({
   path,
   label,
   icon: Icon,
   collapsed,
   count,
+  isJustLanded,
+  onExpand,
 }: {
   path: string;
   label: string;
-  icon: ComponentType<{ size?: number; className?: string }>;
+  icon: ComponentType<{ size?: number; className?: string; active?: boolean; isHovered?: boolean }>;
   collapsed: boolean;
   count?: number;
+  isJustLanded?: boolean;
+  onExpand?: () => void;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const location = useLocation();
+  const dockContext = useContext(SidebarDockContext);
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const isItemActive =
+    location.pathname === path ||
+    (path !== "/" &&
+      path !== "/overview" &&
+      location.pathname.startsWith(path + "/"));
+
+  const itemClassName = [
+    "nav-item",
+    isItemActive ? "active" : "",
+    (isJustLanded && isItemActive) ? "just-landed" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const fallbackMouseY = useMotionValue(Infinity);
+  const mouseY = dockContext ? dockContext.mouseY : fallbackMouseY;
+  const distance = dockContext?.distance ?? 110;
+  const springConfig = dockContext?.spring ?? { mass: 0.1, stiffness: 180, damping: 14 };
+
+  const mouseDistance = useTransform(mouseY, (val: number) => {
+    if (!ref.current || val === Infinity) return 1000;
+    const rect = ref.current.getBoundingClientRect();
+    return val - rect.y - rect.height / 2;
+  });
+
+  const iconScaleTransform = useTransform(
+    mouseDistance,
+    [-distance, 0, distance],
+    [1, collapsed ? 1.35 : 1.18, 1]
+  );
+  const iconScale = useSpring(iconScaleTransform, springConfig);
+
+  const rowTranslateXTransform = useTransform(
+    mouseDistance,
+    [-distance, 0, distance],
+    [0, collapsed ? 4 : 4, 0]
+  );
+  const rowTranslateX = useSpring(rowTranslateXTransform, springConfig);
+
+  const rowScaleTransform = useTransform(
+    mouseDistance,
+    [-distance, 0, distance],
+    [1, collapsed ? 1.15 : 1.015, 1]
+  );
+  const rowScale = useSpring(rowScaleTransform, springConfig);
+
+  const link = (
+    <MotionNavLink
+      ref={ref}
+      className={itemClassName}
+      to={path}
+      aria-label={label}
+      aria-current={isItemActive ? "page" : undefined}
+      style={{
+        scale: rowScale,
+        x: rowTranslateX,
+        transformOrigin: collapsed ? "center left" : "left center",
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        if (collapsed && onExpand) {
+          onExpand();
+        }
+      }}
+    >
+      <motion.span
+        style={{
+          scale: iconScale,
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transformOrigin: "center center",
+        }}
+      >
+        <Icon size={collapsed ? 19 : 22} active={isItemActive} isHovered={isHovered} />
+      </motion.span>
+      {!collapsed && <span className="nav-text">{label}</span>}
+      {!collapsed && count ? <span className="count">{count}</span> : null}
+    </MotionNavLink>
+  );
+
+  if (!collapsed) {
+    return link;
+  }
 
   return (
-    <Tooltip.Root open={collapsed ? undefined : false}>
-      <Tooltip.Trigger asChild>
-        <NavLink
-          className="nav-item"
-          to={path}
-          aria-label={label}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <Icon size={collapsed ? 24 : 22} />
-          <span className="nav-text">
-            <TextRoll isHovered={isHovered}>{label}</TextRoll>
-          </span>
-          {count ? <span className="count">{count}</span> : null}
-        </NavLink>
-      </Tooltip.Trigger>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>{link}</Tooltip.Trigger>
       <Tooltip.Portal>
-        <Tooltip.Content className="tooltip" side="right">
+        <Tooltip.Content className="tooltip" side="right" sideOffset={12}>
           {label}
           <Tooltip.Arrow />
         </Tooltip.Content>
@@ -95,15 +192,18 @@ export default function Shell() {
   );
   const [width, setWidth] = useState(() =>
     Math.min(
-      300,
-      Math.max(214, Number(pref("prangara-sidebar", "238")) || 238),
+      320,
+      Math.max(252, Number(pref("prangara-sidebar", "260")) || 260),
     ),
   );
-  const [theme, setTheme] = useState(() => pref("prangara-theme", "dark"));
+  const [theme, setTheme] = useState<"dark" | "light">(
+    () => (pref("prangara-theme", "dark") === "light" ? "light" : "dark"),
+  );
   const [plantOpen, setPlantOpen] = useState(false),
     [search, setSearch] = useState("");
+  const [ragOpen, setRagOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
-  const [assistantOpen, setAssistantOpen] = useState(false);
+  const sidebarMouseY = useMotionValue(Infinity);
 
   const popoverContentRef = useRef<HTMLDivElement>(null);
   const plantOptionsRef = useRef<HTMLDivElement>(null);
@@ -157,20 +257,25 @@ export default function Shell() {
     };
   }, [plantOpen]);
 
-  // Background Blur & Lenis Scroll Pause when Facility Profiles Popover is open
+  // Background Blur & Lenis Scroll Pause when Facility Profiles Popover or RAG Assistant is open
   useEffect(() => {
     if (plantOpen) {
       document.body.classList.add("has-plant-popover-open");
-      window.__lenis?.stop();
     } else {
       document.body.classList.remove("has-plant-popover-open");
+    }
+
+    if (plantOpen || ragOpen) {
+      window.__lenis?.stop();
+    } else {
       window.__lenis?.start();
     }
+
     return () => {
       document.body.classList.remove("has-plant-popover-open");
       window.__lenis?.start();
     };
-  }, [plantOpen]);
+  }, [plantOpen, ragOpen]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -252,7 +357,10 @@ export default function Shell() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <WavesShaderBackground />
+      <div className="waves-shader-container" aria-hidden="true">
+        <ShaderBackground className="waves-shader-canvas" speed={1.8} />
+        <div className="waves-shader-scrim" />
+      </div>
       <div className="unseen-grain" aria-hidden="true" />
       <UnseenCursor />
       <UnseenSmoothScroll />
@@ -267,32 +375,48 @@ export default function Shell() {
         <aside className="sidebar">
           <Link to="/overview" className="brand" aria-label="PRANGARA overview">
             <PrangaraLogoMark size={28} />
-            <span className="brand-text">
-              <TextRoll>PRANGARA</TextRoll>
-            </span>
+            <span className="brand-text">PRANGARA</span>
           </Link>
           <div className="workspace-label">INDUSTRIAL INTELLIGENCE</div>
-          <nav aria-label="Main navigation">
-            {navigation.map((group) => (
-              <div className="nav-group" key={group.group}>
-                <div className="nav-label">{group.group}</div>
-                {group.items.map(({ path, label, icon: Icon }) => (
-                  <SidebarNavItem
-                    key={path}
-                    path={path}
-                    label={label}
-                    icon={Icon}
-                    collapsed={collapsed}
-                    count={
-                      path === "/leaks" && !!w.assessment?.leaks.findings.length
-                        ? w.assessment.leaks.findings.length
-                        : undefined
-                    }
-                  />
-                ))}
-              </div>
-            ))}
-          </nav>
+          <SidebarDockContext.Provider
+            value={{
+              mouseY: sidebarMouseY,
+              distance: collapsed ? 80 : 95,
+              spring: { mass: 0.1, stiffness: 180, damping: 14 },
+              collapsed,
+            }}
+          >
+            <nav
+              aria-label="Main navigation"
+              onMouseMove={(e) => {
+                sidebarMouseY.set(e.clientY);
+              }}
+              onMouseLeave={() => {
+                sidebarMouseY.set(Infinity);
+              }}
+            >
+              {navigation.map((group) => (
+                <div className="nav-group" key={group.group}>
+                  {group.group ? <div className="nav-label">{group.group}</div> : null}
+                  {group.items.map(({ path, label, icon: Icon }) => (
+                    <SidebarNavItem
+                      key={path}
+                      path={path}
+                      label={label}
+                      icon={Icon}
+                      collapsed={collapsed}
+                      onExpand={() => setCollapsed(false)}
+                      count={
+                        path === "/leaks" && !!w.assessment?.leaks.findings.length
+                          ? w.assessment.leaks.findings.length
+                          : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              ))}
+            </nav>
+          </SidebarDockContext.Provider>
           <div className="sidebar-bottom">
             <div className="sidebar-foot">
               <span>PRANGARA</span>
@@ -433,25 +557,13 @@ export default function Shell() {
             </Popover.Root>
             <div className="top-actions">
               <button
-                className="chip positive"
-                onClick={() => setAssistantOpen(true)}
-                style={{
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.825rem",
-                  padding: "0.35rem 0.75rem",
-                  background: "rgba(16, 185, 129, 0.12)",
-                  border: "1px solid rgba(16, 185, 129, 0.35)",
-                  color: "#10b981",
-                  fontWeight: 600,
-                  borderRadius: "999px",
-                }}
+                type="button"
+                className="top-action-btn shrink-0"
+                onClick={() => setRagOpen(true)}
                 aria-label="Ask PRANGARA"
               >
                 <Sparkles size={14} />
-                <span>Ask PRANGARA ✨</span>
+                <span>ASK PRANGARA</span>
               </button>
               <button
                 className="command-trigger"
@@ -461,41 +573,55 @@ export default function Shell() {
                 <Command size={15} />
                 <kbd>K</kbd>
               </button>
-              <button
-                className="icon-button theme-top"
-                aria-label="Toggle theme"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              {/* Dark / Light Theme Toggle */}
+              <div className="theme-tri-switch" role="group" aria-label="Theme Selection">
+                <button
+                  type="button"
+                  className={`theme-tri-btn ${theme === "dark" ? "active" : ""}`}
+                  onClick={() => setTheme("dark")}
+                  title="Dark (Current Dark Theme)"
+                  aria-pressed={theme === "dark"}
+                >
+                  <Moon size={13} />
+                  <span>Dark</span>
+                </button>
+                <button
+                  type="button"
+                  className={`theme-tri-btn ${theme === "light" ? "active" : ""}`}
+                  onClick={() => setTheme("light")}
+                  title="Light (Current Light Theme)"
+                  aria-pressed={theme === "light"}
+                >
+                  <Sun size={13} />
+                  <span>Light</span>
+                </button>
+              </div>
+              <Link
+                to="/marketplace"
+                className={`topbar-marketplace-btn ${pathname === "/marketplace" ? "active" : ""}`}
+                title="Vendor & Materials Marketplace"
               >
-                <ToggleIcon
-                  size={26}
-                  active={theme === "dark"}
-                  color={theme === "dark" ? "#38bdf8" : "#94a3b8"}
-                />
-              </button>
-              <LiquidButton
-                variant="blue"
-                size="sm"
-                text="Run assessment"
+                <Store size={14} style={{ color: "var(--accent, #79D7E6)" }} />
+                <span>Marketplace</span>
+              </Link>
+              <button
+                type="button"
+                className="top-action-btn shrink-0"
                 onClick={() => navigate("/assessment")}
-              />
+                aria-label="Run assessment"
+              >
+                Run assessment
+              </button>
             </div>
           </header>
           <main id="main" tabIndex={-1}>
+            {w.factoryId && <div className="platform-context">Saved factory assessment · {w.assessment?.plant.name}<Link to={"/workspace/"+w.factoryId}>Factory records ↗</Link></div>}
             <Outlet />
-            <footer className="page-footer">
-              <span>
-                Screening and decision support · Planning-grade economics
-              </span>
-              <Link to="/methodology">Methodology & limitations ↗</Link>
-            </footer>
           </main>
         </div>
       </div>
       <RecordDrawer />
-      <RagAssistant
-        isOpen={assistantOpen}
-        onClose={() => setAssistantOpen(false)}
-      />
+      <RagAssistant isOpen={ragOpen} onClose={() => setRagOpen(false)} />
       <CommandPalette />
       <AnimatePresence>
         {w.toast && (

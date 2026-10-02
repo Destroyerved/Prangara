@@ -8,6 +8,7 @@ import {
   SectionHeading,
   Note,
   Empty,
+  Skeleton,
 } from "../components/ui/common";
 import { MaccTable } from "../components/tables/MaccTable";
 import MaccChart from "../components/charts/MaccChart";
@@ -21,8 +22,9 @@ import {
 import type { PortfolioMode } from "../types/domain";
 export default function AbatementPortfolio() {
   const w = useWorkspace(),
-    a = w.assessment!,
+    a = w.assessment,
     [params, setParams] = useSearchParams();
+  if (!a) return <Skeleton />;
   const raw = params.get("view");
   const mode: PortfolioMode =
     raw === "cash_positive_only" || raw === "quick_wins" ? raw : "all";
@@ -84,7 +86,7 @@ export default function AbatementPortfolio() {
           {
             label: "Annual abatement",
             value:
-              known || mode === "cash_positive_only"
+              p.abatement_t != null
                 ? number(p.abatement_t)
                 : "Unavailable",
             unit: p.abatement_t == null ? "" : "tCO₂e",
@@ -105,7 +107,7 @@ export default function AbatementPortfolio() {
             : "Intervention count unavailable"}
         </span>
         <span>
-          {known || mode === "cash_positive_only"
+          {p.abatement_t != null
             ? number(p.share_pct, 1) + "% of footprint"
             : "Share unavailable"}
         </span>

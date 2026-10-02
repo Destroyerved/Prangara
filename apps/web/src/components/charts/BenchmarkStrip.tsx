@@ -48,7 +48,7 @@ export function BenchmarkStrip({
               height="5"
               fill={
                 [
-                  "var(--accent)",
+                  "var(--chart-positive, #10b981)",
                   "var(--scope-3)",
                   "var(--moderate)",
                   "var(--scope-1)",
@@ -73,32 +73,30 @@ export function BenchmarkStrip({
           ))}
         </>
       )}
-      <motion.g
-        initial={{ x: -x(point) }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.45 }}
-      >
-        <path
-          d={
-            "M " +
-            (x(point) - 5) +
-            " 3 L " +
-            (x(point) + 5) +
-            " 3 L " +
-            x(point) +
-            " 10 Z"
-          }
-          fill="var(--text)"
-        />
-        <line
-          x1={x(point)}
-          x2={x(point)}
-          y1="12"
-          y2="25"
-          stroke="var(--text)"
-          strokeWidth="2"
-        />
-      </motion.g>
+      {(() => {
+        const rawX = x(point);
+        const px = Number.isFinite(rawX) ? rawX : 12;
+        return (
+          <motion.g
+            initial={{ x: -px }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.45 }}
+          >
+            <path
+              d={"M " + (px - 5) + " 3 L " + (px + 5) + " 3 L " + px + " 10 Z"}
+              fill="var(--text)"
+            />
+            <line
+              x1={px}
+              x2={px}
+              y1="12"
+              y2="25"
+              stroke="var(--text)"
+              strokeWidth="2"
+            />
+          </motion.g>
+        );
+      })()}
       {structural && (
         <>
           <text x="12" y="47" className="chart-tick">

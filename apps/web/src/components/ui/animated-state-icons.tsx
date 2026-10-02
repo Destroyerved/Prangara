@@ -170,7 +170,7 @@ export function NotificationIcon({ size = 40, color = "currentColor", className,
       style={{ width: size, height: size, transformOrigin: "20px 6px" }}>
       <path d="M28 16a8 8 0 00-16 0c0 8-4 10-4 10h24s-4-2-4-10" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
       <path d="M17.5 30a3 3 0 005 0" stroke={color} strokeWidth={2} strokeLinecap="round" />
-      <motion.circle cx="28" cy="10" r="4" fill="#38bdf8"
+      <motion.circle cx="28" cy="10" r="4" fill="#ffffff"
         animate={notif
           ? { scale: [0, 1.3, 1], opacity: 1 }
           : { scale: 0, opacity: 0 }}
@@ -187,9 +187,9 @@ export function HeartIcon({ size = 40, color = "currentColor", className, durati
     <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
       <motion.path
         d="M20 34s-12-7.5-12-16a7.5 7.5 0 0112-6 7.5 7.5 0 0112 6c0 8.5-12 16-12 16z"
-        stroke={filled ? "#38bdf8" : color}
+        stroke={filled ? "#ffffff" : color}
         strokeWidth={2}
-        fill={filled ? "#38bdf8" : "none"}
+        fill={filled ? "#ffffff" : "none"}
         animate={filled ? { scale: [1, 1.25, 1] } : { scale: 1 }}
         transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
         style={{ transformOrigin: "20px 22px" }}
@@ -390,6 +390,48 @@ export function AbatementPortfolioIcon({ size = 40, color = "currentColor", clas
   );
 }
 
+/* ─── 16. MARKETPLACE ─── storefront with fluttering awning & pulse pip */
+export function MarketplaceIcon({ size = 40, color = "currentColor", className, duration = 2200, active, isHovered }: StateIconProps & { isHovered?: boolean }) {
+  const auto = useAutoToggle(duration);
+  const isInteracting = active || isHovered || auto;
+  return (
+    <svg viewBox="0 0 40 40" fill="none" className={cn("", className)} style={{ width: size, height: size }}>
+      {/* Roof / Awning */}
+      <motion.path
+        d="M7 16L9 8h22l2 8H7z"
+        stroke={color}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        animate={isInteracting ? { y: -1 } : { y: 0 }}
+        transition={{ duration: 0.3 }}
+      />
+      {/* Awning stripes */}
+      <path
+        d="M12 8l-1.5 8M20 8v8M28 8l1.5 8"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+      {/* Storefront base & pillars */}
+      <line x1="10" y1="18" x2="10" y2="32" stroke={color} strokeWidth={2} strokeLinecap="round" />
+      <line x1="30" y1="18" x2="30" y2="32" stroke={color} strokeWidth={2} strokeLinecap="round" />
+      <line x1="6" y1="32" x2="34" y2="32" stroke={color} strokeWidth={2} strokeLinecap="round" />
+      {/* Center Door / Shop Entrance */}
+      <rect x="16" y="20" width="8" height="12" rx="1.5" stroke={color} strokeWidth={1.8} />
+      {/* Active status indicator pip */}
+      <motion.circle
+        cx="20"
+        cy="25"
+        r="1.8"
+        fill={color}
+        animate={isInteracting ? { scale: [1, 1.4, 1], opacity: 1 } : { scale: 1, opacity: 0.5 }}
+        transition={{ duration: 0.4 }}
+      />
+    </svg>
+  );
+}
+
 /* ─── Demo Component ─── */
 
 const ALL_ICONS = [
@@ -408,6 +450,7 @@ const ALL_ICONS = [
   { name: "Volume", Icon: VolumeIcon },
   { name: "Footprint", Icon: FootprintIcon },
   { name: "Portfolio", Icon: AbatementPortfolioIcon },
+  { name: "Marketplace", Icon: MarketplaceIcon },
 ];
 
 export function Component() {

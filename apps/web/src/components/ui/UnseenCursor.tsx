@@ -102,7 +102,7 @@ export function UnseenCursor() {
       {/* Trailing fluid ring — constant size, zero blur, high-visibility contrast */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none flex items-center justify-center border-2 border-sky-600 dark:border-sky-400 bg-transparent shadow-[0_0_0_1px_rgba(255,255,255,0.7),0_2px_6px_rgba(15,23,42,0.18)] dark:shadow-[0_0_10px_rgba(56,189,248,0.4)] transition-colors duration-150"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none flex items-center justify-center border-2 border-white/60 bg-transparent shadow-[0_0_0_1px_rgba(255,255,255,0.5),0_2px_6px_rgba(0,0,0,0.25)] dark:shadow-[0_0_10px_rgba(255,255,255,0.3)] transition-colors duration-150"
       />
     </div>
   );

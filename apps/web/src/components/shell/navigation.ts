@@ -7,9 +7,18 @@ import {
   AbatementPortfolioIcon,
   SuccessIcon,
   LockUnlockIcon,
+  MarketplaceIcon,
 } from "@/components/ui/animated-state-icons";
 
 export const navigation = [
+  {
+    group: "CONNECTED",
+    items: [
+      { path: "/workspace", label: "Workspace", icon: OverviewIcon },
+      { path: "/notifications", label: "Notifications", icon: NotificationIcon },
+      { path: "/account", label: "Account", icon: LockUnlockIcon },
+    ],
+  },
   {
     group: "",
     items: [{ path: "/overview", label: "Overview", icon: OverviewIcon }],
@@ -25,6 +34,7 @@ export const navigation = [
     items: [
       { path: "/footprint", label: "Footprint", icon: FootprintIcon },
       { path: "/leaks", label: "Leak Points", icon: NotificationIcon },
+      { path: "/scenarios", label: "What-If Simulator", icon: ToggleIcon },
     ],
   },
   {
@@ -36,6 +46,9 @@ export const navigation = [
         label: "Abatement Portfolio",
         icon: AbatementPortfolioIcon,
       },
+      { path: "/marketplace", label: "Marketplace & RFQs", icon: MarketplaceIcon },
+      { path: "/logistics", label: "Green Logistics", icon: FootprintIcon },
+      { path: "/circular-network", label: "Circular Network", icon: OverviewIcon },
     ],
   },
   {

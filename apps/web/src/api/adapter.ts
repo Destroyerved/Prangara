@@ -1,469 +1,52 @@
-/**
- * Live API Adapter
- * Translates between FastAPI backend engine outputs and canonical frontend domain schemas.
- * Adheres strictly to the field-by-field audit in ROADMAP.md §W2.
- */
+import { z } from 'zod';
+import { actionSchema, type PlantProfile } from '../types/domain';
 
-function deriveBenchmarkUnit(name: string): string {
-  if (name.includes("kwh")) return "kWh/t";
-  if (name.includes("gj")) return "GJ/t";
-  if (name.includes("m3")) return "m³/t";
-  if (name.includes("tco2e")) return "tCO₂e/t";
-  return "unit/t";
+// Presentation mapping only. All domain figures and portfolio totals are supplied
+// by backend/engine at main aca0e14. Missing metadata stays missing.
+const object = (v:unknown) => z.record(z.string(),z.unknown()).parse(v);
+const list = (v:unknown) => z.array(z.record(z.string(),z.unknown())).parse(v);
+const strings = (v:unknown) => z.array(z.string()).parse(v ?? []);
+const num = (v:unknown) => z.number().finite().parse(v);
+const str = (v:unknown) => z.string().parse(v);
+const optional = (v:unknown) => v ?? null;
+export function adaptPlant(raw:unknown, sector?:string, assumptions:Record<string,unknown> = {}) {
+  const p=object(raw);
+  return {...p,sector:sector||p.sector,tariff:p.tariff_inr_per_kwh??p.tariff??assumptions.electricity_tariff_inr_per_kwh,
+    discount_rate:p.discount_rate??assumptions.discount_rate,eu_export_share_pct:p.eu_export_share_pct??0};
 }
-
-export const adaptSector = (raw: unknown): unknown => {
-  if (!raw || typeof raw !== "object") return raw;
-  const s = raw as Record<string, any>;
-
-  // If benchmarks is a dictionary (from engine/reference data), convert to array of benchmark objects
-  let benchmarks = s.benchmarks;
-  if (benchmarks && typeof benchmarks === "object" && !Array.isArray(benchmarks)) {
-    benchmarks = Object.entries(benchmarks).map(([k, v]: [string, any]) => ({
-      name: k.replace(/_/g, " "),
-      unit: deriveBenchmarkUnit(k),
-      p25: v?.p25 ?? null,
-      p50: v?.p50 ?? null,
-      p75: v?.p75 ?? null,
-    }));
-  } else if (!Array.isArray(benchmarks)) {
-    benchmarks = [];
-  }
-
-  // Ensure demo_profile has all required fields for plantSchema
-  const demo = s.demo_profile || {};
-  const demo_profile = {
-    name: demo.name || `${s.name || s.key} Demo Facility`,
-    sector: s.key || demo.sector || "textile_dyeing",
-    state: demo.state || s.state || "Tamil Nadu",
-    annual_output_t: demo.annual_output_t ?? 2400,
-    annual_revenue_cr: demo.annual_revenue_cr ?? 34,
-    employees: demo.employees ?? 180,
-    electricity_kwh: demo.electricity_kwh ?? 3000000,
-    fuels: demo.fuels || {},
-    materials: demo.materials || {},
-    waste: demo.waste || {},
-    freight: demo.freight || {},
-    tariff: demo.tariff ?? 8,
-    discount_rate: demo.discount_rate ?? 0.12,
-    eu_export_share_pct: demo.eu_export_share_pct ?? 20,
-  };
-
-  return {
-    key: s.key,
-    name: s.name || s.key,
-    cluster: s.cluster || s.name || "",
-    state: s.state || demo_profile.state || "",
-    demo_profile,
-    benchmarks,
-    regulatory_flags: Array.isArray(s.regulatory_flags) ? s.regulatory_flags : [],
-  };
-};
-
-export const adaptSectors = (raw: unknown): unknown => {
-  if (Array.isArray(raw)) return raw.map(adaptSector);
-  if (raw && typeof raw === "object" && "sectors" in raw) {
-    const list = (raw as { sectors: unknown[] }).sectors;
-    if (Array.isArray(list)) return list.map(adaptSector);
-  }
-  return raw;
-};
-
-export const adaptReference = (raw: unknown): unknown => {
-  if (Array.isArray(raw)) return raw;
-  if (!raw || typeof raw !== "object") return raw;
-
-  const r = raw as Record<string, any>;
-  if (r.groups && typeof r.groups === "object") {
-    const flattened: any[] = [];
-    for (const [groupName, items] of Object.entries(r.groups)) {
-      if (!Array.isArray(items)) continue;
-      for (const item of items) {
-        let scope = "1";
-        if (item.scope) scope = String(item.scope);
-        else if (groupName === "Electricity" || item.key?.toLowerCase().includes("grid") || item.key?.toLowerCase().includes("electricity")) scope = "2";
-        else if (groupName === "Material" || groupName === "Waste" || groupName === "Freight") scope = "3";
-
-        flattened.push({
-          key: item.key,
-          name: item.label || item.name || item.key,
-          group: groupName,
-          scope,
-          value: item.value ?? null,
-          low: item.low ?? null,
-          high: item.high ?? null,
-          unit: item.unit || "",
-          source: item.source || "PRANGARA Reference Registry",
-          vintage: item.vintage || null,
-          state: item.state || null,
-        });
-      }
-    }
-    return flattened;
-  }
-  return raw;
-};
-
-export const adaptAssessment = (raw: unknown): unknown => {
-  if (!raw || typeof raw !== "object") return raw;
-  const r = raw as Record<string, any>;
-
-  // If already matches frontend schema canonical format
-  if (r.footprint?.total?.base !== undefined && r.origin && r.plant && r.sankey && r.recommendations?.portfolios) {
-    return r;
-  }
-
-  // Must have real assessment keys from engine
-  const hasEngineStructure =
-    (r.footprint?.total_tco2e !== undefined || r.footprint?.streams !== undefined || r.headline?.total_tco2e !== undefined) &&
-    (r.recommendations !== undefined || r.leaks !== undefined || r.profile !== undefined);
-
-  if (!hasEngineStructure) {
-    return raw;
-  }
-  const profile = r.profile || r.plant || {};
-  const plant = {
-    name: profile.name || "Assessed Facility",
-    sector: profile.sector || "textile_dyeing",
-    state: profile.state || "Tamil Nadu",
-    annual_output_t: profile.annual_output_t ?? 2400,
-    annual_revenue_cr: profile.annual_revenue_cr ?? 34,
-    employees: profile.employees ?? 180,
-    electricity_kwh: profile.electricity_kwh ?? 3000000,
-    fuels: profile.fuels || {},
-    materials: profile.materials || {},
-    waste: profile.waste || {},
-    freight: profile.freight || {},
-    tariff: profile.tariff ?? 8,
-    discount_rate: profile.discount_rate ?? 0.12,
-    eu_export_share_pct: profile.eu_export_share_pct ?? 25,
-  };
-
-  const origin = r.origin || {
-    kind: "engine",
-    note: r.claim_boundary || "Deterministic carbon engine assessment with version-stamped factors.",
-    reference: `PRANGARA platform engine · v${r.versions?.engine || "2.0"}`,
-  };
-
-  // Footprint mapping
-  const fp = r.footprint || {};
-  const hl = r.headline || {};
-  const totalBase = fp.total_tco2e ?? hl.total_tco2e ?? 0;
-  const totalRange = fp.total_range || hl.total_range || { base: totalBase, low: totalBase, high: totalBase };
-  const uncertaintyPct = fp.uncertainty_pct ?? hl.uncertainty_pct ?? null;
-
-  const s1 = fp.scope1_tco2e ?? 0;
-  const s2 = fp.scope2_tco2e ?? 0;
-  const s3 = fp.scope3_tco2e ?? 0;
-  const split = fp.scope_split_pct || {};
-
-  const scopes = [
-    { scope: "1" as const, total: s1, share_pct: split.scope1 ?? (totalBase > 0 ? (s1 / totalBase) * 100 : 0) },
-    { scope: "2" as const, total: s2, share_pct: split.scope2 ?? (totalBase > 0 ? (s2 / totalBase) * 100 : 0) },
-    { scope: "3" as const, total: s3, share_pct: split.scope3 ?? (totalBase > 0 ? (s3 / totalBase) * 100 : 0) },
-  ];
-
-  const streams = (fp.streams || []).map((s: any) => {
-    const key = s.key || s.id || "";
-    let cat = "fuel";
-    if (key.startsWith("material_")) cat = "material";
-    else if (key.startsWith("waste_")) cat = "waste";
-    else if (key.startsWith("freight_")) cat = "freight";
-    else if (key.includes("electricity")) cat = "electricity";
-    else if (s.scope === 1) cat = "fuel";
-
-    const factorKey = Array.isArray(s.factor_keys) && s.factor_keys.length > 0 ? s.factor_keys[0] : (s.factor_key || null);
-    const rng = s.range || s.emissions || { base: s.tco2e ?? 0, low: s.tco2e ?? 0, high: s.tco2e ?? 0 };
-    const workingDetail = s.detail ? Object.entries(s.detail).map(([k, v]) => `${k}: ${v}`).join(", ") : "";
-    const working = s.source ? `${s.source}${workingDetail ? " · " + workingDetail : ""}` : (s.working || "Engine calculation");
-
-    return {
-      id: key,
-      name: s.label || s.name || key,
-      scope: String(s.scope || "1") as "1" | "2" | "3",
-      category: cat,
-      quantity: s.activity_qty ?? s.quantity ?? null,
-      unit: s.activity_unit || s.unit || "unit",
-      factor_key: factorKey,
-      emissions: {
-        base: rng.base ?? s.tco2e ?? 0,
-        low: rng.low ?? rng.base ?? s.tco2e ?? 0,
-        high: rng.high ?? rng.base ?? s.tco2e ?? 0,
-      },
-      share_pct: s.share_pct ?? 0,
-      working,
-    };
-  });
-
-  const intensities = fp.intensities || {};
-  const gateToGate = intensities.gate_to_gate_tco2e_per_t ?? fp.gate_to_gate ?? null;
-  const cradleToGate = intensities.cradle_to_gate_tco2e_per_t ?? fp.cradle_to_gate ?? null;
-  const biogenic = fp.biogenic_co2_t ?? fp.biogenic_t ?? null;
-
-  // Sankey mapping
-  const rawNodes = r.sankey?.nodes || [];
-  const rawLinks = r.sankey?.links || [];
-  const nodeMap = new Map<number, string>();
-
-  const nodes = rawNodes.map((n: any, idx: number) => {
-    const id = n.id || `node_${idx}`;
-    nodeMap.set(idx, id);
-
-    let scope: "1" | "2" | "3" | "total" = "1";
-    let streamId: string | null = null;
-
-    if (n.kind === "total" || n.scope === "total" || n.name?.toLowerCase().includes("total")) {
-      scope = "total";
-    } else if (n.name?.includes("Scope 1") || n.scope === "1" || n.scope === 1) {
-      scope = "1";
-    } else if (n.name?.includes("Scope 2") || n.scope === "2" || n.scope === 2) {
-      scope = "2";
-    } else if (n.name?.includes("Scope 3") || n.scope === "3" || n.scope === 3) {
-      scope = "3";
-    } else {
-      const match = streams.find((str: any) => str.name.toLowerCase() === n.name?.toLowerCase() || n.name?.toLowerCase().includes(str.name.toLowerCase()));
-      if (match) {
-        scope = match.scope;
-        streamId = match.id;
-      }
-    }
-
-    return {
-      id,
-      name: n.name || id,
-      scope,
-      stream_id: n.stream_id ?? streamId,
-    };
-  });
-
-  const links = rawLinks.map((l: any) => ({
-    source: typeof l.source === "number" ? (nodeMap.get(l.source) || `node_${l.source}`) : String(l.source),
-    target: typeof l.target === "number" ? (nodeMap.get(l.target) || `node_${l.target}`) : String(l.target),
-    value: l.value ?? 0,
-    scope: String(l.scope || "1") as "1" | "2" | "3",
-  }));
-
-  // Leaks mapping
-  const rawLeaks = r.leaks || {};
-  const leakFindings = (rawLeaks.leaks || rawLeaks.findings || []).map((lk: any) => {
-    const streamKey = lk.stream_key || lk.stream_id || "";
-    const rule = (lk.rule === "benchmark_breach" || lk.rule === "material_concentration" || lk.rule === "structural_hotspot") ? lk.rule : "structural_hotspot";
-    const sev = ["critical", "high", "moderate", "watch"].includes(lk.severity) ? lk.severity : "moderate";
-
-    return {
-      id: lk.id || `${streamKey}_${rule}`,
-      stream_id: streamKey,
-      name: lk.label || lk.name || streamKey,
-      rule,
-      severity: sev,
-      share_pct: lk.share_pct ?? 0,
-      actual: lk.actual ?? null,
-      unit: lk.metric_unit || lk.unit || "",
-      p25: lk.p25 ?? null,
-      p50: lk.p50 ?? null,
-      p75: lk.p75 ?? null,
-      percentile: lk.percentile ?? null,
-      recoverable_t: lk.gap_to_median_tco2e ?? lk.recoverable_t ?? null,
-      reason: lk.finding || lk.reason || "Benchmark screening detection",
-    };
-  });
-
-  // Recommendations mapping
-  const recs = r.recommendations || {};
-  const recItems = (recs.recommendations || recs.items || []).map((it: any) => {
-    const payback = it.payback_yrs ?? it.payback_years ?? null;
-    const diff = it.difficulty ?? 1;
-    const isQuickWin = Boolean(it.quick_win || (payback != null && payback <= 2 && diff <= 2));
-
-    let status: "cash_positive" | "net_cost" | "blocked" | "constraint_only" = "cash_positive";
-    if (it.was_blocked) status = "blocked";
-    else if (it.cash_positive || (it.net_annual_benefit_inr && it.net_annual_benefit_inr > 0)) status = "cash_positive";
-    else if (it.substitution_capped) status = "constraint_only";
-    else status = "net_cost";
-
-    const rng = it.abatement_range || {
-      base: it.portfolio_abatement_tco2e ?? it.abatement_tco2e ?? 0,
-      low: it.abatement_tco2e ?? 0,
-      high: it.abatement_tco2e ?? 0,
-    };
-
-    return {
-      id: it.id,
-      name: it.name,
-      category: it.category || "process",
-      target: it.target_stream || it.target || "",
-      status,
-      quick_win: isQuickWin,
-      cap_pct: it.substitution_cap_pct ?? it.cap_pct ?? null,
-      restriction: it.restriction_note ?? it.restriction ?? null,
-      capex: it.capex_inr ?? it.capex ?? 0,
-      net_benefit: it.net_annual_benefit_inr ?? it.net_benefit ?? 0,
-      gross_saving: it.gross_annual_saving_inr ?? it.gross_saving ?? null,
-      opex_delta: it.annual_opex_delta_inr ?? it.opex_delta ?? null,
-      payback_years: payback,
-      npv: it.npv_inr ?? it.npv ?? null,
-      lcoa: it.lcoa_inr_per_tco2e ?? it.lcoa ?? 0,
-      standalone_t: it.abatement_tco2e ?? it.standalone_t ?? 0,
-      abatement_t: it.portfolio_abatement_tco2e ?? it.abatement_t ?? it.abatement_tco2e ?? 0,
-      abatement_range: {
-        base: rng.base ?? it.abatement_tco2e ?? 0,
-        low: rng.low ?? rng.base ?? it.abatement_tco2e ?? 0,
-        high: rng.high ?? rng.base ?? it.abatement_tco2e ?? 0,
-      },
-      difficulty: diff,
-      disruption_days: it.disruption_days ?? null,
-      confidence: (["high", "medium", "low"].includes(it.confidence) ? it.confidence : "medium") as "high" | "medium" | "low",
-      savings_model: it.savings_model || "avoided_purchase",
-      lifetime_years: it.lifetime_yrs ?? it.lifetime_years ?? null,
-      physical_statement: it.physical_note || it.description || "",
-      evidence: it.evidence || "Standard engineering calculation",
-      caveats: Array.isArray(it.caveats) ? it.caveats : [],
-    };
-  });
-
-  const blockedItems = (recs.blocked || []).map((b: any) => ({
-    id: b.id,
-    name: b.name,
-    category: b.category || "process",
-    target: b.target_stream || b.target || "",
-    status: "blocked" as const,
-    quick_win: false,
-    cap_pct: null,
-    restriction: b.reason || b.restriction || "Infeasible for site parameters",
-    capex: 0,
-    net_benefit: 0,
-    gross_saving: null,
-    opex_delta: null,
-    payback_years: null,
-    npv: null,
-    lcoa: 0,
-    standalone_t: 0,
-    abatement_t: 0,
-    abatement_range: { base: 0, low: 0, high: 0 },
-    difficulty: 5,
-    disruption_days: null,
-    confidence: "low" as const,
-    savings_model: "none",
-    lifetime_years: null,
-    physical_statement: b.reason || "Rejected by feasibility rules",
-    evidence: "Technical feasibility boundary",
-    caveats: [b.reason || "Not applicable"],
-  }));
-
-  const maccCurve = recs.macc_curve || [];
-  const allCurve = maccCurve.map((c: any) => ({
-    id: c.id,
-    abatement_t: c.width ?? 0,
-    lcoa: c.height ?? 0,
-  }));
-
-  const portAll = recs.portfolio?.all || {};
-  const portCash = recs.portfolio?.cash_positive_only || {};
-  const portQuick = recs.portfolio?.quick_wins || {};
-
-  const quickWinIds = new Set(recItems.filter((it: any) => it.quick_win).map((it: any) => it.id));
-  const cashPosIds = new Set(recItems.filter((it: any) => it.status === "cash_positive").map((it: any) => it.id));
-
-  const portfolios = {
-    all: {
-      ids: recItems.map((it: any) => it.id),
-      count: portAll.count ?? recItems.length,
-      abatement_t: portAll.abatement_tco2e ?? null,
-      share_pct: portAll.abatement_pct ?? null,
-      capex: portAll.capex_inr ?? null,
-      net_benefit: portAll.net_annual_benefit_inr ?? null,
-      payback_years: portAll.blended_payback_yrs ?? null,
-      npv: portAll.npv_inr ?? null,
-      curve: allCurve,
-    },
-    cash_positive_only: {
-      ids: Array.from(cashPosIds),
-      count: portCash.count ?? cashPosIds.size,
-      abatement_t: portCash.abatement_tco2e ?? null,
-      share_pct: portCash.abatement_pct ?? null,
-      capex: portCash.capex_inr ?? null,
-      net_benefit: portCash.net_annual_benefit_inr ?? null,
-      payback_years: portCash.blended_payback_yrs ?? null,
-      npv: portCash.npv_inr ?? null,
-      curve: allCurve.filter((c: any) => cashPosIds.has(c.id)),
-    },
-    quick_wins: {
-      ids: Array.from(quickWinIds),
-      count: portQuick.count ?? quickWinIds.size,
-      abatement_t: portQuick.abatement_tco2e ?? null,
-      share_pct: portQuick.abatement_pct ?? null,
-      capex: portQuick.capex_inr ?? null,
-      net_benefit: portQuick.net_annual_benefit_inr ?? null,
-      payback_years: portQuick.blended_payback_yrs ?? null,
-      npv: portQuick.npv_inr ?? null,
-      curve: allCurve.filter((c: any) => quickWinIds.has(c.id)),
-    },
-  };
-
-  // Compliance mapping
-  const comp = r.compliance || {};
-  const cb = comp.cbam || {};
-  const br = comp.brsr || {};
-
-  const compliance = {
-    cbam: {
-      applicability: cb.applicable ? "Applicable" : "Not applicable (facility sector outside direct CBAM coverage)",
-      exposure_t: cb.embedded_emissions_exported_tco2e ?? null,
-      indicative_cost: cb.indicative_annual_cost_inr ?? null,
-      reference_price: cb.reference_price_inr_per_tco2e ?? null,
-      export_share_pct: cb.eu_export_share_pct ?? null,
-      included: ["Direct emissions (Scope 1)", "Indirect electricity emissions (Scope 2)"],
-      excluded: ["Precursors and raw materials without installation-specific verification", "Freight outside EU customs territory"],
-      assumptions: [cb.basis, cb.caveat].filter(Boolean),
-    },
-    brsr: (br.readiness || []).map((item: any) => ({
-      name: item.item || "BRSR Indicator",
-      status: (item.status === "ready" ? "Ready" : item.status === "partial" ? "Partial" : "External action required") as "Ready" | "Partial" | "Missing" | "External action required",
-      detail: item.note || (item.value_tco2e ? `${item.value_tco2e.toLocaleString()} tCO₂e` : "Ready for audit package"),
-    })),
-  };
-
-  // Methodology mapping
-  const meth = r.methodology || {};
-  const methodology = {
-    standard: meth.standard || "GHG Protocol Corporate Standard (2004)",
-    gwp: meth.gwp || "IPCC AR6 100-year GWP values",
-    boundary: "Operational control: Scope 1 direct combustion, Scope 2 location-based grid electricity, Scope 3 selected purchased materials, freight, and waste disposal.",
-    limitations: [meth.verification_status, meth.benchmark_note].filter(Boolean),
-    assumptions: [meth.factor_note, meth.leak_rule].filter(Boolean),
-  };
-
-  return {
-    id: r.id || `assessment-${r.versions?.engine || "live"}-${Date.now()}`,
-    plant,
-    origin,
-    footprint: {
-      total: {
-        base: totalBase,
-        low: totalRange.low ?? totalBase,
-        high: totalRange.high ?? totalBase,
-      },
-      uncertainty_pct: uncertaintyPct,
-      scopes,
-      streams,
-      gate_to_gate: gateToGate,
-      cradle_to_gate: cradleToGate,
-      biogenic_t: biogenic,
-    },
-    sankey: {
-      nodes,
-      links,
-    },
-    leaks: {
-      peer_percentile: hl.peer_percentile ?? rawLeaks.peer_percentile ?? null,
-      findings: leakFindings,
-    },
-    recommendations: {
-      items: recItems,
-      blocked: blockedItems,
-      portfolios,
-    },
-    compliance,
-    methodology,
-  };
-};
+export function toEngineProfile(p:PlantProfile) {const {tariff,...rest}=p;return {...rest,tariff_inr_per_kwh:tariff};}
+export function adaptSector(raw:unknown) {
+  const s=object(raw);if(s.name) return raw;
+  const p=object(s.demo_profile);
+  return {key:s.key,name:s.label,cluster:strings(s.clusters).join(' · '),state:p.state,demo_profile:{...p,sector:s.key},
+    benchmarks:Object.entries(object(s.benchmarks)).map(([key,value])=>({...object(value),name:key,unit:key})),regulatory_flags:s.regulatory_flags};
+}
+export function adaptSectors(raw:unknown) {
+  if(Array.isArray(raw)) return raw;
+  return list(object(raw).sectors).map(s=>({key:s.key,name:s.label,cluster:strings(s.clusters).join(' · '),state:'',demo_profile:{name:s.demo_name}}));
+}
+export function adaptReference(raw:unknown) {
+  if(Array.isArray(raw))return raw;
+  const r=object(raw);
+  return Object.entries(object(r.groups)).flatMap(([group,value])=>list(value).map(f=>({key:f.key,name:f.label,group:({electricity:'Electricity',fuels:'Fuel',materials:'Material',transport:'Freight',waste:'Waste'} as Record<string,string>)[group]||group,scope:String(f.scope),value:f.value,low:f.low,high:f.high,unit:f.unit,source:f.source,vintage:null,state:null})));
+}
+export function adaptAssessment(raw:unknown,input?:unknown,id?:string) {
+  const r=object(raw);if(r.origin&&r.plant)return raw;
+  if(!input)throw new Error('The engine input snapshot is required to display this assessment.');
+  const fp=object(r.footprint),recs=object(r.recommendations),leaks=object(r.leaks),sankey=object(r.sankey),compliance=object(r.compliance),cbam=object(compliance.cbam),brsr=object(compliance.brsr),method=object(r.methodology),assumptions=object(recs.assumptions);
+  const streams=list(fp.streams).map(s=>({id:str(s.key),name:str(s.label),scope:String(s.scope),category:str(s.key).startsWith('material_')?'materials':str(s.key).startsWith('waste_')?'waste':s.key==='freight'?'freight':'energy',quantity:optional(s.activity_qty),unit:s.activity_unit,factor_keys:strings(s.factor_keys),factor_key:strings(s.factor_keys).length===1?strings(s.factor_keys)[0]:null,emissions:s.range,share_pct:s.share_pct,working:s.source,detail:s.detail}));
+  const items=list(recs.recommendations).map(a=>actionSchema.parse({id:a.id,name:a.name,category:a.category,target:a.target_stream,status:a.cash_positive===true?'cash_positive':'net_cost',quick_win:false,cap_pct:optional(a.substitution_cap_pct),restriction:optional(a.restriction_note),capex:a.capex_inr,net_benefit:a.net_annual_benefit_inr,gross_saving:optional(a.gross_annual_saving_inr),opex_delta:optional(a.annual_opex_delta_inr),payback_years:optional(a.payback_yrs),npv:optional(a.npv_inr),lcoa:a.lcoa_inr_per_tco2e,standalone_t:a.abatement_tco2e,abatement_t:a.portfolio_abatement_tco2e,abatement_range:a.abatement_range,difficulty:a.difficulty,disruption_days:optional(a.disruption_days),confidence:a.confidence,savings_model:a.savings_model,lifetime_years:optional(a.lifetime_yrs),physical_statement:a.physical_note,evidence:a.evidence,caveats:a.caveats}));
+  const curve=list(recs.macc_curve).map(c=>({id:str(c.id),abatement_t:num(c.width),lcoa:num(c.height)}));
+  const portfolios=Object.fromEntries(Object.entries(object(recs.portfolio)).map(([mode,value])=>{const p=object(value);const selected=mode==='all'?curve:mode==='cash_positive_only'?curve.filter(c=>items.find(a=>a.id===c.id)?.status==='cash_positive'):[];return [mode,{ids:selected.map(c=>c.id),count:optional(p.count),abatement_t:optional(p.abatement_tco2e),share_pct:optional(p.abatement_pct),capex:optional(p.capex_inr),net_benefit:optional(p.net_annual_benefit_inr),payback_years:optional(p.blended_payback_yrs),npv:optional(p.npv_inr),curve:selected}];}));
+  const links=list(sankey.links),nodes=list(sankey.nodes);
+  const cctsRaw=compliance.ccts?object(compliance.ccts):null;
+  const ccts=cctsRaw?{applicable:Boolean(cctsRaw.applicable),status:String(cctsRaw.status??'voluntary_eligible'),designated_consumer_status:String(cctsRaw.designated_consumer_status??'Voluntary Carbon Credit Eligible'),plant_thermal_gj:optional(cctsRaw.plant_thermal_gj),designated_consumer_threshold_gj:optional(cctsRaw.designated_consumer_threshold_gj),is_designated_consumer:Boolean(cctsRaw.is_designated_consumer),voluntary_ccc_potential_tco2e:optional(cctsRaw.voluntary_ccc_potential_tco2e),mechanism:String(cctsRaw.mechanism??'BEE Carbon Credit Trading Scheme'),notes:strings(cctsRaw.notes)}:undefined;
+  return {id:id||'engine-'+str(object(r.profile).sector),plant:adaptPlant(input,undefined,assumptions),origin:{kind:'engine',note:r.is_demo?'Engine demonstration; not a measured factory assessment.':'Calculated by the configured PRANGARA engine.',reference:id||'Unpersisted sandbox assessment'},
+    metadata:{versions:r.versions??{},data_quality:r.data_quality??null,benchmark_source:leaks.benchmark_source,benchmark_provenance:leaks.benchmark_provenance,benchmark_caveat:leaks.benchmark_caveat,is_demo:r.is_demo===true,quick_win_membership_available:false},
+    footprint:{total:fp.total_range,uncertainty_pct:optional(fp.uncertainty_pct),scopes:['1','2','3'].map(scope=>({scope,total:fp['scope'+scope+'_tco2e'],share_pct:object(fp.scope_split_pct)['scope'+scope]})),streams,gate_to_gate:optional(object(fp.intensities).scope12_tco2e_per_t),cradle_to_gate:optional(object(fp.intensities).total_tco2e_per_t),biogenic_t:optional(fp.biogenic_co2_t)},
+    sankey:{nodes:nodes.map((n,i)=>({id:String(i),name:n.name,scope:n.kind==='total'?'total':String(links.find(l=>l.source===i||l.target===i)?.scope),stream_id:streams.find(s=>s.name===n.name)?.id??null})),links:links.map(l=>({source:String(l.source),target:String(l.target),value:l.value,scope:String(l.scope)}))},
+    leaks:{peer_percentile:leaks.peer_position?optional(object(leaks.peer_position).percentile):null,findings:list(leaks.leaks).map(l=>({id:String(l.stream_key)+'-'+l.rule,stream_id:l.stream_key,name:l.label,rule:l.rule,severity:l.severity,share_pct:l.share_pct,actual:optional(l.actual),unit:l.metric_unit,p25:optional(l.p25),p50:optional(l.p50),p75:optional(l.p75),percentile:optional(l.percentile),recoverable_t:optional(l.gap_to_median_tco2e),reason:l.finding}))},
+    recommendations:{items,blocked:list(recs.blocked).map(b=>({id:b.id,name:b.name,restriction:b.reason,cap_pct:null})),portfolios},
+    compliance:{cbam:{applicability:cbam.applicability?String(cbam.applicability):(cbam.applicable?'Potentially applicable — screening only':'Not indicated by sector screening'),status:cbam.status?String(cbam.status):undefined,exposure_t:optional(cbam.embedded_emissions_exported_tco2e),net_surrender_t:optional(cbam.net_surrender_tco2e),eu_benchmark:optional(cbam.eu_benchmark_tco2e_per_t),indicative_cost:cbam.applicable?optional(cbam.indicative_annual_cost_inr):null,reference_price:optional(cbam.reference_price_inr_per_tco2e),export_share_pct:optional(cbam.eu_export_share_pct),included:['Scope 1 direct process emissions','Scope 2 electricity (subject to goods CN code)'],excluded:['Precursor emissions and upstream raw material extraction (supplier declarations needed)'],assumptions:[str(cbam.basis??''),str(cbam.caveat??'')].filter(Boolean)},ccts,brsr:list(brsr.readiness).map(b=>({name:str(b.item),status:b.status==='ready'?'Ready':b.status==='partial'?'Partial':b.status==='no data'?'Missing':'External action required',detail:str(b.note||brsr.why||'')}))},
+    methodology:{standard:method.standard,gwp:method.gwp,boundary:'Scope 1, Scope 2 and collected Scope 3 categories',limitations:[method.factor_note,method.benchmark_note,assumptions.derating_note,assumptions.capex_note].filter(x=>typeof x==='string'),assumptions:[str(method.verification_status)]}};
+}
