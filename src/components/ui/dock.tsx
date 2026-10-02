@@ -262,8 +262,10 @@ export function DockLabel({ children, className, ...rest }: DockLabelProps) {
 export function DockIcon({ children, className, ...rest }: DockIconProps) {
   const restProps = rest as Record<string, unknown>;
   const width = restProps['width'] as MotionValue<number> | undefined;
+  const fallbackWidth = useMotionValue(40);
+  const activeWidth = width ?? fallbackWidth;
 
-  const widthTransform = useTransform(width ?? useMotionValue(40), (val) => val / 2);
+  const widthTransform = useTransform(activeWidth, (val) => val / 2);
 
   return (
     <motion.div

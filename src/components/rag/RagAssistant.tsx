@@ -335,9 +335,9 @@ export function RagAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: ()
         question: res.question || searchQuery,
         summary: res.summary || res.answer?.slice(0, 160) || "Sovereign intelligence result.",
         body: res.answer ? [res.answer] : [res.summary || "No explanation provided."],
-        sources: items.map((s: any) => ({
-          title: s.title || s.source_id,
-          refId: s.source_id,
+        sources: items.map((s: Record<string, string | undefined>) => ({
+          title: s.title || s.source_id || "Statutory Reference",
+          refId: s.source_id || "REF-STATUTORY",
           version: s.badge || s.version || "Sovereign Registry",
           grade: s.publisher || s.authority_class || "Verified Statutory Source",
           excerpt: s.section ? `${s.section} · ${s.page || ""}` : (s.excerpt || "Statutory citation."),

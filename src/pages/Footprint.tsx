@@ -24,7 +24,6 @@ export default function Footprint() {
     [search, setSearch] = useState("");
   const { reference, setDrawer } = w;
 
-  if (!a) return <Skeleton />;
   const columns = useMemo<ColumnDef<Stream>[]>(
     () => [
       {
@@ -99,6 +98,8 @@ export default function Footprint() {
     ],
     [reference.data, setDrawer],
   );
+
+  if (!a) return <Skeleton />;
   const streams = a.footprint.streams.filter(
     (s) =>
       (scope === "all" || s.scope === scope) &&

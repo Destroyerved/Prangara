@@ -17,9 +17,10 @@ export default function MaccChart({
     a = w.assessment;
   const [selected, setSelected] = useState<string | null>(null);
   const { hover, setHover, move } = useChartHover();
-  const curve = a?.recommendations.portfolios[mode]?.curve ?? [];
+  const curve = a?.recommendations.portfolios[mode]?.curve;
   const chart = useMemo(() => {
-    const ordered = [...curve]
+    const list = curve ?? [];
+    const ordered = [...list]
       .filter((v) => v.abatement_t > 0)
       .sort((a, b) => a.lcoa - b.lcoa);
     let cumulative = 0;

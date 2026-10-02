@@ -282,6 +282,23 @@ export function SleekIndustrialMap({
     return () => cancelAnimationFrame(animationFrameId);
   }, [simPlaying, simSpeedMultiplier]);
 
+  const activateSimulatedGps = useCallback(() => {
+    // High-precision simulated facility GPS located in Tirupur industrial zone
+    const simCoords = {
+      lat: 11.1120 + (Math.random() - 0.5) * 0.005,
+      lon: 77.3485 + (Math.random() - 0.5) * 0.005,
+      accuracy: 8,
+      altitude: 295,
+      speed: 0,
+      heading: 42,
+      timestamp: Date.now(),
+    };
+    setDeviceGps(simCoords);
+    setGpsStatus("locked");
+    const dist = haversineDistance(simCoords.lat, simCoords.lon, origin.lat, origin.lon);
+    setGpsDistanceToOrigin(dist);
+  }, [origin.lat, origin.lon]);
+
   // Device GPS Handler
   const handleRequestDeviceGps = useCallback(() => {
     if (gpsActive) {
@@ -323,24 +340,7 @@ export function SleekIndustrialMap({
       },
       { enableHighAccuracy: true, timeout: 8000, maximumAge: 30000 }
     );
-  }, [gpsActive, origin.lat, origin.lon]);
-
-  const activateSimulatedGps = () => {
-    // High-precision simulated facility GPS located in Tirupur industrial zone
-    const simCoords = {
-      lat: 11.1120 + (Math.random() - 0.5) * 0.005,
-      lon: 77.3485 + (Math.random() - 0.5) * 0.005,
-      accuracy: 8,
-      altitude: 295,
-      speed: 0,
-      heading: 42,
-      timestamp: Date.now(),
-    };
-    setDeviceGps(simCoords);
-    setGpsStatus("locked");
-    const dist = haversineDistance(simCoords.lat, simCoords.lon, origin.lat, origin.lon);
-    setGpsDistanceToOrigin(dist);
-  };
+  }, [gpsActive, origin.lat, origin.lon, activateSimulatedGps]);
 
   // Pan interaction handlers
   const handleMouseDown = (e: React.MouseEvent) => {

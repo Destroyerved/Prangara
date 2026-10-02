@@ -28,7 +28,6 @@ export default function Methodology() {
     a = w.assessment,
     [params, setParams] = useSearchParams();
 
-  if (!a) return <Skeleton />;
   const view = params.get("view") || "methodology";
   const [search, setSearch] = useState(""),
     [group, setGroup] = useState("all"),
@@ -88,6 +87,9 @@ export default function Methodology() {
         .toLowerCase()
         .includes(search.toLowerCase()),
   );
+
+  if (!a) return <Skeleton />;
+
   return (
     <div className="page-reveal">
       <PageHeading
