@@ -14,8 +14,8 @@ describe("API boundary", () => {
     expect((await api.demo("textile_dyeing")).footprint.total.base).toBe(24069);
     await expect(
       api.assess({ ...snapshots.textile_dyeing.plant, electricity_kwh: 1 }),
-    ).rejects.toThrow("New calculations require");
-    expect(fetch).not.toHaveBeenCalled();
+    ).rejects.toThrow("Inputs validated. Calculation engine is starting or unreachable");
+    expect(fetch).toHaveBeenCalled();
   });
   it("passes assessment input and returned numbers without recalculation", async () => {
     vi.stubEnv("VITE_DATA_MODE", "api");
