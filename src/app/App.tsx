@@ -87,6 +87,8 @@ export default function App() {
                     />
                   );
                 })}
+                <Route path="plant-data" element={<Navigate to="/assessment" replace />} />
+                <Route path="circular-actions" element={<Navigate to="/actions" replace />} />
                 <Route
                   path="glass-demo"
                   element={

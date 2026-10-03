@@ -1,7 +1,7 @@
 import { AnimatedValue } from "../components/ui/AnimatedValue";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowUpRight, Info } from "lucide-react";
+import { ArrowUpRight, Info, Box } from "lucide-react";
 import { useWorkspace } from "../hooks/useWorkspace";
 import {
   PageHeading,
@@ -193,6 +193,25 @@ export default function Overview() {
           to="/leaks"
           label="View all leak points"
         />
+
+        {/* 3D Plant Digital Twin Preview Banner */}
+        <div className="twin-preview-banner">
+          <div className="twin-preview-content">
+            <div className="twin-preview-badge">
+              <span className="live-dot" />
+              <span>3D Plant Digital Twin Active</span>
+            </div>
+            <h3 className="twin-preview-title">Interactive Equipment Hotspot Telemetry</h3>
+            <p className="twin-preview-desc">
+              Spatial thermal loss simulation & live engineering telemetry for Dual-Fuel Boiler, Economizer & Stenter ranges.
+            </p>
+          </div>
+          <Link to="/leaks" className="button primary shrink-0">
+            <Box size={15} />
+            <span>Launch 3D Plant Twin →</span>
+          </Link>
+        </div>
+
         {a.leaks.findings.length ? (
           <div className="leak-grid">
             {a.leaks.findings.slice(0, 3).map((l, i) => (

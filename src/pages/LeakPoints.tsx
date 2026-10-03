@@ -16,15 +16,17 @@ import {
 } from "@/components/ui/select";
 import { LeakCard } from "../components/leaks/LeakCard";
 import { BenchmarkStrip } from "../components/charts/BenchmarkStrip";
+import MachineTwin3D from "../components/twin/MachineTwin3D";
 import { number } from "../lib/format";
-import { Info, AlertTriangle, TrendingDown, Target } from "lucide-react";
+import { Info, AlertTriangle, TrendingDown, Target, Box } from "lucide-react";
 
 export default function LeakPoints() {
   const w = useWorkspace(),
     a = w.assessment;
   const [severity, setSeverity] = useState("all"),
     [rule, setRule] = useState("all"),
-    [search, setSearch] = useState("");
+    [search, setSearch] = useState(""),
+    [show3DTwin, setShow3DTwin] = useState(true);
 
   if (!a) return <Skeleton />;
 
@@ -53,6 +55,15 @@ export default function LeakPoints() {
         eyebrow="ANALYZE / LEAK INTELLIGENCE"
         title="Where performance escapes"
         description="Detect operational gaps and structural carbon concentrations."
+        action={
+          <button
+            className={`button ${show3DTwin ? "primary" : ""}`}
+            onClick={() => setShow3DTwin(!show3DTwin)}
+          >
+            <Box size={15} />
+            <span>{show3DTwin ? "Hide 3D Plant Twin" : "Open 3D Plant Twin"}</span>
+          </button>
+        }
       />
 
       {/* Structured Executive Intelligence Grid */}
@@ -99,7 +110,7 @@ export default function LeakPoints() {
             {a.leaks.peer_percentile != null ? (
               <span>p{number(a.leaks.peer_percentile)}</span>
             ) : (
-              <span className="text-sm font-semibold tracking-normal text-cyan-300 bg-cyan-950/70 border border-cyan-800/60 px-2.5 py-1 rounded-full">
+              <span className="text-xs font-bold tracking-wider uppercase text-sky-800 dark:text-cyan-300 bg-sky-100 dark:bg-cyan-950/70 border border-sky-300 dark:border-cyan-800/60 px-2.5 py-1 rounded-full">
                 Stream Screening
               </span>
             )}
@@ -118,6 +129,11 @@ export default function LeakPoints() {
           )}
         </div>
       </div>
+
+      {/* Interactive 3D Machine Leak-Point Digital Twin */}
+      {show3DTwin && (
+        <MachineTwin3D />
+      )}
 
       <div className="leak-notice-banner">
         <Info size={16} />

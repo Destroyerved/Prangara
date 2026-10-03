@@ -22,7 +22,8 @@ h4,
 .peer-overview strong,
 .uncertainty-hero strong {
   font-family: var(--font-heading);
-  font-weight: 520;
+  font-weight: 600;
+  color: var(--bright);
 }
 
 h1,
@@ -122,24 +123,16 @@ article {
 }
 
 :root[data-theme="light"] .topbar {
-  background: rgba(255, 255, 255, 0.22) !important;
-  backdrop-filter: blur(28px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-  border: 1px solid rgba(0, 0, 0, 0.16) !important;
-  box-shadow:
-    0 16px 40px -10px rgba(0, 0, 0, 0.08),
-    0 4px 12px rgba(0, 0, 0, 0.03),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95) !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
 :root[data-theme="light"] .topbar:hover,
 :root[data-theme="light"] .topbar:focus-within {
-  background: rgba(255, 255, 255, 0.38) !important;
-  border-color: rgba(0, 0, 0, 0.28) !important;
-  box-shadow:
-    0 20px 45px -10px rgba(0, 0, 0, 0.08),
-    0 0 24px rgba(255, 255, 255, 0.5),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 1) !important;
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06) !important;
 }
 
 /* Glass Inner Controls in Topbar */
@@ -196,15 +189,9 @@ article {
 }
 
 :root[data-theme="light"] .sidebar {
-  background: rgba(255, 255, 255, 0.22) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-  border: 1px solid rgba(0, 0, 0, 0.16) !important;
-  box-shadow:
-    0 20px 45px -10px rgba(0, 0, 0, 0.08),
-    0 6px 18px rgba(0, 0, 0, 0.03),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset -1px 0 0 0 rgba(0, 0, 0, 0.04) !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .workspace {
@@ -1810,30 +1797,18 @@ section {
 }
 
 :root[data-theme="light"] body {
-  background-color: #c5cbd5 !important;
-  background-image:
-    /* Topbar illumination aura */
-    radial-gradient(ellipse 80% 45% at 50% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 40% at 80% 4%, rgba(180, 188, 200, 0.5) 0%, transparent 60%),
-    /* Sidebar dock illumination aura */
-    radial-gradient(ellipse 45% 85% at 0% 35%, rgba(255, 255, 255, 0.25) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 70% at 2% 80%, rgba(175, 184, 196, 0.5) 0%, transparent 60%),
-    /* Central & Page Ambient Waves */
-    radial-gradient(ellipse 90% 75% at 55% 50%, rgba(195, 204, 215, 0.4) 0%, transparent 70%),
-    radial-gradient(ellipse 85% 70% at 88% 85%, rgba(178, 188, 200, 0.5) 0%, transparent 65%),
-    radial-gradient(circle at 30% 60%, rgba(255, 255, 255, 0.2) 0%, transparent 50%) !important;
-  background-attachment: fixed !important;
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  background-image: radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.04) 0%, transparent 60%) !important;
+  background-attachment: scroll !important;
 }
 
 :root[data-theme="light"] .waves-shader-scrim {
-  background: radial-gradient(circle at 50% 30%,
-      rgba(175, 184, 196, 0.15) 0%,
-      rgba(160, 170, 185, 0.45) 100%) !important;
+  display: none !important;
 }
 
 :root[data-theme="light"] .waves-shader-canvas {
-  opacity: 0.32 !important;
-  mix-blend-mode: multiply !important;
+  display: none !important;
 }
 
 .app-shell {
@@ -2108,6 +2083,11 @@ html.lenis::-webkit-scrollbar {
 :root[data-theme="light"] .leak-card,
 :root[data-theme="light"] .analytical-panel,
 :root[data-theme="light"] .boundary-panel,
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .leak-card,
+:root[data-theme="light"] .leak-kpi-card,
+:root[data-theme="light"] .executive-hero,
+:root[data-theme="light"] .analytical-panel,
 :root[data-theme="light"] .assessment-summary,
 :root[data-theme="light"] .constraint-row,
 :root[data-theme="light"] .method-hero,
@@ -2119,14 +2099,10 @@ html.lenis::-webkit-scrollbar {
 :root[data-theme="light"] .intensity-grid,
 :root[data-theme="light"] .empty,
 :root[data-theme="light"] .note {
-  background: rgba(255, 255, 255, 0.24) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-  border: 1px solid rgba(0, 0, 0, 0.16) !important;
-  box-shadow:
-    0 18px 40px -10px rgba(0, 0, 0, 0.08),
-    0 4px 14px rgba(0, 0, 0, 0.03),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95) !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+  color: #0f172a !important;
 }
 
 :root[data-theme="light"] .intensity-grid,
@@ -2139,20 +2115,15 @@ html.lenis::-webkit-scrollbar {
 :root[data-theme="light"] .card:hover,
 :root[data-theme="light"] .leak-card:hover,
 :root[data-theme="light"] .scope-panels>button:hover {
-  background: rgba(255, 255, 255, 0.42) !important;
-  border-color: rgba(0, 0, 0, 0.28) !important;
-  box-shadow:
-    0 22px 50px -10px rgba(0, 0, 0, 0.10),
-    0 0 20px rgba(0, 0, 0, 0.04),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95) !important;
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06) !important;
 }
 
 :root[data-theme="light"] .scope-panels>button.selected {
-  background: rgba(255, 255, 255, 0.50) !important;
-  border-color: #000000 !important;
-  box-shadow:
-    0 18px 40px -8px rgba(0, 0, 0, 0.12),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95) !important;
+  background: #f0f9ff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 2px 8px 0 rgba(2, 132, 199, 0.12) !important;
 }
 
 /* Modals, Floating Popovers, and Drawers */
@@ -2160,14 +2131,12 @@ html.lenis::-webkit-scrollbar {
 :root[data-theme="light"] .plant-popover,
 :root[data-theme="light"] .command-dialog,
 :root[data-theme="light"] .record-drawer {
-  background: rgba(255, 255, 255, 0.55) !important;
-  backdrop-filter: blur(32px) saturate(210%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(210%) !important;
-  border: 1px solid rgba(0, 0, 0, 0.18) !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
   box-shadow:
-    0 30px 70px -15px rgba(15, 23, 42, 0.15),
-    0 10px 30px rgba(15, 23, 42, 0.06),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95) !important;
+    0 24px 60px -10px rgba(15, 23, 42, 0.12),
+    0 8px 24px rgba(15, 23, 42, 0.04) !important;
+  color: #0f172a !important;
 }
 
 :root[data-theme="light"] .command-results {
@@ -2705,9 +2674,24 @@ html.lenis::-webkit-scrollbar {
 }
 
 :root[data-theme="light"] .sleek-map-wrapper {
-  background: radial-gradient(ellipse at 50% 30%, #e2e8f0 0%, #cbd5e1 100%) !important;
-  border-color: rgba(0, 0, 0, 0.14) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), inset 0 1px 1px #ffffff !important;
+  background: radial-gradient(ellipse at 50% 30%, #0c1626 0%, #060b14 100%) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+.sleek-map-wrapper {
+  color: #f8fafc !important;
+}
+
+.sleek-map-wrapper .glass-panel {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #f8fafc !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.sleek-map-wrapper button {
+  color: #f8fafc;
 }
 
 :root[data-theme="cyan"] .sleek-map-wrapper {
