@@ -13,7 +13,6 @@ const Account = lazy(() => import("../pages/Account"));
 const WorkspaceHub = lazy(() => import("../pages/WorkspaceHub"));
 const Marketplace = lazy(() => import("../pages/Marketplace"));
 const Notifications = lazy(() => import("../pages/Notifications"));
-const Landing = lazy(() => import("../pages/Landing"));
 function ConnectedWorkspace({children}:{children:ReactNode}) {
   const {identity}=useSession();
   return <WorkspaceProvider key={(identity?.user.id||"public")+":"+(identity?.active_organization_id||"")}>{children}</WorkspaceProvider>;
@@ -46,14 +45,15 @@ export default function App() {
         <MotionConfig reducedMotion="user">
           <SessionProvider><ConnectedWorkspace>
             <Routes>
-              {/* Standalone Public Routes */}
-              <Route path="/" element={<Suspense fallback={<Skeleton />}><Landing /></Suspense>} />
-              <Route path="/landing" element={<Navigate to="/" replace />} />
-              <Route path="/signin" element={<Suspense fallback={<Skeleton />}><Landing defaultHash="#signin" /></Suspense>} />
-              <Route path="/signup" element={<Suspense fallback={<Skeleton />}><Landing defaultHash="#signup" /></Suspense>} />
+              {/* Root and entry points navigate directly into the platform workspace */}
+              <Route path="/" element={<Navigate to="/overview" replace />} />
+              <Route path="/landing" element={<Navigate to="/overview" replace />} />
+              <Route path="/signin" element={<Navigate to="/overview" replace />} />
+              <Route path="/signup" element={<Navigate to="/overview" replace />} />
 
               {/* Authenticated App Routes with Shell */}
               <Route element={<Shell />}>
+                <Route index element={<Navigate to="/overview" replace />} />
                 <Route path="overview" element={<Suspense fallback={<Skeleton />}><AssessmentGate><Overview /></AssessmentGate></Suspense>} />
                 <Route path="account" element={<Suspense fallback={<Skeleton/>}><Account/></Suspense>}/>
                 <Route path="workspace" element={<Suspense fallback={<Skeleton/>}><WorkspaceHub/></Suspense>}/>
